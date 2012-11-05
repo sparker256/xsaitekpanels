@@ -217,157 +217,160 @@ void process_alt_switch()
 void process_vs_switch()
 {
 
-	if(testbit(multibuf,VS_SWITCH)) {
-          multiseldis = 1;
+   if(testbit(multibuf,VS_SWITCH)) {
+      multiseldis = 1;
+      upapvsf = XPLMGetDataf(ApVs);
+      upapvs = (int)(upapvsf);
 	  if(testbit(multibuf,ADJUSTMENT_UP)) {
-	    vsdbncinc++;
-            if (vsdbncinc > multispeed) {
-                n = multimul;
-                if(xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_vvi_up_fast);
-                    } else {
-                        while (n>0) {
-                            XPLMCommandOnce(ApVsUp);
-                            --n;
-                        }
-                    }
-                    vsdbncinc = 0;
-                }
+         vsdbncinc++;
+         if (vsdbncinc > multispeed) {
+            n = multimul;
+            if (xpanelsfnbutton == 1) {
+               if (loaded737 == 1) {
+                  XPLMCommandOnce(x737mcp_vvi_up_fast);
+               } else {
+                  upapvs = upapvs + 200;
+                  upapvs = (upapvs / 200);
+                  upapvs = (upapvs * 200);
 
-                if(xpanelsfnbutton == 0) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_vvi_up);
-                    } else if (apvsupremap == 1) {
-                        XPLMCommandOnce(ApVsUpRemapableCmd);
-                    } else {
-                        XPLMCommandOnce(ApVsUp);
-                    }
-                    vsdbncinc = 0;
                 }
+                vsdbncinc = 0;
             }
+
+            if (xpanelsfnbutton == 0) {
+               if (loaded737 == 1) {
+                  XPLMCommandOnce(x737mcp_vvi_up);
+               } else if (apvsupremap == 1) {
+                  XPLMCommandOnce(ApVsUpRemapableCmd);
+                } else {
+                   upapvs = upapvs + 100;
+                   upapvs = (upapvs / 100);
+                   upapvs = (upapvs * 100);
+
+                }
+                vsdbncinc = 0;
+            }
+         }
 	  }
 	  if(testbit(multibuf,ADJUSTMENT_DN)) {
-	    vsdbncdec++;
-            if (vsdbncdec > multispeed) {
-                n = multimul;
-                if(xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_vvi_down_fast);
-                    } else {
-                        while (n>0) {
-                            XPLMCommandOnce(ApVsDn);
-                            --n;
-                        }
-                    }
+         vsdbncdec++;
+         if (vsdbncdec > multispeed) {
+            n = multimul;
+            if(xpanelsfnbutton == 1) {
+               if (loaded737 == 1) {
+                  XPLMCommandOnce(x737mcp_vvi_down_fast);
+               } else {
+                  upapvs = upapvs - 200;
+
                 }
-                vsdbncdec = 0;
-                if(xpanelsfnbutton == 0) {
-                    if (loaded737 == 1){
-                        XPLMCommandOnce(x737mcp_vvi_down);
-                    } else if (apvsdnremap == 1) {
-                        XPLMCommandOnce(ApVsDnRemapableCmd);
-                    } else {
-                        XPLMCommandOnce(ApVsDn);
-                    }
-                    vsdbncdec = 0;
-                }
-	    }
+            }
+            vsdbncdec = 0;
+            if(xpanelsfnbutton == 0) {
+               if (loaded737 == 1){
+                  XPLMCommandOnce(x737mcp_vvi_down);
+               } else if (apvsdnremap == 1) {
+                  XPLMCommandOnce(ApVsDnRemapableCmd);
+               } else {
+                  upapvs = upapvs - 100;
+
+               }
+               vsdbncdec = 0;
+            }
+         }
 	  }
-          upapaltf = XPLMGetDataf(ApAlt);
+
+      upapvsf = upapvs;
+      XPLMSetDataf(ApVs, upapvsf);
+      upapaltf = XPLMGetDataf(ApAlt);
 	  upapvsf = XPLMGetDataf(ApVs);
 	  upapalt = (int)(upapaltf);
 	  upapvs = (int)(upapvsf);
 	  if (upapvs < 0){
 	    upapvs = (upapvs * -1);
 	    neg = 1;
-	  }
-	  else {
+      } else {
 	    neg = 0;
 	  }
-	}
+   }
 }
 
 // ***************** IAS Switch Position *******************
 void process_ias_switch()
 {
-
-        if(testbit(multibuf,IAS_SWITCH)) {
-          multiseldis = 2;
-          if(testbit(multibuf,ADJUSTMENT_UP)) {
-            iasdbncinc++;
-            if (iasdbncinc > multispeed) {
-                n = multimul;
-                if(xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_spd_up_fast);
-                    } else {
-                        while (n>0) {
-                            if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                                XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) + 0.01);
-                            } else {
-                                XPLMCommandOnce(ApAsUp);
-                            }
-                           --n;
-                        }
-                    }
-                    iasdbncinc = 0;
-                }
-                if(xpanelsfnbutton == 0) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_spd_up);
-                    } else {
-                        if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                            XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) + 0.01);
-                        } else {
-                            XPLMCommandOnce(ApAsUp);
-                        }
-                    }
-                    iasdbncinc = 0;
-                }
-            }
-          }
-          if(testbit(multibuf,ADJUSTMENT_DN)) {
-            iasdbncdec++;
-            if (iasdbncdec > multispeed) {
-                n = multimul;
-                if(xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_spd_down_fast);
-                    } else {
-                        while (n>0) {
-                            if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                                XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) - 0.01);
-                            } else {
-                                XPLMCommandOnce(ApAsDn);
-                            }
-                           --n;
-                        }
-                    }
-                    iasdbncdec = 0;
-                 }
-                 if(xpanelsfnbutton == 0) {
-                     if (loaded737 == 1) {
-                         XPLMCommandOnce(x737mcp_spd_down);
+   if (testbit(multibuf,IAS_SWITCH)) {
+      multiseldis = 2;
+      if (testbit(multibuf,ADJUSTMENT_UP)) {
+         iasdbncinc++;
+         if (iasdbncinc > multispeed) {
+            n = multimul;
+            if (xpanelsfnbutton == 1) {
+               if (loaded737 == 1) {
+                  XPLMCommandOnce(x737mcp_spd_up_fast);
+               } else {
+                  while (n>0) {
+                     if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                        XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) + 0.01);
                      } else {
-                         if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                             XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) - 0.01);
-                         } else {
-                             XPLMCommandOnce(ApAsDn);
-                         }
+                        XPLMCommandOnce(ApAsUp);
                      }
-                     iasdbncdec = 0;
-                 }
-
-
+                     --n;
+                  }
+               }
+               iasdbncinc = 0;
             }
-          }
-          upapasf = XPLMGetDataf(ApAs);
-          if (XPLMGetDatai(AirspeedIsMach) == 1) {
-            upapasf = (upapasf * 100);
-          }
-          upapas = (int)(upapasf);
-        }
+            if (xpanelsfnbutton == 0) {
+               if (loaded737 == 1) {
+                  XPLMCommandOnce(x737mcp_spd_up);
+               } else {
+                  if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                     XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) + 0.01);
+                  } else {
+                     XPLMCommandOnce(ApAsUp);
+                  }
+               }
+               iasdbncinc = 0;
+            }
+         }
+      }
+      if (testbit(multibuf,ADJUSTMENT_DN)) {
+         iasdbncdec++;
+         if (iasdbncdec > multispeed) {
+            n = multimul;
+            if (xpanelsfnbutton == 1) {
+               if (loaded737 == 1) {
+                  XPLMCommandOnce(x737mcp_spd_down_fast);
+               } else {
+                  while (n>0) {
+                     if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                        XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) - 0.01);
+                     } else {
+                        XPLMCommandOnce(ApAsDn);
+                     }
+                     --n;
+                  }
+               }
+               iasdbncdec = 0;
+            }
+            if (xpanelsfnbutton == 0) {
+               if (loaded737 == 1) {
+                  XPLMCommandOnce(x737mcp_spd_down);
+               } else {
+                  if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                     XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) - 0.01);
+                  } else {
+                     XPLMCommandOnce(ApAsDn);
+                  }
+               }
+               iasdbncdec = 0;
+            }
+         }
+      }
+      upapasf = XPLMGetDataf(ApAs);
+      if (XPLMGetDatai(AirspeedIsMach) == 1) {
+         upapasf = (upapasf * 100);
+      }
+      upapas = (int)(upapasf);
+   }
 }
 
 // ***************** HDG Switch Position *******************
