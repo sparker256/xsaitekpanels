@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.00   ***************
-// ****** Oct 06 2012   **************
+// ****** Nov 05 2012   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -513,7 +513,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels v1.45\n");
+  XPLMDebugString("Xsaitekpanels v2.00\n");
 
 	/* First set up our plugin info. */
   strcpy(outName, "Xsaitekpanels v2.00");
