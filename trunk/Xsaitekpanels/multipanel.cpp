@@ -299,6 +299,8 @@ void process_ias_switch()
 {
    if (testbit(multibuf,IAS_SWITCH)) {
       multiseldis = 2;
+      upapasf = XPLMGetDataf(ApAs);
+      upapas = (int)(upapasf);
       if (testbit(multibuf,ADJUSTMENT_UP)) {
          iasdbncinc++;
          if (iasdbncinc > multispeed) {
@@ -311,7 +313,8 @@ void process_ias_switch()
                      if (XPLMGetDatai(AirspeedIsMach) == 1) {
                         XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) + 0.01);
                      } else {
-                        XPLMCommandOnce(ApAsUp);
+                        //XPLMCommandOnce(ApAsUp);
+                        upapas = upapas + 1;
                      }
                      --n;
                   }
@@ -325,7 +328,8 @@ void process_ias_switch()
                   if (XPLMGetDatai(AirspeedIsMach) == 1) {
                      XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) + 0.01);
                   } else {
-                     XPLMCommandOnce(ApAsUp);
+                     //XPLMCommandOnce(ApAsUp);
+                     upapas = upapas + 1;
                   }
                }
                iasdbncinc = 0;
@@ -344,7 +348,8 @@ void process_ias_switch()
                      if (XPLMGetDatai(AirspeedIsMach) == 1) {
                         XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) - 0.01);
                      } else {
-                        XPLMCommandOnce(ApAsDn);
+                        //XPLMCommandOnce(ApAsDn);
+                        upapas = upapas - 1;
                      }
                      --n;
                   }
@@ -358,13 +363,16 @@ void process_ias_switch()
                   if (XPLMGetDatai(AirspeedIsMach) == 1) {
                      XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) - 0.01);
                   } else {
-                     XPLMCommandOnce(ApAsDn);
+                     //XPLMCommandOnce(ApAsDn);
+                     upapas = upapas - 1;
                   }
                }
                iasdbncdec = 0;
             }
          }
       }
+      upapasf = upapas;
+      XPLMSetDataf(ApAs, upapasf);
       upapasf = XPLMGetDataf(ApAs);
       if (XPLMGetDatai(AirspeedIsMach) == 1) {
          upapasf = (upapasf * 100);
