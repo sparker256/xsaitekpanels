@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.01   ***************
-// ****** Nov 20 2012   **************
+// ******** ver 2.02   ***************
+// ****** Dec 02 2012   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -254,7 +254,8 @@ XPLMCommandRef x737ice_wing_on = NULL, x737ice_wing_off = NULL;
 
 // ******************* Switch Panel Data Ref ********************
 XPLMDataRef BatNum = NULL, GenNum = NULL, EngNum = NULL;
-XPLMDataRef BatArrayOnDR = NULL;
+XPLMDataRef BatArrayOnDR = NULL, IgnSwitchArray = NULL;
+XPLMDataRef StopCirrus = NULL, IgniterOn = NULL;
 
 XPLMDataRef CowlFlaps = NULL, CockpitLights = NULL, AntiIce = NULL;
 XPLMDataRef GearRetract = NULL, OnGround = NULL, LandingGearStatus = {NULL};
@@ -513,10 +514,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels v2.01\n");
+  XPLMDebugString("Xsaitekpanels v2.02\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.01");
+  strcpy(outName, "Xsaitekpanels v2.02");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -817,7 +818,9 @@ PLUGIN_API int XPluginStart(char *		outName,
   GenNum            = XPLMFindDataRef("sim/aircraft/electrical/num_generators");
   EngNum            = XPLMFindDataRef("sim/aircraft/engine/acf_num_engines");
   BatArrayOnDR      = XPLMFindDataRef("sim/cockpit/electrical/battery_array_on");
-
+  IgnSwitchArray    = XPLMFindDataRef("sim/cockpit2/engine/actuators/ignition_key");
+  StopCirrus        = XPLMFindDataRef("sim/flightmodel/engine/ENGN_mixt");
+  IgniterOn         = XPLMFindDataRef("sim/cockpit2/engine/actuators/igniter_on");
 
 
 // ************* Open any Radio that is connected *****************
