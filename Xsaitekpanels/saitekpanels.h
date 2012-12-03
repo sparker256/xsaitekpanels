@@ -250,7 +250,8 @@ extern XPLMCommandRef x737ice_wing_on, x737ice_wing_off;
 
 // ************** Switch Panel Data Ref ******************
 extern XPLMDataRef BatNum, GenNum, EngNum;
-extern XPLMDataRef BatArrayOnDR;
+extern XPLMDataRef BatArrayOnDR, IgnSwitchArray;
+extern XPLMDataRef StopCirrus, IgniterOn;
 
 extern XPLMDataRef CowlFlaps, CockpitLights, AntiIce;
 extern XPLMDataRef GearRetract, OnGround, LandingGearStatus;

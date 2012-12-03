@@ -24,6 +24,7 @@ static int switchres, switchwres;
 static int batnum = 0, gennum = 0, engnum = 0;
 
 static float opencowl[8], closecowl[8];
+static float stop_cirrus[8];
 
 static int MAG_OFF = 10, MAG_RIGHT = 9, MAG_LEFT = 8, MAG_BOTH = 23;
 static int ENG_START = 22;
@@ -38,6 +39,7 @@ static int GEAR_SWITCH_UP = 21, GEAR_SWITCH_DN = 20;
 static int BatArrayOn[8];
 static int failed1up = 0, failed2up = 0, failed3up = 0;
 static int failed1dn = 0, failed2dn = 0, failed3dn = 0;
+static int ignition_key_array[8], igniter_on[8];
 
 static unsigned char switchbuf[4];
 static unsigned char switchwbuf[2], gearled;
@@ -85,22 +87,52 @@ void process_engines_mag_off_switch()
     }
 	if(testbit(switchbuf,MAG_OFF)) {
 	  if(engnum == 1){
-	    XPLMCommandOnce(MagOff1);
+        ignition_key_array[0] = 0;
+        stop_cirrus[0] = 0;
+        igniter_on[0] = 0;
+        //XPLMCommandOnce(MagOff1);
 	  }   
 	  if(engnum == 2){
-	    XPLMCommandOnce(MagOff1);
-	    XPLMCommandOnce(MagOff2);
+        ignition_key_array[0] = 0;
+        ignition_key_array[1] = 0;
+        stop_cirrus[0] = 0;
+        stop_cirrus[1] = 0;
+        igniter_on[0] = 0;
+        igniter_on[1] = 0;
+        //XPLMCommandOnce(MagOff1);
+        //XPLMCommandOnce(MagOff2);
 	  } 
 	  if(engnum == 3){
-	    XPLMCommandOnce(MagOff1);
-	    XPLMCommandOnce(MagOff2);
-	    XPLMCommandOnce(MagOff3);
+        ignition_key_array[0] = 0;
+        ignition_key_array[1] = 0;
+        ignition_key_array[2] = 0;
+        stop_cirrus[0] = 0;
+        stop_cirrus[1] = 0;
+        stop_cirrus[2] = 0;
+        igniter_on[0] = 0;
+        igniter_on[1] = 0;
+        igniter_on[2] = 0;
+        //XPLMCommandOnce(MagOff1);
+        //XPLMCommandOnce(MagOff2);
+        //XPLMCommandOnce(MagOff3);
 	  }
 	  if(engnum == 4){
-	    XPLMCommandOnce(MagOff1);
-	    XPLMCommandOnce(MagOff2);
-	    XPLMCommandOnce(MagOff3);
-	    XPLMCommandOnce(MagOff4);
+        ignition_key_array[0] = 0;
+        ignition_key_array[1] = 0;
+        ignition_key_array[2] = 0;
+        ignition_key_array[3] = 0;
+        stop_cirrus[0] = 0;
+        stop_cirrus[1] = 0;
+        stop_cirrus[2] = 0;
+        stop_cirrus[3] = 0;
+        igniter_on[0] = 0;
+        igniter_on[1] = 0;
+        igniter_on[2] = 0;
+        igniter_on[3] = 0;
+        //XPLMCommandOnce(MagOff1);
+        //XPLMCommandOnce(MagOff2);
+        //XPLMCommandOnce(MagOff3);
+        //XPLMCommandOnce(MagOff4);
 	  }
  	}
 
@@ -129,22 +161,32 @@ void process_engines_right_mag_switch()
     }
 	if(testbit(switchbuf,MAG_RIGHT)) {
 	  if(engnum == 1){
-	    XPLMCommandOnce(MagRight1);
+        ignition_key_array[0] = 1;        
+        //XPLMCommandOnce(MagRight1);
 	  }   
 	  if(engnum == 2){
-	    XPLMCommandOnce(MagRight1);
-	    XPLMCommandOnce(MagRight2);
+        ignition_key_array[0] = 1;
+        ignition_key_array[1] = 1;
+        //XPLMCommandOnce(MagRight1);
+        //XPLMCommandOnce(MagRight2);
 	  }
 	  if(engnum == 3){
-	    XPLMCommandOnce(MagRight1);
-	    XPLMCommandOnce(MagRight2);
-	    XPLMCommandOnce(MagRight3);
+        ignition_key_array[0] = 1;
+        ignition_key_array[1] = 1;
+        ignition_key_array[2] = 1;
+        //XPLMCommandOnce(MagRight1);
+        //XPLMCommandOnce(MagRight2);
+        //XPLMCommandOnce(MagRight3);
 	  }
 	  if(engnum == 4){
-	    XPLMCommandOnce(MagRight1);
-	    XPLMCommandOnce(MagRight2);
-	    XPLMCommandOnce(MagRight3);
-	    XPLMCommandOnce(MagRight4);
+        ignition_key_array[0] = 1;
+        ignition_key_array[1] = 1;
+        ignition_key_array[2] = 1;
+        ignition_key_array[3] = 1;
+        //XPLMCommandOnce(MagRight1);
+        //XPLMCommandOnce(MagRight2);
+        //XPLMCommandOnce(MagRight3);
+        //XPLMCommandOnce(MagRight4);
 	  }
  	}
 }
@@ -173,22 +215,32 @@ void process_engines_left_mag_switch()
 
 	if(testbit(switchbuf,MAG_LEFT)) {
 	  if(engnum == 1){
-	    XPLMCommandOnce(MagLeft1);
+        ignition_key_array[0] = 2;
+        //XPLMCommandOnce(MagLeft1);
 	  }
 	  if(engnum == 2){
-	    XPLMCommandOnce(MagLeft1);
-	    XPLMCommandOnce(MagLeft2);
+        ignition_key_array[0] = 2;
+        ignition_key_array[1] = 2;
+        //XPLMCommandOnce(MagLeft1);
+        //XPLMCommandOnce(MagLeft2);
 	  }
 	  if(engnum == 3){
-	    XPLMCommandOnce(MagLeft1);
-	    XPLMCommandOnce(MagLeft2);
-	    XPLMCommandOnce(MagLeft3);
+        ignition_key_array[0] = 2;
+        ignition_key_array[1] = 2;
+        ignition_key_array[2] = 2;
+        //XPLMCommandOnce(MagLeft1);
+        //XPLMCommandOnce(MagLeft2);
+        //XPLMCommandOnce(MagLeft3);
 	  }
 	  if(engnum == 4){
-	    XPLMCommandOnce(MagLeft1);
-	    XPLMCommandOnce(MagLeft2);
-	    XPLMCommandOnce(MagLeft3);
-	    XPLMCommandOnce(MagLeft4);
+        ignition_key_array[0] = 2;
+        ignition_key_array[1] = 2;
+        ignition_key_array[2] = 2;
+        ignition_key_array[3] = 2;
+        //XPLMCommandOnce(MagLeft1);
+        //XPLMCommandOnce(MagLeft2);
+        //XPLMCommandOnce(MagLeft3);
+        //XPLMCommandOnce(MagLeft4);
 	  }
  	}
 }
@@ -218,22 +270,42 @@ void process_engines_both_mag_switch()
 
    if(testbit(switchbuf,MAG_BOTH)) {
 	  if(engnum == 1){
-	    XPLMCommandOnce(MagBoth1);
+        ignition_key_array[0] = 3;
+        igniter_on[0] = 0;
+        //XPLMCommandOnce(MagBoth1);
 	  }
 	  if(engnum == 2){
-	    XPLMCommandOnce(MagBoth1);
-	    XPLMCommandOnce(MagBoth2);
+        ignition_key_array[0] = 3;
+        ignition_key_array[1] = 3;
+        igniter_on[0] = 0;
+        igniter_on[1] = 0;
+        //XPLMCommandOnce(MagBoth1);
+        //XPLMCommandOnce(MagBoth2);
 	  } 
 	  if(engnum == 3){
-	    XPLMCommandOnce(MagBoth1);
-	    XPLMCommandOnce(MagBoth2);
-	    XPLMCommandOnce(MagBoth3);
+        ignition_key_array[0] = 3;
+        ignition_key_array[1] = 3;
+        ignition_key_array[2] = 3;
+        igniter_on[0] = 0;
+        igniter_on[1] = 0;
+        igniter_on[2] = 0;
+        //XPLMCommandOnce(MagBoth1);
+        //XPLMCommandOnce(MagBoth2);
+        //XPLMCommandOnce(MagBoth3);
 	  } 
 	  if(engnum == 4){
-	    XPLMCommandOnce(MagBoth1);
-	    XPLMCommandOnce(MagBoth2);
-	    XPLMCommandOnce(MagBoth3);
-	    XPLMCommandOnce(MagBoth4);
+        ignition_key_array[0] = 3;
+        ignition_key_array[1] = 3;
+        ignition_key_array[2] = 3;
+        ignition_key_array[3] = 3;
+        igniter_on[0] = 0;
+        igniter_on[1] = 0;
+        igniter_on[2] = 0;
+        igniter_on[3] = 0;
+        //XPLMCommandOnce(MagBoth1);
+        //XPLMCommandOnce(MagBoth2);
+        //XPLMCommandOnce(MagBoth3);
+        //XPLMCommandOnce(MagBoth4);
 	  }
 	}
 }
@@ -261,24 +333,58 @@ void process_engines_start_switch()
 
 	if(testbit(switchbuf,ENG_START)) {
 	  if(engnum == 1){
-	    XPLMCommandOnce(EngStart1);
+        ignition_key_array[0] = 4;
+        stop_cirrus[0] = 1;
+        igniter_on[0] = 1;
+        //XPLMCommandOnce(EngStart1);
 	  }
 	  if(engnum == 2){
-	    XPLMCommandOnce(EngStart1);
-	    XPLMCommandOnce(EngStart2);
+        ignition_key_array[0] = 4;
+        ignition_key_array[1] = 4;
+        stop_cirrus[0] = 1;
+        stop_cirrus[1] = 1;
+        igniter_on[0] = 1;
+        igniter_on[1] = 1;
+        //XPLMCommandOnce(EngStart1);
+        //XPLMCommandOnce(EngStart2);
 	  }
 	  if(engnum == 3){
-	    XPLMCommandOnce(EngStart1);
-	    XPLMCommandOnce(EngStart2);
-	    XPLMCommandOnce(EngStart3);
+        ignition_key_array[0] = 4;
+        ignition_key_array[1] = 4;
+        ignition_key_array[2] = 4;
+        stop_cirrus[0] = 1;
+        stop_cirrus[1] = 1;
+        stop_cirrus[2] = 1;
+        igniter_on[0] = 1;
+        igniter_on[1] = 1;
+        igniter_on[2] = 1;
+        //XPLMCommandOnce(EngStart1);
+        //XPLMCommandOnce(EngStart2);
+        //XPLMCommandOnce(EngStart3);
 	  }
 	  if(engnum == 4){
-	    XPLMCommandOnce(EngStart1);
-	    XPLMCommandOnce(EngStart2);
-	    XPLMCommandOnce(EngStart3);
-	    XPLMCommandOnce(EngStart4);
+        ignition_key_array[0] = 4;
+        ignition_key_array[1] = 4;
+        ignition_key_array[2] = 4;
+        ignition_key_array[3] = 4;
+        stop_cirrus[0] = 1;
+        stop_cirrus[1] = 1;
+        stop_cirrus[2] = 1;
+        stop_cirrus[3] = 1;
+        igniter_on[0] = 1;
+        igniter_on[1] = 1;
+        igniter_on[2] = 1;
+        igniter_on[3] = 1;
+        //XPLMCommandOnce(EngStart1);
+        //XPLMCommandOnce(EngStart2);
+        //XPLMCommandOnce(EngStart3);
+        //XPLMCommandOnce(EngStart4);
 	  }
-	}
+    }
+    XPLMSetDatavi(IgnSwitchArray, ignition_key_array, 0, 8);
+    XPLMSetDatavf(StopCirrus, stop_cirrus, 0, 8);
+    XPLMSetDatavi(IgniterOn, igniter_on, 0,  8);
+
 }
 
 // ***************** Master Battery *******************
