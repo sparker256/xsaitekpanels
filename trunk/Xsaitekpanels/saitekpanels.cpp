@@ -256,6 +256,7 @@ XPLMCommandRef x737ice_wing_on = NULL, x737ice_wing_off = NULL;
 XPLMDataRef BatNum = NULL, GenNum = NULL, EngNum = NULL;
 XPLMDataRef BatArrayOnDR = NULL, IgnSwitchArray = NULL;
 XPLMDataRef StopCirrus = NULL, IgniterOn = NULL;
+XPLMDataRef BleedAirMode = NULL, FuelTankTransfer = NULL;
 
 XPLMDataRef CowlFlaps = NULL, CockpitLights = NULL, AntiIce = NULL;
 XPLMDataRef GearRetract = NULL, OnGround = NULL, LandingGearStatus = {NULL};
@@ -821,7 +822,8 @@ PLUGIN_API int XPluginStart(char *		outName,
   IgnSwitchArray    = XPLMFindDataRef("sim/cockpit2/engine/actuators/ignition_key");
   StopCirrus        = XPLMFindDataRef("sim/flightmodel/engine/ENGN_mixt");
   IgniterOn         = XPLMFindDataRef("sim/cockpit2/engine/actuators/igniter_on");
-
+  BleedAirMode      = XPLMFindDataRef("sim/cockpit/pressure/bleed_air_mode");
+  FuelTankTransfer  = XPLMFindDataRef("sim/cockpit2/fuel/fuel_tank_transfer_to");
 
 // ************* Open any Radio that is connected *****************
 
