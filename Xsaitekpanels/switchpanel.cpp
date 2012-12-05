@@ -40,6 +40,7 @@ static int BatArrayOn[8];
 static int failed1up = 0, failed2up = 0, failed3up = 0;
 static int failed1dn = 0, failed2dn = 0, failed3dn = 0;
 static int ignition_key_array[8], igniter_on[8];
+static int bleed_air_mode, fuel_tank_transfer;
 
 static unsigned char switchbuf[4];
 static unsigned char switchwbuf[2], gearled;
@@ -90,6 +91,8 @@ void process_engines_mag_off_switch()
         ignition_key_array[0] = 0;
         stop_cirrus[0] = 0;
         igniter_on[0] = 0;
+        bleed_air_mode = 0;
+        fuel_tank_transfer = 0;
         //XPLMCommandOnce(MagOff1);
 	  }   
 	  if(engnum == 2){
@@ -99,6 +102,8 @@ void process_engines_mag_off_switch()
         stop_cirrus[1] = 0;
         igniter_on[0] = 0;
         igniter_on[1] = 0;
+        bleed_air_mode = 0;
+        fuel_tank_transfer = 0;
         //XPLMCommandOnce(MagOff1);
         //XPLMCommandOnce(MagOff2);
 	  } 
@@ -112,6 +117,8 @@ void process_engines_mag_off_switch()
         igniter_on[0] = 0;
         igniter_on[1] = 0;
         igniter_on[2] = 0;
+        bleed_air_mode = 0;
+        fuel_tank_transfer = 0;
         //XPLMCommandOnce(MagOff1);
         //XPLMCommandOnce(MagOff2);
         //XPLMCommandOnce(MagOff3);
@@ -129,6 +136,8 @@ void process_engines_mag_off_switch()
         igniter_on[1] = 0;
         igniter_on[2] = 0;
         igniter_on[3] = 0;
+        bleed_air_mode = 0;
+        fuel_tank_transfer = 0;
         //XPLMCommandOnce(MagOff1);
         //XPLMCommandOnce(MagOff2);
         //XPLMCommandOnce(MagOff3);
@@ -161,12 +170,14 @@ void process_engines_right_mag_switch()
     }
 	if(testbit(switchbuf,MAG_RIGHT)) {
 	  if(engnum == 1){
-        ignition_key_array[0] = 1;        
+        ignition_key_array[0] = 1;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagRight1);
 	  }   
 	  if(engnum == 2){
         ignition_key_array[0] = 1;
         ignition_key_array[1] = 1;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagRight1);
         //XPLMCommandOnce(MagRight2);
 	  }
@@ -174,6 +185,7 @@ void process_engines_right_mag_switch()
         ignition_key_array[0] = 1;
         ignition_key_array[1] = 1;
         ignition_key_array[2] = 1;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagRight1);
         //XPLMCommandOnce(MagRight2);
         //XPLMCommandOnce(MagRight3);
@@ -183,6 +195,7 @@ void process_engines_right_mag_switch()
         ignition_key_array[1] = 1;
         ignition_key_array[2] = 1;
         ignition_key_array[3] = 1;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagRight1);
         //XPLMCommandOnce(MagRight2);
         //XPLMCommandOnce(MagRight3);
@@ -216,11 +229,13 @@ void process_engines_left_mag_switch()
 	if(testbit(switchbuf,MAG_LEFT)) {
 	  if(engnum == 1){
         ignition_key_array[0] = 2;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagLeft1);
 	  }
 	  if(engnum == 2){
         ignition_key_array[0] = 2;
         ignition_key_array[1] = 2;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagLeft1);
         //XPLMCommandOnce(MagLeft2);
 	  }
@@ -228,6 +243,7 @@ void process_engines_left_mag_switch()
         ignition_key_array[0] = 2;
         ignition_key_array[1] = 2;
         ignition_key_array[2] = 2;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagLeft1);
         //XPLMCommandOnce(MagLeft2);
         //XPLMCommandOnce(MagLeft3);
@@ -237,6 +253,7 @@ void process_engines_left_mag_switch()
         ignition_key_array[1] = 2;
         ignition_key_array[2] = 2;
         ignition_key_array[3] = 2;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagLeft1);
         //XPLMCommandOnce(MagLeft2);
         //XPLMCommandOnce(MagLeft3);
@@ -272,6 +289,7 @@ void process_engines_both_mag_switch()
 	  if(engnum == 1){
         ignition_key_array[0] = 3;
         igniter_on[0] = 0;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagBoth1);
 	  }
 	  if(engnum == 2){
@@ -279,6 +297,7 @@ void process_engines_both_mag_switch()
         ignition_key_array[1] = 3;
         igniter_on[0] = 0;
         igniter_on[1] = 0;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagBoth1);
         //XPLMCommandOnce(MagBoth2);
 	  } 
@@ -289,6 +308,7 @@ void process_engines_both_mag_switch()
         igniter_on[0] = 0;
         igniter_on[1] = 0;
         igniter_on[2] = 0;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagBoth1);
         //XPLMCommandOnce(MagBoth2);
         //XPLMCommandOnce(MagBoth3);
@@ -302,6 +322,7 @@ void process_engines_both_mag_switch()
         igniter_on[1] = 0;
         igniter_on[2] = 0;
         igniter_on[3] = 0;
+        bleed_air_mode = 0;
         //XPLMCommandOnce(MagBoth1);
         //XPLMCommandOnce(MagBoth2);
         //XPLMCommandOnce(MagBoth3);
@@ -336,6 +357,8 @@ void process_engines_start_switch()
         ignition_key_array[0] = 4;
         stop_cirrus[0] = 1;
         igniter_on[0] = 1;
+        bleed_air_mode = 4;
+        fuel_tank_transfer = 2;
         //XPLMCommandOnce(EngStart1);
 	  }
 	  if(engnum == 2){
@@ -345,6 +368,8 @@ void process_engines_start_switch()
         stop_cirrus[1] = 1;
         igniter_on[0] = 1;
         igniter_on[1] = 1;
+        bleed_air_mode = 4;
+        fuel_tank_transfer = 2;
         //XPLMCommandOnce(EngStart1);
         //XPLMCommandOnce(EngStart2);
 	  }
@@ -358,6 +383,8 @@ void process_engines_start_switch()
         igniter_on[0] = 1;
         igniter_on[1] = 1;
         igniter_on[2] = 1;
+        bleed_air_mode = 4;
+        fuel_tank_transfer = 2;
         //XPLMCommandOnce(EngStart1);
         //XPLMCommandOnce(EngStart2);
         //XPLMCommandOnce(EngStart3);
@@ -375,6 +402,8 @@ void process_engines_start_switch()
         igniter_on[1] = 1;
         igniter_on[2] = 1;
         igniter_on[3] = 1;
+        bleed_air_mode = 4;
+        fuel_tank_transfer = 2;
         //XPLMCommandOnce(EngStart1);
         //XPLMCommandOnce(EngStart2);
         //XPLMCommandOnce(EngStart3);
@@ -384,6 +413,9 @@ void process_engines_start_switch()
     XPLMSetDatavi(IgnSwitchArray, ignition_key_array, 0, 8);
     XPLMSetDatavf(StopCirrus, stop_cirrus, 0, 8);
     XPLMSetDatavi(IgniterOn, igniter_on, 0,  8);
+    XPLMSetDatai(BleedAirMode, bleed_air_mode);
+    XPLMSetDatai(FuelTankTransfer, fuel_tank_transfer);
+
 
 }
 
