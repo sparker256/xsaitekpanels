@@ -1,7 +1,6 @@
 // ****** switchpanels.cpp **********
 // ****  William R. Good  ********
 
-
 #include "XPLMUtilities.h"
 #include "XPLMDataAccess.h"
 
@@ -22,6 +21,7 @@ static int switchnowrite = 0;
 static int switchres, switchwres;
 
 static int batnum = 0, gennum = 0, engnum = 0;
+static int acf_en_type[8];
 
 static float opencowl[8], closecowl[8];
 static float engn_mixt[8];
@@ -96,45 +96,28 @@ void process_engines_mag_off_switch()
 
 	  }   
 	  if(engnum == 2){
-        ignition_key_array[0] = 0;
-        ignition_key_array[1] = 0;
-        engn_mixt[0] = 0;
-        engn_mixt[1] = 0;
-        igniter_on[0] = 0;
-        igniter_on[1] = 0;
+        ignition_key_array[0] = 0, ignition_key_array[1] = 0;
+        engn_mixt[0] = 0, engn_mixt[1] = 0;
+        igniter_on[0] = 0, igniter_on[1] = 0;
         bleed_air_mode = 0;
-
 
 	  } 
 	  if(engnum == 3){
-        ignition_key_array[0] = 0;
-        ignition_key_array[1] = 0;
+        ignition_key_array[0] = 0, ignition_key_array[1] = 0;
         ignition_key_array[2] = 0;
-        engn_mixt[0] = 0;
-        engn_mixt[1] = 0;
-        engn_mixt[2] = 0;
-        igniter_on[0] = 0;
-        igniter_on[1] = 0;
-        igniter_on[2] = 0;
+        engn_mixt[0] = 0, engn_mixt[1] = 0, engn_mixt[2] = 0;
+        igniter_on[0] = 0, igniter_on[1] = 0 , igniter_on[2] = 0;
         bleed_air_mode = 0;
-
 
 	  }
 	  if(engnum == 4){
-        ignition_key_array[0] = 0;
-        ignition_key_array[1] = 0;
-        ignition_key_array[2] = 0;
-        ignition_key_array[3] = 0;
-        engn_mixt[0] = 0;
-        engn_mixt[1] = 0;
-        engn_mixt[2] = 0;
-        engn_mixt[3] = 0;
-        igniter_on[0] = 0;
-        igniter_on[1] = 0;
-        igniter_on[2] = 0;
-        igniter_on[3] = 0;
+        ignition_key_array[0] = 0, ignition_key_array[1] = 0;
+        ignition_key_array[2] = 0, ignition_key_array[3] = 0;
+        engn_mixt[0] = 0, engn_mixt[1] = 0;
+        engn_mixt[2] = 0, engn_mixt[3] = 0;
+        igniter_on[0] = 0, igniter_on[1] = 0;
+        igniter_on[2] = 0, igniter_on[3] = 0;
         bleed_air_mode = 0;
-
 
 	  }
  	}
@@ -170,23 +153,19 @@ void process_engines_right_mag_switch()
 
 	  }   
 	  if(engnum == 2){
-        ignition_key_array[0] = 1;
-        ignition_key_array[1] = 1;
+        ignition_key_array[0] = 1, ignition_key_array[1] = 1;
         bleed_air_mode = 0;
 
 	  }
 	  if(engnum == 3){
-        ignition_key_array[0] = 1;
-        ignition_key_array[1] = 1;
+        ignition_key_array[0] = 1, ignition_key_array[1] = 1;
         ignition_key_array[2] = 1;
         bleed_air_mode = 0;
 
 	  }
 	  if(engnum == 4){
-        ignition_key_array[0] = 1;
-        ignition_key_array[1] = 1;
-        ignition_key_array[2] = 1;
-        ignition_key_array[3] = 1;
+        ignition_key_array[0] = 1, ignition_key_array[1] = 1;
+        ignition_key_array[2] = 1, ignition_key_array[3] = 1;
         bleed_air_mode = 0;
 
 	  }
@@ -222,23 +201,19 @@ void process_engines_left_mag_switch()
 
 	  }
 	  if(engnum == 2){
-        ignition_key_array[0] = 2;
-        ignition_key_array[1] = 2;
+        ignition_key_array[0] = 2, ignition_key_array[1] = 2;
         bleed_air_mode = 0;
 
 	  }
 	  if(engnum == 3){
-        ignition_key_array[0] = 2;
-        ignition_key_array[1] = 2;
+        ignition_key_array[0] = 2, ignition_key_array[1] = 2;
         ignition_key_array[2] = 2;
         bleed_air_mode = 0;
 
 	  }
 	  if(engnum == 4){
-        ignition_key_array[0] = 2;
-        ignition_key_array[1] = 2;
-        ignition_key_array[2] = 2;
-        ignition_key_array[3] = 2;
+        ignition_key_array[0] = 2, ignition_key_array[1] = 2;
+        ignition_key_array[2] = 2, ignition_key_array[3] = 2;
         bleed_air_mode = 0;
 
 	  }
@@ -276,32 +251,24 @@ void process_engines_both_mag_switch()
 
 	  }
 	  if(engnum == 2){
-        ignition_key_array[0] = 3;
-        ignition_key_array[1] = 3;
-        igniter_on[0] = 0;
-        igniter_on[1] = 0;
+        ignition_key_array[0] = 3, ignition_key_array[1] = 3;
+        igniter_on[0] = 0, igniter_on[1] = 0;
         bleed_air_mode = 0;
 
 	  } 
 	  if(engnum == 3){
-        ignition_key_array[0] = 3;
-        ignition_key_array[1] = 3;
+        ignition_key_array[0] = 3, ignition_key_array[1] = 3;
         ignition_key_array[2] = 3;
-        igniter_on[0] = 0;
-        igniter_on[1] = 0;
+        igniter_on[0] = 0, igniter_on[1] = 0;
         igniter_on[2] = 0;
         bleed_air_mode = 0;
 
 	  } 
 	  if(engnum == 4){
-        ignition_key_array[0] = 3;
-        ignition_key_array[1] = 3;
-        ignition_key_array[2] = 3;
-        ignition_key_array[3] = 3;
-        igniter_on[0] = 0;
-        igniter_on[1] = 0;
-        igniter_on[2] = 0;
-        igniter_on[3] = 0;
+        ignition_key_array[0] = 3, ignition_key_array[1] = 3;
+        ignition_key_array[2] = 3, ignition_key_array[3] = 3;
+        igniter_on[0] = 0, igniter_on[1] = 0;
+        igniter_on[2] = 0, igniter_on[3] = 0;
         bleed_air_mode = 0;
 
 	  }
@@ -338,50 +305,40 @@ void process_engines_start_switch()
 
 	  }
 	  if(engnum == 2){
-        ignition_key_array[0] = 4;
-        ignition_key_array[1] = 4;
-        engn_mixt[0] = 1;
-        engn_mixt[1] = 1;
-        igniter_on[0] = 1;
-        igniter_on[1] = 1;
+        ignition_key_array[0] = 4, ignition_key_array[1] = 4;
+        engn_mixt[0] = 1, engn_mixt[1] = 1;
+        igniter_on[0] = 1, igniter_on[1] = 1;
         bleed_air_mode = 4;
 
 	  }
 	  if(engnum == 3){
-        ignition_key_array[0] = 4;
-        ignition_key_array[1] = 4;
+        ignition_key_array[0] = 4, ignition_key_array[1] = 4;
         ignition_key_array[2] = 4;
-        engn_mixt[0] = 1;
-        engn_mixt[1] = 1;
+        engn_mixt[0] = 1, engn_mixt[1] = 1;
         engn_mixt[2] = 1;
-        igniter_on[0] = 1;
-        igniter_on[1] = 1;
+        igniter_on[0] = 1, igniter_on[1] = 1;
         igniter_on[2] = 1;
         bleed_air_mode = 4;
 
 	  }
 	  if(engnum == 4){
-        ignition_key_array[0] = 4;
-        ignition_key_array[1] = 4;
-        ignition_key_array[2] = 4;
-        ignition_key_array[3] = 4;
-        engn_mixt[0] = 1;
-        engn_mixt[1] = 1;
-        engn_mixt[2] = 1;
-        engn_mixt[3] = 1;
-        igniter_on[0] = 1;
-        igniter_on[1] = 1;
-        igniter_on[2] = 1;
-        igniter_on[3] = 1;
+        ignition_key_array[0] = 4, ignition_key_array[1] = 4;
+        ignition_key_array[2] = 4, ignition_key_array[3] = 4;
+        engn_mixt[0] = 1, engn_mixt[1] = 1;
+        engn_mixt[2] = 1, engn_mixt[3] = 1;
+        igniter_on[0] = 1, igniter_on[1] = 1;
+        igniter_on[2] = 1, igniter_on[3] = 1;
         bleed_air_mode = 4;
 
 
 	  }
     }
     XPLMSetDatavi(IgnSwitchArray, ignition_key_array, 0, 8);
-    XPLMSetDatavf(EngnMixt, engn_mixt, 0, 8);
-    XPLMSetDatavi(IgniterOn, igniter_on, 0,  8);
-    XPLMSetDatai(BleedAirMode, bleed_air_mode);
+    if(acf_en_type[0] > 1) {
+        XPLMSetDatavf(EngnMixt, engn_mixt, 0, 8);
+        XPLMSetDatavi(IgniterOn, igniter_on, 0,  8);
+        XPLMSetDatai(BleedAirMode, bleed_air_mode);
+    }
 
 }
 
@@ -1316,6 +1273,7 @@ void process_switch_panel()
     // ******* Only do a read if something new to be read ********
 
       hid_set_nonblocking(switchhandle, 1);
+      XPLMGetDatavi(AcfEnType, acf_en_type, 0, 8);
       int switch_safety_cntr = 30;
       do{
         switchres = hid_read(switchhandle, switchbuf, sizeof(switchbuf));
@@ -1358,7 +1316,8 @@ void process_switch_panel()
       else {
       }
 
-      batnum = XPLMGetDatai(BatNum), gennum = XPLMGetDatai(GenNum), engnum = XPLMGetDatai(EngNum);
+      batnum = XPLMGetDatai(BatNum), gennum = XPLMGetDatai(GenNum);
+      engnum = XPLMGetDatai(EngNum);
 
   return;
 }

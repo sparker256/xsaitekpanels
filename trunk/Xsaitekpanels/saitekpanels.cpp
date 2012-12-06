@@ -98,7 +98,6 @@ XPWidgetID	RadioQnh0TextWidget[50] = {NULL};
 XPWidgetID	RadioQnh1TextWidget[50] = {NULL};
 
 
-
 // ****************** Multi Panel Command Ref **********************
 XPLMCommandRef ApAltDn = NULL, ApAltUp = NULL, ApVsDn = NULL, ApVsUp = NULL;
 XPLMCommandRef ApAsDn = NULL, ApAsUp = NULL, ApHdgDn = NULL, ApHdgUp = NULL;
@@ -188,7 +187,6 @@ XPLMCommandRef LnLtOn = NULL, LnLtOff = NULL, TxLtOn = NULL, TxLtOff = NULL;
 XPLMCommandRef StLtOn = NULL, StLtOff = NULL, NvLtOn = NULL, NvLtOff = NULL;
 XPLMCommandRef BcLtOn = NULL, BcLtOff = NULL, GearUp = NULL, GearDn = NULL;
 
-
 XPLMCommandRef MagOffSwitchOnCmd = NULL, MagOffSwitchOffCmd = NULL;
 XPLMCommandRef MagRightSwitchOnCmd = NULL, MagRightSwitchOffCmd = NULL;
 XPLMCommandRef MagLeftSwitchOnCmd = NULL, MagLeftSwitchOffCmd = NULL;
@@ -198,8 +196,6 @@ XPLMCommandRef MagStartSwitchOnCmd = NULL, MagStartSwitchOffCmd = NULL;
 XPLMCommandRef BatMasterSwitchOnCmd = NULL, BatMasterSwitchOffCmd = NULL;
 XPLMCommandRef AltMasterSwitchOnCmd = NULL, AltMasterSwitchOffCmd = NULL;
 XPLMCommandRef AvMasterSwitchOnCmd = NULL, AvMasterSwitchOffCmd = NULL;
-
-
 
 XPLMCommandRef FuelPumpOnCmd = NULL, FuelPumpOffCmd = NULL;
 XPLMCommandRef DeiceOnCmd = NULL, DeiceOffCmd = NULL;
@@ -213,7 +209,6 @@ XPLMCommandRef NavLightsOnCmd = NULL, NavLightsOffCmd = NULL;
 XPLMCommandRef StrobeLightsOnCmd = NULL, StrobeLightsOffCmd = NULL;
 XPLMCommandRef TaxiLightsOnCmd = NULL, TaxiLightsOffCmd = NULL;
 XPLMCommandRef LandingLightsOnCmd = NULL, LandingLightsOffCmd = NULL;
-
 
 XPLMCommandRef BatOn1 = NULL, BatOn2 = NULL, BatOff1 = NULL, BatOff2 = NULL;
 
@@ -241,7 +236,7 @@ XPLMCommandRef x737ice_wing_on = NULL, x737ice_wing_off = NULL;
 XPLMDataRef BatNum = NULL, GenNum = NULL, EngNum = NULL;
 XPLMDataRef BatArrayOnDR = NULL, IgnSwitchArray = NULL;
 XPLMDataRef EngnMixt = NULL, IgniterOn = NULL;
-XPLMDataRef BleedAirMode = NULL;
+XPLMDataRef BleedAirMode = NULL, AcfEnType = NULL;
 
 XPLMDataRef CowlFlaps = NULL, CockpitLights = NULL, AntiIce = NULL;
 XPLMDataRef GearRetract = NULL, OnGround = NULL, LandingGearStatus = {NULL};
@@ -267,7 +262,6 @@ XPWidgetID	SwitchTextWidget[50] = {NULL};
 typedef	std::vector<XPLMDataRef> aXPLMDataRefID;
 
 static aXPLMDataRefID DataRefID;
-
 
 
 // ****************** BIP Panel Command Ref **********************
@@ -759,10 +753,12 @@ PLUGIN_API int XPluginStart(char *		outName,
   GenNum            = XPLMFindDataRef("sim/aircraft/electrical/num_generators");
   EngNum            = XPLMFindDataRef("sim/aircraft/engine/acf_num_engines");
   BatArrayOnDR      = XPLMFindDataRef("sim/cockpit/electrical/battery_array_on");
+
   IgnSwitchArray    = XPLMFindDataRef("sim/cockpit2/engine/actuators/ignition_key");
   EngnMixt          = XPLMFindDataRef("sim/flightmodel/engine/ENGN_mixt");
   IgniterOn         = XPLMFindDataRef("sim/cockpit2/engine/actuators/igniter_on");
   BleedAirMode      = XPLMFindDataRef("sim/cockpit/pressure/bleed_air_mode");
+  AcfEnType         = XPLMFindDataRef("sim/aircraft/prop/acf_en_type");
 
 // ************* Open any Radio that is connected *****************
 
