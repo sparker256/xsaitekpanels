@@ -209,20 +209,20 @@ extern XPLMCommandRef StrobeLightsOnCmd, StrobeLightsOffCmd;
 extern XPLMCommandRef TaxiLightsOnCmd, TaxiLightsOffCmd;
 extern XPLMCommandRef LandingLightsOnCmd, LandingLightsOffCmd;
 
-extern XPLMCommandRef MagOff1, MagOff2, MagOff3, MagOff4;
-extern XPLMCommandRef MagOff5, MagOff6, MagOff7, MagOff8;
+//extern XPLMCommandRef MagOff1, MagOff2, MagOff3, MagOff4;
+//extern XPLMCommandRef MagOff5, MagOff6, MagOff7, MagOff8;
 
-extern XPLMCommandRef MagLeft1, MagLeft2, MagLeft3, MagLeft4;
-extern XPLMCommandRef MagLeft5, MagLeft6, MagLeft7, MagLeft8;
+//extern XPLMCommandRef MagLeft1, MagLeft2, MagLeft3, MagLeft4;
+//extern XPLMCommandRef MagLeft5, MagLeft6, MagLeft7, MagLeft8;
 
-extern XPLMCommandRef MagRight1, MagRight2, MagRight3, MagRight4;
-extern XPLMCommandRef MagRight5, MagRight6, MagRight7, MagRight8;
+//extern XPLMCommandRef MagRight1, MagRight2, MagRight3, MagRight4;
+//extern XPLMCommandRef MagRight5, MagRight6, MagRight7, MagRight8;
 
-extern XPLMCommandRef MagBoth1, MagBoth2, MagBoth3, MagBoth4;
-extern XPLMCommandRef MagBoth5, MagBoth6, MagBoth7, MagBoth8;
+//extern XPLMCommandRef MagBoth1, MagBoth2, MagBoth3, MagBoth4;
+//extern XPLMCommandRef MagBoth5, MagBoth6, MagBoth7, MagBoth8;
 
-extern XPLMCommandRef EngStart1, EngStart2, EngStart3, EngStart4;
-extern XPLMCommandRef EngStart5, EngStart6, EngStart7, EngStart8;
+//extern XPLMCommandRef EngStart1, EngStart2, EngStart3, EngStart4;
+//extern XPLMCommandRef EngStart5, EngStart6, EngStart7, EngStart8;
 
 extern XPLMCommandRef BatOn1, BatOn2, BatOff1, BatOff2;
 
@@ -251,8 +251,8 @@ extern XPLMCommandRef x737ice_wing_on, x737ice_wing_off;
 // ************** Switch Panel Data Ref ******************
 extern XPLMDataRef BatNum, GenNum, EngNum;
 extern XPLMDataRef BatArrayOnDR, IgnSwitchArray;
-extern XPLMDataRef StopCirrus, IgniterOn;
-extern XPLMDataRef BleedAirMode, FuelTankTransfer;
+extern XPLMDataRef EngnMixt, IgniterOn;
+extern XPLMDataRef BleedAirMode;
 
 extern XPLMDataRef CowlFlaps, CockpitLights, AntiIce;
 extern XPLMDataRef GearRetract, OnGround, LandingGearStatus;
