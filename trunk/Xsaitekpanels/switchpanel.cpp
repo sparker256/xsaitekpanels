@@ -24,7 +24,7 @@ static int switchres, switchwres;
 static int batnum = 0, gennum = 0, engnum = 0;
 
 static float opencowl[8], closecowl[8];
-static float stop_cirrus[8];
+static float engn_mixt[8];
 
 static int MAG_OFF = 10, MAG_RIGHT = 9, MAG_LEFT = 8, MAG_BOTH = 23;
 static int ENG_START = 22;
@@ -89,61 +89,56 @@ void process_engines_mag_off_switch()
 	if(testbit(switchbuf,MAG_OFF)) {
 	  if(engnum == 1){
         ignition_key_array[0] = 0;
-        stop_cirrus[0] = 0;
+        engn_mixt[0] = 0;
         igniter_on[0] = 0;
         bleed_air_mode = 0;
-        fuel_tank_transfer = 0;
-        //XPLMCommandOnce(MagOff1);
+
+
 	  }   
 	  if(engnum == 2){
         ignition_key_array[0] = 0;
         ignition_key_array[1] = 0;
-        stop_cirrus[0] = 0;
-        stop_cirrus[1] = 0;
+        engn_mixt[0] = 0;
+        engn_mixt[1] = 0;
         igniter_on[0] = 0;
         igniter_on[1] = 0;
         bleed_air_mode = 0;
-        fuel_tank_transfer = 0;
-        //XPLMCommandOnce(MagOff1);
-        //XPLMCommandOnce(MagOff2);
+
+
 	  } 
 	  if(engnum == 3){
         ignition_key_array[0] = 0;
         ignition_key_array[1] = 0;
         ignition_key_array[2] = 0;
-        stop_cirrus[0] = 0;
-        stop_cirrus[1] = 0;
-        stop_cirrus[2] = 0;
+        engn_mixt[0] = 0;
+        engn_mixt[1] = 0;
+        engn_mixt[2] = 0;
         igniter_on[0] = 0;
         igniter_on[1] = 0;
         igniter_on[2] = 0;
         bleed_air_mode = 0;
-        fuel_tank_transfer = 0;
-        //XPLMCommandOnce(MagOff1);
-        //XPLMCommandOnce(MagOff2);
-        //XPLMCommandOnce(MagOff3);
+
+
 	  }
 	  if(engnum == 4){
         ignition_key_array[0] = 0;
         ignition_key_array[1] = 0;
         ignition_key_array[2] = 0;
         ignition_key_array[3] = 0;
-        stop_cirrus[0] = 0;
-        stop_cirrus[1] = 0;
-        stop_cirrus[2] = 0;
-        stop_cirrus[3] = 0;
+        engn_mixt[0] = 0;
+        engn_mixt[1] = 0;
+        engn_mixt[2] = 0;
+        engn_mixt[3] = 0;
         igniter_on[0] = 0;
         igniter_on[1] = 0;
         igniter_on[2] = 0;
         igniter_on[3] = 0;
         bleed_air_mode = 0;
-        fuel_tank_transfer = 0;
-        //XPLMCommandOnce(MagOff1);
-        //XPLMCommandOnce(MagOff2);
-        //XPLMCommandOnce(MagOff3);
-        //XPLMCommandOnce(MagOff4);
+
+
 	  }
  	}
+
 
 }
 
@@ -172,23 +167,20 @@ void process_engines_right_mag_switch()
 	  if(engnum == 1){
         ignition_key_array[0] = 1;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagRight1);
+
 	  }   
 	  if(engnum == 2){
         ignition_key_array[0] = 1;
         ignition_key_array[1] = 1;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagRight1);
-        //XPLMCommandOnce(MagRight2);
+
 	  }
 	  if(engnum == 3){
         ignition_key_array[0] = 1;
         ignition_key_array[1] = 1;
         ignition_key_array[2] = 1;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagRight1);
-        //XPLMCommandOnce(MagRight2);
-        //XPLMCommandOnce(MagRight3);
+
 	  }
 	  if(engnum == 4){
         ignition_key_array[0] = 1;
@@ -196,10 +188,7 @@ void process_engines_right_mag_switch()
         ignition_key_array[2] = 1;
         ignition_key_array[3] = 1;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagRight1);
-        //XPLMCommandOnce(MagRight2);
-        //XPLMCommandOnce(MagRight3);
-        //XPLMCommandOnce(MagRight4);
+
 	  }
  	}
 }
@@ -230,23 +219,20 @@ void process_engines_left_mag_switch()
 	  if(engnum == 1){
         ignition_key_array[0] = 2;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagLeft1);
+
 	  }
 	  if(engnum == 2){
         ignition_key_array[0] = 2;
         ignition_key_array[1] = 2;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagLeft1);
-        //XPLMCommandOnce(MagLeft2);
+
 	  }
 	  if(engnum == 3){
         ignition_key_array[0] = 2;
         ignition_key_array[1] = 2;
         ignition_key_array[2] = 2;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagLeft1);
-        //XPLMCommandOnce(MagLeft2);
-        //XPLMCommandOnce(MagLeft3);
+
 	  }
 	  if(engnum == 4){
         ignition_key_array[0] = 2;
@@ -254,10 +240,7 @@ void process_engines_left_mag_switch()
         ignition_key_array[2] = 2;
         ignition_key_array[3] = 2;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagLeft1);
-        //XPLMCommandOnce(MagLeft2);
-        //XPLMCommandOnce(MagLeft3);
-        //XPLMCommandOnce(MagLeft4);
+
 	  }
  	}
 }
@@ -290,7 +273,7 @@ void process_engines_both_mag_switch()
         ignition_key_array[0] = 3;
         igniter_on[0] = 0;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagBoth1);
+
 	  }
 	  if(engnum == 2){
         ignition_key_array[0] = 3;
@@ -298,8 +281,7 @@ void process_engines_both_mag_switch()
         igniter_on[0] = 0;
         igniter_on[1] = 0;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagBoth1);
-        //XPLMCommandOnce(MagBoth2);
+
 	  } 
 	  if(engnum == 3){
         ignition_key_array[0] = 3;
@@ -309,9 +291,7 @@ void process_engines_both_mag_switch()
         igniter_on[1] = 0;
         igniter_on[2] = 0;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagBoth1);
-        //XPLMCommandOnce(MagBoth2);
-        //XPLMCommandOnce(MagBoth3);
+
 	  } 
 	  if(engnum == 4){
         ignition_key_array[0] = 3;
@@ -323,10 +303,7 @@ void process_engines_both_mag_switch()
         igniter_on[2] = 0;
         igniter_on[3] = 0;
         bleed_air_mode = 0;
-        //XPLMCommandOnce(MagBoth1);
-        //XPLMCommandOnce(MagBoth2);
-        //XPLMCommandOnce(MagBoth3);
-        //XPLMCommandOnce(MagBoth4);
+
 	  }
 	}
 }
@@ -355,67 +332,56 @@ void process_engines_start_switch()
 	if(testbit(switchbuf,ENG_START)) {
 	  if(engnum == 1){
         ignition_key_array[0] = 4;
-        stop_cirrus[0] = 1;
+        engn_mixt[0] = 1;
         igniter_on[0] = 1;
         bleed_air_mode = 4;
-        fuel_tank_transfer = 2;
-        //XPLMCommandOnce(EngStart1);
+
 	  }
 	  if(engnum == 2){
         ignition_key_array[0] = 4;
         ignition_key_array[1] = 4;
-        stop_cirrus[0] = 1;
-        stop_cirrus[1] = 1;
+        engn_mixt[0] = 1;
+        engn_mixt[1] = 1;
         igniter_on[0] = 1;
         igniter_on[1] = 1;
         bleed_air_mode = 4;
-        fuel_tank_transfer = 2;
-        //XPLMCommandOnce(EngStart1);
-        //XPLMCommandOnce(EngStart2);
+
 	  }
 	  if(engnum == 3){
         ignition_key_array[0] = 4;
         ignition_key_array[1] = 4;
         ignition_key_array[2] = 4;
-        stop_cirrus[0] = 1;
-        stop_cirrus[1] = 1;
-        stop_cirrus[2] = 1;
+        engn_mixt[0] = 1;
+        engn_mixt[1] = 1;
+        engn_mixt[2] = 1;
         igniter_on[0] = 1;
         igniter_on[1] = 1;
         igniter_on[2] = 1;
         bleed_air_mode = 4;
-        fuel_tank_transfer = 2;
-        //XPLMCommandOnce(EngStart1);
-        //XPLMCommandOnce(EngStart2);
-        //XPLMCommandOnce(EngStart3);
+
 	  }
 	  if(engnum == 4){
         ignition_key_array[0] = 4;
         ignition_key_array[1] = 4;
         ignition_key_array[2] = 4;
         ignition_key_array[3] = 4;
-        stop_cirrus[0] = 1;
-        stop_cirrus[1] = 1;
-        stop_cirrus[2] = 1;
-        stop_cirrus[3] = 1;
+        engn_mixt[0] = 1;
+        engn_mixt[1] = 1;
+        engn_mixt[2] = 1;
+        engn_mixt[3] = 1;
         igniter_on[0] = 1;
         igniter_on[1] = 1;
         igniter_on[2] = 1;
         igniter_on[3] = 1;
         bleed_air_mode = 4;
-        fuel_tank_transfer = 2;
-        //XPLMCommandOnce(EngStart1);
-        //XPLMCommandOnce(EngStart2);
-        //XPLMCommandOnce(EngStart3);
-        //XPLMCommandOnce(EngStart4);
+
+
 	  }
     }
     XPLMSetDatavi(IgnSwitchArray, ignition_key_array, 0, 8);
-    XPLMSetDatavf(StopCirrus, stop_cirrus, 0, 8);
+    XPLMSetDatavf(EngnMixt, engn_mixt, 0, 8);
     XPLMSetDatavi(IgniterOn, igniter_on, 0,  8);
     XPLMSetDatai(BleedAirMode, bleed_air_mode);
-    XPLMSetDatai(FuelTankTransfer, fuel_tank_transfer);
-
 
 }
 

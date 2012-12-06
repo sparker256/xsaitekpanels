@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.02   ***************
-// ****** Dec 02 2012   **************
+// ****** Dec 05 2012   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -215,21 +215,6 @@ XPLMCommandRef TaxiLightsOnCmd = NULL, TaxiLightsOffCmd = NULL;
 XPLMCommandRef LandingLightsOnCmd = NULL, LandingLightsOffCmd = NULL;
 
 
-XPLMCommandRef MagOff1 = NULL, MagOff2 = NULL, MagOff3 = NULL, MagOff4 = NULL;
-XPLMCommandRef MagOff5 = NULL, MagOff6 = NULL, MagOff7 = NULL, MagOff8 = NULL;
-
-XPLMCommandRef MagLeft1 = NULL, MagLeft2 = NULL, MagLeft3 = NULL, MagLeft4 = NULL;
-XPLMCommandRef MagLeft5 = NULL, MagLeft6 = NULL, MagLeft7 = NULL, MagLeft8 = NULL;
-
-XPLMCommandRef MagRight1 = NULL, MagRight2 = NULL, MagRight3 = NULL, MagRight4 = NULL;
-XPLMCommandRef MagRight5 = NULL, MagRight6 = NULL, MagRight7 = NULL, MagRight8 = NULL;
-
-XPLMCommandRef MagBoth1 = NULL, MagBoth2 = NULL, MagBoth3 = NULL, MagBoth4 = NULL;
-XPLMCommandRef MagBoth5 = NULL, MagBoth6 = NULL, MagBoth7 = NULL, MagBoth8 = NULL;
-
-XPLMCommandRef EngStart1 = NULL, EngStart2 = NULL, EngStart3 = NULL, EngStart4 = NULL;
-XPLMCommandRef EngStart5 = NULL, EngStart6 = NULL, EngStart7 = NULL, EngStart8 = NULL;
-
 XPLMCommandRef BatOn1 = NULL, BatOn2 = NULL, BatOff1 = NULL, BatOff2 = NULL;
 
 XPLMCommandRef GenOn1 = NULL, GenOn2 = NULL, GenOn3 = NULL, GenOn4 = NULL;
@@ -255,8 +240,8 @@ XPLMCommandRef x737ice_wing_on = NULL, x737ice_wing_off = NULL;
 // ******************* Switch Panel Data Ref ********************
 XPLMDataRef BatNum = NULL, GenNum = NULL, EngNum = NULL;
 XPLMDataRef BatArrayOnDR = NULL, IgnSwitchArray = NULL;
-XPLMDataRef StopCirrus = NULL, IgniterOn = NULL;
-XPLMDataRef BleedAirMode = NULL, FuelTankTransfer = NULL;
+XPLMDataRef EngnMixt = NULL, IgniterOn = NULL;
+XPLMDataRef BleedAirMode = NULL;
 
 XPLMDataRef CowlFlaps = NULL, CockpitLights = NULL, AntiIce = NULL;
 XPLMDataRef GearRetract = NULL, OnGround = NULL, LandingGearStatus = {NULL};
@@ -716,51 +701,6 @@ PLUGIN_API int XPluginStart(char *		outName,
   GearUp   = XPLMFindCommand("sim/flight_controls/landing_gear_up");
   GearDn   = XPLMFindCommand("sim/flight_controls/landing_gear_down");
 
-  MagOff1   = XPLMFindCommand("sim/magnetos/magnetos_off_1");
-  MagOff2   = XPLMFindCommand("sim/magnetos/magnetos_off_2");
-  MagOff3   = XPLMFindCommand("sim/magnetos/magnetos_off_3");
-  MagOff4   = XPLMFindCommand("sim/magnetos/magnetos_off_4");
-  MagOff5   = XPLMFindCommand("sim/magnetos/magnetos_off_5");
-  MagOff6   = XPLMFindCommand("sim/magnetos/magnetos_off_6");
-  MagOff7   = XPLMFindCommand("sim/magnetos/magnetos_off_7");
-  MagOff8   = XPLMFindCommand("sim/magnetos/magnetos_off_8");
-
-  MagLeft1  = XPLMFindCommand("sim/magnetos/magnetos_left_1");
-  MagLeft2  = XPLMFindCommand("sim/magnetos/magnetos_left_2");
-  MagLeft3  = XPLMFindCommand("sim/magnetos/magnetos_left_3");
-  MagLeft4  = XPLMFindCommand("sim/magnetos/magnetos_left_4");
-  MagLeft5  = XPLMFindCommand("sim/magnetos/magnetos_left_5");
-  MagLeft6  = XPLMFindCommand("sim/magnetos/magnetos_left_6");
-  MagLeft7  = XPLMFindCommand("sim/magnetos/magnetos_left_7");
-  MagLeft8  = XPLMFindCommand("sim/magnetos/magnetos_left_8");
-
-  MagRight1 = XPLMFindCommand("sim/magnetos/magnetos_right_1");
-  MagRight2 = XPLMFindCommand("sim/magnetos/magnetos_right_2");
-  MagRight3 = XPLMFindCommand("sim/magnetos/magnetos_right_3");
-  MagRight4 = XPLMFindCommand("sim/magnetos/magnetos_right_4");
-  MagRight5 = XPLMFindCommand("sim/magnetos/magnetos_right_5");
-  MagRight6 = XPLMFindCommand("sim/magnetos/magnetos_right_6");
-  MagRight7 = XPLMFindCommand("sim/magnetos/magnetos_right_7");
-  MagRight8 = XPLMFindCommand("sim/magnetos/magnetos_right_8");
-
-  MagBoth1  = XPLMFindCommand("sim/magnetos/magnetos_both_1");
-  MagBoth2  = XPLMFindCommand("sim/magnetos/magnetos_both_2");
-  MagBoth3  = XPLMFindCommand("sim/magnetos/magnetos_both_3");
-  MagBoth4  = XPLMFindCommand("sim/magnetos/magnetos_both_4");
-  MagBoth5  = XPLMFindCommand("sim/magnetos/magnetos_both_5");
-  MagBoth6  = XPLMFindCommand("sim/magnetos/magnetos_both_6");
-  MagBoth7  = XPLMFindCommand("sim/magnetos/magnetos_both_7");
-  MagBoth8  = XPLMFindCommand("sim/magnetos/magnetos_both_8");
-
-  EngStart1 = XPLMFindCommand("sim/starters/engage_starter_1");
-  EngStart2 = XPLMFindCommand("sim/starters/engage_starter_2");
-  EngStart3 = XPLMFindCommand("sim/starters/engage_starter_3");
-  EngStart4 = XPLMFindCommand("sim/starters/engage_starter_4");
-  EngStart5 = XPLMFindCommand("sim/starters/engage_starter_5");
-  EngStart6 = XPLMFindCommand("sim/starters/engage_starter_6");
-  EngStart7 = XPLMFindCommand("sim/starters/engage_starter_7");
-  EngStart8 = XPLMFindCommand("sim/starters/engage_starter_8");
-
   BatOn1 = XPLMFindCommand("sim/electrical/battery_1_on");
   BatOn2 = XPLMFindCommand("sim/electrical/battery_2_on");
 
@@ -820,10 +760,9 @@ PLUGIN_API int XPluginStart(char *		outName,
   EngNum            = XPLMFindDataRef("sim/aircraft/engine/acf_num_engines");
   BatArrayOnDR      = XPLMFindDataRef("sim/cockpit/electrical/battery_array_on");
   IgnSwitchArray    = XPLMFindDataRef("sim/cockpit2/engine/actuators/ignition_key");
-  StopCirrus        = XPLMFindDataRef("sim/flightmodel/engine/ENGN_mixt");
+  EngnMixt          = XPLMFindDataRef("sim/flightmodel/engine/ENGN_mixt");
   IgniterOn         = XPLMFindDataRef("sim/cockpit2/engine/actuators/igniter_on");
   BleedAirMode      = XPLMFindDataRef("sim/cockpit/pressure/bleed_air_mode");
-  FuelTankTransfer  = XPLMFindDataRef("sim/cockpit2/fuel/fuel_tank_transfer_to");
 
 // ************* Open any Radio that is connected *****************
 
