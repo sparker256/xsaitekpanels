@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.02   ***************
-// ****** Dec 09 2012   **************
+// ******** ver 2.03   ***************
+// ****** Dec 12 2012   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -53,6 +53,9 @@ XPLMCommandRef	BaroUp = NULL, BaroDn = NULL, BaroStd = NULL;
 
 XPLMCommandRef Com1ActStby = NULL, Com2ActStby = NULL, Nav1ActStby = NULL, Nav2ActStby = NULL;
 XPLMCommandRef Adf1ActStby = NULL, Adf2ActStby = NULL;
+
+XPLMCommandRef Obs1Down = NULL, Obs1Up = NULL;
+XPLMCommandRef Obs2Down = NULL, Obs2Up = NULL;
 
 // ************* Radio Panel Data Ref ****************
 XPLMDataRef Com1ActFreq = NULL, Com2ActFreq = NULL, Nav1ActFreq = NULL, Nav2ActFreq = NULL;
@@ -494,10 +497,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels v2.02\n");
+  XPLMDebugString("Xsaitekpanels v2.03\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.02");
+  strcpy(outName, "Xsaitekpanels v2.03");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -555,6 +558,11 @@ PLUGIN_API int XPluginStart(char *		outName,
   Nav2ActStby = XPLMFindCommand("sim/radios/nav2_standy_flip");
   Adf1ActStby = XPLMFindCommand("sim/radios/adf1_standy_flip");
   Adf2ActStby = XPLMFindCommand("sim/radios/adf2_standy_flip");
+
+  Obs1Down = XPLMFindCommand("sim/radios/obs1_down");
+  Obs1Up = XPLMFindCommand("sim/radios/obs1_up");
+  Obs2Down = XPLMFindCommand("sim/radios/obs2_down");
+  Obs2Up = XPLMFindCommand("sim/radios/obs2_up");
 
 
 // ************ Find Radio Panel Data Ref ******************

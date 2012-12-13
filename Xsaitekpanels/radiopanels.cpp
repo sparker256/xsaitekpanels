@@ -842,28 +842,58 @@ void process_upper_nav1_switch()
         if(testbit(radiobuf[radnum],UPPER_FINE_UP)) {
           upnav1dbncfninc[radnum]++;
           if (upnav1dbncfninc[radnum] > radspeed) {
-	    XPLMCommandOnce(Nav1StbyFineUp);
-	    upnav1dbncfninc[radnum] = 0;
-	  } 
+            if(xpanelsfnbutton == 1) {
+              XPLMCommandOnce(Obs1Up);
+            } else {
+              XPLMCommandOnce(Nav1StbyFineUp);
+            }
+
+
+            upnav1dbncfninc[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],UPPER_FINE_DN)) {
-	  upnav1dbncfndec[radnum]++;
+          upnav1dbncfndec[radnum]++;
           if (upnav1dbncfndec[radnum] > radspeed) {
-	    XPLMCommandOnce(Nav1StbyFineDn);
+            if(xpanelsfnbutton == 1) {
+              XPLMCommandOnce(Obs1Down);
+            } else {
+              XPLMCommandOnce(Nav1StbyFineDn);
+            }
+
 	    upnav1dbncfndec[radnum] = 0;
 	  }
         }
         if(testbit(radiobuf[radnum],UPPER_COARSE_UP)) {
-	  upnav1dbnccorinc[radnum]++;
+          upnav1dbnccorinc[radnum]++;
           if (upnav1dbnccorinc[radnum] > radspeed) {
-	    XPLMCommandOnce(Nav1StbyCorseUp);
+            radn = 10;
+            if(xpanelsfnbutton == 1) {
+              while (radn > 0) {
+                XPLMCommandOnce(Obs1Up);
+                --radn;
+              }
+
+            } else {
+              XPLMCommandOnce(Nav1StbyCorseUp);
+            }
+
 	    upnav1dbnccorinc[radnum] = 0;
 	  }
         }  
         if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
-	  upnav1dbnccordec[radnum]++;
+          upnav1dbnccordec[radnum]++;
           if (upnav1dbnccordec[radnum] > radspeed) {
-	    XPLMCommandOnce(Nav1StbyCorseDn);
+            radn = 10;
+            if(xpanelsfnbutton == 1) {
+              while (radn > 0) {
+                XPLMCommandOnce(Obs1Down);
+                --radn;
+                }
+            } else {
+              XPLMCommandOnce(Nav1StbyCorseDn);
+            }
+
 	    upnav1dbnccordec[radnum] = 0;
 	  }
         }
