@@ -33,6 +33,9 @@ extern XPLMCommandRef BaroUp, BaroDn, BaroStd;
 extern XPLMCommandRef Com1ActStby, Com2ActStby, Nav1ActStby, Nav2ActStby;
 extern XPLMCommandRef Adf1ActStby, Adf2ActStby;
 
+extern XPLMCommandRef Obs1Down, Obs1Up;
+extern XPLMCommandRef Obs2Down, Obs2Up;
+
 // ************** Radio Panel SDK Data Ref **********************
 extern XPLMDataRef Com1ActFreq, Com2ActFreq, Nav1ActFreq, Nav2ActFreq;
 extern XPLMDataRef Com1StbyFreq, Com2StbyFreq, Nav1StbyFreq, Nav2StbyFreq;
