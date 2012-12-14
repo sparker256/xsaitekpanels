@@ -90,8 +90,8 @@ static float updmespeedf[4], lodmespeedf[4];
 static float updmetime[4], lodmetime[4];
 static float upbarosetf[4], lobarosetf[4];
 
-static float UpNav1ObsDegt[4], UpNav2ObsDegt[4];
-static float LoNav1ObsDegt[4], LoNav2ObsDegt[4];
+static float UpNav1ObsDegm[4], UpNav2ObsDegm[4];
+static float LoNav1ObsDegm[4], LoNav2ObsDegm[4];
 
 static int radioaactv, radioadig1, radioarem1, radioadig2, radioarem2, radioadig3, radioarem3;
 static int radioadig4, radioarem4, radioadig5;
@@ -129,8 +129,8 @@ static int upmodeturnoff, lomodeturnoff;
 static unsigned char radiobuf[4][4];
 static unsigned char radiowbuf[4][23];
 
-void process_upper_nav_com_freq();
-void process_lower_nav_com_freq();
+// void process_upper_nav_com_freq();
+// void process_lower_nav_com_freq();
 
 void process_upper_com_freq();
 void process_upper_nav_freq();
@@ -143,8 +143,6 @@ void process_radio_menu()
 
     XPLMClearAllMenuItems(RadioMenuId);
     XPLMAppendMenuItem(RadioMenuId, "Radio Panel Widget", (void *) "RADIO_WIDGET", 1);
-
-
 
 }
 
@@ -841,8 +839,6 @@ void process_upper_com2_switch()
 
 void process_upper_nav1_switch()
 {
-
-
     if(testbit(radiobuf[radnum],UPPER_NAV1)) {
       upseldis[radnum] = 3;
       if (radiores > 0) {
@@ -855,8 +851,7 @@ void process_upper_nav1_switch()
               XPLMCommandOnce(Nav1StbyFineUp);
             }
 
-
-            upnav1dbncfninc[radnum] = 0;
+          upnav1dbncfninc[radnum] = 0;
           }
         }
         if(testbit(radiobuf[radnum],UPPER_FINE_DN)) {
@@ -867,9 +862,8 @@ void process_upper_nav1_switch()
             } else {
               XPLMCommandOnce(Nav1StbyFineDn);
             }
-
-	    upnav1dbncfndec[radnum] = 0;
-	  }
+          upnav1dbncfndec[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],UPPER_COARSE_UP)) {
           upnav1dbnccorinc[radnum]++;
@@ -885,8 +879,8 @@ void process_upper_nav1_switch()
               XPLMCommandOnce(Nav1StbyCorseUp);
             }
 
-	    upnav1dbnccorinc[radnum] = 0;
-	  }
+            upnav1dbnccorinc[radnum] = 0;
+          }
         }  
         if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
           upnav1dbnccordec[radnum]++;
@@ -901,13 +895,13 @@ void process_upper_nav1_switch()
               XPLMCommandOnce(Nav1StbyCorseDn);
             }
 
-	    upnav1dbnccordec[radnum] = 0;
-	  }
+            upnav1dbnccordec[radnum] = 0;
+          }
         }
-	if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-	  XPLMCommandOnce(Nav1ActStby);
+        if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+          XPLMCommandOnce(Nav1ActStby);
         }
-      } 
+      }
 
     upactcomnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
     upstbycomnavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
@@ -931,9 +925,8 @@ void process_upper_nav2_switch()
             } else {
               XPLMCommandOnce(Nav2StbyFineUp);
             }
-
-	    upnav2dbncfninc[radnum] = 0;
-	  }
+            upnav2dbncfninc[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],UPPER_FINE_DN)) {
           upnav2dbncfndec[radnum]++;
@@ -944,8 +937,8 @@ void process_upper_nav2_switch()
               XPLMCommandOnce(Nav2StbyFineDn);
             }
 
-	    upnav2dbncfndec[radnum] = 0;
-	  }
+            upnav2dbncfndec[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],UPPER_COARSE_UP)) {
           upnav2dbnccorinc[radnum]++;
@@ -960,7 +953,7 @@ void process_upper_nav2_switch()
               XPLMCommandOnce(Nav2StbyCorseUp);
             }
             upnav2dbnccorinc[radnum] = 0;
-	  }
+          }
         }  
         if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
           upnav2dbnccordec[radnum]++;
@@ -973,14 +966,14 @@ void process_upper_nav2_switch()
               }
             } else {
               XPLMCommandOnce(Nav2StbyCorseDn);
-          }
+            }
 
-	    upnav2dbnccordec[radnum] = 0;
-	  }
+            upnav2dbnccordec[radnum] = 0;
+          }
         }
 
-	if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-	  XPLMCommandOnce(Nav2ActStby);
+        if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+          XPLMCommandOnce(Nav2ActStby);
         }
       }
 
@@ -1270,9 +1263,6 @@ void process_upper_dme_switch()
 
 void process_upper_xpdr_switch()
 {
-
-
-
     if(testbit(radiobuf[radnum],UPPER_XPDR)) {
       upseldis[radnum] = 9;
 
@@ -1555,8 +1545,6 @@ void process_lower_com1_switch()
 void process_lower_com2_switch()
 {
 
-
-
    if(testbit(radiobuf[radnum],LOWER_COM2)) {
      loseldis[radnum] = 2;
      if (radiores > 0) {
@@ -1603,76 +1591,74 @@ void process_lower_com2_switch()
 void process_lower_nav1_switch()
 {
 
-
-
     if(testbit(radiobuf[radnum],LOWER_NAV1)) {
       loseldis[radnum] = 3;
       if (radiores > 0) {
         if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
           lonav1dbncfninc[radnum]++;
           if (lonav1dbncfninc[radnum] > radspeed) {
-              if(xpanelsfnbutton == 1) {
-                XPLMCommandOnce(Obs1Up);
-              } else {
-                XPLMCommandOnce(Nav1StbyFineUp);
-              }
-        //XPLMCommandOnce(Nav1StbyFineUp);
-	    lonav1dbncfninc[radnum] = 0;
-	  }
+            if(xpanelsfnbutton == 1) {
+              XPLMCommandOnce(Obs1Up);
+            } else {
+              XPLMCommandOnce(Nav1StbyFineUp);
+            }
+            //XPLMCommandOnce(Nav1StbyFineUp);
+            lonav1dbncfninc[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],LOWER_FINE_DN)) {
-	  lonav1dbncfndec[radnum]++;
+          lonav1dbncfndec[radnum]++;
           if (lonav1dbncfndec[radnum] > radspeed) {
-              if(xpanelsfnbutton == 1) {
-                XPLMCommandOnce(Obs1Down);
-              } else {
-                XPLMCommandOnce(Nav1StbyFineDn);
-              }
-        //XPLMCommandOnce(Nav1StbyFineDn);
-	    lonav1dbncfndec[radnum] = 0;
-	  }
+            if(xpanelsfnbutton == 1) {
+              XPLMCommandOnce(Obs1Down);
+            } else {
+              XPLMCommandOnce(Nav1StbyFineDn);
+            }
+          //XPLMCommandOnce(Nav1StbyFineDn);
+            lonav1dbncfndec[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
-	  lonav1dbnccorinc[radnum]++;
+          lonav1dbnccorinc[radnum]++;
           if (lonav1dbnccorinc[radnum] > radspeed) {
-              radn = 10;
-              if(xpanelsfnbutton == 1) {
-                while (radn > 0) {
-                  XPLMCommandOnce(Obs1Up);
-                  --radn;
-                }
+            radn = 10;
+            if(xpanelsfnbutton == 1) {
+              while (radn > 0) {
+                XPLMCommandOnce(Obs1Up);
+                --radn;
+              }
 
-              } else {
-                XPLMCommandOnce(Nav1StbyCorseUp);
-              }
-        //XPLMCommandOnce(Nav1StbyCorseUp);
-	    lonav1dbnccorinc[radnum] = 0;
-	  }
-        }  
+            } else {
+              XPLMCommandOnce(Nav1StbyCorseUp);
+            }
+            //XPLMCommandOnce(Nav1StbyCorseUp);
+            lonav1dbnccorinc[radnum] = 0;
+          }
+        }
         if(testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
-	  lonav1dbnccordec[radnum]++;
+          lonav1dbnccordec[radnum]++;
           if (lonav1dbnccordec[radnum] > radspeed) {
-              radn = 10;
-              if(xpanelsfnbutton == 1) {
-                while (radn > 0) {
-                  XPLMCommandOnce(Obs1Down);
-                  --radn;
-                  }
-              } else {
-                XPLMCommandOnce(Nav1StbyCorseDn);
+            radn = 10;
+            if(xpanelsfnbutton == 1) {
+              while (radn > 0) {
+                XPLMCommandOnce(Obs1Down);
+                --radn;
               }
-        //XPLMCommandOnce(Nav1StbyCorseDn);
-	    lonav1dbnccordec[radnum] = 0;
-	  }
+            } else {
+              XPLMCommandOnce(Nav1StbyCorseDn);
+            }
+            //XPLMCommandOnce(Nav1StbyCorseDn);
+            lonav1dbnccordec[radnum] = 0;
+          }
         }
 
-	if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-	  XPLMCommandOnce(Nav1ActStby);
+        if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
+          XPLMCommandOnce(Nav1ActStby);
         }
       } 
-    loactcomnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
-    lostbycomnavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
-    lonav1[radnum] = 0;	 
+      loactcomnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
+      lostbycomnavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
+      lonav1[radnum] = 0;
     }
 
 }
@@ -1682,75 +1668,73 @@ void process_lower_nav1_switch()
 void process_lower_nav2_switch()
 {
 
-
-
     if(testbit(radiobuf[radnum],LOWER_NAV2)) {
       loseldis[radnum] = 4;
       if (radiores > 0) {
         if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
           lonav2dbncfninc[radnum]++;
           if (lonav2dbncfninc[radnum] > radspeed) {
-              if(xpanelsfnbutton == 1) {
-                XPLMCommandOnce(Obs2Up);
-              } else {
-                XPLMCommandOnce(Nav2StbyFineUp);
-              }
+            if(xpanelsfnbutton == 1) {
+              XPLMCommandOnce(Obs2Up);
+            } else {
+              XPLMCommandOnce(Nav2StbyFineUp);
+            }
 
-        //XPLMCommandOnce(Nav2StbyFineUp);
-	    lonav2dbncfninc[radnum] = 0;
-	  }
+            //XPLMCommandOnce(Nav2StbyFineUp);
+            lonav2dbncfninc[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],LOWER_FINE_DN)) {
-	  lonav2dbncfndec[radnum]++;
+          lonav2dbncfndec[radnum]++;
           if (lonav2dbncfndec[radnum] > radspeed) {
-              if(xpanelsfnbutton == 1) {
-                XPLMCommandOnce(Obs2Down);
-              } else {
-                XPLMCommandOnce(Nav2StbyFineDn);
-              }
-        //XPLMCommandOnce(Nav2StbyFineDn);
-	    lonav2dbncfndec[radnum] = 0;
-	  }
+            if(xpanelsfnbutton == 1) {
+              XPLMCommandOnce(Obs2Down);
+            } else {
+              XPLMCommandOnce(Nav2StbyFineDn);
+            }
+            //XPLMCommandOnce(Nav2StbyFineDn);
+            lonav2dbncfndec[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
-	  lonav2dbnccorinc[radnum]++;
+          lonav2dbnccorinc[radnum]++;
           if (lonav2dbnccorinc[radnum] > radspeed) {
-              radn = 10;
-              if(xpanelsfnbutton == 1) {
-                while (radn > 0) {
-                  XPLMCommandOnce(Obs2Up);
-                  --radn;
-                }
-              } else {
-                XPLMCommandOnce(Nav2StbyCorseUp);
+            radn = 10;
+            if(xpanelsfnbutton == 1) {
+              while (radn > 0) {
+                XPLMCommandOnce(Obs2Up);
+                --radn;
               }
-        //XPLMCommandOnce(Nav2StbyCorseUp);
-	    lonav2dbnccorinc[radnum] = 0;
-	  }
+            } else {
+              XPLMCommandOnce(Nav2StbyCorseUp);
+            }
+            //XPLMCommandOnce(Nav2StbyCorseUp);
+            lonav2dbnccorinc[radnum] = 0;
+          }
         }  
         if(testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
-	  lonav2dbnccordec[radnum]++;
+          lonav2dbnccordec[radnum]++;
           if (lonav2dbnccordec[radnum] > radspeed) {
-              radn = 10;
-              if(xpanelsfnbutton == 1) {
-                while (radn > 0) {
-                  XPLMCommandOnce(Obs2Down);
-                  --radn;
-                }
+            radn = 10;
+            if(xpanelsfnbutton == 1) {
+              while (radn > 0) {
+                XPLMCommandOnce(Obs2Down);
+                --radn;
+              }
               } else {
                 XPLMCommandOnce(Nav2StbyCorseDn);
             }
-        //XPLMCommandOnce(Nav2StbyCorseDn);
-	    lonav2dbnccordec[radnum] = 0;
-	  }
+          //XPLMCommandOnce(Nav2StbyCorseDn);
+          lonav2dbnccordec[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-	  XPLMCommandOnce(Nav2ActStby);
+          XPLMCommandOnce(Nav2ActStby);
         }
       }
     loactcomnavfreq[radnum] = XPLMGetDatai(Nav2ActFreq);
     lostbycomnavfreq[radnum] = XPLMGetDatai(Nav2StbyFreq);
-    lonav2[radnum] = 0;	 
+    lonav2[radnum] = 0;
     }
 
 }
@@ -2446,14 +2430,14 @@ void process_upper_nav_freq()
   }
   if(xpanelsfnbutton == 1) {
       if (upseldis[radnum] == 3) {
-          UpNav1ObsDegt[radnum] = XPLMGetDataf(Nav1ObsDegt);
-          radiobstby = (int)(UpNav1ObsDegt[radnum]);
+          UpNav1ObsDegm[radnum] = XPLMGetDataf(Nav1ObsDegm);
+          radiobstby = (int)(UpNav1ObsDegm[radnum]);
       } else if (upseldis[radnum] == 4) {
-          UpNav2ObsDegt[radnum] = XPLMGetDataf(Nav2ObsDegt);
-          radiobstby = (int)(UpNav2ObsDegt[radnum]);
+          UpNav2ObsDegm[radnum] = XPLMGetDataf(Nav2ObsDegm);
+          radiobstby = (int)(UpNav2ObsDegm[radnum]);
       }
       radiobdig1 = 15, radiobdig2 = 15;
-      radiobstby = radiobstby + 10;
+      //radiobstby = radiobstby + 10;
       radiobdig3 = radiobstby/100, radiobrem3 = radiobstby%100;
       radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
       radiobdig3 = radiobdig3, radiobdig5 = radiobrem4;
@@ -2508,15 +2492,15 @@ void process_lower_nav_freq()
   if(xpanelsfnbutton == 1) {
 
       if (loseldis[radnum] == 3) {
-          LoNav1ObsDegt[radnum] = XPLMGetDataf(Nav1ObsDegt);
-          radiodstby = (int)(LoNav1ObsDegt[radnum]);
+          LoNav1ObsDegm[radnum] = XPLMGetDataf(Nav1ObsDegm);
+          radiodstby = (int)(LoNav1ObsDegm[radnum]);
       } else if (loseldis[radnum] == 4) {
-          LoNav2ObsDegt[radnum] = XPLMGetDataf(Nav2ObsDegt);
-          radiodstby = (int)(LoNav2ObsDegt[radnum]);
+          LoNav2ObsDegm[radnum] = XPLMGetDataf(Nav2ObsDegm);
+          radiodstby = (int)(LoNav2ObsDegm[radnum]);
       }
 
       radioddig1 = 15, radioddig2 = 15;
-      radiodstby = radiodstby + 10;
+      //radiodstby = radiodstby + 10;
 
       radioddig3 = radiodstby/100, radiodrem3 = radiodstby%100;
       radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;

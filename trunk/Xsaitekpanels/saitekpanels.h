@@ -55,7 +55,7 @@ extern XPLMDataRef AvPwrOn, BatPwrOn;
 extern XPLMDataRef Nav1PwrOn, Nav2PwrOn, Com1PwrOn, Com2PwrOn;
 extern XPLMDataRef Afd1PwrOn, DmePwrOn;
 
-extern XPLMDataRef Nav1ObsDegt, Nav2ObsDegt;
+extern XPLMDataRef Nav1ObsDegm, Nav2ObsDegm;
 
 extern XPLMMenuID      RadioMenu;
 extern XPLMMenuID      RadioMenuId;

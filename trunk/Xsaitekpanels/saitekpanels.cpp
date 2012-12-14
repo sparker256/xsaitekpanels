@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.03   ***************
-// ****** Dec 12 2012   **************
+// ****** Dec 14 2012   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -78,7 +78,7 @@ XPLMDataRef AvPwrOn = NULL, BatPwrOn = NULL;
 XPLMDataRef Nav1PwrOn = NULL, Nav2PwrOn = NULL, Com1PwrOn = NULL, Com2PwrOn = NULL;
 XPLMDataRef Afd1PwrOn = NULL, DmePwrOn = NULL;
 
-XPLMDataRef Nav1ObsDegt = NULL, Nav2ObsDegt = NULL;
+XPLMDataRef Nav1ObsDegm = NULL, Nav2ObsDegm = NULL;
 
 XPLMMenuID      RadioMenu;
 XPLMMenuID      RadioMenuId;
@@ -611,8 +611,8 @@ PLUGIN_API int XPluginStart(char *		outName,
   Afd1PwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/adf1_power");
   DmePwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/dme_power");
 
-  Nav1ObsDegt = XPLMFindDataRef("sim/cockpit/radios/nav1_obs_degt");
-  Nav2ObsDegt = XPLMFindDataRef("sim/cockpit/radios/nav2_obs_degt");
+  Nav1ObsDegm = XPLMFindDataRef("sim/cockpit/radios/nav1_obs_degm");
+  Nav2ObsDegm = XPLMFindDataRef("sim/cockpit/radios/nav2_obs_degm");
 
 
 // ************ Find Multi Panel Commands Ref ***************
