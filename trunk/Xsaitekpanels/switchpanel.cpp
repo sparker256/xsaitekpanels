@@ -92,6 +92,7 @@ void process_engines_mag_off_switch()
         engn_mixt[0] = 0;
         igniter_on[0] = 0;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagOff1);
 
 
 	  }   
@@ -100,6 +101,8 @@ void process_engines_mag_off_switch()
         engn_mixt[0] = 0, engn_mixt[1] = 0;
         igniter_on[0] = 0, igniter_on[1] = 0;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagOff1);
+        //XPLMCommandOnce(MagOff2);
 
 	  } 
 	  if(engnum == 3){
@@ -108,6 +111,10 @@ void process_engines_mag_off_switch()
         engn_mixt[0] = 0, engn_mixt[1] = 0, engn_mixt[2] = 0;
         igniter_on[0] = 0, igniter_on[1] = 0 , igniter_on[2] = 0;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagOff1);
+        //XPLMCommandOnce(MagOff2);
+        //XPLMCommandOnce(MagOff3);
+
 
 	  }
 	  if(engnum == 4){
@@ -118,6 +125,10 @@ void process_engines_mag_off_switch()
         igniter_on[0] = 0, igniter_on[1] = 0;
         igniter_on[2] = 0, igniter_on[3] = 0;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagOff1);
+        //XPLMCommandOnce(MagOff2);
+        //XPLMCommandOnce(MagOff3);
+        //XPLMCommandOnce(MagOff4);
 
 	  }
  	}
@@ -150,23 +161,33 @@ void process_engines_right_mag_switch()
 	  if(engnum == 1){
         ignition_key_array[0] = 1;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagRight1);
 
 	  }   
 	  if(engnum == 2){
         ignition_key_array[0] = 1, ignition_key_array[1] = 1;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagRight1);
+        //XPLMCommandOnce(MagRight2);
 
-	  }
+      }
 	  if(engnum == 3){
         ignition_key_array[0] = 1, ignition_key_array[1] = 1;
         ignition_key_array[2] = 1;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagRight1);
+        //XPLMCommandOnce(MagRight2);
+        //XPLMCommandOnce(MagRight3);
 
 	  }
 	  if(engnum == 4){
         ignition_key_array[0] = 1, ignition_key_array[1] = 1;
         ignition_key_array[2] = 1, ignition_key_array[3] = 1;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagRight1);
+        //XPLMCommandOnce(MagRight2);
+        //XPLMCommandOnce(MagRight3);
+        //XPLMCommandOnce(MagRight4);
 
 	  }
  	}
@@ -198,22 +219,33 @@ void process_engines_left_mag_switch()
 	  if(engnum == 1){
         ignition_key_array[0] = 2;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagLeft1);
 
 	  }
 	  if(engnum == 2){
         ignition_key_array[0] = 2, ignition_key_array[1] = 2;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagLeft1);
+        //XPLMCommandOnce(MagLeft2);
 
 	  }
 	  if(engnum == 3){
         ignition_key_array[0] = 2, ignition_key_array[1] = 2;
         ignition_key_array[2] = 2;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagLeft1);
+        //XPLMCommandOnce(MagLeft2);
+        //XPLMCommandOnce(MagLeft3);
 
 	  }
 	  if(engnum == 4){
         ignition_key_array[0] = 2, ignition_key_array[1] = 2;
         ignition_key_array[2] = 2, ignition_key_array[3] = 2;
+        //XPLMCommandOnce(MagLeft1);
+        //XPLMCommandOnce(MagLeft2);
+        //XPLMCommandOnce(MagLeft3);
+        //XPLMCommandOnce(MagLeft4);
+
         bleed_air_mode = 0;
 
 	  }
@@ -248,12 +280,15 @@ void process_engines_both_mag_switch()
         ignition_key_array[0] = 3;
         igniter_on[0] = 0;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagBoth1);
 
 	  }
 	  if(engnum == 2){
         ignition_key_array[0] = 3, ignition_key_array[1] = 3;
         igniter_on[0] = 0, igniter_on[1] = 0;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagBoth1);
+        //XPLMCommandOnce(MagBoth2);
 
 	  } 
 	  if(engnum == 3){
@@ -262,6 +297,9 @@ void process_engines_both_mag_switch()
         igniter_on[0] = 0, igniter_on[1] = 0;
         igniter_on[2] = 0;
         bleed_air_mode = 0;
+        //XPLMCommandOnce(MagBoth1);
+        //XPLMCommandOnce(MagBoth2);
+        //XPLMCommandOnce(MagBoth3);
 
 	  } 
 	  if(engnum == 4){
@@ -270,7 +308,10 @@ void process_engines_both_mag_switch()
         igniter_on[0] = 0, igniter_on[1] = 0;
         igniter_on[2] = 0, igniter_on[3] = 0;
         bleed_air_mode = 0;
-
+        //XPLMCommandOnce(MagBoth1);
+        //XPLMCommandOnce(MagBoth2);
+        //XPLMCommandOnce(MagBoth3);
+        //XPLMCommandOnce(MagBoth4);
 	  }
 	}
 }
@@ -302,6 +343,7 @@ void process_engines_start_switch()
         engn_mixt[0] = 1;
         igniter_on[0] = 1;
         bleed_air_mode = 4;
+        //XPLMCommandOnce(EngStart1);
 
 	  }
 	  if(engnum == 2){
@@ -309,6 +351,8 @@ void process_engines_start_switch()
         engn_mixt[0] = 1, engn_mixt[1] = 1;
         igniter_on[0] = 1, igniter_on[1] = 1;
         bleed_air_mode = 4;
+        //XPLMCommandOnce(EngStart1);
+        //XPLMCommandOnce(EngStart2);
 
 	  }
 	  if(engnum == 3){
@@ -319,6 +363,9 @@ void process_engines_start_switch()
         igniter_on[0] = 1, igniter_on[1] = 1;
         igniter_on[2] = 1;
         bleed_air_mode = 4;
+        //XPLMCommandOnce(EngStart1);
+        //XPLMCommandOnce(EngStart2);
+        //XPLMCommandOnce(EngStart3);
 
 	  }
 	  if(engnum == 4){
@@ -329,10 +376,14 @@ void process_engines_start_switch()
         igniter_on[0] = 1, igniter_on[1] = 1;
         igniter_on[2] = 1, igniter_on[3] = 1;
         bleed_air_mode = 4;
-
+        //XPLMCommandOnce(EngStart1);
+        //XPLMCommandOnce(EngStart2);
+        //XPLMCommandOnce(EngStart3);
+        //XPLMCommandOnce(EngStart4);
 
 	  }
     }
+
     XPLMSetDatavi(IgnSwitchArray, ignition_key_array, 0, 8);
     if(acf_en_type[0] > 1) {
         XPLMSetDatavf(EngnMixt, engn_mixt, 0, 8);

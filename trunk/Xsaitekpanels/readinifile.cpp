@@ -83,6 +83,7 @@ void process_read_ini_file()
     strobelightswitchenable      = 1;
     taxilightswitchenable        = 1;
     landinglightswitchenable     = 1;
+    cockpitbuilderswitchenable   = 1;
 
     bataltinverse = 0;
 
@@ -93,6 +94,7 @@ void process_read_ini_file()
     if (numadf == 1) {
          XPSetWidgetProperty(RadioSpeed1CheckWidget[0], xpProperty_ButtonState, 1);
     }
+
     // multi panel
     trimspeed                = 1;
     multispeed               = 3;

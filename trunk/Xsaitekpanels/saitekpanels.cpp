@@ -1,6 +1,6 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.03   ***************
+// ******** ver 2.04   ***************
 // ****** Dec 15 2012   **************
 
 #include "XPLMDisplay.h"
@@ -215,6 +215,21 @@ XPLMCommandRef StrobeLightsOnCmd = NULL, StrobeLightsOffCmd = NULL;
 XPLMCommandRef TaxiLightsOnCmd = NULL, TaxiLightsOffCmd = NULL;
 XPLMCommandRef LandingLightsOnCmd = NULL, LandingLightsOffCmd = NULL;
 
+XPLMCommandRef MagOff1 = NULL, MagOff2 = NULL, MagOff3 = NULL, MagOff4 = NULL;
+XPLMCommandRef MagOff5 = NULL, MagOff6 = NULL, MagOff7 = NULL, MagOff8 = NULL;
+
+XPLMCommandRef MagLeft1 = NULL, MagLeft2 = NULL, MagLeft3 = NULL, MagLeft4 = NULL;
+XPLMCommandRef MagLeft5 = NULL, MagLeft6 = NULL, MagLeft7 = NULL, MagLeft8 = NULL;
+
+XPLMCommandRef MagRight1 = NULL, MagRight2 = NULL, MagRight3 = NULL, MagRight4 = NULL;
+XPLMCommandRef MagRight5 = NULL, MagRight6 = NULL, MagRight7 = NULL, MagRight8 = NULL;
+
+XPLMCommandRef MagBoth1 = NULL, MagBoth2 = NULL, MagBoth3 = NULL, MagBoth4 = NULL;
+XPLMCommandRef MagBoth5 = NULL, MagBoth6 = NULL, MagBoth7 = NULL, MagBoth8 = NULL;
+
+XPLMCommandRef EngStart1 = NULL, EngStart2 = NULL, EngStart3 = NULL, EngStart4 = NULL;
+XPLMCommandRef EngStart5 = NULL, EngStart6 = NULL, EngStart7 = NULL, EngStart8 = NULL;
+
 XPLMCommandRef BatOn1 = NULL, BatOn2 = NULL, BatOff1 = NULL, BatOff2 = NULL;
 
 XPLMCommandRef GenOn1 = NULL, GenOn2 = NULL, GenOn3 = NULL, GenOn4 = NULL;
@@ -257,9 +272,14 @@ XPWidgetID	SwitchDisableCheckWidget[50] = {NULL};
 XPWidgetID	SwitchRemapCheckWidget[50] = {NULL};
 XPWidgetID	SwitchBatAltCheckWidget[50] = {NULL};
 XPWidgetID	SwitchAltBatCheckWidget[50] = {NULL};
-
 XPWidgetID	SwitchBatAltTextWidget[50] = {NULL};
 XPWidgetID	SwitchAltBatTextWidget[50] = {NULL};
+
+XPWidgetID	SwitchStartSwitchOldCheckWidget[50] = {NULL};
+XPWidgetID	SwitchStartSwitchOldTextWidget[50] = {NULL};
+XPWidgetID	SwitchStartSwitchNewCheckWidget[50] = {NULL};
+XPWidgetID	SwitchStartSwitchNewTextWidget[50] = {NULL};
+
 XPWidgetID	SwitchLabelTextWidget[50] = {NULL};
 XPWidgetID	SwitchTextWidget[50] = {NULL};
 
@@ -370,7 +390,8 @@ int cowlflapsenable, panellightswitchenable;
 int beaconlightswitchenable, navlightswitchenable;
 int strobelightswitchenable, taxilightswitchenable;
 int landinglightswitchenable, bataltinverse;
-int panellightsenable;
+int panellightsenable, cockpitbuilderswitchenable;
+
 
 string mag_off_switch_on, mag_off_switch_off;
 string mag_right_switch_on, mag_right_switch_off;
@@ -499,10 +520,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels v2.03\n");
+  XPLMDebugString("Xsaitekpanels v2.04\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.03");
+  strcpy(outName, "Xsaitekpanels v2.04");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -527,32 +548,32 @@ PLUGIN_API int XPluginStart(char *		outName,
   Nav2StbyCorseDn = XPLMFindCommand("sim/radios/stby_nav2_coarse_down");
   Nav2StbyCorseUp = XPLMFindCommand("sim/radios/stby_nav2_coarse_up");
 
-  Afd1StbyHunUp         = XPLMFindCommand("sim/radios/stby_adf1_hundreds_up");
-  Afd1StbyHunDn         = XPLMFindCommand("sim/radios/stby_adf1_hundreds_down");
-  Afd1StbyTensUp	= XPLMFindCommand("sim/radios/stby_adf1_tens_up");
-  Afd1StbyTensDn	= XPLMFindCommand("sim/radios/stby_adf1_tens_down");
-  Afd1StbyOnesUp	= XPLMFindCommand("sim/radios/stby_adf1_ones_up");
-  Afd1StbyOnesDn	= XPLMFindCommand("sim/radios/stby_adf1_ones_down");
+  Afd1StbyHunUp = XPLMFindCommand("sim/radios/stby_adf1_hundreds_up");
+  Afd1StbyHunDn = XPLMFindCommand("sim/radios/stby_adf1_hundreds_down");
+  Afd1StbyTensUp = XPLMFindCommand("sim/radios/stby_adf1_tens_up");
+  Afd1StbyTensDn = XPLMFindCommand("sim/radios/stby_adf1_tens_down");
+  Afd1StbyOnesUp = XPLMFindCommand("sim/radios/stby_adf1_ones_up");
+  Afd1StbyOnesDn = XPLMFindCommand("sim/radios/stby_adf1_ones_down");
 
-  Afd2StbyHunUp         = XPLMFindCommand("sim/radios/stby_adf2_hundreds_up");
-  Afd2StbyHunDn         = XPLMFindCommand("sim/radios/stby_adf2_hundreds_down");
-  Afd2StbyTensUp	= XPLMFindCommand("sim/radios/stby_adf2_tens_up");
-  Afd2StbyTensDn	= XPLMFindCommand("sim/radios/stby_adf2_tens_down");
-  Afd2StbyOnesUp	= XPLMFindCommand("sim/radios/stby_adf2_ones_up");
-  Afd2StbyOnesDn	= XPLMFindCommand("sim/radios/stby_adf2_ones_down");
+  Afd2StbyHunUp = XPLMFindCommand("sim/radios/stby_adf2_hundreds_up");
+  Afd2StbyHunDn = XPLMFindCommand("sim/radios/stby_adf2_hundreds_down");
+  Afd2StbyTensUp = XPLMFindCommand("sim/radios/stby_adf2_tens_up");
+  Afd2StbyTensDn = XPLMFindCommand("sim/radios/stby_adf2_tens_down");
+  Afd2StbyOnesUp = XPLMFindCommand("sim/radios/stby_adf2_ones_up");
+  Afd2StbyOnesDn = XPLMFindCommand("sim/radios/stby_adf2_ones_down");
 
-  XpdrThUp	= XPLMFindCommand("sim/transponder/transponder_thousands_up");
-  XpdrThDn	= XPLMFindCommand("sim/transponder/transponder_thousands_down");
+  XpdrThUp = XPLMFindCommand("sim/transponder/transponder_thousands_up");
+  XpdrThDn = XPLMFindCommand("sim/transponder/transponder_thousands_down");
   XpdrHunUp	= XPLMFindCommand("sim/transponder/transponder_hundreds_up");
   XpdrHunDn	= XPLMFindCommand("sim/transponder/transponder_hundreds_down");
-  XpdrTensUp	= XPLMFindCommand("sim/transponder/transponder_tens_up");
-  XpdrTensDn	= XPLMFindCommand("sim/transponder/transponder_tens_down");
-  XpdrOnesUp	= XPLMFindCommand("sim/transponder/transponder_ones_up");
-  XpdrOnesDn	= XPLMFindCommand("sim/transponder/transponder_ones_down");
+  XpdrTensUp = XPLMFindCommand("sim/transponder/transponder_tens_up");
+  XpdrTensDn = XPLMFindCommand("sim/transponder/transponder_tens_down");
+  XpdrOnesUp = XPLMFindCommand("sim/transponder/transponder_ones_up");
+  XpdrOnesDn = XPLMFindCommand("sim/transponder/transponder_ones_down");
 
-  BaroUp	= XPLMFindCommand("sim/instruments/barometer_up");
-  BaroDn	= XPLMFindCommand("sim/instruments/barometer_down");
-  BaroStd	= XPLMFindCommand("sim/instruments/barometer_2992");
+  BaroUp = XPLMFindCommand("sim/instruments/barometer_up");
+  BaroDn = XPLMFindCommand("sim/instruments/barometer_down");
+  BaroStd = XPLMFindCommand("sim/instruments/barometer_2992");
 
   Com1ActStby = XPLMFindCommand("sim/radios/com1_standy_flip");
   Com2ActStby = XPLMFindCommand("sim/radios/com2_standy_flip");
@@ -578,28 +599,28 @@ PLUGIN_API int XPluginStart(char *		outName,
   Nav1StbyFreq = XPLMFindDataRef("sim/cockpit/radios/nav1_stdby_freq_hz");
   Nav2StbyFreq = XPLMFindDataRef("sim/cockpit/radios/nav2_stdby_freq_hz");
 
-  Adf1StbyFreq	= XPLMFindDataRef("sim/cockpit/radios/adf1_stdby_freq_hz");
-  Adf2StbyFreq	= XPLMFindDataRef("sim/cockpit/radios/adf2_stdby_freq_hz");
-  Adf1ActFreq	= XPLMFindDataRef("sim/cockpit/radios/adf1_freq_hz");
-  Adf2ActFreq	= XPLMFindDataRef("sim/cockpit/radios/adf2_freq_hz");
+  Adf1StbyFreq = XPLMFindDataRef("sim/cockpit/radios/adf1_stdby_freq_hz");
+  Adf2StbyFreq = XPLMFindDataRef("sim/cockpit/radios/adf2_stdby_freq_hz");
+  Adf1ActFreq = XPLMFindDataRef("sim/cockpit/radios/adf1_freq_hz");
+  Adf2ActFreq = XPLMFindDataRef("sim/cockpit/radios/adf2_freq_hz");
 
-  XpdrCode	= XPLMFindDataRef("sim/cockpit/radios/transponder_code");
-  XpdrMode	= XPLMFindDataRef("sim/cockpit/radios/transponder_mode");
-  BaroSetting	= XPLMFindDataRef("sim/cockpit/misc/barometer_setting");
-  MetricPress   = XPLMFindDataRef("sim/physics/metric_press");
+  XpdrCode = XPLMFindDataRef("sim/cockpit/radios/transponder_code");
+  XpdrMode = XPLMFindDataRef("sim/cockpit/radios/transponder_mode");
+  BaroSetting = XPLMFindDataRef("sim/cockpit/misc/barometer_setting");
+  MetricPress = XPLMFindDataRef("sim/physics/metric_press");
 
-  DmeMode       = XPLMFindDataRef("sim/cockpit2/radios/actuators/DME_mode");
-  DmeSlvSource  = XPLMFindDataRef("sim/cockpit2/radios/actuators/DME_slave_source");
+  DmeMode = XPLMFindDataRef("sim/cockpit2/radios/actuators/DME_mode");
+  DmeSlvSource = XPLMFindDataRef("sim/cockpit2/radios/actuators/DME_slave_source");
 
 
   Nav1DmeNmDist	= XPLMFindDataRef("sim/cockpit2/radios/indicators/nav1_dme_distance_nm");
-  Nav1DmeSpeed	= XPLMFindDataRef("sim/cockpit2/radios/indicators/nav1_dme_speed_kts");
+  Nav1DmeSpeed = XPLMFindDataRef("sim/cockpit2/radios/indicators/nav1_dme_speed_kts");
   Nav2DmeNmDist	= XPLMFindDataRef("sim/cockpit2/radios/indicators/nav2_dme_distance_nm");
-  Nav2DmeSpeed	= XPLMFindDataRef("sim/cockpit2/radios/indicators/nav2_dme_speed_kts");
-  DmeSpeed	= XPLMFindDataRef("sim/cockpit2/radios/indicators/dme_dme_speed_kts");
+  Nav2DmeSpeed = XPLMFindDataRef("sim/cockpit2/radios/indicators/nav2_dme_speed_kts");
+  DmeSpeed = XPLMFindDataRef("sim/cockpit2/radios/indicators/dme_dme_speed_kts");
 
-  DmeFreq	= XPLMFindDataRef("sim/cockpit2/radios/actuators/dme_frequency_hz");
-  DmeTime	= XPLMFindDataRef("sim/cockpit2/radios/indicators/dme_dme_time_min");
+  DmeFreq = XPLMFindDataRef("sim/cockpit2/radios/actuators/dme_frequency_hz");
+  DmeTime = XPLMFindDataRef("sim/cockpit2/radios/indicators/dme_dme_time_min");
 
   AvPwrOn = XPLMFindDataRef("sim/cockpit/electrical/avionics_on");
   BatPwrOn = XPLMFindDataRef("sim/cockpit/electrical/battery_on");
@@ -707,6 +728,51 @@ PLUGIN_API int XPluginStart(char *		outName,
   BcLtOff  = XPLMFindCommand("sim/lights/beacon_lights_off");
   GearUp   = XPLMFindCommand("sim/flight_controls/landing_gear_up");
   GearDn   = XPLMFindCommand("sim/flight_controls/landing_gear_down");
+
+  MagOff1   = XPLMFindCommand("sim/magnetos/magnetos_off_1");
+  MagOff2   = XPLMFindCommand("sim/magnetos/magnetos_off_2");
+  MagOff3   = XPLMFindCommand("sim/magnetos/magnetos_off_3");
+  MagOff4   = XPLMFindCommand("sim/magnetos/magnetos_off_4");
+  MagOff5   = XPLMFindCommand("sim/magnetos/magnetos_off_5");
+  MagOff6   = XPLMFindCommand("sim/magnetos/magnetos_off_6");
+  MagOff7   = XPLMFindCommand("sim/magnetos/magnetos_off_7");
+  MagOff8   = XPLMFindCommand("sim/magnetos/magnetos_off_8");
+
+  MagLeft1  = XPLMFindCommand("sim/magnetos/magnetos_left_1");
+  MagLeft2  = XPLMFindCommand("sim/magnetos/magnetos_left_2");
+  MagLeft3  = XPLMFindCommand("sim/magnetos/magnetos_left_3");
+  MagLeft4  = XPLMFindCommand("sim/magnetos/magnetos_left_4");
+  MagLeft5  = XPLMFindCommand("sim/magnetos/magnetos_left_5");
+  MagLeft6  = XPLMFindCommand("sim/magnetos/magnetos_left_6");
+  MagLeft7  = XPLMFindCommand("sim/magnetos/magnetos_left_7");
+  MagLeft8  = XPLMFindCommand("sim/magnetos/magnetos_left_8");
+
+  MagRight1 = XPLMFindCommand("sim/magnetos/magnetos_right_1");
+  MagRight2 = XPLMFindCommand("sim/magnetos/magnetos_right_2");
+  MagRight3 = XPLMFindCommand("sim/magnetos/magnetos_right_3");
+  MagRight4 = XPLMFindCommand("sim/magnetos/magnetos_right_4");
+  MagRight5 = XPLMFindCommand("sim/magnetos/magnetos_right_5");
+  MagRight6 = XPLMFindCommand("sim/magnetos/magnetos_right_6");
+  MagRight7 = XPLMFindCommand("sim/magnetos/magnetos_right_7");
+  MagRight8 = XPLMFindCommand("sim/magnetos/magnetos_right_8");
+
+  MagBoth1  = XPLMFindCommand("sim/magnetos/magnetos_both_1");
+  MagBoth2  = XPLMFindCommand("sim/magnetos/magnetos_both_2");
+  MagBoth3  = XPLMFindCommand("sim/magnetos/magnetos_both_3");
+  MagBoth4  = XPLMFindCommand("sim/magnetos/magnetos_both_4");
+  MagBoth5  = XPLMFindCommand("sim/magnetos/magnetos_both_5");
+  MagBoth6  = XPLMFindCommand("sim/magnetos/magnetos_both_6");
+  MagBoth7  = XPLMFindCommand("sim/magnetos/magnetos_both_7");
+  MagBoth8  = XPLMFindCommand("sim/magnetos/magnetos_both_8");
+
+  EngStart1 = XPLMFindCommand("sim/starters/engage_starter_1");
+  EngStart2 = XPLMFindCommand("sim/starters/engage_starter_2");
+  EngStart3 = XPLMFindCommand("sim/starters/engage_starter_3");
+  EngStart4 = XPLMFindCommand("sim/starters/engage_starter_4");
+  EngStart5 = XPLMFindCommand("sim/starters/engage_starter_5");
+  EngStart6 = XPLMFindCommand("sim/starters/engage_starter_6");
+  EngStart7 = XPLMFindCommand("sim/starters/engage_starter_7");
+  EngStart8 = XPLMFindCommand("sim/starters/engage_starter_8");
 
   BatOn1 = XPLMFindCommand("sim/electrical/battery_1_on");
   BatOn2 = XPLMFindCommand("sim/electrical/battery_2_on");
@@ -1319,7 +1385,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 6){
          if (strcmp((char *) inItemRef, "SWITCH_WIDGET") == 0) {
-             CreateSwitchWidget(05, 700, 300, 480);	//left, top, right, bottom.
+             CreateSwitchWidget(05, 700, 300, 510);	//left, top, right, bottom.
              switchMenuItem = 1;
 
          }
@@ -1415,11 +1481,61 @@ void CreateSwitchWidget(int x, int y, int w, int h)
 
         XPSetWidgetProperty(SwitchAltBatTextWidget[0], xpProperty_CaptionLit, 1);
 
+// Checkbox for Starter Switch Old Style
 
+        yOffset = (25+05+(1*15));
+        SwitchStartSwitchOldCheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
+                      1,	// Visible
+                      "",       // desc
+                      0,	// root
+                      SwitchWidgetID,
+                      xpWidgetClass_Button);
+
+        XPSetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonType, xpRadioButton);
+        XPSetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
+        XPSetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonState, 0);
+
+// Label for Starter Switch Old Style
+
+        yOffset = (25+05+(1*15));
+        SwitchStartSwitchOldTextWidget[0] = XPCreateWidget(x+35, y-yOffset, x+35+100, y-yOffset-20,
+                      1,	// Visible
+                      "Start Switch Old",// desc
+                      0,		// root
+                      SwitchWidgetID,
+                      xpWidgetClass_Caption);
+
+        XPSetWidgetProperty(SwitchStartSwitchOldTextWidget[0], xpProperty_CaptionLit, 1);
+
+// Checkbox for Starter Switch New Style
+
+        yOffset = (25+05+(1*15));
+        SwitchStartSwitchNewCheckWidget[0] = XPCreateWidget(x+125, y-yOffset, x+125+22, y-yOffset-20,
+                              1,	// Visible
+                              "",       // desc
+                              0,	// root
+                              SwitchWidgetID,
+                              xpWidgetClass_Button);
+
+        XPSetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonType, xpRadioButton);
+        XPSetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
+        XPSetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonState, 0);
+
+// Label for Starter Switch New Style
+
+        yOffset = (25+05+(1*15));
+        SwitchStartSwitchNewTextWidget[0] = XPCreateWidget(x+155, y-yOffset, x+155+100, y-yOffset-20,
+                              1,	// Visible
+                              "Start Switch New",// desc
+                              0,		// root
+                              SwitchWidgetID,
+                              xpWidgetClass_Caption);
+
+        XPSetWidgetProperty(SwitchStartSwitchNewTextWidget[0], xpProperty_CaptionLit, 1);
 
 // Labels for Enable Disable and Remapable
 
-        yOffset = (05+28+(1*15));
+        yOffset = (25+28+(1*15));
         SwitchLabelTextWidget[Index] = XPCreateWidget(x+05, y-yOffset, x+05+170, y-yOffset-20,
               1,	// Visible
               "Disable        Enable        Remapable",// desc
@@ -1435,7 +1551,7 @@ void CreateSwitchWidget(int x, int y, int w, int h)
        {
             if(strcmp(SwitchText[Index],"end") == 0) {break;}
 
-            yOffset = (45+28+(Index*20));
+            yOffset = (65+28+(Index*20));
             SwitchDisableCheckWidget[Index] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                    1,	// Visible
                    "",    // desc
@@ -1455,7 +1571,7 @@ void CreateSwitchWidget(int x, int y, int w, int h)
        {
             if(strcmp(SwitchText[Index],"end") == 0) {break;}
 
-            yOffset = (45+28+(Index*20));
+            yOffset = (65+28+(Index*20));
             SwitchEnableCheckWidget[Index] = XPCreateWidget(x+65, y-yOffset, x+65+22, y-yOffset-20,
                    1,	// Visible
                    "",    // desc
@@ -1477,7 +1593,7 @@ void CreateSwitchWidget(int x, int y, int w, int h)
        {
             if(strcmp(SwitchText[Index],"end") == 0) {break;}
 
-            yOffset = (45+28+(Index*20));
+            yOffset = (65+28+(Index*20));
             SwitchRemapCheckWidget[Index] = XPCreateWidget(x+125, y-yOffset, x+125+22, y-yOffset-20,
                    1,	// Visible
                    "",    // desc
@@ -1498,7 +1614,7 @@ void CreateSwitchWidget(int x, int y, int w, int h)
        {
             if(strcmp(SwitchText[Index],"end") == 0) {break;}
 
-            yOffset = (45+28+(Index*20));
+            yOffset = (65+28+(Index*20));
             SwitchTextWidget[Index] = XPCreateWidget(x+170, y-yOffset, x+170+170, y-yOffset-20,
                   1,	// Visible
                   SwitchText[Index],// desc
