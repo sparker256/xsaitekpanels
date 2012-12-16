@@ -79,6 +79,7 @@ XPLMDataRef Nav1PwrOn = NULL, Nav2PwrOn = NULL, Com1PwrOn = NULL, Com2PwrOn = NU
 XPLMDataRef Afd1PwrOn = NULL, DmePwrOn = NULL;
 
 XPLMDataRef Nav1ObsDegm = NULL, Nav2ObsDegm = NULL;
+XPLMDataRef Adf1CardDirDegm = NULL,  Adf2CardDirDegm = NULL;
 
 XPLMMenuID      RadioMenu;
 XPLMMenuID      RadioMenuId;
@@ -634,6 +635,9 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   Nav1ObsDegm = XPLMFindDataRef("sim/cockpit/radios/nav1_obs_degm");
   Nav2ObsDegm = XPLMFindDataRef("sim/cockpit/radios/nav2_obs_degm");
+
+  Adf1CardDirDegm = XPLMFindDataRef("sim/cockpit/radios/adf1_cardinal_dir");
+  Adf2CardDirDegm = XPLMFindDataRef("sim/cockpit/radios/adf2_cardinal_dir");
 
 
 // ************ Find Multi Panel Commands Ref ***************
