@@ -83,9 +83,9 @@ void process_read_ini_file()
     strobelightswitchenable      = 1;
     taxilightswitchenable        = 1;
     landinglightswitchenable     = 1;
-    cockpitbuilderswitchenable   = 1;
 
     bataltinverse = 0;
+    starterswitchenable = 1;
 
     // radio panel
     radspeed                 = 3;
@@ -177,6 +177,20 @@ void process_read_ini_file()
     if (bataltinverse == 1) {
         XPSetWidgetProperty(SwitchBatAltCheckWidget[0], xpProperty_ButtonState, 0);
         XPSetWidgetProperty(SwitchAltBatCheckWidget[0], xpProperty_ButtonState, 1);
+
+    }
+
+    // Starter Switch Old/New Style
+    starterswitchenable = getOptionToInt("Starter Old New");
+    if (starterswitchenable == 0) {
+        XPSetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonState, 1);
+        XPSetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonState, 0);
+
+    }
+
+    if (starterswitchenable == 1) {
+        XPSetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonState, 0);
+        XPSetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonState, 1);
 
     }
 
@@ -556,6 +570,8 @@ void process_read_ini_file()
           }
 
     bataltinverse = getOptionToInt("Bat Alt inverse");
+
+    starterswitchenable = getOptionToInt("Starter Old New");
 
     // landing lights switch disable - enable - remap
     landinglightswitchenable = getOptionToInt("Landing Lights Switch enable");

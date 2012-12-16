@@ -214,20 +214,20 @@ extern XPLMCommandRef StrobeLightsOnCmd, StrobeLightsOffCmd;
 extern XPLMCommandRef TaxiLightsOnCmd, TaxiLightsOffCmd;
 extern XPLMCommandRef LandingLightsOnCmd, LandingLightsOffCmd;
 
-//extern XPLMCommandRef MagOff1, MagOff2, MagOff3, MagOff4;
-//extern XPLMCommandRef MagOff5, MagOff6, MagOff7, MagOff8;
+extern XPLMCommandRef MagOff1, MagOff2, MagOff3, MagOff4;
+extern XPLMCommandRef MagOff5, MagOff6, MagOff7, MagOff8;
 
-//extern XPLMCommandRef MagLeft1, MagLeft2, MagLeft3, MagLeft4;
-//extern XPLMCommandRef MagLeft5, MagLeft6, MagLeft7, MagLeft8;
+extern XPLMCommandRef MagLeft1, MagLeft2, MagLeft3, MagLeft4;
+extern XPLMCommandRef MagLeft5, MagLeft6, MagLeft7, MagLeft8;
 
-//extern XPLMCommandRef MagRight1, MagRight2, MagRight3, MagRight4;
-//extern XPLMCommandRef MagRight5, MagRight6, MagRight7, MagRight8;
+extern XPLMCommandRef MagRight1, MagRight2, MagRight3, MagRight4;
+extern XPLMCommandRef MagRight5, MagRight6, MagRight7, MagRight8;
 
-//extern XPLMCommandRef MagBoth1, MagBoth2, MagBoth3, MagBoth4;
-//extern XPLMCommandRef MagBoth5, MagBoth6, MagBoth7, MagBoth8;
+extern XPLMCommandRef MagBoth1, MagBoth2, MagBoth3, MagBoth4;
+extern XPLMCommandRef MagBoth5, MagBoth6, MagBoth7, MagBoth8;
 
-//extern XPLMCommandRef EngStart1, EngStart2, EngStart3, EngStart4;
-//extern XPLMCommandRef EngStart5, EngStart6, EngStart7, EngStart8;
+extern XPLMCommandRef EngStart1, EngStart2, EngStart3, EngStart4;
+extern XPLMCommandRef EngStart5, EngStart6, EngStart7, EngStart8;
 
 extern XPLMCommandRef BatOn1, BatOn2, BatOff1, BatOff2;
 
@@ -270,7 +270,8 @@ extern XPWidgetID      SwitchDisableCheckWidget[50];
 extern XPWidgetID      SwitchRemapCheckWidget[50];
 extern XPWidgetID      SwitchBatAltCheckWidget[50];
 extern XPWidgetID      SwitchAltBatCheckWidget[50];
-
+extern XPWidgetID	   SwitchStartSwitchOldCheckWidget[50];
+extern XPWidgetID	   SwitchStartSwitchNewCheckWidget[50];
 
 // ***************** Switch Panel variables ********************
 extern int switchfd;
@@ -285,7 +286,7 @@ extern int cowlflapsenable, panellightswitchenable;
 extern int beaconlightswitchenable, navlightswitchenable;
 extern int strobelightswitchenable, taxilightswitchenable;
 extern int landinglightswitchenable, bataltinverse;
-extern int cockpitbuilderswitchenable;
+extern int starterswitchenable;
 
 
 

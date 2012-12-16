@@ -88,52 +88,59 @@ void process_engines_mag_off_switch()
     }
 	if(testbit(switchbuf,MAG_OFF)) {
 	  if(engnum == 1){
-        ignition_key_array[0] = 0;
-        engn_mixt[0] = 0;
-        igniter_on[0] = 0;
-        bleed_air_mode = 0;
-        //XPLMCommandOnce(MagOff1);
+        if(starterswitchenable == 1) {
+          ignition_key_array[0] = 0;
+          engn_mixt[0] = 0;
+          igniter_on[0] = 0;
+          bleed_air_mode = 0;
+        } else if(starterswitchenable == 0) {
+          XPLMCommandOnce(MagOff1);
+        }
+      }
 
-
-	  }   
 	  if(engnum == 2){
-        ignition_key_array[0] = 0, ignition_key_array[1] = 0;
-        engn_mixt[0] = 0, engn_mixt[1] = 0;
-        igniter_on[0] = 0, igniter_on[1] = 0;
-        bleed_air_mode = 0;
-        //XPLMCommandOnce(MagOff1);
-        //XPLMCommandOnce(MagOff2);
+        if(starterswitchenable == 1) {
+          ignition_key_array[0] = 0, ignition_key_array[1] = 0;
+          engn_mixt[0] = 0, engn_mixt[1] = 0;
+          igniter_on[0] = 0, igniter_on[1] = 0;
+          bleed_air_mode = 0;
+        } else if(starterswitchenable == 0) {
+          XPLMCommandOnce(MagOff1);
+          XPLMCommandOnce(MagOff2);
+        }
+      }
 
-	  } 
 	  if(engnum == 3){
-        ignition_key_array[0] = 0, ignition_key_array[1] = 0;
-        ignition_key_array[2] = 0;
-        engn_mixt[0] = 0, engn_mixt[1] = 0, engn_mixt[2] = 0;
-        igniter_on[0] = 0, igniter_on[1] = 0 , igniter_on[2] = 0;
-        bleed_air_mode = 0;
-        //XPLMCommandOnce(MagOff1);
-        //XPLMCommandOnce(MagOff2);
-        //XPLMCommandOnce(MagOff3);
-
-
+        if(starterswitchenable == 1) {
+          ignition_key_array[0] = 0, ignition_key_array[1] = 0;
+          ignition_key_array[2] = 0;
+          engn_mixt[0] = 0, engn_mixt[1] = 0, engn_mixt[2] = 0;
+          igniter_on[0] = 0, igniter_on[1] = 0 , igniter_on[2] = 0;
+          bleed_air_mode = 0;
+        } else if(starterswitchenable == 0) {
+          XPLMCommandOnce(MagOff1);
+          XPLMCommandOnce(MagOff2);
+          XPLMCommandOnce(MagOff3);
+        }
 	  }
-	  if(engnum == 4){
-        ignition_key_array[0] = 0, ignition_key_array[1] = 0;
-        ignition_key_array[2] = 0, ignition_key_array[3] = 0;
-        engn_mixt[0] = 0, engn_mixt[1] = 0;
-        engn_mixt[2] = 0, engn_mixt[3] = 0;
-        igniter_on[0] = 0, igniter_on[1] = 0;
-        igniter_on[2] = 0, igniter_on[3] = 0;
-        bleed_air_mode = 0;
-        //XPLMCommandOnce(MagOff1);
-        //XPLMCommandOnce(MagOff2);
-        //XPLMCommandOnce(MagOff3);
-        //XPLMCommandOnce(MagOff4);
 
+	  if(engnum == 4){
+        if(starterswitchenable == 1) {
+          ignition_key_array[0] = 0, ignition_key_array[1] = 0;
+          ignition_key_array[2] = 0, ignition_key_array[3] = 0;
+          engn_mixt[0] = 0, engn_mixt[1] = 0;
+          engn_mixt[2] = 0, engn_mixt[3] = 0;
+          igniter_on[0] = 0, igniter_on[1] = 0;
+          igniter_on[2] = 0, igniter_on[3] = 0;
+          bleed_air_mode = 0;
+        } else if(starterswitchenable == 0) {
+          XPLMCommandOnce(MagOff1);
+          XPLMCommandOnce(MagOff2);
+          XPLMCommandOnce(MagOff3);
+          XPLMCommandOnce(MagOff4);
+        }
 	  }
  	}
-
-
 }
 
 // ***************** Engines Right Mag *******************
