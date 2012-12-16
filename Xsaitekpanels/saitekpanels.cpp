@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.04   ***************
-// ****** Dec 15 2012   **************
+// ****** Dec 16 2012   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -390,7 +390,7 @@ int cowlflapsenable, panellightswitchenable;
 int beaconlightswitchenable, navlightswitchenable;
 int strobelightswitchenable, taxilightswitchenable;
 int landinglightswitchenable, bataltinverse;
-int panellightsenable, cockpitbuilderswitchenable;
+int panellightsenable, starterswitchenable;
 
 
 string mag_off_switch_on, mag_off_switch_off;
@@ -1662,6 +1662,15 @@ int	SwitchHandler(XPWidgetMessage  SwitchinMessage, XPWidgetID  SwitchWidgetID, 
                      XPSetWidgetProperty((XPWidgetID)inParam1, xpProperty_ButtonState, 1);
             }
 
+            if(inParam1 == (intptr_t)SwitchStartSwitchOldCheckWidget[0] ||
+               inParam1 == (intptr_t)SwitchStartSwitchNewCheckWidget[0]) {
+
+                     XPSetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonState, 0);
+                     XPSetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonState, 0);
+
+                     XPSetWidgetProperty((XPWidgetID)inParam1, xpProperty_ButtonState, 1);
+            }
+
 
             for (Index1=0; Index1 < 50; Index1++)
             {
@@ -1692,6 +1701,18 @@ int	SwitchHandler(XPWidgetMessage  SwitchinMessage, XPWidgetID  SwitchWidgetID, 
             if (State){
                 bataltinverse = 1;
            }
+
+            State = XPGetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonState, 0);
+            if (State){
+                starterswitchenable = 0;
+            }
+            State = XPGetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonState, 0);
+            if (State){
+                starterswitchenable = 1;
+           }
+
+            printf("starterswitchenable %d\n", starterswitchenable);
+
 
             State = XPGetWidgetProperty(SwitchDisableCheckWidget[0], xpProperty_ButtonState, 0);
             if (State){
