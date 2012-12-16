@@ -285,6 +285,7 @@ extern int cowlflapsenable, panellightswitchenable;
 extern int beaconlightswitchenable, navlightswitchenable;
 extern int strobelightswitchenable, taxilightswitchenable;
 extern int landinglightswitchenable, bataltinverse;
+extern int cockpitbuilderswitchenable;
 
 
 
