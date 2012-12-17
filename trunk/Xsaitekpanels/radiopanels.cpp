@@ -1056,11 +1056,9 @@ void proecss_upper_adf_switch()
 
     if(testbit(radiobuf[radnum],UPPER_ADF)) {
       upseldis[radnum] = 5;
-      if (radiores > 0) {
+      UpAdf1CardDirDegm[radnum] = XPLMGetDataf(Adf1CardDirDegm);
+      upstbyadf1dir[radnum] = (int)(UpAdf1CardDirDegm[radnum]);
          if(xpanelsfnbutton == 1) {
-           UpAdf1CardDirDegm[radnum] = XPLMGetDataf(Adf1CardDirDegm);
-           upstbyadf1dir[radnum] = (int)(UpAdf1CardDirDegm[radnum]);
-
            if(testbit(radiobuf[radnum],UPPER_FINE_UP)) {
                upadfdbdirfninc[radnum]++;
                if (upadfdbdirfninc[radnum] > radspeed) {
@@ -1190,7 +1188,6 @@ void proecss_upper_adf_switch()
 
         }
 
-      }
       upactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
       upstbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
     }
@@ -1865,12 +1862,15 @@ void process_lower_adf_switch()
 
     if(testbit(radiobuf[radnum],LOWER_ADF)) {
       loseldis[radnum] = 5;
-      if (numadf == 1) {
-        if (radiores > 0) {
+      LoAdf1CardDirDegm[radnum] = XPLMGetDataf(Adf1CardDirDegm);
+      lostbyadf1dir[radnum] = (int)(LoAdf1CardDirDegm[radnum]);
 
+      LoAdf2CardDirDegm[radnum] = XPLMGetDataf(Adf2CardDirDegm);
+      lostbyadf2dir[radnum] = (int)(LoAdf2CardDirDegm[radnum]);
+
+      if (numadf == 1) {
           if(xpanelsfnbutton == 1) {
-            LoAdf1CardDirDegm[radnum] = XPLMGetDataf(Adf1CardDirDegm);
-            lostbyadf1dir[radnum] = (int)(LoAdf1CardDirDegm[radnum]);
+
 
             if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
                 loadfdbdirfninc[radnum]++;
@@ -2007,17 +2007,12 @@ void process_lower_adf_switch()
         loactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
         lostbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
 
-      }
+
       }
 // Second ADF on the lower position
       if (numadf == 2) {
-        if (radiores > 0) {
-
             if(xpanelsfnbutton == 1) {
-              LoAdf2CardDirDegm[radnum] = XPLMGetDataf(Adf2CardDirDegm);
-              lostbyadf2dir[radnum] = (int)(LoAdf2CardDirDegm[radnum]);
-
-              if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+               if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
                   loadfdbdirfninc[radnum]++;
                   if (loadfdbdirfninc[radnum] > radspeed) {
                     lostbyadf2dir[radnum] = lostbyadf2dir[radnum] + 1;
@@ -2148,8 +2143,6 @@ void process_lower_adf_switch()
 
           }
 
-
-        }
         loactadffreq[radnum] = XPLMGetDatai(Adf2ActFreq);
         lostbyadffreq[radnum] = XPLMGetDatai(Adf2StbyFreq);
       }
@@ -2788,7 +2781,7 @@ void process_radio_panel()
 
 // ******* Write on changes or timeout ********
 
-    if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (radionowrite[radnum] > 50)) {
+    if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (radionowrite[radnum] > 50) || (xpanelsfnbutton == 1)) {
         radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
         radionowrite[radnum] = 1;
         lastupseldis[radnum] = upseldis[radnum];
