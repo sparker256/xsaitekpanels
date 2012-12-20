@@ -29,6 +29,8 @@ static int lastappos = 0;
 static int aploop = 0;
 
 static int upapalt, upapvs, upapas, upaphdg, upapcrs, upapcrs2, neg;
+static int apas, apasout, apmas;
+
 static int flashcnt = 0, flashon = 0;
 
 static int altdbncinc = 0, altdbncdec = 0, vsdbncinc = 0, vsdbncdec = 0;
@@ -36,6 +38,7 @@ static int iasdbncinc = 0, iasdbncdec = 0, hdgdbncinc = 0, hdgdbncdec = 0;
 static int crsdbncinc = 0, crsdbncdec = 0; 
 
 static float upapaltf, upapvsf, upapasf, upaphdgf, upapcrsf, upapcrsf2, rhdgf;
+static float apasf, apmasf;
 
 static int multiaactv, multiadig1, multiarem1, multiadig2, multiarem2;
 static int multiadig3, multiarem3, multiadig4, multiarem4, multiadig5;
@@ -91,11 +94,20 @@ void process_multi_display()
       break;
     case 2:
     // ***** Setup Display for IAS Switch Position *********
-      multiaactv = upapas;
-      multiadig1 = 15, multiadig2 = 15 ;
-      multiadig3 = multiaactv/100, multiarem3 = multiaactv%100;
-      multiadig4 = multiarem3/10, multiarem4 = multiarem3%10;
-      multiadig5 = multiarem4;
+      if (XPLMGetDatai(AirspeedIsMach) == 1) {
+          multiaactv = apasout;
+          multiadig1 = 15, multiadig2 = 15 ;
+          multiadig3 = multiaactv/100, multiarem3 = multiaactv%100;
+          multiadig4 = multiarem3/10, multiarem4 = multiarem3%10;
+          multiadig5 = multiarem4;
+      } else {
+          multiaactv = apasout;
+          multiadig1 = 15, multiadig2 = 15 ;
+          multiadig3 = multiaactv/100, multiarem3 = multiaactv%100;
+          multiadig4 = multiarem3/10, multiarem4 = multiarem3%10;
+          multiadig5 = multiarem4;
+      }
+
       break;
     case 3:
     // ***** Setup Display for HDG Switch Position *********
@@ -300,8 +312,14 @@ void process_ias_switch()
 {
    if (testbit(multibuf,IAS_SWITCH)) {
       multiseldis = 2;
-      upapasf = XPLMGetDataf(ApAs);
-      upapas = (int)(upapasf);
+      if (XPLMGetDatai(AirspeedIsMach) == 1) {
+         apmasf = XPLMGetDataf(ApAs);
+         apmas = (int)(apmasf * 100);
+      } else {
+          apasf = XPLMGetDataf(ApAs);
+          apas = (int)(apasf);
+      }
+
       if (testbit(multibuf,ADJUSTMENT_UP)) {
          iasdbncinc++;
          if (iasdbncinc > multispeed) {
@@ -312,10 +330,10 @@ void process_ias_switch()
                } else {
                   while (n>0) {
                      if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                        XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) + 0.01);
+                        apmas = apmas + 1;
                      } else {
                         //XPLMCommandOnce(ApAsUp);
-                        upapas = upapas + 1;
+                        apas = apas + 1;
                      }
                      --n;
                   }
@@ -327,10 +345,10 @@ void process_ias_switch()
                   XPLMCommandOnce(x737mcp_spd_up);
                } else {
                   if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                     XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) + 0.01);
+                     apmas = apmas + 1;
                   } else {
                      //XPLMCommandOnce(ApAsUp);
-                     upapas = upapas + 1;
+                     apas = apas + 1;
                   }
                }
                iasdbncinc = 0;
@@ -347,10 +365,10 @@ void process_ias_switch()
                } else {
                   while (n>0) {
                      if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                        XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) - 0.01);
+                        apmas = apmas - 1;
                      } else {
                         //XPLMCommandOnce(ApAsDn);
-                        upapas = upapas - 1;
+                        apas = apas - 1;
                      }
                      --n;
                   }
@@ -362,23 +380,28 @@ void process_ias_switch()
                   XPLMCommandOnce(x737mcp_spd_down);
                } else {
                   if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                     XPLMSetDataf(Airspeed, XPLMGetDataf(Airspeed) - 0.01);
+                     apmas = apmas - 1;
                   } else {
                      //XPLMCommandOnce(ApAsDn);
-                     upapas = upapas - 1;
+                     apas = apas - 1;
                   }
                }
                iasdbncdec = 0;
             }
          }
       }
-      upapasf = upapas;
-      XPLMSetDataf(ApAs, upapasf);
-      upapasf = XPLMGetDataf(ApAs);
       if (XPLMGetDatai(AirspeedIsMach) == 1) {
-         upapasf = (upapasf * 100);
+          apasout = apmas;
+          apmasf = apmas;
+          apmasf = (apmasf / 100);
+          XPLMSetDataf(ApAs, apmasf);
+      } else {
+         apasout = apas;
+         apasf = apas;
+         XPLMSetDataf(ApAs, apasf);
       }
-      upapas = (int)(upapasf);
+          printf("apasout %d apasf %f apmasf %f\n", apasout, apasf, apmasf);
+
    }
 }
 
