@@ -332,7 +332,6 @@ void process_ias_switch()
                      if (XPLMGetDatai(AirspeedIsMach) == 1) {
                         apmas = apmas + 1;
                      } else {
-                        //XPLMCommandOnce(ApAsUp);
                         apas = apas + 1;
                      }
                      --n;
@@ -347,7 +346,6 @@ void process_ias_switch()
                   if (XPLMGetDatai(AirspeedIsMach) == 1) {
                      apmas = apmas + 1;
                   } else {
-                     //XPLMCommandOnce(ApAsUp);
                      apas = apas + 1;
                   }
                }
@@ -367,7 +365,6 @@ void process_ias_switch()
                      if (XPLMGetDatai(AirspeedIsMach) == 1) {
                         apmas = apmas - 1;
                      } else {
-                        //XPLMCommandOnce(ApAsDn);
                         apas = apas - 1;
                      }
                      --n;
@@ -382,7 +379,6 @@ void process_ias_switch()
                   if (XPLMGetDatai(AirspeedIsMach) == 1) {
                      apmas = apmas - 1;
                   } else {
-                     //XPLMCommandOnce(ApAsDn);
                      apas = apas - 1;
                   }
                }
@@ -400,7 +396,6 @@ void process_ias_switch()
          apasf = apas;
          XPLMSetDataf(ApAs, apasf);
       }
-          printf("apasout %d apasf %f apmasf %f\n", apasout, apasf, apmasf);
 
    }
 }
@@ -872,9 +867,9 @@ void process_ias_button()
           if(testbit(multibuf,IAS_BUTTON)) {
             if(xpanelsfnbutton == 1) {
                  if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                     XPLMSetDatai(AirspeedIsMach, 0);
+                     XPLMCommandOnce(ApKnotsMachTgl);
                  } else {
-                     XPLMSetDatai(AirspeedIsMach, 1);
+                     XPLMCommandOnce(ApKnotsMachTgl);
                  }
              }
              if(xpanelsfnbutton == 0) {
