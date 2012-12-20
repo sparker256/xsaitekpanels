@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.05   ***************
-// ****** Dec 19 2012   **************
+// ****** Dec 20 2012   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -74,7 +74,6 @@ XPLMDataRef DmeFreq = NULL, DmeTime = NULL, DmeSpeed = NULL;
 
 XPLMDataRef AvPwrOn = NULL, BatPwrOn = NULL;
 
-
 XPLMDataRef Nav1PwrOn = NULL, Nav2PwrOn = NULL, Com1PwrOn = NULL, Com2PwrOn = NULL;
 XPLMDataRef Afd1PwrOn = NULL, DmePwrOn = NULL;
 
@@ -103,7 +102,6 @@ XPWidgetID	RadioQnh1CheckWidget[50] = {NULL};
 XPWidgetID	RadioQnh0TextWidget[50] = {NULL};
 XPWidgetID	RadioQnh1TextWidget[50] = {NULL};
 
-
 // ****************** Multi Panel Command Ref **********************
 XPLMCommandRef ApAltDn = NULL, ApAltUp = NULL, ApVsDn = NULL, ApVsUp = NULL;
 XPLMCommandRef ApAsDn = NULL, ApAsUp = NULL, ApHdgDn = NULL, ApHdgUp = NULL;
@@ -114,6 +112,7 @@ XPLMCommandRef ApHdgBtn = NULL, ApNavBtn = NULL, ApAltBtn = NULL;
 XPLMCommandRef ApIasBtn = NULL;
 
 XPLMCommandRef ApVsBtn = NULL, ApAprBtn = NULL, ApRevBtn = NULL;
+XPLMCommandRef ApKnotsMachTgl = NULL;
 
 XPLMCommandRef FlapsDn = NULL, FlapsUp = NULL;
 XPLMCommandRef PitchTrimDn = NULL, PitchTrimUp = NULL, PitchTrimTkOff = NULL;
@@ -181,7 +180,6 @@ XPWidgetID	MultiAt0CheckWidget[50] = {NULL};
 XPWidgetID	MultiAt1CheckWidget[50] = {NULL};
 XPWidgetID	MultiAt0TextWidget[50] = {NULL};
 XPWidgetID	MultiAt1TextWidget[50] = {NULL};
-
 
 // *************** Switch Panel Command Ref *******************
 XPLMCommandRef ClFlOpn = NULL, ClFlCls = NULL;
@@ -284,11 +282,9 @@ XPWidgetID	SwitchStartSwitchNewTextWidget[50] = {NULL};
 XPWidgetID	SwitchLabelTextWidget[50] = {NULL};
 XPWidgetID	SwitchTextWidget[50] = {NULL};
 
-
 typedef	std::vector<XPLMDataRef> aXPLMDataRefID;
 
 static aXPLMDataRefID DataRefID;
-
 
 // ****************** BIP Panel Command Ref **********************
 
@@ -329,9 +325,7 @@ char RadioSpeedText[50][200] = {
 "FREQ KNOB  4 PULSES PER COMMAND",
 "FREQ KNOB  5 PULSES PER COMMAND",
 "end"
-
 };
-
 
 hid_device *radiohandle[4];
 
@@ -364,7 +358,6 @@ char MultiSpeedText[50][200] = {
 "FREQ KNOB  4 PULSES PER COMMAND",
 "FREQ KNOB  5 PULSES PER COMMAND",
 "end"
-
 };
 
 char MultiTrimSpeedText[50][200] = {
@@ -372,9 +365,7 @@ char MultiTrimSpeedText[50][200] = {
 "TRIM X2",
 "TRIM X3",
 "end"
-
 };
-
 
 hid_device *multihandle;
 
@@ -393,7 +384,6 @@ int strobelightswitchenable, taxilightswitchenable;
 int landinglightswitchenable, bataltinverse;
 int panellightsenable, starterswitchenable;
 
-
 string mag_off_switch_on, mag_off_switch_off;
 string mag_right_switch_on, mag_right_switch_off;
 string mag_left_switch_on, mag_left_switch_off;
@@ -403,7 +393,6 @@ string mag_start_switch_on, mag_start_switch_off;
 string bat_master_switch_on, bat_master_switch_off;
 string alt_master_switch_on, alt_master_switch_off;
 string av_master_switch_on, av_master_switch_off;
-
 
 string fuel_pump_switch_on, fuel_pump_switch_off;
 string deice_switch_on, deice_switch_off;
@@ -416,7 +405,6 @@ string nav_lights_switch_on, nav_lights_switch_off;
 string strobe_lights_switch_on, strobe_lights_switch_off;
 string taxi_lights_switch_on, taxi_lights_switch_off;
 string landing_lights_switch_on, landing_lights_switch_off;
-
 
 const char *GearTestStrUp;
 
@@ -454,7 +442,6 @@ char SwitchText[50][200] = {
 "TAXI LIGHTS",
 "LANDING LIGHTS",
 "end"
-
 };
 
 hid_device *switchhandle;
@@ -665,6 +652,8 @@ PLUGIN_API int XPluginStart(char *		outName,
   ApVsBtn = XPLMFindCommand("sim/autopilot/vertical_speed");
   ApAprBtn = XPLMFindCommand("sim/autopilot/approach");
   ApRevBtn = XPLMFindCommand("sim/autopilot/back_course");
+  ApKnotsMachTgl = XPLMFindCommand("sim/autopilot/knots_mach_toggle");
+
 
   PitchTrimDn = XPLMFindCommand("sim/flight_controls/pitch_trim_down");
   PitchTrimUp = XPLMFindCommand("sim/flight_controls/pitch_trim_up");

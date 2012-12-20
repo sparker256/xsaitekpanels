@@ -101,6 +101,7 @@ extern XPLMCommandRef ApMstrBtnUp, ApMstrBtnDn, ApMstrBtnOff;
 extern XPLMCommandRef ApHdgBtn, ApNavBtn, ApAltBtn;
 extern XPLMCommandRef ApIasBtn;
 extern XPLMCommandRef ApVsBtn, ApAprBtn, ApRevBtn;
+extern XPLMCommandRef ApKnotsMachTgl;
 
 extern XPLMCommandRef FlapsDn, FlapsUp;
 extern XPLMCommandRef PitchTrimDn, PitchTrimUp, PitchTrimTkOff;
