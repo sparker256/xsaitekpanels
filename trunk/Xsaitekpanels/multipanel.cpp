@@ -314,7 +314,6 @@ void process_ias_switch()
       multiseldis = 2;
       if (XPLMGetDatai(AirspeedIsMach) == 1) {
          apmasf = XPLMGetDataf(ApAs);
-         apmas = (int)(apmasf * 100);
       } else {
           apasf = XPLMGetDataf(ApAs);
           apas = (int)(apasf);
@@ -330,7 +329,7 @@ void process_ias_switch()
                } else {
                   while (n>0) {
                      if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                        apmas = apmas + 1;
+                        apmasf = apmasf + .01;
                      } else {
                         apas = apas + 1;
                      }
@@ -344,7 +343,7 @@ void process_ias_switch()
                   XPLMCommandOnce(x737mcp_spd_up);
                } else {
                   if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                     apmas = apmas + 1;
+                     apmasf = apmasf + .01;
                   } else {
                      apas = apas + 1;
                   }
@@ -363,7 +362,7 @@ void process_ias_switch()
                } else {
                   while (n>0) {
                      if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                        apmas = apmas - 1;
+                        apmasf = apmasf - .01;
                      } else {
                         apas = apas - 1;
                      }
@@ -377,8 +376,8 @@ void process_ias_switch()
                   XPLMCommandOnce(x737mcp_spd_down);
                } else {
                   if (XPLMGetDatai(AirspeedIsMach) == 1) {
-                     apmas = apmas - 1;
-                  } else {
+                     apmasf = apmasf - .01;
+                    } else {
                      apas = apas - 1;
                   }
                }
@@ -387,11 +386,10 @@ void process_ias_switch()
          }
       }
       if (XPLMGetDatai(AirspeedIsMach) == 1) {
+          apmas = (int)(apmasf * 100);
           apasout = apmas;
-          apmasf = apmas;
-          apmasf = (apmasf / 100);
           XPLMSetDataf(ApAs, apmasf);
-      } else {
+       } else {
          apasout = apas;
          apasf = apas;
          XPLMSetDataf(ApAs, apasf);
