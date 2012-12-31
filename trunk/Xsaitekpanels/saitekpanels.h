@@ -36,6 +36,45 @@ extern XPLMCommandRef Adf1ActStby, Adf2ActStby;
 extern XPLMCommandRef Obs1Down, Obs1Up;
 extern XPLMCommandRef Obs2Down, Obs2Up;
 
+extern XPLMCommandRef Rad1UprCom1CrsUpRemapableCmd, Rad1UprCom1CrsDnRemapableCmd;
+extern XPLMCommandRef Rad1UprCom1FnUpRemapableCmd, Rad1UprCom1FnDnRemapableCmd;
+extern XPLMCommandRef Rad1UprCom2CrsUpRemapableCmd, Rad1UprCom2CrsDnRemapableCmd;
+extern XPLMCommandRef Rad1UprCom2FnUpRemapableCmd, Rad1UprCom2FnDnRemapableCmd;
+extern XPLMCommandRef Rad1UprNav1CrsUpRemapableCmd, Rad1UprNav1CrsDnRemapableCmd;
+extern XPLMCommandRef Rad1UprNav1FnUpRemapableCmd, Rad1UprNav1FnDnRemapableCmd;
+extern XPLMCommandRef Rad1UprNav2CrsUpRemapableCmd, Rad1UprNav2CrsDnRemapableCmd;
+extern XPLMCommandRef Rad1UprNav2FnUpRemapableCmd, Rad1UprNav2FnDnRemapableCmd;
+
+
+extern XPLMCommandRef Rad1LowrCom1CrsUpRemapableCmd, Rad1LowrCom1CrsDnRemapableCmd;
+extern XPLMCommandRef Rad1LowrCom1FnUpRemapableCmd, Rad1LowrCom1FnDnRemapableCmd;
+extern XPLMCommandRef Rad1LowrCom2CrsUpRemapableCmd, Rad1LowrCom2CrsDnRemapableCmd;
+extern XPLMCommandRef Rad1LowrCom2FnUpRemapableCmd, Rad1LowrCom2FnDnRemapableCmd;
+extern XPLMCommandRef Rad1LowrNav1CrsUpRemapableCmd, Rad1LowrNav1CrsDnRemapableCmd;
+extern XPLMCommandRef Rad1LowrNav1FnUpRemapableCmd, Rad1LowrNav1FnDnRemapableCmd;
+extern XPLMCommandRef Rad1LowrNav2CrsUpRemapableCmd, Rad1LowrNav2CrsDnRemapableCmd;
+extern XPLMCommandRef Rad1LowrNav2FnUpRemapableCmd, Rad1LowrNav2FnDnRemapableCmd;
+
+
+extern XPLMCommandRef Rad2UprCom1CrsUpRemapableCmd, Rad2UprCom1CrsDnRemapableCmd;
+extern XPLMCommandRef Rad2UprCom1FnUpRemapableCmd, Rad2UprCom1FnDnRemapableCmd;
+extern XPLMCommandRef Rad2UprCom2CrsUpRemapableCmd, Rad2UprCom2CrsDnRemapableCmd;
+extern XPLMCommandRef Rad2UprCom2FnUpRemapableCmd, Rad2UprCom2FnDnRemapableCmd;
+extern XPLMCommandRef Rad2UprNav1CrsUpRemapableCmd, Rad2UprNav1CrsDnRemapableCmd;
+extern XPLMCommandRef Rad2UprNav1FnUpRemapableCmd, Rad2UprNav1FnDnRemapableCmd;
+extern XPLMCommandRef Rad2UprNav2CrsUpRemapableCmd, Rad2UprNav2CrsDnRemapableCmd;
+extern XPLMCommandRef Rad2UprNav2FnUpRemapableCmd, Rad2UprNav2FnDnRemapableCmd;
+
+
+extern XPLMCommandRef Rad2LowrCom1CrsUpRemapableCmd, Rad2LowrCom1CrsDnRemapableCmd;
+extern XPLMCommandRef Rad2LowrCom1FnUpRemapableCmd, Rad2LowrCom1FnDnRemapableCmd;
+extern XPLMCommandRef Rad2LowrCom2CrsUpRemapableCmd, Rad2LowrCom2CrsDnRemapableCmd;
+extern XPLMCommandRef Rad2LowrCom2FnUpRemapableCmd, Rad2LowrCom2FnDnRemapableCmd;
+extern XPLMCommandRef Rad2LowrNav1CrsUpRemapableCmd, Rad2LowrNav1CrsDnRemapableCmd;
+extern XPLMCommandRef Rad2LowrNav1FnUpRemapableCmd, Rad2LowrNav1FnDnRemapableCmd;
+extern XPLMCommandRef Rad2LowrNav2CrsUpRemapableCmd, Rad2LowrNav2CrsDnRemapableCmd;
+extern XPLMCommandRef Rad2LowrNav2FnUpRemapableCmd, Rad2LowrNav2FnDnRemapableCmd;
+
 // ************** Radio Panel SDK Data Ref **********************
 extern XPLMDataRef Com1ActFreq, Com2ActFreq, Nav1ActFreq, Nav2ActFreq;
 extern XPLMDataRef Com1StbyFreq, Com2StbyFreq, Nav1StbyFreq, Nav2StbyFreq;
@@ -81,6 +120,53 @@ extern int radio0fd, radio1fd, radio2fd, radio3fd, radio4fd, radio5fd, radio6fd,
 extern int radio8fd, radio9fd, radio10fd, radio11fd, radio12fd, radio13fd, radio14fd, radio15fd;
 extern int radiofd[4], radcnt, radres;
 extern int radspeed, metricpressenable;
+
+extern int rad1uprcom1switchremap, rad1uprcom2switchremap;
+extern int rad1uprnav1switchremap, rad1uprnav2switchremap;
+extern int rad1lwrcom1switchremap, rad1lwrcom2switchremap;
+extern int rad1lwrnav1switchremap, rad1lwrnav2switchremap;
+
+extern int rad2uprcom1switchremap, rad2uprcom2switchremap;
+extern int rad2uprnav1switchremap, rad2uprnav2switchremap;
+extern int rad2lwrcom1switchremap, rad2lwrcom2switchremap;
+extern int rad2lwrnav1switchremap, rad2lwrnav2switchremap;
+
+extern string rad1_upper_com1_corse_up_remapable, rad1_upper_com1_corse_dn_remapable;
+extern string rad1_upper_com1_fine_up_remapable, rad1_upper_com1_fine_dn_remapable;
+extern string rad1_upper_com2_corse_up_remapable, rad1_upper_com2_corse_dn_remapable;
+extern string rad1_upper_com2_fine_up_remapable, rad1_upper_com2_fine_dn_remapable;
+extern string rad1_upper_nav1_corse_up_remapable, rad1_upper_nav1_corse_dn_remapable;
+extern string rad1_upper_nav1_fine_up_remapable, rad1_upper_nav1_fine_dn_remapable;
+extern string rad1_upper_nav2_corse_up_remapable, rad1_upper_nav2_corse_dn_remapable;
+extern string rad1_upper_nav2_fine_up_remapable, rad1_upper_nav2_fine_dn_remapable;
+
+extern string rad1_lower_com1_corse_up_remapable, rad1_lower_com1_corse_dn_remapable;
+extern string rad1_lower_com1_fine_up_remapable, rad1_lower_com1_fine_dn_remapable;
+extern string rad1_lower_com2_corse_up_remapable, rad1_lower_com2_corse_dn_remapable;
+extern string rad1_lower_com2_fine_up_remapable, rad1_lower_com2_fine_dn_remapable;
+extern string rad1_lower_nav1_corse_up_remapable, rad1_lower_nav1_corse_dn_remapable;
+extern string rad1_lower_nav1_fine_up_remapable, rad1_lower_nav1_fine_dn_remapable;
+extern string rad1_lower_nav2_corse_up_remapable, rad1_lower_nav2_corse_dn_remapable;
+extern string rad1_lower_nav2_fine_up_remapable, rad1_lower_nav2_fine_dn_remapable;
+
+extern string rad2_upper_com1_corse_up_remapable, rad2_upper_com1_corse_dn_remapable;
+extern string rad2_upper_com1_fine_up_remapable, rad2_upper_com1_fine_dn_remapable;
+extern string rad2_upper_com2_corse_up_remapable, rad2_upper_com2_corse_dn_remapable;
+extern string rad2_upper_com2_fine_up_remapable, rad2_upper_com2_fine_dn_remapable;
+extern string rad2_upper_nav1_corse_up_remapable, rad2_upper_nav1_corse_dn_remapable;
+extern string rad2_upper_nav1_fine_up_remapable, rad2_upper_nav1_fine_dn_remapable;
+extern string rad2_upper_nav2_corse_up_remapable, rad2_upper_nav2_corse_dn_remapable;
+extern string rad2_upper_nav2_fine_up_remapable, rad2_upper_nav2_fine_dn_remapable;
+
+extern string rad2_lower_com1_corse_up_remapable, rad2_lower_com1_corse_dn_remapable;
+extern string rad2_lower_com1_fine_up_remapable, rad2_lower_com1_fine_dn_remapable;
+extern string rad2_lower_com2_corse_up_remapable, rad2_lower_com2_corse_dn_remapable;
+extern string rad2_lower_com2_fine_up_remapable, rad2_lower_com2_fine_dn_remapable;
+extern string rad2_lower_nav1_corse_up_remapable, rad2_lower_nav1_corse_dn_remapable;
+extern string rad2_lower_nav1_fine_up_remapable, rad2_lower_nav1_fine_dn_remapable;
+extern string rad2_lower_nav2_corse_up_remapable, rad2_lower_nav2_corse_dn_remapable;
+extern string rad2_lower_nav2_fine_up_remapable, rad2_lower_nav2_fine_dn_remapable;
+
 extern float interval;
 extern unsigned char radbuf[4], radwbuf[21];
 
