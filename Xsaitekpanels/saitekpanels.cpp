@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.05   ***************
-// ****** Dec 20 2012   **************
+// ******** ver 2.06   ***************
+// ****** Dec 30 2012   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -57,6 +57,51 @@ XPLMCommandRef Adf1ActStby = NULL, Adf2ActStby = NULL;
 XPLMCommandRef Obs1Down = NULL, Obs1Up = NULL;
 XPLMCommandRef Obs2Down = NULL, Obs2Up = NULL;
 
+XPLMCommandRef Rad1UprCom1CrsUpRemapableCmd = NULL, Rad1UprCom1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprCom1FnUpRemapableCmd = NULL, Rad1UprCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprCom2CrsUpRemapableCmd = NULL, Rad1UprCom2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprCom2FnUpRemapableCmd = NULL, Rad1UprCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprNav1CrsUpRemapableCmd = NULL, Rad1UprNav1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprNav1FnUpRemapableCmd = NULL, Rad1UprNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprNav2CrsUpRemapableCmd = NULL, Rad1UprNav2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprNav2FnUpRemapableCmd = NULL, Rad1UprNav2FnDnRemapableCmd = NULL;
+
+
+XPLMCommandRef Rad1LowrCom1CrsUpRemapableCmd = NULL, Rad1LowrCom1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrCom1FnUpRemapableCmd = NULL, Rad1LowrCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrCom2CrsUpRemapableCmd = NULL, Rad1LowrCom2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrCom2FnUpRemapableCmd = NULL, Rad1LowrCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrNav1CrsUpRemapableCmd = NULL, Rad1LowrNav1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrNav1FnUpRemapableCmd = NULL, Rad1LowrNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrNav2CrsUpRemapableCmd = NULL, Rad1LowrNav2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrNav2FnUpRemapableCmd = NULL, Rad1LowrNav2FnDnRemapableCmd = NULL;
+
+
+XPLMCommandRef Rad2UprCom1CrsUpRemapableCmd = NULL, Rad2UprCom1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprCom1FnUpRemapableCmd = NULL, Rad2UprCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprCom2CrsUpRemapableCmd = NULL, Rad2UprCom2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprCom2FnUpRemapableCmd = NULL, Rad2UprCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprNav1CrsUpRemapableCmd = NULL, Rad2UprNav1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprNav1FnUpRemapableCmd = NULL, Rad2UprNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprNav2CrsUpRemapableCmd = NULL, Rad2UprNav2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprNav2FnUpRemapableCmd = NULL, Rad2UprNav2FnDnRemapableCmd = NULL;
+
+
+XPLMCommandRef Rad2LowrCom1CrsUpRemapableCmd = NULL, Rad2LowrCom1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrCom1FnUpRemapableCmd = NULL, Rad2LowrCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrCom2CrsUpRemapableCmd = NULL, Rad2LowrCom2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrCom2FnUpRemapableCmd = NULL, Rad2LowrCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrNav1CrsUpRemapableCmd = NULL, Rad2LowrNav1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrNav1FnUpRemapableCmd = NULL, Rad2LowrNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrNav2CrsUpRemapableCmd = NULL, Rad2LowrNav2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrNav2FnUpRemapableCmd = NULL, Rad2LowrNav2FnDnRemapableCmd = NULL;
+
+
+
+
+
+
+
 // ************* Radio Panel Data Ref ****************
 XPLMDataRef Com1ActFreq = NULL, Com2ActFreq = NULL, Nav1ActFreq = NULL, Nav2ActFreq = NULL;
 XPLMDataRef Com1StbyFreq = NULL, Com2StbyFreq = NULL, Nav1StbyFreq = NULL, Nav2StbyFreq = NULL;
@@ -101,6 +146,10 @@ XPWidgetID	RadioQnh0CheckWidget[50] = {NULL};
 XPWidgetID	RadioQnh1CheckWidget[50] = {NULL};
 XPWidgetID	RadioQnh0TextWidget[50] = {NULL};
 XPWidgetID	RadioQnh1TextWidget[50] = {NULL};
+
+
+
+
 
 // ****************** Multi Panel Command Ref **********************
 XPLMCommandRef ApAltDn = NULL, ApAltUp = NULL, ApVsDn = NULL, ApVsUp = NULL;
@@ -313,10 +362,56 @@ unsigned char radbuf[4], radwbuf[21];
 
 int radspeed, numadf, metricpressenable;
 
+int rad1uprcom1switchremap, rad1uprcom2switchremap;
+int rad1uprnav1switchremap, rad1uprnav2switchremap;
+int rad1lwrcom1switchremap, rad1lwrcom2switchremap;
+int rad1lwrnav1switchremap, rad1lwrnav2switchremap;
+
+int rad2uprcom1switchremap, rad2uprcom2switchremap;
+int rad2uprnav1switchremap, rad2uprnav2switchremap;
+int rad2lwrcom1switchremap, rad2lwrcom2switchremap;
+int rad2lwrnav1switchremap, rad2lwrnav2switchremap;
+
 void CreateRadioWidget(int x1, int y1, int w, int h);
 int RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, intptr_t  inParam1, intptr_t  inParam2);
 
 int radioMenuItem;
+
+string rad1_upper_com1_corse_up_remapable, rad1_upper_com1_corse_dn_remapable;
+string rad1_upper_com1_fine_up_remapable, rad1_upper_com1_fine_dn_remapable;
+string rad1_upper_com2_corse_up_remapable, rad1_upper_com2_corse_dn_remapable;
+string rad1_upper_com2_fine_up_remapable, rad1_upper_com2_fine_dn_remapable;
+string rad1_upper_nav1_corse_up_remapable, rad1_upper_nav1_corse_dn_remapable;
+string rad1_upper_nav1_fine_up_remapable, rad1_upper_nav1_fine_dn_remapable;
+string rad1_upper_nav2_corse_up_remapable, rad1_upper_nav2_corse_dn_remapable;
+string rad1_upper_nav2_fine_up_remapable, rad1_upper_nav2_fine_dn_remapable;
+
+string rad1_lower_com1_corse_up_remapable, rad1_lower_com1_corse_dn_remapable;
+string rad1_lower_com1_fine_up_remapable, rad1_lower_com1_fine_dn_remapable;
+string rad1_lower_com2_corse_up_remapable, rad1_lower_com2_corse_dn_remapable;
+string rad1_lower_com2_fine_up_remapable, rad1_lower_com2_fine_dn_remapable;
+string rad1_lower_nav1_corse_up_remapable, rad1_lower_nav1_corse_dn_remapable;
+string rad1_lower_nav1_fine_up_remapable, rad1_lower_nav1_fine_dn_remapable;
+string rad1_lower_nav2_corse_up_remapable, rad1_lower_nav2_corse_dn_remapable;
+string rad1_lower_nav2_fine_up_remapable, rad1_lower_nav2_fine_dn_remapable;
+
+string rad2_upper_com1_corse_up_remapable, rad2_upper_com1_corse_dn_remapable;
+string rad2_upper_com1_fine_up_remapable, rad2_upper_com1_fine_dn_remapable;
+string rad2_upper_com2_corse_up_remapable, rad2_upper_com2_corse_dn_remapable;
+string rad2_upper_com2_fine_up_remapable, rad2_upper_com2_fine_dn_remapable;
+string rad2_upper_nav1_corse_up_remapable, rad2_upper_nav1_corse_dn_remapable;
+string rad2_upper_nav1_fine_up_remapable, rad2_upper_nav1_fine_dn_remapable;
+string rad2_upper_nav2_corse_up_remapable, rad2_upper_nav2_corse_dn_remapable;
+string rad2_upper_nav2_fine_up_remapable, rad2_upper_nav2_fine_dn_remapable;
+
+string rad2_lower_com1_corse_up_remapable, rad2_lower_com1_corse_dn_remapable;
+string rad2_lower_com1_fine_up_remapable, rad2_lower_com1_fine_dn_remapable;
+string rad2_lower_com2_corse_up_remapable, rad2_lower_com2_corse_dn_remapable;
+string rad2_lower_com2_fine_up_remapable, rad2_lower_com2_fine_dn_remapable;
+string rad2_lower_nav1_corse_up_remapable, rad2_lower_nav1_corse_dn_remapable;
+string rad2_lower_nav1_fine_up_remapable, rad2_lower_nav1_fine_dn_remapable;
+string rad2_lower_nav2_corse_up_remapable, rad2_lower_nav2_corse_dn_remapable;
+string rad2_lower_nav2_fine_up_remapable, rad2_lower_nav2_fine_dn_remapable;
 
 char RadioSpeedText[50][200] = {
 "FREQ KNOB  1 PULSE PER COMMAND",
@@ -508,10 +603,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels v2.05\n");
+  XPLMDebugString("Xsaitekpanels v2.06\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.05");
+  strcpy(outName, "Xsaitekpanels v2.06");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 

@@ -819,38 +819,57 @@ void process_upper_com1_switch()
         if(testbit(radiobuf[radnum],UPPER_FINE_UP)) {
           upcom1dbncfninc[radnum]++;
           if (upcom1dbncfninc[radnum] > radspeed) {
-	    XPLMCommandOnce(Com1StbyFineUp);
-	    upcom1dbncfninc[radnum] = 0;
-	  }
+              if (rad1uprcom1switchremap == 1) {
+                  if (radnum == 0) {
+                      XPLMCommandOnce(Rad1UprCom1FnUpRemapableCmd);
+                  } else if (radnum == 1) {
+                      XPLMCommandOnce(Rad2UprCom1FnUpRemapableCmd);
+                  }
+
+              } else {
+                 XPLMCommandOnce(Com1StbyFineUp);
+              }
+
+            upcom1dbncfninc[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],UPPER_FINE_DN)) {
-	  upcom1dbncfndec[radnum]++;
+          upcom1dbncfndec[radnum]++;
           if (upcom1dbncfndec[radnum] > radspeed) {
-	    XPLMCommandOnce(Com1StbyFineDn);
-	    upcom1dbncfndec[radnum] = 0;
-	  }	
+              if (rad1uprcom1switchremap == 1) {
+                  if (radnum == 0) {
+                      XPLMCommandOnce(Rad1UprCom1FnDnRemapableCmd);
+                  } else if (radnum == 1) {
+                      XPLMCommandOnce(Rad2UprCom1FnDnRemapableCmd);
+                  }
+              } else {
+                  XPLMCommandOnce(Com1StbyFineDn);
+              }
+
+            upcom1dbncfndec[radnum] = 0;
+          }
         }
         if(testbit(radiobuf[radnum],UPPER_COARSE_UP)) {
-	  upcom1dbnccorinc[radnum]++;
+          upcom1dbnccorinc[radnum]++;
           if (upcom1dbnccorinc[radnum] > radspeed) {
-	    XPLMCommandOnce(Com1StbyCorseUp);
-	    upcom1dbnccorinc[radnum] = 0;
-	  }
-        }  
-        if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
-	  upcom1dbnccordec[radnum]++;
-          if (upcom1dbnccordec[radnum] > radspeed) {
-	    XPLMCommandOnce(Com1StbyCorseDn);
-	    upcom1dbnccordec[radnum] = 0;
-	  }
+            XPLMCommandOnce(Com1StbyCorseUp);
+            upcom1dbnccorinc[radnum] = 0;
+          }
         }
-	if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+        if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
+          upcom1dbnccordec[radnum]++;
+          if (upcom1dbnccordec[radnum] > radspeed) {
+            XPLMCommandOnce(Com1StbyCorseDn);
+            upcom1dbnccordec[radnum] = 0;
+          }
+        }
+        if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
           XPLMCommandOnce(Com1ActStby);
         }
       }   
-    upactcomnavfreq[radnum] = XPLMGetDatai(Com1ActFreq);
-    upstbycomnavfreq[radnum] = XPLMGetDatai(Com1StbyFreq);
-    upcom1[radnum] = 1;
+      upactcomnavfreq[radnum] = XPLMGetDatai(Com1ActFreq);
+      upstbycomnavfreq[radnum] = XPLMGetDatai(Com1StbyFreq);
+      upcom1[radnum] = 1;
     }
 }
 
@@ -2793,6 +2812,7 @@ void process_radio_panel()
   // *********** loop untill all radios serviced *************
   // **************   then start again    *******************
 
+    //printf("radnum = %d\n", radnum);
     radnum++;
     if (radnum == radcnt) {
       radnum = 0;
