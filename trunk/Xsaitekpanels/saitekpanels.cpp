@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.06   ***************
-// ****** Jan 01 2013   **************
+// ****** Jan 08 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -59,47 +59,58 @@ XPLMCommandRef Obs2Down = NULL, Obs2Up = NULL;
 
 XPLMCommandRef Rad1UprCom1CrsUpRemapableCmd = NULL, Rad1UprCom1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprCom1FnUpRemapableCmd = NULL, Rad1UprCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1UprCom2CrsUpRemapableCmd = NULL, Rad1UprCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprCom2FnUpRemapableCmd = NULL, Rad1UprCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprCom2ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav1CrsUpRemapableCmd = NULL, Rad1UprNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav1FnUpRemapableCmd = NULL, Rad1UprNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprNav1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2CrsUpRemapableCmd = NULL, Rad1UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2FnUpRemapableCmd = NULL, Rad1UprNav2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprNav2ActStbyRemapableCmd = NULL;
 
 
 XPLMCommandRef Rad1LowrCom1CrsUpRemapableCmd = NULL, Rad1LowrCom1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrCom1FnUpRemapableCmd = NULL, Rad1LowrCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrCom2CrsUpRemapableCmd = NULL, Rad1LowrCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrCom2FnUpRemapableCmd = NULL, Rad1LowrCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrCom2ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav1CrsUpRemapableCmd = NULL, Rad1LowrNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav1FnUpRemapableCmd = NULL, Rad1LowrNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrNav1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2CrsUpRemapableCmd = NULL, Rad1LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2FnUpRemapableCmd = NULL, Rad1LowrNav2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrNav2ActStbyRemapableCmd = NULL;
 
 
 XPLMCommandRef Rad2UprCom1CrsUpRemapableCmd = NULL, Rad2UprCom1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprCom1FnUpRemapableCmd = NULL, Rad2UprCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2UprCom2CrsUpRemapableCmd = NULL, Rad2UprCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprCom2FnUpRemapableCmd = NULL, Rad2UprCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprCom2ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav1CrsUpRemapableCmd = NULL, Rad2UprNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav1FnUpRemapableCmd = NULL, Rad2UprNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprNav1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav2CrsUpRemapableCmd = NULL, Rad2UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav2FnUpRemapableCmd = NULL, Rad2UprNav2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprNav2ActStbyRemapableCmd = NULL;
 
 
 XPLMCommandRef Rad2LowrCom1CrsUpRemapableCmd = NULL, Rad2LowrCom1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrCom1FnUpRemapableCmd = NULL, Rad2LowrCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrCom2CrsUpRemapableCmd = NULL, Rad2LowrCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrCom2FnUpRemapableCmd = NULL, Rad2LowrCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrCom2ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav1CrsUpRemapableCmd = NULL, Rad2LowrNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav1FnUpRemapableCmd = NULL, Rad2LowrNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrNav1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav2CrsUpRemapableCmd = NULL, Rad2LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav2FnUpRemapableCmd = NULL, Rad2LowrNav2FnDnRemapableCmd = NULL;
-
-
-
-
-
+XPLMCommandRef Rad2LowrNav2ActStbyRemapableCmd = NULL;
 
 
 // ************* Radio Panel Data Ref ****************
@@ -186,6 +197,7 @@ XPLMCommandRef x737mcp_spd_changeover = NULL, x737mcp_lnav_toggle = NULL;
 XPLMCommandRef NavButtonRemapableCmd = NULL, AprButtonRemapableCmd = NULL;
 XPLMCommandRef RevButtonRemapableCmd = NULL;
 XPLMCommandRef ApVsUpRemapableCmd = NULL, ApVsDnRemapableCmd = NULL;
+XPLMCommandRef TrimUpRemapableCmd = NULL, TrimDnRemapableCmd = NULL;
 
 // ***************** Multi Panel Data Ref *********************
 XPLMDataRef ApAlt = NULL, ApVs = NULL, ApAs = NULL, ApHdg = NULL, ApCrs = NULL, ApCrs2 = NULL;
@@ -362,15 +374,23 @@ unsigned char radbuf[4], radwbuf[21];
 
 int radspeed, numadf, metricpressenable;
 
-int rad1uprcom1switchremap, rad1uprcom2switchremap;
-int rad1uprnav1switchremap, rad1uprnav2switchremap;
-int rad1lwrcom1switchremap, rad1lwrcom2switchremap;
-int rad1lwrnav1switchremap, rad1lwrnav2switchremap;
+int rad1uprcom1switchremap, rad1uprcom1actstbybtnremap;
+int rad1uprcom2switchremap, rad1uprcom2actstbybtnremap;
+int rad1uprnav1switchremap, rad1uprnav1actstbybtnremap;
+int rad1uprnav2switchremap, rad1uprnav2actstbybtnremap;
+int rad1lwrcom1switchremap, rad1lwrcom1actstbybtnremap;
+int rad1lwrcom2switchremap, rad1lwrcom2actstbybtnremap;
+int rad1lwrnav1switchremap, rad1lwrnav1actstbybtnremap;
+int rad1lwrnav2switchremap, rad1lwrnav2actstbybtnremap;
 
-int rad2uprcom1switchremap, rad2uprcom2switchremap;
-int rad2uprnav1switchremap, rad2uprnav2switchremap;
-int rad2lwrcom1switchremap, rad2lwrcom2switchremap;
-int rad2lwrnav1switchremap, rad2lwrnav2switchremap;
+int rad2uprcom1switchremap, rad2uprcom1actstbybtnremap;
+int rad2uprcom2switchremap, rad2uprcom2actstbybtnremap;
+int rad2uprnav1switchremap, rad2uprnav1actstbybtnremap;
+int rad2uprnav2switchremap, rad2uprnav2actstbybtnremap;
+int rad2lwrcom1switchremap, rad2lwrcom1actstbybtnremap;
+int rad2lwrcom2switchremap, rad2lwrcom2actstbybtnremap;
+int rad2lwrnav1switchremap, rad2lwrnav1actstbybtnremap;
+int rad2lwrnav2switchremap, rad2lwrnav2actstbybtnremap;
 
 void CreateRadioWidget(int x1, int y1, int w, int h);
 int RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, intptr_t  inParam1, intptr_t  inParam2);
@@ -379,39 +399,56 @@ int radioMenuItem;
 
 string rad1_upper_com1_corse_up_remapable, rad1_upper_com1_corse_dn_remapable;
 string rad1_upper_com1_fine_up_remapable, rad1_upper_com1_fine_dn_remapable;
+string rad1_upper_com1_actstby_btn_remapable;
 string rad1_upper_com2_corse_up_remapable, rad1_upper_com2_corse_dn_remapable;
 string rad1_upper_com2_fine_up_remapable, rad1_upper_com2_fine_dn_remapable;
+string rad1_upper_com2_actstby_btn_remapable;
 string rad1_upper_nav1_corse_up_remapable, rad1_upper_nav1_corse_dn_remapable;
 string rad1_upper_nav1_fine_up_remapable, rad1_upper_nav1_fine_dn_remapable;
+string rad1_upper_nav1_actstby_btn_remapable;
 string rad1_upper_nav2_corse_up_remapable, rad1_upper_nav2_corse_dn_remapable;
 string rad1_upper_nav2_fine_up_remapable, rad1_upper_nav2_fine_dn_remapable;
+string rad1_upper_nav2_actstby_btn_remapable;
 
 string rad1_lower_com1_corse_up_remapable, rad1_lower_com1_corse_dn_remapable;
 string rad1_lower_com1_fine_up_remapable, rad1_lower_com1_fine_dn_remapable;
+string rad1_lower_com1_actstby_btn_remapable;
 string rad1_lower_com2_corse_up_remapable, rad1_lower_com2_corse_dn_remapable;
 string rad1_lower_com2_fine_up_remapable, rad1_lower_com2_fine_dn_remapable;
+string rad1_lower_com2_actstby_btn_remapable;
 string rad1_lower_nav1_corse_up_remapable, rad1_lower_nav1_corse_dn_remapable;
 string rad1_lower_nav1_fine_up_remapable, rad1_lower_nav1_fine_dn_remapable;
+string rad1_lower_nav1_actstby_btn_remapable;
 string rad1_lower_nav2_corse_up_remapable, rad1_lower_nav2_corse_dn_remapable;
 string rad1_lower_nav2_fine_up_remapable, rad1_lower_nav2_fine_dn_remapable;
+string rad1_lower_nav2_actstby_btn_remapable;
 
 string rad2_upper_com1_corse_up_remapable, rad2_upper_com1_corse_dn_remapable;
 string rad2_upper_com1_fine_up_remapable, rad2_upper_com1_fine_dn_remapable;
+string rad2_upper_com1_actstby_btn_remapable;
 string rad2_upper_com2_corse_up_remapable, rad2_upper_com2_corse_dn_remapable;
 string rad2_upper_com2_fine_up_remapable, rad2_upper_com2_fine_dn_remapable;
+string rad2_upper_com2_actstby_btn_remapable;
 string rad2_upper_nav1_corse_up_remapable, rad2_upper_nav1_corse_dn_remapable;
 string rad2_upper_nav1_fine_up_remapable, rad2_upper_nav1_fine_dn_remapable;
+string rad2_upper_nav1_actstby_btn_remapable;
 string rad2_upper_nav2_corse_up_remapable, rad2_upper_nav2_corse_dn_remapable;
 string rad2_upper_nav2_fine_up_remapable, rad2_upper_nav2_fine_dn_remapable;
+string rad2_upper_nav2_actstby_btn_remapable;
 
 string rad2_lower_com1_corse_up_remapable, rad2_lower_com1_corse_dn_remapable;
 string rad2_lower_com1_fine_up_remapable, rad2_lower_com1_fine_dn_remapable;
+string rad2_lower_com1_actstby_btn_remapable;
 string rad2_lower_com2_corse_up_remapable, rad2_lower_com2_corse_dn_remapable;
 string rad2_lower_com2_fine_up_remapable, rad2_lower_com2_fine_dn_remapable;
+string rad2_lower_com2_actstby_btn_remapable;
 string rad2_lower_nav1_corse_up_remapable, rad2_lower_nav1_corse_dn_remapable;
 string rad2_lower_nav1_fine_up_remapable, rad2_lower_nav1_fine_dn_remapable;
+string rad2_lower_nav1_actstby_btn_remapable;
 string rad2_lower_nav2_corse_up_remapable, rad2_lower_nav2_corse_dn_remapable;
 string rad2_lower_nav2_fine_up_remapable, rad2_lower_nav2_fine_dn_remapable;
+string rad2_lower_nav2_actstby_btn_remapable;
+
 
 char RadioSpeedText[50][200] = {
 "FREQ KNOB  1 PULSE PER COMMAND",
@@ -435,6 +472,7 @@ int trimspeed, multispeed, autothrottleswitchenable;
 
 int navbuttonremap, aprbuttonremap, revbuttonremap;
 int apvsupremap, apvsdnremap;
+int trimupremap, trimdnremap;
 
 int xpanelsfnbutton = 0, xpanelscrstoggle = 0;
 
@@ -445,6 +483,7 @@ int multiMenuItem;
 
 string nav_button_remapable, apr_button_remapable, rev_button_remapable;
 string ap_vs_up_remapable, ap_vs_dn_remapable;
+string trim_up_remapable, trim_dn_remapable;
 
 char MultiSpeedText[50][200] = {
 "FREQ KNOB  1 PULSE PER COMMAND",
