@@ -1150,14 +1150,22 @@ void process_trim_wheel()
   int i;
         if (multires > 0) {
 	  if(testbit(multibuf,TRIM_WHEEL_UP)) {
-	    for(i = 0; i < trimspeed; ++i){
-              XPLMCommandOnce(PitchTrimUp);
-	    }
+          for(i = 0; i < trimspeed; ++i) {
+              if (trimupremap == 1) {
+                  XPLMCommandOnce(TrimUpRemapableCmd);
+              } else {
+                  XPLMCommandOnce(PitchTrimUp);
+              }
+          }
 	  }	
 	  if(testbit(multibuf,TRIM_WHEEL_DN)) {
-	    for(i = 0; i < trimspeed; ++i){
-              XPLMCommandOnce(PitchTrimDn);
-            }
+          for(i = 0; i < trimspeed; ++i) {
+              if (trimdnremap == 1) {
+                  XPLMCommandOnce(TrimDnRemapableCmd);
+              } else {
+                  XPLMCommandOnce(PitchTrimDn);
+              }
+          }
 	  }
 	}
 }

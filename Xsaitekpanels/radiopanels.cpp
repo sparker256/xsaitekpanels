@@ -841,7 +841,6 @@ void process_upper_com1_switch()
               } else {
                   XPLMCommandOnce(Com1StbyFineDn);
               }
-
             upcom1dbncfndec[radnum] = 0;
           }
         }
@@ -874,7 +873,13 @@ void process_upper_com1_switch()
           }
         }
         if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-          XPLMCommandOnce(Com1ActStby);
+            if ((rad1uprcom1actstbybtnremap == 1) && (radnum == 1)) {
+                XPLMCommandOnce(Rad1UprCom1ActStbyRemapableCmd);
+            } else if ((rad2uprcom1actstbybtnremap == 1) && (radnum == 0)) {
+                XPLMCommandOnce(Rad2UprCom1ActStbyRemapableCmd);
+            } else {
+                XPLMCommandOnce(Com1ActStby);
+            }
         }
       }
       upactcomnavfreq[radnum] = XPLMGetDatai(Com1ActFreq);
@@ -884,7 +889,6 @@ void process_upper_com1_switch()
 }
 
 // ***************** Upper COM2 Switch Position *******************
-
 void process_upper_com2_switch()
 {
     if(testbit(radiobuf[radnum],UPPER_COM2)) {
@@ -943,8 +947,14 @@ void process_upper_com2_switch()
               upcom2dbnccordec[radnum] = 0;
           }
         }
-    if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-	  XPLMCommandOnce(Com2ActStby);
+        if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+            if ((rad1uprcom2actstbybtnremap == 1) && (radnum == 1)) {
+                XPLMCommandOnce(Rad1UprCom2ActStbyRemapableCmd);
+            } else if ((rad2uprcom2actstbybtnremap == 1) && (radnum == 0)) {
+                XPLMCommandOnce(Rad2UprCom2ActStbyRemapableCmd);
+            } else {
+                XPLMCommandOnce(Com2ActStby);
+            }
         }
       }
     upactcomnavfreq[radnum] = XPLMGetDatai(Com2ActFreq);
@@ -1039,7 +1049,14 @@ void process_upper_nav1_switch()
           }
         }
         if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-          XPLMCommandOnce(Nav1ActStby);
+            if ((rad1uprnav1actstbybtnremap == 1) && (radnum == 1)) {
+                XPLMCommandOnce(Rad1UprNav1ActStbyRemapableCmd);
+            } else if ((rad2uprnav1actstbybtnremap == 1) && (radnum == 0)) {
+                XPLMCommandOnce(Rad2UprNav1ActStbyRemapableCmd);
+            } else {
+                XPLMCommandOnce(Nav1ActStby);
+            }
+
         }
       }
 
@@ -1141,7 +1158,14 @@ void process_upper_nav2_switch()
         }
 
         if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-          XPLMCommandOnce(Nav2ActStby);
+            if ((rad1uprnav2actstbybtnremap == 1) && (radnum == 1)) {
+                XPLMCommandOnce(Rad1UprNav2ActStbyRemapableCmd);
+            } else if ((rad2uprnav2actstbybtnremap == 1) && (radnum == 0)) {
+                XPLMCommandOnce(Rad2UprNav2ActStbyRemapableCmd);
+            } else {
+                XPLMCommandOnce(Nav2ActStby);
+            }
+
         }
       }
 
@@ -1768,7 +1792,14 @@ void process_lower_com1_switch()
           }
         }
         if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-            XPLMCommandOnce(Com1ActStby);
+            if ((rad1lwrcom1actstbybtnremap == 1) && (radnum == 1)) {
+                XPLMCommandOnce(Rad1LowrCom1ActStbyRemapableCmd);
+            } else if ((rad2lwrcom1actstbybtnremap == 1) && (radnum == 0)) {
+                XPLMCommandOnce(Rad1LowrCom1ActStbyRemapableCmd);
+            } else {
+               XPLMCommandOnce(Com1ActStby);
+            }
+
         }
       }
       loactcomnavfreq[radnum] = XPLMGetDatai(Com1ActFreq);
@@ -1836,7 +1867,15 @@ void process_lower_com2_switch()
          }
        }
        if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-         XPLMCommandOnce(Com2ActStby);
+           if ((rad1lwrcom2actstbybtnremap == 1) && (radnum == 1)) {
+               XPLMCommandOnce(Rad1LowrCom2ActStbyRemapableCmd);
+           } else if ((rad2lwrcom2actstbybtnremap == 1) && (radnum == 0)) {
+               XPLMCommandOnce(Rad2LowrCom2ActStbyRemapableCmd);
+           } else {
+               XPLMCommandOnce(Com2ActStby);
+           }
+
+
        }
      }
     loactcomnavfreq[radnum] = XPLMGetDatai(Com2ActFreq);
@@ -1928,7 +1967,14 @@ void process_lower_nav1_switch()
           }
         }
         if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-          XPLMCommandOnce(Nav1ActStby);
+            if ((rad1lwrnav1actstbybtnremap == 1) && (radnum == 1)) {
+                XPLMCommandOnce(Rad1LowrNav1ActStbyRemapableCmd);
+            } else if ((rad2lwrnav1actstbybtnremap == 1) && (radnum == 0)) {
+                XPLMCommandOnce(Rad2LowrNav1ActStbyRemapableCmd);
+            } else {
+               XPLMCommandOnce(Nav1ActStby);
+            }
+
         }
       } 
       loactcomnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
@@ -2020,7 +2066,14 @@ void process_lower_nav2_switch()
           }
         }
         if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-          XPLMCommandOnce(Nav2ActStby);
+            if ((rad1lwrnav2actstbybtnremap == 1) && (radnum == 1)) {
+                XPLMCommandOnce(Rad1LowrNav2ActStbyRemapableCmd);
+            } else if ((rad2lwrnav2actstbybtnremap == 1) && (radnum == 0)) {
+                XPLMCommandOnce(Rad2LowrNav2ActStbyRemapableCmd);
+            } else {
+               XPLMCommandOnce(Nav2ActStby);
+            }
+
         }
       }
     loactcomnavfreq[radnum] = XPLMGetDatai(Nav2ActFreq);
