@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.06   ***************
-// ****** Jan 08 2013   **************
+// ****** Jan 11 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -265,7 +265,8 @@ XPLMCommandRef AvMasterSwitchOnCmd = NULL, AvMasterSwitchOffCmd = NULL;
 XPLMCommandRef FuelPumpOnCmd = NULL, FuelPumpOffCmd = NULL;
 XPLMCommandRef DeiceOnCmd = NULL, DeiceOffCmd = NULL;
 XPLMCommandRef PitotHeatOnCmd = NULL, PitotHeatOffCmd = NULL;
-XPLMCommandRef GearUpCmd = NULL, GearDnCmd = NULL;
+XPLMCommandRef GearUpOnCmd = NULL, GearOnOffCmd = NULL;
+XPLMCommandRef GearDnOnCmd = NULL, GearDnOffCmd = NULL;
 
 XPLMCommandRef CowlFlapsOpenCmd = NULL, CowlFlapsCloseCmd = NULL;
 XPLMCommandRef PanelLightsOnCmd = NULL, PanelLightsOffCmd = NULL;
@@ -531,7 +532,8 @@ string av_master_switch_on, av_master_switch_off;
 string fuel_pump_switch_on, fuel_pump_switch_off;
 string deice_switch_on, deice_switch_off;
 string pitot_heat_switch_on, pitot_heat_switch_off;
-string gear_switch_up, gear_switch_down;
+string gear_switch_up_on, gear_switch_up_off;
+string gear_switch_down_on, gear_switch_down_off;
 string cowl_flaps_open, cowl_flaps_close;
 string panel_lights_switch_on, panel_lights_switch_off;
 string beacon_lights_switch_on, beacon_lights_switch_off;

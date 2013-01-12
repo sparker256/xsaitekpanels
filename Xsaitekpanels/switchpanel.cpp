@@ -1159,11 +1159,11 @@ void process_gear_switch_switch()
     if(landinggearknobupenable == 2) {
 
         if(testbit(switchbuf,GEAR_SWITCH_UP)) {
-          XPLMCommandOnce(GearUpCmd);
+          XPLMCommandOnce(GearUpOnCmd);
          }
 
         if(testbit(switchbuf,GEAR_SWITCH_DN)) {
-          XPLMCommandOnce(GearDnCmd);
+          XPLMCommandOnce(GearDnOnCmd);
         }
 
         return;

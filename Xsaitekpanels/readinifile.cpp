@@ -442,10 +442,10 @@ void process_read_ini_file()
 
      if (landinggearknobupenable == 2) {
          XPSetWidgetProperty(SwitchRemapCheckWidget[11], xpProperty_ButtonState, 1);
-         gear_switch_up = getOptionToString("gear_up_switch_up_cmd");
-         gear_switch_down = getOptionToString("gear_up_switch_down_cmd");
-         GearUpCmd   = XPLMFindCommand(gear_switch_up.c_str());
-         GearDnCmd   = XPLMFindCommand(gear_switch_down.c_str());
+         gear_switch_up_on = getOptionToString("gear_up_switch_on_cmd");
+         gear_switch_up_off = getOptionToString("gear_up_switch_off_cmd");
+         GearUpOnCmd   = XPLMFindCommand(gear_switch_up_on.c_str());
+         GearUpOnCmd   = XPLMFindCommand(gear_switch_up_off.c_str());
      }
 
      // landing gear dn knob disable - enable - remap
@@ -460,10 +460,10 @@ void process_read_ini_file()
 
       if (landinggearknobdnenable == 2) {
           XPSetWidgetProperty(SwitchRemapCheckWidget[12], xpProperty_ButtonState, 1);
-          gear_switch_up = getOptionToString("gear_dn_switch_up_cmd");
-          gear_switch_down = getOptionToString("gear_dn_switch_down_cmd");
-          GearUpCmd   = XPLMFindCommand(gear_switch_up.c_str());
-          GearDnCmd   = XPLMFindCommand(gear_switch_down.c_str());
+          gear_switch_down_on = getOptionToString("gear_dn_switch_on_cmd");
+          gear_switch_down_off = getOptionToString("gear_dn_switch_off_cmd");
+          GearDnOnCmd   = XPLMFindCommand(gear_switch_down_on.c_str());
+          GearDnOffCmd   = XPLMFindCommand(gear_switch_down_off.c_str());
       }
 
    // cowl flaps switch disable - enable - remap

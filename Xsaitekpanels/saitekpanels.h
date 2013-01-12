@@ -336,7 +336,8 @@ extern XPLMCommandRef AvMasterSwitchOnCmd, AvMasterSwitchOffCmd;
 extern XPLMCommandRef FuelPumpOnCmd, FuelPumpOffCmd;
 extern XPLMCommandRef DeiceOnCmd, DeiceOffCmd;
 extern XPLMCommandRef PitotHeatOnCmd, PitotHeatOffCmd;
-extern XPLMCommandRef GearUpCmd, GearDnCmd;
+extern XPLMCommandRef GearUpOnCmd, GearUpOffCmd;
+extern XPLMCommandRef GearDnOnCmd, GearDnOffCmd;
 
 extern XPLMCommandRef CowlFlapsOpenCmd, CowlFlapsCloseCmd;
 extern XPLMCommandRef PanelLightsOnCmd, PanelLightsOffCmd;
@@ -438,7 +439,8 @@ extern string av_master_switch_on, av_master_switch_off;
 extern string fuel_pump_switch_on, fuel_pump_switch_off;
 extern string deice_switch_on, deice_switch_off;
 extern string pitot_heat_switch_on, pitot_heat_switch_off;
-extern string gear_switch_up, gear_switch_down;
+extern string gear_switch_up_on, gear_switch_up_off;
+extern string gear_switch_down_on, gear_switch_down_off;
 
 extern string cowl_flaps_open, cowl_flaps_close;
 extern string panel_lights_switch_on, panel_lights_switch_off;
