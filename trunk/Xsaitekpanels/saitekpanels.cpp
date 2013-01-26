@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.06   ***************
-// ****** Jan 11 2013   **************
+// ******** ver 2.07   ***************
+// ****** Jan 25 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -159,9 +159,6 @@ XPWidgetID	RadioQnh0TextWidget[50] = {NULL};
 XPWidgetID	RadioQnh1TextWidget[50] = {NULL};
 
 
-
-
-
 // ****************** Multi Panel Command Ref **********************
 XPLMCommandRef ApAltDn = NULL, ApAltUp = NULL, ApVsDn = NULL, ApVsUp = NULL;
 XPLMCommandRef ApAsDn = NULL, ApAsUp = NULL, ApHdgDn = NULL, ApHdgUp = NULL;
@@ -194,8 +191,10 @@ XPLMCommandRef x737mcp_lvlchange_toggle = NULL, x737mcp_alt_toggle = NULL;
 XPLMCommandRef x737mcp_vs_toggle = NULL, x737mcp_app_toggle = NULL;
 XPLMCommandRef x737mcp_spd_changeover = NULL, x737mcp_lnav_toggle = NULL;
 
-XPLMCommandRef NavButtonRemapableCmd = NULL, AprButtonRemapableCmd = NULL;
-XPLMCommandRef RevButtonRemapableCmd = NULL;
+XPLMCommandRef ApButtonRemapableCmd = NULL, HdgButtonRemapableCmd = NULL;
+XPLMCommandRef NavButtonRemapableCmd = NULL, IasButtonRemapableCmd = NULL;
+XPLMCommandRef AltButtonRemapableCmd = NULL, VsButtonRemapableCmd = NULL;
+XPLMCommandRef AprButtonRemapableCmd = NULL, RevButtonRemapableCmd = NULL;
 XPLMCommandRef ApVsUpRemapableCmd = NULL, ApVsDnRemapableCmd = NULL;
 XPLMCommandRef TrimUpRemapableCmd = NULL, TrimDnRemapableCmd = NULL;
 
@@ -207,6 +206,11 @@ XPLMDataRef ApAltStat = NULL, ApVsStat = NULL, ApAprStat = NULL, ApRevStat = NUL
 XPLMDataRef x737athr_armed = NULL, x737swBatBus = NULL, x737stbyPwr = NULL;
 XPLMDataRef ApState = NULL, ApAutThr;
 XPLMDataRef Frp = NULL, MHdg = NULL;
+
+XPLMDataRef ApLightRemapableData = NULL, HdgLightRemapableData = NULL;
+XPLMDataRef NavLightRemapableData = NULL, IasLightRemapableData = NULL;
+XPLMDataRef AltLightRemapableData = NULL, VsLightRemapableData = NULL;
+XPLMDataRef AprLightRemapableData = NULL, RevLightRemapableData = NULL;
 
 XPLMDataRef AirspeedIsMach = NULL, Airspeed = NULL;
 
@@ -471,7 +475,12 @@ int loaded737 = 0;
 
 int trimspeed, multispeed, autothrottleswitchenable;
 
-int navbuttonremap, aprbuttonremap, revbuttonremap;
+int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
+int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
+
+int aplightremap, hdglightremap, navlightremap, iaslightremap;
+int altlightremap, vslightremap, aprlightremap, revlightremap;
+
 int apvsupremap, apvsdnremap;
 int trimupremap, trimdnremap;
 
@@ -482,7 +491,12 @@ int MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
 
 int multiMenuItem;
 
-string nav_button_remapable, apr_button_remapable, rev_button_remapable;
+string ap_button_remapable, hdg_button_remapable, nav_button_remapable, ias_button_remapable;
+string alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_button_remapable;
+
+string ap_light_remapable, hdg_light_remapable, nav_light_remapable, ias_light_remapable;
+string alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
+
 string ap_vs_up_remapable, ap_vs_dn_remapable;
 string trim_up_remapable, trim_dn_remapable;
 
@@ -644,10 +658,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels v2.06\n");
+  XPLMDebugString("Xsaitekpanels v2.07\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.06");
+  strcpy(outName, "Xsaitekpanels v2.07");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 

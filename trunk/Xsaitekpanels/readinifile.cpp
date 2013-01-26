@@ -120,15 +120,28 @@ void process_read_ini_file()
     multispeed               = 3;
     autothrottleswitchenable = 1;
 
+    apbuttonremap           = 0;
+    hdgbuttonremap          = 0;
     navbuttonremap          = 0;
+    iasbuttonremap          = 0;
+    altbuttonremap          = 0;
+    vsbuttonremap           = 0;
     aprbuttonremap          = 0;
     revbuttonremap          = 0;
+
+    aplightremap            = 0;
+    hdglightremap           = 0;
+    navlightremap           = 0;
+    iaslightremap           = 0;
+    altlightremap           = 0;
+    vslightremap            = 0;
+    aprlightremap           = 0;
+    revlightremap           = 0;
+
     apvsupremap             = 0;
     apvsdnremap             = 0;
     trimupremap             = 0;
     trimdnremap             = 0;
-
-
 
     //char *configPath;
 
@@ -1073,12 +1086,101 @@ void process_read_ini_file()
          XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 1);
     }
 
+    // ap button - remapable
+    apbuttonremap = getOptionToInt("Ap Button remapable");
+    if (apbuttonremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         ap_button_remapable = getOptionToString("ap_button_remapable_cmd");
+         ApButtonRemapableCmd   = XPLMFindCommand(ap_button_remapable.c_str());
+    }
+
+    // ap light - remapable
+    aplightremap = getOptionToInt("Ap Light remapable");
+    if (aplightremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         ap_light_remapable = getOptionToString("ap_light_remapable_data");
+         ApLightRemapableData   = XPLMFindDataRef(ap_light_remapable.c_str());
+    }
+
+    // hdg button - remapable
+    hdgbuttonremap = getOptionToInt("Hdg Button remapable");
+    if (hdgbuttonremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         hdg_button_remapable = getOptionToString("hdg_button_remapable_cmd");
+         HdgButtonRemapableCmd   = XPLMFindCommand(hdg_button_remapable.c_str());
+    }
+
+    // hdg light - remapable
+    hdglightremap = getOptionToInt("Hdg Light remapable");
+    if (hdglightremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         hdg_light_remapable = getOptionToString("hdg_light_remapable_data");
+         HdgLightRemapableData   = XPLMFindDataRef(hdg_light_remapable.c_str());
+    }
+
     // nav button - remapable
     navbuttonremap = getOptionToInt("Nav Button remapable");
     if (navbuttonremap == 1) {
          //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          nav_button_remapable = getOptionToString("nav_button_remapable_cmd");
          NavButtonRemapableCmd   = XPLMFindCommand(nav_button_remapable.c_str());
+    }
+
+    // nav light - remapable
+    navlightremap = getOptionToInt("Nav Light remapable");
+    if (navlightremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         nav_light_remapable = getOptionToString("nav_light_remapable_data");
+         NavLightRemapableData   = XPLMFindDataRef(nav_light_remapable.c_str());
+    }
+
+    // ias button - remapable
+    iasbuttonremap = getOptionToInt("Ias Button remapable");
+    if (iasbuttonremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         ias_button_remapable = getOptionToString("ias_button_remapable_cmd");
+         IasButtonRemapableCmd   = XPLMFindCommand(ias_button_remapable.c_str());
+    }
+
+    // ias light - remapable
+    iasbuttonremap = getOptionToInt("Ias Light remapable");
+    if (iaslightremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         ias_light_remapable = getOptionToString("ias_light_remapable_data");
+         IasLightRemapableData   = XPLMFindDataRef(ias_light_remapable.c_str());
+    }
+
+
+    // alt button - remapable
+    altbuttonremap = getOptionToInt("Alt Button remapable");
+    if (altbuttonremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         alt_button_remapable = getOptionToString("alt_button_remapable_cmd");
+         AltButtonRemapableCmd   = XPLMFindCommand(alt_button_remapable.c_str());
+    }
+
+    // alt light - remapable
+    altbuttonremap = getOptionToInt("Alt Light remapable");
+    if (altlightremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         alt_light_remapable = getOptionToString("alt_light_remapable_data");
+         AltLightRemapableData   = XPLMFindDataRef(alt_light_remapable.c_str());
+    }
+
+    // vs button - remapable
+    vsbuttonremap = getOptionToInt("Vs Button remapable");
+    if (vsbuttonremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         vs_button_remapable = getOptionToString("vs_button_remapable_cmd");
+         VsButtonRemapableCmd   = XPLMFindCommand(vs_button_remapable.c_str());
+    }
+
+    // vs light - remapable
+    vslightremap = getOptionToInt("Vs Light remapable");
+    if (vslightremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         vs_light_remapable = getOptionToString("vs_light_remapable_data");
+         VsLightRemapableData   = XPLMFindDataRef(vs_light_remapable.c_str());
     }
 
     // apr button - remapable
@@ -1089,12 +1191,28 @@ void process_read_ini_file()
          AprButtonRemapableCmd   = XPLMFindCommand(apr_button_remapable.c_str());
     }
 
+    // apr light - remapable
+    aprbuttonremap = getOptionToInt("Apr Light remapable");
+    if (aprlightremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         apr_light_remapable = getOptionToString("apr_light_remapable_data");
+         AprLightRemapableData   = XPLMFindDataRef(apr_light_remapable.c_str());
+    }
+
     // rev button - remapable
     revbuttonremap = getOptionToInt("Rev Button remapable");
     if (revbuttonremap == 1) {
          //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          rev_button_remapable = getOptionToString("rev_button_remapable_cmd");
          RevButtonRemapableCmd   = XPLMFindCommand(rev_button_remapable.c_str());
+    }
+
+    // rev light - remapable
+    revbuttonremap = getOptionToInt("Rev Light remapable");
+    if (revlightremap == 1) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         rev_light_remapable = getOptionToString("rev_light_remapable_data");
+         RevLightRemapableData   = XPLMFindDataRef(rev_light_remapable.c_str());
     }
 
     // ap vs up - remapable
