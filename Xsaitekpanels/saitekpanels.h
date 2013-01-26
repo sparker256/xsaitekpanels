@@ -248,8 +248,11 @@ extern XPLMCommandRef x737mcp_lvlchange_toggle, x737mcp_alt_toggle;
 extern XPLMCommandRef x737mcp_vs_toggle, x737mcp_app_toggle;
 extern XPLMCommandRef x737mcp_spd_changeover, x737mcp_lnav_toggle;
 
-extern XPLMCommandRef NavButtonRemapableCmd, AprButtonRemapableCmd;
-extern XPLMCommandRef RevButtonRemapableCmd;
+extern XPLMCommandRef ApButtonRemapableCmd, HdgButtonRemapableCmd;
+extern XPLMCommandRef NavButtonRemapableCmd, IasButtonRemapableCmd;
+extern XPLMCommandRef AltButtonRemapableCmd, VsButtonRemapableCmd;
+extern XPLMCommandRef AprButtonRemapableCmd, RevButtonRemapableCmd;
+
 extern XPLMCommandRef ApVsUpRemapableCmd, ApVsDnRemapableCmd;
 extern XPLMCommandRef TrimUpRemapableCmd, TrimDnRemapableCmd;
 
@@ -261,6 +264,11 @@ extern XPLMDataRef ApAltStat, ApVsStat, ApAprStat, ApRevStat;
 extern XPLMDataRef x737athr_armed ,x737swBatBus ,x737stbyPwr ;
 extern XPLMDataRef ApState, ApAutThr;
 extern XPLMDataRef AirspeedIsMach, Airspeed;
+
+extern XPLMDataRef ApLightRemapableData, HdgLightRemapableData;
+extern XPLMDataRef NavLightRemapableData, IasLightRemapableData;
+extern XPLMDataRef AltLightRemapableData, VsLightRemapableData;
+extern XPLMDataRef AprLightRemapableData, RevLightRemapableData;
 
 extern XPLMDataRef x737mcp_hdg, x737mcp_alt, x737mcp_vs, x737mcp_vs_arm;
 
@@ -293,7 +301,12 @@ extern int numadf;
 extern int loaded737;
 extern int trimspeed, multispeed, autothrottleswitchenable;
 
-extern int navbuttonremap, aprbuttonremap, revbuttonremap;
+extern int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
+extern int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
+
+extern int aplightremap, hdglightremap, navlightremap, iaslightremap;
+extern int altlightremap, vslightremap, aprlightremap, revlightremap;
+
 extern int apvsupremap, apvsdnremap;
 extern int trimupremap, trimdnremap;
 
@@ -301,7 +314,12 @@ extern int xpanelsfnbutton;
 extern int xpanelscrstoggle;
 extern int multi_auto_mul;
 
-extern string nav_button_remapable, apr_button_remapable, rev_button_remapable;
+extern string ap_button_remapable, hdg_button_remapable, nav_button_remapable, ias_button_remapable;
+extern string alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_button_remapable;
+
+extern string ap_light_remapable, hdg_light_remapable, nav_light_remapable, ias_light_remapable;
+extern string alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
+
 extern string ap_vs_up_remapable, ap_vs_dn_remapable;
 extern string trim_up_remapable, trim_dn_remapable;
 
