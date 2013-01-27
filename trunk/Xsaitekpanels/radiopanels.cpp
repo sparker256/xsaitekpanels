@@ -819,9 +819,12 @@ void process_upper_com1_switch()
         if(testbit(radiobuf[radnum],UPPER_FINE_UP)) {
           upcom1dbncfninc[radnum]++;
           if (upcom1dbncfninc[radnum] > radspeed) {
-              if ((rad1uprcom1switchremap == 1) && (radnum == 1)) {
+              printf("radnum = %d\n", radnum);
+              if ((rad1uprcom1switchremap == 1) && (radnum == 0)) {
+                  printf("if ((rad1uprcom1switchremap == 1) && (radnum == 0)) { %d\n", radnum);
                   XPLMCommandOnce(Rad1UprCom1FnUpRemapableCmd);
-              } else if ((rad2uprcom1switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2uprcom1switchremap == 1) && (radnum == 1)) {
+                  printf("else if ((rad2uprcom1switchremap == 1) && (radnum == 1)) { %d\n", radnum);
                   XPLMCommandOnce(Rad2UprCom1FnUpRemapableCmd);
 
               } else {
@@ -834,9 +837,9 @@ void process_upper_com1_switch()
         if(testbit(radiobuf[radnum],UPPER_FINE_DN)) {
           upcom1dbncfndec[radnum]++;
           if (upcom1dbncfndec[radnum] > radspeed) {
-              if ((rad1uprcom1switchremap == 1) && (radnum == 1)) {
+              if ((rad1uprcom1switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1UprCom1FnDnRemapableCmd);
-              } else if ((rad2uprcom1switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2uprcom1switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2UprCom1FnDnRemapableCmd);
               } else {
                   XPLMCommandOnce(Com1StbyFineDn);
@@ -847,9 +850,9 @@ void process_upper_com1_switch()
         if(testbit(radiobuf[radnum],UPPER_COARSE_UP)) {
           upcom1dbnccorinc[radnum]++;
           if (upcom1dbnccorinc[radnum] > radspeed) {
-              if ((rad1uprcom1switchremap == 1) && (radnum == 1)) {
+              if ((rad1uprcom1switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1UprCom1CrsUpRemapableCmd);
-              } else if ((rad2uprcom1switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2uprcom1switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2UprCom1CrsUpRemapableCmd);
               } else {
                   XPLMCommandOnce(Com1StbyCorseUp);
@@ -861,9 +864,9 @@ void process_upper_com1_switch()
         if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
           upcom1dbnccordec[radnum]++;
           if (upcom1dbnccordec[radnum] > radspeed) {
-              if ((rad1uprcom1switchremap == 1) && (radnum == 1)) {
+              if ((rad1uprcom1switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1UprCom1CrsDnRemapableCmd);
-              } else if ((rad2uprcom1switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2uprcom1switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2UprCom1CrsDnRemapableCmd);
               } else {
                   XPLMCommandOnce(Com1StbyCorseDn);
@@ -873,9 +876,9 @@ void process_upper_com1_switch()
           }
         }
         if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-            if ((rad1uprcom1actstbybtnremap == 1) && (radnum == 1)) {
+            if ((rad1uprcom1actstbybtnremap == 1) && (radnum == 0)) {
                 XPLMCommandOnce(Rad1UprCom1ActStbyRemapableCmd);
-            } else if ((rad2uprcom1actstbybtnremap == 1) && (radnum == 0)) {
+            } else if ((rad2uprcom1actstbybtnremap == 1) && (radnum == 1)) {
                 XPLMCommandOnce(Rad2UprCom1ActStbyRemapableCmd);
             } else {
                 XPLMCommandOnce(Com1ActStby);
@@ -897,9 +900,9 @@ void process_upper_com2_switch()
         if(testbit(radiobuf[radnum],UPPER_FINE_UP)) {
           upcom2dbncfninc[radnum]++;
           if (upcom2dbncfninc[radnum] > radspeed) {
-              if ((rad1uprcom2switchremap == 1) && (radnum == 1)) {
+              if ((rad1uprcom2switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1UprCom2FnUpRemapableCmd);
-              } else if ((rad2uprcom2switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2uprcom2switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2UprCom2FnUpRemapableCmd);
               } else {
                   XPLMCommandOnce(Com2StbyFineUp);
@@ -911,9 +914,9 @@ void process_upper_com2_switch()
         if(testbit(radiobuf[radnum],UPPER_FINE_DN)) {
           upcom2dbncfndec[radnum]++;
           if (upcom2dbncfndec[radnum] > radspeed) {
-              if ((rad1uprcom2switchremap == 1) && (radnum == 1)) {
+              if ((rad1uprcom2switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1UprCom2FnDnRemapableCmd);
-              } else if ((rad2uprcom2switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2uprcom2switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2UprCom2FnDnRemapableCmd);
               } else {
                   XPLMCommandOnce(Com2StbyFineDn);
@@ -924,9 +927,9 @@ void process_upper_com2_switch()
         if(testbit(radiobuf[radnum],UPPER_COARSE_UP)) {
           upcom2dbnccorinc[radnum]++;
           if (upcom2dbnccorinc[radnum] > radspeed) {
-              if ((rad1uprcom2switchremap == 1) && (radnum == 1)) {
+              if ((rad1uprcom2switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1UprCom2CrsUpRemapableCmd);
-              } else if ((rad2uprcom2switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2uprcom2switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2UprCom2CrsUpRemapableCmd);
               } else {
                  XPLMCommandOnce(Com2StbyCorseUp);
@@ -937,9 +940,9 @@ void process_upper_com2_switch()
         if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
           upcom2dbnccordec[radnum]++;
           if (upcom2dbnccordec[radnum] > radspeed) {
-              if ((rad1uprcom2switchremap == 1) && (radnum == 1)) {
+              if ((rad1uprcom2switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1UprCom2CrsDnRemapableCmd);
-              } else if ((rad2uprcom2switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2uprcom2switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2UprCom2CrsDnRemapableCmd);
               } else {
                   XPLMCommandOnce(Com2StbyCorseDn);
@@ -948,9 +951,9 @@ void process_upper_com2_switch()
           }
         }
         if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-            if ((rad1uprcom2actstbybtnremap == 1) && (radnum == 1)) {
+            if ((rad1uprcom2actstbybtnremap == 1) && (radnum == 0)) {
                 XPLMCommandOnce(Rad1UprCom2ActStbyRemapableCmd);
-            } else if ((rad2uprcom2actstbybtnremap == 1) && (radnum == 0)) {
+            } else if ((rad2uprcom2actstbybtnremap == 1) && (radnum == 1)) {
                 XPLMCommandOnce(Rad2UprCom2ActStbyRemapableCmd);
             } else {
                 XPLMCommandOnce(Com2ActStby);
@@ -976,9 +979,9 @@ void process_upper_nav1_switch()
             if(xpanelsfnbutton == 1) {
               XPLMCommandOnce(Obs1Up);
             } else {
-                if ((rad1uprnav1switchremap == 1) && (radnum == 1)) {
+                if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1UprNav1FnUpRemapableCmd);
-                 } else if ((rad2uprnav1switchremap == 1) && (radnum == 0)) {
+                 } else if ((rad2uprnav1switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2UprNav1FnUpRemapableCmd);
                 } else {
                    XPLMCommandOnce(Nav1StbyFineUp);
@@ -994,9 +997,9 @@ void process_upper_nav1_switch()
             if(xpanelsfnbutton == 1) {
               XPLMCommandOnce(Obs1Down);
             } else {
-                if ((rad1uprnav1switchremap == 1) && (radnum == 1)) {
+                if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1UprNav1FnDnRemapableCmd);
-                } else if ((rad2uprnav1switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2uprnav1switchremap == 1) && (radnum == 1)) {
                    XPLMCommandOnce(Rad2UprNav1FnDnRemapableCmd);
                 } else {
                    XPLMCommandOnce(Nav1StbyFineDn);
@@ -1015,9 +1018,9 @@ void process_upper_nav1_switch()
                 --radn;
               }
             } else {
-               if ((rad1uprnav1switchremap == 1) && (radnum == 1)) {
+               if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
                    XPLMCommandOnce(Rad1UprNav1CrsUpRemapableCmd);
-               } else if ((rad2uprnav1switchremap == 1) && (radnum == 0)) {
+               } else if ((rad2uprnav1switchremap == 1) && (radnum == 1)) {
                    XPLMCommandOnce(Rad2UprNav1CrsUpRemapableCmd);
                } else {
                    XPLMCommandOnce(Nav1StbyCorseUp);
@@ -1037,9 +1040,9 @@ void process_upper_nav1_switch()
                 --radn;
               }
             } else {
-                if ((rad1uprnav1switchremap == 1) && (radnum == 1)) {
+                if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1UprNav1CrsDnRemapableCmd);
-                } else if ((rad2uprnav1switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2uprnav1switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2UprNav1CrsDnRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav1StbyCorseDn);
@@ -1049,9 +1052,9 @@ void process_upper_nav1_switch()
           }
         }
         if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-            if ((rad1uprnav1actstbybtnremap == 1) && (radnum == 1)) {
+            if ((rad1uprnav1actstbybtnremap == 1) && (radnum == 0)) {
                 XPLMCommandOnce(Rad1UprNav1ActStbyRemapableCmd);
-            } else if ((rad2uprnav1actstbybtnremap == 1) && (radnum == 0)) {
+            } else if ((rad2uprnav1actstbybtnremap == 1) && (radnum == 1)) {
                 XPLMCommandOnce(Rad2UprNav1ActStbyRemapableCmd);
             } else {
                 XPLMCommandOnce(Nav1ActStby);
@@ -1080,9 +1083,9 @@ void process_upper_nav2_switch()
             if(xpanelsfnbutton == 1) {
               XPLMCommandOnce(Obs2Up);
             } else {
-               if ((rad1uprnav2switchremap == 1) && (radnum == 1)) {
+               if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
                    XPLMCommandOnce(Rad1UprNav2FnUpRemapableCmd);
-               } else if ((rad2uprnav2switchremap == 1) && (radnum == 0)) {
+               } else if ((rad2uprnav2switchremap == 1) && (radnum == 1)) {
                    XPLMCommandOnce(Rad2UprNav2FnUpRemapableCmd);
                } else {
                    XPLMCommandOnce(Nav2StbyFineUp);
@@ -1098,9 +1101,9 @@ void process_upper_nav2_switch()
             if(xpanelsfnbutton == 1) {
               XPLMCommandOnce(Obs2Down);
             } else {
-                if ((rad1uprnav2switchremap == 1) && (radnum == 1)) {
+                if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1UprNav2FnDnRemapableCmd);
-                } else if ((rad2uprnav2switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2uprnav2switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2UprNav2FnDnRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav2StbyFineDn);
@@ -1121,9 +1124,9 @@ void process_upper_nav2_switch()
                 --radn;
               }
             } else {
-                if ((rad1uprnav2switchremap == 1) && (radnum == 1)) {
+                if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1UprNav2CrsUpRemapableCmd);
-                } else if ((rad2uprnav2switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2uprnav2switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2UprNav2CrsUpRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav2StbyCorseUp);
@@ -1143,9 +1146,9 @@ void process_upper_nav2_switch()
                 --radn;
               }
             } else {
-                if ((rad1uprnav2switchremap == 1) && (radnum == 1)) {
+                if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1UprNav2CrsDnRemapableCmd);
-                } else if ((rad2uprnav2switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2uprnav2switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2UprNav2CrsDnRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav2StbyCorseDn);
@@ -1158,9 +1161,9 @@ void process_upper_nav2_switch()
         }
 
         if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-            if ((rad1uprnav2actstbybtnremap == 1) && (radnum == 1)) {
+            if ((rad1uprnav2actstbybtnremap == 1) && (radnum == 0)) {
                 XPLMCommandOnce(Rad1UprNav2ActStbyRemapableCmd);
-            } else if ((rad2uprnav2actstbybtnremap == 1) && (radnum == 0)) {
+            } else if ((rad2uprnav2actstbybtnremap == 1) && (radnum == 1)) {
                 XPLMCommandOnce(Rad2UprNav2ActStbyRemapableCmd);
             } else {
                 XPLMCommandOnce(Nav2ActStby);
@@ -1742,9 +1745,9 @@ void process_lower_com1_switch()
         if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
           locom1dbncfninc[radnum]++;
           if (locom1dbncfninc[radnum] > radspeed) {
-               if ((rad1lwrcom1switchremap == 1) && (radnum == 1)) {
+               if ((rad1lwrcom1switchremap == 1) && (radnum == 0)) {
                    XPLMCommandOnce(Rad1LowrCom1FnUpRemapableCmd);
-               } else if ((rad2lwrcom1switchremap == 1) && (radnum == 0)) {
+               } else if ((rad2lwrcom1switchremap == 1) && (radnum == 1)) {
                    XPLMCommandOnce(Rad2LowrCom1FnUpRemapableCmd);
                } else {
                    XPLMCommandOnce(Com1StbyFineUp);
@@ -1755,9 +1758,9 @@ void process_lower_com1_switch()
         if(testbit(radiobuf[radnum],LOWER_FINE_DN)) {
           locom1dbncfndec[radnum]++;
           if (locom1dbncfndec[radnum] > radspeed) {
-              if ((rad1lwrcom1switchremap == 1) && (radnum == 1)) {
+              if ((rad1lwrcom1switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1LowrCom1FnDnRemapableCmd);
-              } else if ((rad2lwrcom1switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2lwrcom1switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2LowrCom1FnDnRemapableCmd);
               } else {
                   XPLMCommandOnce(Com1StbyFineDn);
@@ -1768,9 +1771,9 @@ void process_lower_com1_switch()
         if(testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
 	  locom1dbnccorinc[radnum]++;
           if (locom1dbnccorinc[radnum] > radspeed) {
-              if ((rad1lwrcom1switchremap == 1) && (radnum == 1)) {
+              if ((rad1lwrcom1switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1LowrCom1CrsUpRemapableCmd);
-              } else if ((rad2lwrcom1switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2lwrcom1switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2LowrCom1CrsUpRemapableCmd);
               } else {
                   XPLMCommandOnce(Com1StbyCorseUp);
@@ -1781,9 +1784,9 @@ void process_lower_com1_switch()
         if(testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
           locom1dbnccordec[radnum]++;
           if (locom1dbnccordec[radnum] > radspeed) {
-              if ((rad1lwrcom1switchremap == 1) && (radnum == 1)) {
+              if ((rad1lwrcom1switchremap == 1) && (radnum == 0)) {
                   XPLMCommandOnce(Rad1LowrCom1CrsDnRemapableCmd);
-              } else if ((rad2lwrcom1switchremap == 1) && (radnum == 0)) {
+              } else if ((rad2lwrcom1switchremap == 1) && (radnum == 1)) {
                   XPLMCommandOnce(Rad2LowrCom1CrsDnRemapableCmd);
               } else {
                   XPLMCommandOnce(Com1StbyCorseDn);
@@ -1792,9 +1795,9 @@ void process_lower_com1_switch()
           }
         }
         if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-            if ((rad1lwrcom1actstbybtnremap == 1) && (radnum == 1)) {
+            if ((rad1lwrcom1actstbybtnremap == 1) && (radnum == 0)) {
                 XPLMCommandOnce(Rad1LowrCom1ActStbyRemapableCmd);
-            } else if ((rad2lwrcom1actstbybtnremap == 1) && (radnum == 0)) {
+            } else if ((rad2lwrcom1actstbybtnremap == 1) && (radnum == 1)) {
                 XPLMCommandOnce(Rad1LowrCom1ActStbyRemapableCmd);
             } else {
                XPLMCommandOnce(Com1ActStby);
@@ -1817,9 +1820,9 @@ void process_lower_com2_switch()
        if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
          locom2dbncfninc[radnum]++;
          if (locom2dbncfninc[radnum] > radspeed) {
-             if ((rad1lwrcom2switchremap == 1) && (radnum == 1)) {
+             if ((rad1lwrcom2switchremap == 1) && (radnum == 0)) {
                  XPLMCommandOnce(Rad1LowrCom2FnUpRemapableCmd);
-             } else if ((rad2lwrcom2switchremap == 1) && (radnum == 0)) {
+             } else if ((rad2lwrcom2switchremap == 1) && (radnum == 1)) {
                  XPLMCommandOnce(Rad2LowrCom2FnUpRemapableCmd);
              } else {
                  XPLMCommandOnce(Com2StbyFineUp);
@@ -1830,9 +1833,9 @@ void process_lower_com2_switch()
        if(testbit(radiobuf[radnum],LOWER_FINE_DN)) {
          locom2dbncfndec[radnum]++;
          if (locom2dbncfndec[radnum] > radspeed) {
-             if ((rad1lwrcom2switchremap == 1) && (radnum == 1)) {
+             if ((rad1lwrcom2switchremap == 1) && (radnum == 0)) {
                  XPLMCommandOnce(Rad1LowrCom2FnDnRemapableCmd);
-             } else if ((rad2lwrcom2switchremap == 1) && (radnum == 0)) {
+             } else if ((rad2lwrcom2switchremap == 1) && (radnum == 1)) {
                  XPLMCommandOnce(Rad2LowrCom2FnDnRemapableCmd);
              } else {
                  XPLMCommandOnce(Com2StbyFineDn);
@@ -1843,9 +1846,9 @@ void process_lower_com2_switch()
        if(testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
          locom2dbnccorinc[radnum]++;
          if (locom2dbnccorinc[radnum] > radspeed) {
-             if ((rad1lwrcom2switchremap == 1) && (radnum == 1)) {
+             if ((rad1lwrcom2switchremap == 1) && (radnum == 0)) {
                  XPLMCommandOnce(Rad1LowrCom2CrsUpRemapableCmd);
-             } else if ((rad2lwrcom2switchremap == 1) && (radnum == 0)) {
+             } else if ((rad2lwrcom2switchremap == 1) && (radnum == 1)) {
                  XPLMCommandOnce(Rad2LowrCom2CrsUpRemapableCmd);
              } else {
                  XPLMCommandOnce(Com2StbyCorseUp);
@@ -1856,9 +1859,9 @@ void process_lower_com2_switch()
        if(testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
          locom2dbnccordec[radnum]++;
          if (locom2dbnccordec[radnum] > radspeed) {
-             if ((rad1lwrcom2switchremap == 1) && (radnum == 1)) {
+             if ((rad1lwrcom2switchremap == 1) && (radnum == 0)) {
                  XPLMCommandOnce(Rad1LowrCom2CrsDnRemapableCmd);
-             } else if ((rad2lwrcom2switchremap == 1) && (radnum == 0)) {
+             } else if ((rad2lwrcom2switchremap == 1) && (radnum == 1)) {
                  XPLMCommandOnce(Rad2LowrCom2CrsDnRemapableCmd);
              } else {
                  XPLMCommandOnce(Com2StbyCorseDn);
@@ -1867,9 +1870,9 @@ void process_lower_com2_switch()
          }
        }
        if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-           if ((rad1lwrcom2actstbybtnremap == 1) && (radnum == 1)) {
+           if ((rad1lwrcom2actstbybtnremap == 1) && (radnum == 0)) {
                XPLMCommandOnce(Rad1LowrCom2ActStbyRemapableCmd);
-           } else if ((rad2lwrcom2actstbybtnremap == 1) && (radnum == 0)) {
+           } else if ((rad2lwrcom2actstbybtnremap == 1) && (radnum == 1)) {
                XPLMCommandOnce(Rad2LowrCom2ActStbyRemapableCmd);
            } else {
                XPLMCommandOnce(Com2ActStby);
@@ -1896,9 +1899,9 @@ void process_lower_nav1_switch()
             if(xpanelsfnbutton == 1) {
               XPLMCommandOnce(Obs1Up);
             } else {
-                if ((rad1lwrnav1switchremap == 1) && (radnum == 1)) {
+                if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1LowrNav1FnUpRemapableCmd);
-                } else if ((rad2lwrnav1switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2LowrNav1FnUpRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav1StbyFineUp);
@@ -1913,9 +1916,9 @@ void process_lower_nav1_switch()
             if(xpanelsfnbutton == 1) {
               XPLMCommandOnce(Obs1Down);
             } else {
-                if ((rad1lwrnav1switchremap == 1) && (radnum == 1)) {
+                if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1LowrNav1FnDnRemapableCmd);
-                } else if ((rad2lwrnav1switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2LowrNav1FnDnRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav1StbyFineDn);
@@ -1934,9 +1937,9 @@ void process_lower_nav1_switch()
                 --radn;
               }
             } else {
-                if ((rad1lwrnav1switchremap == 1) && (radnum == 1)) {
+                if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1LowrNav1CrsUpRemapableCmd);
-                } else if ((rad2lwrnav1switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2LowrNav1CrsUpRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav1StbyCorseUp);
@@ -1955,9 +1958,9 @@ void process_lower_nav1_switch()
                 --radn;
               }
             } else {
-                if ((rad1lwrnav1switchremap == 1) && (radnum == 1)) {
+                if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1LowrNav1CrsDnRemapableCmd);
-                } else if ((rad2lwrnav1switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2LowrNav1CrsDnRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav1StbyCorseDn);
@@ -1967,9 +1970,9 @@ void process_lower_nav1_switch()
           }
         }
         if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-            if ((rad1lwrnav1actstbybtnremap == 1) && (radnum == 1)) {
+            if ((rad1lwrnav1actstbybtnremap == 1) && (radnum == 0)) {
                 XPLMCommandOnce(Rad1LowrNav1ActStbyRemapableCmd);
-            } else if ((rad2lwrnav1actstbybtnremap == 1) && (radnum == 0)) {
+            } else if ((rad2lwrnav1actstbybtnremap == 1) && (radnum == 1)) {
                 XPLMCommandOnce(Rad2LowrNav1ActStbyRemapableCmd);
             } else {
                XPLMCommandOnce(Nav1ActStby);
@@ -1995,9 +1998,9 @@ void process_lower_nav2_switch()
             if(xpanelsfnbutton == 1) {
               XPLMCommandOnce(Obs2Up);
             } else {
-                if ((rad1lwrnav2switchremap == 1) && (radnum == 1)) {
+                if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1LowrNav2FnUpRemapableCmd);
-                } else if ((rad2lwrnav2switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2lwrnav2switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2LowrNav2FnUpRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav2StbyFineUp);
@@ -2012,9 +2015,9 @@ void process_lower_nav2_switch()
             if(xpanelsfnbutton == 1) {
               XPLMCommandOnce(Obs2Down);
             } else {
-                if ((rad1lwrnav2switchremap == 1) && (radnum == 1)) {
+                if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1LowrNav2FnDnRemapableCmd);
-                } else if ((rad2lwrnav2switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2lwrnav2switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2LowrNav2FnDnRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav2StbyFineDn);
@@ -2033,9 +2036,9 @@ void process_lower_nav2_switch()
                 --radn;
               }
             } else {
-                if ((rad1lwrnav2switchremap == 1) && (radnum == 1)) {
+                if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1LowrNav2CrsUpRemapableCmd);
-                } else if ((rad2lwrnav2switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2lwrnav2switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2LowrNav2CrsUpRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav2StbyCorseUp);
@@ -2054,9 +2057,9 @@ void process_lower_nav2_switch()
                 --radn;
               }
             } else {
-                if ((rad1lwrnav2switchremap == 1) && (radnum == 1)) {
+                if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
                     XPLMCommandOnce(Rad1LowrNav2CrsDnRemapableCmd);
-                } else if ((rad2lwrnav2switchremap == 1) && (radnum == 0)) {
+                } else if ((rad2lwrnav2switchremap == 1) && (radnum == 1)) {
                     XPLMCommandOnce(Rad2LowrNav2CrsDnRemapableCmd);
                 } else {
                     XPLMCommandOnce(Nav2StbyCorseDn);
@@ -2066,9 +2069,9 @@ void process_lower_nav2_switch()
           }
         }
         if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
-            if ((rad1lwrnav2actstbybtnremap == 1) && (radnum == 1)) {
+            if ((rad1lwrnav2actstbybtnremap == 1) && (radnum == 0)) {
                 XPLMCommandOnce(Rad1LowrNav2ActStbyRemapableCmd);
-            } else if ((rad2lwrnav2actstbybtnremap == 1) && (radnum == 0)) {
+            } else if ((rad2lwrnav2actstbybtnremap == 1) && (radnum == 1)) {
                 XPLMCommandOnce(Rad2LowrNav2ActStbyRemapableCmd);
             } else {
                XPLMCommandOnce(Nav2ActStby);
