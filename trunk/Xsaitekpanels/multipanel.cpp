@@ -595,6 +595,47 @@ void process_ap_master_switch()
                 btnleds |= (1<<0);
                 break;
         }
+
+       } else if (apbuttonremap == 1) {
+             if (testbit(multibuf, AP_MASTER_BUTTON)) {
+                 XPLMCommandOnce(x737mcp_cmd_a_toggle);
+                 lastappos = 1;
+             }
+             if (aplightremap == 1) {
+                 switch(XPLMGetDatai(ApLightRemapableData)){
+                   case 0:
+                     btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                     break;
+                   case 1:
+                 if (flashon == 1) {
+                       btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                 }else{
+                       btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                 }
+                     break;
+                   case 2:
+                     btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                     break;
+                 }
+             } else {
+                 switch(XPLMGetDatai(ApMstrStat)){
+                   case 0:
+                     btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                     break;
+                   case 1:
+                 if (flashon == 1) {
+                       btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                 }else{
+                       btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                 }
+                     break;
+                   case 2:
+                     btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                     break;
+                 }
+             }
+
+
     } else {
         if (appushed == 0) {
           switch(XPLMGetDatai(ApMstrStat)){
@@ -1030,6 +1071,48 @@ void process_alt_button()
                 btnleds &= ~(1<<4);
                 break;
         }
+
+     } else if (altbuttonremap == 1) {
+            if (multires > 0) {
+                if (testbit(multibuf, ALT_BUTTON)) {
+                    XPLMCommandOnce(AltButtonRemapableCmd);
+                    lastappos = 1;
+                }
+            }
+            if (altlightremap == 1) {
+                switch(XPLMGetDatai(AltLightRemapableData)){
+                  case 2:
+                        btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                        break;
+                      case 1:
+                    if (flashon == 1) {
+                          btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                    }else{
+                          btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                    }
+                        break;
+                      case 0:
+                        btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                        break;
+                }
+            } else {
+                switch(XPLMGetDatai(ApAltStat)){
+                  case 2:
+                        btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                        break;
+                      case 1:
+                    if (flashon == 1) {
+                          btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                    }else{
+                          btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                    }
+                        break;
+                      case 0:
+                        btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                        break;
+                }
+            }
+
 
 
 
