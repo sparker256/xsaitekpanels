@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.07b1   ***************
-// ****** Jan 25 2013   **************
+// ******** ver 2.07   ***************
+// ****** Jan 27 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -658,10 +658,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels v2.07b1\n");
+  XPLMDebugString("Xsaitekpanels v2.07\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.07b1");
+  strcpy(outName, "Xsaitekpanels v2.07");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -811,7 +811,7 @@ PLUGIN_API int XPluginStart(char *		outName,
   FlapsDn = XPLMFindCommand("sim/flight_controls/flaps_down");
   FlapsUp = XPLMFindCommand("sim/flight_controls/flaps_up");
 
-  XpanelsFnButtonCommand = XPLMCreateCommand("xplugins/xsaitekpanels/x_panels_fn_button","Xpanels Fn Button");
+  XpanelsFnButtonCommand = XPLMCreateCommand("bgood/xsaitekpanels/x_panels_fn_button","Xpanels Fn Button");
 
 
 // **************** Find Multi Panel Data Ref ********************
@@ -1096,6 +1096,9 @@ PLUGIN_API int XPluginStart(char *		outName,
   }
 
   bipcnt = biptmpcnt;
+
+  sprintf(buf, "Xsaitekpanels found: %d Switch  %d Radio  %d Multi  %d BIP Panels\n", switchcnt, radcnt, multicnt, bipcnt);
+  XPLMDebugString(buf);
 
   // * Register our callback for every loop. Positive intervals
   // * are in seconds, negative are the negative of sim frames.  Zero
