@@ -675,6 +675,51 @@ void process_hdg_button()
                 btnleds &= ~(1<<1);
                 break;
         }
+
+    } else if (hdgbuttonremap == 1) {
+            if (multires > 0) {
+                if (testbit(multibuf, HDG_BUTTON)) {
+                    XPLMCommandOnce(HdgButtonRemapableCmd);
+                    lastappos = 1;
+                }
+            }
+            if (hdglightremap == 1) {
+                switch(XPLMGetDatai(HdgLightRemapableData)){
+                  case 2:
+                    btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
+                    break;
+                  case 1:
+                    if (flashon == 1) {
+                      btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
+                }else{
+                      btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+                }
+                    break;
+                  case 0:
+                    btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+                    break;
+                }
+            } else {
+                switch(XPLMGetDatai(ApHdgStat)){
+                  case 2:
+                    btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
+                    break;
+                  case 1:
+                    if (flashon == 1) {
+                      btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
+                }else{
+                      btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+                }
+                    break;
+                  case 0:
+                    btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+                    break;
+                }
+            }
+
+
+
+
     } else {
         if (multires > 0) {
           if(testbit(multibuf,HDG_BUTTON)) {
@@ -697,7 +742,7 @@ void process_hdg_button()
           case 1:
             if (flashon == 1) {
               btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
-	    }else{   
+        }else{
               btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
 	    }
             break;
@@ -780,22 +825,42 @@ void process_nav_button()
              lastappos = 1;
           }
         }
-
-        switch(XPLMGetDatai(ApNavStat)){
-          case 2:
-            btnleds |= (1<<2);   // * set bit 2 in btnleds to 1 *
-            break;
-          case 1:
-            if (flashon == 1) {
-              btnleds |= (1<<2);   // * set bit 1 in btnleds to 1 *
-            }else{
-              btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+        if (navlightremap == 1) {
+            switch(XPLMGetDatai(NavLightRemapableData)) {
+              case 2:
+                btnleds |= (1<<2);   // * set bit 2 in btnleds to 1 *
+                break;
+              case 1:
+                if (flashon == 1) {
+                  btnleds |= (1<<2);   // * set bit 1 in btnleds to 1 *
+                }else{
+                  btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                }
+                break;
+              case 0:
+                btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                break;
             }
-            break;
-          case 0:
-            btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
-            break;
+        } else {
+            switch(XPLMGetDatai(ApNavStat)){
+              case 2:
+                btnleds |= (1<<2);   // * set bit 2 in btnleds to 1 *
+                break;
+              case 1:
+                if (flashon == 1) {
+                  btnleds |= (1<<2);   // * set bit 1 in btnleds to 1 *
+                }else{
+                  btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                }
+                break;
+              case 0:
+                btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                break;
+            }
         }
+
+
+
 
 
     } else {
@@ -860,6 +925,54 @@ void process_ias_button()
                  btnleds &= ~(1<<3);
                  break;
          }
+
+       } else if (iasbuttonremap == 1) {
+              if (multires > 0) {
+                  if (testbit(multibuf, IAS_BUTTON)) {
+                      XPLMCommandOnce(IasButtonRemapableCmd);
+                      lastappos = 1;
+
+                  }
+              }
+              if (iaslightremap == 1) {
+                  switch(XPLMGetDatai(IasLightRemapableData)){
+                    case 2:
+                      btnleds |= (1<<3);   // * set bit 3 in btnleds to 1 *
+                      break;
+                    case 1:
+                      if (flashon == 1) {
+                        btnleds |= (1<<3);   // * set bit 3 in btnleds to 1 *
+                      }
+                      if (flashon == 0) {
+                        btnleds &= ~(1<<3);   // * clear bit 3 in btnleds to 0 *
+                      }
+                      break;
+                    case 0:
+                      btnleds &= ~(1<<3);   // * clear bit 3 in btnleds to 0 *
+                      break;
+                  }
+              } else {
+                  switch(XPLMGetDatai(ApIasStat)){
+                    case 2:
+                      btnleds |= (1<<3);   // * set bit 3 in btnleds to 1 *
+                      break;
+                    case 1:
+                      if (flashon == 1) {
+                        btnleds |= (1<<3);   // * set bit 3 in btnleds to 1 *
+                      }
+                      if (flashon == 0) {
+                        btnleds &= ~(1<<3);   // * clear bit 3 in btnleds to 0 *
+                      }
+                      break;
+                    case 0:
+                      btnleds &= ~(1<<3);   // * clear bit 3 in btnleds to 0 *
+                      break;
+                  }
+              }
+
+
+
+
      } else {
         if (multires > 0) {
           if(testbit(multibuf,IAS_BUTTON)) {
@@ -917,6 +1030,9 @@ void process_alt_button()
                 btnleds &= ~(1<<4);
                 break;
         }
+
+
+
     } else {
         if (multires > 0) {
           if(testbit(multibuf,ALT_BUTTON)) {
@@ -973,6 +1089,52 @@ void process_vs_button()
                 }
                 break;
         }
+
+    } else if (vsbuttonremap == 1) {
+            if (multires > 0) {
+                if (testbit(multibuf, VS_BUTTON)) {
+                    XPLMCommandOnce(AprButtonRemapableCmd);
+                    lastappos = 1;
+                }
+            }
+            if (vslightremap == 1) {
+                switch (XPLMGetDatai(VsLightRemapableData)) {
+                    case 2:
+                        btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+                    case 1:
+                        if (flashon == 1) {
+                              btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+                        }else{
+                              btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
+                        }
+                        break;
+                case 0:
+                  btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                  break;
+                }
+            } else {
+                switch (XPLMGetDatai(x737mcp_vvi_led)) {
+                    case 1:
+                        btnleds |= (1<<5);
+                        break;
+                    case 0:
+                        if (XPLMGetDatai(x737mcp_vvi_armed_led)) {
+                            if (flashon == 0) {
+                                btnleds |= (1<<5);
+                            } else {
+                                btnleds &= ~(1<<5);
+                            }
+                        } else {
+                            btnleds &= ~(1<<5);
+                        }
+                        break;
+                }
+            }
+
+
+
+
+
     } else {
         if (multires > 0) {
           if(testbit(multibuf,VS_BUTTON)) {
@@ -1027,21 +1189,40 @@ void process_apr_button()
              lastappos = 1;
           }
         }
-        switch(XPLMGetDatai(ApAprStat)){
-          case 2:
-            btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
-            break;
-          case 1:
-            if (flashon == 1) {
-              btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
-            }else{
-              btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+        if (aprlightremap == 1) {
+            switch(XPLMGetDatai(AprLightRemapableData)){
+              case 2:
+                btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
+                break;
+              case 1:
+                if (flashon == 1) {
+                  btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
+                }else{
+                  btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                }
+                break;
+              case 0:
+                btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                break;
             }
-            break;
-          case 0:
-            btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
-            break;
+        } else {
+            switch(XPLMGetDatai(ApAprStat)){
+              case 2:
+                btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
+                break;
+              case 1:
+                if (flashon == 1) {
+                  btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
+                }else{
+                  btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                }
+                break;
+              case 0:
+                btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                break;
+            }
         }
+
 
     } else {
         if (multires > 0) {
@@ -1084,21 +1265,43 @@ void process_rev_button()
             lastappos = 1;
           }
         }
-	switch(XPLMGetDatai(ApRevStat)){
-	  case 2:
-            btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
-            break;
-          case 1:
-	    if (flashon == 1) {
-              btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
-	    }else{    
-              btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
-	    }
-            break;
-          case 0:
-            btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
-            break;
-	} 
+        if (revlightremap == 1) {
+            switch(XPLMGetDatai(RevLightRemapableData)){
+              case 2:
+                    btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
+                    break;
+                  case 1:
+                if (flashon == 1) {
+                      btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
+                }else{
+                      btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
+                }
+                    break;
+                  case 0:
+                    btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
+                    break;
+            }
+        } else {
+            switch(XPLMGetDatai(ApRevStat)){
+              case 2:
+                    btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
+                    break;
+                  case 1:
+                if (flashon == 1) {
+                      btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
+                }else{
+                      btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
+                }
+                    break;
+                  case 0:
+                    btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
+                    break;
+            }
+        }
+
+
+
+
     } else {
 
         if (multires > 0) {
