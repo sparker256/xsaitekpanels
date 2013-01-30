@@ -578,9 +578,9 @@ void process_ap_master_switch()
             }
         }
 
-        if (appushed == 1){
+        if (appushed == 1) {
            aploop++;
-            if (aploop == 50){
+            if (aploop == 50) {
                appushed = 0;
                aploop = 0;
             }
@@ -588,107 +588,107 @@ void process_ap_master_switch()
         }
 
         switch (XPLMGetDatai(x737mcp_cmd_a_led)) {
-            case 0:
-                btnleds &= ~(1<<0);
-                break;
-            case 1:
-                btnleds |= (1<<0);
-                break;
+        case 0:
+            btnleds &= ~(1<<0);
+            break;
+        case 1:
+            btnleds |= (1<<0);
+            break;
         }
 
-       } else if (apbuttonremap == 1) {
-             if (testbit(multibuf, AP_MASTER_BUTTON)) {
-                 XPLMCommandOnce(x737mcp_cmd_a_toggle);
-                 lastappos = 1;
-             }
-             if (aplightremap == 1) {
-                 switch(XPLMGetDatai(ApLightRemapableData)){
-                   case 0:
-                     btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
-                     break;
-                   case 1:
-                 if (flashon == 1) {
-                       btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
-                 }else{
-                       btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
-                 }
-                     break;
-                   case 2:
-                     btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
-                     break;
-                 }
-             } else {
-                 switch(XPLMGetDatai(ApMstrStat)){
-                   case 0:
-                     btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
-                     break;
-                   case 1:
-                 if (flashon == 1) {
-                       btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
-                 }else{
-                       btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
-                 }
-                     break;
-                   case 2:
-                     btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
-                     break;
-                 }
-             }
+    } else if (apbuttonremap == 1) {
+        if (testbit(multibuf, AP_MASTER_BUTTON)) {
+            XPLMCommandOnce(x737mcp_cmd_a_toggle);
+            lastappos = 1;
+        }
+        if (aplightremap == 1) {
+            switch(XPLMGetDatai(ApLightRemapableData)){
+            case 0:
+                btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                break;
+            case 1:
+                if (flashon == 1) {
+                    btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                } else {
+                    btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                }
+                break;
+            case 2:
+                btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                break;
+            }
+        } else {
+            switch(XPLMGetDatai(ApMstrStat)) {
+            case 0:
+                btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                break;
+            case 1:
+                if (flashon == 1) {
+                    btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                } else {
+                    btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                }
+                break;
+            case 2:
+                btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                break;
+            }
+        }
 
 
     } else {
         if (appushed == 0) {
           switch(XPLMGetDatai(ApMstrStat)){
-            case 0:
-             if(testbit(multibuf, AP_MASTER_BUTTON)) {
-                XPLMSetDatai(ApMstrStat, 1);
-                appushed = 1;
-                lastappos = 1;
-              }
-              break;
-            case 1:
-             if(testbit(multibuf, AP_MASTER_BUTTON)) {
-                 if (lastappos == 1){
-                   XPLMSetDatai(ApMstrStat, 2);
-                   appushed = 1;
-                 }
-                 if (lastappos == 2){
-                     XPLMSetDatai(ApMstrStat, 0);
-                     appushed = 1;
-                 }
-              }
-              break;
-            case 2:
+          case 0:
               if(testbit(multibuf, AP_MASTER_BUTTON)) {
-                 XPLMSetDatai(ApMstrStat, 1);
-                 appushed = 1;
-                 lastappos = 2;
+                  XPLMSetDatai(ApMstrStat, 1);
+                  appushed = 1;
+                  lastappos = 1;
+              }
+              break;
+          case 1:
+              if(testbit(multibuf, AP_MASTER_BUTTON)) {
+                  if (lastappos == 1) {
+                      XPLMSetDatai(ApMstrStat, 2);
+                      appushed = 1;
+                  }
+                  if (lastappos == 2) {
+                      XPLMSetDatai(ApMstrStat, 0);
+                      appushed = 1;
+                  }
+              }
+              break;
+          case 2:
+              if(testbit(multibuf, AP_MASTER_BUTTON)) {
+                  XPLMSetDatai(ApMstrStat, 1);
+                  appushed = 1;
+                  lastappos = 2;
               }
               break;
           }
         }
 
-        if (appushed == 1){
-           aploop++;
-            if (aploop == 50){
-               appushed = 0;
-               aploop = 0;
+        if (appushed == 1) {
+            aploop++;
+            if (aploop == 50) {
+                appushed = 0;
+                aploop = 0;
             }
 
         }
         
-        switch(XPLMGetDatai(ApMstrStat)){
-          case 0:
+        switch(XPLMGetDatai(ApMstrStat)) {
+        case 0:
             btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
             break;
-          case 1:
-	    if (flashon == 1) {
-              btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
-	    }else{   
-              btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
-	    }
+        case 1:
+            if (flashon == 1) {
+                btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+            } else {
+                btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+            }
             break;
-          case 2:
+        case 2:
             btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
             break;
         }
