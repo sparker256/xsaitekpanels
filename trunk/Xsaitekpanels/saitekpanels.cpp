@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.07   ***************
-// ****** Jan 29 2013   **************
+// ******** ver 2.08   ***************
+// ****** Feb 17 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -35,8 +35,8 @@
 using namespace std;
 
 // ************* Radio Panel Command Ref ****************
-XPLMCommandRef Com1StbyFineDn = NULL, Com1StbyFineUp = NULL, Com1StbyCorseDn = NULL, Com1StbyCorseUp = NULL;
-XPLMCommandRef Com2StbyFineDn = NULL, Com2StbyFineUp = NULL, Com2StbyCorseDn = NULL, Com2StbyCorseUp = NULL;
+XPLMCommandRef  Com1StbyFineDn = NULL, Com1StbyFineUp = NULL, Com1StbyCorseDn = NULL, Com1StbyCorseUp = NULL;
+XPLMCommandRef  Com2StbyFineDn = NULL, Com2StbyFineUp = NULL, Com2StbyCorseDn = NULL, Com2StbyCorseUp = NULL;
 XPLMCommandRef	Nav1StbyFineDn = NULL, Nav1StbyFineUp = NULL, Nav1StbyCorseDn = NULL, Nav1StbyCorseUp = NULL;
 XPLMCommandRef	Nav2StbyFineDn = NULL, Nav2StbyFineUp = NULL, Nav2StbyCorseDn = NULL, Nav2StbyCorseUp = NULL;
 
@@ -658,10 +658,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels v2.07\n");
+  XPLMDebugString("Xsaitekpanels v2.08\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.07");
+  strcpy(outName, "Xsaitekpanels v2.08");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -1097,7 +1097,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   bipcnt = biptmpcnt;
 
-  sprintf(buf, "Xsaitekpanels found: %d Switch  %d Radio  %d Multi  %d BIP Panels\n", switchcnt, radcnt, multicnt, bipcnt);
+  sprintf(buf, "Xsaitekpanels: found %d Switch  %d Radio  %d Multi  %d BIP Panels\n", switchcnt, radcnt, multicnt, bipcnt);
   XPLMDebugString(buf);
 
   // * Register our callback for every loop. Positive intervals
