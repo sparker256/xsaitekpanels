@@ -32,8 +32,8 @@ string convert_Mac_Path(string in_path) {
     int count = 0;
     for (int i = 0; i < in_path.size(); i++)
        if (in_path[i] == ':') count++;
-            sprintf(seperator_number_buffer, "Xsaitekpanels: How many path seperators are in the path = %d\n", count);
-            XPLMDebugString(seperator_number_buffer);
+            // sprintf(seperator_number_buffer, "Xsaitekpanels: How many path seperators are in the path = %d\n", count);
+            // XPLMDebugString(seperator_number_buffer);
 
     size_t found;
     int n = count;
@@ -43,10 +43,12 @@ string convert_Mac_Path(string in_path) {
        in_path.replace(found, 1,"/");
        --n;
     }
+
     std::size_t pos2 = in_path.find("/Aircraft");
     std::string tmp_in_path = in_path.substr (pos2);
     tmp_in_path.insert(0,".");
     in_path = tmp_in_path;
+
     return in_path;
 }
 
@@ -61,6 +63,7 @@ void process_read_ini_file()
     iniDefaultPluginPath = "./Resources/plugins/Xsaitekpanels/xsaitekpanels.ini";
     //defaultConfigFileName = "xsaitekpanels.ini";
     int Index2;
+    string version;
 
     /* set defaults */
 
@@ -208,7 +211,10 @@ void process_read_ini_file()
     }
 
     // get xsaitekpanels.ini version
-    mag_off_switch_on = getOptionToString("mag_off_switch_on_cmd");
+    version = getOptionToString("Version");
+    XPLMDebugString("\nXsaitekpanels: xsaitekpanels.ini is version   ");
+    XPLMDebugString(version.c_str());
+    XPLMDebugString("\n");
 
     // bat alt normal alt bat cessna
     bataltinverse = getOptionToInt("Bat Alt inverse");
