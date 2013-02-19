@@ -224,7 +224,7 @@ bool ReadConfigFile(string PlaneICAO)
 
   #if APL && __MACH__
       std::string mac_converted_bip_path = convert_Mac_Bip_Path(xpsbipd2b_path_name);
-      XPLMDebugString("\nmac_converted_bip_path is\n");
+      XPLMDebugString("\nXsaitekpanels: mac_converted_bip_path is\n");
       XPLMDebugString(mac_converted_bip_path.c_str());
       XPLMDebugString("\n");
       xpsbipd2b_path_name = mac_converted_bip_path;
