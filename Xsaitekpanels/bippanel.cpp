@@ -242,7 +242,7 @@ bool ReadConfigFile(string PlaneICAO)
 
       xpsbipd2b_path_name.append("D2B_config.txt");
 
-      XPLMDebugString("\nXsaitekpaels: The full path for D2B_config.txt in the current aircraft folder is\n");
+      XPLMDebugString("\nXsaitekpanels: The full path for D2B_config.txt in the current aircraft folder is\n");
       XPLMDebugString(xpsbipd2b_path_name.c_str());
       XPLMDebugString("\n");
 
