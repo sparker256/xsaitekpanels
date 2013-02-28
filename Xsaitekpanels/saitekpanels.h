@@ -253,6 +253,12 @@ extern XPLMCommandRef NavButtonRemapableCmd, IasButtonRemapableCmd;
 extern XPLMCommandRef AltButtonRemapableCmd, VsButtonRemapableCmd;
 extern XPLMCommandRef AprButtonRemapableCmd, RevButtonRemapableCmd;
 
+extern XPLMCommandRef AltSwitchUpRemapableCmd, AltSwitchDnRemapableCmd;
+extern XPLMCommandRef VsSwitchUpRemapableCmd, VsSwitchDnRemapableCmd;
+extern XPLMCommandRef IasSwitchUpRemapableCmd, IasSwitchDnRemapableCmd;
+extern XPLMCommandRef HdgSwitchUpRemapableCmd, HdgSwitchDnRemapableCmd;
+extern XPLMCommandRef CrsSwitchUpRemapableCmd, CrsSwitchDnRemapableCmd;
+
 extern XPLMCommandRef ApVsUpRemapableCmd, ApVsDnRemapableCmd;
 extern XPLMCommandRef TrimUpRemapableCmd, TrimDnRemapableCmd;
 
@@ -308,6 +314,10 @@ extern int aplightremap, hdglightremap, navlightremap, iaslightremap;
 extern int altlightremap, vslightremap, aprlightremap, revlightremap;
 
 extern int apvsupremap, apvsdnremap;
+
+extern int altswitchremap, vsswitchremap, iasswitchremap;
+extern int hdgswitchremap, crsswitchremap;
+
 extern int trimupremap, trimdnremap;
 
 extern int xpanelsfnbutton;
@@ -319,6 +329,12 @@ extern string alt_button_remapable, vs_button_remapable, apr_button_remapable, r
 
 extern string ap_light_remapable, hdg_light_remapable, nav_light_remapable, ias_light_remapable;
 extern string alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
+
+extern string alt_switch_up_remapable, alt_switch_dn_remapable;
+extern string vs_switch_up_remapable, vs_switch_dn_remapable;
+extern string ias_switch_up_remapable, ias_switch_dn_remapable;
+extern string hdg_switch_up_remapable, hdg_switch_dn_remapable;
+extern string crs_switch_up_remapable, crs_switch_dn_remapable;
 
 extern string ap_vs_up_remapable, ap_vs_dn_remapable;
 extern string trim_up_remapable, trim_dn_remapable;

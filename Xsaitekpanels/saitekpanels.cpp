@@ -195,6 +195,15 @@ XPLMCommandRef ApButtonRemapableCmd = NULL, HdgButtonRemapableCmd = NULL;
 XPLMCommandRef NavButtonRemapableCmd = NULL, IasButtonRemapableCmd = NULL;
 XPLMCommandRef AltButtonRemapableCmd = NULL, VsButtonRemapableCmd = NULL;
 XPLMCommandRef AprButtonRemapableCmd = NULL, RevButtonRemapableCmd = NULL;
+
+XPLMCommandRef AltSwitchUpRemapableCmd = NULL, AltSwitchDnRemapableCmd = NULL;
+XPLMCommandRef VsSwitchUpRemapableCmd = NULL, VsSwitchDnRemapableCmd = NULL;
+XPLMCommandRef IasSwitchUpRemapableCmd = NULL, IasSwitchDnRemapableCmd = NULL;
+XPLMCommandRef HdgSwitchUpRemapableCmd = NULL, HdgSwitchDnRemapableCmd = NULL;
+XPLMCommandRef CrsSwitchUpRemapableCmd = NULL, CrsSwitchDnRemapableCmd = NULL;
+
+
+
 XPLMCommandRef ApVsUpRemapableCmd = NULL, ApVsDnRemapableCmd = NULL;
 XPLMCommandRef TrimUpRemapableCmd = NULL, TrimDnRemapableCmd = NULL;
 
@@ -482,6 +491,8 @@ int aplightremap, hdglightremap, navlightremap, iaslightremap;
 int altlightremap, vslightremap, aprlightremap, revlightremap;
 
 int apvsupremap, apvsdnremap;
+int altswitchremap, vsswitchremap, iasswitchremap;
+int hdgswitchremap, crsswitchremap;
 int trimupremap, trimdnremap;
 
 int xpanelsfnbutton = 0, xpanelscrstoggle = 0;
@@ -497,7 +508,18 @@ string alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_butt
 string ap_light_remapable, hdg_light_remapable, nav_light_remapable, ias_light_remapable;
 string alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
 
+string alt_switch_up_remapable, alt_switch_dn_remapable;
+string vs_switch_up_remapable, vs_switch_dn_remapable;
+string ias_switch_up_remapable, ias_switch_dn_remapable;
+string hdg_switch_up_remapable, hdg_switch_dn_remapable;
+string crs_switch_up_remapable, crs_switch_dn_remapable;
+
 string ap_vs_up_remapable, ap_vs_dn_remapable;
+
+
+
+
+
 string trim_up_remapable, trim_dn_remapable;
 
 char MultiSpeedText[50][200] = {
