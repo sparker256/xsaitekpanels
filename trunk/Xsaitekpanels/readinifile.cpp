@@ -145,8 +145,15 @@ void process_read_ini_file()
     aprlightremap           = 0;
     revlightremap           = 0;
 
+    altswitchremap          = 0;
+    vsswitchremap           = 0;
+    iasswitchremap          = 0;
+    hdgswitchremap          = 0;
+    crsswitchremap          = 0;
+
     apvsupremap             = 0;
     apvsdnremap             = 0;
+
     trimupremap             = 0;
     trimdnremap             = 0;
 
@@ -1229,24 +1236,55 @@ void process_read_ini_file()
          RevLightRemapableData   = XPLMFindDataRef(rev_light_remapable.c_str());
     }
 
-    // ap vs up - remapable
-    apvsupremap = getOptionToInt("Ap Vs Up remapable");
-    if (apvsupremap == 1) {
-         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
-        // ApVsUp
-         ap_vs_up_remapable = getOptionToString("ap_vs_up_remapable_cmd");
-         ApVsUpRemapableCmd   = XPLMFindCommand(ap_vs_up_remapable.c_str());
+    // alt switch - remapable
+    altswitchremap = getOptionToInt("Alt Switch remapable");
+    if (altswitchremap == 1) {
+       alt_switch_up_remapable = getOptionToString("alt_switch_up_remapable_cmd");
+       AltSwitchUpRemapableCmd   = XPLMFindCommand(alt_switch_up_remapable.c_str());
+       alt_switch_dn_remapable = getOptionToString("alt_switch_dn_remapable_cmd");
+       AltSwitchDnRemapableCmd   = XPLMFindCommand(alt_switch_dn_remapable.c_str());
+
     }
 
-    // ap vs dn - remapable
-    apvsdnremap = getOptionToInt("Ap Vs Dn remapable");
-    if (apvsdnremap == 1) {
-         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
-        // ApVsUp
-         ap_vs_dn_remapable = getOptionToString("ap_vs_dn_remapable_cmd");
-         ApVsDnRemapableCmd   = XPLMFindCommand(ap_vs_dn_remapable.c_str());
+    // vs switch - remapable
+    vsswitchremap = getOptionToInt("Vs Switch remapable");
+    if (vsswitchremap == 1) {
+       vs_switch_up_remapable = getOptionToString("vs_switch_up_remapable_cmd");
+       VsSwitchUpRemapableCmd   = XPLMFindCommand(vs_switch_up_remapable.c_str());
+       vs_switch_dn_remapable = getOptionToString("vs_switch_dn_remapable_cmd");
+       VsSwitchDnRemapableCmd   = XPLMFindCommand(vs_switch_dn_remapable.c_str());
+
     }
 
+    // ias switch - remapable
+    iasswitchremap = getOptionToInt("Ias Switch remapable");
+    if (iasswitchremap == 1) {
+       ias_switch_up_remapable = getOptionToString("ias_switch_up_remapable_cmd");
+       IasSwitchUpRemapableCmd   = XPLMFindCommand(ias_switch_up_remapable.c_str());
+       ias_switch_dn_remapable = getOptionToString("ias_switch_dn_remapable_cmd");
+       IasSwitchDnRemapableCmd   = XPLMFindCommand(ias_switch_dn_remapable.c_str());
+
+    }
+
+    // hdg switch - remapable
+    hdgswitchremap = getOptionToInt("Hdg Switch remapable");
+    if (hdgswitchremap == 1) {
+       hdg_switch_up_remapable = getOptionToString("hdg_switch_up_remapable_cmd");
+       HdgSwitchUpRemapableCmd   = XPLMFindCommand(hdg_switch_up_remapable.c_str());
+       hdg_switch_dn_remapable = getOptionToString("hdg_switch_dn_remapable_cmd");
+       HdgSwitchDnRemapableCmd   = XPLMFindCommand(hdg_switch_dn_remapable.c_str());
+
+    }
+
+    // crs switch - remapable
+    crsswitchremap = getOptionToInt("Crs Switch remapable");
+    if (crsswitchremap == 1) {
+       crs_switch_up_remapable = getOptionToString("crs_switch_up_remapable_cmd");
+       CrsSwitchUpRemapableCmd   = XPLMFindCommand(crs_switch_up_remapable.c_str());
+       crs_switch_dn_remapable = getOptionToString("crs_switch_dn_remapable_cmd");
+       CrsSwitchDnRemapableCmd   = XPLMFindCommand(crs_switch_dn_remapable.c_str());
+
+    }
 
     // trim up - remapable
     trimupremap = getOptionToInt("Trim Up remapable");
