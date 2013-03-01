@@ -549,11 +549,24 @@ void process_crs_switch()
         if(testbit(multibuf,ADJUSTMENT_UP)) {
             crsdbncinc++;
             if (crsdbncinc > multispeed) {
+                n = multimul;
                 if (xpanelsfnbutton == 1) {
-                    cur_apcrs = cur_apcrs + multimul;
+                    if (crsswitchremap == 1) {
+                        while (n>0) {
+                            XPLMCommandOnce(CrsSwitchUpRemapableCmd);
+                            --n;
+                        }
+                    } else {
+                        cur_apcrs = cur_apcrs + multimul;
+                    }
                 }
                 if(xpanelsfnbutton == 0) {
-                    cur_apcrs = cur_apcrs + 1;
+                    if (crsswitchremap == 1) {
+                        XPLMCommandOnce(CrsSwitchUpRemapableCmd);
+                    } else {
+                        cur_apcrs = cur_apcrs + 1;
+                    }
+
                 }
                 crsdbncinc = 0;
             }
@@ -562,11 +575,25 @@ void process_crs_switch()
         if(testbit(multibuf,ADJUSTMENT_DN)) {
             crsdbncdec++;
             if (crsdbncdec > multispeed) {
+                n = multimul;
                 if (xpanelsfnbutton == 1) {
-                    cur_apcrs = cur_apcrs - multimul;
+                    if (crsswitchremap == 1) {
+                        while (n>0) {
+                            XPLMCommandOnce(CrsSwitchDnRemapableCmd);
+                            --n;
+                        }
+                    } else {
+                        cur_apcrs = cur_apcrs - multimul;
+                    }
+
                 }
                 if(xpanelsfnbutton == 0) {
-                    cur_apcrs = cur_apcrs - 1;
+                    if (crsswitchremap == 1) {
+                        XPLMCommandOnce(CrsSwitchDnRemapableCmd);
+                    } else {
+                        cur_apcrs = cur_apcrs - 1;
+                    }
+
                 }
 
                 crsdbncdec = 0;

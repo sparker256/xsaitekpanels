@@ -151,8 +151,8 @@ void process_read_ini_file()
     hdgswitchremap          = 0;
     crsswitchremap          = 0;
 
-    apvsupremap             = 0;
-    apvsdnremap             = 0;
+    //apvsupremap             = 0;
+    //apvsdnremap             = 0;
 
     trimupremap             = 0;
     trimdnremap             = 0;
