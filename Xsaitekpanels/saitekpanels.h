@@ -313,7 +313,7 @@ extern int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
 extern int aplightremap, hdglightremap, navlightremap, iaslightremap;
 extern int altlightremap, vslightremap, aprlightremap, revlightremap;
 
-extern int apvsupremap, apvsdnremap;
+//extern int apvsupremap, apvsdnremap;
 
 extern int altswitchremap, vsswitchremap, iasswitchremap;
 extern int hdgswitchremap, crsswitchremap;

@@ -490,7 +490,7 @@ int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
 int aplightremap, hdglightremap, navlightremap, iaslightremap;
 int altlightremap, vslightremap, aprlightremap, revlightremap;
 
-int apvsupremap, apvsdnremap;
+//int apvsupremap, apvsdnremap;
 int altswitchremap, vsswitchremap, iasswitchremap;
 int hdgswitchremap, crsswitchremap;
 int trimupremap, trimdnremap;
