@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.09   ***************
-// ****** Feb 18 2013   **************
+// ****** Mar 03 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -204,6 +204,8 @@ XPLMCommandRef CrsSwitchUpRemapableCmd = NULL, CrsSwitchDnRemapableCmd = NULL;
 
 
 
+
+
 XPLMCommandRef ApVsUpRemapableCmd = NULL, ApVsDnRemapableCmd = NULL;
 XPLMCommandRef TrimUpRemapableCmd = NULL, TrimDnRemapableCmd = NULL;
 
@@ -215,6 +217,12 @@ XPLMDataRef ApAltStat = NULL, ApVsStat = NULL, ApAprStat = NULL, ApRevStat = NUL
 XPLMDataRef x737athr_armed = NULL, x737swBatBus = NULL, x737stbyPwr = NULL;
 XPLMDataRef ApState = NULL, ApAutThr;
 XPLMDataRef Frp = NULL, MHdg = NULL;
+
+XPLMDataRef AltSwitchRemapableData = NULL;
+XPLMDataRef VsSwitchRemapableData = NULL;
+XPLMDataRef IasSwitchRemapableData = NULL;
+XPLMDataRef HdgSwitchRemapableData = NULL;
+XPLMDataRef CrsSwitchRemapableData = NULL;
 
 XPLMDataRef ApLightRemapableData = NULL, HdgLightRemapableData = NULL;
 XPLMDataRef NavLightRemapableData = NULL, IasLightRemapableData = NULL;
@@ -513,6 +521,13 @@ string vs_switch_up_remapable, vs_switch_dn_remapable;
 string ias_switch_up_remapable, ias_switch_dn_remapable;
 string hdg_switch_up_remapable, hdg_switch_dn_remapable;
 string crs_switch_up_remapable, crs_switch_dn_remapable;
+
+string alt_switch_data_remapable;
+string vs_switch_data_remapable;
+string ias_switch_data_remapable;
+string hdg_switch_data_remapable;
+string crs_switch_data_remapable;
+
 
 string ap_vs_up_remapable, ap_vs_dn_remapable;
 
