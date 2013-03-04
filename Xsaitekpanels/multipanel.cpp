@@ -154,6 +154,11 @@ void process_alt_switch()
 {
     if(testbit(multibuf,ALT_SWITCH)) {
         multiseldis = 1;
+        if (altswitchremap == 2) {
+            upapaltf = XPLMGetDataf(AltSwitchRemapableData);
+        } else {
+            upapaltf = XPLMGetDataf(ApAlt);
+        }
         upapaltf = XPLMGetDataf(ApAlt);
         upapalt = (int)(upapaltf);
         if(testbit(multibuf,ADJUSTMENT_UP)) {
@@ -234,11 +239,17 @@ void process_alt_switch()
 
         if (loaded737 == 1) {
             XPLMSetDataf(x737mcp_alt, upapaltf);
+        } else if (altswitchremap == 2) {
+            XPLMSetDataf(AltSwitchRemapableData, upapaltf);
         } else {
             XPLMSetDataf(ApAlt, upapaltf);
         }
 
-        upapvsf = XPLMGetDataf(ApVs);
+        if (vsswitchremap == 2) {
+            upapvsf = XPLMGetDataf(VsSwitchRemapableData);
+        } else {
+            upapvsf = XPLMGetDataf(ApVs);
+        }
         upapvs = (int)(upapvsf);
         if (upapvs < 0) {
             upapvs = (upapvs * -1);
@@ -255,7 +266,11 @@ void process_vs_switch()
 {
     if(testbit(multibuf,VS_SWITCH)) {
         multiseldis = 1;
-        upapvsf = XPLMGetDataf(ApVs);
+        if (vsswitchremap == 2) {
+            upapvsf = XPLMGetDataf(VsSwitchRemapableData);
+        } else {
+            upapvsf = XPLMGetDataf(ApVs);
+        }
         upapvs = (int)(upapvsf);
         if(testbit(multibuf,ADJUSTMENT_UP)) {
             vsdbncinc++;
@@ -328,10 +343,26 @@ void process_vs_switch()
                 }
             }
         }
+
         upapvsf = upapvs;
-        XPLMSetDataf(ApVs, upapvsf);
-        upapaltf = XPLMGetDataf(ApAlt);
-        upapvsf = XPLMGetDataf(ApVs);
+        if (vsswitchremap == 2) {
+            XPLMSetDataf(VsSwitchRemapableData, upapvsf);
+        } else {
+            XPLMSetDataf(ApVs, upapvsf);
+        }
+
+        if (altswitchremap == 2) {
+            upapaltf = XPLMGetDataf(AltSwitchRemapableData);
+        } else {
+            upapaltf = XPLMGetDataf(ApAlt);
+        }
+
+        if (vsswitchremap == 2) {
+            upapvsf = XPLMGetDataf(VsSwitchRemapableData);
+        } else {
+            upapvsf = XPLMGetDataf(ApVs);
+        }
+
         upapalt = (int)(upapaltf);
         upapvs = (int)(upapvsf);
         if (upapvs < 0) {
@@ -453,7 +484,12 @@ void process_hdg_switch()
 
     if(testbit(multibuf,HDG_SWITCH)) {
         multiseldis = 3;
-        upaphdgf = XPLMGetDataf(ApHdg);
+        if (hdgswitchremap == 2) {
+            upaphdgf = XPLMGetDataf(HdgSwitchRemapableData);
+        } else {
+            upaphdgf = XPLMGetDataf(ApHdg);
+        }
+
         upaphdg = (int)(upaphdgf);
         if(testbit(multibuf,ADJUSTMENT_UP)) {
             hdgdbncinc++;
@@ -522,7 +558,12 @@ void process_hdg_switch()
                 upaphdg = 359;
             }
             upaphdgf = upaphdg;
-            XPLMSetDataf(ApHdg, upaphdgf);
+            if (hdgswitchremap == 2) {
+                XPLMSetDataf(HdgSwitchRemapableData, upaphdgf);
+            } else {
+                XPLMSetDataf(ApHdg, upaphdgf);
+            }
+
 
         }
     }
