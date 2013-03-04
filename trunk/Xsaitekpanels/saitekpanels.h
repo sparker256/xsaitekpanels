@@ -271,6 +271,12 @@ extern XPLMDataRef x737athr_armed ,x737swBatBus ,x737stbyPwr ;
 extern XPLMDataRef ApState, ApAutThr;
 extern XPLMDataRef AirspeedIsMach, Airspeed;
 
+extern XPLMDataRef AltSwitchRemapableData;
+extern XPLMDataRef VsSwitchRemapableData;
+extern XPLMDataRef IasSwitchRemapableData;
+extern XPLMDataRef HdgSwitchRemapableData;
+extern XPLMDataRef CrsSwitchRemapableData;
+
 extern XPLMDataRef ApLightRemapableData, HdgLightRemapableData;
 extern XPLMDataRef NavLightRemapableData, IasLightRemapableData;
 extern XPLMDataRef AltLightRemapableData, VsLightRemapableData;
@@ -335,6 +341,12 @@ extern string vs_switch_up_remapable, vs_switch_dn_remapable;
 extern string ias_switch_up_remapable, ias_switch_dn_remapable;
 extern string hdg_switch_up_remapable, hdg_switch_dn_remapable;
 extern string crs_switch_up_remapable, crs_switch_dn_remapable;
+
+extern string alt_switch_data_remapable;
+extern string vs_switch_data_remapable;
+extern string ias_switch_data_remapable;
+extern string hdg_switch_data_remapable;
+extern string crs_switch_data_remapable;
 
 extern string ap_vs_up_remapable, ap_vs_dn_remapable;
 extern string trim_up_remapable, trim_dn_remapable;
