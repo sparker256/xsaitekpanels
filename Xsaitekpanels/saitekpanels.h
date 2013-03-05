@@ -277,6 +277,8 @@ extern XPLMDataRef IasSwitchRemapableData;
 extern XPLMDataRef HdgSwitchRemapableData;
 extern XPLMDataRef CrsSwitchRemapableData;
 
+extern XPLMDataRef IasIsmachRemapableData;
+
 extern XPLMDataRef ApLightRemapableData, HdgLightRemapableData;
 extern XPLMDataRef NavLightRemapableData, IasLightRemapableData;
 extern XPLMDataRef AltLightRemapableData, VsLightRemapableData;
@@ -324,6 +326,8 @@ extern int altlightremap, vslightremap, aprlightremap, revlightremap;
 extern int altswitchremap, vsswitchremap, iasswitchremap;
 extern int hdgswitchremap, crsswitchremap;
 
+extern int iasismachremap, iasismachvalue;
+
 extern int trimupremap, trimdnremap;
 
 extern int xpanelsfnbutton;
@@ -341,6 +345,8 @@ extern string vs_switch_up_remapable, vs_switch_dn_remapable;
 extern string ias_switch_up_remapable, ias_switch_dn_remapable;
 extern string hdg_switch_up_remapable, hdg_switch_dn_remapable;
 extern string crs_switch_up_remapable, crs_switch_dn_remapable;
+
+extern string ias_ismach_remapable;
 
 extern string alt_switch_data_remapable;
 extern string vs_switch_data_remapable;

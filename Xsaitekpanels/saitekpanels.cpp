@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.09   ***************
-// ****** Mar 03 2013   **************
+// ****** Mar 04 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -223,6 +223,8 @@ XPLMDataRef VsSwitchRemapableData = NULL;
 XPLMDataRef IasSwitchRemapableData = NULL;
 XPLMDataRef HdgSwitchRemapableData = NULL;
 XPLMDataRef CrsSwitchRemapableData = NULL;
+
+XPLMDataRef IasIsmachRemapableData = NULL;
 
 XPLMDataRef ApLightRemapableData = NULL, HdgLightRemapableData = NULL;
 XPLMDataRef NavLightRemapableData = NULL, IasLightRemapableData = NULL;
@@ -503,6 +505,8 @@ int altswitchremap, vsswitchremap, iasswitchremap;
 int hdgswitchremap, crsswitchremap;
 int trimupremap, trimdnremap;
 
+int iasismachremap, iasismachvalue;
+
 int xpanelsfnbutton = 0, xpanelscrstoggle = 0;
 
 void CreateMultiWidget(int x1, int y1, int w, int h);
@@ -521,6 +525,8 @@ string vs_switch_up_remapable, vs_switch_dn_remapable;
 string ias_switch_up_remapable, ias_switch_dn_remapable;
 string hdg_switch_up_remapable, hdg_switch_dn_remapable;
 string crs_switch_up_remapable, crs_switch_dn_remapable;
+
+string ias_ismach_remapable;
 
 string alt_switch_data_remapable;
 string vs_switch_data_remapable;
