@@ -379,7 +379,13 @@ void process_ias_switch()
 {
     if (testbit(multibuf,IAS_SWITCH)) {
         multiseldis = 2;
-        if (XPLMGetDatai(AirspeedIsMach) == 1) {
+        if (iasismachremap == 1) {
+            if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
+                apmasf = XPLMGetDataf(IasSwitchRemapableData);
+            } else {
+                apasf = XPLMGetDataf(IasSwitchRemapableData);
+            }
+        } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
             apmasf = XPLMGetDataf(ApAs);
         } else {
             apasf = XPLMGetDataf(ApAs);
@@ -399,7 +405,13 @@ void process_ias_switch()
                         }
                     } else {
                         while (n>0) {
-                            if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                            if (iasismachremap == 1) {
+                                if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
+                                    apmasf = apmasf + .01;
+                                } else {
+                                    apas = apas + 1;
+                                }
+                            } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
                                 apmasf = apmasf + .01;
                             } else {
                                 apas = apas + 1;
@@ -415,7 +427,13 @@ void process_ias_switch()
                     } else if (iasswitchremap == 1) {
                         XPLMCommandOnce(IasSwitchUpRemapableCmd);
                     } else {
-                        if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                        if (iasismachremap == 1) {
+                            if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
+                                apmasf = apmasf + .01;
+                            } else {
+                                apas = apas + 1;
+                            }
+                        } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
                             apmasf = apmasf + .01;
                         } else {
                             apas = apas + 1;
@@ -439,7 +457,14 @@ void process_ias_switch()
                         }
                     } else {
                         while (n>0) {
-                            if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                            if (iasismachremap == 1) {
+                                if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
+                                    apmasf = apmasf - .01;
+                                } else {
+                                    apas = apas - 1;
+                                }
+
+                            } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
                                 apmasf = apmasf - .01;
                             } else {
                                 apas = apas - 1;
@@ -455,7 +480,13 @@ void process_ias_switch()
                     } else if (iasswitchremap == 1) {
                         XPLMCommandOnce(IasSwitchDnRemapableCmd);
                     } else {
-                        if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                        if (iasismachremap == 1) {
+                            if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
+                                apmasf = apmasf - .01;
+                            } else {
+                                apas = apas - 1;
+                            }
+                        } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
                             apmasf = apmasf - .01;
                         } else {
                             apas = apas - 1;
@@ -465,7 +496,17 @@ void process_ias_switch()
                 }
             }
         }
-        if (XPLMGetDatai(AirspeedIsMach) == 1) {
+        if (iasismachremap == 1) {
+            if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
+                apmas = (int)(apmasf * 100);
+                apasout = apmas;
+                XPLMSetDataf(IasSwitchRemapableData, apmasf);
+            } else {
+                apasout = apas;
+                apasf = apas;
+                XPLMSetDataf(IasSwitchRemapableData, apasf);
+            }
+        } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
             apmas = (int)(apmasf * 100);
             apasout = apmas;
             XPLMSetDataf(ApAs, apmasf);
@@ -583,10 +624,13 @@ void process_crs_switch()
         upapcrsf = XPLMGetDataf(ApCrs);
         upapcrs = (int)(upapcrsf);
 
-        //  get the appropriate course setting depending on if the toggle is down
-        cur_apcrsf = XPLMGetDataf(crs_dataref);
+        if (crsswitchremap == 1) {
+            cur_apcrsf = XPLMGetDataf(CrsSwitchRemapableData);
+        } else {
+            //  get the appropriate course setting depending on if the toggle is down
+            cur_apcrsf = XPLMGetDataf(crs_dataref);
+        }
         cur_apcrs = (int)(cur_apcrsf);
-
         if(testbit(multibuf,ADJUSTMENT_UP)) {
             crsdbncinc++;
             if (crsdbncinc > multispeed) {
@@ -650,18 +694,26 @@ void process_crs_switch()
         }
 
         cur_apcrsf = cur_apcrs;
-        XPLMSetDataf(crs_dataref, cur_apcrsf);
-
-        //  set the appropriate global based on whether the crs toggle is on
-        if( !xpanelscrstoggle ) {
-            //  toggle off - nav1
-            upapcrsf = cur_apcrsf;
-            upapcrs  = cur_apcrs;
+        if (crsswitchremap == 1) {
+            XPLMSetDataf(CrsSwitchRemapableData, cur_apcrsf);
         } else {
-            //  toggle on - nav2
-            upapcrsf2 = cur_apcrsf;
-            upapcrs2   = cur_apcrs;
-            upapcrs   = cur_apcrs;
+            XPLMSetDataf(crs_dataref, cur_apcrsf);
+        }
+
+        if (crsswitchremap == 1) {
+
+        } else {
+            //  set the appropriate global based on whether the crs toggle is on
+            if( !xpanelscrstoggle ) {
+                //  toggle off - nav1
+                upapcrsf = cur_apcrsf;
+                upapcrs  = cur_apcrs;
+            } else {
+                //  toggle on - nav2
+                upapcrsf2 = cur_apcrsf;
+                upapcrs2   = cur_apcrs;
+                upapcrs   = cur_apcrs;
+            }
         }
 
 	}

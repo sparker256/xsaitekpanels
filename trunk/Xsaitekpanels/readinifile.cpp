@@ -133,6 +133,8 @@ void process_read_ini_file()
     hdgswitchremap          = 0;
     crsswitchremap          = 0;
 
+
+
     apbuttonremap           = 0;
     hdgbuttonremap          = 0;
     navbuttonremap          = 0;
@@ -1171,6 +1173,14 @@ void process_read_ini_file()
     } else if (crsswitchremap == 2) {
         crs_switch_data_remapable = getOptionToString("crs_switch_remapable_data");
         CrsSwitchRemapableData = XPLMFindDataRef(crs_switch_data_remapable.c_str());
+    }
+
+    // ias ismach - remapable
+    iasismachremap = getOptionToInt("Ias Ismach remapable");
+    if (iasismachremap == 1) {
+        ias_ismach_remapable = getOptionToString("ias_ismach_remapable_data");
+        IasIsmachRemapableData = XPLMFindCommand(ias_ismach_remapable.c_str());
+        iasismachvalue = getOptionToInt("ias_ismach_remapable_value");
     }
 
 
