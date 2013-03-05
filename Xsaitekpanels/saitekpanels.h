@@ -442,7 +442,7 @@ extern XPLMCommandRef x737ice_wing_on, x737ice_wing_off;
 extern XPLMDataRef BatNum, GenNum, EngNum;
 extern XPLMDataRef BatArrayOnDR, IgnSwitchArray;
 extern XPLMDataRef EngnMixt, IgniterOn;
-extern XPLMDataRef BleedAirMode, AcfEnType;
+extern XPLMDataRef AcfEnType;
 
 extern XPLMDataRef CowlFlaps, CockpitLights, AntiIce;
 extern XPLMDataRef GearRetract, OnGround, LandingGearStatus;
