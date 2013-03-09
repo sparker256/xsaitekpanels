@@ -284,6 +284,11 @@ extern XPLMDataRef NavLightRemapableData, IasLightRemapableData;
 extern XPLMDataRef AltLightRemapableData, VsLightRemapableData;
 extern XPLMDataRef AprLightRemapableData, RevLightRemapableData;
 
+extern XPLMDataRef ApLightFlashRemapableData, HdgLightFlashRemapableData;
+extern XPLMDataRef NavLightFlashRemapableData, IasLightFlashRemapableData;
+extern XPLMDataRef AltLightFlashRemapableData, VsLightFlashRemapableData;
+extern XPLMDataRef AprLightFlashRemapableData, RevLightFlashRemapableData;
+
 extern XPLMDataRef x737mcp_hdg, x737mcp_alt, x737mcp_vs, x737mcp_vs_arm;
 
 extern XPLMDataRef x737mcp_cmd_a_led;
@@ -339,6 +344,9 @@ extern string alt_button_remapable, vs_button_remapable, apr_button_remapable, r
 
 extern string ap_light_remapable, hdg_light_remapable, nav_light_remapable, ias_light_remapable;
 extern string alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
+
+extern string ap_light_flash_remapable, hdg_light_flash_remapable, nav_light_flash_remapable, ias_light_flash_remapable;
+extern string alt_light_flash_remapable, vs_light_flash_remapable, apr_light_flash_remapable, rev_light_flash_remapable;
 
 extern string alt_switch_up_remapable, alt_switch_dn_remapable;
 extern string vs_switch_up_remapable, vs_switch_dn_remapable;

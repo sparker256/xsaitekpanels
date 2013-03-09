@@ -133,7 +133,7 @@ void process_read_ini_file()
     hdgswitchremap          = 0;
     crsswitchremap          = 0;
 
-
+    iasismachremap          = 0;
 
     apbuttonremap           = 0;
     hdgbuttonremap          = 0;
@@ -1195,9 +1195,11 @@ void process_read_ini_file()
     // ap light - remapable
     aplightremap = getOptionToInt("Ap Light remapable");
     if (aplightremap == 1) {
-         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          ap_light_remapable = getOptionToString("ap_light_remapable_data");
          ApLightRemapableData   = XPLMFindDataRef(ap_light_remapable.c_str());
+         ap_light_flash_remapable = getOptionToString("ap_light_flash_remapable_data");
+         ApLightFlashRemapableData   = XPLMFindDataRef(ap_light_flash_remapable.c_str());
+
     }
 
     // hdg button - remapable
@@ -1211,9 +1213,11 @@ void process_read_ini_file()
     // hdg light - remapable
     hdglightremap = getOptionToInt("Hdg Light remapable");
     if (hdglightremap == 1) {
-         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          hdg_light_remapable = getOptionToString("hdg_light_remapable_data");
          HdgLightRemapableData   = XPLMFindDataRef(hdg_light_remapable.c_str());
+         hdg_light_flash_remapable = getOptionToString("hdg_light_flash_remapable_data");
+         HdgLightFlashRemapableData   = XPLMFindDataRef(hdg_light_flash_remapable.c_str());
+
     }
 
     // nav button - remapable
@@ -1230,6 +1234,8 @@ void process_read_ini_file()
          //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          nav_light_remapable = getOptionToString("nav_light_remapable_data");
          NavLightRemapableData   = XPLMFindDataRef(nav_light_remapable.c_str());
+         nav_light_flash_remapable = getOptionToString("nav_light_flash_remapable_data");
+         NavLightFlashRemapableData   = XPLMFindDataRef(nav_light_flash_remapable.c_str());
     }
 
     // ias button - remapable
@@ -1241,11 +1247,13 @@ void process_read_ini_file()
     }
 
     // ias light - remapable
-    iasbuttonremap = getOptionToInt("Ias Light remapable");
+    iaslightremap = getOptionToInt("Ias Light remapable");
     if (iaslightremap == 1) {
          //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          ias_light_remapable = getOptionToString("ias_light_remapable_data");
          IasLightRemapableData   = XPLMFindDataRef(ias_light_remapable.c_str());
+         ias_light_flash_remapable = getOptionToString("ias_light_flash_remapable_data");
+         IasLightFlashRemapableData   = XPLMFindDataRef(ias_light_flash_remapable.c_str());
     }
 
 
@@ -1258,11 +1266,13 @@ void process_read_ini_file()
     }
 
     // alt light - remapable
-    altbuttonremap = getOptionToInt("Alt Light remapable");
+    altlightremap = getOptionToInt("Alt Light remapable");
     if (altlightremap == 1) {
          //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          alt_light_remapable = getOptionToString("alt_light_remapable_data");
          AltLightRemapableData   = XPLMFindDataRef(alt_light_remapable.c_str());
+         alt_light_flash_remapable = getOptionToString("alt_light_flash_remapable_data");
+         AltLightFlashRemapableData   = XPLMFindDataRef(alt_light_flash_remapable.c_str());
     }
 
     // vs button - remapable
@@ -1279,6 +1289,8 @@ void process_read_ini_file()
          //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          vs_light_remapable = getOptionToString("vs_light_remapable_data");
          VsLightRemapableData   = XPLMFindDataRef(vs_light_remapable.c_str());
+         vs_light_flash_remapable = getOptionToString("vs_light_flash_remapable_data");
+         VsLightFlashRemapableData   = XPLMFindDataRef(vs_light_flash_remapable.c_str());
     }
 
     // apr button - remapable
@@ -1290,11 +1302,13 @@ void process_read_ini_file()
     }
 
     // apr light - remapable
-    aprbuttonremap = getOptionToInt("Apr Light remapable");
+    aprlightremap = getOptionToInt("Apr Light remapable");
     if (aprlightremap == 1) {
          //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          apr_light_remapable = getOptionToString("apr_light_remapable_data");
          AprLightRemapableData   = XPLMFindDataRef(apr_light_remapable.c_str());
+         apr_light_flash_remapable = getOptionToString("apr_light_flash_remapable_data");
+         AprLightFlashRemapableData   = XPLMFindDataRef(apr_light_flash_remapable.c_str());
     }
 
     // rev button - remapable
@@ -1306,11 +1320,13 @@ void process_read_ini_file()
     }
 
     // rev light - remapable
-    revbuttonremap = getOptionToInt("Rev Light remapable");
+    revlightremap = getOptionToInt("Rev Light remapable");
     if (revlightremap == 1) {
          //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
          rev_light_remapable = getOptionToString("rev_light_remapable_data");
          RevLightRemapableData   = XPLMFindDataRef(rev_light_remapable.c_str());
+         rev_light_flash_remapable = getOptionToString("rev_light_flash_remapable_data");
+         RevLightFlashRemapableData   = XPLMFindDataRef(rev_light_flash_remapable.c_str());
     }
 
 
