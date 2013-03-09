@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.09   ***************
-// ****** Mar 04 2013   **************
+// ******** ver 2.10   ***************
+// ****** Mar 09 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -230,6 +230,12 @@ XPLMDataRef ApLightRemapableData = NULL, HdgLightRemapableData = NULL;
 XPLMDataRef NavLightRemapableData = NULL, IasLightRemapableData = NULL;
 XPLMDataRef AltLightRemapableData = NULL, VsLightRemapableData = NULL;
 XPLMDataRef AprLightRemapableData = NULL, RevLightRemapableData = NULL;
+
+XPLMDataRef ApLightFlashRemapableData = NULL, HdgLightFlashRemapableData = NULL;
+XPLMDataRef NavLightFlashRemapableData = NULL, IasLightFlashRemapableData = NULL;
+XPLMDataRef AltLightFlashRemapableData = NULL, VsLightFlashRemapableData = NULL;
+XPLMDataRef AprLightFlashRemapableData = NULL, RevLightFlashRemapableData = NULL;
+
 
 XPLMDataRef AirspeedIsMach = NULL, Airspeed = NULL;
 
@@ -520,6 +526,9 @@ string alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_butt
 string ap_light_remapable, hdg_light_remapable, nav_light_remapable, ias_light_remapable;
 string alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
 
+string ap_light_flash_remapable, hdg_light_flash_remapable, nav_light_flash_remapable, ias_light_flash_remapable;
+string alt_light_flash_remapable, vs_light_flash_remapable, apr_light_flash_remapable, rev_light_flash_remapable;
+
 string alt_switch_up_remapable, alt_switch_dn_remapable;
 string vs_switch_up_remapable, vs_switch_dn_remapable;
 string ias_switch_up_remapable, ias_switch_dn_remapable;
@@ -534,12 +543,7 @@ string ias_switch_data_remapable;
 string hdg_switch_data_remapable;
 string crs_switch_data_remapable;
 
-
 string ap_vs_up_remapable, ap_vs_dn_remapable;
-
-
-
-
 
 string trim_up_remapable, trim_dn_remapable;
 
@@ -701,10 +705,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.09\n");
+  XPLMDebugString("Xsaitekpanels: v2.10\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.09");
+  strcpy(outName, "Xsaitekpanels v2.10");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -2902,7 +2906,8 @@ float	MyPanelsFlightLoopCallback(
   }
 
   if (XPLMIsDataRefGood(XPLMFindDataRef("x737/systems/afds/plugin_status"))) {
-     loaded737 = 1;
+     //loaded737 = 1;
+     loaded737 = 0;
 
      x737athr_armed = XPLMFindDataRef("x737/systems/athr/athr_armed");
 
