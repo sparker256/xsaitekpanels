@@ -1143,6 +1143,8 @@ void process_read_ini_file()
        IasSwitchUpRemapableCmd   = XPLMFindCommand(ias_switch_up_remapable.c_str());
        ias_switch_dn_remapable = getOptionToString("ias_switch_dn_remapable_cmd");
        IasSwitchDnRemapableCmd = XPLMFindCommand(ias_switch_dn_remapable.c_str());
+       ias_switch_data_remapable = getOptionToString("ias_switch_remapable_data");
+       IasSwitchRemapableData = XPLMFindDataRef(ias_switch_data_remapable.c_str());
 
     } else if (iasswitchremap == 2) {
         ias_switch_data_remapable = getOptionToString("ias_switch_remapable_data");
@@ -1179,8 +1181,16 @@ void process_read_ini_file()
     iasismachremap = getOptionToInt("Ias Ismach remapable");
     if (iasismachremap == 1) {
         ias_ismach_remapable = getOptionToString("ias_ismach_remapable_data");
-        IasIsmachRemapableData = XPLMFindCommand(ias_ismach_remapable.c_str());
+        IasIsmachRemapableData = XPLMFindDataRef(ias_ismach_remapable.c_str());
         iasismachvalue = getOptionToInt("ias_ismach_remapable_value");
+    }
+
+    // auto throttle switch - remapable
+    attrswitchremap = getOptionToInt("Auto Throttle Switch enable");
+    if (attrswitchremap == 2) {
+         //XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+         attr_switch_remapable = getOptionToString("auto_throttle_switch_remapable_data");
+         AttrSwitchRemapableData   = XPLMFindDataRef(attr_switch_remapable.c_str());
     }
 
 

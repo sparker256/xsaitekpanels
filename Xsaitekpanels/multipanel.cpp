@@ -100,6 +100,15 @@ void process_multi_display()
           multiadig3 = multiaactv/100, multiarem3 = multiaactv%100;
           multiadig4 = multiarem3/10, multiarem4 = multiarem3%10;
           multiadig5 = multiarem4;
+
+      } else if (XPLMGetDatai(IasIsmachRemapableData) == 1) {
+
+          multiaactv = apasout;
+          multiadig1 = 15, multiadig2 = 15 ;
+          multiadig3 = multiaactv/100, multiarem3 = multiaactv%100;
+          multiadig4 = multiarem3/10, multiarem4 = multiarem3%10;
+          multiadig5 = multiarem4;
+
       } else {
           multiaactv = apasout;
           multiadig1 = 15, multiadig2 = 15 ;
@@ -496,15 +505,23 @@ void process_ias_switch()
                 }
             }
         }
+
         if (iasismachremap == 1) {
             if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
+                if (iasswitchremap == 1) {
+                   apmasf = XPLMGetDataf(IasSwitchRemapableData);
+                }
                 apmas = (int)(apmasf * 100);
                 apasout = apmas;
-                XPLMSetDataf(IasSwitchRemapableData, apmasf);
+                //XPLMSetDataf(IasSwitchRemapableData, apmasf);
             } else {
+                if (iasswitchremap == 1) {
+                   apasf = XPLMGetDataf(IasSwitchRemapableData);
+                   apas = (int)(apasf);
+                }
                 apasout = apas;
                 apasf = apas;
-                XPLMSetDataf(IasSwitchRemapableData, apasf);
+                //XPLMSetDataf(IasSwitchRemapableData, apasf);
             }
         } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
             apmas = (int)(apmasf * 100);
@@ -728,12 +745,16 @@ void process_autothrottle_switch()
     if(testbit(multibuf,AUTO_THROTTLE_SWITCH)) {
         if (loaded737 == 1) {
             XPLMSetDatai(x737athr_armed, 1);
+        } else if (attrswitchremap == 2) {
+            XPLMSetDatai(AttrSwitchRemapableData, 1);
         } else {
             XPLMSetDatai(ApAutThr, 1);
         }
     } else {
         if (loaded737 == 1) {
             XPLMSetDatai(x737athr_armed, 0);
+        } else if (attrswitchremap == 2) {
+            XPLMSetDatai(AttrSwitchRemapableData, 0);
         } else {
             XPLMSetDatai(ApAutThr, 0);
         }
