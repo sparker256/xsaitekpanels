@@ -224,6 +224,8 @@ XPLMDataRef IasSwitchRemapableData = NULL;
 XPLMDataRef HdgSwitchRemapableData = NULL;
 XPLMDataRef CrsSwitchRemapableData = NULL;
 
+XPLMDataRef AttrSwitchRemapableData = NULL;
+
 XPLMDataRef IasIsmachRemapableData = NULL;
 
 XPLMDataRef ApLightRemapableData = NULL, HdgLightRemapableData = NULL;
@@ -511,6 +513,8 @@ int altswitchremap, vsswitchremap, iasswitchremap;
 int hdgswitchremap, crsswitchremap;
 int trimupremap, trimdnremap;
 
+int attrswitchremap;
+
 int iasismachremap, iasismachvalue;
 
 int xpanelsfnbutton = 0, xpanelscrstoggle = 0;
@@ -535,6 +539,8 @@ string ias_switch_up_remapable, ias_switch_dn_remapable;
 string hdg_switch_up_remapable, hdg_switch_dn_remapable;
 string crs_switch_up_remapable, crs_switch_dn_remapable;
 
+string attr_switch_remapable;
+
 string ias_ismach_remapable;
 
 string alt_switch_data_remapable;
@@ -542,6 +548,8 @@ string vs_switch_data_remapable;
 string ias_switch_data_remapable;
 string hdg_switch_data_remapable;
 string crs_switch_data_remapable;
+
+string attr_switch_data_remapable;
 
 string ap_vs_up_remapable, ap_vs_dn_remapable;
 
