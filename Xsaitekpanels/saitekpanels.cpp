@@ -677,6 +677,8 @@ int wrgXPlaneVersion = 0;
 int wrgXPLMVersion = 0;
 int wrgHostID = 0;
 
+int readiniloop = 0;
+
 void process_radio_panel();
 void process_multi_panel();
 void process_switch_panel();
@@ -2911,6 +2913,15 @@ float	MyPanelsFlightLoopCallback(
   if(bipcnt > 0){
     process_bip_panel();
 
+  }
+
+  if (readiniloop < 50) {
+      readiniloop++;
+  } else if (readiniloop == 50) {
+      process_read_ini_file();
+      XPLMDebugString("Xsaitekpanels: process_read_ini_file();\n");
+      readiniloop = 51;
+      XPLMDebugString("Xsaitekpanels: readiniloop = 51;\n");
   }
 
   if (XPLMIsDataRefGood(XPLMFindDataRef("x737/systems/afds/plugin_status"))) {
