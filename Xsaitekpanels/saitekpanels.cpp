@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.10   ***************
-// ****** Mar 09 2013   **************
+// ****** Mar 12 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -296,10 +296,12 @@ XPLMCommandRef AvMasterSwitchOnCmd = NULL, AvMasterSwitchOffCmd = NULL;
 XPLMCommandRef FuelPumpOnCmd = NULL, FuelPumpOffCmd = NULL;
 XPLMCommandRef DeiceOnCmd = NULL, DeiceOffCmd = NULL;
 XPLMCommandRef PitotHeatOnCmd = NULL, PitotHeatOffCmd = NULL;
+XPLMCommandRef Pitot2HeatOnCmd = NULL, Pitot2HeatOffCmd = NULL;
 XPLMCommandRef GearUpOnCmd = NULL, GearOnOffCmd = NULL;
 XPLMCommandRef GearDnOnCmd = NULL, GearDnOffCmd = NULL;
 
 XPLMCommandRef CowlFlapsOpenCmd = NULL, CowlFlapsCloseCmd = NULL;
+XPLMCommandRef Cowl2FlapsOpenCmd = NULL, Cowl2FlapsCloseCmd = NULL;
 XPLMCommandRef PanelLightsOnCmd = NULL, PanelLightsOffCmd = NULL;
 XPLMCommandRef BeaconLightsOnCmd = NULL, BeaconLightsOffCmd = NULL;
 XPLMCommandRef NavLightsOnCmd = NULL, NavLightsOffCmd = NULL;
@@ -601,9 +603,12 @@ string av_master_switch_on, av_master_switch_off;
 string fuel_pump_switch_on, fuel_pump_switch_off;
 string deice_switch_on, deice_switch_off;
 string pitot_heat_switch_on, pitot_heat_switch_off;
+string pitot2_heat_switch_on, pitot2_heat_switch_off;
+
 string gear_switch_up_on, gear_switch_up_off;
 string gear_switch_down_on, gear_switch_down_off;
 string cowl_flaps_open, cowl_flaps_close;
+string cowl2_flaps_open, cowl2_flaps_close;
 string panel_lights_switch_on, panel_lights_switch_off;
 string beacon_lights_switch_on, beacon_lights_switch_off;
 string nav_lights_switch_on, nav_lights_switch_off;
@@ -678,6 +683,7 @@ int wrgXPLMVersion = 0;
 int wrgHostID = 0;
 
 int readiniloop = 0;
+int x737externalmappingenable;
 
 void process_radio_panel();
 void process_multi_panel();
@@ -2919,14 +2925,17 @@ float	MyPanelsFlightLoopCallback(
       readiniloop++;
   } else if (readiniloop == 50) {
       process_read_ini_file();
-      XPLMDebugString("Xsaitekpanels: process_read_ini_file();\n");
       readiniloop = 51;
-      XPLMDebugString("Xsaitekpanels: readiniloop = 51;\n");
   }
 
   if (XPLMIsDataRefGood(XPLMFindDataRef("x737/systems/afds/plugin_status"))) {
-     //loaded737 = 1;
-     loaded737 = 0;
+      if (x737externalmappingenable == 1) {
+          loaded737 = 0;
+          //XPLMDebugString("Xsaitekpanels: loaded737 = 0;\n");
+      } else {
+          loaded737 = 1;
+          //XPLMDebugString("Xsaitekpanels: loaded737 = 1;\n");
+      }
 
      x737athr_armed = XPLMFindDataRef("x737/systems/athr/athr_armed");
 

@@ -403,10 +403,13 @@ extern XPLMCommandRef AvMasterSwitchOnCmd, AvMasterSwitchOffCmd;
 extern XPLMCommandRef FuelPumpOnCmd, FuelPumpOffCmd;
 extern XPLMCommandRef DeiceOnCmd, DeiceOffCmd;
 extern XPLMCommandRef PitotHeatOnCmd, PitotHeatOffCmd;
+extern XPLMCommandRef Pitot2HeatOnCmd, Pitot2HeatOffCmd;
+
 extern XPLMCommandRef GearUpOnCmd, GearUpOffCmd;
 extern XPLMCommandRef GearDnOnCmd, GearDnOffCmd;
 
 extern XPLMCommandRef CowlFlapsOpenCmd, CowlFlapsCloseCmd;
+extern XPLMCommandRef Cowl2FlapsOpenCmd, Cowl2FlapsCloseCmd;
 extern XPLMCommandRef PanelLightsOnCmd, PanelLightsOffCmd;
 extern XPLMCommandRef BeaconLightsOnCmd, BeaconLightsOffCmd;
 extern XPLMCommandRef NavLightsOnCmd, NavLightsOffCmd;
@@ -506,10 +509,13 @@ extern string av_master_switch_on, av_master_switch_off;
 extern string fuel_pump_switch_on, fuel_pump_switch_off;
 extern string deice_switch_on, deice_switch_off;
 extern string pitot_heat_switch_on, pitot_heat_switch_off;
+extern string pitot2_heat_switch_on, pitot2_heat_switch_off;
+
 extern string gear_switch_up_on, gear_switch_up_off;
 extern string gear_switch_down_on, gear_switch_down_off;
 
 extern string cowl_flaps_open, cowl_flaps_close;
+extern string cowl2_flaps_open, cowl2_flaps_close;
 extern string panel_lights_switch_on, panel_lights_switch_off;
 extern string beacon_lights_switch_on, beacon_lights_switch_off;
 extern string nav_lights_switch_on, nav_lights_switch_off;
@@ -542,6 +548,8 @@ bool ReadConfigFile(std::string PlaneICAO);
 extern int wrgXPlaneVersion;
 extern int wrgXPLMVersion;
 extern int wrgHostID;
+
+extern int x737externalmappingenable;
 
 
 #endif

@@ -819,10 +819,22 @@ void process_pitot_heat_switch()
         if(!testbit(switchbuf,PITOT_HEAT)) {
           XPLMCommandOnce(PitotHeatOffCmd);
         }
-
         return;
     }
 
+   if(pitotheatswitchenable == 3) {
+
+        if(testbit(switchbuf,PITOT_HEAT)) {
+          XPLMCommandOnce(PitotHeatOnCmd);
+          XPLMCommandOnce(Pitot2HeatOnCmd);
+         }
+
+        if(!testbit(switchbuf,PITOT_HEAT)) {
+          XPLMCommandOnce(PitotHeatOffCmd);
+          XPLMCommandOnce(Pitot2HeatOffCmd);
+        }
+        return;
+    }
 
 	if(testbit(switchbuf,PITOT_HEAT)) {
 
@@ -877,6 +889,19 @@ void process_cowl_flaps_switch()
          return;
      }
 
+    if(cowlflapsenable == 3) {
+
+         if(testbit(switchbuf,COWL_FLAPS)) {
+           XPLMCommandOnce(CowlFlapsOpenCmd);
+           XPLMCommandOnce(Cowl2FlapsOpenCmd);
+          }
+
+         if(!testbit(switchbuf,COWL_FLAPS)) {
+           XPLMCommandOnce(CowlFlapsCloseCmd);
+           XPLMCommandOnce(Cowl2FlapsCloseCmd);
+         }
+         return;
+     }
 
         if(!testbit(switchbuf,COWL_FLAPS)) {
           if (loaded737 == 1){
