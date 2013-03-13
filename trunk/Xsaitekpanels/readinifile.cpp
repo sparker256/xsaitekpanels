@@ -67,6 +67,9 @@ void process_read_ini_file()
 
     /* set defaults */
 
+    // x737
+    x737externalmappingenable        = 0;
+
     // switch panel defaults
 
     // switches
@@ -259,6 +262,10 @@ void process_read_ini_file()
         XPSetWidgetProperty(SwitchEnableCheckWidget[Index2], xpProperty_ButtonState, 0);
         XPSetWidgetProperty(SwitchRemapCheckWidget[Index2], xpProperty_ButtonState, 0);
     }
+
+    // x737 internal or external using xsaitekpanels.ini
+    x737externalmappingenable =  getOptionToInt("x737 External Mapping enable");
+
 
     // mag off switch disable - enable - remap
     magoffswitchenable = getOptionToInt("Mag Off Switch enable");
@@ -465,6 +472,17 @@ void process_read_ini_file()
         PitotHeatOffCmd   = XPLMFindCommand(pitot_heat_switch_off.c_str());
     }
 
+    if (pitotheatswitchenable == 3) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[10], xpProperty_ButtonState, 1);
+        pitot_heat_switch_on = getOptionToString("pitot_heat_switch_on_cmd");
+        pitot2_heat_switch_on = getOptionToString("pitot2_heat_switch_on_cmd");
+        pitot_heat_switch_off = getOptionToString("pitot_heat_switch_off_cmd");
+        pitot2_heat_switch_off = getOptionToString("pitot2_heat_switch_off_cmd");
+        PitotHeatOnCmd   = XPLMFindCommand(pitot_heat_switch_on.c_str());
+        Pitot2HeatOnCmd   = XPLMFindCommand(pitot2_heat_switch_on.c_str());
+        PitotHeatOffCmd   = XPLMFindCommand(pitot_heat_switch_off.c_str());
+        Pitot2HeatOffCmd   = XPLMFindCommand(pitot2_heat_switch_off.c_str());
+    }
 
     // landing gear up knob disable - enable - remap
     landinggearknobupenable = getOptionToInt("Landing Gear Knob Up enable");
@@ -518,6 +536,18 @@ void process_read_ini_file()
         cowl_flaps_close = getOptionToString("cowl_flaps_close_cmd");
         CowlFlapsOpenCmd   = XPLMFindCommand(cowl_flaps_open.c_str());
         CowlFlapsCloseCmd   = XPLMFindCommand(cowl_flaps_close.c_str());
+    }
+
+    if (cowlflapsenable == 3) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[13], xpProperty_ButtonState, 1);
+        cowl_flaps_open = getOptionToString("cowl_flaps_open_cmd");
+        cowl2_flaps_open = getOptionToString("cowl2_flaps_open_cmd");
+        cowl_flaps_close = getOptionToString("cowl_flaps_close_cmd");
+        cowl2_flaps_close = getOptionToString("cowl2_flaps_close_cmd");
+        CowlFlapsOpenCmd   = XPLMFindCommand(cowl_flaps_open.c_str());
+        Cowl2FlapsOpenCmd   = XPLMFindCommand(cowl2_flaps_open.c_str());
+        CowlFlapsCloseCmd   = XPLMFindCommand(cowl_flaps_close.c_str());
+        Cowl2FlapsCloseCmd   = XPLMFindCommand(cowl2_flaps_close.c_str());
     }
 
     // panel lights switch disable - enable - remap
