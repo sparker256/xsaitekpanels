@@ -771,10 +771,24 @@ void process_de_ice_switch()
 
         if(testbit(switchbuf,DE_ICE)) {
           XPLMCommandOnce(DeiceOnCmd);
+          XPLMCommandOnce(DeiceOnCmd2);
+          XPLMCommandOnce(DeiceOnCmd3);
+          XPLMCommandOnce(DeiceOnCmd4);
+          XPLMCommandOnce(DeiceOnCmd5);
+          XPLMCommandOnce(DeiceOnCmd6);
+          XPLMCommandOnce(DeiceOnCmd7);
+          XPLMCommandOnce(DeiceOnCmd8);
          }
 
         if(!testbit(switchbuf,DE_ICE)) {
           XPLMCommandOnce(DeiceOffCmd);
+          XPLMCommandOnce(DeiceOffCmd2);
+          XPLMCommandOnce(DeiceOffCmd3);
+          XPLMCommandOnce(DeiceOffCmd4);
+          XPLMCommandOnce(DeiceOffCmd5);
+          XPLMCommandOnce(DeiceOffCmd6);
+          XPLMCommandOnce(DeiceOffCmd7);
+          XPLMCommandOnce(DeiceOffCmd8);
         }
 
         return;
@@ -811,18 +825,6 @@ void process_pitot_heat_switch()
     }
 
    if(pitotheatswitchenable == 2) {
-
-        if(testbit(switchbuf,PITOT_HEAT)) {
-          XPLMCommandOnce(PitotHeatOnCmd);
-         }
-
-        if(!testbit(switchbuf,PITOT_HEAT)) {
-          XPLMCommandOnce(PitotHeatOffCmd);
-        }
-        return;
-    }
-
-   if(pitotheatswitchenable == 3) {
 
         if(testbit(switchbuf,PITOT_HEAT)) {
           XPLMCommandOnce(PitotHeatOnCmd);
@@ -876,20 +878,8 @@ void process_cowl_flaps_switch()
         return;
     }
 
+
     if(cowlflapsenable == 2) {
-
-         if(testbit(switchbuf,COWL_FLAPS)) {
-           XPLMCommandOnce(CowlFlapsOpenCmd);
-          }
-
-         if(!testbit(switchbuf,COWL_FLAPS)) {
-           XPLMCommandOnce(CowlFlapsCloseCmd);
-         }
-
-         return;
-     }
-
-    if(cowlflapsenable == 3) {
 
          if(testbit(switchbuf,COWL_FLAPS)) {
            XPLMCommandOnce(CowlFlapsOpenCmd);

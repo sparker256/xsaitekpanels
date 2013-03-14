@@ -451,6 +451,45 @@ void process_read_ini_file()
         deice_switch_off = getOptionToString("deice_switch_off_cmd");
         DeiceOnCmd   = XPLMFindCommand(deice_switch_on.c_str());
         DeiceOffCmd   = XPLMFindCommand(deice_switch_off.c_str());
+
+        deice2_switch_on = getOptionToString("deice2_switch_on_cmd");
+        deice2_switch_off = getOptionToString("deice2_switch_off_cmd");
+        DeiceOnCmd2   = XPLMFindCommand(deice2_switch_on.c_str());
+        DeiceOffCmd2   = XPLMFindCommand(deice2_switch_off.c_str());
+
+        deice3_switch_on = getOptionToString("deice3_switch_on_cmd");
+        deice3_switch_off = getOptionToString("deice3_switch_off_cmd");
+        DeiceOnCmd3   = XPLMFindCommand(deice3_switch_on.c_str());
+        DeiceOffCmd3   = XPLMFindCommand(deice3_switch_off.c_str());
+
+        deice4_switch_on = getOptionToString("deice4_switch_on_cmd");
+        deice4_switch_off = getOptionToString("deice4_switch_off_cmd");
+        DeiceOnCmd4   = XPLMFindCommand(deice4_switch_on.c_str());
+        DeiceOffCmd4   = XPLMFindCommand(deice4_switch_off.c_str());
+
+        deice5_switch_on = getOptionToString("deice5_switch_on_cmd");
+        deice5_switch_off = getOptionToString("deice5_switch_off_cmd");
+        DeiceOnCmd5   = XPLMFindCommand(deice5_switch_on.c_str());
+        DeiceOffCmd5   = XPLMFindCommand(deice5_switch_off.c_str());
+
+        deice6_switch_on = getOptionToString("deice6_switch_on_cmd");
+        deice6_switch_off = getOptionToString("deice6_switch_off_cmd");
+        DeiceOnCmd6   = XPLMFindCommand(deice6_switch_on.c_str());
+        DeiceOffCmd6   = XPLMFindCommand(deice6_switch_off.c_str());
+
+
+        deice7_switch_on = getOptionToString("deice7_switch_on_cmd");
+        deice7_switch_off = getOptionToString("deice7_switch_off_cmd");
+        DeiceOnCmd7   = XPLMFindCommand(deice7_switch_on.c_str());
+        DeiceOffCmd7   = XPLMFindCommand(deice7_switch_off.c_str());
+
+        deice8_switch_on = getOptionToString("deice8_switch_on_cmd");
+        deice8_switch_off = getOptionToString("deice8_switch_off_cmd");
+        DeiceOnCmd8   = XPLMFindCommand(deice8_switch_on.c_str());
+        DeiceOffCmd8   = XPLMFindCommand(deice8_switch_off.c_str());
+
+
+
     }
 
 
@@ -464,23 +503,17 @@ void process_read_ini_file()
         XPSetWidgetProperty(SwitchEnableCheckWidget[10], xpProperty_ButtonState, 1);
     }
 
+
     if (pitotheatswitchenable == 2) {
         XPSetWidgetProperty(SwitchRemapCheckWidget[10], xpProperty_ButtonState, 1);
         pitot_heat_switch_on = getOptionToString("pitot_heat_switch_on_cmd");
         pitot_heat_switch_off = getOptionToString("pitot_heat_switch_off_cmd");
         PitotHeatOnCmd   = XPLMFindCommand(pitot_heat_switch_on.c_str());
         PitotHeatOffCmd   = XPLMFindCommand(pitot_heat_switch_off.c_str());
-    }
 
-    if (pitotheatswitchenable == 3) {
-        XPSetWidgetProperty(SwitchRemapCheckWidget[10], xpProperty_ButtonState, 1);
-        pitot_heat_switch_on = getOptionToString("pitot_heat_switch_on_cmd");
         pitot2_heat_switch_on = getOptionToString("pitot2_heat_switch_on_cmd");
-        pitot_heat_switch_off = getOptionToString("pitot_heat_switch_off_cmd");
         pitot2_heat_switch_off = getOptionToString("pitot2_heat_switch_off_cmd");
-        PitotHeatOnCmd   = XPLMFindCommand(pitot_heat_switch_on.c_str());
         Pitot2HeatOnCmd   = XPLMFindCommand(pitot2_heat_switch_on.c_str());
-        PitotHeatOffCmd   = XPLMFindCommand(pitot_heat_switch_off.c_str());
         Pitot2HeatOffCmd   = XPLMFindCommand(pitot2_heat_switch_off.c_str());
     }
 
@@ -530,23 +563,17 @@ void process_read_ini_file()
         XPSetWidgetProperty(SwitchEnableCheckWidget[13], xpProperty_ButtonState, 1);
     }
 
+
     if (cowlflapsenable == 2) {
         XPSetWidgetProperty(SwitchRemapCheckWidget[13], xpProperty_ButtonState, 1);
         cowl_flaps_open = getOptionToString("cowl_flaps_open_cmd");
         cowl_flaps_close = getOptionToString("cowl_flaps_close_cmd");
         CowlFlapsOpenCmd   = XPLMFindCommand(cowl_flaps_open.c_str());
         CowlFlapsCloseCmd   = XPLMFindCommand(cowl_flaps_close.c_str());
-    }
 
-    if (cowlflapsenable == 3) {
-        XPSetWidgetProperty(SwitchRemapCheckWidget[13], xpProperty_ButtonState, 1);
-        cowl_flaps_open = getOptionToString("cowl_flaps_open_cmd");
         cowl2_flaps_open = getOptionToString("cowl2_flaps_open_cmd");
-        cowl_flaps_close = getOptionToString("cowl_flaps_close_cmd");
         cowl2_flaps_close = getOptionToString("cowl2_flaps_close_cmd");
-        CowlFlapsOpenCmd   = XPLMFindCommand(cowl_flaps_open.c_str());
         Cowl2FlapsOpenCmd   = XPLMFindCommand(cowl2_flaps_open.c_str());
-        CowlFlapsCloseCmd   = XPLMFindCommand(cowl_flaps_close.c_str());
         Cowl2FlapsCloseCmd   = XPLMFindCommand(cowl2_flaps_close.c_str());
     }
 
