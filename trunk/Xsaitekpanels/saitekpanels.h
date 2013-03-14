@@ -402,6 +402,14 @@ extern XPLMCommandRef AvMasterSwitchOnCmd, AvMasterSwitchOffCmd;
 
 extern XPLMCommandRef FuelPumpOnCmd, FuelPumpOffCmd;
 extern XPLMCommandRef DeiceOnCmd, DeiceOffCmd;
+extern XPLMCommandRef DeiceOnCmd2, DeiceOffCmd2;
+extern XPLMCommandRef DeiceOnCmd3, DeiceOffCmd3;
+extern XPLMCommandRef DeiceOnCmd4, DeiceOffCmd4;
+extern XPLMCommandRef DeiceOnCmd5, DeiceOffCmd5;
+extern XPLMCommandRef DeiceOnCmd6, DeiceOffCmd6;
+extern XPLMCommandRef DeiceOnCmd7, DeiceOffCmd7;
+extern XPLMCommandRef DeiceOnCmd8, DeiceOffCmd8;
+
 extern XPLMCommandRef PitotHeatOnCmd, PitotHeatOffCmd;
 extern XPLMCommandRef Pitot2HeatOnCmd, Pitot2HeatOffCmd;
 
@@ -508,6 +516,14 @@ extern string av_master_switch_on, av_master_switch_off;
 
 extern string fuel_pump_switch_on, fuel_pump_switch_off;
 extern string deice_switch_on, deice_switch_off;
+extern string deice2_switch_on, deice2_switch_off;
+extern string deice3_switch_on, deice3_switch_off;
+extern string deice4_switch_on, deice4_switch_off;
+extern string deice5_switch_on, deice5_switch_off;
+extern string deice6_switch_on, deice6_switch_off;
+extern string deice7_switch_on, deice7_switch_off;
+extern string deice8_switch_on, deice8_switch_off;
+
 extern string pitot_heat_switch_on, pitot_heat_switch_off;
 extern string pitot2_heat_switch_on, pitot2_heat_switch_off;
 

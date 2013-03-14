@@ -295,6 +295,15 @@ XPLMCommandRef AvMasterSwitchOnCmd = NULL, AvMasterSwitchOffCmd = NULL;
 
 XPLMCommandRef FuelPumpOnCmd = NULL, FuelPumpOffCmd = NULL;
 XPLMCommandRef DeiceOnCmd = NULL, DeiceOffCmd = NULL;
+XPLMCommandRef DeiceOnCmd1 = NULL, DeiceOffCmd1 = NULL;
+XPLMCommandRef DeiceOnCmd2 = NULL, DeiceOffCmd2 = NULL;
+XPLMCommandRef DeiceOnCmd3 = NULL, DeiceOffCmd3 = NULL;
+XPLMCommandRef DeiceOnCmd4 = NULL, DeiceOffCmd4 = NULL;
+XPLMCommandRef DeiceOnCmd5 = NULL, DeiceOffCmd5 = NULL;
+XPLMCommandRef DeiceOnCmd6 = NULL, DeiceOffCmd6 = NULL;
+XPLMCommandRef DeiceOnCmd7 = NULL, DeiceOffCmd7 = NULL;
+XPLMCommandRef DeiceOnCmd8 = NULL, DeiceOffCmd8 = NULL;
+
 XPLMCommandRef PitotHeatOnCmd = NULL, PitotHeatOffCmd = NULL;
 XPLMCommandRef Pitot2HeatOnCmd = NULL, Pitot2HeatOffCmd = NULL;
 XPLMCommandRef GearUpOnCmd = NULL, GearOnOffCmd = NULL;
@@ -602,6 +611,14 @@ string av_master_switch_on, av_master_switch_off;
 
 string fuel_pump_switch_on, fuel_pump_switch_off;
 string deice_switch_on, deice_switch_off;
+string deice2_switch_on, deice2_switch_off;
+string deice3_switch_on, deice3_switch_off;
+string deice4_switch_on, deice4_switch_off;
+string deice5_switch_on, deice5_switch_off;
+string deice6_switch_on, deice6_switch_off;
+string deice7_switch_on, deice7_switch_off;
+string deice8_switch_on, deice8_switch_off;
+
 string pitot_heat_switch_on, pitot_heat_switch_off;
 string pitot2_heat_switch_on, pitot2_heat_switch_off;
 
@@ -2929,13 +2946,13 @@ float	MyPanelsFlightLoopCallback(
   }
 
   if (XPLMIsDataRefGood(XPLMFindDataRef("x737/systems/afds/plugin_status"))) {
-      if (x737externalmappingenable == 1) {
+      //if (x737externalmappingenable == 1) {
           loaded737 = 0;
           //XPLMDebugString("Xsaitekpanels: loaded737 = 0;\n");
-      } else {
-          loaded737 = 1;
+      //} else {
+      //    loaded737 = 1;
           //XPLMDebugString("Xsaitekpanels: loaded737 = 1;\n");
-      }
+      //}
 
      x737athr_armed = XPLMFindDataRef("x737/systems/athr/athr_armed");
 
