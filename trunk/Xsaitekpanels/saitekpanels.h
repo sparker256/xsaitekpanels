@@ -249,7 +249,8 @@ extern XPLMCommandRef x737mcp_vs_toggle, x737mcp_app_toggle;
 extern XPLMCommandRef x737mcp_spd_changeover, x737mcp_lnav_toggle;
 
 extern XPLMCommandRef ApButtonRemapableCmd, HdgButtonRemapableCmd;
-extern XPLMCommandRef NavButtonRemapableCmd, IasButtonRemapableCmd;
+extern XPLMCommandRef NavButtonVorlocRemapableCmd, NavButtonLnavRemapableCmd;
+extern XPLMCommandRef IasButtonRemapableCmd;
 extern XPLMCommandRef AltButtonRemapableCmd, VsButtonRemapableCmd;
 extern XPLMCommandRef AprButtonRemapableCmd, RevButtonRemapableCmd;
 
@@ -282,12 +283,14 @@ extern XPLMDataRef AttrSwitchRemapableData;
 extern XPLMDataRef IasIsmachRemapableData;
 
 extern XPLMDataRef ApLightRemapableData, HdgLightRemapableData;
-extern XPLMDataRef NavLightRemapableData, IasLightRemapableData;
+extern XPLMDataRef NavLightVorlocRemapableData, NavLightLnavRemapableData;
+extern XPLMDataRef IasLightRemapableData;
 extern XPLMDataRef AltLightRemapableData, VsLightRemapableData;
 extern XPLMDataRef AprLightRemapableData, RevLightRemapableData;
 
 extern XPLMDataRef ApLightFlashRemapableData, HdgLightFlashRemapableData;
-extern XPLMDataRef NavLightFlashRemapableData, IasLightFlashRemapableData;
+extern XPLMDataRef NavLightVorlocFlashRemapableData, NavLightLnavFlashRemapableData;
+extern XPLMDataRef IasLightFlashRemapableData;
 extern XPLMDataRef AltLightFlashRemapableData, VsLightFlashRemapableData;
 extern XPLMDataRef AprLightFlashRemapableData, RevLightFlashRemapableData;
 
@@ -343,14 +346,14 @@ extern int xpanelsfnbutton;
 extern int xpanelscrstoggle;
 extern int multi_auto_mul;
 
-extern string ap_button_remapable, hdg_button_remapable, nav_button_remapable, ias_button_remapable;
-extern string alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_button_remapable;
+extern string ap_button_remapable, hdg_button_remapable, nav_button_vorloc_remapable, nav_button_lnav_remapable;
+extern string ias_button_remapable, alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_button_remapable;
 
-extern string ap_light_remapable, hdg_light_remapable, nav_light_remapable, ias_light_remapable;
-extern string alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
+extern string ap_light_remapable, hdg_light_remapable, nav_light_vorloc_remapable, nav_light_lnav_remapable;
+extern string ias_light_remapable, alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
 
-extern string ap_light_flash_remapable, hdg_light_flash_remapable, nav_light_flash_remapable, ias_light_flash_remapable;
-extern string alt_light_flash_remapable, vs_light_flash_remapable, apr_light_flash_remapable, rev_light_flash_remapable;
+extern string ap_light_flash_remapable, hdg_light_flash_remapable, nav_light_vorloc_flash_remapable, nav_light_lnav_flash_remapable;
+extern string ias_light_flash_remapable, alt_light_flash_remapable, vs_light_flash_remapable, apr_light_flash_remapable, rev_light_flash_remapable;
 
 extern string alt_switch_up_remapable, alt_switch_dn_remapable;
 extern string vs_switch_up_remapable, vs_switch_dn_remapable;
@@ -401,6 +404,10 @@ extern XPLMCommandRef AvMasterSwitchOnCmd, AvMasterSwitchOffCmd;
 
 
 extern XPLMCommandRef FuelPumpOnCmd, FuelPumpOffCmd;
+extern XPLMCommandRef FuelPump2OnCmd, FuelPump2OffCmd;
+extern XPLMCommandRef FuelPump3OnCmd, FuelPump3OffCmd;
+extern XPLMCommandRef FuelPump4OnCmd, FuelPump4OffCmd;
+
 extern XPLMCommandRef DeiceOnCmd, DeiceOffCmd;
 extern XPLMCommandRef DeiceOnCmd2, DeiceOffCmd2;
 extern XPLMCommandRef DeiceOnCmd3, DeiceOffCmd3;
@@ -515,6 +522,11 @@ extern string alt_master_switch_on, alt_master_switch_off;
 extern string av_master_switch_on, av_master_switch_off;
 
 extern string fuel_pump_switch_on, fuel_pump_switch_off;
+extern string fuel_pump2_switch_on, fuel_pump2_switch_off;
+extern string fuel_pump3_switch_on, fuel_pump3_switch_off;
+extern string fuel_pump4_switch_on, fuel_pump4_switch_off;
+
+
 extern string deice_switch_on, deice_switch_off;
 extern string deice2_switch_on, deice2_switch_off;
 extern string deice3_switch_on, deice3_switch_off;
@@ -564,8 +576,6 @@ bool ReadConfigFile(std::string PlaneICAO);
 extern int wrgXPlaneVersion;
 extern int wrgXPLMVersion;
 extern int wrgHostID;
-
-extern int x737externalmappingenable;
 
 
 #endif

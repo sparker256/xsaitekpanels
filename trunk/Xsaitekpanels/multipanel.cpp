@@ -246,9 +246,7 @@ void process_alt_switch()
         }
         upapaltf = upapalt;
 
-        if (loaded737 == 1) {
-            XPLMSetDataf(x737mcp_alt, upapaltf);
-        } else if (altswitchremap == 2) {
+        if (altswitchremap == 2) {
             XPLMSetDataf(AltSwitchRemapableData, upapaltf);
         } else {
             XPLMSetDataf(ApAlt, upapaltf);
@@ -286,9 +284,7 @@ void process_vs_switch()
             if (vsdbncinc > multispeed) {
                 n = multimul;
                 if (xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_vvi_up_fast);
-                    } else if (vsswitchremap == 1) {
+                    if (vsswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(VsSwitchUpRemapableCmd);
                             --n;
@@ -304,10 +300,7 @@ void process_vs_switch()
 
                 }
                 if (xpanelsfnbutton == 0) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_vvi_up);
-
-                    } else if (vsswitchremap == 1) {
+                    if (vsswitchremap == 1) {
                         XPLMCommandOnce(VsSwitchUpRemapableCmd);
                     } else {
                         //XPLMCommandOnce(ApVsUp);
@@ -323,9 +316,7 @@ void process_vs_switch()
             if (vsdbncdec > multispeed) {
                 n = multimul;
                 if(xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_vvi_down_fast);
-                    } else if (vsswitchremap == 1) {
+                    if (vsswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(VsSwitchDnRemapableCmd);
                             --n;
@@ -340,9 +331,7 @@ void process_vs_switch()
                 }
                 vsdbncdec = 0;
                 if(xpanelsfnbutton == 0) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_vvi_down);
-                    } else if (vsswitchremap == 1) {
+                    if (vsswitchremap == 1) {
                         XPLMCommandOnce(VsSwitchDnRemapableCmd);
                     } else {
                         //XPLMCommandOnce(ApVsUp);
@@ -405,9 +394,7 @@ void process_ias_switch()
             if (iasdbncinc > multispeed) {
                 n = multimul;
                 if (xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_spd_up_fast);
-                    } else if (iasswitchremap == 1) {
+                    if (iasswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(IasSwitchUpRemapableCmd);
                             --n;
@@ -431,9 +418,7 @@ void process_ias_switch()
                     iasdbncinc = 0;
                 }
                 if (xpanelsfnbutton == 0) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_spd_up);
-                    } else if (iasswitchremap == 1) {
+                    if (iasswitchremap == 1) {
                         XPLMCommandOnce(IasSwitchUpRemapableCmd);
                     } else {
                         if (iasismachremap == 1) {
@@ -457,9 +442,7 @@ void process_ias_switch()
             if (iasdbncdec > multispeed) {
                 n = multimul;
                 if (xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_spd_down_fast);
-                    } else if (iasswitchremap == 1) {
+                    if (iasswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(IasSwitchDnRemapableCmd);
                             --n;
@@ -484,9 +467,7 @@ void process_ias_switch()
                     iasdbncdec = 0;
                 }
                 if (xpanelsfnbutton == 0) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_spd_down);
-                    } else if (iasswitchremap == 1) {
+                    if (iasswitchremap == 1) {
                         XPLMCommandOnce(IasSwitchDnRemapableCmd);
                     } else {
                         if (iasismachremap == 1) {
@@ -554,9 +535,7 @@ void process_hdg_switch()
             if (hdgdbncinc > multispeed) {
                 n = multimul;
                 if(xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_hdg_up_fast);
-                    } else if (hdgswitchremap == 1) {
+                    if (hdgswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(HdgSwitchUpRemapableCmd);
                             --n;
@@ -568,9 +547,7 @@ void process_hdg_switch()
 
                 }
                 if(xpanelsfnbutton == 0) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_hdg_up);
-                    } else if (hdgswitchremap == 1) {
+                    if (hdgswitchremap == 1) {
                         XPLMCommandOnce(HdgSwitchUpRemapableCmd);
                     } else {
                         upaphdg = upaphdg + 1;
@@ -584,9 +561,7 @@ void process_hdg_switch()
             if (hdgdbncdec > multispeed) {
                 n = multimul;
                 if(xpanelsfnbutton == 1) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_hdg_down_fast);
-                    } else if (hdgswitchremap == 1) {
+                    if (hdgswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(HdgSwitchDnRemapableCmd);
                             --n;
@@ -597,9 +572,7 @@ void process_hdg_switch()
                     hdgdbncdec = 0;
                 }
                 if(xpanelsfnbutton == 0) {
-                    if (loaded737 == 1) {
-                        XPLMCommandOnce(x737mcp_hdg_down);
-                    } else if (hdgswitchremap == 1) {
+                    if (hdgswitchremap == 1) {
                         XPLMCommandOnce(HdgSwitchDnRemapableCmd);
                     } else {
                         upaphdg = upaphdg - 1;
@@ -608,22 +581,19 @@ void process_hdg_switch()
                 }
             }
         }
-        if (loaded737 != 1) {
-            if(upaphdg > 360) {
-                upaphdg = 1;
-            }
-            if(upaphdg < 0) {
-                upaphdg = 359;
-            }
-            upaphdgf = upaphdg;
-            if (hdgswitchremap == 2) {
-                XPLMSetDataf(HdgSwitchRemapableData, upaphdgf);
-            } else {
-                XPLMSetDataf(ApHdg, upaphdgf);
-            }
-
-
+        if(upaphdg > 360) {
+            upaphdg = 1;
         }
+        if(upaphdg < 0) {
+            upaphdg = 359;
+        }
+        upaphdgf = upaphdg;
+        if (hdgswitchremap == 2) {
+            XPLMSetDataf(HdgSwitchRemapableData, upaphdgf);
+        } else {
+            XPLMSetDataf(ApHdg, upaphdgf);
+        }
+
     }
 }
 
@@ -743,17 +713,13 @@ void process_autothrottle_switch()
         return;
     }
     if(testbit(multibuf,AUTO_THROTTLE_SWITCH)) {
-        if (loaded737 == 1) {
-            XPLMSetDatai(x737athr_armed, 1);
-        } else if (attrswitchremap == 2) {
+        if (attrswitchremap == 2) {
             XPLMSetDatai(AttrSwitchRemapableData, 1);
         } else {
             XPLMSetDatai(ApAutThr, 1);
         }
     } else {
-        if (loaded737 == 1) {
-            XPLMSetDatai(x737athr_armed, 0);
-        } else if (attrswitchremap == 2) {
+        if (attrswitchremap == 2) {
             XPLMSetDatai(AttrSwitchRemapableData, 0);
         } else {
             XPLMSetDatai(ApAutThr, 0);
@@ -764,10 +730,10 @@ void process_autothrottle_switch()
 // ***************** AP Master Button and light *******************
 void process_ap_master_switch()
 {
-    if (loaded737 == 1) {
+    if (apbuttonremap == 1) {
         if (appushed == 0) {
             if (testbit(multibuf, AP_MASTER_BUTTON)) {
-                XPLMCommandOnce(x737mcp_cmd_a_toggle);
+                XPLMCommandOnce(ApButtonRemapableCmd);
                 appushed = 1;
                 lastappos = 1;
             }
@@ -779,23 +745,8 @@ void process_ap_master_switch()
                appushed = 0;
                aploop = 0;
             }
-
         }
 
-        switch (XPLMGetDatai(x737mcp_cmd_a_led)) {
-        case 0:
-            btnleds &= ~(1<<0);
-            break;
-        case 1:
-            btnleds |= (1<<0);
-            break;
-        }
-
-    } else if (apbuttonremap == 1) {
-        if (testbit(multibuf, AP_MASTER_BUTTON)) {
-            XPLMCommandOnce(ApButtonRemapableCmd);
-            lastappos = 1;
-        }
         if (aplightremap == 1) {
             switch(XPLMGetDatai(ApLightRemapableData)) {
             case 1:
@@ -895,25 +846,7 @@ void process_ap_master_switch()
 // ***************** HDG Button and light *******************
 void process_hdg_button()
 {
-    if (loaded737 == 1) {
-        if (multires > 0) {
-            if (testbit(multibuf, HDG_BUTTON)) {
-                XPLMCommandOnce(x737mcp_hdg_toggle);
-                lastappos = 1;
-            }
-        }
-
-        // Always match x737 glareshield LED
-        switch (XPLMGetDatai(x737mcp_hdg_led)) {
-            case 1:
-                btnleds |= (1<<1);
-                break;
-            case 0:
-                btnleds &= ~(1<<1);
-                break;
-        }
-
-    } else if (hdgbuttonremap == 1) {
+    if (hdgbuttonremap == 1) {
             if (multires > 0) {
                 if (testbit(multibuf, HDG_BUTTON)) {
                     XPLMCommandOnce(HdgButtonRemapableCmd);
@@ -938,7 +871,6 @@ void process_hdg_button()
                     break;
                 }
 
-
             } else {
                 switch(XPLMGetDatai(ApHdgStat)){
                   case 2:
@@ -956,9 +888,6 @@ void process_hdg_button()
                     break;
                 }
             }
-
-
-
 
     } else {
         if (multires > 0) {
@@ -990,97 +919,74 @@ void process_hdg_button()
             btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
             break;
         }
-	if (XPLMGetDatai(ApMstrStat) == 0) {
-          btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
-	}
+        if (XPLMGetDatai(ApMstrStat) == 0) {
+            btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+        }
     }
 }
 
 // ***************** NAV Button and light *******************
 void process_nav_button()
 {
-
-    if (loaded737 == 1) {
-        if (multires > 0) {
-            if (testbit(multibuf, NAV_BUTTON)) {
-                switch (XPLMGetDatai(HsiSelector)) {
-                    case 0:
-                    case 1:
-                        XPLMCommandOnce(x737mcp_vorloc_toggle);
-                        break;
-                    case 2:
-                        XPLMCommandOnce(x737mcp_lnav_toggle);
-                        break;
-                }
-                lastappos = 1;
-            }
-        }
-
-        switch (XPLMGetDatai(HsiSelector)) {
-            case 0:
-            case 1:
-                // Use LED to match power state
-                switch (XPLMGetDatai(x737mcp_vorloc_led)) {
-                    case 1:
-                        btnleds |= (1<<2);
-                        break;
-                    case 0:
-                        // Although x737 LED has no armed status, the PFD does
-                        if (XPLMGetDatai(x737mcp_vorloc_armed)) {
-                            if (flashon == 1) {
-                                btnleds |= (1<<2);
-                            } else {
-                                btnleds &= ~(1<<2);
-                            }
-                        } else {
-                            btnleds &= ~(1<<2);
-                        }
-                        break;
-                }
-                break;
-            case 2:
-                switch (XPLMGetDatai(x737mcp_lnav)) {
-                    case 1:
-                        btnleds |= (1<<2);
-                        break;
-                    case 0:
-                        if (XPLMGetDatai(x737mcp_lnav_armed)) {
-                            if (flashon == 1) {
-                                btnleds |= (1<<2);
-                            } else {
-                                btnleds &= ~(1<<2);
-                            }
-                        } else {
-                            btnleds &= ~(1<<2);
-                        }
-                        break;
-                }
-                break;
-        }
-
-    } else if (navbuttonremap == 1){
+    if (navbuttonremap == 1){
         if (multires > 0) {
           if(testbit(multibuf,NAV_BUTTON)) {
-             XPLMCommandOnce(NavButtonRemapableCmd);
+              switch (XPLMGetDatai(HsiSelector)) {
+                  case 0:
+                  case 1:
+                      XPLMCommandOnce(NavButtonVorlocRemapableCmd);
+                      break;
+                  case 2:
+                      XPLMCommandOnce(NavButtonLnavRemapableCmd);
+                      break;
+              }
+
              lastappos = 1;
           }
         }
+
         if (navlightremap == 1) {
-            switch(XPLMGetDatai(NavLightRemapableData)) {
-            case 1:
-                btnleds |= (1<<2);   // * set bit 2 in btnleds to 1 *
-                break;
-            case 0:
-                if (XPLMGetDatai(NavLightFlashRemapableData)) {
-                    if (flashon == 1) {
-                        btnleds |= (1<<2);   // * set bit 2 in btnleds to 1 *
-                    } else {
-                        btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+
+            switch (XPLMGetDatai(HsiSelector)) {
+                case 0:
+                case 1:
+                    // Use LED to match power state
+                    switch (XPLMGetDatai(NavLightVorlocRemapableData)) {
+                        case 1:
+                            btnleds |= (1<<2);
+                            break;
+                        case 0:
+                            // Although x737 LED has no armed status, the PFD does
+                            if (XPLMGetDatai(NavLightVorlocFlashRemapableData)) {
+                                if (flashon == 1) {
+                                    btnleds |= (1<<2);
+                                } else {
+                                    btnleds &= ~(1<<2);
+                                }
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                            break;
                     }
-                } else {
-                    btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
-                }
-                break;
+                    break;
+                case 2:
+                    switch (XPLMGetDatai(NavLightLnavRemapableData)) {
+                        case 1:
+                            btnleds |= (1<<2);
+                            break;
+                        case 0:
+                            if (XPLMGetDatai(NavLightLnavFlashRemapableData)) {
+                                if (flashon == 1) {
+                                    btnleds |= (1<<2);
+                                } else {
+                                    btnleds &= ~(1<<2);
+                                }
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                            break;
+                    }
+                    break;
             }
 
 
@@ -1101,10 +1007,6 @@ void process_nav_button()
                 break;
             }
         }
-
-
-
-
 
     } else {
         if (multires > 0) {
@@ -1136,16 +1038,11 @@ void process_nav_button()
 	    break;
 	}
    }
-
-
-
-
 }
 
 // ***************** IAS Button and light ******************
 void process_ias_button()
 {
-
     if (loaded737 == 1) {
          if (multires > 0) {
              if (testbit(multibuf, IAS_BUTTON)) {
@@ -1195,7 +1092,6 @@ void process_ias_button()
                       break;
                   }
 
-
               } else {
                   switch(XPLMGetDatai(ApIasStat)){
                     case 2:
@@ -1214,9 +1110,6 @@ void process_ias_button()
                       break;
                   }
               }
-
-
-
 
      } else {
         if (multires > 0) {
@@ -1257,26 +1150,7 @@ void process_ias_button()
 // ***************** ALT Button and light *******************
 void process_alt_button()
 {
-
-    if (loaded737 == 1) {
-        if (multires > 0) {
-            if (testbit(multibuf, ALT_BUTTON)) {
-                XPLMCommandOnce(x737mcp_alt_toggle);
-                lastappos = 1;
-            }
-        }
-
-        // Always match x737 glareshield LED
-        switch (XPLMGetDatai(x737mcp_alt_led)) {
-            case 1:
-                btnleds |= (1<<4);
-                break;
-            case 0:
-                btnleds &= ~(1<<4);
-                break;
-        }
-
-     } else if (altbuttonremap == 1) {
+     if (altbuttonremap == 1) {
             if (multires > 0) {
                 if (testbit(multibuf, ALT_BUTTON)) {
                     XPLMCommandOnce(AltButtonRemapableCmd);
@@ -1301,7 +1175,6 @@ void process_alt_button()
                     break;
                 }
 
-
             } else {
                 switch(XPLMGetDatai(ApAltStat)){
                   case 2:
@@ -1319,9 +1192,6 @@ void process_alt_button()
                         break;
                 }
             }
-
-
-
 
     } else {
         if (multires > 0) {
@@ -1454,25 +1324,7 @@ void process_vs_button()
 void process_apr_button()
 {
 
-    if (loaded737 == 1) {
-        if (multires > 0) {
-            if (testbit(multibuf, APR_BUTTON)) {
-                XPLMCommandOnce(x737mcp_app_toggle);
-                lastappos = 1;
-            }
-        }
-
-        // Always match x737 glareshield LED
-        switch (XPLMGetDatai(x737mcp_app_led)) {
-            case 1:
-                btnleds |= (1<<6);
-                break;
-            case 0:
-                btnleds &= ~(1<<6);
-                break;
-        }
-
-    } else if (aprbuttonremap == 1){
+    if (aprbuttonremap == 1){
         if (multires > 0) {
           if(testbit(multibuf,APR_BUTTON)) {
              XPLMCommandOnce(AprButtonRemapableCmd);

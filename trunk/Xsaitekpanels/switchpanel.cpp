@@ -703,10 +703,16 @@ void process_fuel_pump_switch()
 
         if(testbit(switchbuf,FUEL_PUMP)) {
           XPLMCommandOnce(FuelPumpOnCmd);
+          XPLMCommandOnce(FuelPump2OnCmd);
+          XPLMCommandOnce(FuelPump3OnCmd);
+          XPLMCommandOnce(FuelPump4OnCmd);
          }
 
         if(!testbit(switchbuf,FUEL_PUMP)) {
           XPLMCommandOnce(FuelPumpOffCmd);
+          XPLMCommandOnce(FuelPump2OffCmd);
+          XPLMCommandOnce(FuelPump3OffCmd);
+          XPLMCommandOnce(FuelPump4OffCmd);
         }
 
         return;

@@ -67,10 +67,7 @@ void process_read_ini_file()
 
     /* set defaults */
 
-    // x737
-    x737externalmappingenable        = 0;
-
-    // switch panel defaults
+        // switch panel defaults
 
     // switches
     magoffswitchenable           = 1;
@@ -263,10 +260,6 @@ void process_read_ini_file()
         XPSetWidgetProperty(SwitchRemapCheckWidget[Index2], xpProperty_ButtonState, 0);
     }
 
-    // x737 internal or external using xsaitekpanels.ini
-    x737externalmappingenable =  getOptionToInt("x737 External Mapping enable");
-
-
     // mag off switch disable - enable - remap
     magoffswitchenable = getOptionToInt("Mag Off Switch enable");
     if (magoffswitchenable == 0) {
@@ -431,6 +424,22 @@ void process_read_ini_file()
         fuel_pump_switch_off = getOptionToString("fuel_pump_switch_off_cmd");
         FuelPumpOnCmd   = XPLMFindCommand(fuel_pump_switch_on.c_str());
         FuelPumpOffCmd   = XPLMFindCommand(fuel_pump_switch_off.c_str());
+
+        fuel_pump2_switch_on = getOptionToString("fuel_pump2_switch_on_cmd");
+        fuel_pump2_switch_off = getOptionToString("fuel_pump2_switch_off_cmd");
+        FuelPump2OnCmd   = XPLMFindCommand(fuel_pump2_switch_on.c_str());
+        FuelPump2OffCmd   = XPLMFindCommand(fuel_pump2_switch_off.c_str());
+
+        fuel_pump3_switch_on = getOptionToString("fuel_pump3_switch_on_cmd");
+        fuel_pump3_switch_off = getOptionToString("fuel_pump3_switch_off_cmd");
+        FuelPump3OnCmd   = XPLMFindCommand(fuel_pump3_switch_on.c_str());
+        FuelPump3OffCmd   = XPLMFindCommand(fuel_pump3_switch_off.c_str());
+
+        fuel_pump4_switch_on = getOptionToString("fuel_pump4_switch_on_cmd");
+        fuel_pump4_switch_off = getOptionToString("fuel_pump4_switch_off_cmd");
+        FuelPump4OnCmd   = XPLMFindCommand(fuel_pump4_switch_on.c_str());
+        FuelPump4OffCmd   = XPLMFindCommand(fuel_pump4_switch_off.c_str());
+
     }
 
 
@@ -1295,17 +1304,26 @@ void process_read_ini_file()
     // nav button - remapable
     navbuttonremap = getOptionToInt("Nav Button remapable");
     if (navbuttonremap == 1) {
-         nav_button_remapable = getOptionToString("nav_button_remapable_cmd");
-         NavButtonRemapableCmd   = XPLMFindCommand(nav_button_remapable.c_str());
+         nav_button_vorloc_remapable = getOptionToString("nav_button_vorloc_remapable_cmd");
+         NavButtonVorlocRemapableCmd   = XPLMFindCommand(nav_button_vorloc_remapable.c_str());
+         nav_button_lnav_remapable = getOptionToString("nav_button_lnav_remapable_cmd");
+         NavButtonLnavRemapableCmd   = XPLMFindCommand(nav_button_lnav_remapable.c_str());
     }
 
     // nav light - remapable
     navlightremap = getOptionToInt("Nav Light remapable");
     if (navlightremap == 1) {
-         nav_light_remapable = getOptionToString("nav_light_remapable_data");
-         NavLightRemapableData   = XPLMFindDataRef(nav_light_remapable.c_str());
-         nav_light_flash_remapable = getOptionToString("nav_light_flash_remapable_data");
-         NavLightFlashRemapableData   = XPLMFindDataRef(nav_light_flash_remapable.c_str());
+         nav_light_vorloc_remapable = getOptionToString("nav_light_vorloc__remapable_data");
+         NavLightVorlocRemapableData   = XPLMFindDataRef(nav_light_vorloc_remapable.c_str());
+         nav_light_vorloc_flash_remapable = getOptionToString("nav_light_vorloc_flash_remapable_data");
+         NavLightVorlocFlashRemapableData   = XPLMFindDataRef(nav_light_vorloc_flash_remapable.c_str());
+
+         nav_light_lnav_remapable = getOptionToString("nav_light_lnav_remapable_data");
+         NavLightLnavRemapableData   = XPLMFindDataRef( nav_light_lnav_remapable.c_str());
+         nav_light_lnav_flash_remapable = getOptionToString("nav_light_lnav_flash_remapable_data");
+         NavLightLnavFlashRemapableData   = XPLMFindDataRef( nav_light_lnav_flash_remapable.c_str());
+
+
     }
 
     // ias button - remapable
