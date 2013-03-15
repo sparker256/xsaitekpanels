@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.10   ***************
-// ****** Mar 12 2013   **************
+// ****** Mar 14 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -192,7 +192,8 @@ XPLMCommandRef x737mcp_vs_toggle = NULL, x737mcp_app_toggle = NULL;
 XPLMCommandRef x737mcp_spd_changeover = NULL, x737mcp_lnav_toggle = NULL;
 
 XPLMCommandRef ApButtonRemapableCmd = NULL, HdgButtonRemapableCmd = NULL;
-XPLMCommandRef NavButtonRemapableCmd = NULL, IasButtonRemapableCmd = NULL;
+XPLMCommandRef NavButtonVorlocRemapableCmd = NULL, NavButtonLnavRemapableCmd = NULL;
+XPLMCommandRef IasButtonRemapableCmd = NULL;
 XPLMCommandRef AltButtonRemapableCmd = NULL, VsButtonRemapableCmd = NULL;
 XPLMCommandRef AprButtonRemapableCmd = NULL, RevButtonRemapableCmd = NULL;
 
@@ -229,12 +230,14 @@ XPLMDataRef AttrSwitchRemapableData = NULL;
 XPLMDataRef IasIsmachRemapableData = NULL;
 
 XPLMDataRef ApLightRemapableData = NULL, HdgLightRemapableData = NULL;
-XPLMDataRef NavLightRemapableData = NULL, IasLightRemapableData = NULL;
+XPLMDataRef NavLightVorlocRemapableData = NULL, NavLightLnavRemapableData = NULL;
+XPLMDataRef IasLightRemapableData = NULL;
 XPLMDataRef AltLightRemapableData = NULL, VsLightRemapableData = NULL;
 XPLMDataRef AprLightRemapableData = NULL, RevLightRemapableData = NULL;
 
 XPLMDataRef ApLightFlashRemapableData = NULL, HdgLightFlashRemapableData = NULL;
-XPLMDataRef NavLightFlashRemapableData = NULL, IasLightFlashRemapableData = NULL;
+XPLMDataRef NavLightVorlocFlashRemapableData = NULL, NavLightLnavFlashRemapableData = NULL;
+XPLMDataRef IasLightFlashRemapableData = NULL;
 XPLMDataRef AltLightFlashRemapableData = NULL, VsLightFlashRemapableData = NULL;
 XPLMDataRef AprLightFlashRemapableData = NULL, RevLightFlashRemapableData = NULL;
 
@@ -294,6 +297,10 @@ XPLMCommandRef AltMasterSwitchOnCmd = NULL, AltMasterSwitchOffCmd = NULL;
 XPLMCommandRef AvMasterSwitchOnCmd = NULL, AvMasterSwitchOffCmd = NULL;
 
 XPLMCommandRef FuelPumpOnCmd = NULL, FuelPumpOffCmd = NULL;
+XPLMCommandRef FuelPump2OnCmd = NULL, FuelPump2OffCmd = NULL;
+XPLMCommandRef FuelPump3OnCmd = NULL, FuelPump3OffCmd = NULL;
+XPLMCommandRef FuelPump4OnCmd = NULL, FuelPump4OffCmd = NULL;
+
 XPLMCommandRef DeiceOnCmd = NULL, DeiceOffCmd = NULL;
 XPLMCommandRef DeiceOnCmd1 = NULL, DeiceOffCmd1 = NULL;
 XPLMCommandRef DeiceOnCmd2 = NULL, DeiceOffCmd2 = NULL;
@@ -535,14 +542,14 @@ int MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
 
 int multiMenuItem;
 
-string ap_button_remapable, hdg_button_remapable, nav_button_remapable, ias_button_remapable;
-string alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_button_remapable;
+string ap_button_remapable, hdg_button_remapable, nav_button_vorloc_remapable, nav_button_lnav_remapable;
+string ias_button_remapable, alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_button_remapable;
 
-string ap_light_remapable, hdg_light_remapable, nav_light_remapable, ias_light_remapable;
-string alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
+string ap_light_remapable, hdg_light_remapable, nav_light_vorloc_remapable, nav_light_lnav_remapable;
+string ias_light_remapable, alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
 
-string ap_light_flash_remapable, hdg_light_flash_remapable, nav_light_flash_remapable, ias_light_flash_remapable;
-string alt_light_flash_remapable, vs_light_flash_remapable, apr_light_flash_remapable, rev_light_flash_remapable;
+string ap_light_flash_remapable, hdg_light_flash_remapable, nav_light_vorloc_flash_remapable, nav_light_lnav_flash_remapable;
+string ias_light_flash_remapable, alt_light_flash_remapable, vs_light_flash_remapable, apr_light_flash_remapable, rev_light_flash_remapable;
 
 string alt_switch_up_remapable, alt_switch_dn_remapable;
 string vs_switch_up_remapable, vs_switch_dn_remapable;
@@ -610,6 +617,10 @@ string alt_master_switch_on, alt_master_switch_off;
 string av_master_switch_on, av_master_switch_off;
 
 string fuel_pump_switch_on, fuel_pump_switch_off;
+string fuel_pump2_switch_on, fuel_pump2_switch_off;
+string fuel_pump3_switch_on, fuel_pump3_switch_off;
+string fuel_pump4_switch_on, fuel_pump4_switch_off;
+
 string deice_switch_on, deice_switch_off;
 string deice2_switch_on, deice2_switch_off;
 string deice3_switch_on, deice3_switch_off;
@@ -700,7 +711,6 @@ int wrgXPLMVersion = 0;
 int wrgHostID = 0;
 
 int readiniloop = 0;
-int x737externalmappingenable;
 
 void process_radio_panel();
 void process_multi_panel();
