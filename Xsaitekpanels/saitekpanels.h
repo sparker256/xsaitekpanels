@@ -233,21 +233,6 @@ extern XPLMCommandRef ApKnotsMachTgl;
 extern XPLMCommandRef FlapsDn, FlapsUp;
 extern XPLMCommandRef PitchTrimDn, PitchTrimUp, PitchTrimTkOff;
 
-extern XPLMCommandRef x737mcp_cmd_a_toggle;
-extern XPLMCommandRef x737mcp_hdg_up, x737mcp_hdg_down;
-extern XPLMCommandRef x737mcp_hdg_up_fast, x737mcp_hdg_down_fast;
-extern XPLMCommandRef x737mcp_spd_up, x737mcp_spd_down;
-extern XPLMCommandRef x737mcp_spd_up_fast, x737mcp_spd_down_fast;
-extern XPLMCommandRef x737mcp_alt_up, x737mcp_alt_down;
-extern XPLMCommandRef x737mcp_alt_up_fast, x737mcp_alt_down_fast;
-extern XPLMCommandRef x737mcp_vvi_up, x737mcp_vvi_down;
-extern XPLMCommandRef x737mcp_vvi_up_fast, x737mcp_vvi_down_fast;
-
-extern XPLMCommandRef x737mcp_hdg_toggle, x737mcp_vorloc_toggle;
-extern XPLMCommandRef x737mcp_lvlchange_toggle, x737mcp_alt_toggle;
-extern XPLMCommandRef x737mcp_vs_toggle, x737mcp_app_toggle;
-extern XPLMCommandRef x737mcp_spd_changeover, x737mcp_lnav_toggle;
-
 extern XPLMCommandRef ApButtonRemapableCmd, HdgButtonRemapableCmd;
 extern XPLMCommandRef NavButtonVorlocRemapableCmd, NavButtonLnavRemapableCmd;
 extern XPLMCommandRef IasButtonRemapableCmd, IasChangeoverButtonRemapableCmd;
@@ -268,7 +253,6 @@ extern XPLMDataRef ApAlt, ApVs, ApAs, ApHdg, ApCrs, ApCrs2;
 
 extern XPLMDataRef ApMstrStat, ApHdgStat, ApNavStat, ApIasStat;
 extern XPLMDataRef ApAltStat, ApVsStat, ApAprStat, ApRevStat;
-extern XPLMDataRef x737athr_armed ,x737swBatBus ,x737stbyPwr ;
 extern XPLMDataRef ApState, ApAutThr;
 extern XPLMDataRef AirspeedIsMach, Airspeed;
 
@@ -294,13 +278,6 @@ extern XPLMDataRef IasLightFlashRemapableData;
 extern XPLMDataRef AltLightFlashRemapableData, VsLightFlashRemapableData;
 extern XPLMDataRef AprLightFlashRemapableData, RevLightFlashRemapableData;
 
-extern XPLMDataRef x737mcp_hdg, x737mcp_alt, x737mcp_vs, x737mcp_vs_arm;
-
-extern XPLMDataRef x737mcp_cmd_a_led;
-extern XPLMDataRef x737mcp_hdg_led, x737mcp_vorloc_led, x737mcp_vorloc_armed;
-extern XPLMDataRef x737mcp_lnav, x737mcp_lnav_armed;
-extern XPLMDataRef x737mcp_lvlchange_led, x737mcp_alt_led;
-extern XPLMDataRef x737mcp_vvi_led, x737mcp_vvi_armed_led, x737mcp_app_led;
 extern XPLMDataRef HsiSelector;
 
 extern XPLMMenuID      MultiMenu;
@@ -330,8 +307,6 @@ extern int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
 
 extern int aplightremap, hdglightremap, navlightremap, iaslightremap;
 extern int altlightremap, vslightremap, aprlightremap, revlightremap;
-
-//extern int apvsupremap, apvsdnremap;
 
 extern int altswitchremap, vsswitchremap, iasswitchremap;
 extern int hdgswitchremap, crsswitchremap;
@@ -462,15 +437,6 @@ extern XPLMCommandRef FuelPumpOn5, FuelPumpOn6, FuelPumpOn7, FuelPumpOn8;
 extern XPLMCommandRef FuelPumpOff1, FuelPumpOff2, FuelPumpOff3, FuelPumpOff4;
 extern XPLMCommandRef FuelPumpOff5, FuelPumpOff6, FuelPumpOff7, FuelPumpOff8;
 
-extern XPLMCommandRef x737gen1_on, x737gen2_on;
-extern XPLMCommandRef x737gen1_off, x737gen2_off;
-
-extern XPLMCommandRef x737ice_pitot1_on, x737ice_pitot2_on;
-extern XPLMCommandRef x737ice_pitot1_off, x737ice_pitot2_off;
-
-extern XPLMCommandRef x737ice_engine1_on, x737ice_engine2_on;
-extern XPLMCommandRef x737ice_engine1_off, x737ice_engine2_off;
-extern XPLMCommandRef x737ice_wing_on, x737ice_wing_off;
 
 // ************** Switch Panel Data Ref ******************
 extern XPLMDataRef BatNum, GenNum, EngNum;
@@ -507,10 +473,6 @@ extern int strobelightswitchenable, taxilightswitchenable;
 extern int landinglightswitchenable, bataltinverse;
 extern int starterswitchenable;
 
-
-
-//extern int bataltinverse, cowlflapsenable, fuelpumpswitchenable;
-//extern int deiceswitchenable, panellightsenable, landinggearknobenable;
 
 extern string mag_off_switch_on, mag_off_switch_off;
 extern string mag_right_switch_on, mag_right_switch_off;
