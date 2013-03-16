@@ -1331,6 +1331,8 @@ void process_read_ini_file()
     if (iasbuttonremap == 1) {
          ias_button_remapable = getOptionToString("ias_button_remapable_cmd");
          IasButtonRemapableCmd   = XPLMFindCommand(ias_button_remapable.c_str());
+         ias_changeover_button_remapable = getOptionToString("ias_changeover_button_remapable_cmd");
+         IasChangeoverButtonRemapableCmd   = XPLMFindCommand(ias_changeover_button_remapable.c_str());
     }
 
     // ias light - remapable

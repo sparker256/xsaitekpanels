@@ -449,43 +449,40 @@ void process_master_battery_switch()
     }
 
     if(testbit(switchbuf,MASTER_BATTERY)) {
-        if (loaded737) {
-            XPLMCommandOnce(x737gen1_on);
-        } else {
-          if(batnum == 1){
+        if(batnum == 1) {
             BatArrayOn[0] = 1;
-          }
-          if(batnum == 2){
+        }
+        if(batnum == 2) {
             BatArrayOn[0] = 1;
             BatArrayOn[1] = 1;
-          }
-          if(batnum == 3){
+        }
+        if(batnum == 3) {
             BatArrayOn[0] = 1;
             BatArrayOn[1] = 1;
             BatArrayOn[2] = 1;
-          }
-          if(batnum == 4){
+        }
+        if(batnum == 4) {
             BatArrayOn[0] = 1;
             BatArrayOn[1] = 1;
             BatArrayOn[2] = 1;
             BatArrayOn[3] = 1;
-          }
-          if(batnum == 5){
+        }
+        if(batnum == 5) {
             BatArrayOn[0] = 1;
             BatArrayOn[1] = 1;
             BatArrayOn[2] = 1;
             BatArrayOn[3] = 1;
             BatArrayOn[4] = 1;
-          }
-          if(batnum == 6){
+        }
+        if(batnum == 6) {
             BatArrayOn[0] = 1;
             BatArrayOn[1] = 1;
             BatArrayOn[2] = 1;
             BatArrayOn[3] = 1;
             BatArrayOn[4] = 1;
             BatArrayOn[5] = 1;
-          }
-          if(batnum == 7){
+        }
+        if(batnum == 7) {
             BatArrayOn[0] = 1;
             BatArrayOn[1] = 1;
             BatArrayOn[2] = 1;
@@ -493,8 +490,8 @@ void process_master_battery_switch()
             BatArrayOn[4] = 1;
             BatArrayOn[5] = 1;
             BatArrayOn[6] = 1;
-          }
-          if(batnum == 8){
+        }
+        if(batnum == 8) {
             BatArrayOn[0] = 1;
             BatArrayOn[1] = 1;
             BatArrayOn[2] = 1;
@@ -503,47 +500,44 @@ void process_master_battery_switch()
             BatArrayOn[5] = 1;
             BatArrayOn[6] = 1;
             BatArrayOn[7] = 1;
-          }
         }
+
     }
     if(!testbit(switchbuf,MASTER_BATTERY)) {
-        if (loaded737) {
-            XPLMCommandOnce(x737gen1_off);
-        } else {
-          if(batnum == 1){
+        if(batnum == 1) {
             BatArrayOn[0] = 0;
-          }
-          if(batnum == 2){
+        }
+        if(batnum == 2) {
             BatArrayOn[0] = 0;
             BatArrayOn[1] = 0;
-          }
-          if(batnum == 3){
+        }
+        if(batnum == 3) {
             BatArrayOn[0] = 0;
             BatArrayOn[1] = 0;
             BatArrayOn[2] = 0;
-          }
-          if(batnum == 4){
+        }
+        if(batnum == 4) {
             BatArrayOn[0] = 0;
             BatArrayOn[1] = 0;
             BatArrayOn[2] = 0;
             BatArrayOn[3] = 0;
-          }
-          if(batnum == 5){
+        }
+        if(batnum == 5) {
             BatArrayOn[0] = 0;
             BatArrayOn[1] = 0;
             BatArrayOn[2] = 0;
             BatArrayOn[3] = 0;
             BatArrayOn[4] = 0;
-          }
-          if(batnum == 6){
+        }
+        if(batnum == 6) {
             BatArrayOn[0] = 0;
             BatArrayOn[1] = 0;
             BatArrayOn[2] = 0;
             BatArrayOn[3] = 0;
             BatArrayOn[4] = 0;
             BatArrayOn[5] = 0;
-          }
-          if(batnum == 7){
+        }
+        if(batnum == 7) {
             BatArrayOn[0] = 0;
             BatArrayOn[1] = 0;
             BatArrayOn[2] = 0;
@@ -551,8 +545,8 @@ void process_master_battery_switch()
             BatArrayOn[4] = 0;
             BatArrayOn[5] = 0;
             BatArrayOn[6] = 0;
-          }
-          if(batnum == 8){
+        }
+        if(batnum == 8) {
             BatArrayOn[0] = 0;
             BatArrayOn[1] = 0;
             BatArrayOn[2] = 0;
@@ -562,12 +556,9 @@ void process_master_battery_switch()
             BatArrayOn[6] = 0;
             BatArrayOn[7] = 0;
           }
-        }
+
     }
 
-    if (loaded737) {
-        return;
-    }
     XPLMSetDatavi(BatArrayOnDR, BatArrayOn, 0, 8);
 }
 
@@ -594,53 +585,47 @@ void process_master_altenator_switch()
     }
 
     if(testbit(switchbuf,MASTER_ALTENATOR)) {
-        if (loaded737) {
-            XPLMCommandOnce(x737gen2_on);
-        } else {
-          if(gennum == 1){
+        if(gennum == 1) {
             XPLMCommandOnce(GenOn1);
-          }
-          if(gennum == 2){
+        }
+        if(gennum == 2) {
             XPLMCommandOnce(GenOn1);
             XPLMCommandOnce(GenOn2);
-          }
-          if(gennum == 3){
+        }
+        if(gennum == 3) {
             XPLMCommandOnce(GenOn1);
             XPLMCommandOnce(GenOn2);
             XPLMCommandOnce(GenOn3);
-          }
-          if(gennum == 4){
+        }
+        if(gennum == 4) {
             XPLMCommandOnce(GenOn1);
             XPLMCommandOnce(GenOn2);
             XPLMCommandOnce(GenOn3);
             XPLMCommandOnce(GenOn4);
-          }
         }
+
     }
 
     if(!testbit(switchbuf,MASTER_ALTENATOR)) {
-        if (loaded737) {
-            XPLMCommandOnce(x737gen2_off);
-        } else {
-          if(gennum == 1){
+        if(gennum == 1) {
             XPLMCommandOnce(GenOff1);
-          }
-          if(gennum == 2){
+        }
+        if(gennum == 2) {
             XPLMCommandOnce(GenOff1);
             XPLMCommandOnce(GenOff2);
-          }
-          if(gennum == 3){
+        }
+        if(gennum == 3) {
             XPLMCommandOnce(GenOff1);
             XPLMCommandOnce(GenOff2);
             XPLMCommandOnce(GenOff3);
-          }
-          if(gennum == 4){
+        }
+        if(gennum == 4) {
             XPLMCommandOnce(GenOff1);
             XPLMCommandOnce(GenOff2);
             XPLMCommandOnce(GenOff3);
             XPLMCommandOnce(GenOff4);
-          }
         }
+
     }
 }
 
@@ -648,9 +633,6 @@ void process_master_altenator_switch()
 
 void process_avionics_power_switch()
 {
-    if (loaded737) {
-        return;
-    }
 
     if(avionicsmasterswitchenable == 0) {
         return;
@@ -691,9 +673,6 @@ void process_avionics_power_switch()
 
 void process_fuel_pump_switch()
 {
-    if (loaded737) {
-        return;
-    }
 
     if(fuelpumpswitchenable == 0) {
         return;
@@ -773,8 +752,18 @@ void process_de_ice_switch()
         return;
     }
 
-   if(deiceswitchenable == 2) {
+    if(deiceswitchenable == 1) {
+        if(testbit(switchbuf,DE_ICE)) {
+           XPLMSetDatai(AntiIce, 1);
+        }
+        if(!testbit(switchbuf,DE_ICE)) {
+           XPLMSetDatai(AntiIce, 0);
+        }
 
+        return;
+    }
+
+    if(deiceswitchenable == 2) {
         if(testbit(switchbuf,DE_ICE)) {
           XPLMCommandOnce(DeiceOnCmd);
           XPLMCommandOnce(DeiceOnCmd2);
@@ -800,25 +789,6 @@ void process_de_ice_switch()
         return;
     }
 
-
-
-	if(testbit(switchbuf,DE_ICE)) {
-
-            if (loaded737 == 1){
-                XPLMCommandOnce(x737ice_wing_on);
-            } else {
-                XPLMSetDatai(AntiIce, 1);
-            }
-
- 	}
-	if(!testbit(switchbuf,DE_ICE)) {
-
-            if (loaded737 == 1){
-                XPLMCommandOnce(x737ice_wing_off);
-            } else {
-                XPLMSetDatai(AntiIce, 0);
-            }
-     }
 }
 
 // ***************** Pitot Heat *******************
@@ -830,7 +800,27 @@ void process_pitot_heat_switch()
         return;
     }
 
-   if(pitotheatswitchenable == 2) {
+    if(pitotheatswitchenable == 1) {
+        if(testbit(switchbuf,PITOT_HEAT)) {
+            if (wrgXPlaneVersion > 9700){
+                XPLMCommandOnce(PtHt0On);
+                XPLMCommandOnce(PtHt1On);
+            } else {
+                XPLMCommandOnce(PtHtOn);
+            }
+        }
+        if(!testbit(switchbuf,PITOT_HEAT)) {
+            if (wrgXPlaneVersion > 9700){
+                XPLMCommandOnce(PtHt0Off);
+                XPLMCommandOnce(PtHt1Off);
+            } else {
+                XPLMCommandOnce(PtHtOff);
+            }
+        }
+        return;
+    }
+
+    if(pitotheatswitchenable == 2) {
 
         if(testbit(switchbuf,PITOT_HEAT)) {
           XPLMCommandOnce(PitotHeatOnCmd);
@@ -843,37 +833,6 @@ void process_pitot_heat_switch()
         }
         return;
     }
-
-	if(testbit(switchbuf,PITOT_HEAT)) {
-
-            if (loaded737 == 1){
-                XPLMCommandOnce(x737ice_pitot1_on);
-                XPLMCommandOnce(x737ice_pitot2_on);
-            } else {
-                if (wrgXPlaneVersion > 9700){
-                    XPLMCommandOnce(PtHt0On);
-                    XPLMCommandOnce(PtHt1On);
-                } else {
-                    XPLMCommandOnce(PtHtOn);
-                }
-            }
-
- 	}
-	if(!testbit(switchbuf,PITOT_HEAT)) {
-
-            if (loaded737 == 1){
-                XPLMCommandOnce(x737ice_pitot1_off);
-                XPLMCommandOnce(x737ice_pitot2_off);
-            } else {
-                if (wrgXPlaneVersion > 9700){
-                    XPLMCommandOnce(PtHt0Off);
-                    XPLMCommandOnce(PtHt1Off);
-                } else {
-                    XPLMCommandOnce(PtHtOff);
-                }
-            }
-
- 	}
 }
 
 // ***************** Cowl Flaps *******************
@@ -884,94 +843,92 @@ void process_cowl_flaps_switch()
         return;
     }
 
-
-    if(cowlflapsenable == 2) {
-
-         if(testbit(switchbuf,COWL_FLAPS)) {
-           XPLMCommandOnce(CowlFlapsOpenCmd);
-           XPLMCommandOnce(Cowl2FlapsOpenCmd);
-          }
-
-         if(!testbit(switchbuf,COWL_FLAPS)) {
-           XPLMCommandOnce(CowlFlapsCloseCmd);
-           XPLMCommandOnce(Cowl2FlapsCloseCmd);
-         }
-         return;
-     }
-
+    if(cowlflapsenable == 1) {
         if(!testbit(switchbuf,COWL_FLAPS)) {
-          if (loaded737 == 1){
-                XPLMCommandOnce(x737ice_engine1_on);
-                XPLMCommandOnce(x737ice_engine2_on);
-          } else {
-          if(engnum == 1){
-            opencowl[0] = 1;
-          }
+            if(engnum == 1) {
+                opencowl[0] = 1;
+            }
 
-	  if(engnum == 2){
-            opencowl[0] = 1;
-            opencowl[1] = 1;
+            if(engnum == 2) {
+                opencowl[0] = 1;
+                opencowl[1] = 1;
 
-	  }
-	  if(engnum == 3){
-            opencowl[0] = 1;
-            opencowl[1] = 1;
-            opencowl[2] = 1;
+            }
+            if(engnum == 3) {
+                opencowl[0] = 1;
+                opencowl[1] = 1;
+                opencowl[2] = 1;
 
-	  }
-	  if(engnum == 4){
-            opencowl[0] = 1;
-            opencowl[1] = 1;
-            opencowl[2] = 1;
-            opencowl[3] = 1;
+            }
+            if(engnum == 4) {
+                opencowl[0] = 1;
+                opencowl[1] = 1;
+                opencowl[2] = 1;
+                opencowl[3] = 1;
 
-	  }
-          XPLMSetDatavf(CowlFlaps, opencowl, 0, 8);
- 	}
-    }
+            }
+            XPLMSetDatavf(CowlFlaps, opencowl, 0, 8);
+        }
 
         if(testbit(switchbuf,COWL_FLAPS)) {
-            if (loaded737 == 1){
-                XPLMCommandOnce(x737ice_engine1_off);
-                XPLMCommandOnce(x737ice_engine2_off);
-            } else {
-              if(engnum == 1){
+            if(engnum == 1) {
                 closecowl[0] = 0;
+            }
+            if(engnum == 2) {
+                closecowl[0] = 0;
+                closecowl[1] = 0;
+            }
+            if(engnum == 3) {
+                closecowl[0] = 0;
+                closecowl[1] = 0;
+                closecowl[2] = 0;
+            }
+            if(engnum == 4) {
+                closecowl[0] = 0;
+                closecowl[1] = 0;
+                closecowl[2] = 0;
+                closecowl[3] = 0;
 
-	  }
-	  if(engnum == 2){
-            closecowl[0] = 0;
-            closecowl[1] = 0;
+            }
+            XPLMSetDatavf(CowlFlaps, closecowl, 0, 8);
 
-	  }
-	  if(engnum == 3){
-            closecowl[0] = 0;
-            closecowl[1] = 0;
-            closecowl[2] = 0;
-
-	  }
-	  if(engnum == 4){
-            closecowl[0] = 0;
-            closecowl[1] = 0;
-            closecowl[2] = 0;
-            closecowl[3] = 0;
-
-	  }
-          XPLMSetDatavf(CowlFlaps, closecowl, 0, 8);
- 	}
+        }
+        return;
     }
+
+    if(cowlflapsenable == 2) {
+        if(testbit(switchbuf,COWL_FLAPS)) {
+            XPLMCommandOnce(CowlFlapsOpenCmd);
+            XPLMCommandOnce(Cowl2FlapsOpenCmd);
+        }
+
+        if(!testbit(switchbuf,COWL_FLAPS)) {
+            XPLMCommandOnce(CowlFlapsCloseCmd);
+            XPLMCommandOnce(Cowl2FlapsCloseCmd);
+        }
+        return;
+     }
+
 }
 
 // ***************** Panel Lights *******************
 
 void process_panel_lights_switch()
 {
-    if (loaded737) {
-        return;
-    }
 
     if(panellightswitchenable == 0) {
         return;
+    }
+
+    if(panellightswitchenable == 1) {
+        if(testbit(switchbuf,PANEL_LIGHTS)) {
+          XPLMSetDataf(CockpitLights, 1);
+        }
+        if(!testbit(switchbuf,PANEL_LIGHTS)) {
+          XPLMSetDataf(CockpitLights, 0);
+        }
+        return;
+
     }
 
     if(panellightswitchenable == 2) {
@@ -987,14 +944,6 @@ void process_panel_lights_switch()
          return;
      }
 
-
-
-	if(testbit(switchbuf,PANEL_LIGHTS)) {
-	  XPLMSetDataf(CockpitLights, 1);
-	}
-	if(!testbit(switchbuf,PANEL_LIGHTS)) {
-	  XPLMSetDataf(CockpitLights, 0);
-	}
 }
 
 // ***************** Beacon Lights *******************
