@@ -1043,34 +1043,17 @@ void process_nav_button()
 // ***************** IAS Button and light ******************
 void process_ias_button()
 {
-    if (loaded737 == 1) {
-         if (multires > 0) {
-             if (testbit(multibuf, IAS_BUTTON)) {
-                 if (xpanelsfnbutton == 1) {
-                     XPLMCommandOnce(x737mcp_spd_changeover);
-                 }
-                 if (xpanelsfnbutton == 0) {
-                     XPLMCommandOnce(x737mcp_lvlchange_toggle);
-                     lastappos = 1;
-                 }
-             }
-         }
 
-         // Always match x737 glareshield LED
-         switch (XPLMGetDatai(x737mcp_lvlchange_led)) {
-             case 1:
-                 btnleds |= (1<<3);
-                 break;
-             case 0:
-                 btnleds &= ~(1<<3);
-                 break;
-         }
-
-       } else if (iasbuttonremap == 1) {
+       if (iasbuttonremap == 1) {
               if (multires > 0) {
                   if (testbit(multibuf, IAS_BUTTON)) {
-                      XPLMCommandOnce(IasButtonRemapableCmd);
-                      lastappos = 1;
+                      if (xpanelsfnbutton == 1) {
+                          XPLMCommandOnce(IasChangeoverButtonRemapableCmd);
+                      }
+                      if (xpanelsfnbutton == 0) {
+                          XPLMCommandOnce(IasButtonRemapableCmd);
+                          lastappos = 1;
+                      }
 
                   }
               }
@@ -1226,94 +1209,69 @@ void process_alt_button()
 void process_vs_button()
 {
 
-    if (loaded737 == 1) {
+    if (vsbuttonremap == 1) {
         if (multires > 0) {
             if (testbit(multibuf, VS_BUTTON)) {
-                XPLMCommandOnce(x737mcp_vs_toggle);
+                XPLMCommandOnce(VsButtonRemapableCmd);
                 lastappos = 1;
             }
         }
-        switch (XPLMGetDatai(x737mcp_vvi_led)) {
+        if (vslightremap == 1) {
+            switch(XPLMGetDatai(VsLightRemapableData)) {
             case 1:
-                btnleds |= (1<<5);
+                btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
                 break;
             case 0:
-                if (XPLMGetDatai(x737mcp_vvi_armed_led)) {
-                    if (flashon == 0) {
-                        btnleds |= (1<<5);
-                    } else {
-                        btnleds &= ~(1<<5);
-                    }
-                } else {
-                    btnleds &= ~(1<<5);
-                }
-                break;
-        }
-
-    } else if (vsbuttonremap == 1) {
-            if (multires > 0) {
-                if (testbit(multibuf, VS_BUTTON)) {
-                    XPLMCommandOnce(VsButtonRemapableCmd);
-                    lastappos = 1;
-                }
-            }
-            if (vslightremap == 1) {
-                switch(XPLMGetDatai(VsLightRemapableData)) {
-                case 1:
-                    btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
-                    break;
-                case 0:
-                    if (XPLMGetDatai(VsLightFlashRemapableData)) {
-                        if (flashon == 1) {
-                            btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
-                        } else {
-                            btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
-                        }
+                if (XPLMGetDatai(VsLightFlashRemapableData)) {
+                    if (flashon == 1) {
+                        btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
                     } else {
                         btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
                     }
-                    break;
+                } else {
+                    btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
                 }
-
-
-            } else {
-                switch (XPLMGetDatai(x737mcp_vvi_led)) {
-                    case 1:
-                        btnleds |= (1<<5);
-                        break;
-                    case 0:
-                        if (XPLMGetDatai(x737mcp_vvi_armed_led)) {
-                            if (flashon == 0) {
-                                btnleds |= (1<<5);
-                            } else {
-                                btnleds &= ~(1<<5);
-                            }
-                        } else {
-                            btnleds &= ~(1<<5);
-                        }
-                        break;
-                }
+                break;
             }
+
+
+        } else {
+            switch(XPLMGetDatai(ApVsStat)) {
+            case 2:
+                btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+                break;
+            case 1:
+                if (flashon == 0) {
+                    btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+                } else {
+                    btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
+                }
+                break;
+            case 0:
+                btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
+                break;
+            }
+        }
 
     } else {
         if (multires > 0) {
-          if(testbit(multibuf,VS_BUTTON)) {
-            XPLMCommandOnce(ApVsBtn);
-            lastappos = 1;
-          }
+            if(testbit(multibuf,VS_BUTTON)) {
+                XPLMCommandOnce(ApVsBtn);
+                lastappos = 1;
+             }
         }
-	switch(XPLMGetDatai(ApVsStat)){
-	  case 2:
+        switch(XPLMGetDatai(ApVsStat)) {
+        case 2:
             btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
             break;
-          case 1:
-	    if (flashon == 0) {
-              btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
-	    }else{   
-              btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
-	    }
+        case 1:
+            if (flashon == 0) {
+                btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+            } else {
+                btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
+            }
             break;
-          case 0:
+        case 0:
             btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
             break;
         }

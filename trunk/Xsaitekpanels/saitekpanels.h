@@ -250,7 +250,7 @@ extern XPLMCommandRef x737mcp_spd_changeover, x737mcp_lnav_toggle;
 
 extern XPLMCommandRef ApButtonRemapableCmd, HdgButtonRemapableCmd;
 extern XPLMCommandRef NavButtonVorlocRemapableCmd, NavButtonLnavRemapableCmd;
-extern XPLMCommandRef IasButtonRemapableCmd;
+extern XPLMCommandRef IasButtonRemapableCmd, IasChangeoverButtonRemapableCmd;
 extern XPLMCommandRef AltButtonRemapableCmd, VsButtonRemapableCmd;
 extern XPLMCommandRef AprButtonRemapableCmd, RevButtonRemapableCmd;
 
@@ -347,7 +347,8 @@ extern int xpanelscrstoggle;
 extern int multi_auto_mul;
 
 extern string ap_button_remapable, hdg_button_remapable, nav_button_vorloc_remapable, nav_button_lnav_remapable;
-extern string ias_button_remapable, alt_button_remapable, vs_button_remapable, apr_button_remapable, rev_button_remapable;
+extern string ias_button_remapable, ias_changeover_button_remapable, alt_button_remapable, vs_button_remapable;
+extern string apr_button_remapable, rev_button_remapable;
 
 extern string ap_light_remapable, hdg_light_remapable, nav_light_vorloc_remapable, nav_light_lnav_remapable;
 extern string ias_light_remapable, alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
