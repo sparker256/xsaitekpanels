@@ -210,7 +210,7 @@ void process_alt_switch()
                 if(xpanelsfnbutton == 1) {
                     if(altswitchremap == 1) {
                         while (n>0) {
-                           XPLMCommandOnce(AltSwitchUpRemapableCmd);
+                           XPLMCommandOnce(AltSwitchDnRemapableCmd);
                            --n;
                         }
                     } else {
