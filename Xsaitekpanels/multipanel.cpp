@@ -590,6 +590,9 @@ void process_hdg_switch()
         upaphdgf = upaphdg;
         if (hdgswitchremap == 2) {
             XPLMSetDataf(HdgSwitchRemapableData, upaphdgf);
+        } else if (hdgswitchremap == 1) {
+            upaphdgf = XPLMGetDataf(HdgSwitchRemapableData);
+            upaphdg = (int)(upaphdgf);
         } else {
             XPLMSetDataf(ApHdg, upaphdgf);
         }
