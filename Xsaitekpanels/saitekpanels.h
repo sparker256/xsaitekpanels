@@ -256,6 +256,12 @@ extern XPLMDataRef ApAltStat, ApVsStat, ApAprStat, ApRevStat;
 extern XPLMDataRef ApState, ApAutThr;
 extern XPLMDataRef AirspeedIsMach, Airspeed;
 
+extern XPLMDataRef ApButtonRemapableData, HdgButtonRemapableData;
+extern XPLMDataRef NavButtonVorlocRemapableData, NavButtonLnavRemapableData;
+extern XPLMDataRef IasButtonRemapableData, IasChangeoverButtonRemapableData;
+extern XPLMDataRef AltButtonRemapableData, VsButtonRemapableData;
+extern XPLMDataRef AprButtonRemapableData, RevButtonRemapableData;
+
 extern XPLMDataRef AltSwitchRemapableData;
 extern XPLMDataRef VsSwitchRemapableData;
 extern XPLMDataRef IasSwitchRemapableData;
@@ -304,9 +310,16 @@ extern int trimspeed, multispeed, autothrottleswitchenable;
 
 extern int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
 extern int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
+extern int lightdatareferencetype;
 
 extern int aplightremap, hdglightremap, navlightremap, iaslightremap;
 extern int altlightremap, vslightremap, aprlightremap, revlightremap;
+
+extern int aplightdata, hdglightdata, navlightvorlocdata, navlightlnavdata;
+extern int iaslightdata, altlightdata, vslightdata, aprlightdata, revlightdata;
+
+extern int aplightflashdata, hdglightflashdata, navlightflashvorlocdata, navlightflashlnavdata;
+extern int iaslightflashdata,altlightflashdata, vslightflashdata, aprlightflashdata, revlightflashdata;
 
 extern int altswitchremap, vsswitchremap, iasswitchremap;
 extern int hdgswitchremap, crsswitchremap;
@@ -324,6 +337,10 @@ extern int multi_auto_mul;
 extern string ap_button_remapable, hdg_button_remapable, nav_button_vorloc_remapable, nav_button_lnav_remapable;
 extern string ias_button_remapable, ias_changeover_button_remapable, alt_button_remapable, vs_button_remapable;
 extern string apr_button_remapable, rev_button_remapable;
+
+extern string ap_button_data_remapable, hdg_button_data_remapable, nav_button_data_vorloc_remapable, nav_button_data_lnav_remapable;
+extern string ias_button_data_remapable, ias_changeover_button_data_remapable, alt_button_data_remapable, vs_button_data_remapable;
+extern string apr_button_data_remapable, rev_button_data_remapable;
 
 extern string ap_light_remapable, hdg_light_remapable, nav_light_vorloc_remapable, nav_light_lnav_remapable;
 extern string ias_light_remapable, alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;

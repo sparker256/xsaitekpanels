@@ -1267,21 +1267,25 @@ void process_read_ini_file()
     }
 
 
+    // Light datareference type
+    lightdatareferencetype = getOptionToInt("Light datareference type");
+
     // ap button - remapable
     apbuttonremap = getOptionToInt("Ap Button remapable");
     if (apbuttonremap == 1) {
          ap_button_remapable = getOptionToString("ap_button_remapable_cmd");
          ApButtonRemapableCmd   = XPLMFindCommand(ap_button_remapable.c_str());
+    } else if (apbuttonremap == 2) {
+        ap_button_data_remapable = getOptionToString("ap_button_remapable_data");
+        ApButtonRemapableData   = XPLMFindDataRef(ap_button_data_remapable.c_str());
     }
 
     // ap light - remapable
-    aplightremap = getOptionToInt("Ap Light remapable");
-    if (aplightremap == 1) {
-         ap_light_remapable = getOptionToString("ap_light_remapable_data");
-         ApLightRemapableData   = XPLMFindDataRef(ap_light_remapable.c_str());
-         ap_light_flash_remapable = getOptionToString("ap_light_flash_remapable_data");
-         ApLightFlashRemapableData   = XPLMFindDataRef(ap_light_flash_remapable.c_str());
-
+    if ((apbuttonremap == 1) || (apbuttonremap == 2)) {
+        ap_light_remapable = getOptionToString("ap_light_remapable_data");
+        ApLightRemapableData   = XPLMFindDataRef(ap_light_remapable.c_str());
+        ap_light_flash_remapable = getOptionToString("ap_light_flash_remapable_data");
+        ApLightFlashRemapableData   = XPLMFindDataRef(ap_light_flash_remapable.c_str());
     }
 
     // hdg button - remapable
@@ -1289,16 +1293,17 @@ void process_read_ini_file()
     if (hdgbuttonremap == 1) {
          hdg_button_remapable = getOptionToString("hdg_button_remapable_cmd");
          HdgButtonRemapableCmd   = XPLMFindCommand(hdg_button_remapable.c_str());
+    } else  if (hdgbuttonremap == 2) {
+        hdg_button_data_remapable = getOptionToString("hdg_button_remapable_data");
+        HdgButtonRemapableData   = XPLMFindDataRef(hdg_button_data_remapable.c_str());
     }
 
     // hdg light - remapable
-    hdglightremap = getOptionToInt("Hdg Light remapable");
-    if (hdglightremap == 1) {
-         hdg_light_remapable = getOptionToString("hdg_light_remapable_data");
-         HdgLightRemapableData   = XPLMFindDataRef(hdg_light_remapable.c_str());
-         hdg_light_flash_remapable = getOptionToString("hdg_light_flash_remapable_data");
-         HdgLightFlashRemapableData   = XPLMFindDataRef(hdg_light_flash_remapable.c_str());
-
+    if ((hdgbuttonremap == 1) || (hdgbuttonremap == 2)) {
+        hdg_light_remapable = getOptionToString("hdg_light_remapable_data");
+        HdgLightRemapableData   = XPLMFindDataRef(hdg_light_remapable.c_str());
+        hdg_light_flash_remapable = getOptionToString("hdg_light_flash_remapable_data");
+        HdgLightFlashRemapableData   = XPLMFindDataRef(hdg_light_flash_remapable.c_str());
     }
 
     // nav button - remapable
@@ -1308,23 +1313,26 @@ void process_read_ini_file()
          NavButtonVorlocRemapableCmd   = XPLMFindCommand(nav_button_vorloc_remapable.c_str());
          nav_button_lnav_remapable = getOptionToString("nav_button_lnav_remapable_cmd");
          NavButtonLnavRemapableCmd   = XPLMFindCommand(nav_button_lnav_remapable.c_str());
+    } else if (navbuttonremap == 2) {
+        nav_button_data_vorloc_remapable = getOptionToString("nav_button_vorloc_remapable_data");
+        NavButtonVorlocRemapableData   = XPLMFindDataRef(nav_button_data_vorloc_remapable.c_str());
+        nav_button_data_lnav_remapable = getOptionToString("nav_button_lnav_remapable_data");
+        NavButtonLnavRemapableData   = XPLMFindDataRef(nav_button_data_lnav_remapable.c_str());
     }
 
     // nav light - remapable
-    navlightremap = getOptionToInt("Nav Light remapable");
-    if (navlightremap == 1) {
-         nav_light_vorloc_remapable = getOptionToString("nav_light_vorloc__remapable_data");
-         NavLightVorlocRemapableData   = XPLMFindDataRef(nav_light_vorloc_remapable.c_str());
-         nav_light_vorloc_flash_remapable = getOptionToString("nav_light_vorloc_flash_remapable_data");
-         NavLightVorlocFlashRemapableData   = XPLMFindDataRef(nav_light_vorloc_flash_remapable.c_str());
+    if ((navbuttonremap == 1) || (navbuttonremap == 2)) {
+        nav_light_vorloc_remapable = getOptionToString("nav_light_vorloc__remapable_data");
+        NavLightVorlocRemapableData   = XPLMFindDataRef(nav_light_vorloc_remapable.c_str());
+        nav_light_vorloc_flash_remapable = getOptionToString("nav_light_vorloc_flash_remapable_data");
+        NavLightVorlocFlashRemapableData   = XPLMFindDataRef(nav_light_vorloc_flash_remapable.c_str());
 
-         nav_light_lnav_remapable = getOptionToString("nav_light_lnav_remapable_data");
-         NavLightLnavRemapableData   = XPLMFindDataRef( nav_light_lnav_remapable.c_str());
-         nav_light_lnav_flash_remapable = getOptionToString("nav_light_lnav_flash_remapable_data");
-         NavLightLnavFlashRemapableData   = XPLMFindDataRef( nav_light_lnav_flash_remapable.c_str());
-
-
+        nav_light_lnav_remapable = getOptionToString("nav_light_lnav_remapable_data");
+        NavLightLnavRemapableData   = XPLMFindDataRef( nav_light_lnav_remapable.c_str());
+        nav_light_lnav_flash_remapable = getOptionToString("nav_light_lnav_flash_remapable_data");
+        NavLightLnavFlashRemapableData   = XPLMFindDataRef( nav_light_lnav_flash_remapable.c_str());
     }
+
 
     // ias button - remapable
     iasbuttonremap = getOptionToInt("Ias Button remapable");
@@ -1333,15 +1341,19 @@ void process_read_ini_file()
          IasButtonRemapableCmd   = XPLMFindCommand(ias_button_remapable.c_str());
          ias_changeover_button_remapable = getOptionToString("ias_changeover_button_remapable_cmd");
          IasChangeoverButtonRemapableCmd   = XPLMFindCommand(ias_changeover_button_remapable.c_str());
+    } else if (iasbuttonremap == 2) {
+         ias_button_data_remapable = getOptionToString("ias_button_remapable_data");
+         IasButtonRemapableData   = XPLMFindDataRef(ias_button_data_remapable.c_str());
+         ias_changeover_button_data_remapable = getOptionToString("ias_changeover_button_remapable_data");
+         IasChangeoverButtonRemapableData   = XPLMFindDataRef(ias_changeover_button_data_remapable.c_str());
     }
 
     // ias light - remapable
-    iaslightremap = getOptionToInt("Ias Light remapable");
-    if (iaslightremap == 1) {
-         ias_light_remapable = getOptionToString("ias_light_remapable_data");
-         IasLightRemapableData   = XPLMFindDataRef(ias_light_remapable.c_str());
-         ias_light_flash_remapable = getOptionToString("ias_light_flash_remapable_data");
-         IasLightFlashRemapableData   = XPLMFindDataRef(ias_light_flash_remapable.c_str());
+    if ((iasbuttonremap == 1) || (iasbuttonremap == 2)) {
+        ias_light_remapable = getOptionToString("ias_light_remapable_data");
+        IasLightRemapableData   = XPLMFindDataRef(ias_light_remapable.c_str());
+        ias_light_flash_remapable = getOptionToString("ias_light_flash_remapable_data");
+        IasLightFlashRemapableData   = XPLMFindDataRef(ias_light_flash_remapable.c_str());
     }
 
 
@@ -1350,15 +1362,17 @@ void process_read_ini_file()
     if (altbuttonremap == 1) {
          alt_button_remapable = getOptionToString("alt_button_remapable_cmd");
          AltButtonRemapableCmd   = XPLMFindCommand(alt_button_remapable.c_str());
+    } else if (altbuttonremap == 2) {
+        alt_button_data_remapable = getOptionToString("alt_button_remapable_data");
+        AltButtonRemapableData   = XPLMFindDataRef(alt_button_data_remapable.c_str());
     }
 
     // alt light - remapable
-    altlightremap = getOptionToInt("Alt Light remapable");
-    if (altlightremap == 1) {
-         alt_light_remapable = getOptionToString("alt_light_remapable_data");
-         AltLightRemapableData   = XPLMFindDataRef(alt_light_remapable.c_str());
-         alt_light_flash_remapable = getOptionToString("alt_light_flash_remapable_data");
-         AltLightFlashRemapableData   = XPLMFindDataRef(alt_light_flash_remapable.c_str());
+    if ((altbuttonremap == 1) || (altbuttonremap == 2)) {
+        alt_light_remapable = getOptionToString("alt_light_remapable_data");
+        AltLightRemapableData   = XPLMFindDataRef(alt_light_remapable.c_str());
+        alt_light_flash_remapable = getOptionToString("alt_light_flash_remapable_data");
+        AltLightFlashRemapableData   = XPLMFindDataRef(alt_light_flash_remapable.c_str());
     }
 
     // vs button - remapable
@@ -1366,15 +1380,17 @@ void process_read_ini_file()
     if (vsbuttonremap == 1) {
          vs_button_remapable = getOptionToString("vs_button_remapable_cmd");
          VsButtonRemapableCmd   = XPLMFindCommand(vs_button_remapable.c_str());
+    } else if (vsbuttonremap == 2) {
+        vs_button_data_remapable = getOptionToString("vs_button_remapable_data");
+        VsButtonRemapableData   = XPLMFindDataRef(vs_button_data_remapable.c_str());
     }
 
     // vs light - remapable
-    vslightremap = getOptionToInt("Vs Light remapable");
-    if (vslightremap == 1) {
-         vs_light_remapable = getOptionToString("vs_light_remapable_data");
-         VsLightRemapableData   = XPLMFindDataRef(vs_light_remapable.c_str());
-         vs_light_flash_remapable = getOptionToString("vs_light_flash_remapable_data");
-         VsLightFlashRemapableData   = XPLMFindDataRef(vs_light_flash_remapable.c_str());
+    if ((vsbuttonremap == 1) || (vsbuttonremap == 2)) {
+        vs_light_remapable = getOptionToString("vs_light_remapable_data");
+        VsLightRemapableData   = XPLMFindDataRef(vs_light_remapable.c_str());
+        vs_light_flash_remapable = getOptionToString("vs_light_flash_remapable_data");
+        VsLightFlashRemapableData   = XPLMFindDataRef(vs_light_flash_remapable.c_str());
     }
 
     // apr button - remapable
@@ -1382,15 +1398,17 @@ void process_read_ini_file()
     if (aprbuttonremap == 1) {
          apr_button_remapable = getOptionToString("apr_button_remapable_cmd");
          AprButtonRemapableCmd   = XPLMFindCommand(apr_button_remapable.c_str());
+    } else  if (aprbuttonremap == 2) {
+        apr_button_data_remapable = getOptionToString("apr_button_remapable_data");
+        AprButtonRemapableData   = XPLMFindDataRef(apr_button_data_remapable.c_str());
     }
 
     // apr light - remapable
-    aprlightremap = getOptionToInt("Apr Light remapable");
-    if (aprlightremap == 1) {
-         apr_light_remapable = getOptionToString("apr_light_remapable_data");
-         AprLightRemapableData   = XPLMFindDataRef(apr_light_remapable.c_str());
-         apr_light_flash_remapable = getOptionToString("apr_light_flash_remapable_data");
-         AprLightFlashRemapableData   = XPLMFindDataRef(apr_light_flash_remapable.c_str());
+    if ((aprbuttonremap == 1) || (aprbuttonremap == 2)) {
+        apr_light_remapable = getOptionToString("apr_light_remapable_data");
+        AprLightRemapableData   = XPLMFindDataRef(apr_light_remapable.c_str());
+        apr_light_flash_remapable = getOptionToString("apr_light_flash_remapable_data");
+        AprLightFlashRemapableData   = XPLMFindDataRef(apr_light_flash_remapable.c_str());
     }
 
     // rev button - remapable
@@ -1398,15 +1416,17 @@ void process_read_ini_file()
     if (revbuttonremap == 1) {
          rev_button_remapable = getOptionToString("rev_button_remapable_cmd");
          RevButtonRemapableCmd   = XPLMFindCommand(rev_button_remapable.c_str());
+    } else if (revbuttonremap == 2) {
+        rev_button_data_remapable = getOptionToString("rev_button_remapable_data");
+        RevButtonRemapableData   = XPLMFindDataRef(rev_button_data_remapable.c_str());
     }
 
     // rev light - remapable
-    revlightremap = getOptionToInt("Rev Light remapable");
-    if (revlightremap == 1) {
-         rev_light_remapable = getOptionToString("rev_light_remapable_data");
-         RevLightRemapableData   = XPLMFindDataRef(rev_light_remapable.c_str());
-         rev_light_flash_remapable = getOptionToString("rev_light_flash_remapable_data");
-         RevLightFlashRemapableData   = XPLMFindDataRef(rev_light_flash_remapable.c_str());
+    if ((revbuttonremap == 1) || (revbuttonremap == 2)) {
+        rev_light_remapable = getOptionToString("rev_light_remapable_data");
+        RevLightRemapableData   = XPLMFindDataRef(rev_light_remapable.c_str());
+        rev_light_flash_remapable = getOptionToString("rev_light_flash_remapable_data");
+        RevLightFlashRemapableData   = XPLMFindDataRef(rev_light_flash_remapable.c_str());
     }
 
 
