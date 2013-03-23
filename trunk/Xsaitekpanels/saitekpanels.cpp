@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.11   ***************
-// ****** Mar 21 2013   **************
+// ****** Mar 22 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -199,6 +199,12 @@ XPLMDataRef ApMstrStat = NULL, ApHdgStat = NULL, ApNavStat = NULL, ApIasStat = N
 XPLMDataRef ApAltStat = NULL, ApVsStat = NULL, ApAprStat = NULL, ApRevStat = NULL;
 XPLMDataRef ApState = NULL, ApAutThr;
 XPLMDataRef Frp = NULL, MHdg = NULL;
+
+XPLMDataRef ApButtonRemapableData = NULL, HdgButtonRemapableData = NULL;
+XPLMDataRef NavButtonVorlocRemapableData = NULL, NavButtonLnavRemapableData = NULL;
+XPLMDataRef IasButtonRemapableData = NULL, IasChangeoverButtonRemapableData = NULL;
+XPLMDataRef AltButtonRemapableData = NULL, VsButtonRemapableData = NULL;
+XPLMDataRef AprButtonRemapableData = NULL, RevButtonRemapableData = NULL;
 
 XPLMDataRef AltSwitchRemapableData = NULL;
 XPLMDataRef VsSwitchRemapableData = NULL;
@@ -487,9 +493,16 @@ int trimspeed, multispeed, autothrottleswitchenable;
 
 int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
 int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
+int lightdatareferencetype;
 
 int aplightremap, hdglightremap, navlightremap, iaslightremap;
 int altlightremap, vslightremap, aprlightremap, revlightremap;
+
+int aplightdata, hdglightdata, navlightvorlocdata, navlightlnavdata;
+int iaslightdata,altlightdata, vslightdata, aprlightdata, revlightdata;
+
+int aplightflashdata, hdglightflashdata, navlightflashvorlocdata, navlightflashlnavdata;
+int iaslightflashdata,altlightflashdata, vslightflashdata, aprlightflashdata, revlightflashdata;
 
 //int apvsupremap, apvsdnremap;
 int altswitchremap, vsswitchremap, iasswitchremap;
@@ -499,6 +512,7 @@ int trimupremap, trimdnremap;
 int attrswitchremap;
 
 int iasismachremap, iasismachvalue;
+
 
 int xpanelsfnbutton = 0, xpanelscrstoggle = 0;
 
@@ -510,6 +524,10 @@ int multiMenuItem;
 string ap_button_remapable, hdg_button_remapable, nav_button_vorloc_remapable, nav_button_lnav_remapable;
 string ias_button_remapable, ias_changeover_button_remapable, alt_button_remapable, vs_button_remapable;
 string apr_button_remapable, rev_button_remapable;
+
+string ap_button_data_remapable, hdg_button_data_remapable, nav_button_data_vorloc_remapable, nav_button_data_lnav_remapable;
+string ias_button_data_remapable, ias_changeover_button_data_remapable, alt_button_data_remapable, vs_button_data_remapable;
+string apr_button_data_remapable, rev_button_data_remapable;
 
 string ap_light_remapable, hdg_light_remapable, nav_light_vorloc_remapable, nav_light_lnav_remapable;
 string ias_light_remapable, alt_light_remapable, vs_light_remapable, apr_light_remapable, rev_light_remapable;
