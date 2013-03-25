@@ -489,14 +489,11 @@ unsigned char multibuf[4], multiwbuf[13];
 
 int loaded737 = 0;
 
-int trimspeed, multispeed, autothrottleswitchenable;
+int trimspeed, multispeed, autothrottleswitchenable, autothrottleswitcharmedvalue;
 
 int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
 int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
 int lightdatareferencetype;
-
-int aplightremap, hdglightremap, navlightremap, iaslightremap;
-int altlightremap, vslightremap, aprlightremap, revlightremap;
 
 int aplightdata, hdglightdata, navlightvorlocdata, navlightlnavdata;
 int iaslightdata,altlightdata, vslightdata, aprlightdata, revlightdata;
@@ -504,7 +501,6 @@ int iaslightdata,altlightdata, vslightdata, aprlightdata, revlightdata;
 int aplightflashdata, hdglightflashdata, navlightflashvorlocdata, navlightflashlnavdata;
 int iaslightflashdata,altlightflashdata, vslightflashdata, aprlightflashdata, revlightflashdata;
 
-//int apvsupremap, apvsdnremap;
 int altswitchremap, vsswitchremap, iasswitchremap;
 int hdgswitchremap, crsswitchremap;
 int trimupremap, trimdnremap;
@@ -682,8 +678,6 @@ hid_device *biphandle[4];
 // ****************** Saitek Panels variables *******************************
 void XsaitekpanelsMenuHandler(void *, void *);
 void WriteCSVTableToDisk(void);
-
-//bool ReadConfigFile(std::string PlaneICAO);
 
 int             XsaitekpanelsMenuItem;
 int             BipMenuItem;

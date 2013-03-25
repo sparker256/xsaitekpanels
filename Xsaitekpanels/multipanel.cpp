@@ -720,13 +720,23 @@ void process_autothrottle_switch()
     }
     if(testbit(multibuf,AUTO_THROTTLE_SWITCH)) {
         if (attrswitchremap == 2) {
-            XPLMSetDatai(AttrSwitchRemapableData, 1);
+            if(autothrottleswitcharmedvalue == 1) {
+               XPLMSetDatai(AttrSwitchRemapableData, 1);
+            } else {
+               XPLMSetDatai(AttrSwitchRemapableData, 0);
+            }
+
         } else {
             XPLMSetDatai(ApAutThr, 1);
         }
     } else {
         if (attrswitchremap == 2) {
-            XPLMSetDatai(AttrSwitchRemapableData, 0);
+            if(autothrottleswitcharmedvalue == 1) {
+                XPLMSetDatai(AttrSwitchRemapableData, 0);
+            } else {
+               XPLMSetDatai(AttrSwitchRemapableData, 1);
+            }
+
         } else {
             XPLMSetDatai(ApAutThr, 0);
         }

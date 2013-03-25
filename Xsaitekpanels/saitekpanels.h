@@ -306,14 +306,11 @@ extern XPWidgetID	MultiAt1CheckWidget[50];
 extern int multifd;
 extern int numadf;
 extern int loaded737;
-extern int trimspeed, multispeed, autothrottleswitchenable;
+extern int trimspeed, multispeed, autothrottleswitchenable, autothrottleswitcharmedvalue;
 
 extern int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
 extern int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
 extern int lightdatareferencetype;
-
-extern int aplightremap, hdglightremap, navlightremap, iaslightremap;
-extern int altlightremap, vslightremap, aprlightremap, revlightremap;
 
 extern int aplightdata, hdglightdata, navlightvorlocdata, navlightlnavdata;
 extern int iaslightdata, altlightdata, vslightdata, aprlightdata, revlightdata;
