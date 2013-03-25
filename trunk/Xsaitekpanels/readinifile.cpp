@@ -126,6 +126,8 @@ void process_read_ini_file()
     trimspeed                = 1;
     multispeed               = 3;
     autothrottleswitchenable = 1;
+    autothrottleswitcharmedvalue = 0;
+
 
     altswitchremap          = 0;
     vsswitchremap           = 0;
@@ -144,17 +146,6 @@ void process_read_ini_file()
     aprbuttonremap          = 0;
     revbuttonremap          = 0;
 
-    aplightremap            = 0;
-    hdglightremap           = 0;
-    navlightremap           = 0;
-    iaslightremap           = 0;
-    altlightremap           = 0;
-    vslightremap            = 0;
-    aprlightremap           = 0;
-    revlightremap           = 0;
-
-    //apvsupremap             = 0;
-    //apvsdnremap             = 0;
 
     trimupremap             = 0;
     trimdnremap             = 0;
@@ -1164,7 +1155,7 @@ void process_read_ini_file()
          XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0], xpProperty_ButtonState, 1);
     }
 
-
+    // auto throttle switch - remapable
     autothrottleswitchenable = getOptionToInt("Auto Throttle Switch enable");
     XPSetWidgetProperty(MultiAt0CheckWidget[0], xpProperty_ButtonState, 0);
     XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 0);
@@ -1174,6 +1165,9 @@ void process_read_ini_file()
     if (autothrottleswitchenable == 1) {
          XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 1);
     }
+
+    // auto throttle switch armed value
+    autothrottleswitcharmedvalue = getOptionToInt("Auto Throttle Switch Armed value");
 
     // alt switch - remapable
     altswitchremap = getOptionToInt("Alt Switch remapable");
