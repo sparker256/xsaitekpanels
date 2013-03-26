@@ -125,9 +125,8 @@ void process_read_ini_file()
     // multi panel defaults
     trimspeed                = 1;
     multispeed               = 3;
-    autothrottleswitchenable = 1;
-    autothrottleswitcharmedvalue = 0;
-
+    iasismachremap           = 0;
+    iasismachvalue           = 1;
 
     altswitchremap          = 0;
     vsswitchremap           = 0;
@@ -135,7 +134,13 @@ void process_read_ini_file()
     hdgswitchremap          = 0;
     crsswitchremap          = 0;
 
-    iasismachremap          = 0;
+    autothrottleswitchenable = 1;
+    autothrottleswitcharmedvalue = 1;
+
+    trimupremap             = 0;
+    trimdnremap             = 0;
+
+    lightdatareferencetype  = 0;
 
     apbuttonremap           = 0;
     hdgbuttonremap          = 0;
@@ -145,10 +150,6 @@ void process_read_ini_file()
     vsbuttonremap           = 0;
     aprbuttonremap          = 0;
     revbuttonremap          = 0;
-
-
-    trimupremap             = 0;
-    trimdnremap             = 0;
 
     //char *configPath;
 

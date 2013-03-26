@@ -1535,7 +1535,7 @@ void process_alt_button()
     } else {
         if (multires > 0) {
           if(testbit(multibuf,ALT_BUTTON)) {
-           XPLMCommandOnce(ApAltBtn);
+           XPLMCommandOnce(ApAltArmBtn);
            lastappos = 1;
           }
         }

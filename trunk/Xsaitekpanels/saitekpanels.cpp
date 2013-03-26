@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.11   ***************
-// ****** Mar 22 2013   **************
+// ******** ver 2.12   ***************
+// ****** Mar 25 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -165,7 +165,7 @@ XPLMCommandRef ApAsDn = NULL, ApAsUp = NULL, ApHdgDn = NULL, ApHdgUp = NULL;
 XPLMCommandRef ApCrsDn = NULL, ApCrsUp = NULL, ApCrsDn2 = NULL, ApCrsUp2 = NULL;
 
 XPLMCommandRef ApMstrBtnUp = NULL, ApMstrBtnDn = NULL, ApMstrBtnOff = NULL;
-XPLMCommandRef ApHdgBtn = NULL, ApNavBtn = NULL, ApAltBtn = NULL;
+XPLMCommandRef ApHdgBtn = NULL, ApNavBtn = NULL, ApAltBtn = NULL, ApAltArmBtn = NULL;
 XPLMCommandRef ApIasBtn = NULL;
 
 XPLMCommandRef ApVsBtn = NULL, ApAprBtn = NULL, ApRevBtn = NULL;
@@ -726,10 +726,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.11\n");
+  XPLMDebugString("Xsaitekpanels: v2.12\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.11");
+  strcpy(outName, "Xsaitekpanels v2.12");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -867,6 +867,7 @@ PLUGIN_API int XPluginStart(char *		outName,
   ApNavBtn = XPLMFindCommand("sim/autopilot/NAV");
   ApIasBtn = XPLMFindCommand("sim/autopilot/level_change");
   ApAltBtn = XPLMFindCommand("sim/autopilot/altitude_hold");
+  ApAltArmBtn = XPLMFindCommand("sim/autopilot/altitude_arm");
   ApVsBtn = XPLMFindCommand("sim/autopilot/vertical_speed");
   ApAprBtn = XPLMFindCommand("sim/autopilot/approach");
   ApRevBtn = XPLMFindCommand("sim/autopilot/back_course");

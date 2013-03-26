@@ -225,7 +225,7 @@ extern XPLMCommandRef ApAsDn, ApAsUp, ApHdgDn, ApHdgUp;
 extern XPLMCommandRef ApCrsDn, ApCrsUp, ApCrsDn2, ApCrsUp2;
 
 extern XPLMCommandRef ApMstrBtnUp, ApMstrBtnDn, ApMstrBtnOff;
-extern XPLMCommandRef ApHdgBtn, ApNavBtn, ApAltBtn;
+extern XPLMCommandRef ApHdgBtn, ApNavBtn, ApAltBtn, ApAltArmBtn;
 extern XPLMCommandRef ApIasBtn;
 extern XPLMCommandRef ApVsBtn, ApAprBtn, ApRevBtn;
 extern XPLMCommandRef ApKnotsMachTgl;
