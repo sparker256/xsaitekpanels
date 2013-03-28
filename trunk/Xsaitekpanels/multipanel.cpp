@@ -788,8 +788,26 @@ void process_ap_master_switch()
                 }
                 break;
             }
+        } else if (lightdatareferencetype == 2) {
+                switch(XPLMGetDatai(ApLightRemapableData)) {
+                case 1:
+                    btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                    break;
+                case 0:
+                    aplightflashdata = XPLMGetDatai(ApLightFlashRemapableData);
+                    if (aplightflashdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                        } else {
+                            btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                        }
+                    } else {
+                        btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                    }
+                    break;
+                }
 
-        } else {
+        } else if (lightdatareferencetype == 3) {
             aplightdata = XPLMGetDatai(ApLightRemapableData);
             switch(aplightdata) {
             case 0:
@@ -853,8 +871,28 @@ void process_ap_master_switch()
                     }
                     break;
                 }
+            } else if (lightdatareferencetype == 2) {
 
-            } else {
+                    switch(XPLMGetDatai(ApLightRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                        break;
+                    case 0:
+                        aplightflashdata = XPLMGetDatai(ApLightFlashRemapableData);
+
+                        if (aplightflashdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<0);   // * set bit 0 in btnleds to 1 *
+                            } else {
+                                btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                            }
+                        } else {
+                            btnleds &= ~(1<<0);   // * clear bit 0 in btnleds to 0 *
+                        }
+                        break;
+                    }
+
+            } else if (lightdatareferencetype == 3) {
                 aplightdata = XPLMGetDatai(ApLightRemapableData);
                 switch(XPLMGetDatai(ApMstrStat)) {
                 case 0:
@@ -970,7 +1008,28 @@ void process_hdg_button()
                     break;
                 }
 
-            } else {
+              } else if (lightdatareferencetype == 2) {
+
+                    switch(XPLMGetDatai(HdgLightRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
+                        break;
+                    case 0:
+                        hdglightflashdata = XPLMGetDatai(HdgLightFlashRemapableData);
+
+                        if (hdglightflashdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
+                            } else {
+                                btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+                            }
+                        } else {
+                            btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+                        }
+                        break;
+                    }
+
+            } else if (lightdatareferencetype == 3) {
                 hdglightdata = XPLMGetDatai(HdgLightRemapableData);
                 switch(hdglightdata) {
                   case 2:
@@ -1027,7 +1086,28 @@ void process_hdg_button()
                 break;
             }
 
-        } else {
+        } else if (lightdatareferencetype == 2) {
+
+                switch(XPLMGetDatai(HdgLightRemapableData)) {
+                case 1:
+                    btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
+                    break;
+                case 0:
+                    hdglightflashdata = XPLMGetDatai(HdgLightFlashRemapableData);
+
+                    if (hdglightflashdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<1);   // * set bit 1 in btnleds to 1 *
+                        } else {
+                            btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+                        }
+                    } else {
+                        btnleds &= ~(1<<1);   // * clear bit 1 in btnleds to 0 *
+                    }
+                    break;
+                }
+
+        } else if (lightdatareferencetype == 3) {
             hdglightdata = XPLMGetDatai(HdgLightRemapableData);
             switch(hdglightdata) {
               case 2:
@@ -1134,7 +1214,28 @@ void process_nav_button()
                     break;
                 }
 
-            } else {
+            } else if (lightdatareferencetype == 2) {
+
+                    switch(XPLMGetDatai(NavLightVorlocRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<2);
+                        break;
+                    case 0:
+                        navlightflashvorlocdata = XPLMGetDatai(NavLightVorlocFlashRemapableData);
+
+                        if (navlightflashvorlocdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<2);
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                        break;
+                    }
+
+            } else if (lightdatareferencetype == 3) {
                 navlightvorlocdata = XPLMGetDatai(NavLightVorlocRemapableData);
                 switch(navlightvorlocdata) {
                 case 2:
@@ -1184,7 +1285,30 @@ void process_nav_button()
                     break;
                 }
 
-            } else {
+            } else if (lightdatareferencetype == 2) {
+
+                    switch(XPLMGetDatai(NavLightLnavRemapableData)) {
+
+                    case 1:
+                        btnleds |= (1<<2);
+                        break;
+                    case 0:
+                        navlightflashlnavdata = XPLMGetDatai(NavLightLnavFlashRemapableData);
+
+                        if (navlightflashlnavdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<2);
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                        break;
+                    }
+
+
+            } else if (lightdatareferencetype == 3) {
                 navlightlnavdata = XPLMGetDatai(NavLightLnavRemapableData);
                 switch(XPLMGetDatai(ApNavStat)) {
                 case 2:
@@ -1264,7 +1388,28 @@ void process_nav_button()
                     break;
                 }
 
-            } else {
+            } else if (lightdatareferencetype == 2) {
+
+                    switch(XPLMGetDatai(NavLightVorlocRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<2);
+                        break;
+                    case 0:
+                        navlightflashvorlocdata = XPLMGetDatai(NavLightVorlocFlashRemapableData);
+
+                        if (navlightflashvorlocdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<2);
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                        break;
+                    }
+
+            } else if (lightdatareferencetype == 3) {
                 navlightvorlocdata = XPLMGetDatai(NavLightVorlocRemapableData);
                 switch(navlightvorlocdata) {
                   case 2:
@@ -1313,7 +1458,29 @@ void process_nav_button()
                     break;
                 }
 
-            } else {
+            } else if (lightdatareferencetype == 2) {
+
+                    switch (XPLMGetDatai(NavLightLnavRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<2);
+                        break;
+                    case 0:
+                        navlightflashlnavdata = XPLMGetDatai(NavLightLnavFlashRemapableData);
+
+                        if (navlightflashlnavdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<2);
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                        break;
+                    }
+
+
+            } else if (lightdatareferencetype == 3) {
                 navlightlnavdata = XPLMGetDatai(NavLightLnavRemapableData);
                 switch(XPLMGetDatai(ApNavStat)) {
                   case 2:
@@ -1411,7 +1578,29 @@ void process_ias_button()
                    }
                    break;
                }
-            } else {
+
+           } else if (lightdatareferencetype == 2) {
+
+                   switch(XPLMGetDatai(IasLightRemapableData)) {
+                   case 1:
+                       btnleds |= (1<<3);   // * set bit 3 in btnleds to 1 *
+                       break;
+                   case 0:
+                       iaslightflashdata = XPLMGetDatai(IasLightFlashRemapableData);
+
+                       if (iaslightflashdata) {
+                           if (flashon == 1) {
+                               btnleds |= (1<<3);   // * set bit 3 in btnleds to 1 *
+                           } else {
+                               btnleds &= ~(1<<3);   // * clear bit 3 in btnleds to 0 *
+                           }
+                       } else {
+                           btnleds &= ~(1<<3);   // * clear bit 3 in btnleds to 0 *
+                       }
+                       break;
+                   }
+
+            } else if (lightdatareferencetype == 3) {
                iaslightdata = XPLMGetDatai(IasLightRemapableData);
                switch(iaslightdata) {
                case 2:
@@ -1481,7 +1670,28 @@ void process_ias_button()
                    break;
                }
 
-           } else {
+           } else if (lightdatareferencetype == 2) {
+
+                   switch(XPLMGetDatai(IasLightRemapableData)) {
+                   case 1:
+                       btnleds |= (1<<3);   // * set bit 3 in btnleds to 1 *
+                       break;
+                   case 0:
+                       iaslightflashdata = XPLMGetDatai(IasLightFlashRemapableData);
+
+                       if (iaslightflashdata) {
+                           if (flashon == 1) {
+                               btnleds |= (1<<3);   // * set bit 3 in btnleds to 1 *
+                           } else {
+                               btnleds &= ~(1<<3);   // * clear bit 3 in btnleds to 0 *
+                           }
+                       } else {
+                           btnleds &= ~(1<<3);   // * clear bit 3 in btnleds to 0 *
+                       }
+                       break;
+                   }
+
+           } else if (lightdatareferencetype == 3) {
                iaslightdata = XPLMGetDatai(IasLightRemapableData);
                switch(iaslightdata) {
                case 2:
@@ -1575,7 +1785,28 @@ void process_alt_button()
                  break;
              }
 
-         } else {
+         } else if (lightdatareferencetype == 2) {
+
+                 switch(XPLMGetDatai(AltLightRemapableData)) {
+                 case 1:
+                     btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                     break;
+                 case 0:
+                     altlightflashdata = XPLMGetDatai(AltLightFlashRemapableData);
+
+                     if (altlightflashdata) {
+                         if (flashon == 1) {
+                             btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                         } else {
+                             btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                         }
+                     } else {
+                         btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                     }
+                     break;
+                 }
+
+         } else if (lightdatareferencetype == 3) {
              altlightdata = XPLMGetDatai(AltLightRemapableData);
              switch(altlightdata) {
              case 2:
@@ -1631,7 +1862,29 @@ void process_alt_button()
                  }
                  break;
              }
-         } else {
+
+        } else if (lightdatareferencetype == 2) {
+
+                 switch(XPLMGetDatai(AltLightRemapableData)) {
+                 case 1:
+                     btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                     break;
+                 case 0:
+                     altlightflashdata = XPLMGetDatai(AltLightFlashRemapableData);
+
+                     if (altlightflashdata) {
+                         if (flashon == 1) {
+                             btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                         } else {
+                             btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                         }
+                     } else {
+                         btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                     }
+                     break;
+                 }
+
+         } else if (lightdatareferencetype == 3) {
              altlightdata = XPLMGetDatai(AltLightRemapableData);
              switch(altlightdata) {
              case 2:
@@ -1720,7 +1973,29 @@ void process_vs_button()
                 break;
             }
 
-        } else {
+         } else if (lightdatareferencetype == 2) {
+
+                switch(XPLMGetDatai(VsLightRemapableData)) {
+                case 1:
+                    btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+                    break;
+                case 0:
+                    vslightflashdata = XPLMGetDatai(VsLightFlashRemapableData);
+
+                    if (vslightflashdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+                        } else {
+                            btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
+                        }
+                    } else {
+                        btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
+                    }
+                    break;
+                }
+
+
+        } else if (lightdatareferencetype == 3) {
             vslightdata = XPLMGetDatai(VsLightRemapableData);
             switch(vslightdata) {
             case 2:
@@ -1780,8 +2055,29 @@ void process_vs_button()
                     break;
                 }
 
+            } else if (lightdatareferencetype == 2) {
 
-            } else {
+                    switch(XPLMGetDatai(VsLightRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+                        break;
+                    case 0:
+                        vslightflashdata = XPLMGetDatai(VsLightFlashRemapableData);
+
+                        if (vslightflashdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<5);   // * set bit 5 in btnleds to 1 *
+                            } else {
+                                btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
+                            }
+                        } else {
+                            btnleds &= ~(1<<5);   // * clear bit 5 in btnleds to 0 *
+                        }
+                        break;
+                    }
+
+
+            } else if (lightdatareferencetype == 3) {
                 vslightdata = XPLMGetDatai(VsLightRemapableData);
                 switch(vslightdata) {
                 case 2:
@@ -1840,6 +2136,7 @@ void process_apr_button()
               lastappos = 1;
           }
         }
+
         if (lightdatareferencetype == 1) {
             if (XPLMGetDataf(AprLightRemapableData) > .50) {
                 aprlightdata = 1;
@@ -1851,15 +2148,12 @@ void process_apr_button()
                 btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
                 break;
             case 0:
-                if (lightdatareferencetype == 1) {
-                    if (XPLMGetDataf(AprLightFlashRemapableData) > .50) {
-                        aprlightflashdata = 1;
-                    } else if (XPLMGetDataf(AprLightFlashRemapableData) < .50) {
+                if (XPLMGetDataf(AprLightFlashRemapableData) > .50) {
+                    aprlightflashdata = 1;
+                } else if (XPLMGetDataf(AprLightFlashRemapableData) < .50) {
                         aprlightflashdata = 0;
-                    }
-                } else {
-                    aprlightflashdata = XPLMGetDatai(AprLightFlashRemapableData);
                 }
+
                 if (aprlightflashdata) {
                     if (flashon == 1) {
                         btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
@@ -1872,7 +2166,29 @@ void process_apr_button()
                 break;
             }
 
-        } else {
+        } else if (lightdatareferencetype == 2) {
+
+                switch(XPLMGetDatai(AprLightRemapableData)) {
+                case 1:
+                    btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
+                    break;
+                case 0:
+                    aprlightflashdata = XPLMGetDatai(AprLightFlashRemapableData);
+
+
+                    if (aprlightflashdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
+                        } else {
+                            btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                        }
+                    } else {
+                        btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                    }
+                    break;
+                }
+
+        } else if (lightdatareferencetype == 3) {
             aprlightdata = XPLMGetDatai(AprLightRemapableData);
             switch(aprlightdata) {
             case 2:
@@ -1904,6 +2220,7 @@ void process_apr_button()
 
               }
             }
+
             if (lightdatareferencetype == 1) {
                 if (XPLMGetDataf(AprLightRemapableData) > .50) {
                     aprlightdata = 1;
@@ -1915,15 +2232,12 @@ void process_apr_button()
                     btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
                     break;
                 case 0:
-                    if (lightdatareferencetype == 1) {
-                        if (XPLMGetDataf(AprLightFlashRemapableData) > .50) {
-                            aprlightflashdata = 1;
-                        } else if (XPLMGetDataf(AprLightFlashRemapableData) < .50) {
-                            aprlightflashdata = 0;
-                        }
-                    } else {
-                        aprlightflashdata = XPLMGetDatai(AprLightFlashRemapableData);
+                    if (XPLMGetDataf(AprLightFlashRemapableData) > .50) {
+                        aprlightflashdata = 1;
+                    } else if (XPLMGetDataf(AprLightFlashRemapableData) < .50) {
+                         aprlightflashdata = 0;
                     }
+
                     if (aprlightflashdata) {
                         if (flashon == 1) {
                             btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
@@ -1935,7 +2249,30 @@ void process_apr_button()
                     }
                     break;
                 }
-            } else {
+
+            } else if (lightdatareferencetype == 2) {
+
+                switch(XPLMGetDatai(AprLightRemapableData)) {
+                case 1:
+                    btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
+                    break;
+                case 0:
+                    aprlightflashdata = XPLMGetDatai(AprLightFlashRemapableData);
+
+                    if (aprlightflashdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<6);   // * set bit 6 in btnleds to 1 *
+                        } else {
+                            btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                        }
+                    } else {
+                        btnleds &= ~(1<<6);   // * clear bit 6 in btnleds to 0 *
+                    }
+                    break;
+                }
+
+
+            } else if (lightdatareferencetype == 3) {
                 aprlightdata = XPLMGetDatai(AprLightRemapableData);
                 switch(XPLMGetDatai(ApAprStat)) {
                 case 2:
@@ -1995,13 +2332,15 @@ void process_rev_button()
                 lastappos = 1;
             }
         }
+
+
         if (lightdatareferencetype == 1) {
             if (XPLMGetDataf(RevLightRemapableData) > .50) {
                 revlightdata = 1;
             } else if (XPLMGetDataf(RevLightRemapableData) < .50) {
                 revlightdata = 0;
             }
-            switch(XPLMGetDatai(RevLightRemapableData)) {
+            switch(revlightdata) {
             case 1:
                 btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
                 break;
@@ -2022,7 +2361,30 @@ void process_rev_button()
                 }
                 break;
             }
-        } else {
+
+          } else if (lightdatareferencetype == 2) {
+
+                switch(XPLMGetDatai(RevLightRemapableData)) {
+                case 1:
+                    btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
+                    break;
+                case 0:
+                    revlightflashdata = XPLMGetDatai(RevLightFlashRemapableData);
+
+                    if (revlightflashdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
+                        } else {
+                            btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
+                        }
+                    } else {
+                        btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
+                    }
+                    break;
+                }
+
+
+        } else if (lightdatareferencetype == 3) {
             revlightdata = XPLMGetDatai(RevLightRemapableData);
             switch(revlightdata) {
             case 2:
@@ -2053,13 +2415,14 @@ void process_rev_button()
                 lastappos = 1;
             }
         }
+
         if (lightdatareferencetype == 1) {
             if (XPLMGetDataf(RevLightRemapableData) > .50) {
                 revlightdata = 1;
             } else if (XPLMGetDataf(RevLightRemapableData) < .50) {
-                revlightdata = 0;
+                revlightflashdata = 0;
             }
-            switch(XPLMGetDatai(RevLightRemapableData)) {
+            switch(revlightflashdata) {
             case 1:
                 btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
                 break;
@@ -2080,7 +2443,29 @@ void process_rev_button()
                 }
                 break;
             }
-        } else {
+
+        } else if (lightdatareferencetype == 2) {
+
+                switch(XPLMGetDatai(RevLightRemapableData)) {
+                case 1:
+                    btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
+                    break;
+                case 0:
+                    revlightflashdata = XPLMGetDatai(RevLightFlashRemapableData);
+
+                    if (revlightflashdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
+                        } else {
+                            btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
+                        }
+                    } else {
+                        btnleds &= ~(1<<7);   // * clear bit 7 in btnleds to 0 *
+                    }
+                    break;
+                }
+
+        } else if (lightdatareferencetype == 3) {
             revlightdata = XPLMGetDatai(RevLightRemapableData);
             switch(revlightdata) {
             case 2:
