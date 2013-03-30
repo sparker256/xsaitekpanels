@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.13   ***************
-// ****** Mar 28 2013   **************
+// ******** ver 2.14   ***************
+// ****** Mar 30 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -343,6 +343,57 @@ XPLMDataRef CowlFlaps = NULL, CockpitLights = NULL, AntiIce = NULL;
 XPLMDataRef GearRetract = NULL, OnGround = NULL, LandingGearStatus = {NULL};
 XPLMDataRef Gear1Fail = NULL, Gear2Fail = NULL, Gear3Fail = NULL;
 
+XPLMDataRef MagOffSwitchData = NULL;
+XPLMDataRef MagRightSwitchData = NULL;
+XPLMDataRef MagLeftSwitchData = NULL;
+XPLMDataRef MagBothSwitchData = NULL;
+XPLMDataRef MagStartSwitchData = NULL;
+
+
+XPLMDataRef BatMasterSwitchData = NULL, Bat2MasterSwitchData = NULL;
+XPLMDataRef Bat3MasterSwitchData = NULL, Bat4MasterSwitchData = NULL;
+XPLMDataRef Bat5MasterSwitchData = NULL, Bat6MasterSwitchData = NULL;
+XPLMDataRef Bat7MasterSwitchData = NULL, Bat8MasterSwitchData = NULL;
+
+XPLMDataRef AltMasterSwitchData = NULL, Alt2MasterSwitchData = NULL;
+XPLMDataRef Alt3MasterSwitchData = NULL, Alt4MasterSwitchData = NULL;
+XPLMDataRef Alt5MasterSwitchData = NULL, Alt6MasterSwitchData = NULL;
+XPLMDataRef Alt7MasterSwitchData = NULL, Alt8MasterSwitchData = NULL;
+
+XPLMDataRef AvMasterSwitchData = NULL, Av2MasterSwitchData = NULL;
+XPLMDataRef Av3MasterSwitchData = NULL, Av4MasterSwitchData = NULL;
+XPLMDataRef Av5MasterSwitchData = NULL, Av6MasterSwitchData = NULL;
+XPLMDataRef Av7MasterSwitchData = NULL, Av8MasterSwitchData = NULL;
+
+XPLMDataRef FuelPumpSwitchData = NULL;
+XPLMDataRef FuelPump2SwitchData = NULL;
+XPLMDataRef FuelPump3SwitchData = NULL;
+XPLMDataRef FuelPump4SwitchData = NULL;
+
+XPLMDataRef DeiceSwitchData = NULL;
+XPLMDataRef Deice2SwitchData = NULL;
+XPLMDataRef Deice3SwitchData = NULL;
+XPLMDataRef Deice4SwitchData = NULL;
+XPLMDataRef Deice5SwitchData = NULL;
+XPLMDataRef Deice6SwitchData = NULL;
+XPLMDataRef Deice7SwitchData = NULL;
+XPLMDataRef Deice8SwitchData = NULL;
+
+XPLMDataRef PitotHeatSwitchData = NULL;
+XPLMDataRef Pitot2HeatSwitchData = NULL;
+XPLMDataRef GearUpData = NULL;
+XPLMDataRef GearDnData = NULL;
+
+XPLMDataRef CowlFlapsData = NULL;
+XPLMDataRef Cowl2FlapsData = NULL;
+XPLMDataRef PanelLightsData = NULL;
+XPLMDataRef BeaconLightsData = NULL;
+XPLMDataRef NavLightsData = NULL;
+XPLMDataRef StrobeLightsData = NULL;
+XPLMDataRef TaxiLightsData = NULL;
+XPLMDataRef LandingLightsData = NULL;
+
+
 XPLMMenuID      SwitchMenu;
 XPLMMenuID      SwitchMenuId;
 
@@ -586,43 +637,131 @@ int strobelightswitchenable, taxilightswitchenable;
 int landinglightswitchenable, bataltinverse;
 int panellightsenable, starterswitchenable;
 
-string mag_off_switch_on, mag_off_switch_off;
-string mag_right_switch_on, mag_right_switch_off;
-string mag_left_switch_on, mag_left_switch_off;
-string mag_both_switch_on, mag_both_switch_off;
-string mag_start_switch_on, mag_start_switch_off;
+int mag_off_switch_data_on_value, mag_off_switch_data_off_value;
+int mag_right_switch_data_on_value, mag_right_switch_data_off_value;
+int mag_left_switch_data_on_value, mag_left_switch_data_off_value;
+int mag_both_switch_data_on_value, mag_both_switch_data_off_value;
+int mag_start_switch_data_on_value, mag_start_switch_data_off_value;
 
-string bat_master_switch_on, bat_master_switch_off;
-string alt_master_switch_on, alt_master_switch_off;
-string av_master_switch_on, av_master_switch_off;
+int bat_master_switch_data_on_value, bat_master_switch_data_off_value;
+int bat2_master_switch_data_on_value, bat2_master_switch_data_off_value;
+int bat3_master_switch_data_on_value, bat3_master_switch_data_off_value;
+int bat4_master_switch_data_on_value, bat4_master_switch_data_off_value;
+int bat5_master_switch_data_on_value, bat5_master_switch_data_off_value;
+int bat6_master_switch_data_on_value, bat6_master_switch_data_off_value;
+int bat7_master_switch_data_on_value, bat7_master_switch_data_off_value;
+int bat8_master_switch_data_on_value, bat8_master_switch_data_off_value;
 
-string fuel_pump_switch_on, fuel_pump_switch_off;
-string fuel_pump2_switch_on, fuel_pump2_switch_off;
-string fuel_pump3_switch_on, fuel_pump3_switch_off;
-string fuel_pump4_switch_on, fuel_pump4_switch_off;
+int alt_master_switch_data_on_value, alt_master_switch_data_off_value;
+int alt2_master_switch_data_on_value, alt2_master_switch_data_off_value;
+int alt3_master_switch_data_on_value, alt3_master_switch_data_off_value;
+int alt4_master_switch_data_on_value, alt4_master_switch_data_off_value;
+int alt5_master_switch_data_on_value, alt5_master_switch_data_off_value;
+int alt6_master_switch_data_on_value, alt6_master_switch_data_off_value;
+int alt7_master_switch_data_on_value, alt7_master_switch_data_off_value;
+int alt8_master_switch_data_on_value, alt8_master_switch_data_off_value;
 
-string deice_switch_on, deice_switch_off;
-string deice2_switch_on, deice2_switch_off;
-string deice3_switch_on, deice3_switch_off;
-string deice4_switch_on, deice4_switch_off;
-string deice5_switch_on, deice5_switch_off;
-string deice6_switch_on, deice6_switch_off;
-string deice7_switch_on, deice7_switch_off;
-string deice8_switch_on, deice8_switch_off;
 
-string pitot_heat_switch_on, pitot_heat_switch_off;
-string pitot2_heat_switch_on, pitot2_heat_switch_off;
+int av_master_switch_data_on_value, av_master_switch_data_off_value;
+int av2_master_switch_data_on_value, av2_master_switch_data_off_value;
+int av3_master_switch_data_on_value, av3_master_switch_data_off_value;
+int av4_master_switch_data_on_value, av4_master_switch_data_off_value;
+int av5_master_switch_data_on_value, av5_master_switch_data_off_value;
+int av6_master_switch_data_on_value, av6_master_switch_data_off_value;
+int av7_master_switch_data_on_value, av7_master_switch_data_off_value;
+int av8_master_switch_data_on_value, av8_master_switch_data_off_value;
 
-string gear_switch_up_on, gear_switch_up_off;
-string gear_switch_down_on, gear_switch_down_off;
-string cowl_flaps_open, cowl_flaps_close;
-string cowl2_flaps_open, cowl2_flaps_close;
-string panel_lights_switch_on, panel_lights_switch_off;
-string beacon_lights_switch_on, beacon_lights_switch_off;
-string nav_lights_switch_on, nav_lights_switch_off;
-string strobe_lights_switch_on, strobe_lights_switch_off;
-string taxi_lights_switch_on, taxi_lights_switch_off;
-string landing_lights_switch_on, landing_lights_switch_off;
+
+
+int fuel_pump_switch_data_on_value, fuel_pump_switch_data_off_value;
+int fuel_pump2_switch_data_on_value, fuel_pump2_switch_data_off_value;
+int fuel_pump3_switch_data_on_value, fuel_pump3_switch_data_off_value;
+int fuel_pump4_switch_data_on_value, fuel_pump4_switch_data_off_value;
+
+int deice_switch_data_on_value, deice_switch_data_off_value;
+int deice2_switch_data_on_value, deice2_switch_data_off_value;
+int deice3_switch_data_on_value, deice3_switch_data_off_value;
+int deice4_switch_data_on_value, deice4_switch_data_off_value;
+int deice5_switch_data_on_value, deice5_switch_data_off_value;
+int deice6_switch_data_on_value, deice6_switch_data_off_value;
+int deice7_switch_data_on_value, deice7_switch_data_off_value;
+int deice8_switch_data_on_value, deice8_switch_data_off_value;
+
+int pitot_heat_switch_data_on_value, pitot_heat_switch_data_off_value;
+int pitot2_heat_switch_data_on_value, pitot2_heat_switch_data_off_value;
+
+int gear_switch_up_data_on_value, gear_switch_up_data_off_value;
+int gear_switch_down_data_on_value, gear_switch_down_data_off_value;
+int cowl_flaps_data_on_value, cowl_flaps_data_off_value;
+int cowl2_flaps_data_on_value, cowl2_flaps_data_off_value;
+int panel_lights_switch_data_on_value, panel_lights_switch_data_off_value;
+int beacon_lights_switch_data_on_value, beacon_lights_switch_data_off_value;
+int nav_lights_switch_data_on_value, nav_lights_switch_data_off_value;
+int strobe_lights_switch_data_on_value, strobe_lights_switch_data_off_value;
+int taxi_lights_switch_data_on_value, taxi_lights_switch_data_off_value;
+int landing_lights_switch_data_on_value, landing_lights_switch_data_off_value;
+
+
+string mag_off_switch_on, mag_off_switch_off, mag_off_switch_data;
+string mag_right_switch_on, mag_right_switch_off, mag_right_switch_data;
+string mag_left_switch_on, mag_left_switch_off, mag_left_switch_data;
+string mag_both_switch_on, mag_both_switch_off, mag_both_switch_data;
+string mag_start_switch_on, mag_start_switch_off, mag_start_switch_data;
+
+string bat_master_switch_on, bat_master_switch_off, bat_master_switch_data;
+string bat2_master_switch_on, bat2_master_switch_off, bat2_master_switch_data;
+string bat3_master_switch_on, bat3_master_switch_off, bat3_master_switch_data;
+string bat4_master_switch_on, bat4_master_switch_off, bat4_master_switch_data;
+string bat5_master_switch_on, bat5_master_switch_off, bat5_master_switch_data;
+string bat6_master_switch_on, bat6_master_switch_off, bat6_master_switch_data;
+string bat7_master_switch_on, bat7_master_switch_off, bat7_master_switch_data;
+string bat8_master_switch_on, bat8_master_switch_off, bat8_master_switch_data;
+
+string alt_master_switch_on, alt_master_switch_off, alt_master_switch_data;
+string alt2_master_switch_on, alt2_master_switch_off, alt2_master_switch_data;
+string alt3_master_switch_on, alt3_master_switch_off, alt3_master_switch_data;
+string alt4_master_switch_on, alt4_master_switch_off, alt4_master_switch_data;
+string alt5_master_switch_on, alt5_master_switch_off, alt5_master_switch_data;
+string alt6_master_switch_on, alt6_master_switch_off, alt6_master_switch_data;
+string alt7_master_switch_on, alt7_master_switch_off, alt7_master_switch_data;
+string alt8_master_switch_on, alt8_master_switch_off, alt8_master_switch_data;
+
+string av_master_switch_on, av_master_switch_off, av_master_switch_data;
+string av2_master_switch_on, av2_master_switch_off, av2_master_switch_data;
+string av3_master_switch_on, av3_master_switch_off, av3_master_switch_data;
+string av4_master_switch_on, av4_master_switch_off, av4_master_switch_data;
+string av5_master_switch_on, av5_master_switch_off, av5_master_switch_data;
+string av6_master_switch_on, av6_master_switch_off, av6_master_switch_data;
+string av7_master_switch_on, av7_master_switch_off, av7_master_switch_data;
+string av8_master_switch_on, av8_master_switch_off, av8_master_switch_data;
+
+string fuel_pump_switch_on, fuel_pump_switch_off, fuel_pump_switch_data;
+string fuel_pump2_switch_on, fuel_pump2_switch_off, fuel_pump2_switch_data;
+string fuel_pump3_switch_on, fuel_pump3_switch_off, fuel_pump3_switch_data;
+string fuel_pump4_switch_on, fuel_pump4_switch_off, fuel_pump4_switch_data;
+
+string deice_switch_on, deice_switch_off, deice_switch_data;
+string deice2_switch_on, deice2_switch_off, deice2_switch_data;
+string deice3_switch_on, deice3_switch_off, deice3_switch_data;
+string deice4_switch_on, deice4_switch_off, deice4_switch_data;
+string deice5_switch_on, deice5_switch_off, deice5_switch_data;
+string deice6_switch_on, deice6_switch_off, deice6_switch_data;
+string deice7_switch_on, deice7_switch_off, deice7_switch_data;
+string deice8_switch_on, deice8_switch_off, deice8_switch_data;
+
+string pitot_heat_switch_on, pitot_heat_switch_off, pitot_heat_switch_data;
+string pitot2_heat_switch_on, pitot2_heat_switch_off, pitot2_heat_switch_data;
+
+string gear_switch_up_on, gear_switch_up_off,gear_switch_up_data ;
+string gear_switch_down_on, gear_switch_down_off, gear_switch_down_data;
+string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data ;
+string cowl2_flaps_open, cowl2_flaps_close, cowl2_flaps_data;
+string panel_lights_switch_on, panel_lights_switch_off, panel_lights_switch_data;
+string beacon_lights_switch_on, beacon_lights_switch_off, beacon_lights_switch_data;
+string nav_lights_switch_on, nav_lights_switch_off, nav_lights_switch_data;
+string strobe_lights_switch_on, strobe_lights_switch_off, strobe_lights_switch_data;
+string taxi_lights_switch_on, taxi_lights_switch_off, taxi_lights_switch_data;
+string landing_lights_switch_on, landing_lights_switch_off, landing_lights_switch_data;
 
 const char *GearTestStrUp;
 
@@ -726,10 +865,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.13\n");
+  XPLMDebugString("Xsaitekpanels: v2.14\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.13");
+  strcpy(outName, "Xsaitekpanels v2.14");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 

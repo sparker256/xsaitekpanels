@@ -268,7 +268,15 @@ void process_read_ini_file()
         mag_off_switch_off = getOptionToString("mag_off_switch_off_cmd");
         MagOffSwitchOnCmd   = XPLMFindCommand(mag_off_switch_on.c_str());
         MagOffSwitchOffCmd   = XPLMFindCommand(mag_off_switch_off.c_str());
-     }
+    }
+
+    if (magoffswitchenable == 3) {
+        mag_off_switch_data = getOptionToString("mag_off_switch_data");
+        MagOffSwitchData   = XPLMFindDataRef(mag_off_switch_data.c_str());
+        mag_off_switch_data_on_value = getOptionToInt("mag_off_switch_data_on_value");
+        mag_off_switch_data_off_value = getOptionToInt("mag_off_switch_data_off_value");
+    }
+
 
     // mag right switch disable - enable - remap
     magrightswitchenable = getOptionToInt("Mag Right Switch enable");
@@ -360,6 +368,52 @@ void process_read_ini_file()
             bat_master_switch_off = getOptionToString("bat_master_switch_cmd");
             BatMasterSwitchOnCmd   = XPLMFindCommand(bat_master_switch_on.c_str());
             BatMasterSwitchOffCmd   = XPLMFindCommand(bat_master_switch_off.c_str());
+
+
+    }
+
+    if (batmasterswitchenable == 3) {
+            bat_master_switch_data = getOptionToString("bat_master_switch_data");
+            BatMasterSwitchData   = XPLMFindDataRef(bat_master_switch_data.c_str());
+            bat_master_switch_data_on_value = getOptionToInt("bat_master_switch_data_on_value");
+            bat_master_switch_data_off_value = getOptionToInt("bat_master_switch_data_off_value");
+
+            bat2_master_switch_data = getOptionToString("bat2_master_switch_data");
+            Bat2MasterSwitchData   = XPLMFindDataRef(bat2_master_switch_data.c_str());
+            bat2_master_switch_data_on_value = getOptionToInt("bat2_master_switch_data_on_value");
+            bat2_master_switch_data_off_value = getOptionToInt("bat2_master_switch_data_off_value");
+
+            bat3_master_switch_data = getOptionToString("bat3_master_switch_data");
+            Bat3MasterSwitchData   = XPLMFindDataRef(bat3_master_switch_data.c_str());
+            bat3_master_switch_data_on_value = getOptionToInt("bat3_master_switch_data_on_value");
+            bat3_master_switch_data_off_value = getOptionToInt("bat3_master_switch_data_off_value");
+
+            bat4_master_switch_data = getOptionToString("bat4_master_switch_data");
+            Bat4MasterSwitchData   = XPLMFindDataRef(bat4_master_switch_data.c_str());
+            bat4_master_switch_data_on_value = getOptionToInt("bat4_master_switch_data_on_value");
+            bat4_master_switch_data_off_value = getOptionToInt("bat4_master_switch_data_off_value");
+
+            bat5_master_switch_data = getOptionToString("bat5_master_switch_data");
+            Bat5MasterSwitchData   = XPLMFindDataRef(bat5_master_switch_data.c_str());
+            bat5_master_switch_data_on_value = getOptionToInt("bat5_master_switch_data_on_value");
+            bat5_master_switch_data_off_value = getOptionToInt("bat5_master_switch_data_off_value");
+
+            bat6_master_switch_data = getOptionToString("bat6_master_switch_data");
+            Bat6MasterSwitchData   = XPLMFindDataRef(bat6_master_switch_data.c_str());
+            bat6_master_switch_data_on_value = getOptionToInt("bat6_master_switch_data_on_value");
+            bat6_master_switch_data_off_value = getOptionToInt("bat6_master_switch_data_off_value");
+
+            bat7_master_switch_data = getOptionToString("bat7_master_switch_data");
+            Bat7MasterSwitchData   = XPLMFindDataRef(bat7_master_switch_data.c_str());
+            bat7_master_switch_data_on_value = getOptionToInt("bat7_master_switch_data_on_value");
+            bat7_master_switch_data_off_value = getOptionToInt("bat7_master_switch_data_off_value");
+
+            bat8_master_switch_data = getOptionToString("bat8_master_switch_data");
+            Bat8MasterSwitchData   = XPLMFindDataRef(bat8_master_switch_data.c_str());
+            bat8_master_switch_data_on_value = getOptionToInt("bat8_master_switch_data_on_value");
+            bat8_master_switch_data_off_value = getOptionToInt("bat8_master_switch_data_off_value");
+
+
     }
 
 
@@ -382,6 +436,48 @@ void process_read_ini_file()
             AltMasterSwitchOffCmd   = XPLMFindCommand(alt_master_switch_off.c_str());
     }
 
+    if (altmasterswitchenable == 3) {
+            alt_master_switch_data = getOptionToString("alt_master_switch_data");
+            AltMasterSwitchData   = XPLMFindDataRef(alt_master_switch_data.c_str());
+            alt_master_switch_data_on_value = getOptionToInt("alt_master_switch_data_on_value");
+            alt_master_switch_data_off_value = getOptionToInt("alt_master_switch_data_off_value");
+
+            alt2_master_switch_data = getOptionToString("alt2_master_switch_data");
+            Alt2MasterSwitchData   = XPLMFindDataRef(alt2_master_switch_data.c_str());
+            alt2_master_switch_data_on_value = getOptionToInt("alt2_master_switch_data_on_value");
+            alt2_master_switch_data_off_value = getOptionToInt("alt2_master_switch_data_off_value");
+
+            alt3_master_switch_data = getOptionToString("alt3_master_switch_data");
+            Alt3MasterSwitchData   = XPLMFindDataRef(alt3_master_switch_data.c_str());
+            alt3_master_switch_data_on_value = getOptionToInt("alt3_master_switch_data_on_value");
+            alt3_master_switch_data_off_value = getOptionToInt("alt3_master_switch_data_off_value");
+
+            alt4_master_switch_data = getOptionToString("alt4_master_switch_data");
+            Alt4MasterSwitchData   = XPLMFindDataRef(alt4_master_switch_data.c_str());
+            alt4_master_switch_data_on_value = getOptionToInt("alt4_master_switch_data_on_value");
+            alt4_master_switch_data_off_value = getOptionToInt("alt4_master_switch_data_off_value");
+
+            alt5_master_switch_data = getOptionToString("alt5_master_switch_data");
+            Alt5MasterSwitchData   = XPLMFindDataRef(alt5_master_switch_data.c_str());
+            alt5_master_switch_data_on_value = getOptionToInt("alt5_master_switch_data_on_value");
+            alt5_master_switch_data_off_value = getOptionToInt("alt5_master_switch_data_off_value");
+
+            alt6_master_switch_data = getOptionToString("alt6_master_switch_data");
+            Alt6MasterSwitchData   = XPLMFindDataRef(alt6_master_switch_data.c_str());
+            alt6_master_switch_data_on_value = getOptionToInt("alt6_master_switch_data_on_value");
+            alt6_master_switch_data_off_value = getOptionToInt("alt6_master_switch_data_off_value");
+
+            alt7_master_switch_data = getOptionToString("alt7_master_switch_data");
+            Alt7MasterSwitchData   = XPLMFindDataRef(alt7_master_switch_data.c_str());
+            alt7_master_switch_data_on_value = getOptionToInt("alt7_master_switch_data_on_value");
+            alt7_master_switch_data_off_value = getOptionToInt("alt7_master_switch_data_off_value");
+
+            alt8_master_switch_data = getOptionToString("alt8_master_switch_data");
+            Alt8MasterSwitchData   = XPLMFindDataRef(alt8_master_switch_data.c_str());
+            alt8_master_switch_data_on_value = getOptionToInt("alt8_master_switch_data_on_value");
+            alt8_master_switch_data_off_value = getOptionToInt("alt8_master_switch_data_off_value");
+    }
+
     // avionics master switch disable - enable - remap
     avionicsmasterswitchenable = getOptionToInt("Avionics master Switch enable");
     if (avionicsmasterswitchenable == 0) {
@@ -399,6 +495,50 @@ void process_read_ini_file()
             AvMasterSwitchOnCmd   = XPLMFindCommand(av_master_switch_on.c_str());
             AvMasterSwitchOffCmd   = XPLMFindCommand(av_master_switch_off.c_str());
     }
+
+    if (avionicsmasterswitchenable == 3) {
+            av_master_switch_data = getOptionToString("av_master_switch_data");
+            AvMasterSwitchData   = XPLMFindDataRef(av_master_switch_data.c_str());
+            av_master_switch_data_on_value = getOptionToInt("av_master_switch_data_on_value");
+            av_master_switch_data_off_value = getOptionToInt("av_master_switch_data_off_value");
+
+            av2_master_switch_data = getOptionToString("av2_master_switch_data");
+            Av2MasterSwitchData   = XPLMFindDataRef(av2_master_switch_data.c_str());
+            av2_master_switch_data_on_value = getOptionToInt("av2_master_switch_data_on_value");
+            av2_master_switch_data_off_value = getOptionToInt("av2_master_switch_data_off_value")
+                    ;
+            av3_master_switch_data = getOptionToString("av3_master_switch_data");
+            Av3MasterSwitchData   = XPLMFindDataRef(av3_master_switch_data.c_str());
+            av3_master_switch_data_on_value = getOptionToInt("av3_master_switch_data_on_value");
+            av3_master_switch_data_off_value = getOptionToInt("av3_master_switch_data_off_value");
+
+            av4_master_switch_data = getOptionToString("av4_master_switch_data");
+            Av4MasterSwitchData   = XPLMFindDataRef(av4_master_switch_data.c_str());
+            av4_master_switch_data_on_value = getOptionToInt("av4_master_switch_data_on_value");
+            av4_master_switch_data_off_value = getOptionToInt("av4_master_switch_data_off_value");
+
+            av5_master_switch_data = getOptionToString("av5_master_switch_data");
+            Av5MasterSwitchData   = XPLMFindDataRef(av5_master_switch_data.c_str());
+            av5_master_switch_data_on_value = getOptionToInt("av5_master_switch_data_on_value");
+            av5_master_switch_data_off_value = getOptionToInt("av5_master_switch_data_off_value");
+
+            av6_master_switch_data = getOptionToString("av6_master_switch_data");
+            Av6MasterSwitchData   = XPLMFindDataRef(av6_master_switch_data.c_str());
+            av6_master_switch_data_on_value = getOptionToInt("av6_master_switch_data_on_value");
+            av6_master_switch_data_off_value = getOptionToInt("av6_master_switch_data_off_value");
+
+            av7_master_switch_data = getOptionToString("av7_master_switch_data");
+            Av7MasterSwitchData   = XPLMFindDataRef(av7_master_switch_data.c_str());
+            av7_master_switch_data_on_value = getOptionToInt("av7_master_switch_data_on_value");
+            av7_master_switch_data_off_value = getOptionToInt("av7_master_switch_data_off_value");
+
+            av8_master_switch_data = getOptionToString("av8_master_switch_data");
+            Av8MasterSwitchData   = XPLMFindDataRef(av8_master_switch_data.c_str());
+            av8_master_switch_data_on_value = getOptionToInt("av8_master_switch_data_on_value");
+            av8_master_switch_data_off_value = getOptionToInt("av8_master_switch_data_off_value");
+
+    }
+
 
     // fuel pump switch disable - enable - remap
     fuelpumpswitchenable = getOptionToInt("Fuel Pump Switch enable");
@@ -431,6 +571,30 @@ void process_read_ini_file()
         fuel_pump4_switch_off = getOptionToString("fuel_pump4_switch_off_cmd");
         FuelPump4OnCmd   = XPLMFindCommand(fuel_pump4_switch_on.c_str());
         FuelPump4OffCmd   = XPLMFindCommand(fuel_pump4_switch_off.c_str());
+
+    }
+
+    if (fuelpumpswitchenable == 3) {
+
+        fuel_pump_switch_data = getOptionToString("fuel_pump_switch_data");
+        FuelPumpSwitchData   = XPLMFindDataRef(fuel_pump_switch_data.c_str());
+        fuel_pump_switch_data_on_value = getOptionToInt("fuel_pump_switch_data_on_value");
+        fuel_pump_switch_data_off_value = getOptionToInt("fuel_pump_switch_data_off_value");
+
+        fuel_pump2_switch_data = getOptionToString("fuel_pump2_switch_data");
+        FuelPump2SwitchData   = XPLMFindDataRef(fuel_pump2_switch_data.c_str());
+        fuel_pump2_switch_data_on_value = getOptionToInt("fuel_pump2_switch_data_on_value");
+        fuel_pump2_switch_data_off_value = getOptionToInt("fuel_pump2_switch_data_off_value");
+
+        fuel_pump3_switch_data = getOptionToString("fuel_pump3_switch_data");
+        FuelPump3SwitchData   = XPLMFindDataRef(fuel_pump3_switch_data.c_str());
+        fuel_pump3_switch_data_on_value = getOptionToInt("fuel_pump3_switch_data_on_value");
+        fuel_pump3_switch_data_off_value = getOptionToInt("fuel_pump3_switch_data_off_value");
+
+        fuel_pump4_switch_data = getOptionToString("fuel_pump4_switch_data");
+        FuelPump4SwitchData   = XPLMFindDataRef(fuel_pump4_switch_data.c_str());
+        fuel_pump4_switch_data_on_value = getOptionToInt("fuel_pump4_switch_data_on_value");
+        fuel_pump4_switch_data_off_value = getOptionToInt("fuel_pump4_switch_data_off_value");
 
     }
 
@@ -489,7 +653,49 @@ void process_read_ini_file()
         DeiceOnCmd8   = XPLMFindCommand(deice8_switch_on.c_str());
         DeiceOffCmd8   = XPLMFindCommand(deice8_switch_off.c_str());
 
+    }
 
+    if (deiceswitchenable == 3) {
+
+        deice_switch_data = getOptionToString("deice_switch_data");
+        DeiceSwitchData   = XPLMFindDataRef(deice_switch_data.c_str());
+        deice_switch_data_on_value = getOptionToInt("deice_switch_data_on_value");
+        deice_switch_data_off_value = getOptionToInt("deice_switch_data_off_value");
+
+        deice2_switch_data = getOptionToString("deice2_switch_data");
+        Deice2SwitchData   = XPLMFindDataRef(deice2_switch_data.c_str());
+        deice2_switch_data_on_value = getOptionToInt("deice2_switch_data_on_value");
+        deice2_switch_data_off_value = getOptionToInt("deice2_switch_data_off_value");
+
+        deice3_switch_data = getOptionToString("deice3_switch_data");
+        Deice3SwitchData   = XPLMFindDataRef(deice3_switch_data.c_str());
+        deice3_switch_data_on_value = getOptionToInt("deice3_switch_data_on_value");
+        deice3_switch_data_off_value = getOptionToInt("deice3_switch_data_off_value");
+
+        deice4_switch_data = getOptionToString("deice4_switch_data");
+        Deice4SwitchData   = XPLMFindDataRef(deice4_switch_data.c_str());
+        deice4_switch_data_on_value = getOptionToInt("deice4_switch_data_on_value");
+        deice4_switch_data_off_value = getOptionToInt("deice4_switch_data_off_value");
+
+        deice5_switch_data = getOptionToString("deice5_switch_data");
+        Deice5SwitchData   = XPLMFindDataRef(deice5_switch_data.c_str());
+        deice5_switch_data_on_value = getOptionToInt("deice5_switch_data_on_value");
+        deice5_switch_data_off_value = getOptionToInt("deice5_switch_data_off_value");
+
+        deice6_switch_data = getOptionToString("deice6_switch_data");
+        Deice6SwitchData   = XPLMFindDataRef(deice6_switch_data.c_str());
+        deice6_switch_data_on_value = getOptionToInt("deice6_switch_data_on_value");
+        deice6_switch_data_off_value = getOptionToInt("deice6_switch_data_off_value");
+
+        deice7_switch_data = getOptionToString("deice7_switch_data");
+        Deice7SwitchData   = XPLMFindDataRef(deice7_switch_data.c_str());
+        deice7_switch_data_on_value = getOptionToInt("deice7_switch_data_on_value");
+        deice7_switch_data_off_value = getOptionToInt("deice7_switch_data_off_value");
+
+        deice8_switch_data = getOptionToString("deice8_switch_data");
+        Deice8SwitchData   = XPLMFindDataRef(deice8_switch_data.c_str());
+        deice8_switch_data_on_value = getOptionToInt("deice8_switch_data_on_value");
+        deice8_switch_data_off_value = getOptionToInt("deice8_switch_data_off_value");
 
     }
 
@@ -518,6 +724,19 @@ void process_read_ini_file()
         Pitot2HeatOffCmd   = XPLMFindCommand(pitot2_heat_switch_off.c_str());
     }
 
+    if (pitotheatswitchenable == 3) {
+        pitot_heat_switch_data = getOptionToString("pitot_heat_switch_data");
+        PitotHeatSwitchData   = XPLMFindDataRef(pitot_heat_switch_on.c_str());
+        pitot_heat_switch_data_on_value = getOptionToInt("pitot_heat_switch_data_on_value");
+        pitot_heat_switch_data_off_value = getOptionToInt("pitot_heat_switch_data_off_value");
+
+        pitot2_heat_switch_data = getOptionToString("pitot2_heat_switch_data");
+        Pitot2HeatSwitchData   = XPLMFindDataRef(pitot2_heat_switch_on.c_str());
+        pitot2_heat_switch_data_on_value = getOptionToInt("pitot2_heat_switch_data_on_value");
+        pitot2_heat_switch_data_off_value = getOptionToInt("pitot2_heat_switch_data_off_value");
+
+    }
+
     // landing gear up knob disable - enable - remap
     landinggearknobupenable = getOptionToInt("Landing Gear Knob Up enable");
     if (landinggearknobupenable == 0) {
@@ -534,6 +753,14 @@ void process_read_ini_file()
          gear_switch_up_off = getOptionToString("gear_up_switch_off_cmd");
          GearUpOnCmd   = XPLMFindCommand(gear_switch_up_on.c_str());
          GearUpOnCmd   = XPLMFindCommand(gear_switch_up_off.c_str());
+     }
+
+     if (landinggearknobupenable == 3) {
+         gear_switch_up_data = getOptionToString("gear_up_switch_data");
+         GearUpData   = XPLMFindDataRef(gear_switch_up_on.c_str());
+         gear_switch_up_data_on_value = getOptionToInt("gear_up_switch_data_on_value");
+         gear_switch_up_data_off_value = getOptionToInt("gear_up_switch_data_off_value");
+
      }
 
      // landing gear dn knob disable - enable - remap
@@ -553,6 +780,15 @@ void process_read_ini_file()
           GearDnOnCmd   = XPLMFindCommand(gear_switch_down_on.c_str());
           GearDnOffCmd   = XPLMFindCommand(gear_switch_down_off.c_str());
       }
+
+      if (landinggearknobdnenable == 3) {
+          gear_switch_down_data = getOptionToString("gear_dn_switch_data");
+          GearDnData   = XPLMFindDataRef(gear_switch_down_data.c_str());
+          gear_switch_down_data_on_value = getOptionToInt("gear_dn_switch_data_on_value");
+          gear_switch_down_data_off_value = getOptionToInt("gear_dn_switch_data_off_value");
+      }
+
+
 
    // cowl flaps switch disable - enable - remap
     cowlflapsenable = getOptionToInt("Cowl Flaps enable");
@@ -578,6 +814,20 @@ void process_read_ini_file()
         Cowl2FlapsCloseCmd   = XPLMFindCommand(cowl2_flaps_close.c_str());
     }
 
+    if (cowlflapsenable == 3) {
+        cowl_flaps_data = getOptionToString("cowl_flaps_data");
+        CowlFlapsData   = XPLMFindDataRef(cowl_flaps_data.c_str());
+        cowl_flaps_data_on_value = getOptionToInt("cowl_flaps_data_open_value");
+        cowl_flaps_data_off_value = getOptionToInt("cowl_flaps_data_close_value");
+
+        cowl2_flaps_data = getOptionToString("cowl2_flaps_data");
+        Cowl2FlapsData   = XPLMFindDataRef(cowl2_flaps_data.c_str());
+        cowl2_flaps_data_on_value = getOptionToInt("cowl2_flaps_data_open_value");
+        cowl2_flaps_data_off_value = getOptionToInt("cowl2_flaps_data_close_value");
+
+    }
+
+
     // panel lights switch disable - enable - remap
     panellightswitchenable = getOptionToInt("Panel Lights Switch enable");
     if (panellightswitchenable == 0) {
@@ -594,6 +844,13 @@ void process_read_ini_file()
          panel_lights_switch_off = getOptionToString("panel_lights_switch_off_cmd");
          PanelLightsOnCmd   = XPLMFindCommand(panel_lights_switch_on.c_str());
          PanelLightsOffCmd   = XPLMFindCommand(panel_lights_switch_off.c_str());
+     }
+
+     if (panellightswitchenable == 3) {
+         panel_lights_switch_data = getOptionToString("panel_lights_switch_data");
+         PanelLightsData   = XPLMFindDataRef(panel_lights_switch_data.c_str());
+         panel_lights_switch_data_on_value = getOptionToInt("panel_lights_switch_data_on_value");
+         panel_lights_switch_data_off_value = getOptionToInt("panel_lights_switch_data_off_value");
      }
 
      // beacon lights switch disable - enable - remap
@@ -614,6 +871,13 @@ void process_read_ini_file()
           BeaconLightsOffCmd   = XPLMFindCommand(beacon_lights_switch_off.c_str());
       }
 
+      if (beaconlightswitchenable == 3) {
+          beacon_lights_switch_data = getOptionToString("beacon_lights_switch_data");
+          BeaconLightsData   = XPLMFindDataRef(beacon_lights_switch_data.c_str());
+          beacon_lights_switch_data_on_value = getOptionToInt("beacon_lights_switch_data_on_value");
+          beacon_lights_switch_data_off_value = getOptionToInt("beacon_lights_switch_data_off_value");
+      }
+
       // nav lights switch disable - enable - remap
       navlightswitchenable = getOptionToInt("Nav Lights Switch enable");
       if (navlightswitchenable == 0) {
@@ -632,6 +896,13 @@ void process_read_ini_file()
            NavLightsOffCmd   = XPLMFindCommand(nav_lights_switch_off.c_str());
        }
 
+       if (navlightswitchenable == 3) {
+           nav_lights_switch_data = getOptionToString("nav_lights_switch_data");
+           NavLightsData   = XPLMFindDataRef(nav_lights_switch_data.c_str());
+           nav_lights_switch_data_on_value = getOptionToInt("nav_lights_switch_data_on_value");
+           nav_lights_switch_data_off_value = getOptionToInt("nav_lights_switch_data_off_value");
+       }
+
        // strobe lights switch disable - enable - remap
        strobelightswitchenable = getOptionToInt("Strobe Lights Switch enable");
        if (strobelightswitchenable == 0) {
@@ -647,6 +918,14 @@ void process_read_ini_file()
             strobe_lights_switch_off = getOptionToString("strobe_lights_switch_off_cmd");
             StrobeLightsOnCmd   = XPLMFindCommand(strobe_lights_switch_on.c_str());
             StrobeLightsOffCmd   = XPLMFindCommand(strobe_lights_switch_off.c_str());
+        }
+
+        if (strobelightswitchenable == 3) {
+            strobe_lights_switch_data = getOptionToString("strobe_lights_switch_data");
+            StrobeLightsData   = XPLMFindDataRef(strobe_lights_switch_data.c_str());
+            strobe_lights_switch_data_on_value = getOptionToInt("strobe_lights_switch_data_on_value");
+            strobe_lights_switch_data_off_value = getOptionToInt("strobe_lights_switch_data_off_value");
+
         }
 
         // taxi lights switch disable - enable - remap
@@ -667,6 +946,14 @@ void process_read_ini_file()
              TaxiLightsOffCmd   = XPLMFindCommand(taxi_lights_switch_off.c_str());
          }
 
+         if (taxilightswitchenable == 3) {
+             taxi_lights_switch_data = getOptionToString("taxi_lights_switch_data");
+             TaxiLightsData   = XPLMFindDataRef(taxi_lights_switch_data.c_str());
+             taxi_lights_switch_data_on_value = getOptionToInt("taxi_lights_switch_data_on_value");
+             taxi_lights_switch_data_off_value = getOptionToInt("taxi_lights_switch_data_off_value");
+
+         }
+
          // landing lights switch disable - enable - remap
          landinglightswitchenable = getOptionToInt("Landing Lights Switch enable");
          if (landinglightswitchenable == 0) {
@@ -685,6 +972,14 @@ void process_read_ini_file()
               LandingLightsOnCmd   = XPLMFindCommand(landing_lights_switch_on.c_str());
               LandingLightsOffCmd   = XPLMFindCommand(landing_lights_switch_off.c_str());
           }
+
+          if (landinglightswitchenable == 3) {
+              landing_lights_switch_data = getOptionToString("landing_lights_switch_data");
+              LandingLightsData   = XPLMFindDataRef(landing_lights_switch_data.c_str());
+              landing_lights_switch_data_on_value = getOptionToInt("landing_lights_switch_data_on_value");
+              landing_lights_switch_data_off_value = getOptionToInt("landing_lights_switch_data_off_value");
+          }
+
 
     bataltinverse = getOptionToInt("Bat Alt inverse");
 
