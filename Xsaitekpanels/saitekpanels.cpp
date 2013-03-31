@@ -343,12 +343,20 @@ XPLMDataRef CowlFlaps = NULL, CockpitLights = NULL, AntiIce = NULL;
 XPLMDataRef GearRetract = NULL, OnGround = NULL, LandingGearStatus = {NULL};
 XPLMDataRef Gear1Fail = NULL, Gear2Fail = NULL, Gear3Fail = NULL;
 
-XPLMDataRef MagOffSwitchData = NULL;
-XPLMDataRef MagRightSwitchData = NULL;
-XPLMDataRef MagLeftSwitchData = NULL;
-XPLMDataRef MagBothSwitchData = NULL;
-XPLMDataRef MagStartSwitchData = NULL;
+XPLMDataRef MagOffSwitchData = NULL, MagOff2SwitchData = NULL;
+XPLMDataRef MagOff3SwitchData = NULL, MagOff4SwitchData = NULL;
 
+XPLMDataRef MagRightSwitchData = NULL, MagRight2SwitchData = NULL;
+XPLMDataRef MagRight3SwitchData = NULL, MagRight4SwitchData = NULL;
+
+XPLMDataRef MagLeftSwitchData = NULL, MagLeft2SwitchData = NULL;
+XPLMDataRef MagLeft3SwitchData = NULL, MagLeft4SwitchData = NULL;
+
+XPLMDataRef MagBothSwitchData = NULL, MagBoth2SwitchData = NULL;
+XPLMDataRef MagBoth3SwitchData = NULL, MagBoth4SwitchData = NULL;
+
+XPLMDataRef MagStartSwitchData = NULL, MagStart2SwitchData = NULL;
+XPLMDataRef MagStart3SwitchData = NULL, MagStart4SwitchData = NULL;
 
 XPLMDataRef BatMasterSwitchData = NULL, Bat2MasterSwitchData = NULL;
 XPLMDataRef Bat3MasterSwitchData = NULL, Bat4MasterSwitchData = NULL;
@@ -379,8 +387,12 @@ XPLMDataRef Deice6SwitchData = NULL;
 XPLMDataRef Deice7SwitchData = NULL;
 XPLMDataRef Deice8SwitchData = NULL;
 
-XPLMDataRef PitotHeatSwitchData = NULL;
-XPLMDataRef Pitot2HeatSwitchData = NULL;
+XPLMDataRef PitotHeatSwitchData = NULL, Pitot2HeatSwitchData = NULL;
+XPLMDataRef Pitot3HeatSwitchData = NULL, Pitot4HeatSwitchData = NULL;
+XPLMDataRef Pitot5HeatSwitchData = NULL, Pitot6HeatSwitchData = NULL;
+XPLMDataRef Pitot7HeatSwitchData = NULL, Pitot8HeatSwitchData = NULL;
+
+
 XPLMDataRef GearUpData = NULL;
 XPLMDataRef GearDnData = NULL;
 
@@ -638,10 +650,30 @@ int landinglightswitchenable, bataltinverse;
 int panellightsenable, starterswitchenable;
 
 int mag_off_switch_data_on_value, mag_off_switch_data_off_value;
+int mag_off2_switch_data_on_value, mag_off2_switch_data_off_value;
+int mag_off3_switch_data_on_value, mag_off3_switch_data_off_value;
+int mag_off4_switch_data_on_value, mag_off4_switch_data_off_value;
+
 int mag_right_switch_data_on_value, mag_right_switch_data_off_value;
+int mag_right2_switch_data_on_value, mag_right2_switch_data_off_value;
+int mag_right3_switch_data_on_value, mag_right3_switch_data_off_value;
+int mag_right4_switch_data_on_value, mag_right4_switch_data_off_value;
+
 int mag_left_switch_data_on_value, mag_left_switch_data_off_value;
+int mag_left2_switch_data_on_value, mag_left2_switch_data_off_value;
+int mag_left3_switch_data_on_value, mag_left3_switch_data_off_value;
+int mag_left4_switch_data_on_value, mag_left4_switch_data_off_value;
+
 int mag_both_switch_data_on_value, mag_both_switch_data_off_value;
+int mag_both2_switch_data_on_value, mag_both2_switch_data_off_value;
+int mag_both3_switch_data_on_value, mag_both3_switch_data_off_value;
+int mag_both4_switch_data_on_value, mag_both4_switch_data_off_value;
+
 int mag_start_switch_data_on_value, mag_start_switch_data_off_value;
+int mag_start2_switch_data_on_value, mag_start2_switch_data_off_value;
+int mag_start3_switch_data_on_value, mag_start3_switch_data_off_value;
+int mag_start4_switch_data_on_value, mag_start4_switch_data_off_value;
+
 
 int bat_master_switch_data_on_value, bat_master_switch_data_off_value;
 int bat2_master_switch_data_on_value, bat2_master_switch_data_off_value;
@@ -689,6 +721,16 @@ int deice8_switch_data_on_value, deice8_switch_data_off_value;
 
 int pitot_heat_switch_data_on_value, pitot_heat_switch_data_off_value;
 int pitot2_heat_switch_data_on_value, pitot2_heat_switch_data_off_value;
+int pitot3_heat_switch_data_on_value, pitot3_heat_switch_data_off_value;
+int pitot4_heat_switch_data_on_value, pitot4_heat_switch_data_off_value;
+int pitot5_heat_switch_data_on_value, pitot5_heat_switch_data_off_value;
+int pitot6_heat_switch_data_on_value, pitot6_heat_switch_data_off_value;
+int pitot7_heat_switch_data_on_value, pitot7_heat_switch_data_off_value;
+int pitot8_heat_switch_data_on_value, pitot8_heat_switch_data_off_value;
+
+
+
+
 
 int gear_switch_up_data_on_value, gear_switch_up_data_off_value;
 int gear_switch_down_data_on_value, gear_switch_down_data_off_value;
@@ -703,10 +745,29 @@ int landing_lights_switch_data_on_value, landing_lights_switch_data_off_value;
 
 
 string mag_off_switch_on, mag_off_switch_off, mag_off_switch_data;
+string mag_off2_switch_on, mag_off2_switch_off, mag_off2_switch_data;
+string mag_off3_switch_on, mag_off3_switch_off, mag_off3_switch_data;
+string mag_off4_switch_on, mag_off4_switch_off, mag_off4_switch_data;
+
 string mag_right_switch_on, mag_right_switch_off, mag_right_switch_data;
+string mag_right2_switch_on, mag_right2_switch_off, mag_right2_switch_data;
+string mag_right3_switch_on, mag_right3_switch_off, mag_right3_switch_data;
+string mag_right4_switch_on, mag_right4_switch_off, mag_right4_switch_data;
+
 string mag_left_switch_on, mag_left_switch_off, mag_left_switch_data;
+string mag_left2_switch_on, mag_left2_switch_off, mag_left2_switch_data;
+string mag_left3_switch_on, mag_left3_switch_off, mag_left3_switch_data;
+string mag_left4_switch_on, mag_left4_switch_off, mag_left4_switch_data;
+
 string mag_both_switch_on, mag_both_switch_off, mag_both_switch_data;
+string mag_both2_switch_on, mag_both2_switch_off, mag_both2_switch_data;
+string mag_both3_switch_on, mag_both3_switch_off, mag_both3_switch_data;
+string mag_both4_switch_on, mag_both4_switch_off, mag_both4_switch_data;
+
 string mag_start_switch_on, mag_start_switch_off, mag_start_switch_data;
+string mag_start2_switch_on, mag_start2_switch_off, mag_start2_switch_data;
+string mag_start3_switch_on, mag_start3_switch_off, mag_start3_switch_data;
+string mag_start4_switch_on, mag_start4_switch_off, mag_start4_switch_data;
 
 string bat_master_switch_on, bat_master_switch_off, bat_master_switch_data;
 string bat2_master_switch_on, bat2_master_switch_off, bat2_master_switch_data;
@@ -751,6 +812,12 @@ string deice8_switch_on, deice8_switch_off, deice8_switch_data;
 
 string pitot_heat_switch_on, pitot_heat_switch_off, pitot_heat_switch_data;
 string pitot2_heat_switch_on, pitot2_heat_switch_off, pitot2_heat_switch_data;
+string pitot3_heat_switch_on, pitot3_heat_switch_off, pitot3_heat_switch_data;
+string pitot4_heat_switch_on, pitot4_heat_switch_off, pitot4_heat_switch_data;
+string pitot5_heat_switch_on, pitot5_heat_switch_off, pitot5_heat_switch_data;
+string pitot6_heat_switch_on, pitot6_heat_switch_off, pitot6_heat_switch_data;
+string pitot7_heat_switch_on, pitot7_heat_switch_off, pitot7_heat_switch_data;
+string pitot8_heat_switch_on, pitot8_heat_switch_off, pitot8_heat_switch_data;
 
 string gear_switch_up_on, gear_switch_up_off,gear_switch_up_data ;
 string gear_switch_down_on, gear_switch_down_off, gear_switch_down_data;
