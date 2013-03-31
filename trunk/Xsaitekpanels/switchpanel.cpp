@@ -75,17 +75,25 @@ void process_engines_mag_off_switch()
     }
 
    if(magoffswitchenable == 2) {
+       if(testbit(switchbuf,MAG_OFF)) {
+           XPLMCommandOnce(MagOffSwitchOnCmd);
+       }
+       if(!testbit(switchbuf,MAG_OFF)) {
+           XPLMCommandOnce(MagOffSwitchOffCmd);
+       }
+       return;
+   }
 
-        if(testbit(switchbuf,MAG_OFF)) {
-          XPLMCommandOnce(MagOffSwitchOnCmd);
-         }
+   if(magoffswitchenable == 3) {
+       if(testbit(switchbuf,MAG_OFF)) {
+           XPLMSetDatai(MagOffSwitchData, mag_off_switch_data_on_value);
+           XPLMSetDatai(MagOff2SwitchData, mag_off2_switch_data_on_value);
+           XPLMSetDatai(MagOff3SwitchData, mag_off3_switch_data_on_value);
+           XPLMSetDatai(MagOff4SwitchData, mag_off4_switch_data_on_value);
+       }
+       return;
+   }
 
-        if(!testbit(switchbuf,MAG_OFF)) {
-          XPLMCommandOnce(MagOffSwitchOffCmd);
-        }
-
-        return;
-    }
 	if(testbit(switchbuf,MAG_OFF)) {
 	  if(engnum == 1){
         if(starterswitchenable == 1) {
@@ -149,17 +157,24 @@ void process_engines_right_mag_switch()
     }
 
    if(magrightswitchenable == 2) {
+       if(testbit(switchbuf,MAG_RIGHT)) {
+           XPLMCommandOnce(MagRightSwitchOnCmd);
+       }
+       if(!testbit(switchbuf,MAG_RIGHT)) {
+           XPLMCommandOnce(MagRightSwitchOffCmd);
+       }
+       return;
+   }
 
-        if(testbit(switchbuf,MAG_RIGHT)) {
-          XPLMCommandOnce(MagRightSwitchOnCmd);
-         }
-
-        if(!testbit(switchbuf,MAG_RIGHT)) {
-          XPLMCommandOnce(MagRightSwitchOffCmd);
-        }
-
-        return;
-    }
+   if(magrightswitchenable == 3) {
+       if(testbit(switchbuf,MAG_RIGHT)) {
+           XPLMSetDatai(MagRightSwitchData, mag_right_switch_data_on_value);
+           XPLMSetDatai(MagRight2SwitchData, mag_right2_switch_data_on_value);
+           XPLMSetDatai(MagRight3SwitchData, mag_right3_switch_data_on_value);
+           XPLMSetDatai(MagRight4SwitchData, mag_right4_switch_data_on_value);
+       }
+       return;
+   }
 	if(testbit(switchbuf,MAG_RIGHT)) {
 	  if(engnum == 1){
         if(starterswitchenable == 1) {
@@ -213,17 +228,24 @@ void process_engines_left_mag_switch()
     }
 
    if(magleftswitchenable == 2) {
+       if(testbit(switchbuf,MAG_LEFT)) {
+           XPLMCommandOnce(MagLeftSwitchOnCmd);
+       }
+       if(!testbit(switchbuf,MAG_LEFT)) {
+           XPLMCommandOnce(MagLeftSwitchOffCmd);
+       }
+       return;
+   }
 
-        if(testbit(switchbuf,MAG_LEFT)) {
-          XPLMCommandOnce(MagLeftSwitchOnCmd);
-         }
-
-        if(!testbit(switchbuf,MAG_LEFT)) {
-          XPLMCommandOnce(MagLeftSwitchOffCmd);
-        }
-
-        return;
-    }
+   if(magleftswitchenable == 3) {
+       if(testbit(switchbuf,MAG_LEFT)) {
+           XPLMSetDatai(MagLeftSwitchData, mag_left_switch_data_on_value);
+           XPLMSetDatai(MagLeft2SwitchData, mag_left2_switch_data_on_value);
+           XPLMSetDatai(MagLeft3SwitchData, mag_left3_switch_data_on_value);
+           XPLMSetDatai(MagLeft4SwitchData, mag_left4_switch_data_on_value);
+       }
+       return;
+   }
 
 	if(testbit(switchbuf,MAG_LEFT)) {
 	  if(engnum == 1){
@@ -278,17 +300,24 @@ void process_engines_both_mag_switch()
     }
 
    if(magbothswitchenable == 2) {
+       if(testbit(switchbuf,MAG_BOTH)) {
+           XPLMCommandOnce(MagBothSwitchOnCmd);
+       }
+       if(!testbit(switchbuf,MAG_BOTH)) {
+           XPLMCommandOnce(MagBothSwitchOffCmd);
+       }
+       return;
+   }
 
-        if(testbit(switchbuf,MAG_BOTH)) {
-          XPLMCommandOnce(MagBothSwitchOnCmd);
-         }
-
-        if(!testbit(switchbuf,MAG_BOTH)) {
-          XPLMCommandOnce(MagBothSwitchOffCmd);
-        }
-
-        return;
-    }
+   if(magbothswitchenable == 3) {
+       if(testbit(switchbuf,MAG_BOTH)) {
+           XPLMSetDatai(MagBothSwitchData, mag_both_switch_data_on_value);
+           XPLMSetDatai(MagBoth2SwitchData, mag_both2_switch_data_on_value);
+           XPLMSetDatai(MagBoth3SwitchData, mag_both3_switch_data_on_value);
+           XPLMSetDatai(MagBoth4SwitchData, mag_both4_switch_data_on_value);
+       }
+       return;
+   }
 
 
    if(testbit(switchbuf,MAG_BOTH)) {
@@ -349,17 +378,24 @@ void process_engines_start_switch()
     }
 
    if(magstartswitchenable == 2) {
+       if(testbit(switchbuf,ENG_START)) {
+           XPLMCommandOnce(MagStartSwitchOnCmd);
+       }
+       if(!testbit(switchbuf,ENG_START)) {
+           XPLMCommandOnce(MagStartSwitchOffCmd);
+       }
+       return;
+   }
 
-        if(testbit(switchbuf,ENG_START)) {
-          XPLMCommandOnce(MagStartSwitchOnCmd);
-         }
-
-        if(!testbit(switchbuf,ENG_START)) {
-          XPLMCommandOnce(MagStartSwitchOffCmd);
-        }
-
-        return;
-    }
+   if(magstartswitchenable == 3) {
+       if(testbit(switchbuf,ENG_START)) {
+           XPLMSetDatai(MagStartSwitchData, mag_start_switch_data_on_value);
+           XPLMSetDatai(MagStart2SwitchData, mag_start2_switch_data_on_value);
+           XPLMSetDatai(MagStart3SwitchData, mag_start3_switch_data_on_value);
+           XPLMSetDatai(MagStart4SwitchData, mag_start4_switch_data_on_value);
+       }
+       return;
+   }
 
 	if(testbit(switchbuf,ENG_START)) {
 	  if(engnum == 1){
@@ -964,11 +1000,22 @@ void process_pitot_heat_switch()
         if(testbit(switchbuf,PITOT_HEAT)) {
             XPLMSetDatai(PitotHeatSwitchData, pitot_heat_switch_data_on_value);
             XPLMSetDatai(Pitot2HeatSwitchData, pitot2_heat_switch_data_on_value);
+            XPLMSetDatai(Pitot3HeatSwitchData, pitot3_heat_switch_data_on_value);
+            XPLMSetDatai(Pitot4HeatSwitchData, pitot4_heat_switch_data_on_value);
+            XPLMSetDatai(Pitot5HeatSwitchData, pitot5_heat_switch_data_on_value);
+            XPLMSetDatai(Pitot6HeatSwitchData, pitot6_heat_switch_data_on_value);
+            XPLMSetDatai(Pitot7HeatSwitchData, pitot7_heat_switch_data_on_value);
+            XPLMSetDatai(Pitot8HeatSwitchData, pitot8_heat_switch_data_on_value);
         }
-
         if(!testbit(switchbuf,PITOT_HEAT)) {
             XPLMSetDatai(PitotHeatSwitchData, pitot_heat_switch_data_off_value);
             XPLMSetDatai(Pitot2HeatSwitchData, pitot2_heat_switch_data_off_value);
+            XPLMSetDatai(Pitot3HeatSwitchData, pitot3_heat_switch_data_off_value);
+            XPLMSetDatai(Pitot4HeatSwitchData, pitot4_heat_switch_data_off_value);
+            XPLMSetDatai(Pitot5HeatSwitchData, pitot5_heat_switch_data_off_value);
+            XPLMSetDatai(Pitot6HeatSwitchData, pitot6_heat_switch_data_off_value);
+            XPLMSetDatai(Pitot7HeatSwitchData, pitot7_heat_switch_data_off_value);
+            XPLMSetDatai(Pitot8HeatSwitchData, pitot8_heat_switch_data_off_value);
         }
         return;
     }

@@ -275,6 +275,21 @@ void process_read_ini_file()
         MagOffSwitchData   = XPLMFindDataRef(mag_off_switch_data.c_str());
         mag_off_switch_data_on_value = getOptionToInt("mag_off_switch_data_on_value");
         mag_off_switch_data_off_value = getOptionToInt("mag_off_switch_data_off_value");
+
+        mag_off2_switch_data = getOptionToString("mag_off2_switch_data");
+        MagOff2SwitchData   = XPLMFindDataRef(mag_off2_switch_data.c_str());
+        mag_off2_switch_data_on_value = getOptionToInt("mag_off2_switch_data_on_value");
+        mag_off2_switch_data_off_value = getOptionToInt("mag_off2_switch_data_off_value");
+
+        mag_off3_switch_data = getOptionToString("mag_off3_switch_data");
+        MagOff3SwitchData   = XPLMFindDataRef(mag_off3_switch_data.c_str());
+        mag_off3_switch_data_on_value = getOptionToInt("mag_off3_switch_data_on_value");
+        mag_off3_switch_data_off_value = getOptionToInt("mag_off3_switch_data_off_value");
+
+        mag_off4_switch_data = getOptionToString("mag4_off_switch_data");
+        MagOff4SwitchData   = XPLMFindDataRef(mag_off4_switch_data.c_str());
+        mag_off4_switch_data_on_value = getOptionToInt("mag_off4_switch_data_on_value");
+        mag_off4_switch_data_off_value = getOptionToInt("mag_off4_switch_data_off_value");
     }
 
 
@@ -296,6 +311,30 @@ void process_read_ini_file()
             MagRightSwitchOffCmd   = XPLMFindCommand(mag_right_switch_off.c_str());
     }
 
+    if (magrightswitchenable == 3) {
+        mag_right_switch_data = getOptionToString("mag_right_switch_data");
+        MagRightSwitchData   = XPLMFindDataRef(mag_right_switch_data.c_str());
+        mag_right_switch_data_on_value = getOptionToInt("mag_right_switch_data_on_value");
+        mag_right_switch_data_off_value = getOptionToInt("mag_right_switch_data_off_value");
+
+        mag_right2_switch_data = getOptionToString("mag_right2_switch_data");
+        MagRight2SwitchData   = XPLMFindDataRef(mag_right2_switch_data.c_str());
+        mag_right2_switch_data_on_value = getOptionToInt("mag_right2_switch_data_on_value");
+        mag_right2_switch_data_off_value = getOptionToInt("mag_right2_switch_data_off_value");
+
+        mag_right3_switch_data = getOptionToString("mag_right3_switch_data");
+        MagRight3SwitchData   = XPLMFindDataRef(mag_right3_switch_data.c_str());
+        mag_right3_switch_data_on_value = getOptionToInt("mag_right3_switch_data_on_value");
+        mag_right3_switch_data_off_value = getOptionToInt("mag_right3_switch_data_off_value");
+
+        mag_right4_switch_data = getOptionToString("mag_right4_switch_data");
+        MagRight4SwitchData   = XPLMFindDataRef(mag_right4_switch_data.c_str());
+        mag_right4_switch_data_on_value = getOptionToInt("mag_right4_switch_data_on_value");
+        mag_right4_switch_data_off_value = getOptionToInt("mag_right4_switch_data_off_value");
+
+
+    }
+
     // mag left switch disable - enable - remap
     magleftswitchenable = getOptionToInt("Mag Left Switch enable");
     if (magleftswitchenable == 0) {
@@ -313,6 +352,30 @@ void process_read_ini_file()
             MagLeftSwitchOnCmd   = XPLMFindCommand(mag_left_switch_on.c_str());
             MagLeftSwitchOffCmd   = XPLMFindCommand(mag_left_switch_off.c_str());
     }
+
+    if (magleftswitchenable == 3) {
+        mag_left_switch_data = getOptionToString("mag_left_switch_data");
+        MagLeftSwitchData   = XPLMFindDataRef(mag_left_switch_data.c_str());
+        mag_left_switch_data_on_value = getOptionToInt("mag_left_switch_data_on_value");
+        mag_left_switch_data_off_value = getOptionToInt("mag_left_switch_data_off_value");
+
+        mag_left2_switch_data = getOptionToString("mag_left2_switch_data");
+        MagLeft2SwitchData   = XPLMFindDataRef(mag_left2_switch_data.c_str());
+        mag_left2_switch_data_on_value = getOptionToInt("mag_left2_switch_data_on_value");
+        mag_left2_switch_data_off_value = getOptionToInt("mag_left2_switch_data_off_value");
+
+        mag_left3_switch_data = getOptionToString("mag_left3_switch_data");
+        MagLeft3SwitchData   = XPLMFindDataRef(mag_left3_switch_data.c_str());
+        mag_left3_switch_data_on_value = getOptionToInt("mag_left3_switch_data_on_value");
+        mag_left3_switch_data_off_value = getOptionToInt("mag_left3_switch_data_off_value");
+
+        mag_left4_switch_data = getOptionToString("mag_left4_switch_data");
+        MagLeft4SwitchData   = XPLMFindDataRef(mag_left4_switch_data.c_str());
+        mag_left4_switch_data_on_value = getOptionToInt("mag_left4_switch_data_on_value");
+        mag_left4_switch_data_off_value = getOptionToInt("mag_left4_switch_data_off_value");
+    }
+
+
 
     // mag both switch disable - enable - remap
     magbothswitchenable = getOptionToInt("Mag Both Switch enable");
@@ -333,6 +396,29 @@ void process_read_ini_file()
             MagBothSwitchOffCmd   = XPLMFindCommand(mag_both_switch_off.c_str());
     }
 
+    if (magbothswitchenable == 3) {
+        mag_both_switch_data = getOptionToString("mag_both_switch_data");
+        MagBothSwitchData   = XPLMFindDataRef(mag_both_switch_data.c_str());
+        mag_both_switch_data_on_value = getOptionToInt("mag_both_switch_data_on_value");
+        mag_both_switch_data_off_value = getOptionToInt("mag_both_switch_data_off_value");
+
+        mag_both2_switch_data = getOptionToString("mag_both2_switch_data");
+        MagBoth2SwitchData   = XPLMFindDataRef(mag_both2_switch_data.c_str());
+        mag_both2_switch_data_on_value = getOptionToInt("mag_both2_switch_data_on_value");
+        mag_both2_switch_data_off_value = getOptionToInt("mag_both2_switch_data_off_value");
+
+        mag_both3_switch_data = getOptionToString("mag_both3_switch_data");
+        MagBoth3SwitchData   = XPLMFindDataRef(mag_both3_switch_data.c_str());
+        mag_both3_switch_data_on_value = getOptionToInt("mag_both3_switch_data_on_value");
+        mag_both3_switch_data_off_value = getOptionToInt("mag_both3_switch_data_off_value");
+
+        mag_both4_switch_data = getOptionToString("mag_both4_switch_data");
+        MagBoth4SwitchData   = XPLMFindDataRef(mag_both4_switch_data.c_str());
+        mag_both4_switch_data_on_value = getOptionToInt("mag_both4_switch_data_on_value");
+        mag_both4_switch_data_off_value = getOptionToInt("mag_both4_switch_data_off_value");
+    }
+
+
     // mag start switch disable - enable - remap
     magstartswitchenable = getOptionToInt("Mag Start Switch enable");
     if (magstartswitchenable == 0) {
@@ -350,6 +436,28 @@ void process_read_ini_file()
             mag_start_switch_off = getOptionToString("mag_start_switch_off_cmd");
             MagStartSwitchOnCmd   = XPLMFindCommand(mag_start_switch_on.c_str());
             MagStartSwitchOffCmd   = XPLMFindCommand(mag_start_switch_off.c_str());
+    }
+
+    if (magstartswitchenable == 3) {
+        mag_start_switch_data = getOptionToString("mag_start_switch_data");
+        MagStartSwitchData   = XPLMFindDataRef(mag_start_switch_data.c_str());
+        mag_start_switch_data_on_value = getOptionToInt("mag_start_switch_data_on_value");
+        mag_start_switch_data_off_value = getOptionToInt("mag_start_switch_data_off_value");
+
+        mag_start2_switch_data = getOptionToString("mag_start2_switch_data");
+        MagStart2SwitchData   = XPLMFindDataRef(mag_start2_switch_data.c_str());
+        mag_start2_switch_data_on_value = getOptionToInt("mag_start2_switch_data_on_value");
+        mag_start2_switch_data_off_value = getOptionToInt("mag_start2_switch_data_off_value");
+
+        mag_start3_switch_data = getOptionToString("mag_start3_switch_data");
+        MagStart3SwitchData   = XPLMFindDataRef(mag_start3_switch_data.c_str());
+        mag_start3_switch_data_on_value = getOptionToInt("mag_start3_switch_data_on_value");
+        mag_start3_switch_data_off_value = getOptionToInt("mag_start3_switch_data_off_value");
+
+        mag_start4_switch_data = getOptionToString("mag_start4_switch_data");
+        MagStart4SwitchData   = XPLMFindDataRef(mag_start4_switch_data.c_str());
+        mag_start4_switch_data_on_value = getOptionToInt("mag_start4_switch_data_on_value");
+        mag_start4_switch_data_off_value = getOptionToInt("mag_start4_switch_data_off_value");
     }
 
     // bat master switch disable - enable - remap
@@ -726,14 +834,44 @@ void process_read_ini_file()
 
     if (pitotheatswitchenable == 3) {
         pitot_heat_switch_data = getOptionToString("pitot_heat_switch_data");
-        PitotHeatSwitchData   = XPLMFindDataRef(pitot_heat_switch_on.c_str());
+        PitotHeatSwitchData   = XPLMFindDataRef(pitot_heat_switch_data.c_str());
         pitot_heat_switch_data_on_value = getOptionToInt("pitot_heat_switch_data_on_value");
         pitot_heat_switch_data_off_value = getOptionToInt("pitot_heat_switch_data_off_value");
 
         pitot2_heat_switch_data = getOptionToString("pitot2_heat_switch_data");
-        Pitot2HeatSwitchData   = XPLMFindDataRef(pitot2_heat_switch_on.c_str());
+        Pitot2HeatSwitchData   = XPLMFindDataRef(pitot2_heat_switch_data.c_str());
         pitot2_heat_switch_data_on_value = getOptionToInt("pitot2_heat_switch_data_on_value");
         pitot2_heat_switch_data_off_value = getOptionToInt("pitot2_heat_switch_data_off_value");
+
+        pitot3_heat_switch_data = getOptionToString("pitot3_heat_switch_data");
+        Pitot3HeatSwitchData   = XPLMFindDataRef(pitot3_heat_switch_data.c_str());
+        pitot3_heat_switch_data_on_value = getOptionToInt("pitot3_heat_switch_data_on_value");
+        pitot3_heat_switch_data_off_value = getOptionToInt("pitot3_heat_switch_data_off_value");
+
+        pitot4_heat_switch_data = getOptionToString("pitot4_heat_switch_data");
+        Pitot4HeatSwitchData   = XPLMFindDataRef(pitot4_heat_switch_data.c_str());
+        pitot4_heat_switch_data_on_value = getOptionToInt("pitot4_heat_switch_data_on_value");
+        pitot4_heat_switch_data_off_value = getOptionToInt("pitot4_heat_switch_data_off_value");
+
+        pitot5_heat_switch_data = getOptionToString("pitot5_heat_switch_data");
+        Pitot5HeatSwitchData   = XPLMFindDataRef(pitot5_heat_switch_data.c_str());
+        pitot5_heat_switch_data_on_value = getOptionToInt("pitot5_heat_switch_data_on_value");
+        pitot5_heat_switch_data_off_value = getOptionToInt("pitot5_heat_switch_data_off_value");
+
+        pitot6_heat_switch_data = getOptionToString("pitot6_heat_switch_data");
+        Pitot6HeatSwitchData   = XPLMFindDataRef(pitot6_heat_switch_data.c_str());
+        pitot6_heat_switch_data_on_value = getOptionToInt("pitot6_heat_switch_data_on_value");
+        pitot6_heat_switch_data_off_value = getOptionToInt("pitot6_heat_switch_data_off_value");
+
+        pitot7_heat_switch_data = getOptionToString("pitot7_heat_switch_data");
+        Pitot7HeatSwitchData   = XPLMFindDataRef(pitot7_heat_switch_data.c_str());
+        pitot7_heat_switch_data_on_value = getOptionToInt("pitot7_heat_switch_data_on_value");
+        pitot7_heat_switch_data_off_value = getOptionToInt("pitot7_heat_switch_data_off_value");
+
+        pitot8_heat_switch_data = getOptionToString("pitot8_heat_switch_data");
+        Pitot8HeatSwitchData   = XPLMFindDataRef(pitot8_heat_switch_data.c_str());
+        pitot8_heat_switch_data_on_value = getOptionToInt("pitot8_heat_switch_data_on_value");
+        pitot8_heat_switch_data_off_value = getOptionToInt("pitot8_heat_switch_data_off_value");
 
     }
 
