@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.14   ***************
-// ****** Mar 30 2013   **************
+// ****** Apr 26 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
