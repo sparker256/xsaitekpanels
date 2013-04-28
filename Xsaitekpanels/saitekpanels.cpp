@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.14   ***************
-// ****** Apr 26 2013   **************
+// ******** ver 2.15   ***************
+// ****** Apr 27 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -398,7 +398,12 @@ XPLMDataRef GearDnData = NULL;
 
 XPLMDataRef CowlFlapsData = NULL;
 XPLMDataRef Cowl2FlapsData = NULL;
-XPLMDataRef PanelLightsData = NULL;
+
+XPLMDataRef PanelLightsData = NULL, PanelLights2Data = NULL;
+XPLMDataRef PanelLights3Data = NULL, PanelLights4Data = NULL;
+XPLMDataRef PanelLights5Data = NULL, PanelLights6Data = NULL;
+XPLMDataRef PanelLights7Data = NULL, PanelLights8Data = NULL;
+
 XPLMDataRef BeaconLightsData = NULL;
 XPLMDataRef NavLightsData = NULL;
 XPLMDataRef StrobeLightsData = NULL;
@@ -728,21 +733,35 @@ int pitot6_heat_switch_data_on_value, pitot6_heat_switch_data_off_value;
 int pitot7_heat_switch_data_on_value, pitot7_heat_switch_data_off_value;
 int pitot8_heat_switch_data_on_value, pitot8_heat_switch_data_off_value;
 
-
-
-
-
 int gear_switch_up_data_on_value, gear_switch_up_data_off_value;
 int gear_switch_down_data_on_value, gear_switch_down_data_off_value;
 int cowl_flaps_data_on_value, cowl_flaps_data_off_value;
 int cowl2_flaps_data_on_value, cowl2_flaps_data_off_value;
+
 int panel_lights_switch_data_on_value, panel_lights_switch_data_off_value;
+int panel_lights_switch2_data_on_value, panel_lights_switch2_data_off_value;
+int panel_lights_switch3_data_on_value, panel_lights_switch3_data_off_value;
+int panel_lights_switch4_data_on_value, panel_lights_switch4_data_off_value;
+int panel_lights_switch5_data_on_value, panel_lights_switch5_data_off_value;
+int panel_lights_switch6_data_on_value, panel_lights_switch6_data_off_value;
+int panel_lights_switch7_data_on_value, panel_lights_switch7_data_off_value;
+int panel_lights_switch8_data_on_value, panel_lights_switch8_data_off_value;
+
+
 int beacon_lights_switch_data_on_value, beacon_lights_switch_data_off_value;
 int nav_lights_switch_data_on_value, nav_lights_switch_data_off_value;
 int strobe_lights_switch_data_on_value, strobe_lights_switch_data_off_value;
 int taxi_lights_switch_data_on_value, taxi_lights_switch_data_off_value;
 int landing_lights_switch_data_on_value, landing_lights_switch_data_off_value;
 
+float panel_lights_switch_dataf_on_value, panel_lights_switch_dataf_off_value;
+float panel_lights_switch2_dataf_on_value, panel_lights_switch2_dataf_off_value;
+float panel_lights_switch3_dataf_on_value, panel_lights_switch3_dataf_off_value;
+float panel_lights_switch4_dataf_on_value, panel_lights_switch4_dataf_off_value;
+float panel_lights_switch5_dataf_on_value, panel_lights_switch5_dataf_off_value;
+float panel_lights_switch6_dataf_on_value, panel_lights_switch6_dataf_off_value;
+float panel_lights_switch7_dataf_on_value, panel_lights_switch7_dataf_off_value;
+float panel_lights_switch8_dataf_on_value, panel_lights_switch8_dataf_off_value;
 
 string mag_off_switch_on, mag_off_switch_off, mag_off_switch_data;
 string mag_off2_switch_on, mag_off2_switch_off, mag_off2_switch_data;
@@ -823,12 +842,23 @@ string gear_switch_up_on, gear_switch_up_off,gear_switch_up_data ;
 string gear_switch_down_on, gear_switch_down_off, gear_switch_down_data;
 string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data ;
 string cowl2_flaps_open, cowl2_flaps_close, cowl2_flaps_data;
+
 string panel_lights_switch_on, panel_lights_switch_off, panel_lights_switch_data;
+string panel_lights_switch2_on, panel_lights_switch2_off, panel_lights_switch2_data;
+string panel_lights_switch3_on, panel_lights_switch3_off, panel_lights_switch3_data;
+string panel_lights_switch4_on, panel_lights_switch4_off, panel_lights_switch4_data;
+string panel_lights_switch5_on, panel_lights_switch5_off, panel_lights_switch5_data;
+string panel_lights_switch6_on, panel_lights_switch6_off, panel_lights_switch6_data;
+string panel_lights_switch7_on, panel_lights_switch7_off, panel_lights_switch7_data;
+string panel_lights_switch8_on, panel_lights_switch8_off, panel_lights_switch8_data;
+
 string beacon_lights_switch_on, beacon_lights_switch_off, beacon_lights_switch_data;
 string nav_lights_switch_on, nav_lights_switch_off, nav_lights_switch_data;
 string strobe_lights_switch_on, strobe_lights_switch_off, strobe_lights_switch_data;
 string taxi_lights_switch_on, taxi_lights_switch_off, taxi_lights_switch_data;
 string landing_lights_switch_on, landing_lights_switch_off, landing_lights_switch_data;
+
+
 
 const char *GearTestStrUp;
 
@@ -932,10 +962,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.14\n");
+  XPLMDebugString("Xsaitekpanels: v2.15\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.14");
+  strcpy(outName, "Xsaitekpanels v2.15");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
