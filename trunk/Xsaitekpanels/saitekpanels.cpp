@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.15   ***************
-// ****** Apr 27 2013   **************
+// ****** May 04 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -136,6 +136,29 @@ XPLMDataRef Afd1PwrOn = NULL, DmePwrOn = NULL;
 XPLMDataRef Nav1ObsDegm = NULL, Nav2ObsDegm = NULL;
 XPLMDataRef Adf1CardDirDegm = NULL,  Adf2CardDirDegm = NULL;
 
+
+XPLMDataRef Rad1UpperCom1ActSwitchRemapableData = NULL, Rad1UpperCom1StbySwitchRemapableData = NULL;
+XPLMDataRef Rad1UpperCom2ActSwitchRemapableData = NULL, Rad1UpperCom2StbySwitchRemapableData = NULL;
+XPLMDataRef Rad1UpperNav1ActSwitchRemapableData = NULL, Rad1UpperNav1StbySwitchRemapableData = NULL;
+XPLMDataRef Rad1UpperNav2ActSwitchRemapableData = NULL, Rad1UpperNav2StbySwitchRemapableData = NULL;
+
+XPLMDataRef Rad1LowerCom1ActSwitchRemapableData = NULL, Rad1LowerCom1StbySwitchRemapableData = NULL;
+XPLMDataRef Rad1LowerCom2ActSwitchRemapableData = NULL, Rad1LowerCom2StbySwitchRemapableData = NULL;
+XPLMDataRef Rad1LowerNav1ActSwitchRemapableData = NULL, Rad1LowerNav1StbySwitchRemapableData = NULL;
+XPLMDataRef Rad1LowerNav2ActSwitchRemapableData = NULL, Rad1LowerNav2StbySwitchRemapableData = NULL;
+
+XPLMDataRef Rad2UpperCom1ActSwitchRemapableData = NULL, Rad2UpperCom1StbySwitchRemapableData = NULL;
+XPLMDataRef Rad2UpperCom2ActSwitchRemapableData = NULL, Rad2UpperCom2StbySwitchRemapableData = NULL;
+XPLMDataRef Rad2UpperNav1ActSwitchRemapableData = NULL, Rad2UpperNav1StbySwitchRemapableData = NULL;
+XPLMDataRef Rad2UpperNav2ActSwitchRemapableData = NULL, Rad2UpperNav2StbySwitchRemapableData = NULL;
+
+XPLMDataRef Rad2LowerCom1ActSwitchRemapableData = NULL, Rad2LowerCom1StbySwitchRemapableData = NULL;
+XPLMDataRef Rad2LowerCom2ActSwitchRemapableData = NULL, Rad2LowerCom2StbySwitchRemapableData = NULL;
+XPLMDataRef Rad2LowerNav1ActSwitchRemapableData = NULL, Rad2LowerNav1StbySwitchRemapableData = NULL;
+XPLMDataRef Rad2LowerNav2ActSwitchRemapableData = NULL, Rad2LowerNav2StbySwitchRemapableData = NULL;
+
+
+
 XPLMMenuID      RadioMenu;
 XPLMMenuID      RadioMenuId;
 
@@ -157,6 +180,9 @@ XPWidgetID	RadioQnh0CheckWidget[50] = {NULL};
 XPWidgetID	RadioQnh1CheckWidget[50] = {NULL};
 XPWidgetID	RadioQnh0TextWidget[50] = {NULL};
 XPWidgetID	RadioQnh1TextWidget[50] = {NULL};
+
+
+
 
 
 // ****************** Multi Panel Command Ref **********************
@@ -488,54 +514,82 @@ int radioMenuItem;
 
 string rad1_upper_com1_corse_up_remapable, rad1_upper_com1_corse_dn_remapable;
 string rad1_upper_com1_fine_up_remapable, rad1_upper_com1_fine_dn_remapable;
+string rad1_upper_com1_act_data_remapable, rad1_upper_com1_stby_data_remapable;
 string rad1_upper_com1_actstby_btn_remapable;
+
 string rad1_upper_com2_corse_up_remapable, rad1_upper_com2_corse_dn_remapable;
 string rad1_upper_com2_fine_up_remapable, rad1_upper_com2_fine_dn_remapable;
+string rad1_upper_com2_act_data_remapable, rad1_upper_com2_stby_data_remapable;
 string rad1_upper_com2_actstby_btn_remapable;
+
 string rad1_upper_nav1_corse_up_remapable, rad1_upper_nav1_corse_dn_remapable;
 string rad1_upper_nav1_fine_up_remapable, rad1_upper_nav1_fine_dn_remapable;
+string rad1_upper_nav1_act_data_remapable, rad1_upper_nav1_stby_data_remapable;
 string rad1_upper_nav1_actstby_btn_remapable;
+
 string rad1_upper_nav2_corse_up_remapable, rad1_upper_nav2_corse_dn_remapable;
 string rad1_upper_nav2_fine_up_remapable, rad1_upper_nav2_fine_dn_remapable;
+string rad1_upper_nav2_act_data_remapable, rad1_upper_nav2_stby_data_remapable;
 string rad1_upper_nav2_actstby_btn_remapable;
 
 string rad1_lower_com1_corse_up_remapable, rad1_lower_com1_corse_dn_remapable;
 string rad1_lower_com1_fine_up_remapable, rad1_lower_com1_fine_dn_remapable;
+string rad1_lower_com1_act_data_remapable, rad1_lower_com1_stby_data_remapable;
 string rad1_lower_com1_actstby_btn_remapable;
+
 string rad1_lower_com2_corse_up_remapable, rad1_lower_com2_corse_dn_remapable;
 string rad1_lower_com2_fine_up_remapable, rad1_lower_com2_fine_dn_remapable;
+string rad1_lower_com2_act_data_remapable, rad1_lower_com2_stby_data_remapable;
 string rad1_lower_com2_actstby_btn_remapable;
+
 string rad1_lower_nav1_corse_up_remapable, rad1_lower_nav1_corse_dn_remapable;
 string rad1_lower_nav1_fine_up_remapable, rad1_lower_nav1_fine_dn_remapable;
+string rad1_lower_nav1_act_data_remapable, rad1_lower_nav1_stby_data_remapable;
 string rad1_lower_nav1_actstby_btn_remapable;
+
 string rad1_lower_nav2_corse_up_remapable, rad1_lower_nav2_corse_dn_remapable;
 string rad1_lower_nav2_fine_up_remapable, rad1_lower_nav2_fine_dn_remapable;
+string rad1_lower_nav2_act_data_remapable, rad1_lower_nav2_stby_data_remapable;
 string rad1_lower_nav2_actstby_btn_remapable;
 
 string rad2_upper_com1_corse_up_remapable, rad2_upper_com1_corse_dn_remapable;
 string rad2_upper_com1_fine_up_remapable, rad2_upper_com1_fine_dn_remapable;
+string rad2_upper_com1_act_data_remapable, rad2_upper_com1_stby_data_remapable;
 string rad2_upper_com1_actstby_btn_remapable;
+
 string rad2_upper_com2_corse_up_remapable, rad2_upper_com2_corse_dn_remapable;
 string rad2_upper_com2_fine_up_remapable, rad2_upper_com2_fine_dn_remapable;
+string rad2_upper_com2_act_data_remapable, rad2_upper_com2_stby_data_remapable;
 string rad2_upper_com2_actstby_btn_remapable;
+
 string rad2_upper_nav1_corse_up_remapable, rad2_upper_nav1_corse_dn_remapable;
 string rad2_upper_nav1_fine_up_remapable, rad2_upper_nav1_fine_dn_remapable;
+string rad2_upper_nav1_act_data_remapable, rad2_upper_nav1_stby_data_remapable;
 string rad2_upper_nav1_actstby_btn_remapable;
+
 string rad2_upper_nav2_corse_up_remapable, rad2_upper_nav2_corse_dn_remapable;
 string rad2_upper_nav2_fine_up_remapable, rad2_upper_nav2_fine_dn_remapable;
+string rad2_upper_nav2_act_data_remapable, rad2_upper_nav2_stby_data_remapable;
 string rad2_upper_nav2_actstby_btn_remapable;
 
 string rad2_lower_com1_corse_up_remapable, rad2_lower_com1_corse_dn_remapable;
 string rad2_lower_com1_fine_up_remapable, rad2_lower_com1_fine_dn_remapable;
+string rad2_lower_com1_act_data_remapable, rad2_lower_com1_stby_data_remapable;
 string rad2_lower_com1_actstby_btn_remapable;
+
 string rad2_lower_com2_corse_up_remapable, rad2_lower_com2_corse_dn_remapable;
 string rad2_lower_com2_fine_up_remapable, rad2_lower_com2_fine_dn_remapable;
+string rad2_lower_com2_act_data_remapable, rad2_lower_com2_stby_data_remapable;
 string rad2_lower_com2_actstby_btn_remapable;
+
 string rad2_lower_nav1_corse_up_remapable, rad2_lower_nav1_corse_dn_remapable;
 string rad2_lower_nav1_fine_up_remapable, rad2_lower_nav1_fine_dn_remapable;
+string rad2_lower_nav1_act_data_remapable, rad2_lower_nav1_stby_data_remapable;
 string rad2_lower_nav1_actstby_btn_remapable;
+
 string rad2_lower_nav2_corse_up_remapable, rad2_lower_nav2_corse_dn_remapable;
 string rad2_lower_nav2_fine_up_remapable, rad2_lower_nav2_fine_dn_remapable;
+string rad2_lower_nav2_act_data_remapable, rad2_lower_nav2_stby_data_remapable;
 string rad2_lower_nav2_actstby_btn_remapable;
 
 
