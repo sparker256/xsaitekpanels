@@ -885,8 +885,20 @@ void process_upper_com1_switch()
             }
         }
       }
-      upactcomnavfreq[radnum] = XPLMGetDatai(Com1ActFreq);
-      upstbycomnavfreq[radnum] = XPLMGetDatai(Com1StbyFreq);
+      if ((rad1uprcom1switchremap == 1) && (radnum == 0)) {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Rad1UpperCom1ActRemapableData);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Rad1UpperCom1StbyRemapableData);
+
+      } else if ((rad2uprcom1switchremap == 1) && (radnum == 1)) {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Rad2UpperCom1ActRemapableData);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Rad2UpperCom1StbyRemapableData);
+
+      } else {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Com1ActFreq);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Com1StbyFreq);
+
+      }
+
       upcom1[radnum] = 1;
     }
 }
@@ -960,9 +972,19 @@ void process_upper_com2_switch()
             }
         }
       }
-    upactcomnavfreq[radnum] = XPLMGetDatai(Com2ActFreq);
-    upstbycomnavfreq[radnum] = XPLMGetDatai(Com2StbyFreq);
-    upcom2[radnum] = 1;	 
+      if ((rad1uprcom2actstbybtnremap == 1) && (radnum == 0)) {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Rad1UpperCom2ActRemapableData);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Rad1UpperCom2StbyRemapableData);
+
+      } else if ((rad2uprcom2actstbybtnremap == 1) && (radnum == 1)) {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Rad2UpperCom2ActRemapableData);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Rad2UpperCom2StbyRemapableData);
+
+      } else {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Com2ActFreq);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Com2StbyFreq);
+      }
+      upcom2[radnum] = 1;
     }
 }
 
@@ -1062,9 +1084,18 @@ void process_upper_nav1_switch()
 
         }
       }
+      if ((rad1uprnav1actstbybtnremap == 1) && (radnum == 0)) {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Rad1UpperNav1ActRemapableData);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Rad1UpperNav1StbyRemapableData);
+      } else if ((rad2uprnav1actstbybtnremap == 1) && (radnum == 1)) {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Rad2UpperNav1ActRemapableData);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Rad2UpperNav1StbyRemapableData);
+      } else {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
+      }
 
-    upactcomnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
-    upstbycomnavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
+
     upnav1[radnum] = 1;	 
     }
 
@@ -1171,10 +1202,17 @@ void process_upper_nav2_switch()
 
         }
       }
-
-    upactcomnavfreq[radnum] = XPLMGetDatai(Nav2ActFreq);
-    upstbycomnavfreq[radnum] = XPLMGetDatai(Nav2StbyFreq);
-    upnav2[radnum] = 1;	 
+      if ((rad1uprnav2actstbybtnremap == 1) && (radnum == 0)) {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Rad1UpperNav2ActRemapableData);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Rad1UpperNav2StbyRemapableData);
+      } else if ((rad2uprnav2actstbybtnremap == 1) && (radnum == 1)) {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Rad2UpperNav2ActRemapableData);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Rad2UpperNav2StbyRemapableData);
+      } else {
+          upactcomnavfreq[radnum] = XPLMGetDatai(Nav2ActFreq);
+          upstbycomnavfreq[radnum] = XPLMGetDatai(Nav2StbyFreq);
+      }
+      upnav2[radnum] = 1;
     }
 }
 
@@ -1805,8 +1843,17 @@ void process_lower_com1_switch()
 
         }
       }
-      loactcomnavfreq[radnum] = XPLMGetDatai(Com1ActFreq);
-      lostbycomnavfreq[radnum] = XPLMGetDatai(Com1StbyFreq);
+      if ((rad1lwrcom1actstbybtnremap == 1) && (radnum == 0)) {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Rad1LowerCom1ActRemapableData);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Rad1LowerCom1StbyRemapableData);
+      } else if ((rad2lwrcom1switchremap == 1) && (radnum == 1)) {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Rad2LowerCom1ActRemapableData);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Rad2LowerCom1StbyRemapableData);
+      } else {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Com1ActFreq);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Com1StbyFreq);
+      }
+
       locom1[radnum] = 1;
     }
 }
@@ -1881,8 +1928,17 @@ void process_lower_com2_switch()
 
        }
      }
-    loactcomnavfreq[radnum] = XPLMGetDatai(Com2ActFreq);
-    lostbycomnavfreq[radnum] = XPLMGetDatai(Com2StbyFreq);
+     if ((rad1lwrcom2actstbybtnremap == 1) && (radnum == 0)) {
+         loactcomnavfreq[radnum] = XPLMGetDatai(Com2ActFreq);
+         lostbycomnavfreq[radnum] = XPLMGetDatai(Com2StbyFreq);
+     } else if ((rad2lwrcom2actstbybtnremap == 1) && (radnum == 1)) {
+         loactcomnavfreq[radnum] = XPLMGetDatai(Com2ActFreq);
+         lostbycomnavfreq[radnum] = XPLMGetDatai(Com2StbyFreq);
+     } else {
+         loactcomnavfreq[radnum] = XPLMGetDatai(Com2ActFreq);
+         lostbycomnavfreq[radnum] = XPLMGetDatai(Com2StbyFreq);
+     }
+
     locom2[radnum] = 1;
     }
 }
@@ -1979,9 +2035,18 @@ void process_lower_nav1_switch()
             }
 
         }
-      } 
-      loactcomnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
-      lostbycomnavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
+      }
+      if ((rad1lwrnav1actstbybtnremap == 1) && (radnum == 0)) {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Rad1LowerNav1ActRemapableData);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Rad1LowerNav1StbyRemapableData);
+      } else if ((rad2lwrnav1actstbybtnremap == 1) && (radnum == 1)) {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Rad2LowerNav1ActRemapableData);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Rad1LowerNav1StbyRemapableData);
+      } else {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
+      }
+
       lonav1[radnum] = 0;
     }
 }
@@ -2079,8 +2144,17 @@ void process_lower_nav2_switch()
 
         }
       }
-    loactcomnavfreq[radnum] = XPLMGetDatai(Nav2ActFreq);
-    lostbycomnavfreq[radnum] = XPLMGetDatai(Nav2StbyFreq);
+      if ((rad1lwrnav2actstbybtnremap == 1) && (radnum == 0)) {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Rad1LowerNav2ActRemapableData);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Rad1LowerNav2StbyRemapableData);
+      } else if ((rad2lwrnav2actstbybtnremap == 1) && (radnum == 1)) {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Rad2LowerNav2ActRemapableData);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Rad2LowerNav2StbyRemapableData);
+      } else {
+          loactcomnavfreq[radnum] = XPLMGetDatai(Nav2ActFreq);
+          lostbycomnavfreq[radnum] = XPLMGetDatai(Nav2StbyFreq);
+      }
+
     lonav2[radnum] = 0;
     }
 }

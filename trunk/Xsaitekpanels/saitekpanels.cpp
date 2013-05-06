@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.15   ***************
-// ****** May 04 2013   **************
+// ****** May 05 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -137,25 +137,25 @@ XPLMDataRef Nav1ObsDegm = NULL, Nav2ObsDegm = NULL;
 XPLMDataRef Adf1CardDirDegm = NULL,  Adf2CardDirDegm = NULL;
 
 
-XPLMDataRef Rad1UpperCom1ActSwitchRemapableData = NULL, Rad1UpperCom1StbySwitchRemapableData = NULL;
-XPLMDataRef Rad1UpperCom2ActSwitchRemapableData = NULL, Rad1UpperCom2StbySwitchRemapableData = NULL;
-XPLMDataRef Rad1UpperNav1ActSwitchRemapableData = NULL, Rad1UpperNav1StbySwitchRemapableData = NULL;
-XPLMDataRef Rad1UpperNav2ActSwitchRemapableData = NULL, Rad1UpperNav2StbySwitchRemapableData = NULL;
+XPLMDataRef Rad1UpperCom1ActRemapableData = NULL, Rad1UpperCom1StbyRemapableData = NULL;
+XPLMDataRef Rad1UpperCom2ActRemapableData = NULL, Rad1UpperCom2StbyRemapableData = NULL;
+XPLMDataRef Rad1UpperNav1ActRemapableData = NULL, Rad1UpperNav1StbyRemapableData = NULL;
+XPLMDataRef Rad1UpperNav2ActRemapableData = NULL, Rad1UpperNav2StbyRemapableData = NULL;
 
-XPLMDataRef Rad1LowerCom1ActSwitchRemapableData = NULL, Rad1LowerCom1StbySwitchRemapableData = NULL;
-XPLMDataRef Rad1LowerCom2ActSwitchRemapableData = NULL, Rad1LowerCom2StbySwitchRemapableData = NULL;
-XPLMDataRef Rad1LowerNav1ActSwitchRemapableData = NULL, Rad1LowerNav1StbySwitchRemapableData = NULL;
-XPLMDataRef Rad1LowerNav2ActSwitchRemapableData = NULL, Rad1LowerNav2StbySwitchRemapableData = NULL;
+XPLMDataRef Rad1LowerCom1ActRemapableData = NULL, Rad1LowerCom1StbyRemapableData = NULL;
+XPLMDataRef Rad1LowerCom2ActRemapableData = NULL, Rad1LowerCom2StbyRemapableData = NULL;
+XPLMDataRef Rad1LowerNav1ActRemapableData = NULL, Rad1LowerNav1StbyRemapableData = NULL;
+XPLMDataRef Rad1LowerNav2ActRemapableData = NULL, Rad1LowerNav2StbyRemapableData = NULL;
 
-XPLMDataRef Rad2UpperCom1ActSwitchRemapableData = NULL, Rad2UpperCom1StbySwitchRemapableData = NULL;
-XPLMDataRef Rad2UpperCom2ActSwitchRemapableData = NULL, Rad2UpperCom2StbySwitchRemapableData = NULL;
-XPLMDataRef Rad2UpperNav1ActSwitchRemapableData = NULL, Rad2UpperNav1StbySwitchRemapableData = NULL;
-XPLMDataRef Rad2UpperNav2ActSwitchRemapableData = NULL, Rad2UpperNav2StbySwitchRemapableData = NULL;
+XPLMDataRef Rad2UpperCom1ActRemapableData = NULL, Rad2UpperCom1StbyRemapableData = NULL;
+XPLMDataRef Rad2UpperCom2ActRemapableData = NULL, Rad2UpperCom2StbyRemapableData = NULL;
+XPLMDataRef Rad2UpperNav1ActRemapableData = NULL, Rad2UpperNav1StbyRemapableData = NULL;
+XPLMDataRef Rad2UpperNav2ActRemapableData = NULL, Rad2UpperNav2StbyRemapableData = NULL;
 
-XPLMDataRef Rad2LowerCom1ActSwitchRemapableData = NULL, Rad2LowerCom1StbySwitchRemapableData = NULL;
-XPLMDataRef Rad2LowerCom2ActSwitchRemapableData = NULL, Rad2LowerCom2StbySwitchRemapableData = NULL;
-XPLMDataRef Rad2LowerNav1ActSwitchRemapableData = NULL, Rad2LowerNav1StbySwitchRemapableData = NULL;
-XPLMDataRef Rad2LowerNav2ActSwitchRemapableData = NULL, Rad2LowerNav2StbySwitchRemapableData = NULL;
+XPLMDataRef Rad2LowerCom1ActRemapableData = NULL, Rad2LowerCom1StbyRemapableData = NULL;
+XPLMDataRef Rad2LowerCom2ActRemapableData = NULL, Rad2LowerCom2StbyRemapableData = NULL;
+XPLMDataRef Rad2LowerNav1ActRemapableData = NULL, Rad2LowerNav1StbyRemapableData = NULL;
+XPLMDataRef Rad2LowerNav2ActRemapableData = NULL, Rad2LowerNav2StbyRemapableData = NULL;
 
 
 
