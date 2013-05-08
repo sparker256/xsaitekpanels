@@ -1244,8 +1244,11 @@ void process_read_ini_file()
     // Radio1 Upper com1 active stanby button - remapable
     rad1uprcom1actstbybtnremap = getOptionToInt("Radio1 Upper Com1 ActStby remapable");
     if (rad1uprcom1actstbybtnremap == 1) {
-        rad1_upper_com1_actstby_btn_remapable = getOptionToString("rad1_upper_com1_actstby_btn_cmd");
-        Rad1UprCom1ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_com1_actstby_btn_remapable.c_str());
+        rad1_upper_com1_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_com1_actstby_btn_cmd");
+        Rad1UprCom1ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_com1_actstby_btn_remapable_cmd.c_str());
+
+        rad1_upper_com1_actstby_btn_remapable_data = getOptionToString("rad1_upper_com1_actstby_btn_data");
+        Rad1UprCom1ActStbyRemapableData   = XPLMFindDataRef(rad1_upper_com1_actstby_btn_remapable_data.c_str());
     }
 
     // Radio1 Upper com2 switch - remapable
@@ -1274,8 +1277,11 @@ void process_read_ini_file()
     // Radio1 Upper com2 active stanby button - remapable
     rad1uprcom2actstbybtnremap = getOptionToInt("Radio1 Upper Com2 ActStby remapable");
     if (rad1uprcom2actstbybtnremap == 1) {
-        rad1_upper_com2_actstby_btn_remapable = getOptionToString("rad1_upper_com2_actstby_btn_cmd");
-        Rad1UprCom2ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_com2_actstby_btn_remapable.c_str());
+        rad1_upper_com2_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_com2_actstby_btn_cmd");
+        Rad1UprCom2ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_com2_actstby_btn_remapable_cmd.c_str());
+
+        rad1_upper_com2_actstby_btn_remapable_data = getOptionToString("rad1_upper_com2_actstby_btn_data");
+        Rad1UprCom2ActStbyRemapableData   = XPLMFindDataRef(rad1_upper_com2_actstby_btn_remapable_data.c_str());
     }
 
     // Radio1 Upper Nav1 switch - remapable
@@ -1304,8 +1310,11 @@ void process_read_ini_file()
     // Radio1 Upper Nav1 active stanby button - remapable
     rad1uprnav1actstbybtnremap = getOptionToInt("Radio1 Upper Nav1 ActStby remapable");
     if (rad1uprnav1actstbybtnremap == 1) {
-        rad1_upper_nav1_actstby_btn_remapable = getOptionToString("rad1_upper_nav1_actstby_btn_cmd");
-        Rad1UprNav1ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_nav1_actstby_btn_remapable.c_str());
+        rad1_upper_nav1_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_nav1_actstby_btn_cmd");
+        Rad1UprNav1ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_nav1_actstby_btn_remapable_cmd.c_str());
+
+        rad1_upper_nav1_actstby_btn_remapable_data = getOptionToString("rad1_upper_nav1_actstby_btn_data");
+        Rad1UprNav1ActStbyRemapableData   = XPLMFindDataRef(rad1_upper_nav1_actstby_btn_remapable_data.c_str());
     }
 
     // Radio1 Upper Nav2 switch - remapable
@@ -1334,8 +1343,11 @@ void process_read_ini_file()
     // Radio1 Upper Nav2 active stanby button - remapable
     rad1uprnav2actstbybtnremap = getOptionToInt("Radio1 Upper Nav2 ActStby remapable");
     if (rad1uprnav2actstbybtnremap == 1) {
-        rad1_upper_nav2_actstby_btn_remapable = getOptionToString("rad1_upper_nav2_actstby_btn_cmd");
-        Rad1UprNav2ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_nav2_actstby_btn_remapable.c_str());
+        rad1_upper_nav2_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_nav2_actstby_btn_cmd");
+        Rad1UprNav2ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_nav2_actstby_btn_remapable_cmd.c_str());
+
+        rad1_upper_nav2_actstby_btn_remapable_data = getOptionToString("rad1_upper_nav2_actstby_btn_data");
+        Rad1UprNav2ActStbyRemapableData = XPLMFindDataRef(rad1_upper_nav2_actstby_btn_remapable_data.c_str());
     }
 
     // ************************  Lower Radio1 remaping  *********************************************
@@ -1365,8 +1377,11 @@ void process_read_ini_file()
     // Radio1 Lower Com1 active stanby button - remapable
     rad1lwrcom1actstbybtnremap = getOptionToInt("Radio1 Lower Com1 ActStby remapable");
     if (rad1lwrcom1actstbybtnremap == 1) {
-        rad1_lower_com1_actstby_btn_remapable = getOptionToString("rad1_lower_com1_actstby_btn_cmd");
-        Rad1LowrCom1ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_com1_actstby_btn_remapable.c_str());
+        rad1_lower_com1_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_com1_actstby_btn_cmd");
+        Rad1LowrCom1ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_com1_actstby_btn_remapable_cmd.c_str());
+
+        rad1_lower_com1_actstby_btn_remapable_data = getOptionToString("rad1_lower_com1_actstby_btn_data");
+        Rad1LowrCom1ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_com1_actstby_btn_remapable_data.c_str());
     }
 
     // Radio1 Lower Com2 switch - remapable
@@ -1395,8 +1410,11 @@ void process_read_ini_file()
     // Radio1 Lower Com2 active stanby button - remapable
     rad1lwrcom2actstbybtnremap = getOptionToInt("Radio1 Lower Com2 ActStby remapable");
     if (rad1lwrcom2actstbybtnremap == 1) {
-        rad1_lower_com2_actstby_btn_remapable = getOptionToString("rad1_lower_com2_actstby_btn_cmd");
-        Rad1LowrCom2ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_com2_actstby_btn_remapable.c_str());
+        rad1_lower_com2_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_com2_actstby_btn_cmd");
+        Rad1LowrCom2ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_com2_actstby_btn_remapable_cmd.c_str());
+
+        rad1_lower_com2_actstby_btn_remapable_data = getOptionToString("rad1_lower_com2_actstby_btn_data");
+        Rad1LowrCom2ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_com2_actstby_btn_remapable_data.c_str());
     }
 
     // Radio1 Lower Nav1 switch - remapable
@@ -1426,8 +1444,11 @@ void process_read_ini_file()
     // Radio1 Lower Nav1 active stanby button - remapable
     rad1lwrnav1actstbybtnremap = getOptionToInt("Radio1 Lower Nav1 ActStby remapable");
     if (rad1lwrnav1actstbybtnremap == 1) {
-        rad1_lower_nav1_actstby_btn_remapable = getOptionToString("rad1_lower_nav1_actstby_btn_cmd");
-        Rad1LowrNav1ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_nav1_actstby_btn_remapable.c_str());
+        rad1_lower_nav1_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_nav1_actstby_btn_cmd");
+        Rad1LowrNav1ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_nav1_actstby_btn_remapable_cmd.c_str());
+
+        rad1_lower_nav1_actstby_btn_remapable_data = getOptionToString("rad1_lower_nav1_actstby_btn_data");
+        Rad1LowrNav1ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_nav1_actstby_btn_remapable_data.c_str());
     }
 
      // Radio1 Lower Nav2 switch - remapable
@@ -1456,8 +1477,11 @@ void process_read_ini_file()
      // Radio1 Lower Nav2 active stanby button - remapable
      rad1lwrnav2actstbybtnremap = getOptionToInt("Radio1 Lower Nav2 ActStby remapable");
      if (rad1lwrnav2actstbybtnremap == 1) {
-         rad1_lower_nav2_actstby_btn_remapable = getOptionToString("rad1_lower_nav2_actstby_btn_cmd");
-         Rad1LowrNav2ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_nav2_actstby_btn_remapable.c_str());
+         rad1_lower_nav2_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_nav2_actstby_btn_cmd");
+         Rad1LowrNav2ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_nav2_actstby_btn_remapable_cmd.c_str());
+
+         rad1_lower_nav2_actstby_btn_remapable_data = getOptionToString("rad1_lower_nav2_actstby_btn_data");
+         Rad1LowrNav2ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_nav2_actstby_btn_remapable_data.c_str());
      }
 
 
@@ -1488,8 +1512,11 @@ void process_read_ini_file()
     // Radio2 Upper Com1 active stanby button - remapable
     rad2uprcom1actstbybtnremap = getOptionToInt("Radio2 Upper Com1 ActStby remapable");
     if (rad2uprcom1actstbybtnremap == 1) {
-        rad2_upper_com1_actstby_btn_remapable = getOptionToString("rad2_upper_com1_actstby_btn_cmd");
-        Rad2UprCom1ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_com1_actstby_btn_remapable.c_str());
+        rad2_upper_com1_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_com1_actstby_btn_cmd");
+        Rad2UprCom1ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_com1_actstby_btn_remapable_cmd.c_str());
+
+        rad2_upper_com1_actstby_btn_remapable_data = getOptionToString("rad2_upper_com1_actstby_btn_data");
+        Rad2UprCom1ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_com1_actstby_btn_remapable_data.c_str());
     }
 
     // Radio2 Upper Com2 switch - remapable
@@ -1518,8 +1545,11 @@ void process_read_ini_file()
     // Radio2 Upper Com2 active stanby button - remapable
     rad2uprcom2actstbybtnremap = getOptionToInt("Radio2 Upper Com2 ActStby remapable");
     if (rad2uprcom2actstbybtnremap == 1) {
-        rad2_upper_com2_actstby_btn_remapable = getOptionToString("rad2_upper_com2_actstby_btn_cmd");
-        Rad2UprCom2ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_com2_actstby_btn_remapable.c_str());
+        rad2_upper_com2_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_com2_actstby_btn_cmd");
+        Rad2UprCom2ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_com2_actstby_btn_remapable_cmd.c_str());
+
+        rad2_upper_com2_actstby_btn_remapable_data = getOptionToString("rad2_upper_com2_actstby_btn_data");
+        Rad2UprCom2ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_com2_actstby_btn_remapable_data.c_str());
     }
 
     // Radio2 Upper Nav1 switch - remapable
@@ -1548,8 +1578,11 @@ void process_read_ini_file()
     // Radio2 Upper Nav1 active stanby button - remapable
     rad2uprnav1actstbybtnremap = getOptionToInt("Radio2 Upper Nav1 ActStby remapable");
     if (rad2uprnav1actstbybtnremap == 1) {
-        rad2_upper_nav1_actstby_btn_remapable = getOptionToString("rad2_upper_nav1_actstby_btn_cmd");
-        Rad2UprNav1ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_nav1_actstby_btn_remapable.c_str());
+        rad2_upper_nav1_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_nav1_actstby_btn_cmd");
+        Rad2UprNav1ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_nav1_actstby_btn_remapable_cmd.c_str());
+
+        rad2_upper_nav1_actstby_btn_remapable_data = getOptionToString("rad2_upper_nav1_actstby_btn_data");
+        Rad2UprNav1ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_nav1_actstby_btn_remapable_data.c_str());
     }
 
     // Radio2 Upper Nav2 switch - remapable
@@ -1578,8 +1611,11 @@ void process_read_ini_file()
     // Radio2 Upper Nav2 active stanby button - remapable
     rad2uprnav2actstbybtnremap = getOptionToInt("Radio2 Upper Nav2 ActStby remapable");
     if (rad2uprnav2actstbybtnremap == 1) {
-        rad2_upper_nav2_actstby_btn_remapable = getOptionToString("rad2_upper_nav2_actstby_btn_cmd");
-        Rad2UprNav2ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_nav2_actstby_btn_remapable.c_str());
+        rad2_upper_nav2_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_nav2_actstby_btn_cmd");
+        Rad2UprNav2ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_nav2_actstby_btn_remapable_cmd.c_str());
+
+        rad2_upper_nav2_actstby_btn_remapable_data = getOptionToString("rad2_upper_nav2_actstby_btn_data");
+        Rad2UprNav2ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_nav2_actstby_btn_remapable_data.c_str());
     }
 
     //  *****************************  Lower Radio2 remaping  **************************************
@@ -1609,8 +1645,11 @@ void process_read_ini_file()
     // Radio2 Lower Com1 active stanby button - remapable
     rad2lwrcom1actstbybtnremap = getOptionToInt("Radio2 Lower Com1 ActStby remapable");
     if (rad2lwrcom1actstbybtnremap == 1) {
-        rad2_lower_com1_actstby_btn_remapable = getOptionToString("rad2_lower_com1_actstby_btn_cmd");
-        Rad2LowrCom1ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_com1_actstby_btn_remapable.c_str());
+        rad2_lower_com1_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_com1_actstby_btn_cmd");
+        Rad2LowrCom1ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_com1_actstby_btn_remapable_cmd.c_str());
+
+        rad2_lower_com1_actstby_btn_remapable_data = getOptionToString("rad2_lower_com1_actstby_btn_data");
+        Rad2LowrCom1ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_com1_actstby_btn_remapable_data.c_str());
     }
 
     // Radio2 Lower Com2 switch - remapable
@@ -1639,8 +1678,11 @@ void process_read_ini_file()
     // Radio2 Lower Com2 active stanby button - remapable
     rad2lwrcom2actstbybtnremap = getOptionToInt("Radio2 Lower Com2 ActStby remapable");
     if (rad2lwrcom2actstbybtnremap == 1) {
-        rad2_lower_com2_actstby_btn_remapable = getOptionToString("rad2_lower_com2_actstby_btn_cmd");
-        Rad2LowrCom2ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_com2_actstby_btn_remapable.c_str());
+        rad2_lower_com2_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_com2_actstby_btn_cmd");
+        Rad2LowrCom2ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_com2_actstby_btn_remapable_cmd.c_str());
+
+        rad2_lower_com2_actstby_btn_remapable_data = getOptionToString("rad2_lower_com2_actstby_btn_data");
+        Rad2LowrCom2ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_com2_actstby_btn_remapable_data.c_str());
     }
 
     // Radio2 Lower Nav1 switch - remapable
@@ -1669,8 +1711,11 @@ void process_read_ini_file()
     // Radio2 Lower Nav1 active stanby button - remapable
     rad2lwrnav1actstbybtnremap = getOptionToInt("Radio2 Lower Nav1 ActStby remapable");
     if (rad2lwrnav1actstbybtnremap == 1) {
-        rad2_lower_nav1_actstby_btn_remapable = getOptionToString("rad2_lower_nav1_actstby_btn_cmd");
-        Rad2LowrNav1ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_nav1_actstby_btn_remapable.c_str());
+        rad2_lower_nav1_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_nav1_actstby_btn_cmd");
+        Rad2LowrNav1ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_nav1_actstby_btn_remapable_cmd.c_str());
+
+        rad2_lower_nav1_actstby_btn_remapable_data = getOptionToString("rad2_lower_nav1_actstby_btn_data");
+        Rad2LowrNav1ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_nav1_actstby_btn_remapable_data.c_str());
     }
 
     // Radio2 Lower Nav2 switch - remapable
@@ -1699,8 +1744,11 @@ void process_read_ini_file()
     // Radio2 Lower Nav2 active stanby button - remapable
     rad2lwrnav2actstbybtnremap = getOptionToInt("Radio2 Lower Nav2 ActStby remapable");
     if (rad2lwrnav2actstbybtnremap == 1) {
-        rad2_lower_nav2_actstby_btn_remapable = getOptionToString("rad2_lower_nav2_actstby_btn_cmd");
-        Rad2LowrNav2ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_nav2_actstby_btn_remapable.c_str());
+        rad2_lower_nav2_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_nav2_actstby_btn_cmd");
+        Rad2LowrNav2ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_nav2_actstby_btn_remapable_cmd.c_str());
+
+        rad2_lower_nav2_actstby_btn_remapable_data = getOptionToString("rad2_lower_nav2_actstby_btn_data");
+        Rad2LowrNav2ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_nav2_actstby_btn_remapable_data.c_str());
     }
 
 
