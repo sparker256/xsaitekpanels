@@ -1243,7 +1243,7 @@ void process_read_ini_file()
 
     // Radio1 Upper com1 active stanby button - remapable
     rad1uprcom1actstbybtnremap = getOptionToInt("Radio1 Upper Com1 ActStby remapable");
-    if (rad1uprcom1actstbybtnremap == 1) {
+    if ((rad1uprcom1actstbybtnremap == 1) || (rad1uprcom1actstbybtnremap == 2)) {
         rad1_upper_com1_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_com1_actstby_btn_cmd");
         Rad1UprCom1ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_com1_actstby_btn_remapable_cmd.c_str());
 
@@ -1267,7 +1267,7 @@ void process_read_ini_file()
         Rad1UprCom2FnDnRemapableCmd  = XPLMFindCommand(rad1_upper_com2_fine_dn_remapable.c_str());
 
         rad1_upper_com2_act_data_remapable = getOptionToString("rad1_upper_com2_act_data");
-        Rad1UpperCom1ActRemapableData   = XPLMFindDataRef(rad1_upper_com2_act_data_remapable.c_str());
+        Rad1UpperCom2ActRemapableData   = XPLMFindDataRef(rad1_upper_com2_act_data_remapable.c_str());
 
         rad1_upper_com2_stby_data_remapable = getOptionToString("rad1_upper_com2_stby_data");
         Rad1UpperCom2StbyRemapableData   = XPLMFindDataRef(rad1_upper_com2_stby_data_remapable.c_str());
@@ -1276,7 +1276,7 @@ void process_read_ini_file()
 
     // Radio1 Upper com2 active stanby button - remapable
     rad1uprcom2actstbybtnremap = getOptionToInt("Radio1 Upper Com2 ActStby remapable");
-    if (rad1uprcom2actstbybtnremap == 1) {
+    if ((rad1uprcom2actstbybtnremap == 1) || (rad1uprcom2actstbybtnremap == 2)) {
         rad1_upper_com2_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_com2_actstby_btn_cmd");
         Rad1UprCom2ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_com2_actstby_btn_remapable_cmd.c_str());
 
@@ -1376,7 +1376,7 @@ void process_read_ini_file()
 
     // Radio1 Lower Com1 active stanby button - remapable
     rad1lwrcom1actstbybtnremap = getOptionToInt("Radio1 Lower Com1 ActStby remapable");
-    if (rad1lwrcom1actstbybtnremap == 1) {
+    if ((rad1lwrcom1actstbybtnremap == 1) || (rad1lwrcom1actstbybtnremap == 2)) {
         rad1_lower_com1_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_com1_actstby_btn_cmd");
         Rad1LowrCom1ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_com1_actstby_btn_remapable_cmd.c_str());
 
@@ -1409,7 +1409,7 @@ void process_read_ini_file()
 
     // Radio1 Lower Com2 active stanby button - remapable
     rad1lwrcom2actstbybtnremap = getOptionToInt("Radio1 Lower Com2 ActStby remapable");
-    if (rad1lwrcom2actstbybtnremap == 1) {
+    if ((rad1lwrcom2actstbybtnremap == 1) || (rad1lwrcom2actstbybtnremap == 2)){
         rad1_lower_com2_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_com2_actstby_btn_cmd");
         Rad1LowrCom2ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_com2_actstby_btn_remapable_cmd.c_str());
 
@@ -1511,7 +1511,7 @@ void process_read_ini_file()
 
     // Radio2 Upper Com1 active stanby button - remapable
     rad2uprcom1actstbybtnremap = getOptionToInt("Radio2 Upper Com1 ActStby remapable");
-    if (rad2uprcom1actstbybtnremap == 1) {
+    if ((rad2uprcom1actstbybtnremap == 1) || (rad2uprcom1actstbybtnremap == 2)) {
         rad2_upper_com1_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_com1_actstby_btn_cmd");
         Rad2UprCom1ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_com1_actstby_btn_remapable_cmd.c_str());
 
@@ -1544,7 +1544,7 @@ void process_read_ini_file()
 
     // Radio2 Upper Com2 active stanby button - remapable
     rad2uprcom2actstbybtnremap = getOptionToInt("Radio2 Upper Com2 ActStby remapable");
-    if (rad2uprcom2actstbybtnremap == 1) {
+    if ((rad2uprcom2actstbybtnremap == 1) || (rad2uprcom2actstbybtnremap == 2)) {
         rad2_upper_com2_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_com2_actstby_btn_cmd");
         Rad2UprCom2ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_com2_actstby_btn_remapable_cmd.c_str());
 
@@ -1644,7 +1644,7 @@ void process_read_ini_file()
 
     // Radio2 Lower Com1 active stanby button - remapable
     rad2lwrcom1actstbybtnremap = getOptionToInt("Radio2 Lower Com1 ActStby remapable");
-    if (rad2lwrcom1actstbybtnremap == 1) {
+    if ((rad2lwrcom1actstbybtnremap == 1) || (rad2lwrcom1actstbybtnremap == 2)) {
         rad2_lower_com1_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_com1_actstby_btn_cmd");
         Rad2LowrCom1ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_com1_actstby_btn_remapable_cmd.c_str());
 
@@ -1677,7 +1677,7 @@ void process_read_ini_file()
 
     // Radio2 Lower Com2 active stanby button - remapable
     rad2lwrcom2actstbybtnremap = getOptionToInt("Radio2 Lower Com2 ActStby remapable");
-    if (rad2lwrcom2actstbybtnremap == 1) {
+    if ((rad2lwrcom2actstbybtnremap == 1) || (rad2lwrcom2actstbybtnremap == 2)) {
         rad2_lower_com2_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_com2_actstby_btn_cmd");
         Rad2LowrCom2ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_com2_actstby_btn_remapable_cmd.c_str());
 
