@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.15   ***************
-// ****** May 05 2013   **************
+// ****** May 12 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -141,22 +141,26 @@ XPLMDataRef Rad1UpperCom1ActRemapableData = NULL, Rad1UpperCom1StbyRemapableData
 XPLMDataRef Rad1UpperCom2ActRemapableData = NULL, Rad1UpperCom2StbyRemapableData = NULL, Rad1UprCom2ActStbyRemapableData = NULL;
 XPLMDataRef Rad1UpperNav1ActRemapableData = NULL, Rad1UpperNav1StbyRemapableData = NULL, Rad1UprNav1ActStbyRemapableData = NULL;
 XPLMDataRef Rad1UpperNav2ActRemapableData = NULL, Rad1UpperNav2StbyRemapableData = NULL, Rad1UprNav2ActStbyRemapableData = NULL;
+XPLMDataRef Rad1UpperXpdrRemapableData = NULL;
 
 
 XPLMDataRef Rad1LowerCom1ActRemapableData = NULL, Rad1LowerCom1StbyRemapableData = NULL, Rad1LowrCom1ActStbyRemapableData = NULL;
 XPLMDataRef Rad1LowerCom2ActRemapableData = NULL, Rad1LowerCom2StbyRemapableData = NULL, Rad1LowrCom2ActStbyRemapableData = NULL;
 XPLMDataRef Rad1LowerNav1ActRemapableData = NULL, Rad1LowerNav1StbyRemapableData = NULL, Rad1LowrNav1ActStbyRemapableData = NULL;
 XPLMDataRef Rad1LowerNav2ActRemapableData = NULL, Rad1LowerNav2StbyRemapableData = NULL, Rad1LowrNav2ActStbyRemapableData = NULL;
+XPLMDataRef Rad1LowerXpdrRemapableData = NULL;
 
 XPLMDataRef Rad2UpperCom1ActRemapableData = NULL, Rad2UpperCom1StbyRemapableData = NULL, Rad2UprCom1ActStbyRemapableData = NULL;
 XPLMDataRef Rad2UpperCom2ActRemapableData = NULL, Rad2UpperCom2StbyRemapableData = NULL, Rad2UprCom2ActStbyRemapableData = NULL;
 XPLMDataRef Rad2UpperNav1ActRemapableData = NULL, Rad2UpperNav1StbyRemapableData = NULL, Rad2UprNav1ActStbyRemapableData = NULL;
 XPLMDataRef Rad2UpperNav2ActRemapableData = NULL, Rad2UpperNav2StbyRemapableData = NULL, Rad2UprNav2ActStbyRemapableData = NULL;
+XPLMDataRef Rad2UpperXpdrRemapableData = NULL;
 
 XPLMDataRef Rad2LowerCom1ActRemapableData = NULL, Rad2LowerCom1StbyRemapableData = NULL, Rad2LowrCom1ActStbyRemapableData = NULL;
 XPLMDataRef Rad2LowerCom2ActRemapableData = NULL, Rad2LowerCom2StbyRemapableData = NULL, Rad2LowrCom2ActStbyRemapableData = NULL;
 XPLMDataRef Rad2LowerNav1ActRemapableData = NULL, Rad2LowerNav1StbyRemapableData = NULL, Rad2LowrNav1ActStbyRemapableData = NULL;
 XPLMDataRef Rad2LowerNav2ActRemapableData = NULL, Rad2LowerNav2StbyRemapableData = NULL, Rad2LowrNav2ActStbyRemapableData = NULL;
+XPLMDataRef Rad2LowerXpdrRemapableData = NULL;
 
 
 
@@ -494,19 +498,23 @@ int rad1uprcom1switchremap, rad1uprcom1actstbybtnremap;
 int rad1uprcom2switchremap, rad1uprcom2actstbybtnremap;
 int rad1uprnav1switchremap, rad1uprnav1actstbybtnremap;
 int rad1uprnav2switchremap, rad1uprnav2actstbybtnremap;
+int rad1uprxpdrswitchremap;
 int rad1lwrcom1switchremap, rad1lwrcom1actstbybtnremap;
 int rad1lwrcom2switchremap, rad1lwrcom2actstbybtnremap;
 int rad1lwrnav1switchremap, rad1lwrnav1actstbybtnremap;
 int rad1lwrnav2switchremap, rad1lwrnav2actstbybtnremap;
+int rad1lwrxpdrswitchremap;
 
 int rad2uprcom1switchremap, rad2uprcom1actstbybtnremap;
 int rad2uprcom2switchremap, rad2uprcom2actstbybtnremap;
 int rad2uprnav1switchremap, rad2uprnav1actstbybtnremap;
 int rad2uprnav2switchremap, rad2uprnav2actstbybtnremap;
+int rad2uprxpdrswitchremap;
 int rad2lwrcom1switchremap, rad2lwrcom1actstbybtnremap;
 int rad2lwrcom2switchremap, rad2lwrcom2actstbybtnremap;
 int rad2lwrnav1switchremap, rad2lwrnav1actstbybtnremap;
 int rad2lwrnav2switchremap, rad2lwrnav2actstbybtnremap;
+int rad2lwrxpdrswitchremap;
 
 void CreateRadioWidget(int x1, int y1, int w, int h);
 int RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, intptr_t  inParam1, intptr_t  inParam2);
@@ -533,6 +541,8 @@ string rad1_upper_nav2_fine_up_remapable, rad1_upper_nav2_fine_dn_remapable;
 string rad1_upper_nav2_act_data_remapable, rad1_upper_nav2_stby_data_remapable;
 string rad1_upper_nav2_actstby_btn_remapable_cmd, rad1_upper_nav2_actstby_btn_remapable_data;
 
+string rad1_upper_xpdr_data_remapable;
+
 string rad1_lower_com1_corse_up_remapable, rad1_lower_com1_corse_dn_remapable;
 string rad1_lower_com1_fine_up_remapable, rad1_lower_com1_fine_dn_remapable;
 string rad1_lower_com1_act_data_remapable, rad1_lower_com1_stby_data_remapable;
@@ -552,6 +562,8 @@ string rad1_lower_nav2_corse_up_remapable, rad1_lower_nav2_corse_dn_remapable;
 string rad1_lower_nav2_fine_up_remapable, rad1_lower_nav2_fine_dn_remapable;
 string rad1_lower_nav2_act_data_remapable, rad1_lower_nav2_stby_data_remapable;
 string rad1_lower_nav2_actstby_btn_remapable_cmd, rad1_lower_nav2_actstby_btn_remapable_data;
+
+string rad1_lower_xpdr_data_remapable;
 
 string rad2_upper_com1_corse_up_remapable, rad2_upper_com1_corse_dn_remapable;
 string rad2_upper_com1_fine_up_remapable, rad2_upper_com1_fine_dn_remapable;
@@ -573,6 +585,8 @@ string rad2_upper_nav2_fine_up_remapable, rad2_upper_nav2_fine_dn_remapable;
 string rad2_upper_nav2_act_data_remapable, rad2_upper_nav2_stby_data_remapable;
 string rad2_upper_nav2_actstby_btn_remapable_cmd, rad2_upper_nav2_actstby_btn_remapable_data;
 
+string rad2_upper_xpdr_data_remapable;
+
 string rad2_lower_com1_corse_up_remapable, rad2_lower_com1_corse_dn_remapable;
 string rad2_lower_com1_fine_up_remapable, rad2_lower_com1_fine_dn_remapable;
 string rad2_lower_com1_act_data_remapable, rad2_lower_com1_stby_data_remapable;
@@ -592,6 +606,8 @@ string rad2_lower_nav2_corse_up_remapable, rad2_lower_nav2_corse_dn_remapable;
 string rad2_lower_nav2_fine_up_remapable, rad2_lower_nav2_fine_dn_remapable;
 string rad2_lower_nav2_act_data_remapable, rad2_lower_nav2_stby_data_remapable;
 string rad2_lower_nav2_actstby_btn_remapable_cmd, rad2_lower_nav2_actstby_btn_remapable_data;
+
+string rad2_lower_xpdr_data_remapable;
 
 
 char RadioSpeedText[50][200] = {
