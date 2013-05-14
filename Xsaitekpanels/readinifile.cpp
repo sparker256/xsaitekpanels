@@ -1497,6 +1497,16 @@ void process_read_ini_file()
          Rad1LowrNav2ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_nav2_actstby_btn_remapable_data.c_str());
      }
 
+     // Radio1 Lower Xpdr switch - remapable
+
+     rad1lwrxpdrswitchremap = getOptionToInt("Radio1 Lower Xpdr Switch remapable");
+     if (rad1lwrxpdrswitchremap == 2) {
+         rad1_lower_xpdr_data_remapable = getOptionToString("rad1_lower_xpdr_data");
+         Rad1LowerXpdrRemapableData   = XPLMFindDataRef(rad1_lower_xpdr_data_remapable.c_str());
+
+     }
+
+
 
      // **************************  Upper Radio2 remaping  ******************************************
     // Radio2 Upper Com1 switch - remapable
@@ -1630,6 +1640,9 @@ void process_read_ini_file()
         rad2_upper_nav2_actstby_btn_remapable_data = getOptionToString("rad2_upper_nav2_actstby_btn_data");
         Rad2UprNav2ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_nav2_actstby_btn_remapable_data.c_str());
     }
+
+
+
 
     //  *****************************  Lower Radio2 remaping  **************************************
     // Radio2 Lower Com1 switch - remapable
