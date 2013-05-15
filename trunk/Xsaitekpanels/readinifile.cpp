@@ -1360,6 +1360,9 @@ void process_read_ini_file()
         rad1_upper_xpdr_data_remapable = getOptionToString("rad1_upper_xpdr_data");
         Rad1UpperXpdrRemapableData   = XPLMFindDataRef(rad1_upper_xpdr_data_remapable.c_str());
 
+        rad1_upper_xpdr_mode_remapable = getOptionToString("rad1_upper_xpdr_mode");
+        Rad1UpperXpdrRemapableMode   = XPLMFindDataRef(rad1_upper_xpdr_mode_remapable.c_str());
+
     }
 
 
@@ -1503,6 +1506,9 @@ void process_read_ini_file()
      if (rad1lwrxpdrswitchremap == 2) {
          rad1_lower_xpdr_data_remapable = getOptionToString("rad1_lower_xpdr_data");
          Rad1LowerXpdrRemapableData   = XPLMFindDataRef(rad1_lower_xpdr_data_remapable.c_str());
+
+         rad1_lower_xpdr_mode_remapable = getOptionToString("rad1_lower_xpdr_mode");
+         Rad1LowerXpdrRemapableMode   = XPLMFindDataRef(rad1_lower_xpdr_mode_remapable.c_str());
 
      }
 
@@ -1776,6 +1782,9 @@ void process_read_ini_file()
         rad2_lower_nav2_actstby_btn_remapable_data = getOptionToString("rad2_lower_nav2_actstby_btn_data");
         Rad2LowrNav2ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_nav2_actstby_btn_remapable_data.c_str());
     }
+
+
+
 
 
 //  ***********************   Multi Panel Commands **************************
