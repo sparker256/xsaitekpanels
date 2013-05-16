@@ -69,6 +69,7 @@ XPLMCommandRef Rad1UprNav1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2CrsUpRemapableCmd = NULL, Rad1UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2FnUpRemapableCmd = NULL, Rad1UprNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1UpperXpdrBaroUpRemapableCmd = NULL, Rad1UpperXpdrBaroDnRemapableCmd = NULL;
 
 
 XPLMCommandRef Rad1LowrCom1CrsUpRemapableCmd = NULL, Rad1LowrCom1CrsDnRemapableCmd = NULL;
@@ -83,6 +84,7 @@ XPLMCommandRef Rad1LowrNav1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2CrsUpRemapableCmd = NULL, Rad1LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2FnUpRemapableCmd = NULL, Rad1LowrNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrXpdrBaroUpRemapableCmd = NULL, Rad1LowrXpdrBaroDnRemapableCmd = NULL;
 
 
 XPLMCommandRef Rad2UprCom1CrsUpRemapableCmd = NULL, Rad2UprCom1CrsDnRemapableCmd = NULL;
@@ -141,14 +143,15 @@ XPLMDataRef Rad1UpperCom1ActRemapableData = NULL, Rad1UpperCom1StbyRemapableData
 XPLMDataRef Rad1UpperCom2ActRemapableData = NULL, Rad1UpperCom2StbyRemapableData = NULL, Rad1UprCom2ActStbyRemapableData = NULL;
 XPLMDataRef Rad1UpperNav1ActRemapableData = NULL, Rad1UpperNav1StbyRemapableData = NULL, Rad1UprNav1ActStbyRemapableData = NULL;
 XPLMDataRef Rad1UpperNav2ActRemapableData = NULL, Rad1UpperNav2StbyRemapableData = NULL, Rad1UprNav2ActStbyRemapableData = NULL;
-XPLMDataRef Rad1UpperXpdrRemapableData = NULL, Rad1UpperXpdrRemapableMode = NULL;
+XPLMDataRef Rad1UpperXpdrRemapableData = NULL, Rad1UpperXpdrRemapableMode = NULL, Rad1UpperXpdrBaroStdRemapableData = NULL;
+
 
 
 XPLMDataRef Rad1LowerCom1ActRemapableData = NULL, Rad1LowerCom1StbyRemapableData = NULL, Rad1LowrCom1ActStbyRemapableData = NULL;
 XPLMDataRef Rad1LowerCom2ActRemapableData = NULL, Rad1LowerCom2StbyRemapableData = NULL, Rad1LowrCom2ActStbyRemapableData = NULL;
 XPLMDataRef Rad1LowerNav1ActRemapableData = NULL, Rad1LowerNav1StbyRemapableData = NULL, Rad1LowrNav1ActStbyRemapableData = NULL;
 XPLMDataRef Rad1LowerNav2ActRemapableData = NULL, Rad1LowerNav2StbyRemapableData = NULL, Rad1LowrNav2ActStbyRemapableData = NULL;
-XPLMDataRef Rad1LowerXpdrRemapableData = NULL, Rad1LowerXpdrRemapableMode = NULL;
+XPLMDataRef Rad1LowerXpdrRemapableData = NULL, Rad1LowerXpdrRemapableMode = NULL,  Rad1LowerXpdrBaroStdRemapableData = NULL;
 
 XPLMDataRef Rad2UpperCom1ActRemapableData = NULL, Rad2UpperCom1StbyRemapableData = NULL, Rad2UprCom1ActStbyRemapableData = NULL;
 XPLMDataRef Rad2UpperCom2ActRemapableData = NULL, Rad2UpperCom2StbyRemapableData = NULL, Rad2UprCom2ActStbyRemapableData = NULL;
@@ -541,7 +544,9 @@ string rad1_upper_nav2_fine_up_remapable, rad1_upper_nav2_fine_dn_remapable;
 string rad1_upper_nav2_act_data_remapable, rad1_upper_nav2_stby_data_remapable;
 string rad1_upper_nav2_actstby_btn_remapable_cmd, rad1_upper_nav2_actstby_btn_remapable_data;
 
-string rad1_upper_xpdr_data_remapable, rad1_upper_xpdr_mode_remapable;
+string rad1_upper_xpdr_data_remapable, rad1_upper_xpdr_mode_remapable, rad1_upper_xpdr_baro_std_data_remapable;
+
+string rad1_upper_xpdr_baro_up_remapable_cmd, rad1_upper_xpdr_baro_dn_remapable_cmd;
 
 string rad1_lower_com1_corse_up_remapable, rad1_lower_com1_corse_dn_remapable;
 string rad1_lower_com1_fine_up_remapable, rad1_lower_com1_fine_dn_remapable;
@@ -564,6 +569,8 @@ string rad1_lower_nav2_act_data_remapable, rad1_lower_nav2_stby_data_remapable;
 string rad1_lower_nav2_actstby_btn_remapable_cmd, rad1_lower_nav2_actstby_btn_remapable_data;
 
 string rad1_lower_xpdr_data_remapable, rad1_lower_xpdr_mode_remapable;
+string rad1_lower_xpdr_baro_std_data_remapable;
+string rad1_lower_xpdr_baro_up_remapable_cmd, rad1_lower_xpdr_baro_dn_remapable_cmd;
 
 string rad2_upper_com1_corse_up_remapable, rad2_upper_com1_corse_dn_remapable;
 string rad2_upper_com1_fine_up_remapable, rad2_upper_com1_fine_dn_remapable;
