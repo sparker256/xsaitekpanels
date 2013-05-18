@@ -78,6 +78,7 @@ extern XPLMCommandRef Rad2UprNav1ActStbyRemapableCmd;
 extern XPLMCommandRef Rad2UprNav2CrsUpRemapableCmd, Rad2UprNav2CrsDnRemapableCmd;
 extern XPLMCommandRef Rad2UprNav2FnUpRemapableCmd, Rad2UprNav2FnDnRemapableCmd;
 extern XPLMCommandRef Rad2UprNav2ActStbyRemapableCmd;
+extern XPLMCommandRef Rad2UpperXpdrBaroUpRemapableCmd, Rad2UpperXpdrBaroDnRemapableCmd;
 
 
 extern XPLMCommandRef Rad2LowrCom1CrsUpRemapableCmd, Rad2LowrCom1CrsDnRemapableCmd;
@@ -92,6 +93,7 @@ extern XPLMCommandRef Rad2LowrNav1ActStbyRemapableCmd;
 extern XPLMCommandRef Rad2LowrNav2CrsUpRemapableCmd, Rad2LowrNav2CrsDnRemapableCmd;
 extern XPLMCommandRef Rad2LowrNav2FnUpRemapableCmd, Rad2LowrNav2FnDnRemapableCmd;
 extern XPLMCommandRef Rad2LowrNav2ActStbyRemapableCmd;
+extern XPLMCommandRef Rad2LowrXpdrBaroUpRemapableCmd, Rad2LowrXpdrBaroDnRemapableCmd;
 
 
 // ************** Radio Panel SDK Data Ref **********************
@@ -134,13 +136,13 @@ extern XPLMDataRef Rad2UpperCom1ActRemapableData, Rad2UpperCom1StbyRemapableData
 extern XPLMDataRef Rad2UpperCom2ActRemapableData, Rad2UpperCom2StbyRemapableData, Rad2UprCom2ActStbyRemapableData;
 extern XPLMDataRef Rad2UpperNav1ActRemapableData, Rad2UpperNav1StbyRemapableData, Rad2UprNav1ActStbyRemapableData;
 extern XPLMDataRef Rad2UpperNav2ActRemapableData, Rad2UpperNav2StbyRemapableData, Rad2UprNav2ActStbyRemapableData;
-extern XPLMDataRef Rad2UpperXpdrRemapableData, Rad2UpperXpdrRemapableMode;
+extern XPLMDataRef Rad2UpperXpdrRemapableData, Rad2UpperXpdrRemapableMode, Rad2UpperXpdrBaroStdRemapableData;
 
 extern XPLMDataRef Rad2LowerCom1ActRemapableData, Rad2LowerCom1StbyRemapableData, Rad2LowrCom1ActStbyRemapableData;
 extern XPLMDataRef Rad2LowerCom2ActRemapableData, Rad2LowerCom2StbyRemapableData, Rad2LowrCom2ActStbyRemapableData;
 extern XPLMDataRef Rad2LowerNav1ActRemapableData, Rad2LowerNav1StbyRemapableData, Rad2LowrNav1ActStbyRemapableData;
 extern XPLMDataRef Rad2LowerNav2ActRemapableData, Rad2LowerNav2StbyRemapableData, Rad2LowrNav2ActStbyRemapableData;
-extern XPLMDataRef Rad2LowerXpdrRemapableData, Rad2LowerXpdrRemapableMode;
+extern XPLMDataRef Rad2LowerXpdrRemapableData, Rad2LowerXpdrRemapableMode, Rad2LowerXpdrBaroStdRemapableData;
 
 
 extern XPLMMenuID      RadioMenu;
@@ -257,7 +259,9 @@ extern string rad2_upper_nav2_fine_up_remapable, rad2_upper_nav2_fine_dn_remapab
 extern string rad2_upper_nav2_act_data_remapable, rad2_upper_nav2_stby_data_remapable;
 extern string rad2_upper_nav2_actstby_btn_remapable_cmd, rad2_upper_nav2_actstby_btn_remapable_data;
 
-extern string rad2_upper_xpdr_data_remapable, rad2_upper_xpdr_mode_remapable;
+extern string rad2_upper_xpdr_data_remapable, rad2_upper_xpdr_mode_remapable, rad2_upper_xpdr_baro_std_data_remapable;
+
+extern string rad2_upper_xpdr_baro_up_remapable_cmd, rad2_upper_xpdr_baro_dn_remapable_cmd;
 
 
 extern string rad2_lower_com1_corse_up_remapable, rad2_lower_com1_corse_dn_remapable;
@@ -280,8 +284,9 @@ extern string rad2_lower_nav2_fine_up_remapable, rad2_lower_nav2_fine_dn_remapab
 extern string rad2_lower_nav2_act_data_remapable, rad2_lower_nav2_stby_data_remapable;
 extern string rad2_lower_nav2_actstby_btn_remapable_cmd, rad2_lower_nav2_actstby_btn_remapable_data;
 
-extern string rad2_lower_xpdr_data_remapable, rad2_lower_xpdr_mode_remapable;
+extern string rad2_lower_xpdr_data_remapable, rad2_lower_xpdr_mode_remapable, rad2_lower_xpdr_baro_std_data_remapable;
 
+extern string rad2_lower_xpdr_baro_up_remapable_cmd, rad2_lower_xpdr_baro_dn_remapable_cmd;
 
 extern float interval;
 extern unsigned char radbuf[4], radwbuf[21];
