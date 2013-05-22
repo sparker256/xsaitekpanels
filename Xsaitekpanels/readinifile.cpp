@@ -286,7 +286,7 @@ void process_read_ini_file()
         mag_off3_switch_data_on_value = getOptionToInt("mag_off3_switch_data_on_value");
         mag_off3_switch_data_off_value = getOptionToInt("mag_off3_switch_data_off_value");
 
-        mag_off4_switch_data = getOptionToString("mag4_off_switch_data");
+        mag_off4_switch_data = getOptionToString("mag_off4_switch_data");
         MagOff4SwitchData   = XPLMFindDataRef(mag_off4_switch_data.c_str());
         mag_off4_switch_data_on_value = getOptionToInt("mag_off4_switch_data_on_value");
         mag_off4_switch_data_off_value = getOptionToInt("mag_off4_switch_data_off_value");
