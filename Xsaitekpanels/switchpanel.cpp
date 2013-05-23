@@ -90,6 +90,14 @@ void process_engines_mag_off_switch()
            XPLMSetDatai(MagOff2SwitchData, mag_off2_switch_data_on_value);
            XPLMSetDatai(MagOff3SwitchData, mag_off3_switch_data_on_value);
            XPLMSetDatai(MagOff4SwitchData, mag_off4_switch_data_on_value);
+           XPLMSetDatai(MagOff5SwitchData, mag_off5_switch_data_on_value);
+           XPLMSetDatai(MagOff6SwitchData, mag_off6_switch_data_on_value);
+           XPLMSetDatai(MagOff7SwitchData, mag_off7_switch_data_on_value);
+           XPLMSetDatai(MagOff8SwitchData, mag_off8_switch_data_on_value);
+           XPLMSetDatai(MagOff9SwitchData, mag_off9_switch_data_on_value);
+           XPLMSetDatai(MagOff10SwitchData, mag_off10_switch_data_on_value);
+
+
        }
        return;
    }
@@ -172,6 +180,14 @@ void process_engines_right_mag_switch()
            XPLMSetDatai(MagRight2SwitchData, mag_right2_switch_data_on_value);
            XPLMSetDatai(MagRight3SwitchData, mag_right3_switch_data_on_value);
            XPLMSetDatai(MagRight4SwitchData, mag_right4_switch_data_on_value);
+           XPLMSetDatai(MagRight5SwitchData, mag_right5_switch_data_on_value);
+           XPLMSetDatai(MagRight6SwitchData, mag_right6_switch_data_on_value);
+           XPLMSetDatai(MagRight7SwitchData, mag_right7_switch_data_on_value);
+           XPLMSetDatai(MagRight8SwitchData, mag_right8_switch_data_on_value);
+           XPLMSetDatai(MagRight9SwitchData, mag_right9_switch_data_on_value);
+           XPLMSetDatai(MagRight10SwitchData, mag_right10_switch_data_on_value);
+
+
        }
        return;
    }
@@ -243,6 +259,12 @@ void process_engines_left_mag_switch()
            XPLMSetDatai(MagLeft2SwitchData, mag_left2_switch_data_on_value);
            XPLMSetDatai(MagLeft3SwitchData, mag_left3_switch_data_on_value);
            XPLMSetDatai(MagLeft4SwitchData, mag_left4_switch_data_on_value);
+           XPLMSetDatai(MagLeft5SwitchData, mag_left5_switch_data_on_value);
+           XPLMSetDatai(MagLeft6SwitchData, mag_left6_switch_data_on_value);
+           XPLMSetDatai(MagLeft7SwitchData, mag_left7_switch_data_on_value);
+           XPLMSetDatai(MagLeft8SwitchData, mag_left8_switch_data_on_value);
+           XPLMSetDatai(MagLeft9SwitchData, mag_left9_switch_data_on_value);
+           XPLMSetDatai(MagLeft10SwitchData, mag_left10_switch_data_on_value);
        }
        return;
    }
@@ -315,6 +337,12 @@ void process_engines_both_mag_switch()
            XPLMSetDatai(MagBoth2SwitchData, mag_both2_switch_data_on_value);
            XPLMSetDatai(MagBoth3SwitchData, mag_both3_switch_data_on_value);
            XPLMSetDatai(MagBoth4SwitchData, mag_both4_switch_data_on_value);
+           XPLMSetDatai(MagBoth5SwitchData, mag_both5_switch_data_on_value);
+           XPLMSetDatai(MagBoth6SwitchData, mag_both6_switch_data_on_value);
+           XPLMSetDatai(MagBoth7SwitchData, mag_both7_switch_data_on_value);
+           XPLMSetDatai(MagBoth8SwitchData, mag_both8_switch_data_on_value);
+           XPLMSetDatai(MagBoth9SwitchData, mag_both9_switch_data_on_value);
+           XPLMSetDatai(MagBoth10SwitchData, mag_both10_switch_data_on_value);
        }
        return;
    }
@@ -393,6 +421,12 @@ void process_engines_start_switch()
            XPLMSetDatai(MagStart2SwitchData, mag_start2_switch_data_on_value);
            XPLMSetDatai(MagStart3SwitchData, mag_start3_switch_data_on_value);
            XPLMSetDatai(MagStart4SwitchData, mag_start4_switch_data_on_value);
+           XPLMSetDatai(MagStart5SwitchData, mag_start5_switch_data_on_value);
+           XPLMSetDatai(MagStart6SwitchData, mag_start6_switch_data_on_value);
+           XPLMSetDatai(MagStart7SwitchData, mag_start7_switch_data_on_value);
+           XPLMSetDatai(MagStart8SwitchData, mag_start8_switch_data_on_value);
+           XPLMSetDatai(MagStart9SwitchData, mag_start9_switch_data_on_value);
+           XPLMSetDatai(MagStart10SwitchData, mag_start10_switch_data_on_value);
        }
        return;
    }
