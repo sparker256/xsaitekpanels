@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.16   ***************
-// ****** May 21 2013   **************
+// ****** May 23 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -455,11 +455,20 @@ XPLMDataRef PanelLights3Data = NULL, PanelLights4Data = NULL;
 XPLMDataRef PanelLights5Data = NULL, PanelLights6Data = NULL;
 XPLMDataRef PanelLights7Data = NULL, PanelLights8Data = NULL;
 
-XPLMDataRef BeaconLightsData = NULL;
-XPLMDataRef NavLightsData = NULL;
-XPLMDataRef StrobeLightsData = NULL;
-XPLMDataRef TaxiLightsData = NULL;
-XPLMDataRef LandingLightsData = NULL;
+XPLMDataRef BeaconLightsData = NULL, BeaconLights2Data = NULL;
+XPLMDataRef BeaconLights3Data = NULL, BeaconLights4Data = NULL;
+
+XPLMDataRef NavLightsData = NULL, NavLights2Data = NULL;
+XPLMDataRef NavLights3Data = NULL, NavLights4Data = NULL;
+
+XPLMDataRef StrobeLightsData = NULL, StrobeLights2Data = NULL;
+XPLMDataRef StrobeLights3Data = NULL, StrobeLights4Data = NULL;
+
+XPLMDataRef TaxiLightsData = NULL, TaxiLights2Data = NULL;
+XPLMDataRef TaxiLights3Data = NULL, TaxiLights4Data = NULL;
+
+XPLMDataRef LandingLightsData = NULL, LandingLights2Data = NULL;
+XPLMDataRef LandingLights3Data = NULL, LandingLights4Data = NULL;
 
 
 XPLMMenuID      SwitchMenu;
@@ -877,12 +886,31 @@ int panel_lights_switch6_data_on_value, panel_lights_switch6_data_off_value;
 int panel_lights_switch7_data_on_value, panel_lights_switch7_data_off_value;
 int panel_lights_switch8_data_on_value, panel_lights_switch8_data_off_value;
 
-
 int beacon_lights_switch_data_on_value, beacon_lights_switch_data_off_value;
+int beacon_lights_switch2_data_on_value, beacon_lights_switch2_data_off_value;
+int beacon_lights_switch3_data_on_value, beacon_lights_switch3_data_off_value;
+int beacon_lights_switch4_data_on_value, beacon_lights_switch4_data_off_value;
+
 int nav_lights_switch_data_on_value, nav_lights_switch_data_off_value;
+int nav_lights_switch2_data_on_value, nav_lights_switch2_data_off_value;
+int nav_lights_switch3_data_on_value, nav_lights_switch3_data_off_value;
+int nav_lights_switch4_data_on_value, nav_lights_switch4_data_off_value;
+
 int strobe_lights_switch_data_on_value, strobe_lights_switch_data_off_value;
+int strobe_lights_switch2_data_on_value, strobe_lights_switch2_data_off_value;
+int strobe_lights_switch3_data_on_value, strobe_lights_switch3_data_off_value;
+int strobe_lights_switch4_data_on_value, strobe_lights_switch4_data_off_value;
+
 int taxi_lights_switch_data_on_value, taxi_lights_switch_data_off_value;
+int taxi_lights_switch2_data_on_value, taxi_lights_switch2_data_off_value;
+int taxi_lights_switch3_data_on_value, taxi_lights_switch3_data_off_value;
+int taxi_lights_switch4_data_on_value, taxi_lights_switch4_data_off_value;
+
 int landing_lights_switch_data_on_value, landing_lights_switch_data_off_value;
+int landing_lights_switch2_data_on_value, landing_lights_switch2_data_off_value;
+int landing_lights_switch3_data_on_value, landing_lights_switch3_data_off_value;
+int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
+
 
 float panel_lights_switch_dataf_on_value, panel_lights_switch_dataf_off_value;
 float panel_lights_switch2_dataf_on_value, panel_lights_switch2_dataf_off_value;
@@ -892,6 +920,31 @@ float panel_lights_switch5_dataf_on_value, panel_lights_switch5_dataf_off_value;
 float panel_lights_switch6_dataf_on_value, panel_lights_switch6_dataf_off_value;
 float panel_lights_switch7_dataf_on_value, panel_lights_switch7_dataf_off_value;
 float panel_lights_switch8_dataf_on_value, panel_lights_switch8_dataf_off_value;
+
+float beacon_lights_switch_dataf_on_value, beacon_lights_switch_dataf_off_value;
+float beacon_lights_switch2_dataf_on_value, beacon_lights_switch2_dataf_off_value;
+float beacon_lights_switch3_dataf_on_value, beacon_lights_switch3_dataf_off_value;
+float beacon_lights_switch4_dataf_on_value, beacon_lights_switch4_dataf_off_value;
+
+float nav_lights_switch_dataf_on_value, nav_lights_switch_dataf_off_value;
+float nav_lights_switch2_dataf_on_value, nav_lights_switch2_dataf_off_value;
+float nav_lights_switch3_dataf_on_value, nav_lights_switch3_dataf_off_value;
+float nav_lights_switch4_dataf_on_value, nav_lights_switch4_dataf_off_value;
+
+float strobe_lights_switch_dataf_on_value, strobe_lights_switch_dataf_off_value;
+float strobe_lights_switch2_dataf_on_value, strobe_lights_switch2_dataf_off_value;
+float strobe_lights_switch3_dataf_on_value, strobe_lights_switch3_dataf_off_value;
+float strobe_lights_switch4_dataf_on_value, strobe_lights_switch4_dataf_off_value;
+
+float taxi_lights_switch_dataf_on_value, taxi_lights_switch_dataf_off_value;
+float taxi_lights_switch2_dataf_on_value, taxi_lights_switch2_dataf_off_value;
+float taxi_lights_switch3_dataf_on_value, taxi_lights_switch3_dataf_off_value;
+float taxi_lights_switch4_dataf_on_value, taxi_lights_switch4_dataf_off_value;
+
+float landing_lights_switch_dataf_on_value, landing_lights_switch_dataf_off_value;
+float landing_lights_switch2_dataf_on_value, landing_lights_switch2_dataf_off_value;
+float landing_lights_switch3_dataf_on_value, landing_lights_switch3_dataf_off_value;
+float landing_lights_switch4_dataf_on_value, landing_lights_switch4_dataf_off_value;
 
 string mag_off_switch_on, mag_off_switch_off, mag_off_switch_data;
 string mag_off2_switch_on, mag_off2_switch_off, mag_off2_switch_data;
@@ -1013,10 +1066,30 @@ string panel_lights_switch7_on, panel_lights_switch7_off, panel_lights_switch7_d
 string panel_lights_switch8_on, panel_lights_switch8_off, panel_lights_switch8_data;
 
 string beacon_lights_switch_on, beacon_lights_switch_off, beacon_lights_switch_data;
+string beacon_lights_switch2_on, beacon_lights_switch2_off, beacon_lights_switch2_data;
+string beacon_lights_switch3_on, beacon_lights_switch3_off, beacon_lights_switch3_data;
+string beacon_lights_switch4_on, beacon_lights_switch4_off, beacon_lights_switch4_data;
+
 string nav_lights_switch_on, nav_lights_switch_off, nav_lights_switch_data;
+string nav_lights_switch2_on, nav_lights_switch2_off, nav_lights_switch2_data;
+string nav_lights_switch3_on, nav_lights_switch3_off, nav_lights_switch3_data;
+string nav_lights_switch4_on, nav_lights_switch4_off, nav_lights_switch4_data;
+
 string strobe_lights_switch_on, strobe_lights_switch_off, strobe_lights_switch_data;
+string strobe_lights_switch2_on, strobe_lights_switch2_off, strobe_lights_switch2_data;
+string strobe_lights_switch3_on, strobe_lights_switch3_off, strobe_lights_switch3_data;
+string strobe_lights_switch4_on, strobe_lights_switch4_off, strobe_lights_switch4_data;
+
 string taxi_lights_switch_on, taxi_lights_switch_off, taxi_lights_switch_data;
+string taxi_lights_switch2_on, taxi_lights_switc2h_off, taxi_lights_switch2_data;
+string taxi_lights_switch3_on, taxi_lights_switch3_off, taxi_lights_switch3_data;
+string taxi_lights_switch4_on, taxi_lights_switch4_off, taxi_lights_switch4_data;
+
 string landing_lights_switch_on, landing_lights_switch_off, landing_lights_switch_data;
+string landing_lights_switch2_on, landing_lights_switch2_off, landing_lights_switch2_data;
+string landing_lights_switch3_on, landing_lights_switch3_off, landing_lights_switch3_data;
+string landing_lights_switch4_on, landing_lights_switch4_off, landing_lights_switch4_data;
+
 
 
 
@@ -1122,10 +1195,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.15\n");
+  XPLMDebugString("Xsaitekpanels: v2.16\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.15");
+  strcpy(outName, "Xsaitekpanels v2.16");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 

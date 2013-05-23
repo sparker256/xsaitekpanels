@@ -628,11 +628,22 @@ extern XPLMDataRef PanelLights3Data, PanelLights4Data;
 extern XPLMDataRef PanelLights5Data, PanelLights6Data;
 extern XPLMDataRef PanelLights7Data, PanelLights8Data;
 
-extern XPLMDataRef BeaconLightsData;
-extern XPLMDataRef NavLightsData;
-extern XPLMDataRef StrobeLightsData;
-extern XPLMDataRef TaxiLightsData;
-extern XPLMDataRef LandingLightsData;
+extern XPLMDataRef BeaconLightsData, BeaconLights2Data;
+extern XPLMDataRef BeaconLights3Data, BeaconLights4Data;
+
+extern XPLMDataRef NavLightsData, NavLights2Data;
+extern XPLMDataRef NavLights3Data, NavLights4Data;
+
+extern XPLMDataRef StrobeLightsData, StrobeLights2Data;
+extern XPLMDataRef StrobeLights3Data, StrobeLights4Data;
+
+extern XPLMDataRef TaxiLightsData, TaxiLights2Data;
+extern XPLMDataRef TaxiLights3Data, TaxiLights4Data;
+
+extern XPLMDataRef LandingLightsData, LandingLights2Data;
+extern XPLMDataRef LandingLights3Data, LandingLights4Data;
+
+
 
 extern XPLMMenuID      SwitchMenu;
 extern XPLMMenuID      SwitchMenuId;
@@ -765,8 +776,6 @@ extern int pitot6_heat_switch_data_on_value, pitot6_heat_switch_data_off_value;
 extern int pitot7_heat_switch_data_on_value, pitot7_heat_switch_data_off_value;
 extern int pitot8_heat_switch_data_on_value, pitot8_heat_switch_data_off_value;
 
-
-
 extern int gear_switch_up_data_on_value, gear_switch_up_data_off_value;
 extern int gear_switch_down_data_on_value, gear_switch_down_data_off_value;
 extern int cowl_flaps_data_on_value, cowl_flaps_data_off_value;
@@ -782,10 +791,29 @@ extern int panel_lights_switch7_data_on_value, panel_lights_switch7_data_off_val
 extern int panel_lights_switch8_data_on_value, panel_lights_switch8_data_off_value;
 
 extern int beacon_lights_switch_data_on_value, beacon_lights_switch_data_off_value;
+extern int beacon_lights_switch2_data_on_value, beacon_lights_switch2_data_off_value;
+extern int beacon_lights_switch3_data_on_value, beacon_lights_switch3_data_off_value;
+extern int beacon_lights_switch4_data_on_value, beacon_lights_switch4_data_off_value;
+
 extern int nav_lights_switch_data_on_value, nav_lights_switch_data_off_value;
+extern int nav_lights_switch2_data_on_value, nav_lights_switch2_data_off_value;
+extern int nav_lights_switch3_data_on_value, nav_lights_switch3_data_off_value;
+extern int nav_lights_switch4_data_on_value, nav_lights_switch4_data_off_value;
+
 extern int strobe_lights_switch_data_on_value, strobe_lights_switch_data_off_value;
+extern int strobe_lights_switch2_data_on_value, strobe_lights_switch2_data_off_value;
+extern int strobe_lights_switch3_data_on_value, strobe_lights_switch3_data_off_value;
+extern int strobe_lights_switch4_data_on_value, strobe_lights_switch4_data_off_value;
+
 extern int taxi_lights_switch_data_on_value, taxi_lights_switch_data_off_value;
+extern int taxi_lights_switch2_data_on_value, taxi_lights_switch2_data_off_value;
+extern int taxi_lights_switch3_data_on_value, taxi_lights_switch3_data_off_value;
+extern int taxi_lights_switch4_data_on_value, taxi_lights_switch4_data_off_value;
+
 extern int landing_lights_switch_data_on_value, landing_lights_switch_data_off_value;
+extern int landing_lights_switch2_data_on_value, landing_lights_switch2_data_off_value;
+extern int landing_lights_switch3_data_on_value, landing_lights_switch3_data_off_value;
+extern int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 
 extern float panel_lights_switch_dataf_on_value, panel_lights_switch_dataf_off_value;
 extern float panel_lights_switch2_dataf_on_value, panel_lights_switch2_dataf_off_value;
@@ -796,6 +824,30 @@ extern float panel_lights_switch6_dataf_on_value, panel_lights_switch6_dataf_off
 extern float panel_lights_switch7_dataf_on_value, panel_lights_switch7_dataf_off_value;
 extern float panel_lights_switch8_dataf_on_value, panel_lights_switch8_dataf_off_value;
 
+extern float beacon_lights_switch_dataf_on_value, beacon_lights_switch_dataf_off_value;
+extern float beacon_lights_switch2_dataf_on_value, beacon_lights_switch2_dataf_off_value;
+extern float beacon_lights_switch3_dataf_on_value, beacon_lights_switch3_dataf_off_value;
+extern float beacon_lights_switch4_dataf_on_value, beacon_lights_switch4_dataf_off_value;
+
+extern float nav_lights_switch_dataf_on_value, nav_lights_switch_dataf_off_value;
+extern float nav_lights_switch2_dataf_on_value, nav_lights_switch2_dataf_off_value;
+extern float nav_lights_switch3_dataf_on_value, nav_lights_switch3_dataf_off_value;
+extern float nav_lights_switch4_dataf_on_value, nav_lights_switch4_dataf_off_value;
+
+extern float strobe_lights_switch_dataf_on_value, strobe_lights_switch_dataf_off_value;
+extern float strobe_lights_switch2_dataf_on_value, strobe_lights_switch2_dataf_off_value;
+extern float strobe_lights_switch3_dataf_on_value, strobe_lights_switch3_dataf_off_value;
+extern float strobe_lights_switch4_dataf_on_value, strobe_lights_switch4_dataf_off_value;
+
+extern float taxi_lights_switch_dataf_on_value, taxi_lights_switch_dataf_off_value;
+extern float taxi_lights_switch2_dataf_on_value, taxi_lights_switch2_dataf_off_value;
+extern float taxi_lights_switch3_dataf_on_value, taxi_lights_switch3_dataf_off_value;
+extern float taxi_lights_switch4_dataf_on_value, taxi_lights_switch4_dataf_off_value;
+
+extern float landing_lights_switch_dataf_on_value, landing_lights_switch_dataf_off_value;
+extern float landing_lights_switch2_dataf_on_value, landing_lights_switch2_dataf_off_value;
+extern float landing_lights_switch3_dataf_on_value, landing_lights_switch3_dataf_off_value;
+extern float landing_lights_switch4_dataf_on_value, landing_lights_switch4_dataf_off_value;
 
 extern string mag_off_switch_on, mag_off_switch_off, mag_off_switch_data;
 extern string mag_off2_switch_on, mag_off2_switch_off, mag_off2_switch_data;
@@ -922,13 +974,30 @@ extern string panel_lights_switch6_on, panel_lights_switch6_off, panel_lights_sw
 extern string panel_lights_switch7_on, panel_lights_switch7_off, panel_lights_switch7_data;
 extern string panel_lights_switch8_on, panel_lights_switch8_off, panel_lights_switch8_data;
 
-
 extern string beacon_lights_switch_on, beacon_lights_switch_off, beacon_lights_switch_data;
-extern string nav_lights_switch_on, nav_lights_switch_off, nav_lights_switch_data;
-extern string strobe_lights_switch_on, strobe_lights_switch_off, strobe_lights_switch_data;
-extern string taxi_lights_switch_on, taxi_lights_switch_off, taxi_lights_switch_data;
-extern string landing_lights_switch_on, landing_lights_switch_off, landing_lights_switch_data;
+extern string beacon_lights_switch2_on, beacon_lights_switch2_off, beacon_lights_switch2_data;
+extern string beacon_lights_switch3_on, beacon_lights_switch3_off, beacon_lights_switch3_data;
+extern string beacon_lights_switch4_on, beacon_lights_switch4_off, beacon_lights_switch4_data;
 
+extern string nav_lights_switch_on, nav_lights_switch_off, nav_lights_switch_data;
+extern string nav_lights_switch2_on, nav_lights_switch2_off, nav_lights_switch2_data;
+extern string nav_lights_switch3_on, nav_lights_switch3_off, nav_lights_switch3_data;
+extern string nav_lights_switch4_on, nav_lights_switc4h_off, nav_lights_switch4_data;
+
+extern string strobe_lights_switch_on, strobe_lights_switch_off, strobe_lights_switch_data;
+extern string strobe_lights_switch2_on, strobe_lights_switch2_off, strobe_lights_switch2_data;
+extern string strobe_lights_switch3_on, strobe_lights_switch3_off, strobe_lights_switch3_data;
+extern string strobe_lights_switch4_on, strobe_lights_switch4_off, strobe_lights_switch4_data;
+
+extern string taxi_lights_switch_on, taxi_lights_switch_off, taxi_lights_switch_data;
+extern string taxi_lights_switch2_on, taxi_lights_switch2_off, taxi_lights_switch2_data;
+extern string taxi_lights_switch3_on, taxi_lights_switch3_off, taxi_lights_switch3_data;
+extern string taxi_lights_switch4_on, taxi_lights_switch4_off, taxi_lights_switch4_data;
+
+extern string landing_lights_switch_on, landing_lights_switch_off, landing_lights_switch_data;
+extern string landing_lights_switch2_on, landing_lights_switch2_off, landing_lights_switch2_data;
+extern string landing_lights_switch3_on, landing_lights_switch3_off, landing_lights_switch3_data;
+extern string landing_lights_switch4_on, landing_lights_switch4_off, landing_lights_switch4_data;
 
 extern float LandingGearDeployRatio[10];
 extern hid_device *switchhandle;
