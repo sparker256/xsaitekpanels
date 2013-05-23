@@ -381,18 +381,33 @@ XPLMDataRef Gear1Fail = NULL, Gear2Fail = NULL, Gear3Fail = NULL;
 
 XPLMDataRef MagOffSwitchData = NULL, MagOff2SwitchData = NULL;
 XPLMDataRef MagOff3SwitchData = NULL, MagOff4SwitchData = NULL;
+XPLMDataRef MagOff5SwitchData = NULL, MagOff6SwitchData = NULL;
+XPLMDataRef MagOff7SwitchData = NULL, MagOff8SwitchData = NULL;
+XPLMDataRef MagOff9SwitchData = NULL, MagOff10SwitchData = NULL;
 
 XPLMDataRef MagRightSwitchData = NULL, MagRight2SwitchData = NULL;
 XPLMDataRef MagRight3SwitchData = NULL, MagRight4SwitchData = NULL;
+XPLMDataRef MagRight5SwitchData = NULL, MagRight6SwitchData = NULL;
+XPLMDataRef MagRight7SwitchData = NULL, MagRight8SwitchData = NULL;
+XPLMDataRef MagRight9SwitchData = NULL, MagRight10SwitchData = NULL;
 
 XPLMDataRef MagLeftSwitchData = NULL, MagLeft2SwitchData = NULL;
 XPLMDataRef MagLeft3SwitchData = NULL, MagLeft4SwitchData = NULL;
+XPLMDataRef MagLeft5SwitchData = NULL, MagLeft6SwitchData = NULL;
+XPLMDataRef MagLeft7SwitchData = NULL, MagLeft8SwitchData = NULL;
+XPLMDataRef MagLeft9SwitchData = NULL, MagLeft10SwitchData = NULL;
 
 XPLMDataRef MagBothSwitchData = NULL, MagBoth2SwitchData = NULL;
 XPLMDataRef MagBoth3SwitchData = NULL, MagBoth4SwitchData = NULL;
+XPLMDataRef MagBoth5SwitchData = NULL, MagBoth6SwitchData = NULL;
+XPLMDataRef MagBoth7SwitchData = NULL, MagBoth8SwitchData = NULL;
+XPLMDataRef MagBoth9SwitchData = NULL, MagBoth10SwitchData = NULL;
 
 XPLMDataRef MagStartSwitchData = NULL, MagStart2SwitchData = NULL;
 XPLMDataRef MagStart3SwitchData = NULL, MagStart4SwitchData = NULL;
+XPLMDataRef MagStart5SwitchData = NULL, MagStart6SwitchData = NULL;
+XPLMDataRef MagStart7SwitchData = NULL, MagStart8SwitchData = NULL;
+XPLMDataRef MagStart9SwitchData = NULL, MagStart10SwitchData = NULL;
 
 XPLMDataRef BatMasterSwitchData = NULL, Bat2MasterSwitchData = NULL;
 XPLMDataRef Bat3MasterSwitchData = NULL, Bat4MasterSwitchData = NULL;
@@ -742,26 +757,57 @@ int mag_off_switch_data_on_value, mag_off_switch_data_off_value;
 int mag_off2_switch_data_on_value, mag_off2_switch_data_off_value;
 int mag_off3_switch_data_on_value, mag_off3_switch_data_off_value;
 int mag_off4_switch_data_on_value, mag_off4_switch_data_off_value;
+int mag_off5_switch_data_on_value, mag_off5_switch_data_off_value;
+int mag_off6_switch_data_on_value, mag_off6_switch_data_off_value;
+int mag_off7_switch_data_on_value, mag_off7_switch_data_off_value;
+int mag_off8_switch_data_on_value, mag_off8_switch_data_off_value;
+int mag_off9_switch_data_on_value, mag_off9_switch_data_off_value;
+int mag_off10_switch_data_on_value, mag_off10_switch_data_off_value;
 
 int mag_right_switch_data_on_value, mag_right_switch_data_off_value;
 int mag_right2_switch_data_on_value, mag_right2_switch_data_off_value;
 int mag_right3_switch_data_on_value, mag_right3_switch_data_off_value;
 int mag_right4_switch_data_on_value, mag_right4_switch_data_off_value;
+int mag_right5_switch_data_on_value, mag_right5_switch_data_off_value;
+int mag_right6_switch_data_on_value, mag_right6_switch_data_off_value;
+int mag_right7_switch_data_on_value, mag_right7_switch_data_off_value;
+int mag_right8_switch_data_on_value, mag_right8_switch_data_off_value;
+int mag_right9_switch_data_on_value, mag_right9_switch_data_off_value;
+int mag_right10_switch_data_on_value, mag_right10_switch_data_off_value;
 
 int mag_left_switch_data_on_value, mag_left_switch_data_off_value;
 int mag_left2_switch_data_on_value, mag_left2_switch_data_off_value;
 int mag_left3_switch_data_on_value, mag_left3_switch_data_off_value;
 int mag_left4_switch_data_on_value, mag_left4_switch_data_off_value;
+int mag_left5_switch_data_on_value, mag_left5_switch_data_off_value;
+int mag_left6_switch_data_on_value, mag_left6_switch_data_off_value;
+int mag_left7_switch_data_on_value, mag_left7_switch_data_off_value;
+int mag_left8_switch_data_on_value, mag_left8_switch_data_off_value;
+int mag_left9_switch_data_on_value, mag_left9_switch_data_off_value;
+int mag_left10_switch_data_on_value, mag_left10_switch_data_off_value;
 
 int mag_both_switch_data_on_value, mag_both_switch_data_off_value;
 int mag_both2_switch_data_on_value, mag_both2_switch_data_off_value;
 int mag_both3_switch_data_on_value, mag_both3_switch_data_off_value;
 int mag_both4_switch_data_on_value, mag_both4_switch_data_off_value;
+int mag_both5_switch_data_on_value, mag_both5_switch_data_off_value;
+int mag_both6_switch_data_on_value, mag_both6_switch_data_off_value;
+int mag_both7_switch_data_on_value, mag_both7_switch_data_off_value;
+int mag_both8_switch_data_on_value, mag_both8_switch_data_off_value;
+int mag_both9_switch_data_on_value, mag_both9_switch_data_off_value;
+int mag_both10_switch_data_on_value, mag_both10_switch_data_off_value;
+
 
 int mag_start_switch_data_on_value, mag_start_switch_data_off_value;
 int mag_start2_switch_data_on_value, mag_start2_switch_data_off_value;
 int mag_start3_switch_data_on_value, mag_start3_switch_data_off_value;
 int mag_start4_switch_data_on_value, mag_start4_switch_data_off_value;
+int mag_start5_switch_data_on_value, mag_start5_switch_data_off_value;
+int mag_start6_switch_data_on_value, mag_start6_switch_data_off_value;
+int mag_start7_switch_data_on_value, mag_start7_switch_data_off_value;
+int mag_start8_switch_data_on_value, mag_start8_switch_data_off_value;
+int mag_start9_switch_data_on_value, mag_start9_switch_data_off_value;
+int mag_start10_switch_data_on_value, mag_start10_switch_data_off_value;
 
 
 int bat_master_switch_data_on_value, bat_master_switch_data_off_value;
@@ -851,26 +897,56 @@ string mag_off_switch_on, mag_off_switch_off, mag_off_switch_data;
 string mag_off2_switch_on, mag_off2_switch_off, mag_off2_switch_data;
 string mag_off3_switch_on, mag_off3_switch_off, mag_off3_switch_data;
 string mag_off4_switch_on, mag_off4_switch_off, mag_off4_switch_data;
+string mag_off5_switch_on, mag_off5_switch_off, mag_off5_switch_data;
+string mag_off6_switch_on, mag_off6_switch_off, mag_off6_switch_data;
+string mag_off7_switch_on, mag_off7_switch_off, mag_off7_switch_data;
+string mag_off8_switch_on, mag_off8_switch_off, mag_off8_switch_data;
+string mag_off9_switch_on, mag_off9_switch_off, mag_off9_switch_data;
+string mag_off10_switch_on, mag_off10_switch_off, mag_off10_switch_data;
 
 string mag_right_switch_on, mag_right_switch_off, mag_right_switch_data;
 string mag_right2_switch_on, mag_right2_switch_off, mag_right2_switch_data;
 string mag_right3_switch_on, mag_right3_switch_off, mag_right3_switch_data;
 string mag_right4_switch_on, mag_right4_switch_off, mag_right4_switch_data;
+string mag_right5_switch_on, mag_right5_switch_off, mag_right5_switch_data;
+string mag_right6_switch_on, mag_right6_switch_off, mag_right6_switch_data;
+string mag_right7_switch_on, mag_right7_switch_off, mag_right7_switch_data;
+string mag_right8_switch_on, mag_right8_switch_off, mag_right8_switch_data;
+string mag_right9_switch_on, mag_right9_switch_off, mag_right9_switch_data;
+string mag_right10_switch_on, mag_right10_switch_off, mag_right10_switch_data;
 
 string mag_left_switch_on, mag_left_switch_off, mag_left_switch_data;
 string mag_left2_switch_on, mag_left2_switch_off, mag_left2_switch_data;
 string mag_left3_switch_on, mag_left3_switch_off, mag_left3_switch_data;
 string mag_left4_switch_on, mag_left4_switch_off, mag_left4_switch_data;
+string mag_left5_switch_on, mag_left5_switch_off, mag_left5_switch_data;
+string mag_left6_switch_on, mag_left6_switch_off, mag_left6_switch_data;
+string mag_left7_switch_on, mag_left7_switch_off, mag_left7_switch_data;
+string mag_left8_switch_on, mag_left8_switch_off, mag_left8_switch_data;
+string mag_left9_switch_on, mag_left9_switch_off, mag_left9_switch_data;
+string mag_left10_switch_on, mag_left10_switch_off, mag_left10_switch_data;
 
 string mag_both_switch_on, mag_both_switch_off, mag_both_switch_data;
 string mag_both2_switch_on, mag_both2_switch_off, mag_both2_switch_data;
 string mag_both3_switch_on, mag_both3_switch_off, mag_both3_switch_data;
 string mag_both4_switch_on, mag_both4_switch_off, mag_both4_switch_data;
+string mag_both5_switch_on, mag_both5_switch_off, mag_both5_switch_data;
+string mag_both6_switch_on, mag_both6_switch_off, mag_both6_switch_data;
+string mag_both7_switch_on, mag_both7_switch_off, mag_both7_switch_data;
+string mag_both8_switch_on, mag_both8_switch_off, mag_both8_switch_data;
+string mag_both9_switch_on, mag_both9_switch_off, mag_both9_switch_data;
+string mag_both10_switch_on, mag_both10_switch_off, mag_both10_switch_data;
 
 string mag_start_switch_on, mag_start_switch_off, mag_start_switch_data;
 string mag_start2_switch_on, mag_start2_switch_off, mag_start2_switch_data;
 string mag_start3_switch_on, mag_start3_switch_off, mag_start3_switch_data;
 string mag_start4_switch_on, mag_start4_switch_off, mag_start4_switch_data;
+string mag_start5_switch_on, mag_start5_switch_off, mag_start5_switch_data;
+string mag_start6_switch_on, mag_start6_switch_off, mag_start6_switch_data;
+string mag_start7_switch_on, mag_start7_switch_off, mag_start7_switch_data;
+string mag_start8_switch_on, mag_start8_switch_off, mag_start8_switch_data;
+string mag_start9_switch_on, mag_start9_switch_off, mag_start9_switch_data;
+string mag_start10_switch_on, mag_start10_switch_off, mag_start10_switch_data;
 
 string bat_master_switch_on, bat_master_switch_off, bat_master_switch_data;
 string bat2_master_switch_on, bat2_master_switch_off, bat2_master_switch_data;
