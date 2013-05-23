@@ -1138,14 +1138,9 @@ void process_read_ini_file()
          PanelLightsOffCmd   = XPLMFindCommand(panel_lights_switch_off.c_str());
      }
 
-     if (panellightswitchenable == 3) {
-         panel_lights_switch_data = getOptionToString("panel_lights_switch_data");
-         PanelLightsData   = XPLMFindDataRef(panel_lights_switch_data.c_str());
-         panel_lights_switch_data_on_value = getOptionToInt("panel_lights_switch_data_on_value");
-         panel_lights_switch_data_off_value = getOptionToInt("panel_lights_switch_data_off_value");
-     }
 
-     if (panellightswitchenable == 4) {
+
+     if ((panellightswitchenable == 3) || (panellightswitchenable == 4)) {
          panel_lights_switch_data = getOptionToString("panel_lights_switch_data");
          PanelLightsData   = XPLMFindDataRef(panel_lights_switch_data.c_str());
          panel_lights_switch_data_on_value = getOptionToInt("panel_lights_switch_data_on_value");
@@ -1206,12 +1201,29 @@ void process_read_ini_file()
           BeaconLightsOffCmd   = XPLMFindCommand(beacon_lights_switch_off.c_str());
       }
 
-      if (beaconlightswitchenable == 3) {
+      if ((beaconlightswitchenable == 3) || (beaconlightswitchenable == 4)) {
           beacon_lights_switch_data = getOptionToString("beacon_lights_switch_data");
           BeaconLightsData   = XPLMFindDataRef(beacon_lights_switch_data.c_str());
           beacon_lights_switch_data_on_value = getOptionToInt("beacon_lights_switch_data_on_value");
           beacon_lights_switch_data_off_value = getOptionToInt("beacon_lights_switch_data_off_value");
+
+          beacon_lights_switch2_data = getOptionToString("beacon_lights_switch2_data");
+          BeaconLights2Data   = XPLMFindDataRef(beacon_lights_switch_data.c_str());
+          beacon_lights_switch2_data_on_value = getOptionToInt("beacon_lights_switch2_data_on_value");
+          beacon_lights_switch2_data_off_value = getOptionToInt("beacon_lights_switch2_data_off_value");
+
+          beacon_lights_switch3_data = getOptionToString("beacon_lights_switch3_data");
+          BeaconLights3Data   = XPLMFindDataRef(beacon_lights_switch3_data.c_str());
+          beacon_lights_switch3_data_on_value = getOptionToInt("beacon_lights_switch3_data_on_value");
+          beacon_lights_switch3_data_off_value = getOptionToInt("beacon_lights_switch3_data_off_value");
+
+          beacon_lights_switch4_data = getOptionToString("beacon_lights_switch4_data");
+          BeaconLights4Data   = XPLMFindDataRef(beacon_lights_switch4_data.c_str());
+          beacon_lights_switch4_data_on_value = getOptionToInt("beacon_lights_switch4_data_on_value");
+          beacon_lights_switch4_data_off_value = getOptionToInt("beacon_lights_switch4_data_off_value");
+
       }
+
 
       // nav lights switch disable - enable - remap
       navlightswitchenable = getOptionToInt("Nav Lights Switch enable");
@@ -1231,11 +1243,27 @@ void process_read_ini_file()
            NavLightsOffCmd   = XPLMFindCommand(nav_lights_switch_off.c_str());
        }
 
-       if (navlightswitchenable == 3) {
+       if ((navlightswitchenable == 3) || (navlightswitchenable == 4)) {
            nav_lights_switch_data = getOptionToString("nav_lights_switch_data");
            NavLightsData   = XPLMFindDataRef(nav_lights_switch_data.c_str());
            nav_lights_switch_data_on_value = getOptionToInt("nav_lights_switch_data_on_value");
            nav_lights_switch_data_off_value = getOptionToInt("nav_lights_switch_data_off_value");
+
+           nav_lights_switch2_data = getOptionToString("nav_lights_switch2_data");
+           NavLights2Data   = XPLMFindDataRef(nav_lights_switch2_data.c_str());
+           nav_lights_switch2_data_on_value = getOptionToInt("nav_lights_switch2_data_on_value");
+           nav_lights_switch2_data_off_value = getOptionToInt("nav_lights_switch2_data_off_value");
+
+           nav_lights_switch3_data = getOptionToString("nav_lights_switch3_data");
+           NavLights3Data   = XPLMFindDataRef(nav_lights_switch3_data.c_str());
+           nav_lights_switch3_data_on_value = getOptionToInt("nav_lights_switch3_data_on_value");
+           nav_lights_switch3_data_off_value = getOptionToInt("nav_lights_switch3_data_off_value");
+
+           nav_lights_switch4_data = getOptionToString("nav_lights_switch4_data");
+           NavLights4Data   = XPLMFindDataRef(nav_lights_switch4_data.c_str());
+           nav_lights_switch4_data_on_value = getOptionToInt("nav_lights_switch4_data_on_value");
+           nav_lights_switch_data_off_value = getOptionToInt("nav_lights_switch4_data_off_value");
+
        }
 
        // strobe lights switch disable - enable - remap
@@ -1255,11 +1283,26 @@ void process_read_ini_file()
             StrobeLightsOffCmd   = XPLMFindCommand(strobe_lights_switch_off.c_str());
         }
 
-        if (strobelightswitchenable == 3) {
+        if ((strobelightswitchenable == 3) || (strobelightswitchenable == 4)) {
             strobe_lights_switch_data = getOptionToString("strobe_lights_switch_data");
             StrobeLightsData   = XPLMFindDataRef(strobe_lights_switch_data.c_str());
             strobe_lights_switch_data_on_value = getOptionToInt("strobe_lights_switch_data_on_value");
             strobe_lights_switch_data_off_value = getOptionToInt("strobe_lights_switch_data_off_value");
+
+            strobe_lights_switch2_data = getOptionToString("strobe_lights_switch2_data");
+            StrobeLights2Data   = XPLMFindDataRef(strobe_lights_switch2_data.c_str());
+            strobe_lights_switch2_data_on_value = getOptionToInt("strobe_lights_switch2_data_on_value");
+            strobe_lights_switch2_data_off_value = getOptionToInt("strobe_lights_switch2_data_off_value");
+
+            strobe_lights_switch3_data = getOptionToString("strobe_lights_switch3_data");
+            StrobeLights3Data   = XPLMFindDataRef(strobe_lights_switch3_data.c_str());
+            strobe_lights_switch3_data_on_value = getOptionToInt("strobe_lights_switch3_data_on_value");
+            strobe_lights_switch3_data_off_value = getOptionToInt("strobe_lights_switch3_data_off_value");
+
+            strobe_lights_switch4_data = getOptionToString("strobe_lights_switch4_data");
+            StrobeLights4Data   = XPLMFindDataRef(strobe_lights_switch4_data.c_str());
+            strobe_lights_switch4_data_on_value = getOptionToInt("strobe_lights_switch4_data_on_value");
+            strobe_lights_switch4_data_off_value = getOptionToInt("strobe_lights_switch4_data_off_value");
 
         }
 
@@ -1281,11 +1324,26 @@ void process_read_ini_file()
              TaxiLightsOffCmd   = XPLMFindCommand(taxi_lights_switch_off.c_str());
          }
 
-         if (taxilightswitchenable == 3) {
+         if ((taxilightswitchenable == 3) || (taxilightswitchenable == 4)) {
              taxi_lights_switch_data = getOptionToString("taxi_lights_switch_data");
              TaxiLightsData   = XPLMFindDataRef(taxi_lights_switch_data.c_str());
              taxi_lights_switch_data_on_value = getOptionToInt("taxi_lights_switch_data_on_value");
              taxi_lights_switch_data_off_value = getOptionToInt("taxi_lights_switch_data_off_value");
+
+             taxi_lights_switch2_data = getOptionToString("taxi_lights_switch2_data");
+             TaxiLights2Data   = XPLMFindDataRef(taxi_lights_switch2_data.c_str());
+             taxi_lights_switch2_data_on_value = getOptionToInt("taxi_lights_switch2_data_on_value");
+             taxi_lights_switch2_data_off_value = getOptionToInt("taxi_lights_switch2_data_off_value");
+
+             taxi_lights_switch3_data = getOptionToString("taxi_lights_switch3_data");
+             TaxiLights3Data   = XPLMFindDataRef(taxi_lights_switch3_data.c_str());
+             taxi_lights_switch3_data_on_value = getOptionToInt("taxi_lights_switch3_data_on_value");
+             taxi_lights_switch3_data_off_value = getOptionToInt("taxi_lights_switch3_data_off_value");
+
+             taxi_lights_switch4_data = getOptionToString("taxi_lights_switch4_data");
+             TaxiLights4Data   = XPLMFindDataRef(taxi_lights_switch4_data.c_str());
+             taxi_lights_switch4_data_on_value = getOptionToInt("taxi_lights_switch4_data_on_value");
+             taxi_lights_switch4_data_off_value = getOptionToInt("taxi_lights_switch4_data_off_value");
 
          }
 
@@ -1308,11 +1366,27 @@ void process_read_ini_file()
               LandingLightsOffCmd   = XPLMFindCommand(landing_lights_switch_off.c_str());
           }
 
-          if (landinglightswitchenable == 3) {
+          if ((landinglightswitchenable == 3) || (landinglightswitchenable == 4)) {
               landing_lights_switch_data = getOptionToString("landing_lights_switch_data");
               LandingLightsData   = XPLMFindDataRef(landing_lights_switch_data.c_str());
               landing_lights_switch_data_on_value = getOptionToInt("landing_lights_switch_data_on_value");
               landing_lights_switch_data_off_value = getOptionToInt("landing_lights_switch_data_off_value");
+
+              landing_lights_switch2_data = getOptionToString("landing_lights_switch2_data");
+              LandingLights2Data   = XPLMFindDataRef(landing_lights_switch2_data.c_str());
+              landing_lights_switch2_data_on_value = getOptionToInt("landing_lights_switch2_data_on_value");
+              landing_lights_switch2_data_off_value = getOptionToInt("landing_lights_switch2_data_off_value");
+
+              landing_lights_switch3_data = getOptionToString("landing_lights_switch3_data");
+              LandingLights3Data   = XPLMFindDataRef(landing_lights_switch3_data.c_str());
+              landing_lights_switch3_data_on_value = getOptionToInt("landing_lights_switch3_data_on_value");
+              landing_lights_switch3_data_off_value = getOptionToInt("landing_lights_switch3_data_off_value");
+
+              landing_lights_switch4_data = getOptionToString("landing_lights_switch4_data");
+              LandingLights4Data   = XPLMFindDataRef(landing_lights_switch4_data.c_str());
+              landing_lights_switch4_data_on_value = getOptionToInt("landing_lights_switch4_data_on_value");
+              landing_lights_switch4_data_off_value = getOptionToInt("landing_lights_switch4_data_off_value");
+
           }
 
 
