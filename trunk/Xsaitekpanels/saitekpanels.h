@@ -596,11 +596,10 @@ extern XPLMDataRef Av3MasterSwitchData, Av4MasterSwitchData;
 extern XPLMDataRef Av5MasterSwitchData, Av6MasterSwitchData;
 extern XPLMDataRef Av7MasterSwitchData, Av8MasterSwitchData;
 
-
-extern XPLMDataRef FuelPumpSwitchData;
-extern XPLMDataRef FuelPump2SwitchData;
-extern XPLMDataRef FuelPump3SwitchData;
-extern XPLMDataRef FuelPump4SwitchData;
+extern XPLMDataRef FuelPumpSwitchData, FuelPump2SwitchData;
+extern XPLMDataRef FuelPump3SwitchData, FuelPump4SwitchData;
+extern XPLMDataRef FuelPump5SwitchData, FuelPump6SwitchData;
+extern XPLMDataRef FuelPump7SwitchData, FuelPump8SwitchData;
 
 extern XPLMDataRef DeiceSwitchData;
 extern XPLMDataRef Deice2SwitchData;
@@ -757,6 +756,11 @@ extern int fuel_pump_switch_data_on_value, fuel_pump_switch_data_off_value;
 extern int fuel_pump2_switch_data_on_value, fuel_pump2_switch_data_off_value;
 extern int fuel_pump3_switch_data_on_value, fuel_pump3_switch_data_off_value;
 extern int fuel_pump4_switch_data_on_value, fuel_pump4_switch_data_off_value;
+extern int fuel_pump5_switch_data_on_value, fuel_pump5_switch_data_off_value;
+extern int fuel_pump6_switch_data_on_value, fuel_pump6_switch_data_off_value;
+extern int fuel_pump7_switch_data_on_value, fuel_pump7_switch_data_off_value;
+extern int fuel_pump8_switch_data_on_value, fuel_pump8_switch_data_off_value;
+
 
 extern int deice_switch_data_on_value, deice_switch_data_off_value;
 extern int deice2_switch_data_on_value, deice2_switch_data_off_value;
@@ -932,14 +936,14 @@ extern string av6_master_switch_on, av6_master_switch_off, av6_master_switch_dat
 extern string av7_master_switch_on, av7_master_switch_off, av7_master_switch_data;
 extern string av8_master_switch_on, av8_master_switch_off, av8_master_switch_data;
 
-
-
-
 extern string fuel_pump_switch_on, fuel_pump_switch_off, fuel_pump_switch_data;
 extern string fuel_pump2_switch_on, fuel_pump2_switch_off, fuel_pump2_switch_data;
 extern string fuel_pump3_switch_on, fuel_pump3_switch_off, fuel_pump3_switch_data;
 extern string fuel_pump4_switch_on, fuel_pump4_switch_off, fuel_pump4_switch_data;
-
+extern string fuel_pump5_switch_on, fuel_pump5_switch_off, fuel_pump5_switch_data;
+extern string fuel_pump6_switch_on, fuel_pump6_switch_off, fuel_pump6_switch_data;
+extern string fuel_pump7_switch_on, fuel_pump7_switch_off, fuel_pump7_switch_data;
+extern string fuel_pump8_switch_on, fuel_pump8_switch_off, fuel_pump8_switch_data;
 
 extern string deice_switch_on, deice_switch_off, deice_switch_data;
 extern string deice2_switch_on, deice2_switch_off, deice2_switch_data;

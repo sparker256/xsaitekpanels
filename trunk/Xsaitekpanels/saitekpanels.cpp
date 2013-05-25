@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.16   ***************
-// ****** May 23 2013   **************
+// ****** May 24 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -424,10 +424,10 @@ XPLMDataRef Av3MasterSwitchData = NULL, Av4MasterSwitchData = NULL;
 XPLMDataRef Av5MasterSwitchData = NULL, Av6MasterSwitchData = NULL;
 XPLMDataRef Av7MasterSwitchData = NULL, Av8MasterSwitchData = NULL;
 
-XPLMDataRef FuelPumpSwitchData = NULL;
-XPLMDataRef FuelPump2SwitchData = NULL;
-XPLMDataRef FuelPump3SwitchData = NULL;
-XPLMDataRef FuelPump4SwitchData = NULL;
+XPLMDataRef FuelPumpSwitchData = NULL, FuelPump2SwitchData = NULL;
+XPLMDataRef FuelPump3SwitchData = NULL, FuelPump4SwitchData = NULL;
+XPLMDataRef FuelPump5SwitchData = NULL, FuelPump6SwitchData = NULL;
+XPLMDataRef FuelPump7SwitchData = NULL, FuelPump8SwitchData = NULL;
 
 XPLMDataRef DeiceSwitchData = NULL;
 XPLMDataRef Deice2SwitchData = NULL;
@@ -848,11 +848,15 @@ int av7_master_switch_data_on_value, av7_master_switch_data_off_value;
 int av8_master_switch_data_on_value, av8_master_switch_data_off_value;
 
 
-
 int fuel_pump_switch_data_on_value, fuel_pump_switch_data_off_value;
 int fuel_pump2_switch_data_on_value, fuel_pump2_switch_data_off_value;
 int fuel_pump3_switch_data_on_value, fuel_pump3_switch_data_off_value;
 int fuel_pump4_switch_data_on_value, fuel_pump4_switch_data_off_value;
+int fuel_pump5_switch_data_on_value, fuel_pump5_switch_data_off_value;
+int fuel_pump6_switch_data_on_value, fuel_pump6_switch_data_off_value;
+int fuel_pump7_switch_data_on_value, fuel_pump7_switch_data_off_value;
+int fuel_pump8_switch_data_on_value, fuel_pump8_switch_data_off_value;
+
 
 int deice_switch_data_on_value, deice_switch_data_off_value;
 int deice2_switch_data_on_value, deice2_switch_data_off_value;
@@ -1032,6 +1036,11 @@ string fuel_pump_switch_on, fuel_pump_switch_off, fuel_pump_switch_data;
 string fuel_pump2_switch_on, fuel_pump2_switch_off, fuel_pump2_switch_data;
 string fuel_pump3_switch_on, fuel_pump3_switch_off, fuel_pump3_switch_data;
 string fuel_pump4_switch_on, fuel_pump4_switch_off, fuel_pump4_switch_data;
+string fuel_pump5_switch_on, fuel_pump5_switch_off, fuel_pump5_switch_data;
+string fuel_pump6_switch_on, fuel_pump6_switch_off, fuel_pump6_switch_data;
+string fuel_pump7_switch_on, fuel_pump7_switch_off, fuel_pump7_switch_data;
+string fuel_pump8_switch_on, fuel_pump8_switch_off, fuel_pump8_switch_data;
+
 
 string deice_switch_on, deice_switch_off, deice_switch_data;
 string deice2_switch_on, deice2_switch_off, deice2_switch_data;
