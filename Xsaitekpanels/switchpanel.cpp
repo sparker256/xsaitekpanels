@@ -857,8 +857,10 @@ void process_fuel_pump_switch()
             XPLMSetDatai(FuelPump2SwitchData, fuel_pump2_switch_data_on_value);
             XPLMSetDatai(FuelPump3SwitchData, fuel_pump3_switch_data_on_value);
             XPLMSetDatai(FuelPump4SwitchData, fuel_pump4_switch_data_on_value);
-
-
+            XPLMSetDatai(FuelPump5SwitchData, fuel_pump5_switch_data_on_value);
+            XPLMSetDatai(FuelPump6SwitchData, fuel_pump6_switch_data_on_value);
+            XPLMSetDatai(FuelPump7SwitchData, fuel_pump7_switch_data_on_value);
+            XPLMSetDatai(FuelPump8SwitchData, fuel_pump8_switch_data_on_value);
          }
 
         if(!testbit(switchbuf,FUEL_PUMP)) {
@@ -866,6 +868,10 @@ void process_fuel_pump_switch()
             XPLMSetDatai(FuelPump2SwitchData, fuel_pump2_switch_data_off_value);
             XPLMSetDatai(FuelPump3SwitchData, fuel_pump3_switch_data_off_value);
             XPLMSetDatai(FuelPump4SwitchData, fuel_pump4_switch_data_off_value);
+            XPLMSetDatai(FuelPump5SwitchData, fuel_pump5_switch_data_off_value);
+            XPLMSetDatai(FuelPump6SwitchData, fuel_pump6_switch_data_off_value);
+            XPLMSetDatai(FuelPump7SwitchData, fuel_pump7_switch_data_off_value);
+            XPLMSetDatai(FuelPump8SwitchData, fuel_pump8_switch_data_off_value);
 
         }
 

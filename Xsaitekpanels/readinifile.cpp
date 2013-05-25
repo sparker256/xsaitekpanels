@@ -837,7 +837,6 @@ void process_read_ini_file()
     }
 
     if (fuelpumpswitchenable == 3) {
-
         fuel_pump_switch_data = getOptionToString("fuel_pump_switch_data");
         FuelPumpSwitchData   = XPLMFindDataRef(fuel_pump_switch_data.c_str());
         fuel_pump_switch_data_on_value = getOptionToInt("fuel_pump_switch_data_on_value");
@@ -857,6 +856,26 @@ void process_read_ini_file()
         FuelPump4SwitchData   = XPLMFindDataRef(fuel_pump4_switch_data.c_str());
         fuel_pump4_switch_data_on_value = getOptionToInt("fuel_pump4_switch_data_on_value");
         fuel_pump4_switch_data_off_value = getOptionToInt("fuel_pump4_switch_data_off_value");
+
+        fuel_pump5_switch_data = getOptionToString("fuel_pump5_switch_data");
+        FuelPump5SwitchData   = XPLMFindDataRef(fuel_pump5_switch_data.c_str());
+        fuel_pump5_switch_data_on_value = getOptionToInt("fuel_pump5_switch_data_on_value");
+        fuel_pump5_switch_data_off_value = getOptionToInt("fuel_pump5_switch_data_off_value");
+
+        fuel_pump6_switch_data = getOptionToString("fuel_pump6_switch_data");
+        FuelPump6SwitchData   = XPLMFindDataRef(fuel_pump6_switch_data.c_str());
+        fuel_pump6_switch_data_on_value = getOptionToInt("fuel_pump6_switch_data_on_value");
+        fuel_pump6_switch_data_off_value = getOptionToInt("fuel_pump6_switch_data_off_value");
+
+        fuel_pump7_switch_data = getOptionToString("fuel_pump7_switch_data");
+        FuelPump7SwitchData   = XPLMFindDataRef(fuel_pump7_switch_data.c_str());
+        fuel_pump7_switch_data_on_value = getOptionToInt("fuel_pump7_switch_data_on_value");
+        fuel_pump7_switch_data_off_value = getOptionToInt("fuel_pump7_switch_data_off_value");
+
+        fuel_pump8_switch_data = getOptionToString("fuel_pump8_switch_data");
+        FuelPump8SwitchData   = XPLMFindDataRef(fuel_pump8_switch_data.c_str());
+        fuel_pump8_switch_data_on_value = getOptionToInt("fuel_pump8_switch_data_on_value");
+        fuel_pump8_switch_data_off_value = getOptionToInt("fuel_pump8_switch_data_off_value");
 
     }
 
