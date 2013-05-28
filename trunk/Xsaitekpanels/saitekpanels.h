@@ -503,6 +503,9 @@ extern XPLMCommandRef GearDnOnCmd, GearDnOffCmd;
 
 extern XPLMCommandRef CowlFlapsOpenCmd, CowlFlapsCloseCmd;
 extern XPLMCommandRef Cowl2FlapsOpenCmd, Cowl2FlapsCloseCmd;
+extern XPLMCommandRef Cowl3FlapsOpenCmd, Cowl3FlapsCloseCmd;
+extern XPLMCommandRef Cowl4FlapsOpenCmd, Cowl4FlapsCloseCmd;
+
 extern XPLMCommandRef PanelLightsOnCmd, PanelLightsOffCmd;
 extern XPLMCommandRef BeaconLightsOnCmd, BeaconLightsOffCmd;
 extern XPLMCommandRef NavLightsOnCmd, NavLightsOffCmd;
@@ -619,8 +622,10 @@ extern XPLMDataRef Pitot7HeatSwitchData, Pitot8HeatSwitchData;
 extern XPLMDataRef GearUpData;
 extern XPLMDataRef GearDnData;
 
-extern XPLMDataRef CowlFlapsData;
-extern XPLMDataRef Cowl2FlapsData;
+extern XPLMDataRef CowlFlapsData, Cowl2FlapsData;
+extern XPLMDataRef Cowl3FlapsData, Cowl4FlapsData;
+extern XPLMDataRef Cowl5FlapsData, Cowl6FlapsData;
+extern XPLMDataRef Cowl7FlapsData, Cowl8FlapsData;
 
 extern XPLMDataRef PanelLightsData, PanelLights2Data;
 extern XPLMDataRef PanelLights3Data, PanelLights4Data;
@@ -782,8 +787,16 @@ extern int pitot8_heat_switch_data_on_value, pitot8_heat_switch_data_off_value;
 
 extern int gear_switch_up_data_on_value, gear_switch_up_data_off_value;
 extern int gear_switch_down_data_on_value, gear_switch_down_data_off_value;
+
 extern int cowl_flaps_data_on_value, cowl_flaps_data_off_value;
 extern int cowl2_flaps_data_on_value, cowl2_flaps_data_off_value;
+extern int cowl3_flaps_data_on_value, cowl3_flaps_data_off_value;
+extern int cowl4_flaps_data_on_value, cowl4_flaps_data_off_value;
+extern int cowl5_flaps_data_on_value, cowl5_flaps_data_off_value;
+extern int cowl6_flaps_data_on_value, cowl6_flaps_data_off_value;
+extern int cowl7_flaps_data_on_value, cowl7_flaps_data_off_value;
+extern int cowl8_flaps_data_on_value, cowl8_flaps_data_off_value;
+
 
 extern int panel_lights_switch_data_on_value, panel_lights_switch_data_off_value;
 extern int panel_lights_switch2_data_on_value, panel_lights_switch2_data_off_value;
@@ -966,8 +979,14 @@ extern string pitot8_heat_switch_on, pitot8_heat_switch_off, pitot8_heat_switch_
 extern string gear_switch_up_on, gear_switch_up_off, gear_switch_up_data;
 extern string gear_switch_down_on, gear_switch_down_off, gear_switch_down_data ;
 
-extern string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data;
+extern string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data ;
 extern string cowl2_flaps_open, cowl2_flaps_close, cowl2_flaps_data;
+extern string cowl3_flaps_open, cowl3_flaps_close, cowl3_flaps_data;
+extern string cowl4_flaps_open, cowl4_flaps_close, cowl4_flaps_data;
+extern string cowl5_flaps_open, cowl5_flaps_close, cowl5_flaps_data;
+extern string cowl6_flaps_open, cowl6_flaps_close, cowl6_flaps_data;
+extern string cowl7_flaps_open, cowl7_flaps_close, cowl7_flaps_data;
+extern string cowl8_flaps_open, cowl8_flaps_close, cowl8_flaps_data;
 
 extern string panel_lights_switch_on, panel_lights_switch_off, panel_lights_switch_data;
 extern string panel_lights_switch2_on, panel_lights_switch2_off, panel_lights_switch2_data;

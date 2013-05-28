@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.16   ***************
-// ****** May 24 2013   **************
+// ****** May 26 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -333,6 +333,9 @@ XPLMCommandRef GearDnOnCmd = NULL, GearDnOffCmd = NULL;
 
 XPLMCommandRef CowlFlapsOpenCmd = NULL, CowlFlapsCloseCmd = NULL;
 XPLMCommandRef Cowl2FlapsOpenCmd = NULL, Cowl2FlapsCloseCmd = NULL;
+XPLMCommandRef Cowl3FlapsOpenCmd = NULL, Cowl3FlapsCloseCmd = NULL;
+XPLMCommandRef Cowl4FlapsOpenCmd = NULL, Cowl4FlapsCloseCmd = NULL;
+
 XPLMCommandRef PanelLightsOnCmd = NULL, PanelLightsOffCmd = NULL;
 XPLMCommandRef BeaconLightsOnCmd = NULL, BeaconLightsOffCmd = NULL;
 XPLMCommandRef NavLightsOnCmd = NULL, NavLightsOffCmd = NULL;
@@ -447,8 +450,10 @@ XPLMDataRef Pitot7HeatSwitchData = NULL, Pitot8HeatSwitchData = NULL;
 XPLMDataRef GearUpData = NULL;
 XPLMDataRef GearDnData = NULL;
 
-XPLMDataRef CowlFlapsData = NULL;
-XPLMDataRef Cowl2FlapsData = NULL;
+XPLMDataRef CowlFlapsData = NULL, Cowl2FlapsData = NULL;
+XPLMDataRef Cowl3FlapsData = NULL, Cowl4FlapsData = NULL;
+XPLMDataRef Cowl5FlapsData = NULL, Cowl6FlapsData = NULL;
+XPLMDataRef Cowl7FlapsData = NULL, Cowl8FlapsData = NULL;
 
 XPLMDataRef PanelLightsData = NULL, PanelLights2Data = NULL;
 XPLMDataRef PanelLights3Data = NULL, PanelLights4Data = NULL;
@@ -878,8 +883,15 @@ int pitot8_heat_switch_data_on_value, pitot8_heat_switch_data_off_value;
 
 int gear_switch_up_data_on_value, gear_switch_up_data_off_value;
 int gear_switch_down_data_on_value, gear_switch_down_data_off_value;
+
 int cowl_flaps_data_on_value, cowl_flaps_data_off_value;
 int cowl2_flaps_data_on_value, cowl2_flaps_data_off_value;
+int cowl3_flaps_data_on_value, cowl3_flaps_data_off_value;
+int cowl4_flaps_data_on_value, cowl4_flaps_data_off_value;
+int cowl5_flaps_data_on_value, cowl5_flaps_data_off_value;
+int cowl6_flaps_data_on_value, cowl6_flaps_data_off_value;
+int cowl7_flaps_data_on_value, cowl7_flaps_data_off_value;
+int cowl8_flaps_data_on_value, cowl8_flaps_data_off_value;
 
 int panel_lights_switch_data_on_value, panel_lights_switch_data_off_value;
 int panel_lights_switch2_data_on_value, panel_lights_switch2_data_off_value;
@@ -1062,8 +1074,16 @@ string pitot8_heat_switch_on, pitot8_heat_switch_off, pitot8_heat_switch_data;
 
 string gear_switch_up_on, gear_switch_up_off,gear_switch_up_data ;
 string gear_switch_down_on, gear_switch_down_off, gear_switch_down_data;
+
 string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data ;
 string cowl2_flaps_open, cowl2_flaps_close, cowl2_flaps_data;
+string cowl3_flaps_open, cowl3_flaps_close, cowl3_flaps_data;
+string cowl4_flaps_open, cowl4_flaps_close, cowl4_flaps_data;
+string cowl5_flaps_open, cowl5_flaps_close, cowl5_flaps_data;
+string cowl6_flaps_open, cowl6_flaps_close, cowl6_flaps_data;
+string cowl7_flaps_open, cowl7_flaps_close, cowl7_flaps_data;
+string cowl8_flaps_open, cowl8_flaps_close, cowl8_flaps_data;
+
 
 string panel_lights_switch_on, panel_lights_switch_off, panel_lights_switch_data;
 string panel_lights_switch2_on, panel_lights_switch2_off, panel_lights_switch2_data;
