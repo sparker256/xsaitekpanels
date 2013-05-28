@@ -1123,6 +1123,16 @@ void process_read_ini_file()
         cowl2_flaps_close = getOptionToString("cowl2_flaps_close_cmd");
         Cowl2FlapsOpenCmd   = XPLMFindCommand(cowl2_flaps_open.c_str());
         Cowl2FlapsCloseCmd   = XPLMFindCommand(cowl2_flaps_close.c_str());
+
+        cowl3_flaps_open = getOptionToString("cowl3_flaps_open_cmd");
+        cowl3_flaps_close = getOptionToString("cowl3_flaps_close_cmd");
+        Cowl3FlapsOpenCmd   = XPLMFindCommand(cowl3_flaps_open.c_str());
+        Cowl3FlapsCloseCmd   = XPLMFindCommand(cowl3_flaps_close.c_str());
+
+        cowl4_flaps_open = getOptionToString("cowl4_flaps_open_cmd");
+        cowl4_flaps_close = getOptionToString("cowl4_flaps_close_cmd");
+        Cowl4FlapsOpenCmd   = XPLMFindCommand(cowl4_flaps_open.c_str());
+        Cowl4FlapsCloseCmd   = XPLMFindCommand(cowl4_flaps_close.c_str());
     }
 
     if (cowlflapsenable == 3) {
@@ -1135,6 +1145,36 @@ void process_read_ini_file()
         Cowl2FlapsData   = XPLMFindDataRef(cowl2_flaps_data.c_str());
         cowl2_flaps_data_on_value = getOptionToInt("cowl2_flaps_data_open_value");
         cowl2_flaps_data_off_value = getOptionToInt("cowl2_flaps_data_close_value");
+
+        cowl3_flaps_data = getOptionToString("cowl3_flaps_data");
+        Cowl3FlapsData   = XPLMFindDataRef(cowl3_flaps_data.c_str());
+        cowl3_flaps_data_on_value = getOptionToInt("cowl3_flaps_data_open_value");
+        cowl3_flaps_data_off_value = getOptionToInt("cowl3_flaps_data_close_value");
+
+        cowl4_flaps_data = getOptionToString("cowl4_flaps_data");
+        Cowl4FlapsData   = XPLMFindDataRef(cowl4_flaps_data.c_str());
+        cowl4_flaps_data_on_value = getOptionToInt("cowl4_flaps_data_open_value");
+        cowl4_flaps_data_off_value = getOptionToInt("cowl4_flaps_data_close_value");
+
+        cowl5_flaps_data = getOptionToString("cowl5_flaps_data");
+        Cowl5FlapsData   = XPLMFindDataRef(cowl5_flaps_data.c_str());
+        cowl5_flaps_data_on_value = getOptionToInt("cowl5_flaps_data_open_value");
+        cowl5_flaps_data_off_value = getOptionToInt("cowl5_flaps_data_close_value");
+
+        cowl6_flaps_data = getOptionToString("cowl6_flaps_data");
+        Cowl6FlapsData   = XPLMFindDataRef(cowl6_flaps_data.c_str());
+        cowl6_flaps_data_on_value = getOptionToInt("cowl6_flaps_data_open_value");
+        cowl6_flaps_data_off_value = getOptionToInt("cowl6_flaps_data_close_value");
+
+        cowl7_flaps_data = getOptionToString("cowl7_flaps_data");
+        Cowl7FlapsData   = XPLMFindDataRef(cowl7_flaps_data.c_str());
+        cowl7_flaps_data_on_value = getOptionToInt("cowl7_flaps_data_open_value");
+        cowl7_flaps_data_off_value = getOptionToInt("cowl7_flaps_data_close_value");
+
+        cowl8_flaps_data = getOptionToString("cowl8_flaps_data");
+        Cowl8FlapsData   = XPLMFindDataRef(cowl8_flaps_data.c_str());
+        cowl8_flaps_data_on_value = getOptionToInt("cowl8_flaps_data_open_value");
+        cowl8_flaps_data_off_value = getOptionToInt("cowl8_flaps_data_close_value");
 
     }
 

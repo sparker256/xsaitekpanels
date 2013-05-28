@@ -1126,11 +1126,15 @@ void process_cowl_flaps_switch()
         if(testbit(switchbuf,COWL_FLAPS)) {
             XPLMCommandOnce(CowlFlapsOpenCmd);
             XPLMCommandOnce(Cowl2FlapsOpenCmd);
+            XPLMCommandOnce(Cowl3FlapsOpenCmd);
+            XPLMCommandOnce(Cowl4FlapsOpenCmd);
         }
 
         if(!testbit(switchbuf,COWL_FLAPS)) {
             XPLMCommandOnce(CowlFlapsCloseCmd);
             XPLMCommandOnce(Cowl2FlapsCloseCmd);
+            XPLMCommandOnce(Cowl3FlapsCloseCmd);
+            XPLMCommandOnce(Cowl4FlapsCloseCmd);
         }
         return;
     }
@@ -1139,11 +1143,25 @@ void process_cowl_flaps_switch()
         if(testbit(switchbuf,COWL_FLAPS)) {
             XPLMSetDatai(CowlFlapsData, cowl_flaps_data_on_value);
             XPLMSetDatai(Cowl2FlapsData, cowl2_flaps_data_on_value);
+            XPLMSetDatai(Cowl3FlapsData, cowl3_flaps_data_on_value);
+            XPLMSetDatai(Cowl4FlapsData, cowl4_flaps_data_on_value);
+            XPLMSetDatai(Cowl5FlapsData, cowl5_flaps_data_on_value);
+            XPLMSetDatai(Cowl6FlapsData, cowl6_flaps_data_on_value);
+            XPLMSetDatai(Cowl7FlapsData, cowl7_flaps_data_on_value);
+            XPLMSetDatai(Cowl8FlapsData, cowl8_flaps_data_on_value);
+
+
 
         }
         if(!testbit(switchbuf,COWL_FLAPS)) {
             XPLMSetDatai(CowlFlapsData, cowl_flaps_data_off_value);
             XPLMSetDatai(Cowl2FlapsData, cowl2_flaps_data_off_value);
+            XPLMSetDatai(Cowl3FlapsData, cowl3_flaps_data_off_value);
+            XPLMSetDatai(Cowl4FlapsData, cowl4_flaps_data_off_value);
+            XPLMSetDatai(Cowl5FlapsData, cowl5_flaps_data_off_value);
+            XPLMSetDatai(Cowl6FlapsData, cowl6_flaps_data_off_value);
+            XPLMSetDatai(Cowl7FlapsData, cowl7_flaps_data_off_value);
+            XPLMSetDatai(Cowl8FlapsData, cowl8_flaps_data_off_value);
         }
         return;
     }
