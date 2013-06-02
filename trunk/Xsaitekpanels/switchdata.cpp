@@ -83,13 +83,60 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-
-
     SwitchCowlOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/cowl/position",
                              xplmType_Int,
                              1,
                              SwitchCowlPositionGetDataiCallback,
                              SwitchCowlPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+
+    SwitchPanelOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/panel/position",
+                             xplmType_Int,
+                             1,
+                             SwitchPanelPositionGetDataiCallback,
+                             SwitchPanelPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchBeaconOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/beacon/position",
+                             xplmType_Int,
+                             1,
+                             SwitchBeaconPositionGetDataiCallback,
+                             SwitchBeaconPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchNavOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/nav/position",
+                             xplmType_Int,
+                             1,
+                             SwitchNavPositionGetDataiCallback,
+                             SwitchNavPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchStrobeOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/strobe/position",
+                             xplmType_Int,
+                             1,
+                             SwitchStrobePositionGetDataiCallback,
+                             SwitchStrobePositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchTaxiOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/taxi/position",
+                             xplmType_Int,
+                             1,
+                             SwitchTaxiPositionGetDataiCallback,
+                             SwitchTaxiPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchLandingOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/landing/position",
+                             xplmType_Int,
+                             1,
+                             SwitchLandingPositionGetDataiCallback,
+                             SwitchLandingPositionSetDataiCallback,
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
