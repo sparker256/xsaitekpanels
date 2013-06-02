@@ -647,6 +647,60 @@ extern XPLMDataRef TaxiLights3Data, TaxiLights4Data;
 extern XPLMDataRef LandingLightsData, LandingLights2Data;
 extern XPLMDataRef LandingLights3Data, LandingLights4Data;
 
+extern XPLMDataRef	SwitchBatOwnedDataRef, SwitchAltOwnedDataRef;
+extern XPLMDataRef	SwitchAvOwnedDataRef, SwitchFuelOwnedDataRef;
+extern XPLMDataRef	SwitchDiceOwnedDataRef, SwitchPitotOwnedDataRef;
+extern XPLMDataRef	SwitchGearUpOwnedDataRef, SwitchGearDnOwnedDataRef;
+extern XPLMDataRef	SwitchCowlOwnedDataRef, SwitchPanelOwnedDataRef;
+extern XPLMDataRef	SwitchBeaconOwnedDataRef, SwitchNavOwnedDataRef;
+extern XPLMDataRef	SwitchStrobeOwnedDataRef, SwitchTaxiOwnedDataRef;
+extern XPLMDataRef	SwitchLandingOwnedDataRef;
+
+extern int	SwitchBatPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchBatPositionSetDataiCallback(void * inRefcon, int SwitchBatPosition);
+
+extern int	SwitchAltPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchAltPositionSetDataiCallback(void * inRefcon, int SwitchAltPosition);
+
+extern int	SwitchAvPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchAvPositionSetDataiCallback(void * inRefcon, int SwitchAvPosition);
+
+extern int	SwitchFuelPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchFuelPositionSetDataiCallback(void * inRefcon, int SwitchFuelPosition);
+
+extern int	SwitchDicePositionGetDataiCallback(void * inRefcon);
+extern void	SwitchDicePositionSetDataiCallback(void * inRefcon, int SwitchDicePosition);
+
+extern int	SwitchPitotPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchPitotPositionSetDataiCallback(void * inRefcon, int SwitchPitotPosition);
+
+extern int	SwitchGearUpPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchGearUpPositionSetDataiCallback(void * inRefcon, int SwitchGearUpPosition);
+
+extern int	SwitchGearDnPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchGearDnPositionSetDataiCallback(void * inRefcon, int SwitchGearDnPosition);
+
+extern int	SwitchCowlPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchCowlPositionSetDataiCallback(void * inRefcon, int SwitchCowPosition);
+
+extern int	SwitchPanelPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchPanelPositionSetDataiCallback(void * inRefcon, int SwitchPanelPosition);
+
+extern int	SwitchBeaconPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchBeaconPositionSetDataiCallback(void * inRefcon, int SwitchBeaconPosition);
+
+extern int	SwitchNavPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchNavPositionSetDataiCallback(void * inRefcon, int SwitchNavPosition);
+
+extern int	SwitchStrobePositionGetDataiCallback(void * inRefcon);
+extern void	SwitchStrobePositionSetDataiCallback(void * inRefcon, int SwitchStrobePosition);
+
+extern int	SwitchTaxiPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchTaxiPositionSetDataiCallback(void * inRefcon, int SwitchTaxiPosition);
+
+extern int	SwitchLandingPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchLandingPositionSetDataiCallback(void * inRefcon, int SwitchLandingPosition);
+
 
 
 extern XPLMMenuID      SwitchMenu;
@@ -1021,6 +1075,8 @@ extern string landing_lights_switch_on, landing_lights_switch_off, landing_light
 extern string landing_lights_switch2_on, landing_lights_switch2_off, landing_lights_switch2_data;
 extern string landing_lights_switch3_on, landing_lights_switch3_off, landing_lights_switch3_data;
 extern string landing_lights_switch4_on, landing_lights_switch4_off, landing_lights_switch4_data;
+
+extern int switchloop;
 
 extern float LandingGearDeployRatio[10];
 extern hid_device *switchhandle;

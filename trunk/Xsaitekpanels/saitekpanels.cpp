@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.16   ***************
-// ****** May 26 2013   **************
+// ******** ver 2.17   ***************
+// ****** Jun 01 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -475,6 +475,14 @@ XPLMDataRef TaxiLights3Data = NULL, TaxiLights4Data = NULL;
 XPLMDataRef LandingLightsData = NULL, LandingLights2Data = NULL;
 XPLMDataRef LandingLights3Data = NULL, LandingLights4Data = NULL;
 
+XPLMDataRef	SwitchBatOwnedDataRef = NULL, SwitchAltOwnedDataRef = NULL;
+XPLMDataRef	SwitchAvOwnedDataRef = NULL, SwitchFuelOwnedDataRef = NULL;
+XPLMDataRef	SwitchDiceOwnedDataRef = NULL, SwitchPitotOwnedDataRef = NULL;
+XPLMDataRef	SwitchGearUpOwnedDataRef = NULL, SwitchGearDnOwnedDataRef = NULL;
+XPLMDataRef	SwitchCowlOwnedDataRef = NULL, SwitchPanelOwnedDataRef = NULL;
+XPLMDataRef	SwitchBeaconOwnedDataRef = NULL, SwitchNavOwnedDataRef = NULL;
+XPLMDataRef	SwitchStrobeOwnedDataRef = NULL, SwitchTaxiOwnedDataRef = NULL;
+XPLMDataRef	SwitchLandingOwnedDataRef = NULL;
 
 XPLMMenuID      SwitchMenu;
 XPLMMenuID      SwitchMenuId;
@@ -927,6 +935,77 @@ int landing_lights_switch2_data_on_value, landing_lights_switch2_data_off_value;
 int landing_lights_switch3_data_on_value, landing_lights_switch3_data_off_value;
 int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 
+// This is the storage for the data we own.
+static int SwitchBatOwnedData = 0, SwitchAltOwnedData = 0;
+static int SwitchAvOwnedData = 0, SwitchFuelOwnedData = 0;
+static int SwitchDiceOwnedData = 0, SwitchPitotOwnedData = 0;
+static int SwitchGearUpOwnedData = 0, SwitchGearDnOwnedData = 0;
+static int SwitchCowlOwnedData = 0, SwitchPanelOwnedData = 0;
+static int SwitchBeaconOwnedData = 0, SwitchNavOwnedData = 0;
+static int SwitchStrobeOwnedData = 0, SwitchTaxiOwnedData = 0;
+static int SwitchLandingOwnedData = 0;
+
+// These callbacks are called by the SDK to read and write the sim.
+// We provide two sets of callbacks allowing our data to appear as
+// float and double.  This is done for didactic purposes; multityped
+// should not be used in initial designs as a convenience to client
+// code.
+
+int SwitchBatPosition, SwitchAltPosition;
+int SwitchAvPosition, SwitchFuelPosition;
+int SwitchDeicePosition, SwitchPitotPosition;
+int SwitchGearUpPosition, SwitchGearDnPosition;
+int SwitchCowlPosition, SwitchPanelPosition;
+int SwitchBeaconPosition, SwitchNavPosition;
+int SwitchStrobePosition, SwitchTaxiPosition;
+int SwitchLandingPosition;
+
+int	SwitchBatPositionGetDataiCallback(void * inRefcon);
+void	SwitchBatPositionSetDataiCallback(void * inRefcon, int SwitchBatPosition);
+
+int	SwitchAltPositionGetDataiCallback(void * inRefcon);
+void	SwitchAltPositionSetDataiCallback(void * inRefcon, int SwitchAltPosition);
+
+int	SwitchAvPositionGetDataiCallback(void * inRefcon);
+void	SwitchAvPositionSetDataiCallback(void * inRefcon, int SwitchAvPosition);
+
+int	SwitchFuelPositionGetDataiCallback(void * inRefcon);
+void	SwitchFuelPositionSetDataiCallback(void * inRefcon, int SwitchFuelPosition);
+
+int	SwitchDicePositionGetDataiCallback(void * inRefcon);
+void	SwitchDicePositionSetDataiCallback(void * inRefcon, int SwitchDicePosition);
+
+int	SwitchPitotPositionGetDataiCallback(void * inRefcon);
+void	SwitchPitotPositionSetDataiCallback(void * inRefcon, int SwitchPitotPosition);
+
+int	SwitchGearUpPositionGetDataiCallback(void * inRefcon);
+void	SwitchGearUpPositionSetDataiCallback(void * inRefcon, int SwitchGearUpPosition);
+
+int	SwitchGearDnPositionGetDataiCallback(void * inRefcon);
+void	SwitchGearDnPositionSetDataiCallback(void * inRefcon, int SwitchGearDnPosition);
+
+int	SwitchCowlPositionGetDataiCallback(void * inRefcon);
+void	SwitchCowPositionSetDataiCallback(void * inRefcon, int SwitchCowPosition);
+
+int	SwitchPanelPositionGetDataiCallback(void * inRefcon);
+void	SwitchPanelPositionSetDataiCallback(void * inRefcon, int SwitchPanelPosition);
+
+int	SwitchBeaconPositionGetDataiCallback(void * inRefcon);
+void	SwitchBeaconPositionSetDataiCallback(void * inRefcon, int SwitchBeaconPosition);
+
+int	SwitchNavPositionGetDataiCallback(void * inRefcon);
+void	SwitchNavPositionSetDataiCallback(void * inRefcon, int SwitchNavPosition);
+
+int	SwitchStrobePositionGetDataiCallback(void * inRefcon);
+void	SwitchStrobePositionSetDataiCallback(void * inRefcon, int SwitchStrobePosition);
+
+int	SwitchTaxiPositionGetDataiCallback(void * inRefcon);
+void	SwitchTaxiPositionSetDataiCallback(void * inRefcon, int SwitchTaxiPosition);
+
+int	SwitchLandingPositionGetDataiCallback(void * inRefcon);
+void	SwitchLandingPositionSetDataiCallback(void * inRefcon, int SwitchLandingPosition);
+
+
 
 float panel_lights_switch_dataf_on_value, panel_lights_switch_dataf_off_value;
 float panel_lights_switch2_dataf_on_value, panel_lights_switch2_dataf_off_value;
@@ -1135,6 +1214,7 @@ int SwitchHandler(XPWidgetMessage  SwitchinMessage, XPWidgetID  SwitchWidgetID, 
 int switchMenuItem;
 int max_items = 20;
 int checkable = -1;
+int switchloop = 0;
 
 char SwitchText[50][200] = {
 "MAGS OFF",
@@ -1188,9 +1268,11 @@ int wrgHostID = 0;
 
 int readiniloop = 0;
 
+
 void process_radio_panel();
 void process_multi_panel();
 void process_switch_panel();
+void process_switch_data();
 void process_bip_panel();
 void process_pref_file();
 void process_read_ini_file();
@@ -1224,10 +1306,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.16\n");
+  XPLMDebugString("Xsaitekpanels: v2.17\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.16");
+  strcpy(outName, "Xsaitekpanels v2.17");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -1684,6 +1766,13 @@ PLUGIN_API int XPluginStart(char *		outName,
                              1,                          // Receive input before plugin windows.
                              (void *) 0);                // inRefcon.
 
+
+  // Create datareferences for all of the switch panel switches
+  if(switchcnt > 0){
+    process_switch_data();
+  }
+
+
   // Create our menu
 
    XsaitekpanelsMenuItem = XPLMAppendMenuItem(
@@ -2003,6 +2092,8 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 
     PlaneICAO.insert(1,ICAOString);
 
+
+
     if ((inMessage == XPLM_MSG_PLANE_LOADED) & ((intptr_t) inParam == 0)) {
       process_read_ini_file();
     }
@@ -2029,6 +2120,106 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
     }
 
 }
+
+int	SwitchBatPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchBatOwnedData;
+}
+
+void	SwitchBatPositionSetDataiCallback(void * inRefcon, int SwitchBatPosition2)
+{
+    SwitchBatOwnedData = SwitchBatPosition2;
+}
+
+
+int	SwitchAltPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchAltOwnedData;
+}
+
+void	SwitchAltPositionSetDataiCallback(void * inRefcon, int SwitchAltPosition2)
+{
+    SwitchAltOwnedData = SwitchAltPosition2;
+}
+
+
+int	SwitchAvPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchAvOwnedData;
+}
+
+void	SwitchAvPositionSetDataiCallback(void * inRefcon, int SwitchAvPosition2)
+{
+    SwitchAvOwnedData = SwitchAvPosition2;
+}
+
+
+int	SwitchFuelPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchFuelOwnedData;
+}
+
+void	SwitchFuelPositionSetDataiCallback(void * inRefcon, int SwitchFuelPosition2)
+{
+    SwitchFuelOwnedData = SwitchFuelPosition2;
+}
+
+
+int	SwitchDicePositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchDiceOwnedData;
+}
+
+void	SwitchDicePositionSetDataiCallback(void * inRefcon, int SwitchDicePosition2)
+{
+    SwitchDiceOwnedData = SwitchDicePosition2;
+}
+
+
+int	SwitchPitotPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchPitotOwnedData;
+}
+
+void	SwitchPitotPositionSetDataiCallback(void * inRefcon, int SwitchPitotPosition2)
+{
+    SwitchPitotOwnedData = SwitchPitotPosition2;
+}
+
+
+int	SwitchGearUpPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchGearUpOwnedData;
+}
+
+void	SwitchGearUpPositionSetDataiCallback(void * inRefcon, int SwitchGearUpPosition2)
+{
+    SwitchGearUpOwnedData = SwitchGearUpPosition2;
+}
+
+
+int	SwitchGearDnPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchGearDnOwnedData;
+}
+
+void	SwitchGearDnPositionSetDataiCallback(void * inRefcon, int SwitchGearDnPosition2)
+{
+    SwitchGearDnOwnedData = SwitchGearDnPosition2;
+}
+
+
+int	SwitchCowlPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchCowlOwnedData;
+}
+
+void	SwitchCowlPositionSetDataiCallback(void * inRefcon, int SwitchCowlPosition2)
+{
+    SwitchCowlOwnedData = SwitchCowlPosition2;
+}
+
+
 
 void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 {

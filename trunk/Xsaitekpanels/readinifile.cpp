@@ -678,6 +678,49 @@ void process_read_ini_file()
 
     }
 
+    if (batmasterswitchenable == 4) {
+
+        bat_master_switch_data = getOptionToString("bat_master_switch_data");
+        BatMasterSwitchData   = XPLMFindDataRef(bat_master_switch_data.c_str());
+        bat_master_switch_data_on_value = getOptionToInt("bat_master_switch_data_on_value");
+        bat_master_switch_data_off_value = getOptionToInt("bat_master_switch_data_off_value");
+
+        bat2_master_switch_data = getOptionToString("bat2_master_switch_data");
+        Bat2MasterSwitchData   = XPLMFindDataRef(bat2_master_switch_data.c_str());
+        bat2_master_switch_data_on_value = getOptionToInt("bat2_master_switch_data_on_value");
+        bat2_master_switch_data_off_value = getOptionToInt("bat2_master_switch_data_off_value");
+
+        bat3_master_switch_data = getOptionToString("bat3_master_switch_data");
+        Bat3MasterSwitchData   = XPLMFindDataRef(bat3_master_switch_data.c_str());
+        bat3_master_switch_data_on_value = getOptionToInt("bat3_master_switch_data_on_value");
+        bat3_master_switch_data_off_value = getOptionToInt("bat3_master_switch_data_off_value");
+
+        bat4_master_switch_data = getOptionToString("bat4_master_switch_data");
+        Bat4MasterSwitchData   = XPLMFindDataRef(bat4_master_switch_data.c_str());
+        bat4_master_switch_data_on_value = getOptionToInt("bat4_master_switch_data_on_value");
+        bat4_master_switch_data_off_value = getOptionToInt("bat4_master_switch_data_off_value");
+
+        bat5_master_switch_data = getOptionToString("bat5_master_switch_data");
+        Bat5MasterSwitchData   = XPLMFindDataRef(bat5_master_switch_data.c_str());
+        bat5_master_switch_data_on_value = getOptionToInt("bat5_master_switch_data_on_value");
+        bat5_master_switch_data_off_value = getOptionToInt("bat5_master_switch_data_off_value");
+
+        bat6_master_switch_data = getOptionToString("bat6_master_switch_data");
+        Bat6MasterSwitchData   = XPLMFindDataRef(bat6_master_switch_data.c_str());
+        bat6_master_switch_data_on_value = getOptionToInt("bat6_master_switch_data_on_value");
+        bat6_master_switch_data_off_value = getOptionToInt("bat6_master_switch_data_off_value");
+
+        bat7_master_switch_data = getOptionToString("bat7_master_switch_data");
+        Bat7MasterSwitchData   = XPLMFindDataRef(bat7_master_switch_data.c_str());
+        bat7_master_switch_data_on_value = getOptionToInt("bat7_master_switch_data_on_value");
+        bat7_master_switch_data_off_value = getOptionToInt("bat7_master_switch_data_off_value");
+
+        bat8_master_switch_data = getOptionToString("bat8_master_switch_data");
+        Bat8MasterSwitchData   = XPLMFindDataRef(bat8_master_switch_data.c_str());
+        bat8_master_switch_data_on_value = getOptionToInt("bat8_master_switch_data_on_value");
+        bat8_master_switch_data_off_value = getOptionToInt("bat8_master_switch_data_off_value");
+    }
+
 
     // alt master switch disable - enable - remap
     altmasterswitchenable = getOptionToInt("Alt Master Switch enable");

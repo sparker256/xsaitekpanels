@@ -1,0 +1,97 @@
+// ****** switchdata.cpp **********
+// ****  William R. Good  ********
+
+#include "XPLMUtilities.h"
+#include "XPLMDataAccess.h"
+
+#include "saitekpanels.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+
+//  ***** Switch Data Process  *****
+void process_switch_data()
+
+{
+    SwitchBatOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/bat/position",
+                             xplmType_Int,
+                             1,
+                             SwitchBatPositionGetDataiCallback,
+                             SwitchBatPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+
+    SwitchAltOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/alt/position",
+                             xplmType_Int,
+                             1,
+                             SwitchAltPositionGetDataiCallback,
+                             SwitchAltPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchAvOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/av/position",
+                             xplmType_Int,
+                             1,
+                             SwitchAvPositionGetDataiCallback,
+                             SwitchAvPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchFuelOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/fuel/position",
+                             xplmType_Int,
+                             1,
+                             SwitchFuelPositionGetDataiCallback,
+                             SwitchFuelPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchDiceOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/dice/position",
+                             xplmType_Int,
+                             1,
+                             SwitchDicePositionGetDataiCallback,
+                             SwitchDicePositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchPitotOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/pitot/position",
+                             xplmType_Int,
+                             1,
+                             SwitchPitotPositionGetDataiCallback,
+                             SwitchPitotPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchGearUpOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/gearup/position",
+                             xplmType_Int,
+                             1,
+                             SwitchGearUpPositionGetDataiCallback,
+                             SwitchGearUpPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchGearDnOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/geardn/position",
+                             xplmType_Int,
+                             1,
+                             SwitchGearDnPositionGetDataiCallback,
+                             SwitchGearDnPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+
+
+    SwitchCowlOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/cowl/position",
+                             xplmType_Int,
+                             1,
+                             SwitchCowlPositionGetDataiCallback,
+                             SwitchCowlPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+return;
+}
