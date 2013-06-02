@@ -2121,6 +2121,8 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 
 }
 
+// Switch panel data references call backs
+
 int	SwitchBatPositionGetDataiCallback(void * inRefcon)
 {
     return SwitchBatOwnedData;
@@ -2219,6 +2221,71 @@ void	SwitchCowlPositionSetDataiCallback(void * inRefcon, int SwitchCowlPosition2
     SwitchCowlOwnedData = SwitchCowlPosition2;
 }
 
+
+int	SwitchPanelPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchPanelOwnedData;
+}
+
+void	SwitchPanelPositionSetDataiCallback(void * inRefcon, int SwitchPanelPosition2)
+{
+    SwitchPanelOwnedData = SwitchPanelPosition2;
+}
+
+
+int	SwitchBeaconPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchBeaconOwnedData;
+}
+
+void	SwitchBeaconPositionSetDataiCallback(void * inRefcon, int SwitchBeaconPosition2)
+{
+    SwitchBeaconOwnedData = SwitchBeaconPosition2;
+}
+
+
+int	SwitchNavPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchNavOwnedData;
+}
+
+void	SwitchNavPositionSetDataiCallback(void * inRefcon, int SwitchNavPosition2)
+{
+    SwitchNavOwnedData = SwitchNavPosition2;
+}
+
+
+int	SwitchStrobePositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchStrobeOwnedData;
+}
+
+void	SwitchStrobePositionSetDataiCallback(void * inRefcon, int SwitchStrobePosition2)
+{
+    SwitchStrobeOwnedData = SwitchStrobePosition2;
+}
+
+
+int	SwitchTaxiPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchTaxiOwnedData;
+}
+
+void	SwitchTaxiPositionSetDataiCallback(void * inRefcon, int SwitchTaxiPosition2)
+{
+    SwitchTaxiOwnedData = SwitchTaxiPosition2;
+}
+
+
+int	SwitchLandingPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchLandingOwnedData;
+}
+
+void	SwitchLandingPositionSetDataiCallback(void * inRefcon, int SwitchLandingPosition2)
+{
+    SwitchLandingOwnedData = SwitchLandingPosition2;
+}
 
 
 void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
