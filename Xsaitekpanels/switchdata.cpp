@@ -18,6 +18,47 @@
 void process_switch_data()
 
 {
+    SwitchStartOffOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startoff/position",
+                             xplmType_Int,
+                             1,
+                             SwitchStartOffPositionGetDataiCallback,
+                             SwitchStartOffPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchStartRightOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startright/position",
+                             xplmType_Int,
+                             1,
+                             SwitchStartRightPositionGetDataiCallback,
+                             SwitchStartRightPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchStartLeftOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startleft/position",
+                             xplmType_Int,
+                             1,
+                             SwitchStartLeftPositionGetDataiCallback,
+                             SwitchStartLeftPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchStartBothOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startboth/position",
+                             xplmType_Int,
+                             1,
+                             SwitchStartBothPositionGetDataiCallback,
+                             SwitchStartBothPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    SwitchStartStartOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startstart/position",
+                             xplmType_Int,
+                             1,
+                             SwitchStartStartPositionGetDataiCallback,
+                             SwitchStartStartPositionSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+
     SwitchBatOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/bat/position",
                              xplmType_Int,
                              1,
