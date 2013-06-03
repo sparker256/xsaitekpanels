@@ -102,6 +102,27 @@ void process_engines_mag_off_switch()
        return;
    }
 
+   if(magoffswitchenable == 4) {
+       if(testbit(switchbuf,MAG_OFF)) {
+           XPLMSetDatai(SwitchStartOffOwnedDataRef, 1);
+           XPLMSetDatai(MagOffSwitchData, mag_off_switch_data_on_value);
+           XPLMSetDatai(MagOff2SwitchData, mag_off2_switch_data_on_value);
+           XPLMSetDatai(MagOff3SwitchData, mag_off3_switch_data_on_value);
+           XPLMSetDatai(MagOff4SwitchData, mag_off4_switch_data_on_value);
+           XPLMSetDatai(MagOff5SwitchData, mag_off5_switch_data_on_value);
+           XPLMSetDatai(MagOff6SwitchData, mag_off6_switch_data_on_value);
+           XPLMSetDatai(MagOff7SwitchData, mag_off7_switch_data_on_value);
+           XPLMSetDatai(MagOff8SwitchData, mag_off8_switch_data_on_value);
+           XPLMSetDatai(MagOff9SwitchData, mag_off9_switch_data_on_value);
+           XPLMSetDatai(MagOff10SwitchData, mag_off10_switch_data_on_value);
+       }
+       if(!testbit(switchbuf,MAG_OFF)) {
+           XPLMSetDatai(SwitchStartOffOwnedDataRef, 0);
+       }
+       return;
+   }
+
+
 	if(testbit(switchbuf,MAG_OFF)) {
 	  if(engnum == 1){
         if(starterswitchenable == 1) {
@@ -191,6 +212,27 @@ void process_engines_right_mag_switch()
        }
        return;
    }
+
+   if(magrightswitchenable == 4) {
+       if(testbit(switchbuf,MAG_RIGHT)) {
+           XPLMSetDatai(SwitchStartRightOwnedDataRef, 1);
+           XPLMSetDatai(MagRightSwitchData, mag_right_switch_data_on_value);
+           XPLMSetDatai(MagRight2SwitchData, mag_right2_switch_data_on_value);
+           XPLMSetDatai(MagRight3SwitchData, mag_right3_switch_data_on_value);
+           XPLMSetDatai(MagRight4SwitchData, mag_right4_switch_data_on_value);
+           XPLMSetDatai(MagRight5SwitchData, mag_right5_switch_data_on_value);
+           XPLMSetDatai(MagRight6SwitchData, mag_right6_switch_data_on_value);
+           XPLMSetDatai(MagRight7SwitchData, mag_right7_switch_data_on_value);
+           XPLMSetDatai(MagRight8SwitchData, mag_right8_switch_data_on_value);
+           XPLMSetDatai(MagRight9SwitchData, mag_right9_switch_data_on_value);
+           XPLMSetDatai(MagRight10SwitchData, mag_right10_switch_data_on_value);
+       }
+       if(!testbit(switchbuf,MAG_RIGHT)) {
+           XPLMSetDatai(SwitchStartRightOwnedDataRef, 0);
+       }
+       return;
+   }
+
 	if(testbit(switchbuf,MAG_RIGHT)) {
 	  if(engnum == 1){
         if(starterswitchenable == 1) {
@@ -269,6 +311,28 @@ void process_engines_left_mag_switch()
        return;
    }
 
+   if(magleftswitchenable == 4) {
+       if(testbit(switchbuf,MAG_LEFT)) {
+           XPLMSetDatai(SwitchStartLeftOwnedDataRef, 1);
+           XPLMSetDatai(MagLeftSwitchData, mag_left_switch_data_on_value);
+           XPLMSetDatai(MagLeft2SwitchData, mag_left2_switch_data_on_value);
+           XPLMSetDatai(MagLeft3SwitchData, mag_left3_switch_data_on_value);
+           XPLMSetDatai(MagLeft4SwitchData, mag_left4_switch_data_on_value);
+           XPLMSetDatai(MagLeft5SwitchData, mag_left5_switch_data_on_value);
+           XPLMSetDatai(MagLeft6SwitchData, mag_left6_switch_data_on_value);
+           XPLMSetDatai(MagLeft7SwitchData, mag_left7_switch_data_on_value);
+           XPLMSetDatai(MagLeft8SwitchData, mag_left8_switch_data_on_value);
+           XPLMSetDatai(MagLeft9SwitchData, mag_left9_switch_data_on_value);
+           XPLMSetDatai(MagLeft10SwitchData, mag_left10_switch_data_on_value);
+       }
+       if(!testbit(switchbuf,MAG_LEFT)) {
+          XPLMSetDatai(SwitchStartLeftOwnedDataRef, 0);
+       }
+
+       return;
+   }
+
+
 	if(testbit(switchbuf,MAG_LEFT)) {
 	  if(engnum == 1){
         if(starterswitchenable == 1) {
@@ -346,6 +410,28 @@ void process_engines_both_mag_switch()
        }
        return;
    }
+
+   if(magbothswitchenable == 4) {
+       if(testbit(switchbuf,MAG_BOTH)) {
+           XPLMSetDatai(SwitchStartBothOwnedDataRef, 1);
+           XPLMSetDatai(MagBothSwitchData, mag_both_switch_data_on_value);
+           XPLMSetDatai(MagBoth2SwitchData, mag_both2_switch_data_on_value);
+           XPLMSetDatai(MagBoth3SwitchData, mag_both3_switch_data_on_value);
+           XPLMSetDatai(MagBoth4SwitchData, mag_both4_switch_data_on_value);
+           XPLMSetDatai(MagBoth5SwitchData, mag_both5_switch_data_on_value);
+           XPLMSetDatai(MagBoth6SwitchData, mag_both6_switch_data_on_value);
+           XPLMSetDatai(MagBoth7SwitchData, mag_both7_switch_data_on_value);
+           XPLMSetDatai(MagBoth8SwitchData, mag_both8_switch_data_on_value);
+           XPLMSetDatai(MagBoth9SwitchData, mag_both9_switch_data_on_value);
+           XPLMSetDatai(MagBoth10SwitchData, mag_both10_switch_data_on_value);
+       }
+       if(!testbit(switchbuf,MAG_BOTH)) {
+           XPLMSetDatai(SwitchStartBothOwnedDataRef, 0);
+       }
+
+       return;
+   }
+
 
 
    if(testbit(switchbuf,MAG_BOTH)) {
@@ -430,6 +516,27 @@ void process_engines_start_switch()
        }
        return;
    }
+
+   if(magstartswitchenable == 4) {
+       if(testbit(switchbuf,ENG_START)) {
+           XPLMSetDatai(SwitchStartStartOwnedDataRef, 1);
+           XPLMSetDatai(MagStartSwitchData, mag_start_switch_data_on_value);
+           XPLMSetDatai(MagStart2SwitchData, mag_start2_switch_data_on_value);
+           XPLMSetDatai(MagStart3SwitchData, mag_start3_switch_data_on_value);
+           XPLMSetDatai(MagStart4SwitchData, mag_start4_switch_data_on_value);
+           XPLMSetDatai(MagStart5SwitchData, mag_start5_switch_data_on_value);
+           XPLMSetDatai(MagStart6SwitchData, mag_start6_switch_data_on_value);
+           XPLMSetDatai(MagStart7SwitchData, mag_start7_switch_data_on_value);
+           XPLMSetDatai(MagStart8SwitchData, mag_start8_switch_data_on_value);
+           XPLMSetDatai(MagStart9SwitchData, mag_start9_switch_data_on_value);
+           XPLMSetDatai(MagStart10SwitchData, mag_start10_switch_data_on_value);
+       }
+       if(!testbit(switchbuf,ENG_START)) {
+           XPLMSetDatai(SwitchStartStartOwnedDataRef, 0);
+       }
+       return;
+   }
+
 
 	if(testbit(switchbuf,ENG_START)) {
 	  if(engnum == 1){
@@ -1522,6 +1629,81 @@ void process_panel_lights_switch()
         return;
     }
 
+    if(panellightswitchenable == 6) {
+        if(testbit(switchbuf, PANEL_LIGHTS)) {
+            XPLMSetDatai(SwitchPanelOwnedDataRef, 1);
+            panel_lights_switch_dataf_on_value = panel_lights_switch_data_on_value;
+            panel_lights_switch_dataf_on_value = panel_lights_switch_dataf_on_value / 100;
+            XPLMSetDataf(PanelLightsData, panel_lights_switch_dataf_on_value);
+
+            panel_lights_switch2_dataf_on_value = panel_lights_switch2_data_on_value;
+            panel_lights_switch2_dataf_on_value = panel_lights_switch2_dataf_on_value /100;
+            XPLMSetDataf(PanelLights2Data, panel_lights_switch2_dataf_on_value);
+
+            panel_lights_switch3_dataf_on_value = panel_lights_switch3_data_on_value;
+            panel_lights_switch3_dataf_on_value = panel_lights_switch3_dataf_on_value/ 100;
+            XPLMSetDataf(PanelLights3Data, panel_lights_switch3_dataf_on_value);
+
+            panel_lights_switch4_dataf_on_value = panel_lights_switch4_data_on_value;
+            panel_lights_switch4_dataf_on_value = panel_lights_switch4_dataf_on_value/ 100;
+            XPLMSetDataf(PanelLights4Data, panel_lights_switch4_dataf_on_value);
+
+            panel_lights_switch5_dataf_on_value = panel_lights_switch5_data_on_value;
+            panel_lights_switch5_dataf_on_value = panel_lights_switch5_dataf_on_value/ 100;
+            XPLMSetDataf(PanelLights5Data, panel_lights_switch5_dataf_on_value);
+
+            panel_lights_switch6_dataf_on_value = panel_lights_switch6_data_on_value;
+            panel_lights_switch6_dataf_on_value = panel_lights_switch6_dataf_on_value/ 100;
+            XPLMSetDataf(PanelLights6Data, panel_lights_switch6_dataf_on_value);
+
+            panel_lights_switch7_dataf_on_value = panel_lights_switch7_data_on_value;
+            panel_lights_switch7_dataf_on_value = panel_lights_switch7_dataf_on_value/ 100;
+            XPLMSetDataf(PanelLights7Data, panel_lights_switch7_dataf_on_value);
+
+            panel_lights_switch8_dataf_on_value = panel_lights_switch8_data_on_value;
+            panel_lights_switch8_dataf_on_value = panel_lights_switch8_dataf_on_value/ 100;
+            XPLMSetDataf(PanelLights8Data, panel_lights_switch8_dataf_on_value);
+
+        }
+        if(!testbit(switchbuf, PANEL_LIGHTS)) {
+            XPLMSetDatai(SwitchPanelOwnedDataRef, 0);
+            panel_lights_switch_dataf_off_value = panel_lights_switch_data_off_value;
+            panel_lights_switch_dataf_off_value = panel_lights_switch_dataf_off_value/ 100;
+            XPLMSetDataf(PanelLightsData, panel_lights_switch_dataf_off_value);
+
+            panel_lights_switch2_dataf_off_value = panel_lights_switch2_data_off_value;
+            panel_lights_switch2_dataf_off_value = panel_lights_switch2_dataf_off_value/ 100;
+            XPLMSetDataf(PanelLights2Data, panel_lights_switch2_dataf_off_value);
+
+            panel_lights_switch3_dataf_off_value = panel_lights_switch3_data_off_value;
+            panel_lights_switch3_dataf_off_value = panel_lights_switch3_dataf_off_value/ 100;
+            XPLMSetDataf(PanelLights3Data, panel_lights_switch3_dataf_off_value);
+
+            panel_lights_switch4_dataf_off_value = panel_lights_switch4_data_off_value;
+            panel_lights_switch4_dataf_off_value = panel_lights_switch4_dataf_off_value/ 100;
+            XPLMSetDataf(PanelLights4Data, panel_lights_switch4_dataf_off_value);
+
+            panel_lights_switch5_dataf_off_value = panel_lights_switch5_data_off_value;
+            panel_lights_switch5_dataf_off_value = panel_lights_switch5_dataf_off_value/ 100;
+            XPLMSetDataf(PanelLights5Data, panel_lights_switch5_dataf_off_value);
+
+            panel_lights_switch6_dataf_off_value = panel_lights_switch6_data_off_value;
+            panel_lights_switch6_dataf_off_value = panel_lights_switch6_dataf_off_value/ 100;
+            XPLMSetDataf(PanelLights6Data, panel_lights_switch6_dataf_off_value);
+
+            panel_lights_switch7_dataf_off_value = panel_lights_switch7_data_off_value;
+            panel_lights_switch7_dataf_off_value = panel_lights_switch7_dataf_off_value/ 100;
+            XPLMSetDataf(PanelLights7Data, panel_lights_switch7_dataf_off_value);
+
+            panel_lights_switch8_dataf_off_value = panel_lights_switch8_data_off_value;
+            panel_lights_switch8_dataf_off_value = panel_lights_switch8_dataf_off_value/ 100;
+            XPLMSetDataf(PanelLights8Data, panel_lights_switch8_dataf_off_value);
+
+        }
+        return;
+    }
+
+
 }
 
 // ***************** Beacon Lights *******************
@@ -1614,6 +1796,47 @@ void process_beacon_lights_switch()
             XPLMSetDatai(BeaconLights2Data, beacon_lights_switch2_data_off_value);
             XPLMSetDatai(BeaconLights3Data, beacon_lights_switch3_data_off_value);
             XPLMSetDatai(BeaconLights4Data, beacon_lights_switch4_data_off_value);
+        }
+        return;
+    }
+
+    if(beaconlightswitchenable == 6) {
+        if(testbit(switchbuf,BEACON_LIGHTS)) {
+            XPLMSetDatai(SwitchBeaconOwnedDataRef, 1);
+            beacon_lights_switch_dataf_on_value = beacon_lights_switch_data_on_value;
+            beacon_lights_switch_dataf_on_value = beacon_lights_switch_dataf_on_value /100;
+            XPLMSetDataf(BeaconLightsData, beacon_lights_switch_dataf_on_value);
+
+            beacon_lights_switch2_dataf_on_value = beacon_lights_switch2_data_on_value;
+            beacon_lights_switch2_dataf_on_value = beacon_lights_switch2_dataf_on_value /100;
+            XPLMSetDataf(BeaconLights2Data, beacon_lights_switch2_dataf_on_value);
+
+            beacon_lights_switch3_dataf_on_value = beacon_lights_switch3_data_on_value;
+            beacon_lights_switch3_dataf_on_value = beacon_lights_switch3_dataf_on_value /100;
+            XPLMSetDataf(BeaconLights3Data, beacon_lights_switch3_dataf_on_value);
+
+            beacon_lights_switch4_dataf_on_value = beacon_lights_switch4_data_on_value;
+            beacon_lights_switch4_dataf_on_value = beacon_lights_switch4_dataf_on_value /100;
+            XPLMSetDataf(BeaconLights4Data, beacon_lights_switch4_dataf_on_value);
+
+        }
+        if(!testbit(switchbuf,BEACON_LIGHTS)) {
+            XPLMSetDatai(SwitchBeaconOwnedDataRef, 0);
+            beacon_lights_switch_dataf_off_value = beacon_lights_switch_data_off_value;
+            beacon_lights_switch_dataf_off_value = beacon_lights_switch_dataf_off_value /100;
+            XPLMSetDataf(BeaconLightsData, beacon_lights_switch_dataf_off_value);
+
+            beacon_lights_switch2_dataf_off_value = beacon_lights_switch2_data_off_value;
+            beacon_lights_switch2_dataf_off_value = beacon_lights_switch2_dataf_off_value /100;
+            XPLMSetDataf(BeaconLights2Data, beacon_lights_switch2_dataf_off_value);
+
+            beacon_lights_switch3_dataf_off_value = beacon_lights_switch3_data_off_value;
+            beacon_lights_switch3_dataf_off_value = beacon_lights_switch3_data_off_value /100;
+            XPLMSetDataf(BeaconLights3Data, beacon_lights_switch3_dataf_off_value);
+
+            beacon_lights_switch4_dataf_off_value = beacon_lights_switch4_data_off_value;
+            beacon_lights_switch4_dataf_off_value = beacon_lights_switch4_dataf_off_value /100;
+            XPLMSetDataf(BeaconLights4Data, beacon_lights_switch4_dataf_off_value);
         }
         return;
     }
@@ -1719,6 +1942,48 @@ void process_nav_lights_switch()
         return;
     }
 
+    if(navlightswitchenable == 6) {
+        if(testbit(switchbuf,NAV_LIGHTS)) {
+            XPLMSetDatai(SwitchNavOwnedDataRef, 1);
+            nav_lights_switch_dataf_on_value = nav_lights_switch_data_on_value;
+            nav_lights_switch_dataf_on_value = nav_lights_switch_dataf_on_value / 100;
+            XPLMSetDataf(NavLightsData, nav_lights_switch_dataf_on_value);
+
+            nav_lights_switch2_dataf_on_value = nav_lights_switch2_data_on_value;
+            nav_lights_switch2_dataf_on_value = nav_lights_switch2_dataf_on_value / 100;
+            XPLMSetDataf(NavLights2Data, nav_lights_switch2_dataf_on_value);
+
+            nav_lights_switch3_dataf_on_value = nav_lights_switch3_data_on_value;
+            nav_lights_switch3_dataf_on_value = nav_lights_switch3_dataf_on_value / 100;
+            XPLMSetDataf(NavLights3Data, nav_lights_switch3_dataf_on_value);
+
+            nav_lights_switch4_dataf_on_value = nav_lights_switch4_data_on_value;
+            nav_lights_switch4_dataf_on_value = nav_lights_switch4_dataf_on_value / 100;
+            XPLMSetDataf(NavLights4Data, nav_lights_switch4_dataf_on_value);
+
+        }
+        if(!testbit(switchbuf,NAV_LIGHTS)) {
+            XPLMSetDatai(SwitchNavOwnedDataRef, 1);
+            nav_lights_switch_dataf_off_value = nav_lights_switch_data_off_value;
+            nav_lights_switch_dataf_off_value = nav_lights_switch_dataf_off_value / 100;
+            XPLMSetDataf(NavLightsData, nav_lights_switch_dataf_off_value);
+
+            nav_lights_switch2_dataf_off_value = nav_lights_switch2_data_off_value;
+            nav_lights_switch2_dataf_off_value = nav_lights_switch2_dataf_off_value / 100;
+            XPLMSetDataf(NavLights2Data, nav_lights_switch2_dataf_off_value);
+
+            nav_lights_switch3_dataf_off_value = nav_lights_switch3_data_off_value;
+            nav_lights_switch3_dataf_off_value = nav_lights_switch3_dataf_off_value / 100;
+            XPLMSetDataf(NavLights3Data, nav_lights_switch3_dataf_off_value);
+
+            nav_lights_switch4_dataf_off_value = nav_lights_switch4_data_off_value;
+            nav_lights_switch4_dataf_off_value = nav_lights_switch4_dataf_off_value / 100;
+            XPLMSetDataf(NavLights4Data, nav_lights_switch4_dataf_off_value);
+
+        }
+        return;
+    }
+
 	if(testbit(switchbuf,NAV_LIGHTS)) {
           XPLMCommandOnce(NvLtOn);
  	}
@@ -1818,6 +2083,48 @@ void process_strobe_lights_switch()
         }
         return;
     }
+
+    if(strobelightswitchenable == 6) {
+        if(testbit(switchbuf,STROBE_LIGHTS)) {
+            XPLMSetDatai(SwitchStrobeOwnedDataRef, 1);
+            strobe_lights_switch_dataf_on_value = strobe_lights_switch_data_on_value;
+            strobe_lights_switch_dataf_on_value = strobe_lights_switch_dataf_on_value / 100;
+            XPLMSetDataf(StrobeLightsData, strobe_lights_switch_dataf_on_value);
+
+            strobe_lights_switch2_dataf_on_value = strobe_lights_switch2_data_on_value;
+            strobe_lights_switch2_dataf_on_value = strobe_lights_switch2_dataf_on_value / 100;
+            XPLMSetDataf(StrobeLights2Data, strobe_lights_switch2_dataf_on_value);
+
+            strobe_lights_switch3_dataf_on_value = strobe_lights_switch3_data_on_value;
+            strobe_lights_switch3_dataf_on_value = strobe_lights_switch3_dataf_on_value / 100;
+            XPLMSetDataf(StrobeLights3Data, strobe_lights_switch3_dataf_on_value);
+
+            strobe_lights_switch4_dataf_on_value = strobe_lights_switch4_data_on_value;
+            strobe_lights_switch4_dataf_on_value = strobe_lights_switch4_dataf_on_value / 100;
+            XPLMSetDataf(StrobeLights4Data, strobe_lights_switch4_dataf_on_value);
+
+        }
+        if(!testbit(switchbuf,STROBE_LIGHTS)) {
+            XPLMSetDatai(SwitchStrobeOwnedDataRef, 0);
+            strobe_lights_switch_dataf_off_value = strobe_lights_switch_data_off_value;
+            strobe_lights_switch_dataf_off_value = strobe_lights_switch_dataf_off_value / 100;
+            XPLMSetDataf(StrobeLightsData, strobe_lights_switch_dataf_off_value);
+
+            strobe_lights_switch2_dataf_off_value = strobe_lights_switch2_data_off_value;
+            strobe_lights_switch2_dataf_off_value = strobe_lights_switch2_dataf_off_value / 100;
+            XPLMSetDataf(StrobeLights2Data, strobe_lights_switch2_dataf_off_value);
+
+            strobe_lights_switch3_dataf_off_value = strobe_lights_switch3_data_off_value;
+            strobe_lights_switch3_dataf_off_value = strobe_lights_switch3_dataf_off_value / 100;
+            XPLMSetDataf(StrobeLights3Data, strobe_lights_switch3_dataf_off_value);
+
+            strobe_lights_switch4_dataf_off_value = strobe_lights_switch4_data_off_value;
+            strobe_lights_switch4_dataf_off_value = strobe_lights_switch4_dataf_off_value / 100;
+            XPLMSetDataf(StrobeLights4Data, strobe_lights_switch4_dataf_off_value);
+        }
+        return;
+    }
+
 
 	if(testbit(switchbuf,STROBE_LIGHTS)) {
           XPLMCommandOnce(StLtOn);
@@ -1921,6 +2228,48 @@ void process_taxi_lights_switch()
         return;
     }
 
+    if(taxilightswitchenable == 6) {
+        if(testbit(switchbuf,TAXI_LIGHTS)) {
+            XPLMSetDatai(SwitchTaxiOwnedDataRef, 1);
+            taxi_lights_switch_dataf_on_value = taxi_lights_switch_data_on_value;
+            taxi_lights_switch_dataf_on_value = taxi_lights_switch_dataf_on_value / 100;
+            XPLMSetDataf(TaxiLightsData, taxi_lights_switch_dataf_on_value);
+
+            taxi_lights_switch2_dataf_on_value = taxi_lights_switch2_data_on_value;
+            taxi_lights_switch2_dataf_on_value = taxi_lights_switch2_dataf_on_value / 100;
+            XPLMSetDataf(TaxiLights2Data, taxi_lights_switch2_dataf_on_value);
+
+            taxi_lights_switch3_dataf_on_value = taxi_lights_switch3_data_on_value;
+            taxi_lights_switch3_dataf_on_value = taxi_lights_switch3_dataf_on_value / 100;
+            XPLMSetDataf(TaxiLights3Data, taxi_lights_switch3_dataf_on_value);
+
+            taxi_lights_switch4_dataf_on_value = taxi_lights_switch4_data_on_value;
+            taxi_lights_switch4_dataf_on_value = taxi_lights_switch4_dataf_on_value / 100;
+            XPLMSetDataf(TaxiLights4Data, taxi_lights_switch4_dataf_on_value);
+
+        }
+        if(!testbit(switchbuf,TAXI_LIGHTS)) {
+            XPLMSetDatai(SwitchTaxiOwnedDataRef, 0);
+            taxi_lights_switch_dataf_off_value = taxi_lights_switch_data_off_value;
+            taxi_lights_switch_dataf_off_value = taxi_lights_switch_dataf_off_value / 100;
+            XPLMSetDataf(TaxiLightsData, taxi_lights_switch_dataf_off_value);
+
+            taxi_lights_switch2_dataf_off_value = taxi_lights_switch2_data_off_value;
+            taxi_lights_switch2_dataf_off_value = taxi_lights_switch2_dataf_off_value / 100;
+            XPLMSetDataf(TaxiLights2Data, taxi_lights_switch2_dataf_off_value);
+
+            taxi_lights_switch3_dataf_off_value = taxi_lights_switch3_data_off_value;
+            taxi_lights_switch3_dataf_off_value = taxi_lights_switch3_dataf_off_value / 100;
+            XPLMSetDataf(TaxiLights3Data, taxi_lights_switch3_dataf_off_value);
+
+            taxi_lights_switch4_dataf_off_value = taxi_lights_switch4_data_off_value;
+            taxi_lights_switch4_dataf_off_value = taxi_lights_switch4_dataf_off_value / 100;
+            XPLMSetDataf(TaxiLights4Data, taxi_lights_switch4_dataf_off_value);
+        }
+        return;
+    }
+
+
 
 	if(testbit(switchbuf,TAXI_LIGHTS)) {
           XPLMCommandOnce(TxLtOn);
@@ -2022,6 +2371,48 @@ void process_landing_lights_switch()
         return;
      }
 
+    if(landinglightswitchenable == 6) {
+        if(testbit(switchbuf,LANDING_LIGHTS)) {
+            XPLMSetDatai(SwitchLandingOwnedDataRef, 1);
+            landing_lights_switch_dataf_on_value = landing_lights_switch_data_on_value;
+            landing_lights_switch_dataf_on_value = landing_lights_switch_dataf_on_value / 100;
+            XPLMSetDataf(LandingLightsData, landing_lights_switch_dataf_on_value);
+
+            landing_lights_switch2_dataf_on_value = landing_lights_switch2_data_on_value;
+            landing_lights_switch2_dataf_on_value = landing_lights_switch2_dataf_on_value / 100;
+            XPLMSetDataf(LandingLights2Data, landing_lights_switch2_dataf_on_value);
+
+            landing_lights_switch3_dataf_on_value = landing_lights_switch3_data_on_value;
+            landing_lights_switch3_dataf_on_value = landing_lights_switch3_dataf_on_value / 100;
+            XPLMSetDataf(LandingLights3Data, landing_lights_switch3_dataf_on_value);
+
+            landing_lights_switch4_dataf_on_value = landing_lights_switch4_data_on_value;
+            landing_lights_switch4_dataf_on_value = landing_lights_switch4_dataf_on_value / 100;
+            XPLMSetDataf(LandingLights4Data, landing_lights_switch4_dataf_on_value);
+
+        }
+        if(!testbit(switchbuf,LANDING_LIGHTS)) {
+            XPLMSetDatai(SwitchLandingOwnedDataRef, 0);
+            landing_lights_switch_dataf_off_value = landing_lights_switch_data_off_value;
+            landing_lights_switch_dataf_off_value = landing_lights_switch_dataf_off_value / 100;
+            XPLMSetDataf(LandingLightsData, landing_lights_switch_dataf_off_value);
+
+            landing_lights_switch2_dataf_off_value = landing_lights_switch2_data_off_value;
+            landing_lights_switch2_dataf_off_value = landing_lights_switch2_dataf_off_value / 100;
+            XPLMSetDataf(LandingLights2Data, landing_lights_switch2_dataf_off_value);
+
+            landing_lights_switch3_dataf_off_value = landing_lights_switch3_data_off_value;
+            landing_lights_switch3_dataf_off_value = landing_lights_switch3_dataf_off_value / 100;
+            XPLMSetDataf(LandingLights3Data, landing_lights_switch3_dataf_off_value);
+
+            landing_lights_switch4_dataf_off_value = landing_lights_switch4_data_off_value;
+            landing_lights_switch4_dataf_off_value = landing_lights_switch4_dataf_off_value / 100;
+            XPLMSetDataf(LandingLights4Data, landing_lights_switch4_dataf_off_value);
+        }
+        return;
+     }
+
+
 	if(testbit(switchbuf,LANDING_LIGHTS)) {
           XPLMCommandOnce(LnLtOn);
  	}
@@ -2052,6 +2443,43 @@ void process_gear_switch_switch()
         return;
     }
 
+    if(landinggearknobupenable == 3) {
+        if(testbit(switchbuf,GEAR_SWITCH_UP)) {
+            XPLMSetDatai(GearUpData, gear_switch_up_data_on_value);
+        }
+        if(!testbit(switchbuf,GEAR_SWITCH_UP)) {
+            XPLMSetDatai(GearUpData, gear_switch_up_data_off_value);
+
+        }
+        if(testbit(switchbuf,GEAR_SWITCH_DN)) {
+           XPLMSetDatai(GearDnData, gear_switch_down_data_on_value);
+        }
+        if(!testbit(switchbuf,GEAR_SWITCH_DN)) {
+           XPLMSetDatai(GearDnData, gear_switch_down_data_off_value);
+        }
+        return;
+    }
+
+    if(landinggearknobupenable == 4) {
+        if(testbit(switchbuf,GEAR_SWITCH_UP)) {
+            XPLMSetDatai(SwitchGearUpOwnedDataRef, 1);
+            XPLMSetDatai(GearUpData, gear_switch_up_data_on_value);
+        }
+        if(!testbit(switchbuf,GEAR_SWITCH_UP)) {
+            XPLMSetDatai(SwitchGearUpOwnedDataRef, 0);
+            XPLMSetDatai(GearUpData, gear_switch_up_data_off_value);
+
+        }
+        if(testbit(switchbuf,GEAR_SWITCH_DN)) {
+           XPLMSetDatai(SwitchGearDnOwnedDataRef, 1);
+           XPLMSetDatai(GearDnData, gear_switch_down_data_on_value);
+        }
+        if(!testbit(switchbuf,GEAR_SWITCH_DN)) {
+           XPLMSetDatai(SwitchGearDnOwnedDataRef, 0);
+           XPLMSetDatai(GearDnData, gear_switch_down_data_off_value);
+        }
+        return;
+    }
 
 	
 	if(XPLMGetDatai(GearRetract) > 0){

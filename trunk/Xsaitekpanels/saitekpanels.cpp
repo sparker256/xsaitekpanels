@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.17   ***************
-// ****** Jun 01 2013   **************
+// ****** Jun 02 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -475,6 +475,9 @@ XPLMDataRef TaxiLights3Data = NULL, TaxiLights4Data = NULL;
 XPLMDataRef LandingLightsData = NULL, LandingLights2Data = NULL;
 XPLMDataRef LandingLights3Data = NULL, LandingLights4Data = NULL;
 
+XPLMDataRef	SwitchStartOffOwnedDataRef = NULL, SwitchStartRightOwnedDataRef = NULL;
+XPLMDataRef	SwitchStartLeftOwnedDataRef = NULL, SwitchStartBothOwnedDataRef = NULL;
+XPLMDataRef	SwitchStartStartOwnedDataRef = NULL;
 XPLMDataRef	SwitchBatOwnedDataRef = NULL, SwitchAltOwnedDataRef = NULL;
 XPLMDataRef	SwitchAvOwnedDataRef = NULL, SwitchFuelOwnedDataRef = NULL;
 XPLMDataRef	SwitchDiceOwnedDataRef = NULL, SwitchPitotOwnedDataRef = NULL;
@@ -936,6 +939,10 @@ int landing_lights_switch3_data_on_value, landing_lights_switch3_data_off_value;
 int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 
 // This is the storage for the data we own.
+
+static int SwitchStartOffOwnedData = 0, SwitchStartRightOwnedData = 0;
+static int SwitchStartLeftOwnedData = 0, SwitchStartBothOwnedData = 0;
+static int SwitchStartStartOwnedData = 0;
 static int SwitchBatOwnedData = 0, SwitchAltOwnedData = 0;
 static int SwitchAvOwnedData = 0, SwitchFuelOwnedData = 0;
 static int SwitchDiceOwnedData = 0, SwitchPitotOwnedData = 0;
@@ -959,6 +966,21 @@ int SwitchCowlPosition, SwitchPanelPosition;
 int SwitchBeaconPosition, SwitchNavPosition;
 int SwitchStrobePosition, SwitchTaxiPosition;
 int SwitchLandingPosition;
+
+int	SwitchStartOffPositionGetDataiCallback(void * inRefcon);
+void	SwitchStartOffPositionSetDataiCallback(void * inRefcon, int SwitchStartOffPosition);
+
+int	SwitchStartRightPositionGetDataiCallback(void * inRefcon);
+void	SwitchStartRightPositionSetDataiCallback(void * inRefcon, int SwitchStartRightPosition);
+
+int	SwitchStartLeftPositionGetDataiCallback(void * inRefcon);
+void	SwitchStartLeftPositionSetDataiCallback(void * inRefcon, int SwitchStartLeftPosition);
+
+int	SwitchStartBothPositionGetDataiCallback(void * inRefcon);
+void	SwitchStartBothPositionSetDataiCallback(void * inRefcon, int SwitchStartBothPosition);
+
+int	SwitchStartStartPositionGetDataiCallback(void * inRefcon);
+void	SwitchStartStartPositionSetDataiCallback(void * inRefcon, int SwitchStartStartPosition);
 
 int	SwitchBatPositionGetDataiCallback(void * inRefcon);
 void	SwitchBatPositionSetDataiCallback(void * inRefcon, int SwitchBatPosition);
@@ -2122,6 +2144,61 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 }
 
 // Switch panel data references call backs
+
+int	SwitchStartOffPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchStartOffOwnedData;
+}
+
+void	SwitchStartOffPositionSetDataiCallback(void * inRefcon, int SwitchStartOffPosition2)
+{
+    SwitchStartOffOwnedData = SwitchStartOffPosition2;
+}
+
+
+int	SwitchStartRightPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchStartRightOwnedData;
+}
+
+void	SwitchStartRightPositionSetDataiCallback(void * inRefcon, int SwitchStartRightPosition2)
+{
+    SwitchStartRightOwnedData = SwitchStartRightPosition2;
+}
+
+
+int	SwitchStartLeftPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchStartLeftOwnedData;
+}
+
+void	SwitchStartLeftPositionSetDataiCallback(void * inRefcon, int SwitchStartLeftPosition2)
+{
+    SwitchStartLeftOwnedData = SwitchStartLeftPosition2;
+}
+
+
+int	SwitchStartBothPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchStartBothOwnedData;
+}
+
+void	SwitchStartBothPositionSetDataiCallback(void * inRefcon, int SwitchStartBothPosition2)
+{
+    SwitchStartBothOwnedData = SwitchStartBothPosition2;
+}
+
+
+int	SwitchStartStartPositionGetDataiCallback(void * inRefcon)
+{
+    return SwitchStartStartOwnedData;
+}
+
+void	SwitchStartStartPositionSetDataiCallback(void * inRefcon, int SwitchStartStartPosition2)
+{
+    SwitchStartStartOwnedData = SwitchStartStartPosition2;
+}
+
 
 int	SwitchBatPositionGetDataiCallback(void * inRefcon)
 {

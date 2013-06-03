@@ -647,6 +647,9 @@ extern XPLMDataRef TaxiLights3Data, TaxiLights4Data;
 extern XPLMDataRef LandingLightsData, LandingLights2Data;
 extern XPLMDataRef LandingLights3Data, LandingLights4Data;
 
+extern XPLMDataRef	SwitchStartOffOwnedDataRef, SwitchStartRightOwnedDataRef;
+extern XPLMDataRef	SwitchStartLeftOwnedDataRef, SwitchStartBothOwnedDataRef;
+extern XPLMDataRef	SwitchStartStartOwnedDataRef;
 extern XPLMDataRef	SwitchBatOwnedDataRef, SwitchAltOwnedDataRef;
 extern XPLMDataRef	SwitchAvOwnedDataRef, SwitchFuelOwnedDataRef;
 extern XPLMDataRef	SwitchDiceOwnedDataRef, SwitchPitotOwnedDataRef;
@@ -655,6 +658,21 @@ extern XPLMDataRef	SwitchCowlOwnedDataRef, SwitchPanelOwnedDataRef;
 extern XPLMDataRef	SwitchBeaconOwnedDataRef, SwitchNavOwnedDataRef;
 extern XPLMDataRef	SwitchStrobeOwnedDataRef, SwitchTaxiOwnedDataRef;
 extern XPLMDataRef	SwitchLandingOwnedDataRef;
+
+extern int	SwitchStartOffPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchStartOffPositionSetDataiCallback(void * inRefcon, int SwitchStartOffPosition);
+
+extern int	SwitchStartRightPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchStartRightPositionSetDataiCallback(void * inRefcon, int SwitchStartRightPosition);
+
+extern int	SwitchStartLeftPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchStartLeftPositionSetDataiCallback(void * inRefcon, int SwitchStartLeftPosition);
+
+extern int	SwitchStartBothPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchStartBothPositionSetDataiCallback(void * inRefcon, int SwitchStartBothPosition);
+
+extern int	SwitchStartStartPositionGetDataiCallback(void * inRefcon);
+extern void	SwitchStartStartPositionSetDataiCallback(void * inRefcon, int SwitchStartStartPosition);
 
 extern int	SwitchBatPositionGetDataiCallback(void * inRefcon);
 extern void	SwitchBatPositionSetDataiCallback(void * inRefcon, int SwitchBatPosition);
