@@ -549,6 +549,18 @@ extern XPLMDataRef AprLightFlashRemapableData, RevLightFlashRemapableData;
 
 extern XPLMDataRef HsiSelector;
 
+extern XPLMDataRef	MultiAltSwitchOwnedDataRef, MultiVsSwitchOwnedDataRef;
+extern XPLMDataRef	MultiIasSwitchOwnedDataRef, MultiHdgSwitchOwnedDataRef;
+extern XPLMDataRef	MultiCrsSwitchOwnedDataRef;
+extern XPLMDataRef	MultiKnobIncOwnedDataRef, MultiKnobDecOwnedDataRef;
+extern XPLMDataRef	MultiAtOwnedDataRef, MultiTrimUpOwnedDataRef;
+extern XPLMDataRef	MultiTrimDnOwnedDataRef, MultiFlapsUpOwnedDataRef;
+extern XPLMDataRef	MultiFlapsDnOwnedDataRef, MultiApBtnOwnedDataRef;
+extern XPLMDataRef	MultiHdgBtnOwnedDataRef, MultiNavBtnOwnedDataRef;
+extern XPLMDataRef	MultiIasBtnOwnedDataRef, MultiAltBtnOwnedDataRef;
+extern XPLMDataRef	MultiVsBtnOwnedDataRef, MultiAprBtnOwnedDataRef;
+extern XPLMDataRef	MultiRevBtnOwnedDataRef;
+
 extern XPLMMenuID      MultiMenu;
 extern XPLMMenuID      MultiMenuId;
 extern XPLMMenuID      Frp;
@@ -593,6 +605,70 @@ extern int trimupremap, trimdnremap;
 extern int xpanelsfnbutton;
 extern int xpanelscrstoggle;
 extern int multi_auto_mul;
+
+
+extern int	MultiAltSwitchStatusGetDataiCallback(void * inRefcon);
+extern void	MultiAltSwitchStatusSetDataiCallback(void * inRefcon, int MultiAltSwitchStatus);
+
+extern int	MultiVsSwitchStatusGetDataiCallback(void * inRefcon);
+extern void	MultiVsSwitchStatusSetDataiCallback(void * inRefcon, int MultiVsSwitchStatus);
+
+extern int	MultiIasSwitchStatusGetDataiCallback(void * inRefcon);
+extern void	MultiIasSwitchStatusSetDataiCallback(void * inRefcon, int MultiIasSwitchStatus);
+
+extern int	MultiHdgSwitchStatusGetDataiCallback(void * inRefcon);
+extern void	MultiHdgSwitchStatusSetDataiCallback(void * inRefcon, int MultiHdgSwitchStatus);
+
+extern int	MultiCrsSwitchStatusGetDataiCallback(void * inRefcon);
+extern void	MultiCrsSwitchStatusSetDataiCallback(void * inRefcon, int MultiCrsswitchStatus);
+
+extern int	MultiKnobIncStatusGetDataiCallback(void * inRefcon);
+extern void	MultiKnobIncStatusSetDataiCallback(void * inRefcon, int MultiKnobIncStatus);
+
+extern int	MultiKnobDecStatusGetDataiCallback(void * inRefcon);
+extern void	MultiKnobDecStatusSetDataiCallback(void * inRefcon, int MultiKnobDecStatus);
+
+extern int	MultiAtStatusGetDataiCallback(void * inRefcon);
+extern void	MultiAtStatusSetDataiCallback(void * inRefcon, int MultiAtStatus);
+
+extern int	MultiTrimUpStatusGetDataiCallback(void * inRefcon);
+extern void	MultiTrimUpStatusSetDataiCallback(void * inRefcon, int MultiTrimUpStatus);
+
+extern int	MultiTrimDnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiTrimDnStatusSetDataiCallback(void * inRefcon, int MultiTrimDnStatus);
+
+extern int	MultiFlapsUpStatusGetDataiCallback(void * inRefcon);
+extern void	MultiFlapsUpStatusSetDataiCallback(void * inRefcon, int MultiFlapsUpStatus);
+
+extern int	MultiFlapsDnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiFlapsDnStatusSetDataiCallback(void * inRefcon, int MultiFlapsDnStatus);
+
+extern int	MultiApBtnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiApBtnStatusSetDataiCallback(void * inRefcon, int MultiApBtnStatus);
+
+extern int	MultiHdgBtnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiHdgBtnStatusSetDataiCallback(void * inRefcon, int MultiHdgBtnStatus);
+
+extern int	MultiNavBtnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiNavBtnStatusSetDataiCallback(void * inRefcon, int MultiNavBtnStatus);
+
+extern int	MultiIasBtnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiIasBtnStatusSetDataiCallback(void * inRefcon, int MultiIasBtnStatus);
+
+extern int	MultiAltBtnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiAltBtnStatusSetDataiCallback(void * inRefcon, int MultiAltBtnStatus);
+
+extern int	MultiVsBtnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiVsBtnStatusSetDataiCallback(void * inRefcon, int MultiVsBtnStatus);
+
+extern int	MultiAprBtnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiAprBtnStatusSetDataiCallback(void * inRefcon, int MultiAprBtnStatus);
+
+extern int	MultiRevBtnStatusGetDataiCallback(void * inRefcon);
+extern void	MultiRevBtnStatusSetDataiCallback(void * inRefcon, int MultiRevBtnStatus);
+
+
+
 
 extern string ap_button_remapable, hdg_button_remapable, nav_button_vorloc_remapable, nav_button_lnav_remapable;
 extern string ias_button_remapable, ias_changeover_button_remapable, alt_button_remapable, vs_button_remapable;

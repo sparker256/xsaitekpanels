@@ -297,6 +297,18 @@ XPLMDataRef AirspeedIsMach = NULL, Airspeed = NULL;
 
 XPLMDataRef HsiSelector = NULL;
 
+XPLMDataRef	MultiAltSwitchOwnedDataRef = NULL, MultiVsSwitchOwnedDataRef = NULL;
+XPLMDataRef	MultiIasSwitchOwnedDataRef = NULL, MultiHdgSwitchOwnedDataRef = NULL;
+XPLMDataRef	MultiCrsSwitchOwnedDataRef = NULL;
+XPLMDataRef	MultiKnobIncOwnedDataRef = NULL, MultiKnobDecOwnedDataRef = NULL;
+XPLMDataRef	MultiAtOwnedDataRef = NULL, MultiTrimUpOwnedDataRef = NULL;
+XPLMDataRef	MultiTrimDnOwnedDataRef = NULL, MultiFlapsUpOwnedDataRef = NULL;
+XPLMDataRef	MultiFlapsDnOwnedDataRef = NULL, MultiApBtnOwnedDataRef = NULL;
+XPLMDataRef	MultiHdgBtnOwnedDataRef = NULL, MultiNavBtnOwnedDataRef = NULL;
+XPLMDataRef	MultiIasBtnOwnedDataRef = NULL, MultiAltBtnOwnedDataRef = NULL;
+XPLMDataRef	MultiVsBtnOwnedDataRef = NULL, MultiAprBtnOwnedDataRef = NULL;
+XPLMDataRef	MultiRevBtnOwnedDataRef = NULL;
+
 XPLMMenuID      MultiMenu;
 XPLMMenuID      MultiMenuId;
 
@@ -920,6 +932,89 @@ int iasismachremap, iasismachvalue;
 
 int xpanelsfnbutton = 0, xpanelscrstoggle = 0;
 
+
+// This is the storage for the data we own.
+
+static int MultiAltSwitchOwnedData = 0, MultiVsSwitchOwnedData = 0;
+static int MultiIasSwitchOwnedData = 0, MultiHdgSwitchOwnedData = 0;
+static int MultiCrsSwitchOwnedData = 0;
+static int MultiKnobIncOwnedData = 0, MultiKnobDecOwnedData = 0;
+static int MultiAtOwnedData = 0, MultiTrimUpOwnedData = 0;
+static int MultiTrimDnOwnedData = 0, MultiFlapsUpOwnedData = 0;
+static int MultiFlapsDnOwnedData = 0, MultiApBtnOwnedData = 0;
+static int MultiHdgBtnOwnedData = 0, MultiNavBtnOwnedData = 0;
+static int MultiIasBtnOwnedData = 0, MultiAltBtnOwnedData = 0;
+static int MultiVsBtnOwnedData = 0, MultiAprBtnOwnedData = 0;
+static int MultiRevBtnOwnedData = 0;
+
+// These callbacks are called by the SDK to read and write the sim.
+// We provide two sets of callbacks allowing our data to appear as
+// float and double.  This is done for didactic purposes; multityped
+// should not be used in initial designs as a convenience to client
+// code.
+
+int	MultiAltSwitchStatusGetDataiCallback(void * inRefcon);
+void	MultiAltSwitchStatusSetDataiCallback(void * inRefcon, int MultiAltSwitchStatus);
+
+int	MultiVsSwitchStatusGetDataiCallback(void * inRefcon);
+void	MultiVsSwitchStatusSetDataiCallback(void * inRefcon, int MultiVsSwitchStatus);
+
+int	MultiIasSwitchStatusGetDataiCallback(void * inRefcon);
+void	MultiIasSwitchStatusSetDataiCallback(void * inRefcon, int MultiIasSwitchStatus);
+
+int	MultiHdgSwitchStatusGetDataiCallback(void * inRefcon);
+void	MultiHdgSwitchStatusSetDataiCallback(void * inRefcon, int MultiHdgSwitchStatus);
+
+int	MultiCrsSwitchStatusGetDataiCallback(void * inRefcon);
+void	MultiCrsSwitchStatusSetDataiCallback(void * inRefcon, int MultiCrsswitchStatus);
+
+int	MultiKnobIncStatusGetDataiCallback(void * inRefcon);
+void	MultiKnobIncStatusSetDataiCallback(void * inRefcon, int MultiKnobIncStatus);
+
+int	MultiKnobDecStatusGetDataiCallback(void * inRefcon);
+void	MultiKnobDecStatusSetDataiCallback(void * inRefcon, int MultiKnobDecStatus);
+
+int	MultiAtStatusGetDataiCallback(void * inRefcon);
+void	MultiAtStatusSetDataiCallback(void * inRefcon, int MultiAtStatus);
+
+int	MultiTrimUpStatusGetDataiCallback(void * inRefcon);
+void	MultiTrimUpStatusSetDataiCallback(void * inRefcon, int MultiTrimUpStatus);
+
+int	MultiTrimDnStatusGetDataiCallback(void * inRefcon);
+void	MultiTrimDnStatusSetDataiCallback(void * inRefcon, int MultiTrimDnStatus);
+
+int	MultiFlapsUpStatusGetDataiCallback(void * inRefcon);
+void	MultiFlapsUpStatusSetDataiCallback(void * inRefcon, int MultiFlapsUpStatus);
+
+int	MultiFlapsDnStatusGetDataiCallback(void * inRefcon);
+void	MultiFlapsDnStatusSetDataiCallback(void * inRefcon, int MultiFlapsDnStatus);
+
+int	MultiApBtnStatusGetDataiCallback(void * inRefcon);
+void	MultiApBtnStatusSetDataiCallback(void * inRefcon, int MultiApBtnStatus);
+
+int	MultiHdgBtnStatusGetDataiCallback(void * inRefcon);
+void	MultiHdgBtnStatusSetDataiCallback(void * inRefcon, int MultiHdgBtnStatus);
+
+int	MultiNavBtnStatusGetDataiCallback(void * inRefcon);
+void	MultiNavBtnStatusSetDataiCallback(void * inRefcon, int MultiNavBtnStatus);
+
+int	MultiIasBtnStatusGetDataiCallback(void * inRefcon);
+void	MultiIasBtnStatusSetDataiCallback(void * inRefcon, int MultiIasBtnStatus);
+
+int	MultiAltBtnStatusGetDataiCallback(void * inRefcon);
+void	MultiAltBtnStatusSetDataiCallback(void * inRefcon, int MultiAltBtnStatus);
+
+int	MultiVsBtnStatusGetDataiCallback(void * inRefcon);
+void	MultiVsBtnStatusSetDataiCallback(void * inRefcon, int MultiVsBtnStatus);
+
+int	MultiAprBtnStatusGetDataiCallback(void * inRefcon);
+void	MultiAprBtnStatusSetDataiCallback(void * inRefcon, int MultiAprBtnStatus);
+
+int	MultiRevBtnStatusGetDataiCallback(void * inRefcon);
+void	MultiRevBtnStatusSetDataiCallback(void * inRefcon, int MultiRevBtnStatus);
+
+
+
 void CreateMultiWidget(int x1, int y1, int w, int h);
 int MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, intptr_t  inParam1, intptr_t  inParam2);
 
@@ -1513,6 +1608,7 @@ void process_radio_panel();
 void process_radio1_data();
 void process_radio2_data();
 void process_multi_panel();
+void process_multi_data();
 void process_switch_panel();
 void process_switch_data();
 void process_bip_panel();
@@ -2024,6 +2120,12 @@ PLUGIN_API int XPluginStart(char *		outName,
       process_radio2_data();
   }
 
+
+  // If you find a multi panel then create
+  // datareferences for all of the multi panel switch positions
+  if(radcnt > 0)  {
+      process_multi_data();
+  }
 
 
   // Create our menu
@@ -3126,6 +3228,228 @@ void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbySta
     Rad2LwrActStbyOwnedData = Rad2LwrActStbyStatus2;
 }
 
+
+
+
+// Multi panel data references call backs
+
+int	MultiAltSwitchStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiAltSwitchOwnedData;
+}
+
+void	MultiAltSwitchStatusSetDataiCallback(void * inRefcon, int MultiAltSwitchStatus2)
+{
+    MultiAltSwitchOwnedData = MultiAltSwitchStatus2;
+}
+
+
+int	MultiVsSwitchStatusGetDataiCallback(void * inRefcon)
+{
+    return 	MultiVsSwitchOwnedData;
+}
+
+void	MultiVsSwitchStatusSetDataiCallback(void * inRefcon, int MultiVsSwitchStatus2)
+{
+    MultiVsSwitchOwnedData = MultiVsSwitchStatus2;
+}
+
+
+int	MultiIasSwitchStatusGetDataiCallback(void * inRefcon)
+{
+    return SwitchStartLeftOwnedData;
+}
+
+void	MultiIasSwitchStatusSetDataiCallback(void * inRefcon, int MultiIasSwitchStatus2)
+{
+    MultiIasSwitchOwnedData = MultiIasSwitchStatus2;
+}
+
+
+int	MultiHdgSwitchStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiHdgSwitchOwnedData;
+}
+
+void	MultiHdgSwitchStatusSetDataiCallback(void * inRefcon, int MultiHdgSwitchStatus2)
+{
+    MultiHdgSwitchOwnedData = MultiHdgSwitchStatus2;
+}
+
+
+int	MultiCrsSwitchStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiCrsSwitchOwnedData;
+}
+
+void	MultiCrsSwitchStatusSetDataiCallback(void * inRefcon, int MultiCrsSwitchStatus2)
+{
+    MultiCrsSwitchOwnedData = MultiCrsSwitchStatus2;
+}
+
+
+int	MultiKnobIncStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiKnobIncOwnedData;
+}
+
+void	MultiKnobIncStatusSetDataiCallback(void * inRefcon, int MultiKnobIncStatus2)
+{
+    MultiKnobIncOwnedData = MultiKnobIncStatus2;
+}
+
+
+int	MultiKnobDecStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiKnobDecOwnedData;
+}
+
+void	MultiKnobDecStatusSetDataiCallback(void * inRefcon, int MultiKnobDecStatus2)
+{
+    MultiKnobDecOwnedData = MultiKnobDecStatus2;
+}
+
+
+int	MultiAtStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiAtOwnedData;
+}
+
+void	MultiAtStatusSetDataiCallback(void * inRefcon, int MultiAtStatus2)
+{
+    MultiAtOwnedData = MultiAtStatus2;
+}
+
+
+int	MultiTrimUpStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiTrimUpOwnedData;
+}
+
+void	MultiTrimUpStatusSetDataiCallback(void * inRefcon, int MultiTrimUpStatus2)
+{
+    MultiTrimUpOwnedData = MultiTrimUpStatus2;
+}
+
+
+int	MultiTrimDnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiTrimDnOwnedData;
+}
+
+void	MultiTrimDnStatusSetDataiCallback(void * inRefcon, int MultiTrimDnStatus2)
+{
+    MultiTrimDnOwnedData = MultiTrimDnStatus2;
+}
+
+
+int	MultiFlapsUpStatusGetDataiCallback(void * inRefcon)
+{
+    return SwitchPitotOwnedData;
+}
+
+void	MultiFlapsUpStatusSetDataiCallback(void * inRefcon, int MultiFlapsUpStatus2)
+{
+    MultiFlapsUpOwnedData = MultiFlapsUpStatus2;
+}
+
+
+int	MultiFlapsDnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiFlapsDnOwnedData;
+}
+
+void	MultiFlapsDnStatusSetDataiCallback(void * inRefcon, int 	MultiFlapsDnStatus2)
+{
+    MultiFlapsDnOwnedData = 	MultiFlapsDnStatus2;
+}
+
+
+int	MultiApBtnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiApBtnOwnedData;
+}
+
+void	MultiApBtnStatusSetDataiCallback(void * inRefcon, int MultiApBtnStatus2)
+{
+    MultiApBtnOwnedData = MultiApBtnStatus2;
+}
+
+
+int	MultiHdgBtnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiHdgBtnOwnedData;
+}
+
+void	MultiHdgBtnStatusSetDataiCallback(void * inRefcon, int MultiHdgBtnStatus2)
+{
+    MultiHdgBtnOwnedData = MultiHdgBtnStatus2;
+}
+
+
+int	MultiNavBtnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiNavBtnOwnedData;
+}
+
+void	MultiNavBtnStatusSetDataiCallback(void * inRefcon, int MultiNavBtnStatus2)
+{
+    MultiNavBtnOwnedData = MultiNavBtnStatus2;
+}
+
+
+int	MultiIasBtnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiIasBtnOwnedData;
+}
+
+void	MultiIasBtnStatusSetDataiCallback(void * inRefcon, int MultiIasBtnStatus2)
+{
+    MultiIasBtnOwnedData = MultiIasBtnStatus2;
+}
+
+
+int	MultiAltBtnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiAltBtnOwnedData;
+}
+
+void	MultiAltBtnStatusSetDataiCallback(void * inRefcon, int MultiAltBtnStatus2)
+{
+    MultiAltBtnOwnedData = MultiAltBtnStatus2;
+}
+
+int	MultiVsBtnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiVsBtnOwnedData;
+}
+
+void	MultiVsBtnStatusSetDataiCallback(void * inRefcon, int MultiVsBtnStatus2)
+{
+    MultiVsBtnOwnedData = MultiVsBtnStatus2;
+}
+
+
+int	MultiAprBtnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiAprBtnOwnedData;
+}
+
+void	MultiAprBtnStatusSetDataiCallback(void * inRefcon, int MultiAprBtnStatus2)
+{
+    MultiAprBtnOwnedData = MultiAprBtnStatus2;
+}
+
+
+int	MultiRevBtnStatusGetDataiCallback(void * inRefcon)
+{
+    return MultiRevBtnOwnedData;
+}
+
+void	MultiRevBtnStatusSetDataiCallback(void * inRefcon, int MultiRevBtnStatus2)
+{
+    MultiRevBtnOwnedData = MultiRevBtnStatus2;
+}
 
 
 
