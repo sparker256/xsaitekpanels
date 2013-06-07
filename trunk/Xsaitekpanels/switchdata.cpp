@@ -18,7 +18,7 @@
 void process_switch_data()
 
 {
-    SwitchStartOffOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startoff/position",
+    SwitchStartOffOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/startoff/status",
                              xplmType_Int,
                              1,
                              SwitchStartOffPositionGetDataiCallback,
@@ -26,7 +26,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchStartRightOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startright/position",
+    SwitchStartRightOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/startright/status",
                              xplmType_Int,
                              1,
                              SwitchStartRightPositionGetDataiCallback,
@@ -34,7 +34,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchStartLeftOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startleft/position",
+    SwitchStartLeftOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/startleft/status",
                              xplmType_Int,
                              1,
                              SwitchStartLeftPositionGetDataiCallback,
@@ -42,7 +42,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchStartBothOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startboth/position",
+    SwitchStartBothOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/startboth/status",
                              xplmType_Int,
                              1,
                              SwitchStartBothPositionGetDataiCallback,
@@ -50,7 +50,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchStartStartOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/startstart/position",
+    SwitchStartStartOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/startstart/status",
                              xplmType_Int,
                              1,
                              SwitchStartStartPositionGetDataiCallback,
@@ -59,7 +59,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL);
 
 
-    SwitchBatOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/bat/position",
+    SwitchBatOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/bat/status",
                              xplmType_Int,
                              1,
                              SwitchBatPositionGetDataiCallback,
@@ -68,7 +68,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL);
 
 
-    SwitchAltOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/alt/position",
+    SwitchAltOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/alt/status",
                              xplmType_Int,
                              1,
                              SwitchAltPositionGetDataiCallback,
@@ -76,7 +76,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchAvOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/av/position",
+    SwitchAvOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/av/status",
                              xplmType_Int,
                              1,
                              SwitchAvPositionGetDataiCallback,
@@ -84,7 +84,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchFuelOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/fuel/position",
+    SwitchFuelOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/fuel/status",
                              xplmType_Int,
                              1,
                              SwitchFuelPositionGetDataiCallback,
@@ -92,7 +92,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchDiceOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/dice/position",
+    SwitchDiceOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/dice/status",
                              xplmType_Int,
                              1,
                              SwitchDicePositionGetDataiCallback,
@@ -100,7 +100,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchPitotOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/pitot/position",
+    SwitchPitotOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/pitot/status",
                              xplmType_Int,
                              1,
                              SwitchPitotPositionGetDataiCallback,
@@ -108,7 +108,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchGearUpOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/gearup/position",
+    SwitchGearUpOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/gearup/status",
                              xplmType_Int,
                              1,
                              SwitchGearUpPositionGetDataiCallback,
@@ -116,7 +116,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchGearDnOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/geardn/position",
+    SwitchGearDnOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/geardn/status",
                              xplmType_Int,
                              1,
                              SwitchGearDnPositionGetDataiCallback,
@@ -124,7 +124,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchCowlOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/cowl/position",
+    SwitchCowlOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/cowl/status",
                              xplmType_Int,
                              1,
                              SwitchCowlPositionGetDataiCallback,
@@ -133,7 +133,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL);
 
 
-    SwitchPanelOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/panel/position",
+    SwitchPanelOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/panel/status",
                              xplmType_Int,
                              1,
                              SwitchPanelPositionGetDataiCallback,
@@ -141,7 +141,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchBeaconOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/beacon/position",
+    SwitchBeaconOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/beacon/status",
                              xplmType_Int,
                              1,
                              SwitchBeaconPositionGetDataiCallback,
@@ -149,7 +149,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchNavOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/nav/position",
+    SwitchNavOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/nav/status",
                              xplmType_Int,
                              1,
                              SwitchNavPositionGetDataiCallback,
@@ -157,7 +157,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchStrobeOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/strobe/position",
+    SwitchStrobeOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/strobe/status",
                              xplmType_Int,
                              1,
                              SwitchStrobePositionGetDataiCallback,
@@ -165,7 +165,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchTaxiOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/taxi/position",
+    SwitchTaxiOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/taxi/status",
                              xplmType_Int,
                              1,
                              SwitchTaxiPositionGetDataiCallback,
@@ -173,7 +173,7 @@ void process_switch_data()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-    SwitchLandingOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switch/landing/position",
+    SwitchLandingOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/landing/status",
                              xplmType_Int,
                              1,
                              SwitchLandingPositionGetDataiCallback,

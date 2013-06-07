@@ -144,6 +144,36 @@ extern XPLMDataRef Rad2LowerNav1ActRemapableData, Rad2LowerNav1StbyRemapableData
 extern XPLMDataRef Rad2LowerNav2ActRemapableData, Rad2LowerNav2StbyRemapableData, Rad2LowrNav2ActStbyRemapableData;
 extern XPLMDataRef Rad2LowerXpdrRemapableData, Rad2LowerXpdrRemapableMode, Rad2LowerXpdrBaroStdRemapableData;
 
+extern XPLMDataRef Rad1UpperCom1OwnedDataRef, Rad1UpperCom2OwnedDataRef;
+extern XPLMDataRef Rad1UpperNav1OwnedDataRef, Rad1UpperNav2OwnedDataRef;
+extern XPLMDataRef Rad1UpperAdfOwnedDataRef, Rad1UpperDmeOwnedDataRef;
+extern XPLMDataRef Rad1UpperCom1OwnedDataRef, Rad1UpperCom2OwnedDataRef;
+extern XPLMDataRef Rad1UpperXpdrOwnedDataRef, Rad1UpperCorseIncOwnedDataRef;
+extern XPLMDataRef Rad1UpperCorseDecOwnedDataRef, Rad1UpperFineIncOwnedDataRef;
+extern XPLMDataRef Rad1UpperFineDecOwnedDataRef, Rad1UpperActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad1LowerCom1OwnedDataRef, Rad1LowerCom2OwnedDataRef;
+extern XPLMDataRef Rad1LowerNav1OwnedDataRef, Rad1LowerNav2OwnedDataRef;
+extern XPLMDataRef Rad1LowerAdfOwnedDataRef, Rad1LowerDmeOwnedDataRef;
+extern XPLMDataRef Rad1LowerXpdrOwnedDataRef, Rad1LowerCorseIncOwnedDataRef;
+extern XPLMDataRef Rad1LowerCorseDecOwnedDataRef, Rad1LowerFineIncOwnedDataRef;
+extern XPLMDataRef Rad1LowerFineDecOwnedDataRef, Rad1LowerActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad2UpperCom1OwnedDataRef, Rad2UpperCom2OwnedDataRef;
+extern XPLMDataRef Rad2UpperNav1OwnedDataRef, Rad2UpperNav2OwnedDataRef;
+extern XPLMDataRef Rad2UpperAdfOwnedDataRef, Rad2UpperDmeOwnedDataRef;
+extern XPLMDataRef Rad2UpperCom1OwnedDataRe, Rad2UpperCom2OwnedDataRef;
+extern XPLMDataRef Rad2UpperXpdrOwnedDataRef, Rad2UpperCorseIncOwnedDataRef;
+extern XPLMDataRef Rad2UpperCorseDecOwnedDataRef, Rad2UpperFineIncOwnedDataRef;
+extern XPLMDataRef Rad2UpperFineDecOwnedDataRef, Rad2UpperActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad2LowerCom1OwnedDataRef, Rad2LowerCom2OwnedDataRef;
+extern XPLMDataRef Rad2LowerNav1OwnedDataRef, Rad2LowerNav2OwnedDataRef;
+extern XPLMDataRef Rad2LowerAdfOwnedDataRef, Rad2LowerDmeOwnedDataRef;
+extern XPLMDataRef Rad2LowerCom1OwnedDataRe, Rad2LowerCom2OwnedDataRef;
+extern XPLMDataRef Rad2LowerXpdrOwnedDataRef, Rad2LowerCorseIncOwnedDataRef;
+extern XPLMDataRef Rad2LowerCorseDecOwnedDataRef, Rad2LowerFineIncOwnedDataRef;
+extern XPLMDataRef Rad2LowerFineDecOwnedDataRef, Rad2LowerActStbyOwnedDataRef;
 
 extern XPLMMenuID      RadioMenu;
 extern XPLMMenuID      RadioMenuId;
@@ -190,6 +220,159 @@ extern int rad2lwrcom2switchremap, rad2lwrcom2actstbybtnremap;
 extern int rad2lwrnav1switchremap, rad2lwrnav1actstbybtnremap;
 extern int rad2lwrnav2switchremap, rad2lwrnav2actstbybtnremap;
 extern int rad2lwrxpdrswitchremap;
+
+extern int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprCom1StatusSetDataiCallback(void * inRefcon, int Rad1UprCom1Status);
+
+extern int	Rad1UprCom2StatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprCom2StatusSetDataiCallback(void * inRefcon, int Rad1UprCom2Status);
+
+extern int	Rad1UprNav1StatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprNav1StatusSetDataiCallback(void * inRefcon, int Rad1UprNav1Status);
+
+extern int	Rad1UprNav2StatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprNav2StatusSetDataiCallback(void * inRefcon, int Rad1UprNav2Status);
+
+extern int	Rad1UprAdfStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprAdfStatusSetDataiCallback(void * inRefcon, int Rad1UprAdfStatus);
+
+extern int	Rad1UprDmeStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDmeStatusSetDataiCallback(void * inRefcon, int Rad1UprDmeStatus);
+
+extern int	Rad1UprXpdrStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad1UprXpdrStatus);
+
+extern int	Rad1UprCorseIncStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseIncStatus);
+
+extern int	Rad1UprCorseDecStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprCorseDecStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseDecStatus);
+
+extern int	Rad1UprFineIncStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad1UprFineIncStatus);
+
+extern int	Rad1UprFineDecStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad1UprFineDecStatus);
+
+extern int	Rad1UprActStbyStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad1UprActStbyStatus);
+
+
+extern int	Rad1LwrCom1StatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad1LwrCom1Status);
+
+extern int	Rad1LwrCom2StatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrCom2StatusSetDataiCallback(void * inRefcon, int Rad1LwrCom2Status);
+
+extern int	Rad1LwrNav1StatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrNav1StatusSetDataiCallback(void * inRefcon, int Rad1LwrNav1Status);
+
+extern int	Rad1LwrNav2StatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrNav2StatusSetDataiCallback(void * inRefcon, int Rad1LwrNav2Status);
+
+extern int	Rad1LwrAdfStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrAdfStatusSetDataiCallback(void * inRefcon, int Rad1LwrAdfStatus);
+
+extern int	Rad1LwrDmeStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad1LwrDmeStatus);
+
+extern int	Rad1LwrXpdrStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad1LwrXpdrStatus);
+
+extern int	Rad1LwrCorseIncStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad1LwrCorseIncStatus);
+
+extern int	Rad1LwrCorseDecStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrCorseDecStatusSetDataiCallback(void * inRefcon, int Rad1LwrCorseDecStatus);
+
+extern int	Rad1LwrFineIncStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad1LwrFineIncStatus);
+
+extern int	Rad1LwrFineDecStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad1LwrFineDecStatus);
+
+extern int	Rad1LwrActStbyStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad1LwrActStbyStatus);
+
+
+extern int	Rad2UprCom1StatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprCom1StatusSetDataiCallback(void * inRefcon, int Rad2UprCom1Status);
+
+extern int	Rad2UprCom2StatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprCom2StatusSetDataiCallback(void * inRefcon, int Rad2UprCom2Status);
+
+extern int	Rad2UprNav1StatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprNav1StatusSetDataiCallback(void * inRefcon, int Rad2UprNav1Status);
+
+extern int	Rad2UprNav2StatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprNav2StatusSetDataiCallback(void * inRefcon, int Rad2UprNav2Status);
+
+extern int	Rad2UprAdfStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprAdfStatusSetDataiCallback(void * inRefcon, int Rad2UprAdfStatus);
+
+extern int	Rad2UprDmeStatusGetDataiCallback(void * inRefcon);
+void	Rad2UprDmeStatusSetDataiCallback(void * inRefcon, int Rad2UprDmeStatus);
+
+extern int	Rad2UprXpdrStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad2UprXpdrStatus);
+
+extern int	Rad2UprCorseIncStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad2UprCorseIncStatus);
+
+extern int	Rad2UprCorseDecStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprCorseDecStatusSetDataiCallback(void * inRefcon, int Rad2UprCorseDecStatus);
+
+extern int	Rad2UprFineIncStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad2UprFineIncStatus);
+
+extern int	Rad2UprFineDecStatusGetDataiCallback(void * inRefcon);
+void	Rad2UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad2UprFineDecStatus);
+
+extern int	Rad2UprActStbyStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad2UprActStbyStatus);
+
+
+extern int	Rad2LwrCom1StatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad2LwrCom1Status);
+
+extern int	Rad2LwrCom2StatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrCom2StatusSetDataiCallback(void * inRefcon, int Rad2LwrCom2Status);
+
+extern int	Rad2LwrNav1StatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrNav1StatusSetDataiCallback(void * inRefcon, int Rad2LwrNav1Status);
+
+extern int	Rad2LwrNav2StatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrNav2StatusSetDataiCallback(void * inRefcon, int Rad2LwrNav2Status);
+
+extern int	Rad2LwrAdfStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrAdfStatusSetDataiCallback(void * inRefcon, int Rad2LwrAdfStatus);
+
+extern int	Rad2LwrDmeStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad2LwrDmeStatus);
+
+extern int	Rad2LwrXpdrStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad2LwrXpdrStatus);
+
+extern int	Rad2LwrCorseIncStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad2LwrCorseIncStatus);
+
+extern int	Rad2LwrCorseDecStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrCorseDecStatusSetDataiCallback(void * inRefcon, int Rad2LwrCorseDecStatus);
+
+extern int	Rad2LwrFineIncStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad2LwrFineIncStatus);
+
+extern int	Rad2LwrFineDecStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad2LwrFineDecStatus);
+
+extern int	Rad2LwrActStbyStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbyStatus);
+
+
+
+
+
+
 
 extern string rad1_upper_com1_corse_up_remapable, rad1_upper_com1_corse_dn_remapable;
 extern string rad1_upper_com1_fine_up_remapable, rad1_upper_com1_fine_dn_remapable;

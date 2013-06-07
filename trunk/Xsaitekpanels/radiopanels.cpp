@@ -887,6 +887,191 @@ void process_radio_make_message()
 
 }
 
+// ***************** Create Datareferences for upper Switches ************
+void process_upper_datareferences()
+{
+    if(testbit(radiobuf[radnum],UPPER_COM1)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCom1OwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCom1OwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCom1OwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCom1OwnedDataRef, 0);
+        }
+    }
+
+    if(testbit(radiobuf[radnum],UPPER_COM2)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCom2OwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCom2OwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCom2OwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCom2OwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_NAV1)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperNav1OwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperNav1OwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperNav1OwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperNav1OwnedDataRef, 0);
+        }
+    }
+
+    if(testbit(radiobuf[radnum],UPPER_NAV2)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperNav2OwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperNav2OwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperNav2OwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperNav2OwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_ADF)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperAdfOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperAdfOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperAdfOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperAdfOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_DME)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperDmeOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperDmeOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperDmeOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperDmeOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_XPDR)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperXpdrOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperXpdrOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperXpdrOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperXpdrOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_COARSE_UP)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCorseIncOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCorseIncOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCorseIncOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCorseIncOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCorseDecOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCorseDecOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCorseDecOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCorseDecOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_FINE_UP)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperFineIncOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperFineIncOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperFineIncOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperFineIncOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_FINE_DN)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperFineDecOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperFineDecOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperFineDecOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperFineDecOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperActStbyOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperActStbyOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperActStbyOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperActStbyOwnedDataRef, 0);
+        }
+    }
+
+
+}
+
+
+
 // ***************** Upper COM1 Switch Position *******************
 
 void process_upper_com1_switch()
@@ -2319,6 +2504,194 @@ void process_upper_xpdr_switch()
   }
 
 }
+
+
+// ***************** Create Datareferences for lower Switches ************
+void process_lower_datareferences()
+{
+    if(testbit(radiobuf[radnum],LOWER_COM1)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerCom1OwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerCom1OwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerCom1OwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerCom1OwnedDataRef, 0);
+        }
+    }
+
+    if(testbit(radiobuf[radnum],LOWER_COM2)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerCom2OwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerCom2OwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerCom2OwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerCom2OwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_NAV1)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerNav1OwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerNav1OwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerNav1OwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerNav1OwnedDataRef, 0);
+        }
+    }
+
+    if(testbit(radiobuf[radnum],LOWER_NAV2)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerNav2OwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerNav2OwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerNav2OwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerNav2OwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_ADF)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerAdfOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerAdfOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerAdfOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerAdfOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_DME)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerDmeOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerDmeOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperDmeOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperDmeOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_XPDR)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerXpdrOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerXpdrOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerXpdrOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerXpdrOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerCorseIncOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCorseIncOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1UpperCorseIncOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2UpperCorseIncOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerCorseDecOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerCorseDecOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerCorseDecOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerCorseDecOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerFineIncOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerFineIncOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerFineIncOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerFineIncOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerFineDecOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerFineDecOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerFineDecOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerFineDecOwnedDataRef, 0);
+        }
+    }
+
+
+    if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerActStbyOwnedDataRef, 1);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerActStbyOwnedDataRef, 1);
+        }
+    } else {
+        if (radnum == 0) {
+            XPLMSetDatai(Rad1LowerActStbyOwnedDataRef, 0);
+        } else if (radnum == 1) {
+            XPLMSetDatai(Rad2LowerActStbyOwnedDataRef, 0);
+        }
+    }
+
+
+}
+
+
+
+
 
 // ***************** Lower COM1 Switch Position *******************
 void process_lower_com1_switch()
@@ -4044,6 +4417,7 @@ void process_radio_panel()
   do{
     radiores = hid_read(radiohandle[radnum], radiobuf[radnum], sizeof(radiobuf[radnum]));
 
+    process_upper_datareferences();
     process_upper_com1_switch();
     process_upper_com2_switch();
     process_upper_nav1_switch();
@@ -4051,6 +4425,7 @@ void process_radio_panel()
     proecss_upper_adf_switch();
     process_upper_dme_switch();
     process_upper_xpdr_switch();
+    process_lower_datareferences();
     process_lower_com1_switch();
     process_lower_com2_switch();
     process_lower_nav1_switch();
