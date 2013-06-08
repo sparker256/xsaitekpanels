@@ -2590,9 +2590,9 @@ void process_lower_datareferences()
         }
     } else {
         if (radnum == 0) {
-            XPLMSetDatai(Rad1UpperDmeOwnedDataRef, 0);
+            XPLMSetDatai(Rad1LowerDmeOwnedDataRef, 0);
         } else if (radnum == 1) {
-            XPLMSetDatai(Rad2UpperDmeOwnedDataRef, 0);
+            XPLMSetDatai(Rad2LowerDmeOwnedDataRef, 0);
         }
     }
 
@@ -2616,13 +2616,13 @@ void process_lower_datareferences()
         if (radnum == 0) {
             XPLMSetDatai(Rad1LowerCorseIncOwnedDataRef, 1);
         } else if (radnum == 1) {
-            XPLMSetDatai(Rad2UpperCorseIncOwnedDataRef, 1);
+            XPLMSetDatai(Rad2LowerCorseIncOwnedDataRef, 1);
         }
     } else {
         if (radnum == 0) {
-            XPLMSetDatai(Rad1UpperCorseIncOwnedDataRef, 0);
+            XPLMSetDatai(Rad1LowerCorseIncOwnedDataRef, 0);
         } else if (radnum == 1) {
-            XPLMSetDatai(Rad2UpperCorseIncOwnedDataRef, 0);
+            XPLMSetDatai(Rad2LowerCorseIncOwnedDataRef, 0);
         }
     }
 

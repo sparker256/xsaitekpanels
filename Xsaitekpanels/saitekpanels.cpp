@@ -2768,7 +2768,7 @@ void	Rad1UprDmeStatusSetDataiCallback(void * inRefcon, int Rad1UprDmeStatus2)
 
 int	Rad1UprXpdrStatusGetDataiCallback(void * inRefcon)
 {
-    return Rad1UprDmeOwnedData;
+    return Rad1UprXpdrOwnedData;
 }
 
 void	Rad1UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad1UprXpdrStatus2)
@@ -3257,7 +3257,7 @@ void	MultiVsSwitchStatusSetDataiCallback(void * inRefcon, int MultiVsSwitchStatu
 
 int	MultiIasSwitchStatusGetDataiCallback(void * inRefcon)
 {
-    return SwitchStartLeftOwnedData;
+    return MultiIasSwitchOwnedData;
 }
 
 void	MultiIasSwitchStatusSetDataiCallback(void * inRefcon, int MultiIasSwitchStatus2)
@@ -3345,7 +3345,7 @@ void	MultiTrimDnStatusSetDataiCallback(void * inRefcon, int MultiTrimDnStatus2)
 
 int	MultiFlapsUpStatusGetDataiCallback(void * inRefcon)
 {
-    return SwitchPitotOwnedData;
+    return MultiFlapsUpOwnedData;
 }
 
 void	MultiFlapsUpStatusSetDataiCallback(void * inRefcon, int MultiFlapsUpStatus2)

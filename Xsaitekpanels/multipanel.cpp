@@ -158,6 +158,140 @@ void process_multi_display()
 
 }
 
+
+// ***************** ALT Switch Position *******************
+void process_multi_panel_datareference_values()
+{
+    if(testbit(multibuf,ALT_SWITCH)) {
+        XPLMSetDatai(MultiAltSwitchOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiAltSwitchOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,VS_SWITCH)) {
+        XPLMSetDatai(MultiVsSwitchOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiVsSwitchOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,IAS_SWITCH)) {
+        XPLMSetDatai(MultiIasSwitchOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiIasSwitchOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,HDG_SWITCH)) {
+        XPLMSetDatai(MultiHdgSwitchOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiHdgSwitchOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,CRS_SWITCH)) {
+        XPLMSetDatai(MultiCrsSwitchOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiCrsSwitchOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,ADJUSTMENT_UP)) {
+        XPLMSetDatai(MultiKnobIncOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiKnobIncOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,ADJUSTMENT_DN)) {
+        XPLMSetDatai(MultiKnobDecOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiKnobDecOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,AUTO_THROTTLE_SWITCH)) {
+        XPLMSetDatai(MultiAtOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiAtOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,TRIM_WHEEL_UP)) {
+        XPLMSetDatai(MultiTrimUpOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiTrimUpOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,TRIM_WHEEL_DN)) {
+        XPLMSetDatai(MultiTrimDnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiTrimDnOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,TRIM_WHEEL_UP)) {
+        XPLMSetDatai(MultiTrimUpOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiTrimUpOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,FLAPS_UP_SWITCH)) {
+        XPLMSetDatai(MultiFlapsUpOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiFlapsUpOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,FLAPS_DN_SWITCH)) {
+        XPLMSetDatai(MultiFlapsDnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiFlapsDnOwnedDataRef, 0);
+    }
+
+
+    if(testbit(multibuf,AP_MASTER_BUTTON)) {
+        XPLMSetDatai(MultiApBtnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiApBtnOwnedDataRef, 0);
+    }
+
+
+    if(testbit(multibuf,HDG_BUTTON)) {
+        XPLMSetDatai(MultiHdgBtnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiHdgBtnOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,NAV_BUTTON)) {
+        XPLMSetDatai(MultiNavBtnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiNavBtnOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,IAS_BUTTON)) {
+        XPLMSetDatai(MultiIasBtnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiIasBtnOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,ALT_BUTTON)) {
+        XPLMSetDatai(MultiAltBtnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiAltBtnOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,VS_BUTTON)) {
+        XPLMSetDatai(MultiVsBtnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiVsBtnOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,APR_BUTTON)) {
+        XPLMSetDatai(MultiAprBtnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiAprBtnOwnedDataRef, 0);
+    }
+
+    if(testbit(multibuf,REV_BUTTON)) {
+        XPLMSetDatai(MultiRevBtnOwnedDataRef, 1);
+    } else {
+        XPLMSetDatai(MultiRevBtnOwnedDataRef, 0);
+    }
+
+}
+
 // ***************** ALT Switch Position *******************
 void process_alt_switch()
 {
@@ -3258,6 +3392,7 @@ void process_multi_panel()
     int multi_safety_cntr = 30;
     do {
         multires = hid_read(multihandle, multibuf, sizeof(multibuf));
+        process_multi_panel_datareference_values();
         process_alt_switch();
         process_vs_switch();
         process_ias_switch();
