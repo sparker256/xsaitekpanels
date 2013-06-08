@@ -26,8 +26,6 @@ void process_multi_panel_datareferences()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-
-
     MultiVsSwitchOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/vsswitch/status",
                              xplmType_Int,
                              1,
@@ -60,7 +58,6 @@ void process_multi_panel_datareferences()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-
     MultiKnobIncOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/knobinc/status",
                              xplmType_Int,
                              1,
@@ -68,7 +65,6 @@ void process_multi_panel_datareferences()
                              MultiKnobIncStatusSetDataiCallback,
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
-
 
     MultiKnobDecOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/knobdec/status",
                              xplmType_Int,
@@ -118,8 +114,6 @@ void process_multi_panel_datareferences()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
-
-
     MultiApBtnOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/apbtn/status",
                              xplmType_Int,
                              1,
@@ -127,7 +121,6 @@ void process_multi_panel_datareferences()
                              MultiApBtnStatusSetDataiCallback,
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
-
 
     MultiHdgBtnOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/hdgbtn/status",
                              xplmType_Int,
@@ -184,9 +177,6 @@ void process_multi_panel_datareferences()
                              MultiRevBtnStatusSetDataiCallback,
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
-
-
-
 
 }
 
