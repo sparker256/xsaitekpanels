@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.18   ***************
-// ****** Jun 05 2013   **************
+// ******** ver 2.19   ***************
+// ****** Jun 10 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -466,6 +466,10 @@ XPLMDataRef AvMasterSwitchData = NULL, Av2MasterSwitchData = NULL;
 XPLMDataRef Av3MasterSwitchData = NULL, Av4MasterSwitchData = NULL;
 XPLMDataRef Av5MasterSwitchData = NULL, Av6MasterSwitchData = NULL;
 XPLMDataRef Av7MasterSwitchData = NULL, Av8MasterSwitchData = NULL;
+XPLMDataRef Av9MasterSwitchData = NULL, Av10MasterSwitchData = NULL;
+XPLMDataRef Av11MasterSwitchData = NULL, Av12MasterSwitchData = NULL;
+XPLMDataRef Av13MasterSwitchData = NULL, Av14MasterSwitchData = NULL;
+XPLMDataRef Av15MasterSwitchData = NULL, Av16MasterSwitchData = NULL;
 
 XPLMDataRef FuelPumpSwitchData = NULL, FuelPump2SwitchData = NULL;
 XPLMDataRef FuelPump3SwitchData = NULL, FuelPump4SwitchData = NULL;
@@ -1174,6 +1178,15 @@ int av6_master_switch_data_on_value, av6_master_switch_data_off_value;
 int av7_master_switch_data_on_value, av7_master_switch_data_off_value;
 int av8_master_switch_data_on_value, av8_master_switch_data_off_value;
 
+int av9_master_switch_data_on_value, av9_master_switch_data_off_value;
+int av10_master_switch_data_on_value, av10_master_switch_data_off_value;
+int av11_master_switch_data_on_value, av11_master_switch_data_off_value;
+int av12_master_switch_data_on_value, av12_master_switch_data_off_value;
+int av13_master_switch_data_on_value, av13_master_switch_data_off_value;
+int av14_master_switch_data_on_value, av14_master_switch_data_off_value;
+int av15_master_switch_data_on_value, av15_master_switch_data_off_value;
+int av16_master_switch_data_on_value, av16_master_switch_data_off_value;
+
 
 int fuel_pump_switch_data_on_value, fuel_pump_switch_data_off_value;
 int fuel_pump2_switch_data_on_value, fuel_pump2_switch_data_off_value;
@@ -1458,6 +1471,16 @@ string av6_master_switch_on, av6_master_switch_off, av6_master_switch_data;
 string av7_master_switch_on, av7_master_switch_off, av7_master_switch_data;
 string av8_master_switch_on, av8_master_switch_off, av8_master_switch_data;
 
+string av9_master_switch_on, av9_master_switch_off, av9_master_switch_data;
+string av10_master_switch_on, av10_master_switch_off, av10_master_switch_data;
+string av11_master_switch_on, av11_master_switch_off, av11_master_switch_data;
+string av12_master_switch_on, av12_master_switch_off, av12_master_switch_data;
+string a13_master_switch_on, av13_master_switch_off, av13_master_switch_data;
+string av14_master_switch_on, av14_master_switch_off, av14_master_switch_data;
+string av15_master_switch_on, av15_master_switch_off, av15_master_switch_data;
+string av16_master_switch_on, av16_master_switch_off, av16_master_switch_data;
+
+
 string fuel_pump_switch_on, fuel_pump_switch_off, fuel_pump_switch_data;
 string fuel_pump2_switch_on, fuel_pump2_switch_off, fuel_pump2_switch_data;
 string fuel_pump3_switch_on, fuel_pump3_switch_off, fuel_pump3_switch_data;
@@ -1644,10 +1667,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.18\n");
+  XPLMDebugString("Xsaitekpanels: v2.19\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.18");
+  strcpy(outName, "Xsaitekpanels v2.19");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
