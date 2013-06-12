@@ -802,6 +802,48 @@ void process_read_ini_file()
             av8_master_switch_data_on_value = getOptionToInt("av8_master_switch_data_on_value");
             av8_master_switch_data_off_value = getOptionToInt("av8_master_switch_data_off_value");
 
+
+
+            av9_master_switch_data = getOptionToString("av9_master_switch_data");
+            Av9MasterSwitchData   = XPLMFindDataRef(av9_master_switch_data.c_str());
+            av9_master_switch_data_on_value = getOptionToInt("av9_master_switch_data_on_value");
+            av9_master_switch_data_off_value = getOptionToInt("av9_master_switch_data_off_value");
+
+            av10_master_switch_data = getOptionToString("av10_master_switch_data");
+            Av10MasterSwitchData   = XPLMFindDataRef(av10_master_switch_data.c_str());
+            av10_master_switch_data_on_value = getOptionToInt("av10_master_switch_data_on_value");
+            av10_master_switch_data_off_value = getOptionToInt("av10_master_switch_data_off_value")
+                    ;
+            av11_master_switch_data = getOptionToString("av11_master_switch_data");
+            Av11MasterSwitchData   = XPLMFindDataRef(av11_master_switch_data.c_str());
+            av11_master_switch_data_on_value = getOptionToInt("av11_master_switch_data_on_value");
+            av11_master_switch_data_off_value = getOptionToInt("av11_master_switch_data_off_value");
+
+            av12_master_switch_data = getOptionToString("av12_master_switch_data");
+            Av12MasterSwitchData   = XPLMFindDataRef(av12_master_switch_data.c_str());
+            av12_master_switch_data_on_value = getOptionToInt("av12_master_switch_data_on_value");
+            av12_master_switch_data_off_value = getOptionToInt("av12_master_switch_data_off_value");
+
+            av13_master_switch_data = getOptionToString("av13_master_switch_data");
+            Av13MasterSwitchData   = XPLMFindDataRef(av13_master_switch_data.c_str());
+            av13_master_switch_data_on_value = getOptionToInt("av13_master_switch_data_on_value");
+            av13_master_switch_data_off_value = getOptionToInt("av13_master_switch_data_off_value");
+
+            av14_master_switch_data = getOptionToString("av14_master_switch_data");
+            Av14MasterSwitchData   = XPLMFindDataRef(av14_master_switch_data.c_str());
+            av14_master_switch_data_on_value = getOptionToInt("av14_master_switch_data_on_value");
+            av14_master_switch_data_off_value = getOptionToInt("av14_master_switch_data_off_value");
+
+            av15_master_switch_data = getOptionToString("av15_master_switch_data");
+            Av15MasterSwitchData   = XPLMFindDataRef(av15_master_switch_data.c_str());
+            av15_master_switch_data_on_value = getOptionToInt("av15_master_switch_data_on_value");
+            av15_master_switch_data_off_value = getOptionToInt("av15_master_switch_data_off_value");
+
+            av16_master_switch_data = getOptionToString("av16_master_switch_data");
+            Av16MasterSwitchData   = XPLMFindDataRef(av16_master_switch_data.c_str());
+            av16_master_switch_data_on_value = getOptionToInt("av16_master_switch_data_on_value");
+            av16_master_switch_data_off_value = getOptionToInt("av16_master_switch_data_off_value");
+
     }
 
 
@@ -1270,7 +1312,7 @@ void process_read_ini_file()
           beacon_lights_switch_data_off_value = getOptionToInt("beacon_lights_switch_data_off_value");
 
           beacon_lights_switch2_data = getOptionToString("beacon_lights_switch2_data");
-          BeaconLights2Data   = XPLMFindDataRef(beacon_lights_switch_data.c_str());
+          BeaconLights2Data   = XPLMFindDataRef(beacon_lights_switch2_data.c_str());
           beacon_lights_switch2_data_on_value = getOptionToInt("beacon_lights_switch2_data_on_value");
           beacon_lights_switch2_data_off_value = getOptionToInt("beacon_lights_switch2_data_off_value");
 
