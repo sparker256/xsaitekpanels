@@ -180,7 +180,120 @@ void process_multi_panel_datareferences()
 
 }
 
-void process_multi_data()
+void process_multi_unregister_xsaitekpanels_datareference()
+
+{
+     XPLMUnregisterDataAccessor(MultiAltSwitchOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiVsSwitchOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiIasSwitchOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiHdgSwitchOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiCrsSwitchOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiKnobIncOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiKnobDecOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiAtOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiTrimUpOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiTrimDnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiFlapsUpOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiFlapsDnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiApBtnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiHdgBtnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiNavBtnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiIasBtnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiAltBtnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiVsBtnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiAprBtnOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiRevBtnOwnedDataRef);
+
+    return;
+}
+
+void process_multi_find_xplane_commands()
+
+{
+    // ************ Find Multi Panel Commands Ref ***************
+      ApAltDn = XPLMFindCommand("sim/autopilot/altitude_down");
+      ApAltUp = XPLMFindCommand("sim/autopilot/altitude_up");
+      ApVsDn = XPLMFindCommand("sim/autopilot/vertical_speed_down");
+      ApVsUp = XPLMFindCommand("sim/autopilot/vertical_speed_up");
+      ApAsDn = XPLMFindCommand("sim/autopilot/airspeed_down");
+      ApAsUp = XPLMFindCommand("sim/autopilot/airspeed_up");
+      ApHdgDn = XPLMFindCommand("sim/autopilot/heading_down");
+      ApHdgUp = XPLMFindCommand("sim/autopilot/heading_up");
+
+      ApCrsDn = XPLMFindCommand("sim/radios/obs1_down");
+      ApCrsUp = XPLMFindCommand("sim/radios/obs1_up");
+      ApCrsDn2 = XPLMFindCommand("sim/radios/obs2_down");
+      ApCrsUp2 = XPLMFindCommand("sim/radios/obs2_up");
+
+      ApMstrBtnUp = XPLMFindCommand("sim/autopilot/fdir_servos_up_one");
+      ApMstrBtnDn = XPLMFindCommand("sim/autopilot/fdir_servos_down_one");
+      ApMstrBtnOff = XPLMFindCommand("sim/autopilot/servos_and_flight_dir_off");
+      ApHdgBtn = XPLMFindCommand("sim/autopilot/heading");
+      ApNavBtn = XPLMFindCommand("sim/autopilot/NAV");
+      ApIasBtn = XPLMFindCommand("sim/autopilot/level_change");
+      ApAltBtn = XPLMFindCommand("sim/autopilot/altitude_hold");
+      ApAltArmBtn = XPLMFindCommand("sim/autopilot/altitude_arm");
+      ApVsBtn = XPLMFindCommand("sim/autopilot/vertical_speed");
+      ApAprBtn = XPLMFindCommand("sim/autopilot/approach");
+      ApRevBtn = XPLMFindCommand("sim/autopilot/back_course");
+      ApKnotsMachTgl = XPLMFindCommand("sim/autopilot/knots_mach_toggle");
+
+
+      PitchTrimDn = XPLMFindCommand("sim/flight_controls/pitch_trim_down");
+      PitchTrimUp = XPLMFindCommand("sim/flight_controls/pitch_trim_up");
+      PitchTrimTkOff = XPLMFindCommand("sim/flight_controls/pitch_trim_takeoff");
+      FlapsDn = XPLMFindCommand("sim/flight_controls/flaps_down");
+      FlapsUp = XPLMFindCommand("sim/flight_controls/flaps_up");
+
+      HsiSelector = XPLMFindDataRef("sim/cockpit/switches/HSI_selector");
+
+
+    return;
+
+}
+
+
+void process_multi_find_xplane_datareference()
+
+{
+    // **************** Find Multi Panel Data Ref ********************
+
+      ApAlt = XPLMFindDataRef("sim/cockpit/autopilot/altitude");
+      ApVs = XPLMFindDataRef("sim/cockpit/autopilot/vertical_velocity");
+      ApAs = XPLMFindDataRef("sim/cockpit/autopilot/airspeed");
+      ApHdg = XPLMFindDataRef("sim/cockpit/autopilot/heading_mag");
+
+      ApCrs  = XPLMFindDataRef("sim/cockpit/radios/nav1_obs_degm");
+      ApCrs2 = XPLMFindDataRef("sim/cockpit/radios/nav2_obs_degm");
+
+      ApMstrStat = XPLMFindDataRef("sim/cockpit2/autopilot/flight_director_mode");
+      ApState = XPLMFindDataRef("sim/cockpit/autopilot/autopilot_state");
+      ApHdgStat = XPLMFindDataRef("sim/cockpit2/autopilot/heading_status");
+      ApNavStat = XPLMFindDataRef("sim/cockpit2/autopilot/nav_status");
+      ApIasStat = XPLMFindDataRef("sim/cockpit2/autopilot/speed_status");
+      ApAltStat = XPLMFindDataRef("sim/cockpit2/autopilot/altitude_hold_status");
+      ApVsStat = XPLMFindDataRef("sim/cockpit2/autopilot/vvi_status");
+      ApAprStat = XPLMFindDataRef("sim/cockpit2/autopilot/approach_status");
+      ApRevStat = XPLMFindDataRef("sim/cockpit2/autopilot/backcourse_status");
+      AvPwrOn = XPLMFindDataRef("sim/cockpit/electrical/avionics_on");
+      BatPwrOn = XPLMFindDataRef("sim/cockpit/electrical/battery_on");
+      Frp = XPLMFindDataRef("sim/operation/misc/frame_rate_period");
+
+      MHdg = XPLMFindDataRef("sim/flightmodel/position/magpsi");
+
+      AirspeedIsMach = XPLMFindDataRef("sim/cockpit/autopilot/airspeed_is_mach");
+      Airspeed = XPLMFindDataRef("sim/cockpit/autopilot/airspeed");
+
+      ApAutThr = XPLMFindDataRef("sim/cockpit2/autopilot/autothrottle_enabled");
+
+
+    return;
+
+}
+
+
+
+void process_multi_register_xsaitekpanels_datareference()
 
 {
 
