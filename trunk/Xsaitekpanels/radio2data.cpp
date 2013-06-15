@@ -238,8 +238,43 @@ void process_radio2_lower_datareference()
 }
 
 
+void process_radio2_unregister_xsaitekpanels_datareference()
+{
+    XPLMUnregisterDataAccessor(Rad2UpperCom1OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperCom2OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperNav1OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperNav2OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperAdfOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperDmeOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperXpdrOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperCorseIncOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperCorseDecOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperFineIncOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperFineDecOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2UpperActStbyOwnedDataRef);
 
-void process_radio2_data()
+    XPLMUnregisterDataAccessor(Rad2LowerCom1OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerCom2OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerNav1OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerNav2OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerAdfOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerDmeOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerXpdrOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerCorseIncOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerCorseDecOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerFineIncOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerFineDecOwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad2LowerActStbyOwnedDataRef);
+
+    return;
+
+}
+
+
+
+
+
+void process_radio2_register_xsaitekpanels_datareference()
 {
     process_radio2_upper_datareference();
     process_radio2_lower_datareference();

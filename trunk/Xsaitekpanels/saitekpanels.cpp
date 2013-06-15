@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.19   ***************
-// ****** Jun 10 2013   **************
+// ****** Jun 14 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -1628,12 +1628,22 @@ int readiniloop = 0;
 
 
 void process_radio_panel();
-void process_radio1_data();
-void process_radio2_data();
+void process_radio1_register_xsaitekpanels_datareference();
+void process_radio1_unregister_xsaitekpanels_datareference();
+void process_radio2_register_xsaitekpanels_datareference();
+void process_radio2_unregister_xsaitekpanels_datareference();
+void process_radio_find_xplane_commands();
+void process_radio_find_xplane_datareference();
 void process_multi_panel();
-void process_multi_data();
+void process_multi_register_xsaitekpanels_datareference();
+void process_multi_unregister_xsaitekpanels_datareference();
+void process_multi_find_xplane_commands();
+void process_multi_find_xplane_datareference();
 void process_switch_panel();
-void process_switch_data();
+void process_switch_register_xsaitekpanels_datareference();
+void process_switch_unregister_xsaitekpanels_datareference();
+void process_switch_find_xplane_commands();
+void process_switch_find_xplane_datareference();
 void process_bip_panel();
 void process_pref_file();
 void process_read_ini_file();
@@ -1674,326 +1684,9 @@ PLUGIN_API int XPluginStart(char *		outName,
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
-// ************ Find Radio Panel Commands Ref ******************
-  Com1StbyFineDn = XPLMFindCommand("sim/radios/stby_com1_fine_down");
-  Com1StbyFineUp = XPLMFindCommand("sim/radios/stby_com1_fine_up");
-  Com1StbyCorseDn = XPLMFindCommand("sim/radios/stby_com1_coarse_down");
-  Com1StbyCorseUp = XPLMFindCommand("sim/radios/stby_com1_coarse_up");
-
-  Com2StbyFineDn = XPLMFindCommand("sim/radios/stby_com2_fine_down");
-  Com2StbyFineUp = XPLMFindCommand("sim/radios/stby_com2_fine_up");
-  Com2StbyCorseDn = XPLMFindCommand("sim/radios/stby_com2_coarse_down");
-  Com2StbyCorseUp = XPLMFindCommand("sim/radios/stby_com2_coarse_up");
-
-  Nav1StbyFineDn = XPLMFindCommand("sim/radios/stby_nav1_fine_down");
-  Nav1StbyFineUp = XPLMFindCommand("sim/radios/stby_nav1_fine_up");
-  Nav1StbyCorseDn = XPLMFindCommand("sim/radios/stby_nav1_coarse_down");
-  Nav1StbyCorseUp = XPLMFindCommand("sim/radios/stby_nav1_coarse_up");
-
-  Nav2StbyFineDn = XPLMFindCommand("sim/radios/stby_nav2_fine_down");
-  Nav2StbyFineUp = XPLMFindCommand("sim/radios/stby_nav2_fine_up");
-  Nav2StbyCorseDn = XPLMFindCommand("sim/radios/stby_nav2_coarse_down");
-  Nav2StbyCorseUp = XPLMFindCommand("sim/radios/stby_nav2_coarse_up");
-
-  Afd1StbyHunUp = XPLMFindCommand("sim/radios/stby_adf1_hundreds_up");
-  Afd1StbyHunDn = XPLMFindCommand("sim/radios/stby_adf1_hundreds_down");
-  Afd1StbyTensUp = XPLMFindCommand("sim/radios/stby_adf1_tens_up");
-  Afd1StbyTensDn = XPLMFindCommand("sim/radios/stby_adf1_tens_down");
-  Afd1StbyOnesUp = XPLMFindCommand("sim/radios/stby_adf1_ones_up");
-  Afd1StbyOnesDn = XPLMFindCommand("sim/radios/stby_adf1_ones_down");
-
-  Afd2StbyHunUp = XPLMFindCommand("sim/radios/stby_adf2_hundreds_up");
-  Afd2StbyHunDn = XPLMFindCommand("sim/radios/stby_adf2_hundreds_down");
-  Afd2StbyTensUp = XPLMFindCommand("sim/radios/stby_adf2_tens_up");
-  Afd2StbyTensDn = XPLMFindCommand("sim/radios/stby_adf2_tens_down");
-  Afd2StbyOnesUp = XPLMFindCommand("sim/radios/stby_adf2_ones_up");
-  Afd2StbyOnesDn = XPLMFindCommand("sim/radios/stby_adf2_ones_down");
-
-  XpdrThUp = XPLMFindCommand("sim/transponder/transponder_thousands_up");
-  XpdrThDn = XPLMFindCommand("sim/transponder/transponder_thousands_down");
-  XpdrHunUp	= XPLMFindCommand("sim/transponder/transponder_hundreds_up");
-  XpdrHunDn	= XPLMFindCommand("sim/transponder/transponder_hundreds_down");
-  XpdrTensUp = XPLMFindCommand("sim/transponder/transponder_tens_up");
-  XpdrTensDn = XPLMFindCommand("sim/transponder/transponder_tens_down");
-  XpdrOnesUp = XPLMFindCommand("sim/transponder/transponder_ones_up");
-  XpdrOnesDn = XPLMFindCommand("sim/transponder/transponder_ones_down");
-
-  BaroUp = XPLMFindCommand("sim/instruments/barometer_up");
-  BaroDn = XPLMFindCommand("sim/instruments/barometer_down");
-  BaroStd = XPLMFindCommand("sim/instruments/barometer_2992");
-
-  Com1ActStby = XPLMFindCommand("sim/radios/com1_standy_flip");
-  Com2ActStby = XPLMFindCommand("sim/radios/com2_standy_flip");
-  Nav1ActStby = XPLMFindCommand("sim/radios/nav1_standy_flip");
-  Nav2ActStby = XPLMFindCommand("sim/radios/nav2_standy_flip");
-  Adf1ActStby = XPLMFindCommand("sim/radios/adf1_standy_flip");
-  Adf2ActStby = XPLMFindCommand("sim/radios/adf2_standy_flip");
-
-  Obs1Down = XPLMFindCommand("sim/radios/obs1_down");
-  Obs1Up = XPLMFindCommand("sim/radios/obs1_up");
-  Obs2Down = XPLMFindCommand("sim/radios/obs2_down");
-  Obs2Up = XPLMFindCommand("sim/radios/obs2_up");
-
-
-// ************ Find Radio Panel Data Ref ******************
-  Com1ActFreq = XPLMFindDataRef("sim/cockpit/radios/com1_freq_hz");
-  Com2ActFreq = XPLMFindDataRef("sim/cockpit/radios/com2_freq_hz");
-  Nav1ActFreq = XPLMFindDataRef("sim/cockpit/radios/nav1_freq_hz");
-  Nav2ActFreq = XPLMFindDataRef("sim/cockpit/radios/nav2_freq_hz");
-
-  Com1StbyFreq = XPLMFindDataRef("sim/cockpit/radios/com1_stdby_freq_hz");
-  Com2StbyFreq = XPLMFindDataRef("sim/cockpit/radios/com2_stdby_freq_hz");
-  Nav1StbyFreq = XPLMFindDataRef("sim/cockpit/radios/nav1_stdby_freq_hz");
-  Nav2StbyFreq = XPLMFindDataRef("sim/cockpit/radios/nav2_stdby_freq_hz");
-
-  Adf1StbyFreq = XPLMFindDataRef("sim/cockpit/radios/adf1_stdby_freq_hz");
-  Adf2StbyFreq = XPLMFindDataRef("sim/cockpit/radios/adf2_stdby_freq_hz");
-  Adf1ActFreq = XPLMFindDataRef("sim/cockpit/radios/adf1_freq_hz");
-  Adf2ActFreq = XPLMFindDataRef("sim/cockpit/radios/adf2_freq_hz");
-
-  XpdrCode = XPLMFindDataRef("sim/cockpit/radios/transponder_code");
-  XpdrMode = XPLMFindDataRef("sim/cockpit/radios/transponder_mode");
-  BaroSetting = XPLMFindDataRef("sim/cockpit/misc/barometer_setting");
-  MetricPress = XPLMFindDataRef("sim/physics/metric_press");
-
-  DmeMode = XPLMFindDataRef("sim/cockpit2/radios/actuators/DME_mode");
-  DmeSlvSource = XPLMFindDataRef("sim/cockpit2/radios/actuators/DME_slave_source");
-
-
-  Nav1DmeNmDist	= XPLMFindDataRef("sim/cockpit2/radios/indicators/nav1_dme_distance_nm");
-  Nav1DmeSpeed = XPLMFindDataRef("sim/cockpit2/radios/indicators/nav1_dme_speed_kts");
-  Nav2DmeNmDist	= XPLMFindDataRef("sim/cockpit2/radios/indicators/nav2_dme_distance_nm");
-  Nav2DmeSpeed = XPLMFindDataRef("sim/cockpit2/radios/indicators/nav2_dme_speed_kts");
-  DmeSpeed = XPLMFindDataRef("sim/cockpit2/radios/indicators/dme_dme_speed_kts");
-
-  DmeFreq = XPLMFindDataRef("sim/cockpit2/radios/actuators/dme_frequency_hz");
-  DmeTime = XPLMFindDataRef("sim/cockpit2/radios/indicators/dme_dme_time_min");
-
-  AvPwrOn = XPLMFindDataRef("sim/cockpit/electrical/avionics_on");
-  BatPwrOn = XPLMFindDataRef("sim/cockpit/electrical/battery_on");
-
-  Nav1PwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/nav1_power");
-  Nav2PwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/nav2_power");
-  Com1PwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/com1_power");
-  Com2PwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/com2_power");
-  Afd1PwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/adf1_power");
-  DmePwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/dme_power");
-
-  Nav1ObsDegm = XPLMFindDataRef("sim/cockpit/radios/nav1_obs_degm");
-  Nav2ObsDegm = XPLMFindDataRef("sim/cockpit/radios/nav2_obs_degm");
-
-  Adf1CardDirDegm = XPLMFindDataRef("sim/cockpit/radios/adf1_cardinal_dir");
-  Adf2CardDirDegm = XPLMFindDataRef("sim/cockpit/radios/adf2_cardinal_dir");
-
-
-// ************ Find Multi Panel Commands Ref ***************
-  ApAltDn = XPLMFindCommand("sim/autopilot/altitude_down");
-  ApAltUp = XPLMFindCommand("sim/autopilot/altitude_up");
-  ApVsDn = XPLMFindCommand("sim/autopilot/vertical_speed_down");
-  ApVsUp = XPLMFindCommand("sim/autopilot/vertical_speed_up");
-  ApAsDn = XPLMFindCommand("sim/autopilot/airspeed_down");
-  ApAsUp = XPLMFindCommand("sim/autopilot/airspeed_up");
-  ApHdgDn = XPLMFindCommand("sim/autopilot/heading_down");
-  ApHdgUp = XPLMFindCommand("sim/autopilot/heading_up");
-
-  ApCrsDn = XPLMFindCommand("sim/radios/obs1_down");
-  ApCrsUp = XPLMFindCommand("sim/radios/obs1_up");
-  ApCrsDn2 = XPLMFindCommand("sim/radios/obs2_down");
-  ApCrsUp2 = XPLMFindCommand("sim/radios/obs2_up");
-
-  ApMstrBtnUp = XPLMFindCommand("sim/autopilot/fdir_servos_up_one");
-  ApMstrBtnDn = XPLMFindCommand("sim/autopilot/fdir_servos_down_one");
-  ApMstrBtnOff = XPLMFindCommand("sim/autopilot/servos_and_flight_dir_off");
-  ApHdgBtn = XPLMFindCommand("sim/autopilot/heading");
-  ApNavBtn = XPLMFindCommand("sim/autopilot/NAV");
-  ApIasBtn = XPLMFindCommand("sim/autopilot/level_change");
-  ApAltBtn = XPLMFindCommand("sim/autopilot/altitude_hold");
-  ApAltArmBtn = XPLMFindCommand("sim/autopilot/altitude_arm");
-  ApVsBtn = XPLMFindCommand("sim/autopilot/vertical_speed");
-  ApAprBtn = XPLMFindCommand("sim/autopilot/approach");
-  ApRevBtn = XPLMFindCommand("sim/autopilot/back_course");
-  ApKnotsMachTgl = XPLMFindCommand("sim/autopilot/knots_mach_toggle");
-
-
-  PitchTrimDn = XPLMFindCommand("sim/flight_controls/pitch_trim_down");
-  PitchTrimUp = XPLMFindCommand("sim/flight_controls/pitch_trim_up");
-  PitchTrimTkOff = XPLMFindCommand("sim/flight_controls/pitch_trim_takeoff");
-  FlapsDn = XPLMFindCommand("sim/flight_controls/flaps_down");
-  FlapsUp = XPLMFindCommand("sim/flight_controls/flaps_up");
-
-  HsiSelector = XPLMFindDataRef("sim/cockpit/switches/HSI_selector");
 
   XpanelsFnButtonCommand = XPLMCreateCommand("bgood/xsaitekpanels/x_panels_fn_button","Xpanels Fn Button");
 
-
-// **************** Find Multi Panel Data Ref ********************
-
-  ApAlt = XPLMFindDataRef("sim/cockpit/autopilot/altitude");
-  ApVs = XPLMFindDataRef("sim/cockpit/autopilot/vertical_velocity");
-  ApAs = XPLMFindDataRef("sim/cockpit/autopilot/airspeed");
-  ApHdg = XPLMFindDataRef("sim/cockpit/autopilot/heading_mag");
-
-  ApCrs  = XPLMFindDataRef("sim/cockpit/radios/nav1_obs_degm");
-  ApCrs2 = XPLMFindDataRef("sim/cockpit/radios/nav2_obs_degm");
-
-  ApMstrStat = XPLMFindDataRef("sim/cockpit2/autopilot/flight_director_mode");
-  ApState = XPLMFindDataRef("sim/cockpit/autopilot/autopilot_state");
-  ApHdgStat = XPLMFindDataRef("sim/cockpit2/autopilot/heading_status");
-  ApNavStat = XPLMFindDataRef("sim/cockpit2/autopilot/nav_status");
-  ApIasStat = XPLMFindDataRef("sim/cockpit2/autopilot/speed_status");
-  ApAltStat = XPLMFindDataRef("sim/cockpit2/autopilot/altitude_hold_status");
-  ApVsStat = XPLMFindDataRef("sim/cockpit2/autopilot/vvi_status");
-  ApAprStat = XPLMFindDataRef("sim/cockpit2/autopilot/approach_status");
-  ApRevStat = XPLMFindDataRef("sim/cockpit2/autopilot/backcourse_status");
-  AvPwrOn = XPLMFindDataRef("sim/cockpit/electrical/avionics_on");
-  BatPwrOn = XPLMFindDataRef("sim/cockpit/electrical/battery_on");
-  Frp = XPLMFindDataRef("sim/operation/misc/frame_rate_period");
-
-  MHdg = XPLMFindDataRef("sim/flightmodel/position/magpsi");
-
-  AirspeedIsMach = XPLMFindDataRef("sim/cockpit/autopilot/airspeed_is_mach");
-  Airspeed = XPLMFindDataRef("sim/cockpit/autopilot/airspeed");
-
-  ApAutThr = XPLMFindDataRef("sim/cockpit2/autopilot/autothrottle_enabled");
-
-
-// **************** Find Switch Panel Commands Ref *******************
-  ClFlOpn  = XPLMFindCommand("sim/flight_controls/cowl_flaps_open");
-  ClFlCls  = XPLMFindCommand("sim/flight_controls/cowl_flaps_closed");
-  PtHt0On   = XPLMFindCommand("sim/ice/pitot_heat0_on");
-  PtHt0Off  = XPLMFindCommand("sim/ice/pitot_heat0_off");
-  PtHt1On   = XPLMFindCommand("sim/ice/pitot_heat1_on");
-  PtHt1Off  = XPLMFindCommand("sim/ice/pitot_heat1_off");
-
-  PtHtOn   = XPLMFindCommand("sim/ice/pitot_heat_on");
-  PtHtOff  = XPLMFindCommand("sim/ice/pitot_heat_off");
-
-  AvLtOn   = XPLMFindCommand("sim/systems/avionics_on");
-  AvLtOff  = XPLMFindCommand("sim/systems/avionics_off");
-  BatOn   = XPLMFindCommand("sim/electrical/battery_1_on");
-  BatOff  = XPLMFindCommand("sim/electrical/battery_1_off");
-
-  LnLtOn   = XPLMFindCommand("sim/lights/landing_lights_on");
-  LnLtOff  = XPLMFindCommand("sim/lights/landing_lights_off");
-  TxLtOn   = XPLMFindCommand("sim/lights/taxi_lights_on");
-  TxLtOff  = XPLMFindCommand("sim/lights/taxi_lights_off");
-  StLtOn   = XPLMFindCommand("sim/lights/strobe_lights_on");
-  StLtOff  = XPLMFindCommand("sim/lights/strobe_lights_off");
-  NvLtOn   = XPLMFindCommand("sim/lights/nav_lights_on");
-  NvLtOff  = XPLMFindCommand("sim/lights/nav_lights_off");
-  BcLtOn   = XPLMFindCommand("sim/lights/beacon_lights_on");
-  BcLtOff  = XPLMFindCommand("sim/lights/beacon_lights_off");
-  GearUp   = XPLMFindCommand("sim/flight_controls/landing_gear_up");
-  GearDn   = XPLMFindCommand("sim/flight_controls/landing_gear_down");
-
-  MagOff1   = XPLMFindCommand("sim/magnetos/magnetos_off_1");
-  MagOff2   = XPLMFindCommand("sim/magnetos/magnetos_off_2");
-  MagOff3   = XPLMFindCommand("sim/magnetos/magnetos_off_3");
-  MagOff4   = XPLMFindCommand("sim/magnetos/magnetos_off_4");
-  MagOff5   = XPLMFindCommand("sim/magnetos/magnetos_off_5");
-  MagOff6   = XPLMFindCommand("sim/magnetos/magnetos_off_6");
-  MagOff7   = XPLMFindCommand("sim/magnetos/magnetos_off_7");
-  MagOff8   = XPLMFindCommand("sim/magnetos/magnetos_off_8");
-
-  MagLeft1  = XPLMFindCommand("sim/magnetos/magnetos_left_1");
-  MagLeft2  = XPLMFindCommand("sim/magnetos/magnetos_left_2");
-  MagLeft3  = XPLMFindCommand("sim/magnetos/magnetos_left_3");
-  MagLeft4  = XPLMFindCommand("sim/magnetos/magnetos_left_4");
-  MagLeft5  = XPLMFindCommand("sim/magnetos/magnetos_left_5");
-  MagLeft6  = XPLMFindCommand("sim/magnetos/magnetos_left_6");
-  MagLeft7  = XPLMFindCommand("sim/magnetos/magnetos_left_7");
-  MagLeft8  = XPLMFindCommand("sim/magnetos/magnetos_left_8");
-
-  MagRight1 = XPLMFindCommand("sim/magnetos/magnetos_right_1");
-  MagRight2 = XPLMFindCommand("sim/magnetos/magnetos_right_2");
-  MagRight3 = XPLMFindCommand("sim/magnetos/magnetos_right_3");
-  MagRight4 = XPLMFindCommand("sim/magnetos/magnetos_right_4");
-  MagRight5 = XPLMFindCommand("sim/magnetos/magnetos_right_5");
-  MagRight6 = XPLMFindCommand("sim/magnetos/magnetos_right_6");
-  MagRight7 = XPLMFindCommand("sim/magnetos/magnetos_right_7");
-  MagRight8 = XPLMFindCommand("sim/magnetos/magnetos_right_8");
-
-  MagBoth1  = XPLMFindCommand("sim/magnetos/magnetos_both_1");
-  MagBoth2  = XPLMFindCommand("sim/magnetos/magnetos_both_2");
-  MagBoth3  = XPLMFindCommand("sim/magnetos/magnetos_both_3");
-  MagBoth4  = XPLMFindCommand("sim/magnetos/magnetos_both_4");
-  MagBoth5  = XPLMFindCommand("sim/magnetos/magnetos_both_5");
-  MagBoth6  = XPLMFindCommand("sim/magnetos/magnetos_both_6");
-  MagBoth7  = XPLMFindCommand("sim/magnetos/magnetos_both_7");
-  MagBoth8  = XPLMFindCommand("sim/magnetos/magnetos_both_8");
-
-  EngStart1 = XPLMFindCommand("sim/starters/engage_starter_1");
-  EngStart2 = XPLMFindCommand("sim/starters/engage_starter_2");
-  EngStart3 = XPLMFindCommand("sim/starters/engage_starter_3");
-  EngStart4 = XPLMFindCommand("sim/starters/engage_starter_4");
-  EngStart5 = XPLMFindCommand("sim/starters/engage_starter_5");
-  EngStart6 = XPLMFindCommand("sim/starters/engage_starter_6");
-  EngStart7 = XPLMFindCommand("sim/starters/engage_starter_7");
-  EngStart8 = XPLMFindCommand("sim/starters/engage_starter_8");
-
-  BatOn1 = XPLMFindCommand("sim/electrical/battery_1_on");
-  BatOn2 = XPLMFindCommand("sim/electrical/battery_2_on");
-
-  BatOff1 = XPLMFindCommand("sim/electrical/battery_1_off");
-  BatOff2 = XPLMFindCommand("sim/electrical/battery_2_off");
-
-  GenOn1 = XPLMFindCommand("sim/electrical/generator_1_on");
-  GenOn2 = XPLMFindCommand("sim/electrical/generator_2_on");
-  GenOn3 = XPLMFindCommand("sim/electrical/generator_3_on");
-  GenOn4 = XPLMFindCommand("sim/electrical/generator_4_on");
-  GenOn5 = XPLMFindCommand("sim/electrical/generator_5_on");
-  GenOn6 = XPLMFindCommand("sim/electrical/generator_6_on");
-  GenOn7 = XPLMFindCommand("sim/electrical/generator_7_on");
-  GenOn8 = XPLMFindCommand("sim/electrical/generator_8_on");
-
-  GenOff1 = XPLMFindCommand("sim/electrical/generator_1_off");
-  GenOff2 = XPLMFindCommand("sim/electrical/generator_2_off");
-  GenOff3 = XPLMFindCommand("sim/electrical/generator_3_off");
-  GenOff4 = XPLMFindCommand("sim/electrical/generator_4_off");
-  GenOff5 = XPLMFindCommand("sim/electrical/generator_5_off");
-  GenOff6 = XPLMFindCommand("sim/electrical/generator_6_off");
-  GenOff7 = XPLMFindCommand("sim/electrical/generator_7_off");
-  GenOff8 = XPLMFindCommand("sim/electrical/generator_8_off");
-
-  FuelPumpOn1 = XPLMFindCommand("sim/fuel/fuel_pump_1_on");
-  FuelPumpOn2 = XPLMFindCommand("sim/fuel/fuel_pump_2_on");
-  FuelPumpOn3 = XPLMFindCommand("sim/fuel/fuel_pump_3_on");
-  FuelPumpOn4 = XPLMFindCommand("sim/fuel/fuel_pump_4_on");
-  FuelPumpOn5 = XPLMFindCommand("sim/fuel/fuel_pump_5_on");
-  FuelPumpOn6 = XPLMFindCommand("sim/fuel/fuel_pump_6_on");
-  FuelPumpOn7 = XPLMFindCommand("sim/fuel/fuel_pump_7_on");
-  FuelPumpOn8 = XPLMFindCommand("sim/fuel/fuel_pump_8_on");
-
-  FuelPumpOff1 = XPLMFindCommand("sim/fuel/fuel_pump_1_off");
-  FuelPumpOff2 = XPLMFindCommand("sim/fuel/fuel_pump_2_off");
-  FuelPumpOff3 = XPLMFindCommand("sim/fuel/fuel_pump_3_off");
-  FuelPumpOff4 = XPLMFindCommand("sim/fuel/fuel_pump_4_off");
-  FuelPumpOff5 = XPLMFindCommand("sim/fuel/fuel_pump_5_off");
-  FuelPumpOff6 = XPLMFindCommand("sim/fuel/fuel_pump_6_off");
-  FuelPumpOff7 = XPLMFindCommand("sim/fuel/fuel_pump_7_off");
-  FuelPumpOff8 = XPLMFindCommand("sim/fuel/fuel_pump_8_off");
-
-// **************** Find Switch Panel Data Ref *******************
-  AntiIce           = XPLMFindDataRef("sim/cockpit/switches/anti_ice_on");
-  CockpitLights     = XPLMFindDataRef("sim/cockpit/electrical/cockpit_lights");
-  CowlFlaps         = XPLMFindDataRef("sim/flightmodel/engine/ENGN_cowl");
-  GearRetract       = XPLMFindDataRef("sim/aircraft/gear/acf_gear_retract");
-  LandingGearStatus = XPLMFindDataRef("sim/aircraft/parts/acf_gear_deploy");
-  Gear1Fail         = XPLMFindDataRef("sim/operation/failures/rel_lagear1");
-  Gear2Fail         = XPLMFindDataRef("sim/operation/failures/rel_lagear2");
-  Gear3Fail         = XPLMFindDataRef("sim/operation/failures/rel_lagear3");
-
-  OnGround          = XPLMFindDataRef("sim/flightmodel/failures/onground_any");
-
-  BatNum            = XPLMFindDataRef("sim/aircraft/electrical/num_batteries");
-  GenNum            = XPLMFindDataRef("sim/aircraft/electrical/num_generators");
-  EngNum            = XPLMFindDataRef("sim/aircraft/engine/acf_num_engines");
-  BatArrayOnDR      = XPLMFindDataRef("sim/cockpit/electrical/battery_array_on");
-
-  IgnSwitchArray    = XPLMFindDataRef("sim/cockpit2/engine/actuators/ignition_key");
-  EngnMixt          = XPLMFindDataRef("sim/flightmodel/engine/ENGN_mixt");
-  IgniterOn         = XPLMFindDataRef("sim/cockpit2/engine/actuators/igniter_on");
-  AcfEnType         = XPLMFindDataRef("sim/aircraft/prop/acf_en_type");
 
 // ************* Open any Radio that is connected *****************
 
@@ -2131,23 +1824,30 @@ PLUGIN_API int XPluginStart(char *		outName,
   // If you find a switch panel then create
   // datareferences for all of the switch panel switch positions
   if(switchcnt > 0)  {
-      process_switch_data();
+      process_switch_register_xsaitekpanels_datareference();
+      process_switch_find_xplane_commands();
+      process_switch_find_xplane_datareference();
   }
 
   // If you find a radio panel then create
   // datareferences for all of the radio panel switch positions
   if(radcnt > 0)  {
-      process_radio1_data();
+      process_radio1_register_xsaitekpanels_datareference();
+      process_radio_find_xplane_commands();
+      process_radio_find_xplane_datareference();
+
   }
   if(radcnt > 1)  {
-      process_radio2_data();
+      process_radio2_register_xsaitekpanels_datareference();
   }
 
 
   // If you find a multi panel then create
   // datareferences for all of the multi panel switch positions
-  if(radcnt > 0)  {
-      process_multi_data();
+  if(multicnt > 0)  {
+      process_multi_register_xsaitekpanels_datareference();
+      process_multi_find_xplane_commands();
+      process_multi_find_xplane_datareference();
   }
 
 
@@ -2435,6 +2135,11 @@ PLUGIN_API void	XPluginStop(void)
   // ********** Unregitser the callback on quit. *************
   XPLMUnregisterFlightLoopCallback(MyPanelsFlightLoopCallback, NULL);
   XPLMUnregisterCommandHandler(XpanelsFnButtonCommand, XpanelsFnButtonCommandHandler, 1, NULL);
+  process_switch_unregister_xsaitekpanels_datareference();
+  process_radio1_unregister_xsaitekpanels_datareference();
+  process_radio2_unregister_xsaitekpanels_datareference();
+  process_multi_unregister_xsaitekpanels_datareference();
+
   XPDestroyWidget(BipWidgetID, 1);
   XPLMDestroyMenu(BipMenuId);
   XPLMDestroyMenu(Bip2MenuId);
@@ -2503,220 +2208,260 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 
 int	SwitchStartOffPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchStartOffOwnedData;
 }
 
 void	SwitchStartOffPositionSetDataiCallback(void * inRefcon, int SwitchStartOffPosition2)
 {
+    (void) inRefcon;
     SwitchStartOffOwnedData = SwitchStartOffPosition2;
 }
 
 
 int	SwitchStartRightPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchStartRightOwnedData;
 }
 
 void	SwitchStartRightPositionSetDataiCallback(void * inRefcon, int SwitchStartRightPosition2)
 {
+    (void) inRefcon;
     SwitchStartRightOwnedData = SwitchStartRightPosition2;
 }
 
 
 int	SwitchStartLeftPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchStartLeftOwnedData;
 }
 
 void	SwitchStartLeftPositionSetDataiCallback(void * inRefcon, int SwitchStartLeftPosition2)
 {
+    (void) inRefcon;
     SwitchStartLeftOwnedData = SwitchStartLeftPosition2;
 }
 
 
 int	SwitchStartBothPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchStartBothOwnedData;
 }
 
 void	SwitchStartBothPositionSetDataiCallback(void * inRefcon, int SwitchStartBothPosition2)
 {
+    (void) inRefcon;
     SwitchStartBothOwnedData = SwitchStartBothPosition2;
 }
 
 
 int	SwitchStartStartPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchStartStartOwnedData;
 }
 
 void	SwitchStartStartPositionSetDataiCallback(void * inRefcon, int SwitchStartStartPosition2)
 {
+    (void) inRefcon;
     SwitchStartStartOwnedData = SwitchStartStartPosition2;
 }
 
 
 int	SwitchBatPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchBatOwnedData;
 }
 
 void	SwitchBatPositionSetDataiCallback(void * inRefcon, int SwitchBatPosition2)
 {
+    (void) inRefcon;
     SwitchBatOwnedData = SwitchBatPosition2;
 }
 
 
 int	SwitchAltPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchAltOwnedData;
 }
 
 void	SwitchAltPositionSetDataiCallback(void * inRefcon, int SwitchAltPosition2)
 {
+    (void) inRefcon;
     SwitchAltOwnedData = SwitchAltPosition2;
 }
 
 
 int	SwitchAvPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchAvOwnedData;
 }
 
 void	SwitchAvPositionSetDataiCallback(void * inRefcon, int SwitchAvPosition2)
 {
+    (void) inRefcon;
     SwitchAvOwnedData = SwitchAvPosition2;
 }
 
 
 int	SwitchFuelPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchFuelOwnedData;
 }
 
 void	SwitchFuelPositionSetDataiCallback(void * inRefcon, int SwitchFuelPosition2)
 {
+    (void) inRefcon;
     SwitchFuelOwnedData = SwitchFuelPosition2;
 }
 
 
 int	SwitchDicePositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchDiceOwnedData;
 }
 
 void	SwitchDicePositionSetDataiCallback(void * inRefcon, int SwitchDicePosition2)
 {
+    (void) inRefcon;
     SwitchDiceOwnedData = SwitchDicePosition2;
 }
 
 
 int	SwitchPitotPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchPitotOwnedData;
 }
 
 void	SwitchPitotPositionSetDataiCallback(void * inRefcon, int SwitchPitotPosition2)
 {
+    (void) inRefcon;
     SwitchPitotOwnedData = SwitchPitotPosition2;
 }
 
 
 int	SwitchGearUpPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchGearUpOwnedData;
 }
 
 void	SwitchGearUpPositionSetDataiCallback(void * inRefcon, int SwitchGearUpPosition2)
 {
+    (void) inRefcon;
     SwitchGearUpOwnedData = SwitchGearUpPosition2;
 }
 
 
 int	SwitchGearDnPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchGearDnOwnedData;
 }
 
 void	SwitchGearDnPositionSetDataiCallback(void * inRefcon, int SwitchGearDnPosition2)
 {
+    (void) inRefcon;
     SwitchGearDnOwnedData = SwitchGearDnPosition2;
 }
 
 
 int	SwitchCowlPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchCowlOwnedData;
 }
 
 void	SwitchCowlPositionSetDataiCallback(void * inRefcon, int SwitchCowlPosition2)
 {
+    (void) inRefcon;
     SwitchCowlOwnedData = SwitchCowlPosition2;
 }
 
 
 int	SwitchPanelPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchPanelOwnedData;
 }
 
 void	SwitchPanelPositionSetDataiCallback(void * inRefcon, int SwitchPanelPosition2)
 {
+    (void) inRefcon;
     SwitchPanelOwnedData = SwitchPanelPosition2;
 }
 
 
 int	SwitchBeaconPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchBeaconOwnedData;
 }
 
 void	SwitchBeaconPositionSetDataiCallback(void * inRefcon, int SwitchBeaconPosition2)
 {
+    (void) inRefcon;
     SwitchBeaconOwnedData = SwitchBeaconPosition2;
 }
 
 
 int	SwitchNavPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchNavOwnedData;
 }
 
 void	SwitchNavPositionSetDataiCallback(void * inRefcon, int SwitchNavPosition2)
 {
+    (void) inRefcon;
     SwitchNavOwnedData = SwitchNavPosition2;
 }
 
 
 int	SwitchStrobePositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchStrobeOwnedData;
 }
 
 void	SwitchStrobePositionSetDataiCallback(void * inRefcon, int SwitchStrobePosition2)
 {
+   (void) inRefcon;
     SwitchStrobeOwnedData = SwitchStrobePosition2;
 }
 
 
 int	SwitchTaxiPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchTaxiOwnedData;
 }
 
 void	SwitchTaxiPositionSetDataiCallback(void * inRefcon, int SwitchTaxiPosition2)
 {
+    (void) inRefcon;
     SwitchTaxiOwnedData = SwitchTaxiPosition2;
 }
 
 
 int	SwitchLandingPositionGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return SwitchLandingOwnedData;
 }
 
 void	SwitchLandingPositionSetDataiCallback(void * inRefcon, int SwitchLandingPosition2)
 {
+    (void) inRefcon;
     SwitchLandingOwnedData = SwitchLandingPosition2;
 }
 
@@ -2725,130 +2470,154 @@ void	SwitchLandingPositionSetDataiCallback(void * inRefcon, int SwitchLandingPos
 
 int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprCom1OwnedData;
 }
 
 void	Rad1UprCom1StatusSetDataiCallback(void * inRefcon, int Rad1UprCom1Status2)
 {
+    (void) inRefcon;
     Rad1UprCom1OwnedData = Rad1UprCom1Status2;
 }
 
 
 int	Rad1UprCom2StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprCom2OwnedData;
 }
 
 void	Rad1UprCom2StatusSetDataiCallback(void * inRefcon, int Rad1UprCom2Status2)
 {
+    (void) inRefcon;
     Rad1UprCom2OwnedData = Rad1UprCom2Status2;
 }
 
 
 int	Rad1UprNav1StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprNav1OwnedData;
 }
 
 void	Rad1UprNav1StatusSetDataiCallback(void * inRefcon, int Rad1UprNav1Status2)
 {
+    (void) inRefcon;
     Rad1UprNav1OwnedData = Rad1UprNav1Status2;
 }
 
 
 int	Rad1UprNav2StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprNav2OwnedData;
 }
 
 void	Rad1UprNav2StatusSetDataiCallback(void * inRefcon, int Rad1UprNav2Status2)
 {
+    (void) inRefcon;
     Rad1UprNav2OwnedData = Rad1UprNav2Status2;
 }
 
 
 int	Rad1UprAdfStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprAdfOwnedData;
 }
 
 void	Rad1UprAdfStatusSetDataiCallback(void * inRefcon, int Rad1UprAdfStatus2)
 {
+    (void) inRefcon;
     Rad1UprAdfOwnedData = Rad1UprAdfStatus2;
 }
 
 
 int	Rad1UprDmeStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprDmeOwnedData;
 }
 
 void	Rad1UprDmeStatusSetDataiCallback(void * inRefcon, int Rad1UprDmeStatus2)
 {
+    (void) inRefcon;
     Rad1UprDmeOwnedData = Rad1UprDmeStatus2;
 }
 
 
 int	Rad1UprXpdrStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprXpdrOwnedData;
 }
 
 void	Rad1UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad1UprXpdrStatus2)
 {
+    (void) inRefcon;
     Rad1UprXpdrOwnedData = Rad1UprXpdrStatus2;
 }
 
 
 int	Rad1UprCorseIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprCorseIncOwnedData;
 }
 
 void	Rad1UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseIncStatus2)
 {
+    (void) inRefcon;
     Rad1UprCorseIncOwnedData = Rad1UprCorseIncStatus2;
 }
 
 int	Rad1UprCorseDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprCorseDecOwnedData;
 }
 
 void	Rad1UprCorseDecStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseDecStatus2)
 {
+    (void) inRefcon;
     Rad1UprCorseDecOwnedData = Rad1UprCorseDecStatus2;
 }
 
 
 int	Rad1UprFineIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprFineIncOwnedData;
 }
 
 void	Rad1UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad1UprFineIncStatus2)
 {
+    (void) inRefcon;
     Rad1UprFineIncOwnedData = Rad1UprFineIncStatus2;
 }
 
 int	Rad1UprFineDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprFineDecOwnedData;
 }
 
 void	Rad1UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad1UprFineDecStatus2)
 {
+    (void) inRefcon;
     Rad1UprFineDecOwnedData = Rad1UprFineDecStatus2;
 }
 
 
 int	Rad1UprActStbyStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1UprActStbyOwnedData;
 }
 
 void	Rad1UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad1UprActStbyStatus2)
 {
+   (void) inRefcon;
     Rad1UprActStbyOwnedData = Rad1UprActStbyStatus2;
 }
 
@@ -2857,132 +2626,156 @@ void	Rad1UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad1UprActStbySta
 
 int	Rad1LwrCom1StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrCom1OwnedData;
 }
 
 void	Rad1LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad1LwrCom1Status2)
 {
+    (void) inRefcon;
     Rad1LwrCom1OwnedData = Rad1LwrCom1Status2;
 }
 
 
 int	Rad1LwrCom2StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrCom2OwnedData;
 }
 
 void	Rad1LwrCom2StatusSetDataiCallback(void * inRefcon, int Rad1LwrCom2Status2)
-{
+{(void) inRefcon;
+
     Rad1LwrCom2OwnedData = Rad1LwrCom2Status2;
 }
 
 
 int	Rad1LwrNav1StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrNav1OwnedData;
 }
 
 void	Rad1LwrNav1StatusSetDataiCallback(void * inRefcon, int Rad1LwrNav1Status2)
 {
+    (void) inRefcon;
     Rad1LwrNav1OwnedData = Rad1LwrNav1Status2;
 }
 
 
 int	Rad1LwrNav2StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrNav2OwnedData;
 }
 
 void	Rad1LwrNav2StatusSetDataiCallback(void * inRefcon, int Rad1LwrNav2Status2)
 {
+    (void) inRefcon;
     Rad1LwrNav2OwnedData = Rad1LwrNav2Status2;
 }
 
 
 int	Rad1LwrAdfStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrAdfOwnedData;
 }
 
 void	Rad1LwrAdfStatusSetDataiCallback(void * inRefcon, int Rad1LwrAdfStatus2)
 {
+    (void) inRefcon;
     Rad1LwrAdfOwnedData = Rad1LwrAdfStatus2;
 }
 
 
 int	Rad1LwrDmeStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrDmeOwnedData;
 }
 
 void	Rad1LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad1LwrDmeStatus2)
 {
+    (void) inRefcon;
     Rad1LwrDmeOwnedData = Rad1LwrDmeStatus2;
 }
 
 
 int	Rad1LwrXpdrStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrXpdrOwnedData;
 }
 
 void	Rad1LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad1LwrXpdrStatus2)
 {
+    (void) inRefcon;
     Rad1LwrXpdrOwnedData = Rad1LwrXpdrStatus2;
 }
 
 
 int	Rad1LwrCorseIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrCorseIncOwnedData;
 }
 
 void	Rad1LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad1LwrCorseIncStatus2)
 {
+    (void) inRefcon;
     Rad1LwrCorseIncOwnedData = Rad1LwrCorseIncStatus2;
 }
 
 
 int	Rad1LwrCorseDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrCorseDecOwnedData;
 }
 
 void	Rad1LwrCorseDecStatusSetDataiCallback(void * inRefcon, int Rad1LwrCorseDecStatus2)
 {
+    (void) inRefcon;
     Rad1LwrCorseDecOwnedData = Rad1LwrCorseDecStatus2;
 }
 
 
 int	Rad1LwrFineIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrFineIncOwnedData;
 }
 
 void	Rad1LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad1LwrFineIncStatus2)
 {
+    (void) inRefcon;
     Rad1LwrFineIncOwnedData = Rad1LwrFineIncStatus2;
 }
 
 
 int	Rad1LwrFineDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrFineDecOwnedData;
 }
 
 void	Rad1LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad1LwrFineDecStatus2)
 {
+    (void) inRefcon;
     Rad1LwrFineDecOwnedData = Rad1LwrFineDecStatus2;
 }
 
 
 int	Rad1LwrActStbyStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad1LwrActStbyOwnedData;
 }
 
 void	Rad1LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad1LwrActStbyStatus2)
 {
+    (void) inRefcon;
     Rad1LwrActStbyOwnedData = Rad1LwrActStbyStatus2;
 }
 
@@ -2992,130 +2785,154 @@ void	Rad1LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad1LwrActStbySta
 
 int	Rad2UprCom1StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprCom1OwnedData;
 }
 
 void	Rad2UprCom1StatusSetDataiCallback(void * inRefcon, int Rad2UprCom1Status2)
 {
+    (void) inRefcon;
     Rad2UprCom1OwnedData = Rad2UprCom1Status2;
 }
 
 
 int	Rad2UprCom2StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprCom2OwnedData;
 }
 
 void	Rad2UprCom2StatusSetDataiCallback(void * inRefcon, int Rad2UprCom2Status2)
 {
+    (void) inRefcon;
     Rad2UprCom2OwnedData = Rad2UprCom2Status2;
 }
 
 
 int	Rad2UprNav1StatusGetDataiCallback(void * inRefcon)
 {
+   (void) inRefcon;
     return Rad2UprNav1OwnedData;
 }
 
 void	Rad2UprNav1StatusSetDataiCallback(void * inRefcon, int Rad2UprNav1Status2)
 {
+    (void) inRefcon;
     Rad2UprNav1OwnedData = Rad2UprNav1Status2;
 }
 
 
 int	Rad2UprNav2StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprNav2OwnedData;
 }
 
 void	Rad2UprNav2StatusSetDataiCallback(void * inRefcon, int Rad2UprNav2Status2)
 {
+    (void) inRefcon;
     Rad2UprNav2OwnedData = Rad2UprNav2Status2;
 }
 
 
 int	Rad2UprAdfStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprAdfOwnedData;
 }
 
 void	Rad2UprAdfStatusSetDataiCallback(void * inRefcon, int Rad2UprAdfStatus2)
 {
+    (void) inRefcon;
     Rad2UprAdfOwnedData = Rad2UprAdfStatus2;
 }
 
 
 int	Rad2UprDmeStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprDmeOwnedData;
 }
 
 void	Rad2UprDmeStatusSetDataiCallback(void * inRefcon, int Rad2UprDmeStatus2)
 {
+    (void) inRefcon;
     Rad2UprDmeOwnedData = Rad2UprDmeStatus2;
 }
 
 
 int	Rad2UprXpdrStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprXpdrOwnedData;
 }
 
 void	Rad2UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad2UprXpdrStatus2)
 {
+    (void) inRefcon;
     Rad2UprXpdrOwnedData = Rad2UprXpdrStatus2;
 }
 
 
 int	Rad2UprCorseIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprCorseIncOwnedData;
 }
 
 void	Rad2UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad2UprCorseIncStatus2)
 {
+    (void) inRefcon;
     Rad2UprCorseIncOwnedData = Rad2UprCorseIncStatus2;
 }
 
 int	Rad2UprCorseDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprCorseDecOwnedData;
 }
 
 void	Rad2UprCorseDecStatusSetDataiCallback(void * inRefcon, int Rad2UprCorseDecStatus2)
 {
+    (void) inRefcon;
     Rad2UprCorseDecOwnedData = Rad2UprCorseDecStatus2;
 }
 
 
 int	Rad2UprFineIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprFineIncOwnedData;
 }
 
 void	Rad2UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad2UprFineIncStatus2)
 {
+    (void) inRefcon;
     Rad2UprFineIncOwnedData = Rad2UprFineIncStatus2;
 }
 
 int	Rad2UprFineDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprFineDecOwnedData;
 }
 
 void	Rad2UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad2UprFineDecStatus2)
 {
+    (void) inRefcon;
     Rad2UprFineDecOwnedData = Rad2UprFineDecStatus2;
 }
 
 
 int	Rad2UprActStbyStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2UprActStbyOwnedData;
 }
 
 void	Rad2UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad2UprActStbyStatus2)
 {
+    (void) inRefcon;
     Rad2UprActStbyOwnedData = Rad2UprActStbyStatus2;
 }
 
@@ -3124,130 +2941,154 @@ void	Rad2UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad2UprActStbySta
 
 int	Rad2LwrCom1StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrCom1OwnedData;
 }
 
 void	Rad2LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad2LwrCom1Status2)
 {
+    (void) inRefcon;
     Rad2LwrCom1OwnedData = Rad2LwrCom1Status2;
 }
 
 
 int	Rad2LwrCom2StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrCom2OwnedData;
 }
 
 void	Rad2LwrCom2StatusSetDataiCallback(void * inRefcon, int Rad2LwrCom2Status2)
 {
+    (void) inRefcon;
     Rad2LwrCom2OwnedData = Rad2LwrCom2Status2;
 }
 
 
 int	Rad2LwrNav1StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrNav1OwnedData;
 }
 
 void	Rad2LwrNav1StatusSetDataiCallback(void * inRefcon, int Rad2LwrNav1Status2)
 {
+    (void) inRefcon;
     Rad2LwrNav1OwnedData = Rad2LwrNav1Status2;
 }
 
 
 int	Rad2LwrNav2StatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrNav2OwnedData;
 }
 
 void	Rad2LwrNav2StatusSetDataiCallback(void * inRefcon, int Rad2LwrNav2Status2)
 {
+    (void) inRefcon;
     Rad2LwrNav2OwnedData = Rad2LwrNav2Status2;
 }
 
 
 int	Rad2LwrAdfStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrAdfOwnedData;
 }
 
 void	Rad2LwrAdfStatusSetDataiCallback(void * inRefcon, int Rad2LwrAdfStatus2)
 {
+    (void) inRefcon;
     Rad2LwrAdfOwnedData = Rad2LwrAdfStatus2;
 }
 
 
 int	Rad2LwrDmeStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrDmeOwnedData;
 }
 
 void	Rad2LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad2LwrDmeStatus2)
 {
+    (void) inRefcon;
     Rad2LwrDmeOwnedData = Rad2LwrDmeStatus2;
 }
 
 
 int	Rad2LwrXpdrStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrXpdrOwnedData;
 }
 
 void	Rad2LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad2LwrXpdrStatus2)
 {
+    (void) inRefcon;
     Rad2LwrXpdrOwnedData = Rad2LwrXpdrStatus2;
 }
 
 
 int	Rad2LwrCorseIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrCorseIncOwnedData;
 }
 
 void	Rad2LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad2LwrCorseIncStatus2)
 {
+    (void) inRefcon;
     Rad2LwrCorseIncOwnedData = Rad2LwrCorseIncStatus2;
 }
 
 int	Rad2LwrCorseDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrCorseDecOwnedData;
 }
 
 void	Rad2LwrCorseDecStatusSetDataiCallback(void * inRefcon, int Rad2LwrCorseDecStatus2)
 {
+    (void) inRefcon;
     Rad2LwrCorseDecOwnedData = Rad2LwrCorseDecStatus2;
 }
 
 
 int	Rad2LwrFineIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrFineIncOwnedData;
 }
 
 void	Rad2LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad2LwrFineIncStatus2)
 {
+    (void) inRefcon;
     Rad2LwrFineIncOwnedData = Rad2LwrFineIncStatus2;
 }
 
 int	Rad2LwrFineDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrFineDecOwnedData;
 }
 
 void	Rad2LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad2LwrFineDecStatus2)
 {
+    (void) inRefcon;
     Rad2LwrFineDecOwnedData = Rad2LwrFineDecStatus2;
 }
 
 
 int	Rad2LwrActStbyStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return Rad2LwrActStbyOwnedData;
 }
 
 void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbyStatus2)
 {
+    (void) inRefcon;
     Rad2LwrActStbyOwnedData = Rad2LwrActStbyStatus2;
 }
 
@@ -3258,219 +3099,259 @@ void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbySta
 
 int	MultiAltSwitchStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiAltSwitchOwnedData;
 }
 
 void	MultiAltSwitchStatusSetDataiCallback(void * inRefcon, int MultiAltSwitchStatus2)
 {
+    (void) inRefcon;
     MultiAltSwitchOwnedData = MultiAltSwitchStatus2;
 }
 
 
 int	MultiVsSwitchStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return 	MultiVsSwitchOwnedData;
 }
 
 void	MultiVsSwitchStatusSetDataiCallback(void * inRefcon, int MultiVsSwitchStatus2)
 {
+    (void) inRefcon;
     MultiVsSwitchOwnedData = MultiVsSwitchStatus2;
 }
 
 
 int	MultiIasSwitchStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiIasSwitchOwnedData;
 }
 
 void	MultiIasSwitchStatusSetDataiCallback(void * inRefcon, int MultiIasSwitchStatus2)
 {
+    (void) inRefcon;
     MultiIasSwitchOwnedData = MultiIasSwitchStatus2;
 }
 
 
 int	MultiHdgSwitchStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiHdgSwitchOwnedData;
 }
 
 void	MultiHdgSwitchStatusSetDataiCallback(void * inRefcon, int MultiHdgSwitchStatus2)
 {
+    (void) inRefcon;
     MultiHdgSwitchOwnedData = MultiHdgSwitchStatus2;
 }
 
 
 int	MultiCrsSwitchStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiCrsSwitchOwnedData;
 }
 
 void	MultiCrsSwitchStatusSetDataiCallback(void * inRefcon, int MultiCrsSwitchStatus2)
 {
+   (void) inRefcon;
     MultiCrsSwitchOwnedData = MultiCrsSwitchStatus2;
 }
 
 
 int	MultiKnobIncStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiKnobIncOwnedData;
 }
 
 void	MultiKnobIncStatusSetDataiCallback(void * inRefcon, int MultiKnobIncStatus2)
 {
+    (void) inRefcon;
     MultiKnobIncOwnedData = MultiKnobIncStatus2;
 }
 
 
 int	MultiKnobDecStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiKnobDecOwnedData;
 }
 
 void	MultiKnobDecStatusSetDataiCallback(void * inRefcon, int MultiKnobDecStatus2)
 {
+   (void) inRefcon;
     MultiKnobDecOwnedData = MultiKnobDecStatus2;
 }
 
 
 int	MultiAtStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiAtOwnedData;
 }
 
 void	MultiAtStatusSetDataiCallback(void * inRefcon, int MultiAtStatus2)
 {
+    (void) inRefcon;
     MultiAtOwnedData = MultiAtStatus2;
 }
 
 
 int	MultiTrimUpStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiTrimUpOwnedData;
 }
 
 void	MultiTrimUpStatusSetDataiCallback(void * inRefcon, int MultiTrimUpStatus2)
 {
+    (void) inRefcon;
     MultiTrimUpOwnedData = MultiTrimUpStatus2;
 }
 
 
 int	MultiTrimDnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiTrimDnOwnedData;
 }
 
 void	MultiTrimDnStatusSetDataiCallback(void * inRefcon, int MultiTrimDnStatus2)
 {
+    (void) inRefcon;
     MultiTrimDnOwnedData = MultiTrimDnStatus2;
 }
 
 
 int	MultiFlapsUpStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiFlapsUpOwnedData;
 }
 
 void	MultiFlapsUpStatusSetDataiCallback(void * inRefcon, int MultiFlapsUpStatus2)
 {
+    (void) inRefcon;
     MultiFlapsUpOwnedData = MultiFlapsUpStatus2;
 }
 
 
 int	MultiFlapsDnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiFlapsDnOwnedData;
 }
 
 void	MultiFlapsDnStatusSetDataiCallback(void * inRefcon, int 	MultiFlapsDnStatus2)
 {
+    (void) inRefcon;
     MultiFlapsDnOwnedData = 	MultiFlapsDnStatus2;
 }
 
 
 int	MultiApBtnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiApBtnOwnedData;
 }
 
 void	MultiApBtnStatusSetDataiCallback(void * inRefcon, int MultiApBtnStatus2)
 {
+    (void) inRefcon;
     MultiApBtnOwnedData = MultiApBtnStatus2;
 }
 
 
 int	MultiHdgBtnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiHdgBtnOwnedData;
 }
 
 void	MultiHdgBtnStatusSetDataiCallback(void * inRefcon, int MultiHdgBtnStatus2)
 {
+    (void) inRefcon;
     MultiHdgBtnOwnedData = MultiHdgBtnStatus2;
 }
 
 
 int	MultiNavBtnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiNavBtnOwnedData;
 }
 
 void	MultiNavBtnStatusSetDataiCallback(void * inRefcon, int MultiNavBtnStatus2)
 {
+    (void) inRefcon;
     MultiNavBtnOwnedData = MultiNavBtnStatus2;
 }
 
 
 int	MultiIasBtnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiIasBtnOwnedData;
 }
 
 void	MultiIasBtnStatusSetDataiCallback(void * inRefcon, int MultiIasBtnStatus2)
 {
+    (void) inRefcon;
     MultiIasBtnOwnedData = MultiIasBtnStatus2;
 }
 
 
 int	MultiAltBtnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiAltBtnOwnedData;
 }
 
 void	MultiAltBtnStatusSetDataiCallback(void * inRefcon, int MultiAltBtnStatus2)
 {
+    (void) inRefcon;
     MultiAltBtnOwnedData = MultiAltBtnStatus2;
 }
 
 int	MultiVsBtnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiVsBtnOwnedData;
 }
 
 void	MultiVsBtnStatusSetDataiCallback(void * inRefcon, int MultiVsBtnStatus2)
 {
+    (void) inRefcon;
     MultiVsBtnOwnedData = MultiVsBtnStatus2;
 }
 
 
 int	MultiAprBtnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiAprBtnOwnedData;
 }
 
 void	MultiAprBtnStatusSetDataiCallback(void * inRefcon, int MultiAprBtnStatus2)
 {
+    (void) inRefcon;
     MultiAprBtnOwnedData = MultiAprBtnStatus2;
 }
 
 
 int	MultiRevBtnStatusGetDataiCallback(void * inRefcon)
 {
+    (void) inRefcon;
     return MultiRevBtnOwnedData;
 }
 
 void	MultiRevBtnStatusSetDataiCallback(void * inRefcon, int MultiRevBtnStatus2)
 {
+    (void) inRefcon;
     MultiRevBtnOwnedData = MultiRevBtnStatus2;
 }
 
@@ -4701,8 +4582,6 @@ void CreateMultiWidget(int x, int y, int w, int h)
 // Register our widget handler
              XPAddWidgetCallback(MultiWidgetID, MultiHandler);
              process_read_ini_file();
-
-
 
 
 }
