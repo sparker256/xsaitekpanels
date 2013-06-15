@@ -1,4 +1,4 @@
-// ****** switchdata.cpp **********
+// ****** radio1data.cpp **********
 // ****  William R. Good  ********
 
 #include "XPLMUtilities.h"
