@@ -851,14 +851,14 @@ void process_avionics_power_switch()
             XPLMSetDatai(Av6MasterSwitchData, av6_master_switch_data_off_value);
             XPLMSetDatai(Av7MasterSwitchData, av7_master_switch_data_off_value);
             XPLMSetDatai(Av8MasterSwitchData, av8_master_switch_data_off_value);
-            XPLMSetDatai(AvMasterSwitchData, av9_master_switch_data_off_value);
-            XPLMSetDatai(Av2MasterSwitchData, av10_master_switch_data_off_value);
-            XPLMSetDatai(Av3MasterSwitchData, av11_master_switch_data_off_value);
-            XPLMSetDatai(Av4MasterSwitchData, av12_master_switch_data_off_value);
-            XPLMSetDatai(Av5MasterSwitchData, av13_master_switch_data_off_value);
-            XPLMSetDatai(Av6MasterSwitchData, av14_master_switch_data_off_value);
-            XPLMSetDatai(Av7MasterSwitchData, av15_master_switch_data_off_value);
-            XPLMSetDatai(Av8MasterSwitchData, av16_master_switch_data_off_value);
+            XPLMSetDatai(Av9MasterSwitchData, av9_master_switch_data_off_value);
+            XPLMSetDatai(Av10MasterSwitchData, av10_master_switch_data_off_value);
+            XPLMSetDatai(Av11MasterSwitchData, av11_master_switch_data_off_value);
+            XPLMSetDatai(Av12MasterSwitchData, av12_master_switch_data_off_value);
+            XPLMSetDatai(Av13MasterSwitchData, av13_master_switch_data_off_value);
+            XPLMSetDatai(Av14MasterSwitchData, av14_master_switch_data_off_value);
+            XPLMSetDatai(Av15MasterSwitchData, av15_master_switch_data_off_value);
+            XPLMSetDatai(Av16MasterSwitchData, av16_master_switch_data_off_value);
 
         }
 

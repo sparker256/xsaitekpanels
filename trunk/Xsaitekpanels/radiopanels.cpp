@@ -4256,7 +4256,7 @@ void process_radio_blank_display()
 
 	if (XPLMGetDatai(Com2PwrOn) == 0) {
           if (upcom2[radnum] == 2) {
-            upseldis[radnum] = 8;
+            upseldis[radnum] = 10;
           }
           if (locom2[radnum] == 2) {
             loseldis[radnum] = 10;
