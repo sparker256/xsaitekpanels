@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.20   ***************
-// ****** Jun 22 2013   **************
+// ****** Jun 24 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -196,7 +196,6 @@ XPLMDataRef Rad2LowerCorseDecOwnedDataRef = NULL, Rad2LowerFineIncOwnedDataRef =
 XPLMDataRef Rad2LowerFineDecOwnedDataRef = NULL, Rad2LowerActStbyOwnedDataRef = NULL;
 
 
-
 XPLMMenuID      RadioMenu;
 XPLMMenuID      RadioMenuId;
 
@@ -221,8 +220,6 @@ XPWidgetID	RadioQnh1TextWidget[50] = {NULL};
 
 
 
-
-
 // ****************** Multi Panel Command Ref **********************
 XPLMCommandRef ApAltDn = NULL, ApAltUp = NULL, ApVsDn = NULL, ApVsUp = NULL;
 XPLMCommandRef ApAsDn = NULL, ApAsUp = NULL, ApHdgDn = NULL, ApHdgUp = NULL;
@@ -239,6 +236,7 @@ XPLMCommandRef FlapsDn = NULL, FlapsUp = NULL;
 XPLMCommandRef PitchTrimDn = NULL, PitchTrimUp = NULL, PitchTrimTkOff = NULL;
 
 XPLMCommandRef XpanelsFnButtonCommand = NULL, XpanelsCrsToggleCommand = NULL;
+XPLMCommandRef XpanelsLeftStartFnButtonCommand = NULL;
 
 
 XPLMCommandRef ApButtonRemapableCmd = NULL, HdgButtonRemapableCmd = NULL;
@@ -451,6 +449,13 @@ XPLMDataRef MagStart3SwitchData = NULL, MagStart4SwitchData = NULL;
 XPLMDataRef MagStart5SwitchData = NULL, MagStart6SwitchData = NULL;
 XPLMDataRef MagStart7SwitchData = NULL, MagStart8SwitchData = NULL;
 XPLMDataRef MagStart9SwitchData = NULL, MagStart10SwitchData = NULL;
+
+XPLMDataRef MagStartSwitchLeftData = NULL, MagStart2SwitchLeftData = NULL;
+XPLMDataRef MagStart3SwitchLeftData = NULL, MagStart4SwitchLeftData = NULL;
+XPLMDataRef MagStart5SwitchLeftData = NULL, MagStart6SwitchLeftData = NULL;
+XPLMDataRef MagStart7SwitchLeftData = NULL, MagStart8SwitchLeftData = NULL;
+XPLMDataRef MagStart9SwitchLeftData = NULL, MagStart10SwitchLeftData = NULL;
+
 
 XPLMDataRef BatMasterSwitchData = NULL, Bat2MasterSwitchData = NULL;
 XPLMDataRef Bat3MasterSwitchData = NULL, Bat4MasterSwitchData = NULL;
@@ -935,6 +940,7 @@ int iasismachremap, iasismachvalue;
 
 
 int xpanelsfnbutton = 0, xpanelscrstoggle = 0;
+int xpanelsleftstartfnbutton = 0;
 
 
 // This is the storage for the data we own.
@@ -1148,6 +1154,17 @@ int mag_start7_switch_data_on_value, mag_start7_switch_data_off_value;
 int mag_start8_switch_data_on_value, mag_start8_switch_data_off_value;
 int mag_start9_switch_data_on_value, mag_start9_switch_data_off_value;
 int mag_start10_switch_data_on_value, mag_start10_switch_data_off_value;
+
+int mag_start_switch_left_data_on_value, mag_start_switch_left_data_off_value;
+int mag_start2_switch_left_data_on_value, mag_start2_switch_left_data_off_value;
+int mag_start3_switch_left_data_on_value, mag_start3_switch_left_data_off_value;
+int mag_start4_switch_left_data_on_value, mag_start4_switch_left_data_off_value;
+int mag_start5_switch_left_data_on_value, mag_start5_switch_left_data_off_value;
+int mag_start6_switch_left_data_on_value, mag_start6_switch_left_data_off_value;
+int mag_start7_switch_left_data_on_value, mag_start7_switch_left_data_off_value;
+int mag_start8_switch_left_data_on_value, mag_start8_switch_left_data_off_value;
+int mag_start9_switch_left_data_on_value, mag_start9_switch_left_data_off_value;
+int mag_start10_switch_left_data_on_value, mag_start10_switch_left_data_off_value;
 
 
 int bat_master_switch_data_on_value, bat_master_switch_data_off_value;
@@ -1444,6 +1461,18 @@ string mag_start8_switch_on, mag_start8_switch_off, mag_start8_switch_data;
 string mag_start9_switch_on, mag_start9_switch_off, mag_start9_switch_data;
 string mag_start10_switch_on, mag_start10_switch_off, mag_start10_switch_data;
 
+string mag_start_switch_left_on, mag_start_switch_left_off, mag_start_switch_left_data;
+string mag_start2_switch_left_on, mag_start2_switch_left_off, mag_start2_switch_left_data;
+string mag_start3_switch_left_on, mag_start3_switch_left_off, mag_start3_switch_left_data;
+string mag_start4_switch_left_on, mag_start4_switch_left_off, mag_start4_switch_left_data;
+string mag_start5_switch_left_on, mag_start5_switch_left_off, mag_start5_switch_left_data;
+string mag_start6_switch_left_on, mag_start6_switch_left_off, mag_start6_switch_left_data;
+string mag_start7_switch_left_on, mag_start7_switch_left_off, mag_start7_switch_left_data;
+string mag_start8_switch_left_on, mag_start8_switch_left_off, mag_start8_switch_left_data;
+string mag_start9_switch_left_on, mag_start9_switch_left_off, mag_start9_switch_left_data;
+string mag_start10_switch_left_on, mag_start10_switch_left_off, mag_start10_switch_left_data;
+
+
 string bat_master_switch_on, bat_master_switch_off, bat_master_switch_data;
 string bat2_master_switch_on, bat2_master_switch_off, bat2_master_switch_data;
 string bat3_master_switch_on, bat3_master_switch_off, bat3_master_switch_data;
@@ -1655,7 +1684,14 @@ float	MyPanelsFlightLoopCallback(
                                    int                  inCounter,    
                                    void *               inRefcon);
 
+float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int counter, void * refcon);
+
+
 int    XpanelsFnButtonCommandHandler(XPLMCommandRef       inCommand,          //  custom command handler
+                               XPLMCommandPhase     inPhase,
+                               void *               inRefcon);
+
+int    XpanelsLeftStartFnButtonCommandHandler(XPLMCommandRef       inCommand,          //  custom command handler
                                XPLMCommandPhase     inPhase,
                                void *               inRefcon);
 
@@ -1686,6 +1722,8 @@ PLUGIN_API int XPluginStart(char *		outName,
 
 
   XpanelsFnButtonCommand = XPLMCreateCommand("bgood/xsaitekpanels/x_panels_fn_button","Xpanels Fn Button");
+  XpanelsLeftStartFnButtonCommand = XPLMCreateCommand("bgood/xsaitekpanels/left_start_fn_button","Xpanels Left Start Fn Button");
+
 
 
 // ************* Open any Radio that is connected *****************
@@ -1813,10 +1851,18 @@ PLUGIN_API int XPluginStart(char *		outName,
                         MyPanelsFlightLoopCallback,	// * Callback *
                         interval,			// * Interval -1 every loop*
                         NULL);				// * refcon not used. *
+  // Defer registering for later.
+  XPLMRegisterFlightLoopCallback(XsaitekpanelsCustomDatarefLoopCB, 1, NULL);
+
 
   // Register our custom commands
   XPLMRegisterCommandHandler(XpanelsFnButtonCommand,           // in Command name
                              XpanelsFnButtonCommandHandler,    // in Handler
+                             1,                          // Receive input before plugin windows.
+                             (void *) 0);                // inRefcon.
+
+  XPLMRegisterCommandHandler(XpanelsLeftStartFnButtonCommand,           // in Command name
+                             XpanelsLeftStartFnButtonCommandHandler,    // in Handler
                              1,                          // Receive input before plugin windows.
                              (void *) 0);                // inRefcon.
 
@@ -2134,7 +2180,9 @@ PLUGIN_API void	XPluginStop(void)
 
   // ********** Unregitser the callback on quit. *************
   XPLMUnregisterFlightLoopCallback(MyPanelsFlightLoopCallback, NULL);
+  XPLMUnregisterFlightLoopCallback(XsaitekpanelsCustomDatarefLoopCB, NULL);
   XPLMUnregisterCommandHandler(XpanelsFnButtonCommand, XpanelsFnButtonCommandHandler, 1, NULL);
+  XPLMUnregisterCommandHandler(XpanelsLeftStartFnButtonCommand, XpanelsLeftStartFnButtonCommandHandler, 1, NULL);
   process_switch_unregister_xsaitekpanels_datareference();
   process_radio1_unregister_xsaitekpanels_datareference();
   process_radio2_unregister_xsaitekpanels_datareference();
@@ -4724,6 +4772,62 @@ int    XpanelsFnButtonCommandHandler(XPLMCommandRef       inCommand,
 
 return 0;
 }
+
+int    XpanelsLeftStartFnButtonCommandHandler(XPLMCommandRef       inCommand,
+                        XPLMCommandPhase     inPhase,
+                        void *               inRefcon)
+{
+    (void) inCommand;
+    (void) inRefcon;
+//  If inPhase == 1 the command is executed continuously.
+     if (inPhase == 1)
+   {
+          xpanelsleftstartfnbutton = 1;
+    }
+     if (inPhase == 2)
+   {
+          xpanelsleftstartfnbutton = 0;
+    }
+
+return 0;
+}
+
+float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int counter, void * refcon)
+{
+    void *Param = NULL;
+    XPLMPluginID PluginID = XPLMFindPluginBySignature("xplanesdk.examples.DataRefEditor");
+    if (PluginID != XPLM_NO_PLUGIN_ID){
+
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startoff/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startright/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startleft/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startboth/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startstart/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/bat/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/alt/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/av/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/fuel/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/dice/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/pitot/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/gearup/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/geardn/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/cowl/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/panel/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/beacon/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/nav/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/strobe/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/taxi/status");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/landing/status");
+
+
+    }
+    // etc
+    // etc
+    return 0;
+}
+
+
+
 
 // ************************* Panels Callback  *************************
 float	MyPanelsFlightLoopCallback(

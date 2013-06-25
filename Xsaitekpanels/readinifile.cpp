@@ -570,50 +570,109 @@ void process_read_ini_file()
         mag_start_switch_data_on_value = getOptionToInt("mag_start_switch_data_on_value");
         mag_start_switch_data_off_value = getOptionToInt("mag_start_switch_data_off_value");
 
+        mag_start_switch_left_data = getOptionToString("mag_start_switch_left_data");
+        MagStartSwitchLeftData   = XPLMFindDataRef(mag_start_switch_left_data.c_str());
+        mag_start_switch_left_data_on_value = getOptionToInt("mag_start_switch_left_data_on_value");
+        mag_start_switch_left_data_off_value = getOptionToInt("mag_start_switch_left_data_off_value");
+
+
         mag_start2_switch_data = getOptionToString("mag_start2_switch_data");
         MagStart2SwitchData   = XPLMFindDataRef(mag_start2_switch_data.c_str());
         mag_start2_switch_data_on_value = getOptionToInt("mag_start2_switch_data_on_value");
         mag_start2_switch_data_off_value = getOptionToInt("mag_start2_switch_data_off_value");
+
+        mag_start2_switch_left_data = getOptionToString("mag_start2_switch_left_data");
+        MagStart2SwitchLeftData   = XPLMFindDataRef(mag_start2_switch_left_data.c_str());
+        mag_start2_switch_left_data_on_value = getOptionToInt("mag_start2_switch_left_data_on_value");
+        mag_start2_switch_left_data_off_value = getOptionToInt("mag_start2_switch_left_data_off_value");
+
 
         mag_start3_switch_data = getOptionToString("mag_start3_switch_data");
         MagStart3SwitchData   = XPLMFindDataRef(mag_start3_switch_data.c_str());
         mag_start3_switch_data_on_value = getOptionToInt("mag_start3_switch_data_on_value");
         mag_start3_switch_data_off_value = getOptionToInt("mag_start3_switch_data_off_value");
 
+        mag_start3_switch_left_data = getOptionToString("mag_start3_switch_left_data");
+        MagStart3SwitchLeftData   = XPLMFindDataRef(mag_start3_switch_left_data.c_str());
+        mag_start3_switch_left_data_on_value = getOptionToInt("mag_start3_switch_left_data_on_value");
+        mag_start3_switch_left_data_off_value = getOptionToInt("mag_start3_switch_left_data_off_value");
+
+
         mag_start4_switch_data = getOptionToString("mag_start4_switch_data");
         MagStart4SwitchData   = XPLMFindDataRef(mag_start4_switch_data.c_str());
         mag_start4_switch_data_on_value = getOptionToInt("mag_start4_switch_data_on_value");
         mag_start4_switch_data_off_value = getOptionToInt("mag_start4_switch_data_off_value");
+
+        mag_start4_switch_left_data = getOptionToString("mag_start4_switch_left_data");
+        MagStart4SwitchLeftData   = XPLMFindDataRef(mag_start4_switch_left_data.c_str());
+        mag_start4_switch_left_data_on_value = getOptionToInt("mag_start4_switch_left_data_on_value");
+        mag_start4_switch_left_data_off_value = getOptionToInt("mag_start4_switch_left_data_off_value");
+
 
         mag_start5_switch_data = getOptionToString("mag_start5_switch_data");
         MagStart5SwitchData   = XPLMFindDataRef(mag_start5_switch_data.c_str());
         mag_start5_switch_data_on_value = getOptionToInt("mag_start5_switch_data_on_value");
         mag_start5_switch_data_off_value = getOptionToInt("mag_start5_switch_data_off_value");
 
+        mag_start5_switch_left_data = getOptionToString("mag_start5_switch_left_data");
+        MagStart5SwitchLeftData   = XPLMFindDataRef(mag_start5_switch_left_data.c_str());
+        mag_start5_switch_left_data_on_value = getOptionToInt("mag_start5_switch_left_data_on_value");
+        mag_start5_switch_left_data_off_value = getOptionToInt("mag_start5_switch_left_data_off_value");
+
+
         mag_start6_switch_data = getOptionToString("mag_start6_switch_data");
         MagStart6SwitchData   = XPLMFindDataRef(mag_start6_switch_data.c_str());
         mag_start6_switch_data_on_value = getOptionToInt("mag_start6_switch_data_on_value");
         mag_start6_switch_data_off_value = getOptionToInt("mag_start6_switch_data_off_value");
+
+        mag_start6_switch_left_data = getOptionToString("mag_start6_switch_left_data");
+        MagStart6SwitchLeftData   = XPLMFindDataRef(mag_start6_switch_left_data.c_str());
+        mag_start6_switch_left_data_on_value = getOptionToInt("mag_start6_switch_left_data_on_value");
+        mag_start6_switch_left_data_off_value = getOptionToInt("mag_start6_switch_left_data_off_value");
+
 
         mag_start7_switch_data = getOptionToString("mag_start7_switch_data");
         MagStart7SwitchData   = XPLMFindDataRef(mag_start7_switch_data.c_str());
         mag_start7_switch_data_on_value = getOptionToInt("mag_start7_switch_data_on_value");
         mag_start7_switch_data_off_value = getOptionToInt("mag_start7_switch_data_off_value");
 
+        mag_start7_switch_left_data = getOptionToString("mag_start7_switch_left_data");
+        MagStart7SwitchLeftData   = XPLMFindDataRef(mag_start7_switch_left_data.c_str());
+        mag_start7_switch_left_data_on_value = getOptionToInt("mag_start7_switch_left_data_on_value");
+        mag_start7_switch_left_data_off_value = getOptionToInt("mag_start7_switch_left_data_off_value");
+
+
         mag_start8_switch_data = getOptionToString("mag_start8_switch_data");
         MagStart8SwitchData   = XPLMFindDataRef(mag_start8_switch_data.c_str());
         mag_start8_switch_data_on_value = getOptionToInt("mag_start8_switch_data_on_value");
         mag_start8_switch_data_off_value = getOptionToInt("mag_start8_switch_data_off_value");
+
+        mag_start8_switch_left_data = getOptionToString("mag_start8_switch_left_data");
+        MagStart8SwitchLeftData   = XPLMFindDataRef(mag_start8_switch_left_data.c_str());
+        mag_start8_switch_left_data_on_value = getOptionToInt("mag_start8_switch_left_data_on_value");
+        mag_start8_switch_left_data_off_value = getOptionToInt("mag_start8_switch_left_data_off_value");
+
 
         mag_start9_switch_data = getOptionToString("mag_start9_switch_data");
         MagStart9SwitchData   = XPLMFindDataRef(mag_start9_switch_data.c_str());
         mag_start9_switch_data_on_value = getOptionToInt("mag_start9_switch_data_on_value");
         mag_start9_switch_data_off_value = getOptionToInt("mag_start9_switch_data_off_value");
 
+        mag_start9_switch_left_data = getOptionToString("mag_start9_switch_left_data");
+        MagStart9SwitchLeftData   = XPLMFindDataRef(mag_start9_switch_left_data.c_str());
+        mag_start9_switch_left_data_on_value = getOptionToInt("mag_start9_switch_left_data_on_value");
+        mag_start9_switch_left_data_off_value = getOptionToInt("mag_start9_switch_left_data_off_value");
+
+
         mag_start10_switch_data = getOptionToString("mag_start10_switch_data");
         MagStart10SwitchData   = XPLMFindDataRef(mag_start10_switch_data.c_str());
         mag_start10_switch_data_on_value = getOptionToInt("mag_start10_switch_data_on_value");
         mag_start10_switch_data_off_value = getOptionToInt("mag_start10_switch_data_off_value");
+
+        mag_start10_switch_left_data = getOptionToString("mag_start10_switch_left_data");
+        MagStart10SwitchLeftData   = XPLMFindDataRef(mag_start10_switch_left_data.c_str());
+        mag_start10_switch_left_data_on_value = getOptionToInt("mag_start10_switch_left_data_on_value");
+        mag_start10_switch_left_data_off_value = getOptionToInt("mag_start10_switch_left_data_off_value");
 
     }
 

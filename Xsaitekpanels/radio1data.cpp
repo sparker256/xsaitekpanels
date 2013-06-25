@@ -358,7 +358,8 @@ void process_radio_find_xplane_datareference()
       DmeFreq = XPLMFindDataRef("sim/cockpit2/radios/actuators/dme_frequency_hz");
       DmeTime = XPLMFindDataRef("sim/cockpit2/radios/indicators/dme_dme_time_min");
 
-      AvPwrOn = XPLMFindDataRef("sim/cockpit/electrical/avionics_on");
+      //AvPwrOn = XPLMFindDataRef("sim/cockpit/electrical/avionics_on");
+      AvPwrOn = XPLMFindDataRef("sim/cockpit2/switches/avionics_power_on");
       BatPwrOn = XPLMFindDataRef("sim/cockpit/electrical/battery_on");
 
       Nav1PwrOn = XPLMFindDataRef("sim/cockpit2/radios/actuators/nav1_power");

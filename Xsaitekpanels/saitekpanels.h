@@ -605,6 +605,7 @@ extern int trimupremap, trimdnremap;
 extern int xpanelsfnbutton;
 extern int xpanelscrstoggle;
 extern int multi_auto_mul;
+extern int xpanelsleftstartfnbutton;
 
 
 extern int	MultiAltSwitchStatusGetDataiCallback(void * inRefcon);
@@ -842,6 +843,12 @@ extern XPLMDataRef MagStart5SwitchData, MagStart6SwitchData;
 extern XPLMDataRef MagStart7SwitchData, MagStart8SwitchData;
 extern XPLMDataRef MagStart9SwitchData, MagStart10SwitchData;
 
+extern XPLMDataRef MagStartSwitchLeftData, MagStart2SwitchLeftData;
+extern XPLMDataRef MagStart3SwitchLeftData, MagStart4SwitchLeftData;
+extern XPLMDataRef MagStart5SwitchLeftData, MagStart6SwitchLeftData;
+extern XPLMDataRef MagStart7SwitchLeftData, MagStart8SwitchLeftData;
+extern XPLMDataRef MagStart9SwitchLeftData, MagStart10SwitchLeftData;
+
 
 extern XPLMDataRef BatMasterSwitchData, Bat2MasterSwitchData;
 extern XPLMDataRef Bat3MasterSwitchData, Bat4MasterSwitchData;
@@ -1066,6 +1073,17 @@ extern int mag_start8_switch_data_on_value, mag_start8_switch_data_off_value;
 extern int mag_start9_switch_data_on_value, mag_start9_switch_data_off_value;
 extern int mag_start10_switch_data_on_value, mag_start10_switch_data_off_value;
 
+extern int mag_start_switch_left_data_on_value, mag_start_switch_left_data_off_value;
+extern int mag_start2_switch_left_data_on_value, mag_start2_switch_left_data_off_value;
+extern int mag_start3_switch_left_data_on_value, mag_start3_switch_left_data_off_value;
+extern int mag_start4_switch_left_data_on_value, mag_start4_switch_left_data_off_value;
+extern int mag_start5_switch_left_data_on_value, mag_start5_switch_left_data_off_value;
+extern int mag_start6_switch_left_data_on_value, mag_start6_switch_left_data_off_value;
+extern int mag_start7_switch_left_data_on_value, mag_start7_switch_left_data_off_value;
+extern int mag_start8_switch_left_data_on_value, mag_start8_switch_left_data_off_value;
+extern int mag_start9_switch_left_data_on_value, mag_start9_switch_left_data_off_value;
+extern int mag_start10_switch_left_data_on_value, mag_start10_switch_left_data_off_value;
+
 
 extern int bat_master_switch_data_on_value, bat_master_switch_data_off_value;
 extern int bat2_master_switch_data_on_value, bat2_master_switch_data_off_value;
@@ -1266,6 +1284,17 @@ extern string mag_start7_switch_on, mag_start7_switch_off, mag_start7_switch_dat
 extern string mag_start8_switch_on, mag_start8_switch_off, mag_start8_switch_data;
 extern string mag_start9_switch_on, mag_start9_switch_off, mag_start9_switch_data;
 extern string mag_start10_switch_on, mag_start10_switch_off, mag_start10_switch_data;
+
+extern string mag_start_switch_left_on, mag_start_switch_left_off, mag_start_switch_left_data;
+extern string mag_start2_switch_left_on, mag_start2_switch_left_off, mag_start2_switch_left_data;
+extern string mag_start3_switch_left_on, mag_start3_switch_left_off, mag_start3_switch_left_data;
+extern string mag_start4_switch_left_on, mag_start4_switch_left_off, mag_start4_switch_left_data;
+extern string mag_start5_switch_left_on, mag_start5_switch_left_off, mag_start5_switch_left_data;
+extern string mag_start6_switch_left_on, mag_start6_switch_left_off, mag_start6_switch_left_data;
+extern string mag_start7_switch_left_on, mag_start7_switch_left_off, mag_start7_switch_left_data;
+extern string mag_start8_switch_left_on, mag_start8_switch_left_off, mag_start8_switch_left_data;
+extern string mag_start9_switch_left_on, mag_start9_switch_left_off, mag_start9_switch_left_data;
+extern string mag_start10_switch_left_on, mag_start10_switch_left_off, mag_start10_switch_left_data;
 
 
 extern string bat_master_switch_on, bat_master_switch_off, bat_master_switch_data;
