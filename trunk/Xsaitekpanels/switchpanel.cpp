@@ -443,16 +443,32 @@ void process_engines_start_switch()
 
    if(magstartswitchenable == 3) {
        if(testbit(switchbuf,ENG_START)) {
-           XPLMSetDatai(MagStartSwitchData, mag_start_switch_data_on_value);
-           XPLMSetDatai(MagStart2SwitchData, mag_start2_switch_data_on_value);
-           XPLMSetDatai(MagStart3SwitchData, mag_start3_switch_data_on_value);
-           XPLMSetDatai(MagStart4SwitchData, mag_start4_switch_data_on_value);
-           XPLMSetDatai(MagStart5SwitchData, mag_start5_switch_data_on_value);
-           XPLMSetDatai(MagStart6SwitchData, mag_start6_switch_data_on_value);
-           XPLMSetDatai(MagStart7SwitchData, mag_start7_switch_data_on_value);
-           XPLMSetDatai(MagStart8SwitchData, mag_start8_switch_data_on_value);
-           XPLMSetDatai(MagStart9SwitchData, mag_start9_switch_data_on_value);
-           XPLMSetDatai(MagStart10SwitchData, mag_start10_switch_data_on_value);
+           if(xpanelsleftstartfnbutton == 1) {
+               XPLMSetDatai(MagStartSwitchLeftData, mag_start_switch_left_data_on_value);
+               XPLMSetDatai(MagStart2SwitchLeftData, mag_start2_switch_left_data_on_value);
+               XPLMSetDatai(MagStart3SwitchLeftData, mag_start3_switch_left_data_on_value);
+               XPLMSetDatai(MagStart4SwitchLeftData, mag_start4_switch_left_data_on_value);
+               XPLMSetDatai(MagStart5SwitchLeftData, mag_start5_switch_left_data_on_value);
+               XPLMSetDatai(MagStart6SwitchLeftData, mag_start6_switch_left_data_on_value);
+               XPLMSetDatai(MagStart7SwitchLeftData, mag_start7_switch_left_data_on_value);
+               XPLMSetDatai(MagStart8SwitchLeftData, mag_start8_switch_left_data_on_value);
+               XPLMSetDatai(MagStart9SwitchLeftData, mag_start9_switch_left_data_on_value);
+               XPLMSetDatai(MagStart10SwitchLeftData, mag_start10_switch_left_data_on_value);
+
+
+           } else {
+               XPLMSetDatai(MagStartSwitchData, mag_start_switch_data_on_value);
+               XPLMSetDatai(MagStart2SwitchData, mag_start2_switch_data_on_value);
+               XPLMSetDatai(MagStart3SwitchData, mag_start3_switch_data_on_value);
+               XPLMSetDatai(MagStart4SwitchData, mag_start4_switch_data_on_value);
+               XPLMSetDatai(MagStart5SwitchData, mag_start5_switch_data_on_value);
+               XPLMSetDatai(MagStart6SwitchData, mag_start6_switch_data_on_value);
+               XPLMSetDatai(MagStart7SwitchData, mag_start7_switch_data_on_value);
+               XPLMSetDatai(MagStart8SwitchData, mag_start8_switch_data_on_value);
+               XPLMSetDatai(MagStart9SwitchData, mag_start9_switch_data_on_value);
+               XPLMSetDatai(MagStart10SwitchData, mag_start10_switch_data_on_value);
+
+           }
        }
        return;
    }
@@ -868,12 +884,14 @@ void process_avionics_power_switch()
 
 	if(testbit(switchbuf,AVIONICS_POWER)) {
           XPLMCommandOnce(AvLtOn);
+
           if (XPLMGetDatai(BatPwrOn) == 1) {
               XPLMSetDatai(AvPwrOn, 1);
           }
           if (XPLMGetDatai(BatPwrOn) == 0) {
               XPLMSetDatai(AvPwrOn, 0);
           }
+
 
  	}
         if(!testbit(switchbuf,AVIONICS_POWER)) {

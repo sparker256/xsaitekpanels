@@ -27,6 +27,8 @@ static int n = 5;
 static int appushed = 0;
 static int lastappos = 0, lastappos2 = 0;
 static int aploop = 0;
+static int multitestloop = 0;
+
 
 static int upapalt, upapvs, upapas, upaphdg, upapcrs, upapcrs2, neg;
 static int apas, apasout, apmas;
@@ -44,7 +46,7 @@ static int multiaactv, multiadig1, multiarem1, multiadig2, multiarem2;
 static int multiadig3, multiarem3, multiadig4, multiarem4, multiadig5;
 static int multibstby, multibdig1, multibdig2, multibrem2;
 static int multibdig3, multibrem3, multibdig4, multibrem4, multibdig5;  
-static int btnleds = 0, lastbtnleds = 0, multiseldis = 1;
+static int btnleds = 0, lastbtnleds = 0, multiseldis = 5;
 
 static int ALT_SWITCH = 7, VS_SWITCH = 6;
 static int IAS_SWITCH = 5, HDG_SWITCH = 4;
@@ -296,7 +298,14 @@ void process_multi_panel_datareference_values()
 void process_alt_switch()
 {
     if(testbit(multibuf,ALT_SWITCH)) {
-        multiseldis = 1;
+
+        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+            multiseldis = 5;
+        } else {
+           multiseldis = 1;
+        }
+
+
         if (altswitchremap == 2) {
             upapaltf = XPLMGetDataf(AltSwitchRemapableData);
         } else {
@@ -406,7 +415,12 @@ void process_alt_switch()
 void process_vs_switch()
 {
     if(testbit(multibuf,VS_SWITCH)) {
-        multiseldis = 1;
+        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+            multiseldis = 5;
+        } else {
+           multiseldis = 1;
+        }
+
         if (vsswitchremap == 2) {
             upapvsf = XPLMGetDataf(VsSwitchRemapableData);
         } else {
@@ -513,7 +527,13 @@ void process_vs_switch()
 void process_ias_switch()
 {
     if (testbit(multibuf,IAS_SWITCH)) {
-        multiseldis = 2;
+        //multiseldis = 2;
+        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+            multiseldis = 5;
+        } else {
+           multiseldis = 2;
+        }
+
         if (iasismachremap == 1) {
             if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
                 apmasf = XPLMGetDataf(IasSwitchRemapableData);
@@ -659,7 +679,13 @@ void process_hdg_switch()
 {
 
     if(testbit(multibuf,HDG_SWITCH)) {
-        multiseldis = 3;
+        //multiseldis = 3;
+        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+            multiseldis = 5;
+        } else {
+           multiseldis = 3;
+        }
+
         if (hdgswitchremap == 2) {
             upaphdgf = XPLMGetDataf(HdgSwitchRemapableData);
         } else {
@@ -747,7 +773,13 @@ void process_crs_switch()
     XPLMDataRef crs_dataref =  !xpanelscrstoggle ? ApCrs : ApCrs2;
 
 	if(testbit(multibuf,CRS_SWITCH)) {
-        multiseldis = 4;
+        //multiseldis = 4;
+        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+            multiseldis = 5;
+        } else {
+           multiseldis = 4;
+        }
+
         upapcrsf = XPLMGetDataf(ApCrs);
         upapcrs = (int)(upapcrsf);
 
@@ -3377,6 +3409,10 @@ void process_multi_blank_display()
     if (XPLMGetDatai(BatPwrOn) == 0) {
         multiseldis = 5;
     }
+    if (XPLMGetDatai(SwitchAvOwnedDataRef) == 0) {
+        multiseldis = 5;
+    }
+
 
 }
 
@@ -3431,6 +3467,12 @@ void process_multi_panel()
         lastbtnleds = btnleds;
     } else {
         multinowrite++;
+    }
+
+    printf("multitestloop = %d AvPwrOn = %d BatPwrOn = %d multiseldis  %d\n", multitestloop, XPLMGetDatai(AvPwrOn), XPLMGetDatai(BatPwrOn), multiseldis);
+    multitestloop ++;
+    if (multitestloop > 5000) {
+        multitestloop = 0;
     }
     return;
 }
