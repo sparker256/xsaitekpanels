@@ -3469,10 +3469,14 @@ void process_multi_panel()
         multinowrite++;
     }
 
+    /*
     printf("multitestloop = %d AvPwrOn = %d BatPwrOn = %d multiseldis  %d\n", multitestloop, XPLMGetDatai(AvPwrOn), XPLMGetDatai(BatPwrOn), multiseldis);
     multitestloop ++;
     if (multitestloop > 5000) {
         multitestloop = 0;
     }
+
+    */
+
     return;
 }

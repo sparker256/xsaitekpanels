@@ -217,6 +217,10 @@ void process_read_ini_file()
     XPLMDebugString(version.c_str());
     XPLMDebugString("\n");
 
+    // Do we want to enable data reference editor?
+    dre_enable = getOptionToInt("Data Reference Editor enable");
+
+
     // bat alt normal alt bat cessna
     bataltinverse = getOptionToInt("Bat Alt inverse");
     if (bataltinverse == 0) {

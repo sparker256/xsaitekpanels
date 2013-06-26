@@ -1432,5 +1432,8 @@ extern int wrgXPlaneVersion;
 extern int wrgXPLMVersion;
 extern int wrgHostID;
 
+extern int dre_enable;
+
+
 
 #endif
