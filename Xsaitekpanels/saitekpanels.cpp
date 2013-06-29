@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.20   ***************
-// ****** Jun 24 2013   **************
+// ****** Jun 28 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -4795,6 +4795,10 @@ return 0;
 float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int counter, void * refcon)
 {
     void *Param = NULL;
+    (void) elapsedMe;
+    (void) elapsedSim;
+    (void) counter;
+    (void) refcon;
     XPLMPluginID PluginID = XPLMFindPluginBySignature("xplanesdk.examples.DataRefEditor");
     if (PluginID != XPLM_NO_PLUGIN_ID){
 

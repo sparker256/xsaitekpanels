@@ -40,7 +40,7 @@ static int BatArrayOn[8];
 static int failed1up = 0, failed2up = 0, failed3up = 0;
 static int failed1dn = 0, failed2dn = 0, failed3dn = 0;
 static int ignition_key_array[8], igniter_on[8];
-static int bleed_air_mode, fuel_tank_transfer;
+// static int bleed_air_mode, fuel_tank_transfer;
 
 static unsigned char switchbuf[4];
 static unsigned char switchwbuf[2], gearled;
