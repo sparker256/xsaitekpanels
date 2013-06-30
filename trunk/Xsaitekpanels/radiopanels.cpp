@@ -4420,10 +4420,16 @@ void process_radio_blank_display()
           loseldis[radnum] = 10;
 	}
 
-    if (XPLMGetDatai(SwitchAvOwnedDataRef) == 0) {
-          upseldis[radnum] = 10;
-          loseldis[radnum] = 10;
+    if(switchcnt > 0)  {
+        if (XPLMGetDatai(SwitchAvOwnedDataRef) == 0) {
+              upseldis[radnum] = 10;
+              loseldis[radnum] = 10;
+        }
+
+    } else {
+
     }
+
 
 	if (XPLMGetDatai(Com1PwrOn) == 0) {
           if (upcom1[radnum] == 1) {

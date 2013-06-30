@@ -1005,6 +1005,7 @@ extern XPWidgetID	   SwitchStartSwitchNewCheckWidget[50];
 
 // ***************** Switch Panel variables ********************
 extern int switchfd;
+extern int switchcnt;
 
 extern int magoffswitchenable, magrightswitchenable, magleftswitchenable;
 extern int magbothswitchenable, magstartswitchenable;

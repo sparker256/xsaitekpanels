@@ -3409,9 +3409,15 @@ void process_multi_blank_display()
     if (XPLMGetDatai(BatPwrOn) == 0) {
         multiseldis = 5;
     }
-    if (XPLMGetDatai(SwitchAvOwnedDataRef) == 0) {
-        multiseldis = 5;
+    if(switchcnt > 0)  {
+        if (XPLMGetDatai(SwitchAvOwnedDataRef) == 0) {
+            multiseldis = 5;
+        }
+
+    } else {
+
     }
+
 
 
 }
