@@ -275,8 +275,7 @@ void process_multi_find_xplane_datareference()
       ApVsStat = XPLMFindDataRef("sim/cockpit2/autopilot/vvi_status");
       ApAprStat = XPLMFindDataRef("sim/cockpit2/autopilot/approach_status");
       ApRevStat = XPLMFindDataRef("sim/cockpit2/autopilot/backcourse_status");
-      //AvPwrOn = XPLMFindDataRef("sim/cockpit/electrical/avionics_on");
-      BatPwrOn = XPLMFindDataRef("sim/cockpit/electrical/battery_on");
+
       Frp = XPLMFindDataRef("sim/operation/misc/frame_rate_period");
 
       MHdg = XPLMFindDataRef("sim/flightmodel/position/magpsi");

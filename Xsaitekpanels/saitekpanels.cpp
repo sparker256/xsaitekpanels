@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.21   ***************
-// ****** Jun 30 2013   **************
+// ******** ver 2.22   ***************
+// ****** Jul 04 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -1715,10 +1715,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.21\n");
+  XPLMDebugString("Xsaitekpanels: v2.22\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.21");
+  strcpy(outName, "Xsaitekpanels v2.22");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
@@ -1868,6 +1868,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
 
   AvPwrOn = XPLMFindDataRef("sim/cockpit2/switches/avionics_power_on");
+  BatPwrOn = XPLMFindDataRef("sim/cockpit/electrical/battery_on");
   // If you find a switch panel then create
   // datareferences for all of the switch panel switch positions
   if(switchcnt > 0)  {
@@ -4904,8 +4905,6 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
     // etc
     return 0;
 }
-
-
 
 
 // ************************* Panels Callback  *************************
