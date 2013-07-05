@@ -553,6 +553,8 @@ void process_master_battery_switch()
         return;
     }
 
+
+
    if(batmasterswitchenable == 2) {
 
         if(testbit(switchbuf,MASTER_BATTERY)) {
@@ -812,6 +814,7 @@ void process_master_altenator_switch()
 
 void process_avionics_power_switch()
 {
+
     if(testbit(switchbuf,AVIONICS_POWER)) {
         XPLMSetDatai(SwitchAvOwnedDataRef, 1);
     } else {
@@ -822,11 +825,31 @@ void process_avionics_power_switch()
         return;
     }
 
-   if(avionicsmasterswitchenable == 2) {
+    if(avionicsmasterswitchenable == 1) {
+        if(testbit(switchbuf,AVIONICS_POWER)) {
+
+            if (XPLMGetDatai(BatPwrOn) == 1) {
+                XPLMSetDatai(AvPwrOn, 1);
+            }
+
+            if (XPLMGetDatai(BatPwrOn) == 0) {
+                XPLMSetDatai(AvPwrOn, 0);
+            }
+        }
+
+        if(!testbit(switchbuf,AVIONICS_POWER)) {
+              XPLMSetDatai(AvPwrOn, 0);
+        }
+
+
+        return;
+    }
+
+    if(avionicsmasterswitchenable == 2) {
 
         if(testbit(switchbuf,AVIONICS_POWER)) {
-          XPLMCommandOnce(AvMasterSwitchOnCmd);
-         }
+            XPLMCommandOnce(AvMasterSwitchOnCmd);
+        }
 
         if(!testbit(switchbuf,AVIONICS_POWER)) {
           XPLMCommandOnce(AvMasterSwitchOffCmd);
@@ -855,7 +878,6 @@ void process_avionics_power_switch()
             XPLMSetDatai(Av15MasterSwitchData, av15_master_switch_data_on_value);
             XPLMSetDatai(Av16MasterSwitchData, av16_master_switch_data_on_value);
 
-
          }
 
         if(!testbit(switchbuf,AVIONICS_POWER)) {
@@ -875,29 +897,10 @@ void process_avionics_power_switch()
             XPLMSetDatai(Av14MasterSwitchData, av14_master_switch_data_off_value);
             XPLMSetDatai(Av15MasterSwitchData, av15_master_switch_data_off_value);
             XPLMSetDatai(Av16MasterSwitchData, av16_master_switch_data_off_value);
-
         }
 
         return;
     }
-
-
-	if(testbit(switchbuf,AVIONICS_POWER)) {
-          XPLMCommandOnce(AvLtOn);
-
-          if (XPLMGetDatai(BatPwrOn) == 1) {
-              XPLMSetDatai(AvPwrOn, 1);
-          }
-          if (XPLMGetDatai(BatPwrOn) == 0) {
-              XPLMSetDatai(AvPwrOn, 0);
-          }
-
-
- 	}
-        if(!testbit(switchbuf,AVIONICS_POWER)) {
-          XPLMCommandOnce(AvLtOff);
- 	}
-
 
 }
 
