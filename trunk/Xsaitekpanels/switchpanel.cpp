@@ -1314,23 +1314,23 @@ void process_panel_lights_switch()
     if(panellightswitchenable == 3) {
         if(testbit(switchbuf, PANEL_LIGHTS)) {
             XPLMSetDatai(PanelLightsData, panel_lights_switch_data_on_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch2_data_on_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch3_data_on_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch4_data_on_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch5_data_on_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch6_data_on_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch7_data_on_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch8_data_on_value);
+            XPLMSetDatai(PanelLights2Data, panel_lights_switch2_data_on_value);
+            XPLMSetDatai(PanelLights3Data, panel_lights_switch3_data_on_value);
+            XPLMSetDatai(PanelLights4Data, panel_lights_switch4_data_on_value);
+            XPLMSetDatai(PanelLights5Data, panel_lights_switch5_data_on_value);
+            XPLMSetDatai(PanelLights6Data, panel_lights_switch6_data_on_value);
+            XPLMSetDatai(PanelLights7Data, panel_lights_switch7_data_on_value);
+            XPLMSetDatai(PanelLights8Data, panel_lights_switch8_data_on_value);
         }
         if(!testbit(switchbuf, PANEL_LIGHTS)) {
             XPLMSetDatai(PanelLightsData, panel_lights_switch_data_off_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch2_data_off_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch3_data_off_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch4_data_off_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch5_data_off_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch6_data_off_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch7_data_off_value);
-            XPLMSetDatai(PanelLightsData, panel_lights_switch8_data_off_value);
+            XPLMSetDatai(PanelLights2Data, panel_lights_switch2_data_off_value);
+            XPLMSetDatai(PanelLights3Data, panel_lights_switch3_data_off_value);
+            XPLMSetDatai(PanelLights4Data, panel_lights_switch4_data_off_value);
+            XPLMSetDatai(PanelLights5Data, panel_lights_switch5_data_off_value);
+            XPLMSetDatai(PanelLights6Data, panel_lights_switch6_data_off_value);
+            XPLMSetDatai(PanelLights7Data, panel_lights_switch7_data_off_value);
+            XPLMSetDatai(PanelLights8Data, panel_lights_switch8_data_off_value);
         }
         return;
     }
