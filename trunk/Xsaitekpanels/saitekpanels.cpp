@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.24   ***************
-// ****** Jul 19 2013   **************
+// ******** ver 2.25   ***************
+// ****** Sep 15 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -1245,14 +1245,14 @@ int cowl6_flaps_data_on_value, cowl6_flaps_data_off_value;
 int cowl7_flaps_data_on_value, cowl7_flaps_data_off_value;
 int cowl8_flaps_data_on_value, cowl8_flaps_data_off_value;
 
-int panel_lights_switch_data_on_value, panel_lights_switch_data_off_value;
-int panel_lights_switch2_data_on_value, panel_lights_switch2_data_off_value;
-int panel_lights_switch3_data_on_value, panel_lights_switch3_data_off_value;
-int panel_lights_switch4_data_on_value, panel_lights_switch4_data_off_value;
-int panel_lights_switch5_data_on_value, panel_lights_switch5_data_off_value;
-int panel_lights_switch6_data_on_value, panel_lights_switch6_data_off_value;
-int panel_lights_switch7_data_on_value, panel_lights_switch7_data_off_value;
-int panel_lights_switch8_data_on_value, panel_lights_switch8_data_off_value;
+int panel_lights_switch_data_on_value, panel_lights_switch_data_off_value, panel_lights_switch_data_array_offset, panel_lights_switch_data_array_size;
+int panel_lights_switch2_data_on_value, panel_lights_switch2_data_off_value, panel_lights_switch2_data_array_offset, panel_lights_switch2_data_array_size;
+int panel_lights_switch3_data_on_value, panel_lights_switch3_data_off_value, panel_lights_switch3_data_array_offset, panel_lights_switch3_data_array_size;
+int panel_lights_switch4_data_on_value, panel_lights_switch4_data_off_value, panel_lights_switch4_data_array_offset, panel_lights_switch4_data_array_size;
+int panel_lights_switch5_data_on_value, panel_lights_switch5_data_off_value, panel_lights_switch5_data_array_offset, panel_lights_switch5_data_array_size;
+int panel_lights_switch6_data_on_value, panel_lights_switch6_data_off_value, panel_lights_switch6_data_array_offset, panel_lights_switch6_data_array_size;
+int panel_lights_switch7_data_on_value, panel_lights_switch7_data_off_value, panel_lights_switch7_data_array_offset, panel_lights_switch7_data_array_size;
+int panel_lights_switch8_data_on_value, panel_lights_switch8_data_off_value, panel_lights_switch8_data_array_offset, panel_lights_switch8_data_array_size;
 
 int beacon_lights_switch_data_on_value, beacon_lights_switch_data_off_value;
 int beacon_lights_switch2_data_on_value, beacon_lights_switch2_data_off_value;
@@ -1715,10 +1715,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XPLMDebugString("Xsaitekpanels: v2.24\n");
+  XPLMDebugString("Xsaitekpanels: v2.25\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.24");
+  strcpy(outName, "Xsaitekpanels v2.25");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 

@@ -1307,46 +1307,62 @@ void process_read_ini_file()
 
 
 
-     if ((panellightswitchenable == 3) || (panellightswitchenable == 4)) {
+     if ((panellightswitchenable == 3) || (panellightswitchenable == 4) || (panellightswitchenable == 5)) {
          panel_lights_switch_data = getOptionToString("panel_lights_switch_data");
          PanelLightsData   = XPLMFindDataRef(panel_lights_switch_data.c_str());
          panel_lights_switch_data_on_value = getOptionToInt("panel_lights_switch_data_on_value");
          panel_lights_switch_data_off_value = getOptionToInt("panel_lights_switch_data_off_value");
+         panel_lights_switch_data_array_offset = getOptionToInt("panel_lights_switch_data_array_offset");
+         panel_lights_switch_data_array_size = getOptionToInt("panel_lights_switch_data_array_size");
 
          panel_lights_switch2_data = getOptionToString("panel_lights_switch2_data");
          PanelLights2Data   = XPLMFindDataRef(panel_lights_switch2_data.c_str());
          panel_lights_switch2_data_on_value = getOptionToInt("panel_lights_switch2_data_on_value");
          panel_lights_switch2_data_off_value = getOptionToInt("panel_lights_switch2_data_off_value");
+         panel_lights_switch2_data_array_offset = getOptionToInt("panel_lights_switch2_data_array_offset");
+         panel_lights_switch2_data_array_size = getOptionToInt("panel_lights_switch2_data_array_size");
 
          panel_lights_switch3_data = getOptionToString("panel_lights_switch3_data");
          PanelLights3Data   = XPLMFindDataRef(panel_lights_switch3_data.c_str());
          panel_lights_switch3_data_on_value = getOptionToInt("panel_lights_switch3_data_on_value");
          panel_lights_switch3_data_off_value = getOptionToInt("panel_lights_switch3_data_off_value");
+         panel_lights_switch3_data_array_offset = getOptionToInt("panel_lights_switch3_data_array_offset");
+         panel_lights_switch3_data_array_size = getOptionToInt("panel_lights_switch3_data_array_size");
 
          panel_lights_switch4_data = getOptionToString("panel_lights_switch4_data");
          PanelLights4Data   = XPLMFindDataRef(panel_lights_switch4_data.c_str());
          panel_lights_switch4_data_on_value = getOptionToInt("panel_lights_switch4_data_on_value");
          panel_lights_switch4_data_off_value = getOptionToInt("panel_lights_switch4_data_off_value");
+         panel_lights_switch4_data_array_offset = getOptionToInt("panel_lights_switch4_data_array_offset");
+         panel_lights_switch4_data_array_size = getOptionToInt("panel_lights_switch4_data_array_size");
 
          panel_lights_switch5_data = getOptionToString("panel_lights_switch5_data");
          PanelLights5Data   = XPLMFindDataRef(panel_lights_switch5_data.c_str());
          panel_lights_switch5_data_on_value = getOptionToInt("panel_lights_switch5_data_on_value");
          panel_lights_switch5_data_off_value = getOptionToInt("panel_lights_switch5_data_off_value");
+         panel_lights_switch5_data_array_offset = getOptionToInt("panel_lights_switch5_data_array_offset");
+         panel_lights_switch5_data_array_size = getOptionToInt("panel_lights_switch5_data_array_size");
 
          panel_lights_switch6_data = getOptionToString("panel_lights_switch6_data");
          PanelLights6Data   = XPLMFindDataRef(panel_lights_switch6_data.c_str());
          panel_lights_switch6_data_on_value = getOptionToInt("panel_lights_switch6_data_on_value");
          panel_lights_switch6_data_off_value = getOptionToInt("panel_lights_switch6_data_off_value");
+         panel_lights_switch6_data_array_offset = getOptionToInt("panel_lights_switch6_data_array_offset");
+         panel_lights_switch6_data_array_size = getOptionToInt("panel_lights_switch6_data_array_size");
 
          panel_lights_switch7_data = getOptionToString("panel_lights_switch7_data");
          PanelLights7Data   = XPLMFindDataRef(panel_lights_switch7_data.c_str());
          panel_lights_switch7_data_on_value = getOptionToInt("panel_lights_switch7_data_on_value");
          panel_lights_switch7_data_off_value = getOptionToInt("panel_lights_switch7_data_off_value");
+         panel_lights_switch7_data_array_offset = getOptionToInt("panel_lights_switch7_data_array_offset");
+         panel_lights_switch7_data_array_size = getOptionToInt("panel_lights_switch7_data_array_size");
 
          panel_lights_switch8_data = getOptionToString("panel_lights_switch8_data");
          PanelLights8Data   = XPLMFindDataRef(panel_lights_switch8_data.c_str());
          panel_lights_switch8_data_on_value = getOptionToInt("panel_lights_switch8_data_on_value");
          panel_lights_switch8_data_off_value = getOptionToInt("panel_lights_switch8_data_off_value");
+         panel_lights_switch8_data_array_offset = getOptionToInt("panel_lights_switch8_data_array_offset");
+         panel_lights_switch8_data_array_size = getOptionToInt("panel_lights_switch8_data_array_size");
 
      }
 
