@@ -26,6 +26,18 @@ static int acf_en_type[8];
 static float opencowl[8], closecowl[8];
 static float engn_mixt[8];
 
+static float panel_lights_switch_dataf_array[8];
+static float panel_lights_switch2_dataf_array[8];
+static float panel_lights_switch3_dataf_array[8];
+static float panel_lights_switch4_dataf_array[8];
+static float panel_lights_switch5_dataf_array[8];
+static float panel_lights_switch6_dataf_array[8];
+static float panel_lights_switch7_dataf_array[8];
+static float panel_lights_switch8_dataf_array[8];
+
+//float ThrottleList[8];
+
+
 static int MAG_OFF = 10, MAG_RIGHT = 9, MAG_LEFT = 8, MAG_BOTH = 23;
 static int ENG_START = 22;
 static int MASTER_BATTERY = 7, MASTER_ALTENATOR = 6;
@@ -1407,6 +1419,94 @@ void process_panel_lights_switch()
         return;
     }
 
+
+    if(panellightswitchenable == 5) {
+        if(testbit(switchbuf, PANEL_LIGHTS)) {
+            panel_lights_switch_dataf_on_value = panel_lights_switch_data_on_value;
+            panel_lights_switch_dataf_on_value = panel_lights_switch_dataf_on_value / 100;
+            panel_lights_switch_dataf_array[panel_lights_switch_data_array_offset] = panel_lights_switch_dataf_on_value;
+            XPLMSetDatavf(PanelLightsData, panel_lights_switch_dataf_array, 0, panel_lights_switch_data_array_size);
+
+            panel_lights_switch2_dataf_on_value = panel_lights_switch2_data_on_value;
+            panel_lights_switch2_dataf_on_value = panel_lights_switch2_dataf_on_value /100;
+            panel_lights_switch2_dataf_array[panel_lights_switch2_data_array_offset] = panel_lights_switch2_dataf_on_value;
+            XPLMSetDatavf(PanelLights2Data, panel_lights_switch2_dataf_array, 0, panel_lights_switch2_data_array_size);
+
+            panel_lights_switch3_dataf_on_value = panel_lights_switch3_data_on_value;
+            panel_lights_switch3_dataf_on_value = panel_lights_switch3_dataf_on_value/ 100;
+            panel_lights_switch3_dataf_array[panel_lights_switch3_data_array_offset] = panel_lights_switch3_dataf_on_value;
+            XPLMSetDatavf(PanelLights3Data, panel_lights_switch3_dataf_array, 0, panel_lights_switch3_data_array_size);
+
+            panel_lights_switch4_dataf_on_value = panel_lights_switch4_data_on_value;
+            panel_lights_switch4_dataf_on_value = panel_lights_switch4_dataf_on_value/ 100;
+            panel_lights_switch4_dataf_array[panel_lights_switch4_data_array_offset] = panel_lights_switch4_dataf_on_value;
+            XPLMSetDatavf(PanelLights4Data, panel_lights_switch4_dataf_array, 0, panel_lights_switch4_data_array_size);
+
+            panel_lights_switch5_dataf_on_value = panel_lights_switch5_data_on_value;
+            panel_lights_switch5_dataf_on_value = panel_lights_switch5_dataf_on_value/ 100;
+            panel_lights_switch5_dataf_array[panel_lights_switch5_data_array_offset] = panel_lights_switch5_dataf_on_value;
+            XPLMSetDatavf(PanelLights5Data, panel_lights_switch5_dataf_array, 0, panel_lights_switch5_data_array_size);
+
+            panel_lights_switch6_dataf_on_value = panel_lights_switch6_data_on_value;
+            panel_lights_switch6_dataf_on_value = panel_lights_switch6_dataf_on_value/ 100;
+            panel_lights_switch6_dataf_array[panel_lights_switch6_data_array_offset] = panel_lights_switch6_dataf_on_value;
+            XPLMSetDatavf(PanelLights6Data, panel_lights_switch6_dataf_array, 0, panel_lights_switch6_data_array_size);
+
+            panel_lights_switch7_dataf_on_value = panel_lights_switch7_data_on_value;
+            panel_lights_switch7_dataf_on_value = panel_lights_switch7_dataf_on_value/ 100;
+            panel_lights_switch7_dataf_array[panel_lights_switch7_data_array_offset] = panel_lights_switch7_dataf_on_value;
+            XPLMSetDatavf(PanelLights7Data, panel_lights_switch7_dataf_array, 0, panel_lights_switch7_data_array_size);
+
+            panel_lights_switch8_dataf_on_value = panel_lights_switch8_data_on_value;
+            panel_lights_switch8_dataf_on_value = panel_lights_switch8_dataf_on_value/ 100;
+            panel_lights_switch8_dataf_array[panel_lights_switch8_data_array_offset] = panel_lights_switch8_dataf_on_value;
+            XPLMSetDatavf(PanelLights8Data, panel_lights_switch8_dataf_array, 0, panel_lights_switch8_data_array_size);
+
+        }
+        if(!testbit(switchbuf, PANEL_LIGHTS)) {
+            panel_lights_switch_dataf_off_value = panel_lights_switch_data_off_value;
+            panel_lights_switch_dataf_off_value = panel_lights_switch_dataf_off_value/ 100;
+            panel_lights_switch_dataf_array[panel_lights_switch_data_array_offset] = panel_lights_switch_dataf_off_value;
+            XPLMSetDatavf(PanelLightsData, panel_lights_switch_dataf_array, 0, panel_lights_switch_data_array_size);
+
+            panel_lights_switch2_dataf_off_value = panel_lights_switch2_data_off_value;
+            panel_lights_switch2_dataf_off_value = panel_lights_switch2_dataf_off_value/ 100;
+            panel_lights_switch2_dataf_array[panel_lights_switch2_data_array_offset] = panel_lights_switch2_dataf_off_value;
+            XPLMSetDatavf(PanelLights2Data, panel_lights_switch2_dataf_array, 0, panel_lights_switch2_data_array_size);
+
+            panel_lights_switch3_dataf_off_value = panel_lights_switch3_data_off_value;
+            panel_lights_switch3_dataf_off_value = panel_lights_switch3_dataf_off_value/ 100;
+            panel_lights_switch3_dataf_array[panel_lights_switch3_data_array_offset] = panel_lights_switch3_dataf_off_value;
+            XPLMSetDatavf(PanelLights3Data, panel_lights_switch3_dataf_array, 0, panel_lights_switch3_data_array_size);
+
+            panel_lights_switch4_dataf_off_value = panel_lights_switch4_data_off_value;
+            panel_lights_switch4_dataf_off_value = panel_lights_switch4_dataf_off_value/ 100;
+            panel_lights_switch4_dataf_array[panel_lights_switch4_data_array_offset] = panel_lights_switch4_dataf_off_value;
+            XPLMSetDatavf(PanelLights4Data, panel_lights_switch4_dataf_array, 0, panel_lights_switch4_data_array_size);
+
+            panel_lights_switch5_dataf_off_value = panel_lights_switch5_data_off_value;
+            panel_lights_switch5_dataf_off_value = panel_lights_switch5_dataf_off_value/ 100;
+            panel_lights_switch5_dataf_array[panel_lights_switch5_data_array_offset] = panel_lights_switch5_dataf_off_value;
+            XPLMSetDatavf(PanelLights5Data, panel_lights_switch5_dataf_array, 0, panel_lights_switch5_data_array_size);
+
+            panel_lights_switch6_dataf_off_value = panel_lights_switch6_data_off_value;
+            panel_lights_switch6_dataf_off_value = panel_lights_switch6_dataf_off_value/ 100;
+            panel_lights_switch6_dataf_array[panel_lights_switch6_data_array_offset] = panel_lights_switch6_dataf_off_value;
+            XPLMSetDatavf(PanelLights6Data, panel_lights_switch6_dataf_array, 0, panel_lights_switch6_data_array_size);
+
+            panel_lights_switch7_dataf_off_value = panel_lights_switch7_data_off_value;
+            panel_lights_switch7_dataf_off_value = panel_lights_switch7_dataf_off_value/ 100;
+            panel_lights_switch7_dataf_array[panel_lights_switch7_data_array_offset] = panel_lights_switch7_dataf_off_value;
+            XPLMSetDatavf(PanelLights7Data, panel_lights_switch7_dataf_array, 0, panel_lights_switch7_data_array_size);
+
+            panel_lights_switch8_dataf_off_value = panel_lights_switch8_data_off_value;
+            panel_lights_switch8_dataf_off_value = panel_lights_switch8_dataf_off_value/ 100;
+            panel_lights_switch8_dataf_array[panel_lights_switch8_data_array_offset] = panel_lights_switch8_dataf_off_value;
+            XPLMSetDatavf(PanelLights8Data, panel_lights_switch8_dataf_array, 0, panel_lights_switch8_data_array_size);
+
+        }
+        return;
+    }
 
 }
 
