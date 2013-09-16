@@ -147,7 +147,7 @@ XPLMDataRef Rad1UpperNav1ActRemapableData = NULL, Rad1UpperNav1StbyRemapableData
 XPLMDataRef Rad1UpperNav2ActRemapableData = NULL, Rad1UpperNav2StbyRemapableData = NULL, Rad1UprNav2ActStbyRemapableData = NULL;
 XPLMDataRef Rad1UpperXpdrRemapableData = NULL, Rad1UpperXpdrRemapableMode = NULL, Rad1UpperXpdrBaroStdRemapableData = NULL;
 
-
+XPLMDataRef RadioPanelCountDataRef = NULL;
 
 XPLMDataRef Rad1LowerCom1ActRemapableData = NULL, Rad1LowerCom1StbyRemapableData = NULL, Rad1LowrCom1ActStbyRemapableData = NULL;
 XPLMDataRef Rad1LowerCom2ActRemapableData = NULL, Rad1LowerCom2StbyRemapableData = NULL, Rad1LowrCom2ActStbyRemapableData = NULL;
@@ -166,6 +166,9 @@ XPLMDataRef Rad2LowerCom2ActRemapableData = NULL, Rad2LowerCom2StbyRemapableData
 XPLMDataRef Rad2LowerNav1ActRemapableData = NULL, Rad2LowerNav1StbyRemapableData = NULL, Rad2LowrNav1ActStbyRemapableData = NULL;
 XPLMDataRef Rad2LowerNav2ActRemapableData = NULL, Rad2LowerNav2StbyRemapableData = NULL, Rad2LowrNav2ActStbyRemapableData = NULL;
 XPLMDataRef Rad2LowerXpdrRemapableData = NULL, Rad2LowerXpdrRemapableMode = NULL, Rad2LowerXpdrBaroStdRemapableData = NULL;
+
+
+
 
 XPLMDataRef Rad1UpperCom1OwnedDataRef = NULL, Rad1UpperCom2OwnedDataRef = NULL;
 XPLMDataRef Rad1UpperNav1OwnedDataRef = NULL, Rad1UpperNav2OwnedDataRef = NULL;
@@ -294,6 +297,8 @@ XPLMDataRef AprLightFlashRemapableData = NULL, RevLightFlashRemapableData = NULL
 XPLMDataRef AirspeedIsMach = NULL, Airspeed = NULL;
 
 XPLMDataRef HsiSelector = NULL;
+
+XPLMDataRef MultiPanelCountDataRef = NULL;
 
 XPLMDataRef	MultiAltSwitchOwnedDataRef = NULL, MultiVsSwitchOwnedDataRef = NULL;
 XPLMDataRef	MultiIasSwitchOwnedDataRef = NULL, MultiHdgSwitchOwnedDataRef = NULL;
@@ -524,6 +529,8 @@ XPLMDataRef TaxiLights3Data = NULL, TaxiLights4Data = NULL;
 XPLMDataRef LandingLightsData = NULL, LandingLights2Data = NULL;
 XPLMDataRef LandingLights3Data = NULL, LandingLights4Data = NULL;
 
+XPLMDataRef SwitchPanelCountDataRef = NULL;
+
 XPLMDataRef	SwitchStartOffOwnedDataRef = NULL, SwitchStartRightOwnedDataRef = NULL;
 XPLMDataRef	SwitchStartLeftOwnedDataRef = NULL, SwitchStartBothOwnedDataRef = NULL;
 XPLMDataRef	SwitchStartStartOwnedDataRef = NULL;
@@ -565,6 +572,8 @@ static aXPLMDataRefID DataRefID;
 
 //  ***************** BIP Panel Data Ref *********************
 XPLMDataRef gTimeSimIsRunningXDataRef = NULL;
+
+XPLMDataRef BipPanelCountData = NULL;
 
 XPLMMenuID      XsaitekpanelsMenu;
 XPLMMenuID      BipMenu;
@@ -615,6 +624,8 @@ int RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, int
 
 int radioMenuItem;
 
+
+static int RadioPanelCountData = 0;
 static int Rad1UprCom1OwnedData = 0, Rad1UprCom2OwnedData = 0;
 static int Rad1UprNav1OwnedData = 0, Rad1UprNav2OwnedData = 0;
 static int Rad1UprAdfOwnedData = 0, Rad1UprDmeOwnedData = 0;
@@ -645,6 +656,9 @@ static int Rad2LwrXpdrOwnedData = 0, Rad2LwrCorseIncOwnedData = 0;
 static int Rad2LwrCorseDecOwnedData = 0, Rad2LwrFineIncOwnedData = 0;
 static int Rad2LwrFineDecOwnedData = 0, Rad2LwrActStbyOwnedData = 0;
 
+
+int	RadioPanelCountGetDataiCallback(void * inRefcon);
+void	RadioPanelCountSetDataiCallback(void * inRefcon, int RadioPanelCount);
 
 
 int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon);
@@ -945,6 +959,7 @@ int xpanelsleftstartfnbutton = 0;
 
 // This is the storage for the data we own.
 
+static int MultiPanelCountData = 0;
 static int MultiAltSwitchOwnedData = 0, MultiVsSwitchOwnedData = 0;
 static int MultiIasSwitchOwnedData = 0, MultiHdgSwitchOwnedData = 0;
 static int MultiCrsSwitchOwnedData = 0;
@@ -962,6 +977,9 @@ static int MultiRevBtnOwnedData = 0;
 // float and double.  This is done for didactic purposes; multityped
 // should not be used in initial designs as a convenience to client
 // code.
+
+int	MultiPanelCountGetDataiCallback(void * inRefcon);
+void	MultiPanelCountSetDataiCallback(void * inRefcon, int MultiPanelCount);
 
 int	MultiAltSwitchStatusGetDataiCallback(void * inRefcon);
 void	MultiAltSwitchStatusSetDataiCallback(void * inRefcon, int MultiAltSwitchStatus);
@@ -1281,6 +1299,8 @@ int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 
 // This is the storage for the data we own.
 
+
+static int SwitchPanelCountData = 0;
 static int SwitchStartOffOwnedData = 0, SwitchStartRightOwnedData = 0;
 static int SwitchStartLeftOwnedData = 0, SwitchStartBothOwnedData = 0;
 static int SwitchStartStartOwnedData = 0;
@@ -1309,6 +1329,9 @@ static int SwitchLandingOwnedData = 0;
 //int SwitchBeaconPosition, SwitchNavPosition;
 //int SwitchStrobePosition, SwitchTaxiPosition;
 //int SwitchLandingPosition;
+
+int	SwitchPanelCountGetDataiCallback(void * inRefcon);
+void	SwitchPanelCountSetDataiCallback(void * inRefcon, int SwitchPanelCount);
 
 int	SwitchStartOffPositionGetDataiCallback(void * inRefcon);
 void	SwitchStartOffPositionSetDataiCallback(void * inRefcon, int SwitchStartOffPosition);
@@ -1679,6 +1702,7 @@ void process_bip_panel();
 void process_pref_file();
 void process_read_ini_file();
 
+
 // ********************* MyPanelsFlightLoopCallback **************************
 float	MyPanelsFlightLoopCallback(
                                    float                inElapsedSinceLastCall,    
@@ -1845,6 +1869,32 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   sprintf(buf, "Xsaitekpanels: found %d Switch  %d Radio  %d Multi  %d BIP Panels\n", switchcnt, radcnt, multicnt, bipcnt);
   XPLMDebugString(buf);
+
+  SwitchPanelCountDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/count",
+                           xplmType_Int,
+                           1,
+                           SwitchPanelCountGetDataiCallback,
+                           SwitchPanelCountSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  RadioPanelCountDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/count",
+                           xplmType_Int,
+                           1,
+                           RadioPanelCountGetDataiCallback,
+                           RadioPanelCountSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  MultiPanelCountDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/count",
+                           xplmType_Int,
+                           1,
+                           MultiPanelCountGetDataiCallback,
+                           MultiPanelCountSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+
 
   // * Register our callback for every loop. Positive intervals
   // * are in seconds, negative are the negative of sim frames.  Zero
@@ -2256,6 +2306,19 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 
 // Switch panel data references call backs
 
+int	SwitchPanelCountGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return SwitchPanelCountData;
+}
+
+void	SwitchPanelCountSetDataiCallback(void * inRefcon, int SwitchPanelCountData2)
+{
+    (void) inRefcon;
+    SwitchPanelCountData = SwitchPanelCountData2;
+}
+
+
 int	SwitchStartOffPositionGetDataiCallback(void * inRefcon)
 {
     (void) inRefcon;
@@ -2517,6 +2580,19 @@ void	SwitchLandingPositionSetDataiCallback(void * inRefcon, int SwitchLandingPos
 
 
 // Radio1 upper datareferences callbacks
+
+int	RadioPanelCountGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return RadioPanelCountData;
+}
+
+void	RadioPanelCountSetDataiCallback(void * inRefcon, int RadioPanelCountData2)
+{
+    (void) inRefcon;
+    RadioPanelCountData = RadioPanelCountData2;
+}
+
 
 int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon)
 {
@@ -3146,6 +3222,21 @@ void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbySta
 
 
 // Multi panel data references call backs
+
+
+int	MultiPanelCountGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return MultiPanelCountData;
+}
+
+void	MultiPanelCountSetDataiCallback(void * inRefcon, int MultiPanelCountData2)
+{
+    (void) inRefcon;
+    MultiPanelCountData = MultiPanelCountData2;
+}
+
+
 
 int	MultiAltSwitchStatusGetDataiCallback(void * inRefcon)
 {
@@ -4804,6 +4895,7 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
     XPLMPluginID PluginID = XPLMFindPluginBySignature("xplanesdk.examples.DataRefEditor");
     if (PluginID != XPLM_NO_PLUGIN_ID){
 
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/count");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startoff/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startright/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startleft/status");
@@ -4825,7 +4917,7 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/taxi/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/landing/status");
 
-
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/count");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcom1/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcom2/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprnav1/status");
@@ -4879,6 +4971,7 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwractstby/status");
 
 
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/count");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/altswitch/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/vsswitch/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/iasswitch/status");
@@ -4951,6 +5044,9 @@ float	MyPanelsFlightLoopCallback(
       }
   }
 
+  XPLMSetDatai(SwitchPanelCountDataRef, switchcnt);
+  XPLMSetDatai(RadioPanelCountDataRef, radcnt);
+  XPLMSetDatai(MultiPanelCountDataRef, multicnt);
 
   return interval;
 }
