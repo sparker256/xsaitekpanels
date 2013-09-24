@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.25   ***************
-// ****** Sep 15 2013   **************
+// ****** Sep 23 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -585,6 +585,9 @@ XPWidgetID      BipWidgetID = NULL;
 XPWidgetID      Bip2WidgetID = NULL;
 XPWidgetID      Bip3WidgetID = NULL;
 XPWidgetID      Bip4WidgetID = NULL;
+
+// ********************* Saitek Panels Data Ref  ************************
+XPLMDataRef XsaitekpanelsVersionDataRef = NULL;
 
 // ********************** Radio Panel variables ************************
 int radcnt = 0, radiores, stopradcnt;
@@ -1299,6 +1302,11 @@ int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 
 // This is the storage for the data we own.
 
+static int XsaitekpanelsVersionData = 0;
+
+int	XsaitekpanelsVersionGetDataiCallback(void * inRefcon);
+void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVersion);
+
 
 static int SwitchPanelCountData = 0;
 static int SwitchStartOffOwnedData = 0, SwitchStartRightOwnedData = 0;
@@ -1668,6 +1676,7 @@ void XsaitekpanelsMenuHandler(void *, void *);
 void WriteCSVTableToDisk(void);
 
 int             XsaitekpanelsMenuItem;
+int             XsaitekpanelsVersion;
 int             BipMenuItem;
 
 int Fps, multi_auto_mul;
@@ -1739,6 +1748,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
+  XsaitekpanelsVersion = 225;
   XPLMDebugString("Xsaitekpanels: v2.25\n");
 
 	/* First set up our plugin info. */
@@ -1870,6 +1880,14 @@ PLUGIN_API int XPluginStart(char *		outName,
   sprintf(buf, "Xsaitekpanels: found %d Switch  %d Radio  %d Multi  %d BIP Panels\n", switchcnt, radcnt, multicnt, bipcnt);
   XPLMDebugString(buf);
 
+  XsaitekpanelsVersionDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/version",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsVersionGetDataiCallback,
+                           XsaitekpanelsVersionSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
   SwitchPanelCountDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/count",
                            xplmType_Int,
                            1,
@@ -1893,7 +1911,6 @@ PLUGIN_API int XPluginStart(char *		outName,
                            MultiPanelCountSetDataiCallback,
                            NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                            NULL, NULL, NULL, NULL, NULL);
-
 
 
   // * Register our callback for every loop. Positive intervals
@@ -2305,6 +2322,19 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 }
 
 // Switch panel data references call backs
+
+int	XsaitekpanelsVersionGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsVersionData;
+}
+
+void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVersionData2)
+{
+    (void) inRefcon;
+    XsaitekpanelsVersionData = XsaitekpanelsVersionData2;
+}
+
 
 int	SwitchPanelCountGetDataiCallback(void * inRefcon)
 {
@@ -4895,6 +4925,7 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
     XPLMPluginID PluginID = XPLMFindPluginBySignature("xplanesdk.examples.DataRefEditor");
     if (PluginID != XPLM_NO_PLUGIN_ID){
 
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/version");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/count");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startoff/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startright/status");
@@ -5044,6 +5075,7 @@ float	MyPanelsFlightLoopCallback(
       }
   }
 
+  XPLMSetDatai(XsaitekpanelsVersionDataRef, XsaitekpanelsVersion);
   XPLMSetDatai(SwitchPanelCountDataRef, switchcnt);
   XPLMSetDatai(RadioPanelCountDataRef, radcnt);
   XPLMSetDatai(MultiPanelCountDataRef, multicnt);
