@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.25   ***************
-// ****** Sep 23 2013   **************
+// ******** ver 2.26   ***************
+// ****** Nov 11 2013   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -621,6 +621,50 @@ int rad2lwrcom2switchremap, rad2lwrcom2actstbybtnremap;
 int rad2lwrnav1switchremap, rad2lwrnav1actstbybtnremap;
 int rad2lwrnav2switchremap, rad2lwrnav2actstbybtnremap;
 int rad2lwrxpdrswitchremap;
+
+int rad1_upr_com1_actstby_btn_data_on_value, rad1_upr_com1_actstby_btn_data_off_value;
+int rad1_upr_com2_actstby_btn_data_on_value, rad1_upr_com2_actstby_btn_data_off_value;
+int rad1_upr_nav1_actstby_btn_data_on_value, rad1_upr_nav1_actstby_btn_data_off_value;
+int rad1_upr_nav2_actstby_btn_data_on_value, rad1_upr_nav2_actstby_btn_data_off_value;
+
+int rad1_lwr_com1_actstby_btn_data_on_value, rad1_lwr_com1_actstby_btn_data_off_value;
+int rad1_lwr_com2_actstby_btn_data_on_value, rad1_lwr_com2_actstby_btn_data_off_value;
+int rad1_lwr_nav1_actstby_btn_data_on_value, rad1_lwr_nav1_actstby_btn_data_off_value;
+int rad1_lwr_nav2_actstby_btn_data_on_value, rad1_lwr_nav2_actstby_btn_data_off_value;
+
+int rad2_upr_com1_actstby_btn_data_on_value, rad2_upr_com1_actstby_btn_data_off_value;
+int rad2_upr_com2_actstby_btn_data_on_value, rad2_upr_com2_actstby_btn_data_off_value;
+int rad2_upr_nav1_actstby_btn_data_on_value, rad2_upr_nav1_actstby_btn_data_off_value;
+int rad2_upr_nav2_actstby_btn_data_on_value, rad2_upr_nav2_actstby_btn_data_off_value;
+
+int rad2_lwr_com1_actstby_btn_data_on_value, rad2_lwr_com1_actstby_btn_data_off_value;
+int rad2_lwr_com2_actstby_btn_data_on_value, rad2_lwr_com2_actstby_btn_data_off_value;
+int rad2_lwr_nav1_actstby_btn_data_on_value, rad2_lwr_nav1_actstby_btn_data_off_value;
+int rad2_lwr_nav2_actstby_btn_data_on_value, rad2_lwr_nav2_actstby_btn_data_off_value;
+
+
+float rad1_upr_com1_actstby_btn_dataf_on_value, rad1_upr_com1_actstby_btn_dataf_off_value;
+float rad1_upr_com2_actstby_btn_dataf_on_value, rad1_upr_com2_actstby_btn_dataf_off_value;
+float rad1_upr_nav1_actstby_btn_dataf_on_value, rad1_upr_nav1_actstby_btn_dataf_off_value;
+float rad1_upr_nav2_actstby_btn_datfa_on_value, rad1_upr_nav2_actstby_btn_dataf_off_value;
+
+float rad1_lwr_com1_actstby_btn_dataf_on_value, rad1_lwr_com1_actstby_btn_dataf_off_value;
+float rad1_lwr_com2_actstby_btn_dataf_on_value, rad1_lwr_com2_actstby_btn_dataf_off_value;
+float rad1_lwr_nav1_actstby_btn_dataf_on_value, rad1_lwr_nav1_actstby_btn_dataf_off_value;
+float rad1_lwr_nav2_actstby_btn_dataf_on_value, rad1_lwr_nav2_actstby_btn_dataf_off_value;
+
+float rad2_upr_com1_actstby_btn_dataf_on_value, rad2_upr_com1_actstby_btn_dataf_off_value;
+float rad2_upr_com2_actstby_btn_dataf_on_value, rad2_upr_com2_actstby_btn_dataf_off_value;
+float rad2_upr_nav1_actstby_btn_dataf_on_value, rad2_upr_nav1_actstby_btn_dataf_off_value;
+float rad2_upr_nav2_actstby_btn_datfa_on_value, rad2_upr_nav2_actstby_btn_dataf_off_value;
+
+float rad2_lwr_com1_actstby_btn_dataf_on_value, rad2_lwr_com1_actstby_btn_dataf_off_value;
+float rad2_lwr_com2_actstby_btn_dataf_on_value, rad2_lwr_com2_actstby_btn_dataf_off_value;
+float rad2_lwr_nav1_actstby_btn_dataf_on_value, rad2_lwr_nav1_actstby_btn_dataf_off_value;
+float rad2_lwr_nav2_actstby_btn_dataf_on_value, rad2_lwr_nav2_actstby_btn_dataf_off_value;
+
+
+
 
 void CreateRadioWidget(int x1, int y1, int w, int h);
 int RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, intptr_t  inParam1, intptr_t  inParam2);
@@ -1748,11 +1792,11 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 225;
-  XPLMDebugString("Xsaitekpanels: v2.25\n");
+  XsaitekpanelsVersion = 226;
+  XPLMDebugString("Xsaitekpanels: v2.26\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.25");
+  strcpy(outName, "Xsaitekpanels v2.26");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 
