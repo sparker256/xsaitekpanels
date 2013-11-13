@@ -913,6 +913,17 @@ extern XPLMDataRef Av13MasterSwitchData, Av14MasterSwitchData;
 extern XPLMDataRef Av15MasterSwitchData, Av16MasterSwitchData;
 
 
+extern XPLMDataRef AvMasterSwitchDataf, Av2MasterSwitchDataf;
+extern XPLMDataRef Av3MasterSwitchDataf, Av4MasterSwitchDataf;
+extern XPLMDataRef Av5MasterSwitchDataf, Av6MasterSwitchDataf;
+extern XPLMDataRef Av7MasterSwitchDataf, Av8MasterSwitchDataf;
+
+extern XPLMDataRef Av9MasterSwitchDataf, Av10MasterSwitchDataf;
+extern XPLMDataRef Av11MasterSwitchDataf, Av12MasterSwitchDataf;
+extern XPLMDataRef Av13MasterSwitchDataf, Av14MasterSwitchDataf;
+extern XPLMDataRef Av15MasterSwitchDataf, Av16MasterSwitchDataf;
+
+
 extern XPLMDataRef FuelPumpSwitchData, FuelPump2SwitchData;
 extern XPLMDataRef FuelPump3SwitchData, FuelPump4SwitchData;
 extern XPLMDataRef FuelPump5SwitchData, FuelPump6SwitchData;
@@ -1239,6 +1250,25 @@ extern int landing_lights_switch2_data_on_value, landing_lights_switch2_data_off
 extern int landing_lights_switch3_data_on_value, landing_lights_switch3_data_off_value;
 extern int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 
+
+extern float av_master_switch_dataf_on_value, av_master_switch_dataf_off_value;
+extern float av2_master_switch_dataf_on_value, av2_master_switch_dataf_off_value;
+extern float av3_master_switch_dataf_on_value, av3_master_switch_dataf_off_value;
+extern float av4_master_switch_dataf_on_value, av4_master_switch_dataf_off_value;
+extern float av5_master_switch_dataf_on_value, av5_master_switch_dataf_off_value;
+extern float av6_master_switch_dataf_on_value, av6_master_switch_dataf_off_value;
+extern float av7_master_switch_dataf_on_value, av7_master_switch_dataf_off_value;
+extern float av8_master_switch_dataf_on_value, av8_master_switch_dataf_off_value;
+
+extern float av9_master_switch_dataf_on_value, av9_master_switch_dataf_off_value;
+extern float av10_master_switch_dataf_on_value, av10_master_switch_dataf_off_value;
+extern float av11_master_switch_dataf_on_value, av11_master_switch_dataf_off_value;
+extern float av12_master_switch_dataf_on_value, av12_master_switch_dataf_off_value;
+extern float av13_master_switch_dataf_on_value, av13_master_switch_dataf_off_value;
+extern float av14_master_switch_dataf_on_value, av14_master_switch_dataf_off_value;
+extern float av15_master_switch_dataf_on_value, av15_master_switch_dataf_off_value;
+extern float av16_master_switch_dataf_on_value, av16_master_switch_dataf_off_value;
+
 extern float panel_lights_switch_dataf_on_value, panel_lights_switch_dataf_off_value;
 extern float panel_lights_switch2_dataf_on_value, panel_lights_switch2_dataf_off_value;
 extern float panel_lights_switch3_dataf_on_value, panel_lights_switch3_dataf_off_value;
@@ -1358,23 +1388,23 @@ extern string alt6_master_switch_on, alt6_master_switch_off, alt6_master_switch_
 extern string alt7_master_switch_on, alt7_master_switch_off, alt7_master_switch_data;
 extern string alt8_master_switch_on, alt8_master_switch_off, alt8_master_switch_data;
 
-extern string av_master_switch_on, av_master_switch_off, av_master_switch_data;
-extern string av2_master_switch_on, av2_master_switch_off, av2_master_switch_data;
-extern string av3_master_switch_on, av3_master_switch_off, av3_master_switch_data;
-extern string av4_master_switch_on, av4_master_switch_off, av4_master_switch_data;
-extern string av5_master_switch_on, av5_master_switch_off, av5_master_switch_data;
-extern string av6_master_switch_on, av6_master_switch_off, av6_master_switch_data;
-extern string av7_master_switch_on, av7_master_switch_off, av7_master_switch_data;
-extern string av8_master_switch_on, av8_master_switch_off, av8_master_switch_data;
+extern string av_master_switch_on, av_master_switch_off, av_master_switch_data, av_master_switch_dataf;
+extern string av2_master_switch_on, av2_master_switch_off, av2_master_switch_data, av2_master_switch_dataf;
+extern string av3_master_switch_on, av3_master_switch_off, av3_master_switch_data, av3_master_switch_dataf;
+extern string av4_master_switch_on, av4_master_switch_off, av4_master_switch_data, av4_master_switch_dataf;
+extern string av5_master_switch_on, av5_master_switch_off, av5_master_switch_data, av5_master_switch_dataf;
+extern string av6_master_switch_on, av6_master_switch_off, av6_master_switch_data, av6_master_switch_dataf;
+extern string av7_master_switch_on, av7_master_switch_off, av7_master_switch_data, av7_master_switch_dataf;
+extern string av8_master_switch_on, av8_master_switch_off, av8_master_switch_data, av8_master_switch_dataf;
 
-extern string av9_master_switch_on, av9_master_switch_off, av9_master_switch_data;
-extern string av10_master_switch_on, av10_master_switch_off, av10_master_switch_data;
-extern string av11_master_switch_on, av11_master_switch_off, av11_master_switch_data;
-extern string av12_master_switch_on, av12_master_switch_off, av12_master_switch_data;
-extern string a13_master_switch_on, av13_master_switch_off, av13_master_switch_data;
-extern string av14_master_switch_on, av14_master_switch_off, av14_master_switch_data;
-extern string av15_master_switch_on, av15_master_switch_off, av15_master_switch_data;
-extern string av16_master_switch_on, av16_master_switch_off, av16_master_switch_data;
+extern string av9_master_switch_on, av9_master_switch_off, av9_master_switch_data, av9_master_switch_dataf;
+extern string av10_master_switch_on, av10_master_switch_off, av10_master_switch_data, av10_master_switch_dataf;
+extern string av11_master_switch_on, av11_master_switch_off, av11_master_switch_data, av11_master_switch_dataf;
+extern string av12_master_switch_on, av12_master_switch_off, av12_master_switch_data, av12_master_switch_dataf;
+extern string av13_master_switch_on, av13_master_switch_off, av13_master_switch_data, av13_master_switch_dataf;
+extern string av14_master_switch_on, av14_master_switch_off, av14_master_switch_data, av14_master_switch_dataf;
+extern string av15_master_switch_on, av15_master_switch_off, av15_master_switch_data, av15_master_switch_dataf;
+extern string av16_master_switch_on, av16_master_switch_off, av16_master_switch_data, av16_master_switch_dataf;
 
 extern string fuel_pump_switch_on, fuel_pump_switch_off, fuel_pump_switch_data;
 extern string fuel_pump2_switch_on, fuel_pump2_switch_off, fuel_pump2_switch_data;

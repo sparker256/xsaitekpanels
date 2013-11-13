@@ -827,41 +827,57 @@ void process_read_ini_file()
     if (avionicsmasterswitchenable == 3) {
             av_master_switch_data = getOptionToString("av_master_switch_data");
             AvMasterSwitchData   = XPLMFindDataRef(av_master_switch_data.c_str());
+            av_master_switch_dataf = getOptionToString("av_master_switch_dataf");
+            AvMasterSwitchDataf   = XPLMFindDataRef(av_master_switch_dataf.c_str());
             av_master_switch_data_on_value = getOptionToInt("av_master_switch_data_on_value");
             av_master_switch_data_off_value = getOptionToInt("av_master_switch_data_off_value");
 
             av2_master_switch_data = getOptionToString("av2_master_switch_data");
             Av2MasterSwitchData   = XPLMFindDataRef(av2_master_switch_data.c_str());
+            av2_master_switch_dataf = getOptionToString("av2_master_switch_dataf");
+            Av2MasterSwitchDataf   = XPLMFindDataRef(av2_master_switch_dataf.c_str());
             av2_master_switch_data_on_value = getOptionToInt("av2_master_switch_data_on_value");
             av2_master_switch_data_off_value = getOptionToInt("av2_master_switch_data_off_value")
                     ;
             av3_master_switch_data = getOptionToString("av3_master_switch_data");
             Av3MasterSwitchData   = XPLMFindDataRef(av3_master_switch_data.c_str());
+            av3_master_switch_dataf = getOptionToString("av3_master_switch_dataf");
+            Av3MasterSwitchDataf   = XPLMFindDataRef(av3_master_switch_dataf.c_str());
             av3_master_switch_data_on_value = getOptionToInt("av3_master_switch_data_on_value");
             av3_master_switch_data_off_value = getOptionToInt("av3_master_switch_data_off_value");
 
             av4_master_switch_data = getOptionToString("av4_master_switch_data");
             Av4MasterSwitchData   = XPLMFindDataRef(av4_master_switch_data.c_str());
+            av4_master_switch_dataf = getOptionToString("av4_master_switch_dataf");
+            Av4MasterSwitchDataf   = XPLMFindDataRef(av4_master_switch_dataf.c_str());
             av4_master_switch_data_on_value = getOptionToInt("av4_master_switch_data_on_value");
             av4_master_switch_data_off_value = getOptionToInt("av4_master_switch_data_off_value");
 
             av5_master_switch_data = getOptionToString("av5_master_switch_data");
             Av5MasterSwitchData   = XPLMFindDataRef(av5_master_switch_data.c_str());
+            av5_master_switch_dataf = getOptionToString("av5_master_switch_dataf");
+            Av5MasterSwitchDataf   = XPLMFindDataRef(av5_master_switch_dataf.c_str());
             av5_master_switch_data_on_value = getOptionToInt("av5_master_switch_data_on_value");
             av5_master_switch_data_off_value = getOptionToInt("av5_master_switch_data_off_value");
 
             av6_master_switch_data = getOptionToString("av6_master_switch_data");
             Av6MasterSwitchData   = XPLMFindDataRef(av6_master_switch_data.c_str());
+            av6_master_switch_dataf = getOptionToString("av6_master_switch_dataf");
+            Av6MasterSwitchDataf   = XPLMFindDataRef(av6_master_switch_dataf.c_str());
             av6_master_switch_data_on_value = getOptionToInt("av6_master_switch_data_on_value");
             av6_master_switch_data_off_value = getOptionToInt("av6_master_switch_data_off_value");
 
             av7_master_switch_data = getOptionToString("av7_master_switch_data");
             Av7MasterSwitchData   = XPLMFindDataRef(av7_master_switch_data.c_str());
+            av7_master_switch_dataf = getOptionToString("av7_master_switch_dataf");
+            Av7MasterSwitchDataf   = XPLMFindDataRef(av7_master_switch_dataf.c_str());
             av7_master_switch_data_on_value = getOptionToInt("av7_master_switch_data_on_value");
             av7_master_switch_data_off_value = getOptionToInt("av7_master_switch_data_off_value");
 
             av8_master_switch_data = getOptionToString("av8_master_switch_data");
             Av8MasterSwitchData   = XPLMFindDataRef(av8_master_switch_data.c_str());
+            av8_master_switch_dataf = getOptionToString("av8_master_switch_dataf");
+            Av8MasterSwitchDataf   = XPLMFindDataRef(av8_master_switch_dataf.c_str());
             av8_master_switch_data_on_value = getOptionToInt("av8_master_switch_data_on_value");
             av8_master_switch_data_off_value = getOptionToInt("av8_master_switch_data_off_value");
 
@@ -869,41 +885,57 @@ void process_read_ini_file()
 
             av9_master_switch_data = getOptionToString("av9_master_switch_data");
             Av9MasterSwitchData   = XPLMFindDataRef(av9_master_switch_data.c_str());
+            av9_master_switch_dataf = getOptionToString("av9_master_switch_dataf");
+            Av9MasterSwitchDataf   = XPLMFindDataRef(av9_master_switch_dataf.c_str());
             av9_master_switch_data_on_value = getOptionToInt("av9_master_switch_data_on_value");
             av9_master_switch_data_off_value = getOptionToInt("av9_master_switch_data_off_value");
 
             av10_master_switch_data = getOptionToString("av10_master_switch_data");
             Av10MasterSwitchData   = XPLMFindDataRef(av10_master_switch_data.c_str());
+            av10_master_switch_dataf = getOptionToString("av10_master_switch_dataf");
+            Av10MasterSwitchDataf   = XPLMFindDataRef(av10_master_switch_dataf.c_str());
             av10_master_switch_data_on_value = getOptionToInt("av10_master_switch_data_on_value");
             av10_master_switch_data_off_value = getOptionToInt("av10_master_switch_data_off_value")
                     ;
             av11_master_switch_data = getOptionToString("av11_master_switch_data");
             Av11MasterSwitchData   = XPLMFindDataRef(av11_master_switch_data.c_str());
+            av11_master_switch_dataf = getOptionToString("av11_master_switch_dataf");
+            Av11MasterSwitchDataf   = XPLMFindDataRef(av11_master_switch_dataf.c_str());
             av11_master_switch_data_on_value = getOptionToInt("av11_master_switch_data_on_value");
             av11_master_switch_data_off_value = getOptionToInt("av11_master_switch_data_off_value");
 
             av12_master_switch_data = getOptionToString("av12_master_switch_data");
             Av12MasterSwitchData   = XPLMFindDataRef(av12_master_switch_data.c_str());
+            av12_master_switch_dataf = getOptionToString("av12_master_switch_dataf");
+            Av12MasterSwitchDataf   = XPLMFindDataRef(av12_master_switch_dataf.c_str());
             av12_master_switch_data_on_value = getOptionToInt("av12_master_switch_data_on_value");
             av12_master_switch_data_off_value = getOptionToInt("av12_master_switch_data_off_value");
 
             av13_master_switch_data = getOptionToString("av13_master_switch_data");
             Av13MasterSwitchData   = XPLMFindDataRef(av13_master_switch_data.c_str());
+            av13_master_switch_dataf = getOptionToString("av13_master_switch_dataf");
+            Av13MasterSwitchDataf   = XPLMFindDataRef(av13_master_switch_dataf.c_str());
             av13_master_switch_data_on_value = getOptionToInt("av13_master_switch_data_on_value");
             av13_master_switch_data_off_value = getOptionToInt("av13_master_switch_data_off_value");
 
             av14_master_switch_data = getOptionToString("av14_master_switch_data");
             Av14MasterSwitchData   = XPLMFindDataRef(av14_master_switch_data.c_str());
+            av14_master_switch_dataf = getOptionToString("av14_master_switch_dataf");
+            Av14MasterSwitchDataf   = XPLMFindDataRef(av14_master_switch_dataf.c_str());
             av14_master_switch_data_on_value = getOptionToInt("av14_master_switch_data_on_value");
             av14_master_switch_data_off_value = getOptionToInt("av14_master_switch_data_off_value");
 
             av15_master_switch_data = getOptionToString("av15_master_switch_data");
             Av15MasterSwitchData   = XPLMFindDataRef(av15_master_switch_data.c_str());
+            av15_master_switch_dataf = getOptionToString("av15_master_switch_dataf");
+            Av15MasterSwitchDataf   = XPLMFindDataRef(av15_master_switch_dataf.c_str());
             av15_master_switch_data_on_value = getOptionToInt("av15_master_switch_data_on_value");
             av15_master_switch_data_off_value = getOptionToInt("av15_master_switch_data_off_value");
 
             av16_master_switch_data = getOptionToString("av16_master_switch_data");
             Av16MasterSwitchData   = XPLMFindDataRef(av16_master_switch_data.c_str());
+            av16_master_switch_dataf = getOptionToString("av16_master_switch_dataf");
+            Av16MasterSwitchDataf   = XPLMFindDataRef(av16_master_switch_dataf.c_str());
             av16_master_switch_data_on_value = getOptionToInt("av16_master_switch_data_on_value");
             av16_master_switch_data_off_value = getOptionToInt("av16_master_switch_data_off_value");
 
