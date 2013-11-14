@@ -1690,10 +1690,11 @@ void process_read_ini_file()
         rad1_upper_com1_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_com1_actstby_btn_cmd");
         Rad1UprCom1ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_com1_actstby_btn_remapable_cmd.c_str());
     }
-    if ((rad1uprcom1actstbybtnremap == 2) || (rad1uprcom1actstbybtnremap == 3)) {
-
+    if (rad1uprcom1actstbybtnremap == 2) {
         rad1_upper_com1_actstby_btn_remapable_data = getOptionToString("rad1_upper_com1_actstby_btn_data");
-        Rad1UprCom1ActStbyRemapableData   = XPLMFindDataRef(rad1_upper_com1_actstby_btn_remapable_data.c_str());
+        Rad1UprCom1ActStbyRemapableData = XPLMFindDataRef(rad1_upper_com1_actstby_btn_remapable_data.c_str());
+        rad1_upper_com1_actstby_btn_remapable_dataf = getOptionToString("rad1_upper_com1_actstby_btn_dataf");
+        Rad1UprCom1ActStbyRemapableDataf = XPLMFindDataRef(rad1_upper_com1_actstby_btn_remapable_dataf.c_str());
         rad1_upr_com1_actstby_btn_data_on_value = getOptionToInt("rad1_upr_com1_actstby_btn_data_on_value");
         rad1_upr_com1_actstby_btn_data_off_value = getOptionToInt("rad1_upr_com1_actstby_btn_data_off_value");
 
@@ -1728,10 +1729,11 @@ void process_read_ini_file()
         rad1_upper_com2_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_com2_actstby_btn_cmd");
         Rad1UprCom2ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_com2_actstby_btn_remapable_cmd.c_str());
     }
-    if ((rad1uprcom2actstbybtnremap == 2) || (rad1uprcom2actstbybtnremap == 3)) {
-
+    if (rad1uprcom2actstbybtnremap == 2) {
         rad1_upper_com2_actstby_btn_remapable_data = getOptionToString("rad1_upper_com2_actstby_btn_data");
-        Rad1UprCom2ActStbyRemapableData   = XPLMFindDataRef(rad1_upper_com2_actstby_btn_remapable_data.c_str());
+        Rad1UprCom2ActStbyRemapableData = XPLMFindDataRef(rad1_upper_com2_actstby_btn_remapable_data.c_str());
+        rad1_upper_com2_actstby_btn_remapable_dataf = getOptionToString("rad1_upper_com2_actstby_btn_dataf");
+        Rad1UprCom2ActStbyRemapableDataf   = XPLMFindDataRef(rad1_upper_com2_actstby_btn_remapable_dataf.c_str());
         rad1_upr_com2_actstby_btn_data_on_value = getOptionToInt("rad1_upr_com2_actstby_btn_data_on_value");
         rad1_upr_com2_actstby_btn_data_off_value = getOptionToInt("rad1_upr_com2_actstby_btn_data_off_value");
     }
@@ -1767,10 +1769,12 @@ void process_read_ini_file()
         rad1_upper_nav1_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_nav1_actstby_btn_cmd");
         Rad1UprNav1ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_nav1_actstby_btn_remapable_cmd.c_str());
     }
-    if ((rad1uprnav1actstbybtnremap == 2) || (rad1uprnav1actstbybtnremap == 3)) {
+    if (rad1uprnav1actstbybtnremap == 2) {
 
         rad1_upper_nav1_actstby_btn_remapable_data = getOptionToString("rad1_upper_nav1_actstby_btn_data");
-        Rad1UprNav1ActStbyRemapableData   = XPLMFindDataRef(rad1_upper_nav1_actstby_btn_remapable_data.c_str());
+        Rad1UprNav1ActStbyRemapableData = XPLMFindDataRef(rad1_upper_nav1_actstby_btn_remapable_data.c_str());
+        rad1_upper_nav1_actstby_btn_remapable_dataf = getOptionToString("rad1_upper_nav1_actstby_btn_dataf");
+        Rad1UprNav1ActStbyRemapableDataf = XPLMFindDataRef(rad1_upper_nav1_actstby_btn_remapable_dataf.c_str());
         rad1_upr_nav1_actstby_btn_data_on_value = getOptionToInt("rad1_upr_nav1_actstby_btn_data_on_value");
         rad1_upr_nav1_actstby_btn_data_off_value = getOptionToInt("rad1_upr_nav1_actstby_btn_data_off_value");
 
@@ -1805,10 +1809,12 @@ void process_read_ini_file()
         rad1_upper_nav2_actstby_btn_remapable_cmd = getOptionToString("rad1_upper_nav2_actstby_btn_cmd");
         Rad1UprNav2ActStbyRemapableCmd   = XPLMFindCommand(rad1_upper_nav2_actstby_btn_remapable_cmd.c_str());
     }
-    if ((rad1uprnav2actstbybtnremap == 2) || (rad1uprnav2actstbybtnremap == 3)) {
+    if (rad1uprnav2actstbybtnremap == 2) {
 
         rad1_upper_nav2_actstby_btn_remapable_data = getOptionToString("rad1_upper_nav2_actstby_btn_data");
         Rad1UprNav2ActStbyRemapableData = XPLMFindDataRef(rad1_upper_nav2_actstby_btn_remapable_data.c_str());
+        rad1_upper_nav2_actstby_btn_remapable_dataf = getOptionToString("rad1_upper_nav2_actstby_btn_dataf");
+        Rad1UprNav2ActStbyRemapableDataf = XPLMFindDataRef(rad1_upper_nav2_actstby_btn_remapable_dataf.c_str());
         rad1_upr_nav2_actstby_btn_data_on_value = getOptionToInt("rad1_upr_nav2_actstby_btn_data_on_value");
         rad1_upr_nav2_actstby_btn_data_off_value = getOptionToInt("rad1_upr_nav2_actstby_btn_data_off_value");
     }
@@ -1867,9 +1873,11 @@ void process_read_ini_file()
         rad1_lower_com1_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_com1_actstby_btn_cmd");
         Rad1LowrCom1ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_com1_actstby_btn_remapable_cmd.c_str());
     }
-    if ((rad1lwrcom1actstbybtnremap == 2) || (rad1lwrcom1actstbybtnremap == 3)) {
+    if (rad1lwrcom1actstbybtnremap == 2) {
         rad1_lower_com1_actstby_btn_remapable_data = getOptionToString("rad1_lower_com1_actstby_btn_data");
-        Rad1LowrCom1ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_com1_actstby_btn_remapable_data.c_str());
+        Rad1LowrCom1ActStbyRemapableData = XPLMFindDataRef(rad1_lower_com1_actstby_btn_remapable_data.c_str());
+        rad1_lower_com1_actstby_btn_remapable_dataf = getOptionToString("rad1_lower_com1_actstby_btn_dataf");
+        Rad1LowrCom1ActStbyRemapableDataf = XPLMFindDataRef(rad1_lower_com1_actstby_btn_remapable_dataf.c_str());
         rad1_lwr_com1_actstby_btn_data_on_value = getOptionToInt("rad1_lwr_com1_actstby_btn_data_on_value");
         rad1_lwr_com1_actstby_btn_data_off_value = getOptionToInt("rad1_lwr_com1_actstby_btn_data_off_value");
     }
@@ -1903,10 +1911,11 @@ void process_read_ini_file()
         rad1_lower_com2_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_com2_actstby_btn_cmd");
         Rad1LowrCom2ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_com2_actstby_btn_remapable_cmd.c_str());
     }
-    if ((rad1lwrcom2actstbybtnremap == 2) || (rad1lwrcom2actstbybtnremap == 3)) {
-
+    if (rad1lwrcom2actstbybtnremap == 2) {
         rad1_lower_com2_actstby_btn_remapable_data = getOptionToString("rad1_lower_com2_actstby_btn_data");
-        Rad1LowrCom2ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_com2_actstby_btn_remapable_data.c_str());
+        Rad1LowrCom2ActStbyRemapableData = XPLMFindDataRef(rad1_lower_com2_actstby_btn_remapable_data.c_str());
+        rad1_lower_com2_actstby_btn_remapable_dataf = getOptionToString("rad1_lower_com2_actstby_btn_dataf");
+        Rad1LowrCom2ActStbyRemapableDataf = XPLMFindDataRef(rad1_lower_com2_actstby_btn_remapable_dataf.c_str());
         rad1_lwr_com2_actstby_btn_data_on_value = getOptionToInt("rad1_lwr_com2_actstby_btn_data_on_value");
         rad1_lwr_com2_actstby_btn_data_off_value = getOptionToInt("rad1_lwr_com2_actstby_btn_data_off_value");
     }
@@ -1941,9 +1950,11 @@ void process_read_ini_file()
         rad1_lower_nav1_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_nav1_actstby_btn_cmd");
         Rad1LowrNav1ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_nav1_actstby_btn_remapable_cmd.c_str());
     }
-    if ((rad1lwrnav1actstbybtnremap == 2) || (rad1lwrnav1actstbybtnremap == 3)) {
+    if (rad1lwrnav1actstbybtnremap == 2) {
         rad1_lower_nav1_actstby_btn_remapable_data = getOptionToString("rad1_lower_nav1_actstby_btn_data");
-        Rad1LowrNav1ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_nav1_actstby_btn_remapable_data.c_str());
+        Rad1LowrNav1ActStbyRemapableData = XPLMFindDataRef(rad1_lower_nav1_actstby_btn_remapable_data.c_str());
+        rad1_lower_nav1_actstby_btn_remapable_dataf = getOptionToString("rad1_lower_nav1_actstby_btn_dataf");
+        Rad1LowrNav1ActStbyRemapableDataf = XPLMFindDataRef(rad1_lower_nav1_actstby_btn_remapable_dataf.c_str());
         rad1_lwr_nav1_actstby_btn_data_on_value = getOptionToInt("rad1_lwr_nav1_actstby_btn_data_on_value");
         rad1_lwr_nav1_actstby_btn_data_off_value = getOptionToInt("rad1_lwr_nav1_actstby_btn_data_off_value");
     }
@@ -1977,9 +1988,11 @@ void process_read_ini_file()
          rad1_lower_nav2_actstby_btn_remapable_cmd = getOptionToString("rad1_lower_nav2_actstby_btn_cmd");
          Rad1LowrNav2ActStbyRemapableCmd   = XPLMFindCommand(rad1_lower_nav2_actstby_btn_remapable_cmd.c_str());
      }
-     if ((rad1lwrnav2actstbybtnremap == 2) || (rad1lwrnav2actstbybtnremap == 3)) {
+     if (rad1lwrnav2actstbybtnremap == 2) {
          rad1_lower_nav2_actstby_btn_remapable_data = getOptionToString("rad1_lower_nav2_actstby_btn_data");
-         Rad1LowrNav2ActStbyRemapableData   = XPLMFindDataRef(rad1_lower_nav2_actstby_btn_remapable_data.c_str());
+         Rad1LowrNav2ActStbyRemapableData = XPLMFindDataRef(rad1_lower_nav2_actstby_btn_remapable_data.c_str());
+         rad1_lower_nav2_actstby_btn_remapable_dataf = getOptionToString("rad1_lower_nav2_actstby_btn_dataf");
+         Rad1LowrNav2ActStbyRemapableDataf = XPLMFindDataRef(rad1_lower_nav2_actstby_btn_remapable_dataf.c_str());
          rad1_lwr_nav2_actstby_btn_data_on_value = getOptionToInt("rad1_lwr_nav2_actstby_btn_data_on_value");
          rad1_lwr_nav2_actstby_btn_data_off_value = getOptionToInt("rad1_lwr_nav2_actstby_btn_data_off_value");
      }
@@ -2037,9 +2050,11 @@ void process_read_ini_file()
         rad2_upper_com1_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_com1_actstby_btn_cmd");
         Rad2UprCom1ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_com1_actstby_btn_remapable_cmd.c_str());
      }
-    if ((rad2uprcom1actstbybtnremap == 2) || (rad2uprcom1actstbybtnremap == 3)) {
+    if (rad2uprcom1actstbybtnremap == 2) {
         rad2_upper_com1_actstby_btn_remapable_data = getOptionToString("rad2_upper_com1_actstby_btn_data");
-        Rad2UprCom1ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_com1_actstby_btn_remapable_data.c_str());
+        Rad2UprCom1ActStbyRemapableData = XPLMFindDataRef(rad2_upper_com1_actstby_btn_remapable_data.c_str());
+        rad2_upper_com1_actstby_btn_remapable_dataf = getOptionToString("rad2_upper_com1_actstby_btn_dataf");
+        Rad2UprCom1ActStbyRemapableDataf = XPLMFindDataRef(rad2_upper_com1_actstby_btn_remapable_dataf.c_str());
         rad2_upr_com1_actstby_btn_data_on_value = getOptionToInt("rad2_upr_com1_actstby_btn_data_on_value");
         rad2_upr_com1_actstby_btn_data_off_value = getOptionToInt("rad2_upr_com1_actstby_btn_data_off_value");
     }
@@ -2069,13 +2084,15 @@ void process_read_ini_file()
 
     // Radio2 Upper Com2 active stanby button - remapable
     rad2uprcom2actstbybtnremap = getOptionToInt("Radio2 Upper Com2 ActStby remapable");
-    if ((rad2uprcom2actstbybtnremap == 1) || (rad2uprcom2actstbybtnremap == 2)) {
+    if (rad2uprcom2actstbybtnremap == 1) {
         rad2_upper_com2_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_com2_actstby_btn_cmd");
         Rad2UprCom2ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_com2_actstby_btn_remapable_cmd.c_str());
     }
-   if ((rad2uprcom2actstbybtnremap == 2) || (rad2uprcom2actstbybtnremap == 3)) {
+   if (rad2uprcom2actstbybtnremap == 2)  {
         rad2_upper_com2_actstby_btn_remapable_data = getOptionToString("rad2_upper_com2_actstby_btn_data");
-        Rad2UprCom2ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_com2_actstby_btn_remapable_data.c_str());
+        Rad2UprCom2ActStbyRemapableData = XPLMFindDataRef(rad2_upper_com2_actstby_btn_remapable_data.c_str());
+        rad2_upper_com2_actstby_btn_remapable_dataf = getOptionToString("rad2_upper_com2_actstby_btn_dataf");
+        Rad2UprCom2ActStbyRemapableDataf = XPLMFindDataRef(rad2_upper_com2_actstby_btn_remapable_dataf.c_str());
         rad2_upr_com2_actstby_btn_data_on_value = getOptionToInt("rad2_upr_com2_actstby_btn_data_on_value");
         rad2_upr_com2_actstby_btn_data_off_value = getOptionToInt("rad2_upr_com2_actstby_btn_data_off_value");
     }
@@ -2109,9 +2126,11 @@ void process_read_ini_file()
         rad2_upper_nav1_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_nav1_actstby_btn_cmd");
         Rad2UprNav1ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_nav1_actstby_btn_remapable_cmd.c_str());
     }
-   if ((rad2uprnav1actstbybtnremap == 2) || (rad2uprnav1actstbybtnremap == 3)) {
+   if (rad2uprnav1actstbybtnremap == 2) {
         rad2_upper_nav1_actstby_btn_remapable_data = getOptionToString("rad2_upper_nav1_actstby_btn_data");
-        Rad2UprNav1ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_nav1_actstby_btn_remapable_data.c_str());
+        Rad2UprNav1ActStbyRemapableData = XPLMFindDataRef(rad2_upper_nav1_actstby_btn_remapable_data.c_str());
+        rad2_upper_nav1_actstby_btn_remapable_dataf = getOptionToString("rad2_upper_nav1_actstby_btn_dataf");
+        Rad2UprNav1ActStbyRemapableDataf = XPLMFindDataRef(rad2_upper_nav1_actstby_btn_remapable_dataf.c_str());
         rad2_upr_nav1_actstby_btn_data_on_value = getOptionToInt("rad2_upr_nav1_actstby_btn_data_on_value");
         rad2_upr_nav1_actstby_btn_data_off_value = getOptionToInt("rad2_upr_nav1_actstby_btn_data_off_value");
     }
@@ -2145,9 +2164,11 @@ void process_read_ini_file()
         rad2_upper_nav2_actstby_btn_remapable_cmd = getOptionToString("rad2_upper_nav2_actstby_btn_cmd");
         Rad2UprNav2ActStbyRemapableCmd   = XPLMFindCommand(rad2_upper_nav2_actstby_btn_remapable_cmd.c_str());
     }
-   if ((rad2uprnav2actstbybtnremap == 2) || (rad2uprnav2actstbybtnremap == 3)) {
+   if (rad2uprnav2actstbybtnremap == 2) {
         rad2_upper_nav2_actstby_btn_remapable_data = getOptionToString("rad2_upper_nav2_actstby_btn_data");
-        Rad2UprNav2ActStbyRemapableData   = XPLMFindDataRef(rad2_upper_nav2_actstby_btn_remapable_data.c_str());
+        Rad2UprNav2ActStbyRemapableData = XPLMFindDataRef(rad2_upper_nav2_actstby_btn_remapable_data.c_str());
+        rad2_upper_nav2_actstby_btn_remapable_dataf = getOptionToString("rad2_upper_nav2_actstby_btn_dataf");
+        Rad2UprNav2ActStbyRemapableDataf = XPLMFindDataRef(rad2_upper_nav2_actstby_btn_remapable_dataf.c_str());
         rad2_upr_nav2_actstby_btn_data_on_value = getOptionToInt("rad2_upr_nav2_actstby_btn_data_on_value");
         rad2_upr_nav2_actstby_btn_data_off_value = getOptionToInt("rad2_upr_nav2_actstby_btn_data_off_value");
     }
@@ -2208,9 +2229,11 @@ void process_read_ini_file()
         rad2_lower_com1_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_com1_actstby_btn_cmd");
         Rad2LowrCom1ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_com1_actstby_btn_remapable_cmd.c_str());
     }
-   if ((rad2lwrcom1actstbybtnremap == 2) || (rad2lwrcom1actstbybtnremap == 3)) {
+   if (rad2lwrcom1actstbybtnremap == 2) {
         rad2_lower_com1_actstby_btn_remapable_data = getOptionToString("rad2_lower_com1_actstby_btn_data");
-        Rad2LowrCom1ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_com1_actstby_btn_remapable_data.c_str());
+        Rad2LowrCom1ActStbyRemapableData = XPLMFindDataRef(rad2_lower_com1_actstby_btn_remapable_data.c_str());
+        rad2_lower_com1_actstby_btn_remapable_dataf = getOptionToString("rad2_lower_com1_actstby_btn_dataf");
+        Rad2LowrCom1ActStbyRemapableDataf = XPLMFindDataRef(rad2_lower_com1_actstby_btn_remapable_dataf.c_str());
         rad2_lwr_com1_actstby_btn_data_on_value = getOptionToInt("rad2_lwr_com1_actstby_btn_data_on_value");
         rad2_lwr_com1_actstby_btn_data_off_value = getOptionToInt("rad2_lwr_com1_actstby_btn_data_off_value");
     }
@@ -2244,9 +2267,11 @@ void process_read_ini_file()
         rad2_lower_com2_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_com2_actstby_btn_cmd");
         Rad2LowrCom2ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_com2_actstby_btn_remapable_cmd.c_str());
     }
-   if ((rad2lwrcom2actstbybtnremap == 2) || (rad2lwrcom2actstbybtnremap == 3)) {
+   if (rad2lwrcom2actstbybtnremap == 2) {
         rad2_lower_com2_actstby_btn_remapable_data = getOptionToString("rad2_lower_com2_actstby_btn_data");
-        Rad2LowrCom2ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_com2_actstby_btn_remapable_data.c_str());
+        Rad2LowrCom2ActStbyRemapableData = XPLMFindDataRef(rad2_lower_com2_actstby_btn_remapable_data.c_str());
+        rad2_lower_com2_actstby_btn_remapable_dataf = getOptionToString("rad2_lower_com2_actstby_btn_dataf");
+        Rad2LowrCom2ActStbyRemapableDataf = XPLMFindDataRef(rad2_lower_com2_actstby_btn_remapable_dataf.c_str());
         rad2_lwr_com2_actstby_btn_data_on_value = getOptionToInt("rad2_lwr_com2_actstby_btn_data_on_value");
         rad2_lwr_com2_actstby_btn_data_off_value = getOptionToInt("rad2_lwr_com2_actstby_btn_data_off_value");
     }
@@ -2280,9 +2305,11 @@ void process_read_ini_file()
         rad2_lower_nav1_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_nav1_actstby_btn_cmd");
         Rad2LowrNav1ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_nav1_actstby_btn_remapable_cmd.c_str());
     }
-   if ((rad2lwrnav1actstbybtnremap == 2) || (rad2lwrnav1actstbybtnremap == 3)) {
+   if (rad2lwrnav1actstbybtnremap == 2) {
         rad2_lower_nav1_actstby_btn_remapable_data = getOptionToString("rad2_lower_nav1_actstby_btn_data");
-        Rad2LowrNav1ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_nav1_actstby_btn_remapable_data.c_str());
+        Rad2LowrNav1ActStbyRemapableData = XPLMFindDataRef(rad2_lower_nav1_actstby_btn_remapable_data.c_str());
+        rad2_lower_nav1_actstby_btn_remapable_dataf = getOptionToString("rad2_lower_nav1_actstby_btn_dataf");
+        Rad2LowrNav1ActStbyRemapableDataf = XPLMFindDataRef(rad2_lower_nav1_actstby_btn_remapable_dataf.c_str());
         rad2_lwr_nav1_actstby_btn_data_on_value = getOptionToInt("rad2_lwr_nav1_actstby_btn_data_on_value");
         rad2_lwr_nav1_actstby_btn_data_off_value = getOptionToInt("rad2_lwr_nav1_actstby_btn_data_off_value");
     }
@@ -2316,14 +2343,16 @@ void process_read_ini_file()
         rad2_lower_nav2_actstby_btn_remapable_cmd = getOptionToString("rad2_lower_nav2_actstby_btn_cmd");
         Rad2LowrNav2ActStbyRemapableCmd   = XPLMFindCommand(rad2_lower_nav2_actstby_btn_remapable_cmd.c_str());
     }
-   if ((rad2lwrnav2actstbybtnremap == 2) || (rad2lwrnav2actstbybtnremap == 3)) {
+   if (rad2lwrnav2actstbybtnremap == 2) {
         rad2_lower_nav2_actstby_btn_remapable_data = getOptionToString("rad2_lower_nav2_actstby_btn_data");
-        Rad2LowrNav2ActStbyRemapableData   = XPLMFindDataRef(rad2_lower_nav2_actstby_btn_remapable_data.c_str());
+        Rad2LowrNav2ActStbyRemapableData = XPLMFindDataRef(rad2_lower_nav2_actstby_btn_remapable_data.c_str());
+        rad2_lower_nav2_actstby_btn_remapable_dataf = getOptionToString("rad2_lower_nav2_actstby_btn_dataf");
+        Rad2LowrNav2ActStbyRemapableDataf = XPLMFindDataRef(rad2_lower_nav2_actstby_btn_remapable_dataf.c_str());
         rad2_lwr_nav2_actstby_btn_data_on_value = getOptionToInt("rad2_lwr_nav2_actstby_btn_data_on_value");
         rad2_lwr_nav2_actstby_btn_data_off_value = getOptionToInt("rad2_lwr_nav2_actstby_btn_data_off_value");
     }
 
-    // Radio1 Lower Xpdr switch - remapable
+    // Radio2 Lower Xpdr switch - remapable
 
     rad2lwrxpdrswitchremap = getOptionToInt("Radio2 Lower Xpdr Switch remapable");
     if (rad2lwrxpdrswitchremap == 777) {
