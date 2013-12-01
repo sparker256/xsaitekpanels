@@ -2594,7 +2594,7 @@ void process_read_ini_file()
          IasButtonRemapableCmd   = XPLMFindCommand(ias_button_remapable.c_str());
          ias_changeover_button_remapable = getOptionToString("ias_changeover_button_remapable_cmd");
          IasChangeoverButtonRemapableCmd   = XPLMFindCommand(ias_changeover_button_remapable.c_str());
-    } else if ((iasbuttonremap == 2) || (iasbuttonremap == 2)) {
+    } else if ((iasbuttonremap == 2) || (iasbuttonremap == 3)) {
          ias_button_data_remapable = getOptionToString("ias_button_remapable_data");
          IasButtonRemapableData   = XPLMFindDataRef(ias_button_data_remapable.c_str());
          ias_changeover_button_data_remapable = getOptionToString("ias_changeover_button_remapable_data");
