@@ -39,16 +39,11 @@ unix:!macx {
 macx {
     DEFINES += APL=1 IBM=0 LIN=0
     TARGET = mac.xpl
-    QMAKE_LFLAGS += -F../SDK/Libraries/Mac/ -framework XPWidgets -framework XPLM
+    QMAKE_LFLAGS += -F../../SDK/Libraries/Mac/ -framework XPWidgets -framework XPLM
     SOURCES += \
-          ../hidapi-0.7.0/mac/hid.c
+          ../../hidapi-0.7.0/mac/hid.c
     LIBS += -framework IOKit -framework CoreFoundation
 
-    # Build for multiple architectures.
-    # The following line is only needed to build universal on PPC architectures.
-    # QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
-    # The following line defines for which architectures we build.
-    CONFIG += x86
 }
 
 HEADERS += ../saitekpanels.h \
