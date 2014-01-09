@@ -159,9 +159,9 @@ void process_read_ini_file()
     char xpsacfpath[512];
     XPLMGetNthAircraftModel(0, xpsacfname, xpsacfpath);
 
-    XPLMDebugString("\nXsaitekpanels: Raw Current aircraft path is \n");
-    XPLMDebugString(xpsacfpath);
-    XPLMDebugString("\n");
+    //XPLMDebugString("\nXsaitekpanels: Raw Current aircraft path is \n");
+    //XPLMDebugString(xpsacfpath);
+    //XPLMDebugString("\n");
 
     if(strlen(xpsacfpath) == 0){
       return;
@@ -182,9 +182,9 @@ void process_read_ini_file()
 
     xpsini_path_name.append("xsaitekpanels.ini");
 
-    XPLMDebugString("\nXsaitekpanels: The full path to xsaitekpanels.ini in the current aircraft folder is \n");
-    XPLMDebugString(xpsini_path_name.c_str());
-    XPLMDebugString("\n");
+    //XPLMDebugString("\nXsaitekpanels: The full path to xsaitekpanels.ini in the current aircraft folder is \n");
+    //XPLMDebugString(xpsini_path_name.c_str());
+    //XPLMDebugString("\n");
 
     std::vector<char> parse_ini_path_name(xpsini_path_name.size() + 1);
     std::copy(xpsini_path_name.begin(), xpsini_path_name.end(), parse_ini_path_name.begin());
