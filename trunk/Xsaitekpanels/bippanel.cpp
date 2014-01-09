@@ -242,9 +242,9 @@ bool ReadConfigFile(string PlaneICAO)
 
       xpsbipd2b_path_name.append("D2B_config.txt");
 
-      XPLMDebugString("\nXsaitekpanels: The full path for D2B_config.txt in the current aircraft folder is\n");
-      XPLMDebugString(xpsbipd2b_path_name.c_str());
-      XPLMDebugString("\n");
+      //XPLMDebugString("\nXsaitekpanels: The full path for D2B_config.txt in the current aircraft folder is\n");
+      //XPLMDebugString(xpsbipd2b_path_name.c_str());
+      //XPLMDebugString("\n");
 
       std::vector<char> parse_d2b_path_name(xpsbipd2b_path_name.size() + 1);
       std::copy(xpsbipd2b_path_name.begin(), xpsbipd2b_path_name.end(), parse_d2b_path_name.begin());
@@ -460,9 +460,9 @@ bool ReadConfigFile(string PlaneICAO)
 
         xpsbipd2b_path_name2.append("D2B_config2.txt");
 
-        XPLMDebugString("\nXsaitekpanels: The full path for D2B_config2.txt in the current aircraft folder is\n");
-        XPLMDebugString(xpsbipd2b_path_name2.c_str());
-        XPLMDebugString("\n");
+        //XPLMDebugString("\nXsaitekpanels: The full path for D2B_config2.txt in the current aircraft folder is\n");
+        //XPLMDebugString(xpsbipd2b_path_name2.c_str());
+        //XPLMDebugString("\n");
 
         std::vector<char> parse_d2b_path_name2(xpsbipd2b_path_name2.size() + 1);
         std::copy(xpsbipd2b_path_name2.begin(), xpsbipd2b_path_name2.end(), parse_d2b_path_name2.begin());
