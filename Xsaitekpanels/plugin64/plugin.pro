@@ -17,12 +17,17 @@ DEFINES += XPLM200
 
 win32 {
     DEFINES += APL=0 IBM=1 LIN=0
-    LIBS += -L../SDK/Libraries/Win
+    LIBS += -L../../SDK/Libraries/Win
     LIBS += -lXPLM -lXPWidgets
-    LIBS += $$quote(C:\Program Files\Microsoft SDKs\Windows\v6.0A\Lib\SetupAPI.Lib)
-    SOURCES += \
-          ../hidapi-0.7.0/windows/hid.c
     TARGET = win.xpl
+    LIBS += "-LD:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Lib"
+    LIBS +=  "-lSetupAPI"
+    INCLUDEPATH += D:/gnu/include
+    INCLUDEPATH += "D:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Include"
+    INCLUDEPATH += .
+    SOURCES += \
+          ../../hidapi-0.7.0/windows/hid.c
+
 }
 
 unix:!macx {
@@ -43,7 +48,6 @@ macx {
     SOURCES += \
           ../../hidapi-0.7.0/mac/hid.c
     LIBS += -framework IOKit -framework CoreFoundation
-
 }
 
 HEADERS += ../saitekpanels.h \

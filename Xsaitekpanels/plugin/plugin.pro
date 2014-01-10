@@ -17,12 +17,16 @@ DEFINES += XPLM200
 
 win32 {
     DEFINES += APL=0 IBM=1 LIN=0
-    LIBS += -L../SDK/Libraries/Win
+    LIBS += -L../../SDK/Libraries/Win
     LIBS += -lXPLM -lXPWidgets
-    LIBS += $$quote(C:\Program Files\Microsoft SDKs\Windows\v6.0A\Lib\SetupAPI.Lib)
-    SOURCES += \
-          ../hidapi-0.7.0/windows/hid.c
     TARGET = win.xpl
+    LIBS += "-LD:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Lib"
+    LIBS +=  "-lSetupAPI"
+    INCLUDEPATH += D:/gnu/include
+    INCLUDEPATH += "D:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Include"
+    INCLUDEPATH += .
+    SOURCES += \
+          ../../hidapi-0.7.0/windows/hid.c
 }
 
 unix:!macx {
@@ -36,31 +40,14 @@ unix:!macx {
 
 }
 
-
-# Trying to give info that might be helpfull in Mac building
-# I do not own a Mac so am depending on what I have read in forums
-# You should also consider building with 10.6 SDK otherwise
-# only poeple with 10.7 will be able to load your plugins.
-# QMAKE_CXXFLAGS += -m32 -isysroot /Developer/SDKs/MacOSX10.6.sdk
-# QMAKE_LFLAGS += -m32 -flat_namespace -undefined suppress  -isysroot /Developer/SDKs/MacOSX10.6.sdk
-# I have read that this will also work
-# QMAKE_CXXFLAGS += -arch i386 -isysroot /Developer/SDKs/MacOSX10.6.sdk
-# QMAKE_LFLAGS += -arch i386 -flat_namespace -undefined suppress  -isysroot /Developer/SDKs/MacOSX10.6.sdk
-
 macx {
     DEFINES += APL=1 IBM=0 LIN=0
     TARGET = mac.xpl
     QMAKE_LFLAGS += -F../../SDK/Libraries/Mac/ -framework XPWidgets -framework XPLM
+
     SOURCES += \
           ../../hidapi-0.7.0/mac/hid.c
     LIBS += -framework IOKit -framework CoreFoundation
-
-    # Build for multiple architectures.
-    # The following line is only needed to build universal on PPC architectures.
-    # QMAKE_MAC_SDK=/Developer/SDKs/MacOSX10.4u.sdk
-    # The following line defines for which architectures we build.
-    # CONFIG += x86
-    # CONFIG += x86_64
 }
 
 HEADERS += ../saitekpanels.h \
