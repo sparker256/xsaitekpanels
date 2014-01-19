@@ -1489,7 +1489,7 @@ extern XPWidgetID      BipWidgetID, Bip2WidgetID, Bip3WidgetID, Bip4WidgetID;
 // ***************** Bip Panel variables ********************
 extern hid_device *biphandle[4];
 extern int bipcnt, biptmpcnt, bipnum;
-extern int bipwcscmp0, bipwcscmp1;
+extern int bipwcscmp0, bipwcscmp1, bipwcscmp2;
 
 void WriteCSVTableToDisk(void);
 bool ReadConfigFile(std::string PlaneICAO);

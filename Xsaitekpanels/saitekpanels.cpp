@@ -1,6 +1,6 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ******** ver 2.27   ***************
+// ******** ver 2.28   ***************
 // ****** Jan 08 2014   **************
 
 #include "XPLMDisplay.h"
@@ -1765,7 +1765,7 @@ hid_device *switchhandle;
 // ****************** BIP Panel variables *******************************
 int bipcnt = 0, biptmpcnt = 0, bipres, biploop[4], stopbipcnt;
 int bipnum = 0;
-int bipwcscmp0 = 0, bipwcscmp1 = 1;
+int bipwcscmp0 = 0, bipwcscmp1 = 1, bipwcscmp2 = 2;
 unsigned char bipwbuf[4][10];
 
 #define MAX_STR 255
@@ -1850,11 +1850,11 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 227;
-  XPLMDebugString("Xsaitekpanels: v2.27\n");
+  XsaitekpanelsVersion = 228;
+  XPLMDebugString("Xsaitekpanels: v2.28\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels v2.27");
+  strcpy(outName, "Xsaitekpanels v2.28");
   strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
 

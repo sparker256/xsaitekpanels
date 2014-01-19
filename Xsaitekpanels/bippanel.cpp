@@ -200,7 +200,8 @@ bool ReadConfigFile(string PlaneICAO)
 
   char           *bip1ConfigurationPath;
   char           *bip2ConfigurationPath;
-  const char     *foundd2bpath, *foundd2bpath2;
+  char           *bip3ConfigurationPath;
+  const char     *foundd2bpath, *foundd2bpath2, *foundd2bpath3;
   char           buff[256];
 
   PlaneICAO.erase(PlaneICAO.find(']')+1);
@@ -219,6 +220,7 @@ bool ReadConfigFile(string PlaneICAO)
 
   std::string xpsbipd2b_path_name = xpsbipacfpath;
   std::string xpsbipd2b_path_name2;
+  std::string xpsbipd2b_path_name3;
   std::size_t pos = xpsbipd2b_path_name.find(xpsbipacfname);
   xpsbipd2b_path_name = xpsbipd2b_path_name.substr(0, pos);
 
@@ -451,6 +453,11 @@ bool ReadConfigFile(string PlaneICAO)
 
    }
 
+
+
+
+
+
     if(bipnum == bipwcscmp1) {
 
         //sprintf(buff, "if(bipnum == bipwcscmp1) bipnum %d == bipwcscmp1 %d\n", bipnum, bipwcscmp1);
@@ -676,6 +683,234 @@ bool ReadConfigFile(string PlaneICAO)
 
 
 
+    if(bipnum == bipwcscmp2) {
+
+        //sprintf(buff, "if(bipnum == bipwcscmp1) bipnum %d == bipwcscmp1 %d\n", bipnum, bipwcscmp1);
+        //XPLMDebugString(buff);
+
+        bip3ConfigurationPath = "./Resources/plugins/Xsaitekpanels/D2B_config3.txt";
+
+        xpsbipd2b_path_name3.append("D2B_config3.txt");
+
+        //XPLMDebugString("\nXsaitekpanels: The full path for D2B_config2.txt in the current aircraft folder is\n");
+        //XPLMDebugString(xpsbipd2b_path_name2.c_str());
+        //XPLMDebugString("\n");
+
+        std::vector<char> parse_d2b_path_name3(xpsbipd2b_path_name3.size() + 1);
+        std::copy(xpsbipd2b_path_name3.begin(), xpsbipd2b_path_name3.end(), parse_d2b_path_name3.begin());
+
+        std::ifstream ifile(&parse_d2b_path_name3[0]);
+        if (ifile) {
+            XPLMDebugString("\nXsaitekpanels: Found D2B_config2.txt in the current aircraft path and it is\n");
+            XPLMDebugString(&parse_d2b_path_name3[0]);
+            XPLMDebugString("\n");
+            XPLMDebugString("\n");
+            foundd2bpath3 = (&parse_d2b_path_name3[0]);
+
+        } else {
+            std::ifstream ifile(bip3ConfigurationPath);
+           if (ifile) {
+               XPLMDebugString("\nXsaitekpanels: Found D2B_config3.txt in the Xsaitekpanels plugin path and it is\n");
+               XPLMDebugString(bip3ConfigurationPath);
+               XPLMDebugString("\n");
+               XPLMDebugString("\n");
+               foundd2bpath2 = bip3ConfigurationPath;
+
+
+           } else {
+               return false;
+           }
+        }
+
+      ifstream ReadBip3File;
+      ReadBip3File.open(foundd2bpath3);
+
+    if (ReadBip3File.is_open() != true)
+    {
+        logMsg("Error: Can't read D2B_config3 config file!");
+        return false;
+    }
+    ErrorInLine = 0;
+
+    LastTableElement[bipwcscmp1] = -1;
+    for (i1 = 0; i1 < MAXTABLEELEMENTS; i1++)
+    {
+        BipTable[bipwcscmp2][i1].Row = '0';
+        BipTable[bipwcscmp2][i1].Position = 0;
+        BipTable[bipwcscmp2][i1].Color = '0';
+        BipTable[bipwcscmp2][i1].DataRefToSet = NULL;
+        BipTable[bipwcscmp2][i1].DataRefType = 0;
+        BipTable[bipwcscmp2][i1].DataRefIndex = 0;
+        BipTable[bipwcscmp2][i1].WhatToDo = '0';
+        BipTable[bipwcscmp2][i1].FloatValueToSet = 0;
+        BipTable[bipwcscmp2][i1].FloatLimit = 0;
+        BipTable[bipwcscmp2][i1].CSVDebugString[512] = '0';
+    }
+
+    while (getline(ReadBip3File, LineToEncrypt[bipwcscmp2]))
+    {
+
+
+        ErrorInLine++;
+        if (LineToEncrypt[bipwcscmp2].find("#BE SILENT") == 0)
+        {
+            InSilentMode = true;
+            continue;
+        }
+        if (LineToEncrypt[bipwcscmp2].find("#BE CHATTY") == 0)
+        {
+            InSilentMode = false;
+            continue;
+        }
+        if (LineToEncrypt[bipwcscmp2].find("#SHOW ICAO") == 0)
+        {
+            XPShowWidget(Bip3WidgetID);
+            continue;
+        }
+        if (LineToEncrypt[bipwcscmp2].find("#HIDE ICAO") == 0)
+        {
+            XPHideWidget(Bip3WidgetID);
+            continue;
+        }
+        if (LineToEncrypt[bipwcscmp2].find("[") == 0)
+        {
+            //if ((LineToEncrypt[1].find("[DEFAULT2]") == 0) || (LineToEncrypt[1].find(PlaneICAO) == 0))
+            if ((LineToEncrypt[bipwcscmp2].find("[DEFAULT]") == 0) || (LineToEncrypt[bipwcscmp2].find(PlaneICAO) == 0))
+            {
+                CorrectICAO = true;
+            }
+            else
+            {
+                CorrectICAO = false;
+            }
+            //if ((LineToEncrypt[1].find("[DEFAULT2]") != 0) && (++LastMenuEntry[1] < 50))
+            if ((LineToEncrypt[bipwcscmp2].find("[DEFAULT]") != 0) && (++LastMenuEntry[bipwcscmp2] < 50))
+            {
+                strcpy(MenuEntries[bipwcscmp2][LastMenuEntry[bipwcscmp2]], LineToEncrypt[bipwcscmp2].c_str());
+
+            }
+        }
+        if (!CorrectICAO) continue;
+
+        if (LineToEncrypt[bipwcscmp2].find("#RESET AUTHORITY") == 0)
+        {
+            if (++LastTableElement[bipwcscmp2] >= MAXTABLEELEMENTS)
+            {
+                logMsg("Xdataref2BIP: Fatal Error: Too much code to handle!");
+                ReadBip3File.close();
+                LastTableElement[bipwcscmp2] = MAXTABLEELEMENTS - 1;
+                return false;
+            }
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].WhatToDo = 'T';
+            continue;
+        }
+
+        if (sscanf(LineToEncrypt[bipwcscmp2].c_str(), "#SET BIP %c %i %c FROM ARRAY %s %i RANGE %f TO %f", RowString, &BipPosition, ColorString, DataRefString, &Index, &Argument, &Limit) == 7)
+        {
+            if (++LastTableElement[bipwcscmp2] >= MAXTABLEELEMENTS)
+            {
+                logMsg("Xdataref2BIP: Fatal Error: Too much code to handle!");
+                ReadBip3File.close();
+                LastTableElement[bipwcscmp2] = MAXTABLEELEMENTS - 1;
+                return false;
+            }
+            DataRefNumber = XPLMFindDataRef(DataRefString);
+            if (DataRefNumber == NULL)
+            {
+                logMsg("Xdataref3BIP: A DataRef you want to use is not defined!");
+                ReadBip3File.close();
+                return false;
+            }
+            DataRefType = XPLMGetDataRefTypes(DataRefNumber);
+            if (!((DataRefType == xplmType_IntArray) || (DataRefType == xplmType_FloatArray)))
+            {
+                logMsg("Xdataref3BIP: A DataRef you want to use can not be read (wrong type)!");
+                ReadBip3File.close();
+                return false;
+            }
+
+            if ((BipPosition >= MAXINDICATORS) || (BipPosition < 0))
+            {
+                logMsg("Xdataref3BIP: Indicator does not exist!");
+                ReadBip3File.close();
+                LastTableElement[bipwcscmp2] = MAXTABLEELEMENTS - 1;
+                return false;
+            }
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].Row = *RowString;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].Position = BipPosition;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].Color = *ColorString;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].DataRefToSet = DataRefNumber;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].DataRefType = DataRefType;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].DataRefIndex = Index;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatValueToSet = Argument;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatLimit = Limit;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].WhatToDo = 'v';
+            strcpy(BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString, DataRefString);
+            continue;
+        }
+        if (sscanf(LineToEncrypt[bipwcscmp2].c_str(), "#SET BIP %c %i %c FROM DATAREF %s RANGE %f TO %f", RowString, &BipPosition, ColorString, DataRefString, &Argument, &Limit) == 6)
+        {
+            if (++LastTableElement[bipwcscmp2] >= MAXTABLEELEMENTS)
+            {
+                logMsg("Xdataref3BIP: Fatal Error: Too much code to handle!");
+                ReadBip3File.close();
+                LastTableElement[bipwcscmp2] = MAXTABLEELEMENTS - 1;
+                return false;
+            }
+            DataRefNumber = XPLMFindDataRef(DataRefString);
+            if (DataRefNumber == NULL)
+            {
+                logMsg("Xdataref3BIP: A DataRef you want to use is not defined!");
+                ReadBip3File.close();
+                return false;
+            }
+            DataRefType = XPLMGetDataRefTypes(DataRefNumber);
+            if (!((DataRefType == xplmType_Int) || (DataRefType == xplmType_Float)))
+            {
+                logMsg("Xdataref3BIP: A DataRef you want to use can not be read (wrong type)!");
+                ReadBip3File.close();
+                return false;
+            }
+            if ((BipPosition >= MAXINDICATORS) || (BipPosition < 0))
+            {
+                logMsg("Xdataref3BIP: Indicator does not exist!");
+                ReadBip3File.close();
+                LastTableElement[bipwcscmp2] = MAXTABLEELEMENTS - 1;
+                return false;
+            }
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].Row = *RowString;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].Position = BipPosition;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].Color = *ColorString;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].DataRefToSet = DataRefNumber;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].DataRefType = DataRefType;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatValueToSet = Argument;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatLimit = Limit;
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].WhatToDo = 'v';
+            strcpy(BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString, DataRefString);
+            continue;
+        }
+
+
+        if (LineToEncrypt[bipwcscmp2].find('#') == 0)
+        {
+            logMsg("Xdataref3BIP: Can't understand the line of code!");
+            ReadBip3File.close();
+            LastTableElement[bipwcscmp2] = MAXTABLEELEMENTS - 1;
+            return false;
+        }
+
+    }
+
+    ReadBip3File.close();
+    //return true;
+
+   }
+
+
+
+
+
+
 return true;
 }
 
@@ -704,6 +939,22 @@ void process_bip_menu()
         XPLMAppendMenuItem(Bip2MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
 
     }
+
+
+    if(bipnum == bipwcscmp2) {
+
+        XPLMClearAllMenuItems(Bip3MenuId);
+        XPLMAppendMenuItem(Bip3MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
+        XPLMAppendMenuItem(Bip3MenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
+        XPLMAppendMenuSeparator(Bip3MenuId);
+        //XPLMAppendMenuItem(Bip2MenuId, MenuEntries[1][LastMenuEntry[1]], (void *) MenuEntries[1][LastMenuEntry[1]], 1);
+        XPLMAppendMenuItem(Bip3MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
+
+    }
+
+
+
+
 
     return;
 
