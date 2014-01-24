@@ -454,10 +454,6 @@ bool ReadConfigFile(string PlaneICAO)
    }
 
 
-
-
-
-
     if(bipnum == bipwcscmp1) {
 
         //sprintf(buff, "if(bipnum == bipwcscmp1) bipnum %d == bipwcscmp1 %d\n", bipnum, bipwcscmp1);
@@ -685,8 +681,8 @@ bool ReadConfigFile(string PlaneICAO)
 
     if(bipnum == bipwcscmp2) {
 
-        //sprintf(buff, "if(bipnum == bipwcscmp1) bipnum %d == bipwcscmp1 %d\n", bipnum, bipwcscmp1);
-        //XPLMDebugString(buff);
+        sprintf(buff, "if(Xsaitekpanels: bipnum == bipwcscmp2) bipnum %d == bipwcscmp2 %d\n", bipnum, bipwcscmp2);
+        XPLMDebugString(buff);
 
         bip3ConfigurationPath = "./Resources/plugins/Xsaitekpanels/D2B_config3.txt";
 
@@ -701,7 +697,7 @@ bool ReadConfigFile(string PlaneICAO)
 
         std::ifstream ifile(&parse_d2b_path_name3[0]);
         if (ifile) {
-            XPLMDebugString("\nXsaitekpanels: Found D2B_config2.txt in the current aircraft path and it is\n");
+            XPLMDebugString("\nXsaitekpanels: Found D2B_config3.txt in the current aircraft path and it is\n");
             XPLMDebugString(&parse_d2b_path_name3[0]);
             XPLMDebugString("\n");
             XPLMDebugString("\n");
@@ -714,7 +710,7 @@ bool ReadConfigFile(string PlaneICAO)
                XPLMDebugString(bip3ConfigurationPath);
                XPLMDebugString("\n");
                XPLMDebugString("\n");
-               foundd2bpath2 = bip3ConfigurationPath;
+               foundd2bpath3 = bip3ConfigurationPath;
 
 
            } else {
@@ -907,10 +903,6 @@ bool ReadConfigFile(string PlaneICAO)
    }
 
 
-
-
-
-
 return true;
 }
 
@@ -951,9 +943,6 @@ void process_bip_menu()
         XPLMAppendMenuItem(Bip3MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
 
     }
-
-
-
 
 
     return;
@@ -1136,13 +1125,15 @@ void process_bip_what_to_do_v()
 void process_bip_panel()
 
 {
-
+    char	buf1[256];
 
     if (biploop[bipnum] < 2) {
       // Clear Display on first loop
       bipwbuf[bipnum][0] = 0xb8;  //0xb8 Report ID to display
       bipwbuf[bipnum][1] = 0, bipwbuf[bipnum][2] = 0, bipwbuf[bipnum][3] = 0;
       bipwbuf[bipnum][4] = 0, bipwbuf[bipnum][5] = 0, bipwbuf[bipnum][6] = 0;
+      sprintf(buf1, "Xsaitekpanels hid_send_feature_report(biphandle[bipnum] %d\n", bipnum);
+      XPLMDebugString(buf1);
       res = hid_send_feature_report(biphandle[bipnum], bipwbuf[bipnum], 10);
       biploop[bipnum]++;
     }
