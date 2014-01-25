@@ -31,6 +31,7 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <wchar.h>
 
 using namespace std;
 
@@ -692,8 +693,6 @@ float rad2_lwr_com1_actstby_btn_dataf_on_value, rad2_lwr_com1_actstby_btn_dataf_
 float rad2_lwr_com2_actstby_btn_dataf_on_value, rad2_lwr_com2_actstby_btn_dataf_off_value;
 float rad2_lwr_nav1_actstby_btn_dataf_on_value, rad2_lwr_nav1_actstby_btn_dataf_off_value;
 float rad2_lwr_nav2_actstby_btn_dataf_on_value, rad2_lwr_nav2_actstby_btn_dataf_off_value;
-
-
 
 
 void CreateRadioWidget(int x1, int y1, int w, int h);
@@ -1921,7 +1920,10 @@ PLUGIN_API int XPluginStart(char *		outName,
   bip_devs = hid_enumerate(0x6a3, 0xb4e);
   bip_cur_dev = bip_devs;
   char	buf[256];
-  int result, result2, result3;
+  int bip_result01, bip_result10;
+  int bip_result02, bip_result20;
+  int bip_result12, bip_result21;
+
   // find serial numbers of all BIP's connected
   while (bip_cur_dev) {
       biphandle[biptmpcnt] = hid_open_path(bip_cur_dev->path);
@@ -1935,24 +1937,201 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   hid_free_enumeration(bip_devs);
 
-  if (biptmpcnt > 2) {
+  if (biptmpcnt = 3) {
 
-     result = wcscmp(bip_serial_string[0], bip_serial_string[1]);
-     result2 = wcscmp(bip_serial_string[0], bip_serial_string[2]);
-     result3 = wcscmp(bip_serial_string[1], bip_serial_string[2]);
-     bip_serial_number[0] = int(bip_serial_string[0][8]);
-     bip_serial_number[1] = int(bip_serial_string[1][8]);
-     bip_serial_number[2] = int(bip_serial_string[2][8]);
+      bip_result01 = wcscmp(bip_serial_string[0], bip_serial_string[1]);
+      bip_result10 = wcscmp(bip_serial_string[1], bip_serial_string[0]);
+      bip_result02 = wcscmp(bip_serial_string[0], bip_serial_string[2]);
+      bip_result20 = wcscmp(bip_serial_string[2], bip_serial_string[0]);
+      bip_result12 = wcscmp(bip_serial_string[1], bip_serial_string[2]);
+      bip_result21 = wcscmp(bip_serial_string[2], bip_serial_string[1]);
 
      sprintf(buf, "Xsaitekpanels: bip_serial_string[0] = %ls  bip_serial_string[1] = %ls bip_serial_string[2] = %ls\n", bip_serial_string[0], bip_serial_string[1],  bip_serial_string[2]);
      XPLMDebugString(buf);
 
-     sprintf(buf, "bip_serial_number[0] = %d  bip_serial_number[1] = %d bip_serial_number[2] = %d\n", bip_serial_number[0], bip_serial_number[1],  bip_serial_number[2]);
+     sprintf(buf, "Xsaitekpanels: bip_result01 = %d  bip_result02 = %d bip_result12 = %d\n", bip_result01, bip_result02, bip_result12);
      XPLMDebugString(buf);
 
-     // Need to find a way to sort the serial numbers and put the biphandle in order
+     sprintf(buf, "Xsaitekpanels: bip_result10 = %d  bip_result20 = %d bip_result21 = %d\n", bip_result10, bip_result20, bip_result21);
+     XPLMDebugString(buf);
+
+       // Need to find a way to sort the serial numbers and put the biphandle in order
+
+     if (bip_result01 > 0) {
+         if (bip_result02 > 0) {
+             if (bip_result12 > 0) {
+                 biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
+                 bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[0][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[0], bipwbuf[0], 10);
+                 bipwcscmp0 = 0;
+
+                 biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[1]);
+                 bipwbuf[1][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[1][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[1], bipwbuf[1], 10);
+                 bipwcscmp1 = 1;
+
+                 biphandle[2] = hid_open(0x6a3, 0xb4e, bip_serial_string[2]);
+                 bipwbuf[2][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[2][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[2], bipwbuf[2], 10);
+                 bipwcscmp2 = 2;
+
+             } else if (bip_result12 < 0) {
+                 biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
+                 bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[0][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[0], bipwbuf[0], 10);
+                 bipwcscmp0 = 0;
+
+                 biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[2]);
+                 bipwbuf[2][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[2][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[1], bipwbuf[2], 10);
+                 bipwcscmp1 = 1;
+
+                 biphandle[2] = hid_open(0x6a3, 0xb4e, bip_serial_string[1]);
+                 bipwbuf[1][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[1][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[2], bipwbuf[1], 10);
+                 bipwcscmp2 = 2;
+
+             }
+
+         } else if (bip_result02 < 0) {
+             if (bip_result12 > 0) {
+                 biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
+                 bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[0][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[0], bipwbuf[0], 10);
+                 bipwcscmp0 = 0;
+
+                 biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[1]);
+                 bipwbuf[1][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[1][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[1], bipwbuf[1], 10);
+                 bipwcscmp1 = 1;
+
+                 biphandle[2] = hid_open(0x6a3, 0xb4e, bip_serial_string[2]);
+                 bipwbuf[2][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[2][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[2], bipwbuf[2], 10);
+                 bipwcscmp2 = 2;
+
+             } else if (bip_result12 < 0) {
+                 biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
+                 bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[0][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[0], bipwbuf[0], 10);
+                 bipwcscmp0 = 0;
+
+                 biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[1]);
+                 bipwbuf[1][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[1][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[1], bipwbuf[1], 10);
+                 bipwcscmp1 = 1;
+
+                 biphandle[2] = hid_open(0x6a3, 0xb4e, bip_serial_string[2]);
+                 bipwbuf[2][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[2][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[2], bipwbuf[2], 10);
+                 bipwcscmp2 = 2;
+
+             }
+
+         }
+
+     } else if (bip_result01 < 0) {
+         if (bip_result02 > 0) {
+             if (bip_result12 > 0) {
+                 biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
+                 bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[0][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[0], bipwbuf[0], 10);
+                 bipwcscmp0 = 0;
+
+                 biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[1]);
+                 bipwbuf[1][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[1][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[1], bipwbuf[1], 10);
+                 bipwcscmp1 = 1;
+
+                 biphandle[2] = hid_open(0x6a3, 0xb4e, bip_serial_string[2]);
+                 bipwbuf[2][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[2][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[2], bipwbuf[2], 10);
+                 bipwcscmp2 = 2;
+
+             } else if (bip_result12 < 0) {
+                 biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
+                 bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[0][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[0], bipwbuf[0], 10);
+                 bipwcscmp0 = 0;
+
+                 biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[1]);
+                 bipwbuf[1][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[1][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[1], bipwbuf[1], 10);
+                 bipwcscmp1 = 1;
+
+                 biphandle[2] = hid_open(0x6a3, 0xb4e, bip_serial_string[2]);
+                 bipwbuf[2][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[2][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[2], bipwbuf[2], 10);
+                 bipwcscmp2 = 2;
 
 
+             }
+
+         } else if (bip_result02 < 0) {
+             if (bip_result12 > 0) {
+                 biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
+                 bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[0][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[0], bipwbuf[0], 10);
+                 bipwcscmp0 = 0;
+
+                 biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[1]);
+                 bipwbuf[1][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[1][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[1], bipwbuf[1], 10);
+                 bipwcscmp1 = 1;
+
+                 biphandle[2] = hid_open(0x6a3, 0xb4e, bip_serial_string[2]);
+                 bipwbuf[2][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[2][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[2], bipwbuf[2], 10);
+                 bipwcscmp2 = 2;
+
+             } else if (bip_result12 < 0) {
+                 biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[2]);
+                 bipwbuf[2][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[2][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[0], bipwbuf[2], 10);
+                 bipwcscmp0 = 0;
+
+                 biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
+                 bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[0][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[1], bipwbuf[0], 10);
+                 bipwcscmp1 = 1;
+
+                 biphandle[2] = hid_open(0x6a3, 0xb4e, bip_serial_string[1]);
+                 bipwbuf[1][0] = 0xb2; // 0xb2 Report ID for brightness
+                 bipwbuf[1][1] = 100;  // Set brightness to 100%
+                 bipres = hid_send_feature_report(biphandle[2], bipwbuf[1], 10);
+                 bipwcscmp2 = 2;
+
+             }
+
+         }
+
+     }
+
+
+/*
      biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
      bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
      bipwbuf[0][1] = 100;  // Set brightness to 100%
@@ -1977,11 +2156,13 @@ PLUGIN_API int XPluginStart(char *		outName,
      sprintf(buf, "bipres biphandle[2] = %d\n", bipres);
      XPLMDebugString(buf);
 
+     */
+
 
  } else if (biptmpcnt == 2) {
 
-     result = wcscmp(bip_serial_string[0], bip_serial_string[1]);
-     if(result > 0){
+     bip_result01 = wcscmp(bip_serial_string[0], bip_serial_string[1]);
+     if(bip_result01 > 0){
        //sprintf(buf, "(result > 0) %ls > %ls\n", wstr[0], wstr[1]);
        //XPLMDebugString(buf);
        biphandle[0] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
@@ -1996,8 +2177,8 @@ PLUGIN_API int XPluginStart(char *		outName,
        bipres = hid_send_feature_report(biphandle[1], bipwbuf[1], 10);
        bipwcscmp1 = 1;
 
-     }else if (result < 0){
-       //sprintf(buf, "(result < 0) %ls < %ls\n", wstr[0], wstr[1]);
+     }else if (bip_result01 < 0){
+       //sprintf(buf, "(bip_result < 0) %ls < %ls\n", wstr[0], wstr[1]);
        //XPLMDebugString(buf);
        biphandle[1] = hid_open(0x6a3, 0xb4e, bip_serial_string[0]);
        bipwbuf[0][0] = 0xb2; // 0xb2 Report ID for brightness
