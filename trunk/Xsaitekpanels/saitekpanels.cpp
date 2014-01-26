@@ -274,7 +274,9 @@ XPLMCommandRef HdgSwitchUpRemapableCmd = NULL, HdgSwitchDnRemapableCmd = NULL;
 XPLMCommandRef CrsSwitchUpRemapableCmd = NULL, CrsSwitchDnRemapableCmd = NULL;
 
 XPLMCommandRef ApVsUpRemapableCmd = NULL, ApVsDnRemapableCmd = NULL;
+
 XPLMCommandRef TrimUpRemapableCmd = NULL, TrimDnRemapableCmd = NULL;
+XPLMCommandRef FlapsUpRemapableCmd = NULL, FlapsDnRemapableCmd = NULL;
 
 // ***************** Multi Panel Data Ref *********************
 XPLMDataRef ApAlt = NULL, ApVs = NULL, ApAs = NULL, ApHdg = NULL, ApCrs = NULL, ApCrs2 = NULL;
@@ -1034,6 +1036,7 @@ int iaslightflashdata,altlightflashdata, vslightflashdata, aprlightflashdata, re
 int altswitchremap, vsswitchremap, iasswitchremap;
 int hdgswitchremap, crsswitchremap;
 int trimupremap, trimdnremap;
+int flapsupremap, flapsdnremap;
 
 int attrswitchremap;
 
@@ -1170,6 +1173,7 @@ string attr_switch_data_remapable;
 string ap_vs_up_remapable, ap_vs_dn_remapable;
 
 string trim_up_remapable, trim_dn_remapable;
+string flaps_up_remapable, flaps_dn_remapable;
 
 char MultiSpeedText[50][200] = {
 "FREQ KNOB  1 PULSE PER COMMAND",

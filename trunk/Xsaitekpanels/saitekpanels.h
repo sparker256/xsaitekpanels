@@ -547,6 +547,7 @@ extern XPLMCommandRef CrsSwitchUpRemapableCmd, CrsSwitchDnRemapableCmd;
 
 extern XPLMCommandRef ApVsUpRemapableCmd, ApVsDnRemapableCmd;
 extern XPLMCommandRef TrimUpRemapableCmd, TrimDnRemapableCmd;
+extern XPLMCommandRef FlapsUpRemapableCmd, FlapsDnRemapableCmd;
 
 // ************ Multi Panel Data Ref *****************
 extern XPLMDataRef ApAlt, ApVs, ApAs, ApHdg, ApCrs, ApCrs2;
@@ -638,6 +639,7 @@ extern int attrswitchremap;
 extern int iasismachremap, iasismachvalue;
 
 extern int trimupremap, trimdnremap;
+extern int flapsupremap, flapsdnremap;
 
 extern int xpanelsfnbutton;
 extern int xpanelscrstoggle;
@@ -740,7 +742,9 @@ extern string hdg_switch_data_remapable;
 extern string crs_switch_data_remapable;
 
 extern string ap_vs_up_remapable, ap_vs_dn_remapable;
+
 extern string trim_up_remapable, trim_dn_remapable;
+extern string flaps_up_remapable, flaps_dn_remapable;
 
 extern hid_device *multihandle;
 

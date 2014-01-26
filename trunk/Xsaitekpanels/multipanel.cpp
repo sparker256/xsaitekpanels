@@ -3439,13 +3439,25 @@ void process_rev_button()
 // ***************** Flaps Switch *******************
 void process_flaps_switch()
 {
-    if (XPLMGetDatai(BatPwrOn) == 1) {
+    if (flapsupremap == 0) {
+        if (XPLMGetDatai(BatPwrOn) == 1) {
+            if (multires > 0) {
+                if(testbit(multibuf,FLAPS_UP_SWITCH)) {
+                    XPLMCommandOnce(FlapsUp);
+                }
+                if(testbit(multibuf,FLAPS_DN_SWITCH)) {
+                    XPLMCommandOnce(FlapsDn);
+                }
+            }
+        }
+    } else if (flapsupremap == 1) {
+
         if (multires > 0) {
             if(testbit(multibuf,FLAPS_UP_SWITCH)) {
-                XPLMCommandOnce(FlapsUp);
+                XPLMCommandOnce(FlapsUpRemapableCmd);
             }
             if(testbit(multibuf,FLAPS_DN_SWITCH)) {
-                XPLMCommandOnce(FlapsDn);
+                XPLMCommandOnce(FlapsDnRemapableCmd);
             }
         }
     }
