@@ -140,6 +140,9 @@ void process_read_ini_file()
     trimupremap             = 0;
     trimdnremap             = 0;
 
+    flapsupremap             = 0;
+    flapsdnremap             = 0;
+
     lightdatareferencetype  = 0;
 
     apbuttonremap           = 0;
@@ -2687,15 +2690,31 @@ void process_read_ini_file()
     trimupremap = getOptionToInt("Trim Up remapable");
     if (trimupremap == 1) {
          trim_up_remapable = getOptionToString("trim_up_remapable_cmd");
-         TrimUpRemapableCmd   = XPLMFindCommand(trim_up_remapable.c_str());
+         TrimUpRemapableCmd = XPLMFindCommand(trim_up_remapable.c_str());
     }
 
     // trim dn - remapable
     trimdnremap = getOptionToInt("Trim Dn remapable");
     if (trimdnremap == 1) {
          trim_dn_remapable = getOptionToString("trim_dn_remapable_cmd");
-         TrimDnRemapableCmd   = XPLMFindCommand(trim_dn_remapable.c_str());
+         TrimDnRemapableCmd = XPLMFindCommand(trim_dn_remapable.c_str());
     }
+
+
+    // flaps up - remapable
+    flapsupremap = getOptionToInt("Flaps Up remapable");
+    if (flapsupremap == 1) {
+         flaps_up_remapable = getOptionToString("flaps_up_remapable_cmd");
+         FlapsUpRemapableCmd = XPLMFindCommand(flaps_up_remapable.c_str());
+    }
+
+    // flaps dn - remapable
+    flapsdnremap = getOptionToInt("Flaps Dn remapable");
+    if (flapsdnremap == 1) {
+         flaps_dn_remapable = getOptionToString("flaps_dn_remapable_cmd");
+         FlapsDnRemapableCmd = XPLMFindCommand(flaps_dn_remapable.c_str());
+    }
+
 
 
   return;
