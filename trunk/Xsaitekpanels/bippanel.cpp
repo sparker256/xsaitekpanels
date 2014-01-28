@@ -233,6 +233,7 @@ bool ReadConfigFile(string PlaneICAO)
   #endif
 
   xpsbipd2b_path_name2 = xpsbipd2b_path_name;
+  xpsbipd2b_path_name3 = xpsbipd2b_path_name;
 
 
   if(bipnum == bipwcscmp0) {
@@ -678,19 +679,14 @@ bool ReadConfigFile(string PlaneICAO)
    }
 
 
-
     if(bipnum == bipwcscmp2) {
 
-        sprintf(buff, "if(Xsaitekpanels: bipnum == bipwcscmp2) bipnum %d == bipwcscmp2 %d\n", bipnum, bipwcscmp2);
-        XPLMDebugString(buff);
+        //sprintf(buff, "if(Xsaitekpanels: bipnum == bipwcscmp2) bipnum %d == bipwcscmp2 %d\n", bipnum, bipwcscmp2);
+        //XPLMDebugString(buff);
 
         bip3ConfigurationPath = "./Resources/plugins/Xsaitekpanels/D2B_config3.txt";
 
         xpsbipd2b_path_name3.append("D2B_config3.txt");
-
-        //XPLMDebugString("\nXsaitekpanels: The full path for D2B_config2.txt in the current aircraft folder is\n");
-        //XPLMDebugString(xpsbipd2b_path_name2.c_str());
-        //XPLMDebugString("\n");
 
         std::vector<char> parse_d2b_path_name3(xpsbipd2b_path_name3.size() + 1);
         std::copy(xpsbipd2b_path_name3.begin(), xpsbipd2b_path_name3.end(), parse_d2b_path_name3.begin());
@@ -1132,8 +1128,8 @@ void process_bip_panel()
       bipwbuf[bipnum][0] = 0xb8;  //0xb8 Report ID to display
       bipwbuf[bipnum][1] = 0, bipwbuf[bipnum][2] = 0, bipwbuf[bipnum][3] = 0;
       bipwbuf[bipnum][4] = 0, bipwbuf[bipnum][5] = 0, bipwbuf[bipnum][6] = 0;
-      sprintf(buf1, "Xsaitekpanels hid_send_feature_report(biphandle[bipnum] %d\n", bipnum);
-      XPLMDebugString(buf1);
+      //sprintf(buf1, "Xsaitekpanels hid_send_feature_report(biphandle[bipnum] %d\n", bipnum);
+      //XPLMDebugString(buf1);
       res = hid_send_feature_report(biphandle[bipnum], bipwbuf[bipnum], 10);
       biploop[bipnum]++;
     }
