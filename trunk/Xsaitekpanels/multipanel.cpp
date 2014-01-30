@@ -299,14 +299,14 @@ void process_alt_switch()
 {
     if(testbit(multibuf,ALT_SWITCH)) {
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (XPLMGetDatai(AvPwrOn) == 0) {
             multiseldis = 5;
         } else {
            multiseldis = 1;
         }
 
 
-        if (altswitchremap == 2) {
+        if ((altswitchremap == 2) | (altswitchremap == 1)) {
             upapaltf = XPLMGetDataf(AltSwitchRemapableData);
         } else {
             upapaltf = XPLMGetDataf(ApAlt);
