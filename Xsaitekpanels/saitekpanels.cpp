@@ -1,7 +1,7 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
 // ******** ver 2.28   ***************
-// ****** Jan 27 2014   **************
+// ****** Jan 29 2014   **************
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -621,6 +621,18 @@ XPWidgetID      Bip4WidgetID = NULL;
 
 // ********************* Saitek Panels Data Ref  ************************
 XPLMDataRef XsaitekpanelsVersionDataRef = NULL;
+
+XPLMDataRef XsaitekpanelsInteger1DataRef = NULL;
+XPLMDataRef XsaitekpanelsInteger2DataRef = NULL;
+XPLMDataRef XsaitekpanelsInteger3DataRef = NULL;
+XPLMDataRef XsaitekpanelsInteger4DataRef = NULL;
+XPLMDataRef XsaitekpanelsInteger5DataRef = NULL;
+
+XPLMDataRef XsaitekpanelsFloat1DataRef = NULL;
+XPLMDataRef XsaitekpanelsFloat2DataRef = NULL;
+XPLMDataRef XsaitekpanelsFloat3DataRef = NULL;
+XPLMDataRef XsaitekpanelsFloat4DataRef = NULL;
+XPLMDataRef XsaitekpanelsFloat5DataRef = NULL;
 
 // ********************** Radio Panel variables ************************
 int radcnt = 0, radiores, stopradcnt;
@@ -1396,6 +1408,67 @@ int	XsaitekpanelsVersionGetDataiCallback(void * inRefcon);
 void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVersion);
 
 
+// Xsaitekpanels Integer data
+static int XsaitekpanelsInteger1Data = 0;
+
+int	XsaitekpanelsInteger1GetDataiCallback(void * inRefcon);
+void	XsaitekpanelsInteger1SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger1);
+
+static int XsaitekpanelsInteger2Data = 0;
+
+int	XsaitekpanelsInteger2GetDataiCallback(void * inRefcon);
+void	XsaitekpanelsInteger2SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger2);
+
+static int XsaitekpanelsInteger3Data = 0;
+
+int	XsaitekpanelsInteger3GetDataiCallback(void * inRefcon);
+void	XsaitekpanelsInteger3SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger3);
+
+static int XsaitekpanelsInteger4Data = 0;
+
+int	XsaitekpanelsInteger4GetDataiCallback(void * inRefcon);
+void	XsaitekpanelsInteger4SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger4);
+
+
+static int XsaitekpanelsInteger5Data = 0;
+
+int	XsaitekpanelsInteger5GetDataiCallback(void * inRefcon);
+void	XsaitekpanelsInteger5SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger5);
+
+
+// Xsaitekpanels Float data
+static float XsaitekpanelsFloat1Data = 0;
+
+float	XsaitekpanelsFloat1GetDatafCallback(void * inRefcon);
+void	XsaitekpanelsFloat1SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat1);
+
+static float XsaitekpanelsFloat2Data = 0;
+
+float	XsaitekpanelsFloat2GetDatafCallback(void * inRefcon);
+void	XsaitekpanelsFloat2SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat2);
+
+static float XsaitekpanelsFloat3Data = 0;
+
+float	XsaitekpanelsFloat3GetDatafCallback(void * inRefcon);
+void	XsaitekpanelsFloat3SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat3);
+
+static float XsaitekpanelsFloat4Data = 0;
+
+float	XsaitekpanelsFloat4GetDatafCallback(void * inRefcon);
+void	XsaitekpanelsFloat4SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat4);
+
+
+static float XsaitekpanelsFloat5Data = 0;
+
+float	XsaitekpanelsFloat5GetDatafCallback(void * inRefcon);
+void	XsaitekpanelsFloat5SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat5);
+
+/* This callback is called whenever our shared data is changed. */
+static void	XsaitekpanelsFloat1DataChangedCallback(void * inRefcon);
+
+
+
+
 static int SwitchPanelCountData = 0;
 static int SwitchStartOffOwnedData = 0, SwitchStartRightOwnedData = 0;
 static int SwitchStartLeftOwnedData = 0, SwitchStartBothOwnedData = 0;
@@ -1783,6 +1856,20 @@ void WriteCSVTableToDisk(void);
 
 int             XsaitekpanelsMenuItem;
 int             XsaitekpanelsVersion;
+
+int             XsaitekpanelsInteger1;
+int             XsaitekpanelsInteger2;
+int             XsaitekpanelsInteger3;
+int             XsaitekpanelsInteger4;
+int             XsaitekpanelsInteger5;
+
+float             XsaitekpanelsFloat1;
+float             XsaitekpanelsFloat2;
+float             XsaitekpanelsFloat3;
+float             XsaitekpanelsFloat4;
+float             XsaitekpanelsFloat5;
+
+
 int             BipMenuItem;
 
 int Fps, multi_auto_mul;
@@ -1849,12 +1936,14 @@ PLUGIN_API int XPluginStart(char *		outName,
   int BipSubMenuItem, Bip2SubMenuItem, Bip3SubMenuItem;
   int MultiSubMenuItem, RadioSubMenuItem;
   int SwitchSubMenuItem;
+  int XsaitekpanelsSharedRetVal;
 
   XPLMGetVersions(&wrgXPlaneVersion, &wrgXPLMVersion, &wrgHostID);
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
   XsaitekpanelsVersion = 228;
+
   XPLMDebugString("Xsaitekpanels: v2.28\n");
 
 	/* First set up our plugin info. */
@@ -2198,6 +2287,101 @@ PLUGIN_API int XPluginStart(char *		outName,
                            XsaitekpanelsVersionSetDataiCallback,
                            NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                            NULL, NULL, NULL, NULL, NULL);
+
+
+  XsaitekpanelsInteger1DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/integer1",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsInteger1GetDataiCallback,
+                           XsaitekpanelsInteger1SetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+
+  XsaitekpanelsInteger2DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/integer2",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsInteger2GetDataiCallback,
+                           XsaitekpanelsInteger2SetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+
+
+  XsaitekpanelsInteger3DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/integer3",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsInteger3GetDataiCallback,
+                           XsaitekpanelsInteger3SetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  XsaitekpanelsInteger4DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/integer4",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsInteger4GetDataiCallback,
+                           XsaitekpanelsInteger4SetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  XsaitekpanelsInteger5DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/integer5",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsInteger5GetDataiCallback,
+                           XsaitekpanelsInteger5SetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+
+
+  XsaitekpanelsFloat1DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/float1",
+                           xplmType_Float,
+                           1, NULL, NULL,
+                           XsaitekpanelsFloat1GetDatafCallback,
+                           XsaitekpanelsFloat1SetDatafCallback,
+                           NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  XsaitekpanelsFloat2DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/float2",
+                           xplmType_Float,
+                           1, NULL, NULL,
+                           XsaitekpanelsFloat2GetDatafCallback,
+                           XsaitekpanelsFloat2SetDatafCallback,
+                           NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  XsaitekpanelsFloat3DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/float3",
+                           xplmType_Float,
+                           1, NULL, NULL,
+                           XsaitekpanelsFloat3GetDatafCallback,
+                           XsaitekpanelsFloat3SetDatafCallback,
+                           NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  XsaitekpanelsFloat4DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/float4",
+                           xplmType_Float,
+                           1, NULL, NULL,
+                           XsaitekpanelsFloat4GetDatafCallback,
+                           XsaitekpanelsFloat4SetDatafCallback,
+                           NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+
+  XsaitekpanelsFloat5DataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/float5",
+                           xplmType_Float,
+                           1, NULL, NULL,
+                           XsaitekpanelsFloat5GetDatafCallback,
+                           XsaitekpanelsFloat5SetDatafCallback,
+                           NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  /* Subscribe to shared data.  If no one else has made it, this will
+   * cause the SDK to allocate the data. */
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float1", xplmType_Float,
+      XsaitekpanelsFloat1DataChangedCallback, NULL);
+
+
 
   SwitchPanelCountDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/count",
                            xplmType_Int,
@@ -2647,7 +2831,7 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 
 }
 
-// Switch panel data references call backs
+// Saitek panels data references call backs
 
 int	XsaitekpanelsVersionGetDataiCallback(void * inRefcon)
 {
@@ -2661,6 +2845,156 @@ void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVers
     XsaitekpanelsVersionData = XsaitekpanelsVersionData2;
 }
 
+
+// Saitek panels Integer data references call backs
+
+
+int	XsaitekpanelsInteger1GetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsInteger1Data;
+}
+
+void	XsaitekpanelsInteger1SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger1Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsInteger1Data = XsaitekpanelsInteger1Data2;
+}
+
+
+int	XsaitekpanelsInteger2GetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsInteger2Data;
+}
+
+void	XsaitekpanelsInteger2SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger2Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsInteger2Data = XsaitekpanelsInteger2Data2;
+}
+
+
+int	XsaitekpanelsInteger3GetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsInteger3Data;
+}
+
+void	XsaitekpanelsInteger3SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger3Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsInteger3Data = XsaitekpanelsInteger3Data2;
+}
+
+
+int	XsaitekpanelsInteger4GetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsInteger4Data;
+}
+
+void	XsaitekpanelsInteger4SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger4Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsInteger4Data = XsaitekpanelsInteger4Data2;
+}
+
+
+int	XsaitekpanelsInteger5GetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsInteger5Data;
+}
+
+void	XsaitekpanelsInteger5SetDataiCallback(void * inRefcon, int XsaitekpanelsInteger5Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsInteger5Data = XsaitekpanelsInteger5Data2;
+}
+
+
+// Saitek panels Float data references call backs
+
+float	XsaitekpanelsFloat1GetDatafCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsFloat1Data;
+}
+
+void	XsaitekpanelsFloat1SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat1Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsFloat1Data = XsaitekpanelsFloat1Data2;
+}
+
+
+float	XsaitekpanelsFloat2GetDatafCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsFloat2Data;
+}
+
+void	XsaitekpanelsFloat2SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat2Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsFloat2Data = XsaitekpanelsFloat2Data2;
+}
+
+
+float	XsaitekpanelsFloat3GetDatafCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsFloat3Data;
+}
+
+void	XsaitekpanelsFloat3SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat3Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsFloat3Data = XsaitekpanelsFloat3Data2;
+}
+
+
+float	XsaitekpanelsFloat4GetDatafCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsFloat4Data;
+}
+
+void	XsaitekpanelsFloat4SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat4Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsFloat4Data = XsaitekpanelsFloat4Data2;
+}
+
+
+float	XsaitekpanelsFloat5GetDatafCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsFloat5Data;
+}
+
+void	XsaitekpanelsFloat5SetDatafCallback(void * inRefcon, float XsaitekpanelsFloat5Data2)
+{
+    (void) inRefcon;
+    XsaitekpanelsFloat5Data = XsaitekpanelsFloat5Data2;
+}
+
+
+/*
+ * This is the callback for our shared data.  Right now we do not react
+ * to our shared data being chagned.
+ *
+ */
+
+void	XsaitekpanelsFloat1DataChangedCallback(void * inRefcon)
+{
+}
+
+
+
+
+// Switch panel data references call backs
 
 int	SwitchPanelCountGetDataiCallback(void * inRefcon)
 {
@@ -5274,6 +5608,21 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
     if (PluginID != XPLM_NO_PLUGIN_ID){
 
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/version");
+
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/integer1");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/integer2");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/integer3");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/integer4");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/integer5");
+
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/float1");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/float2");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/float3");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/float4");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/float5");
+
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float1");
+
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/count");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startoff/status");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startright/status");
@@ -5424,6 +5773,20 @@ float	MyPanelsFlightLoopCallback(
   }
 
   XPLMSetDatai(XsaitekpanelsVersionDataRef, XsaitekpanelsVersion);
+
+  XPLMSetDatai(XsaitekpanelsInteger1DataRef, XsaitekpanelsInteger1);
+  XPLMSetDatai(XsaitekpanelsInteger2DataRef, XsaitekpanelsInteger2);
+  XPLMSetDatai(XsaitekpanelsInteger3DataRef, XsaitekpanelsInteger3);
+  XPLMSetDatai(XsaitekpanelsInteger4DataRef, XsaitekpanelsInteger4);
+  XPLMSetDatai(XsaitekpanelsInteger5DataRef, XsaitekpanelsInteger5);
+
+  XPLMSetDataf(XsaitekpanelsFloat1DataRef, XsaitekpanelsFloat1);
+  XPLMSetDataf(XsaitekpanelsFloat2DataRef, XsaitekpanelsFloat2);
+  XPLMSetDataf(XsaitekpanelsFloat3DataRef, XsaitekpanelsFloat3);
+  XPLMSetDataf(XsaitekpanelsFloat4DataRef, XsaitekpanelsFloat4);
+  XPLMSetDataf(XsaitekpanelsFloat5DataRef, XsaitekpanelsFloat5);
+
+
   XPLMSetDatai(SwitchPanelCountDataRef, switchcnt);
   XPLMSetDatai(RadioPanelCountDataRef, radcnt);
   XPLMSetDatai(MultiPanelCountDataRef, multicnt);
