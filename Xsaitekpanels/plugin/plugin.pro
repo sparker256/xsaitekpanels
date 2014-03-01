@@ -16,17 +16,48 @@ INCLUDEPATH += ../../hidapi-0.7.0/hidapi
 DEFINES += XPLM200
 
 win32 {
+    message(win32)
+    CONFIG += dll    	
     DEFINES += APL=0 IBM=1 LIN=0
+    SOURCES += ../../hidapi-0.7.0/windows/hid.c
     LIBS += -L../../SDK/Libraries/Win
-    LIBS += -lXPLM -lXPWidgets
     TARGET = win.xpl
+    INCLUDEPATH += .
+    LIBS +=  "-lsetupapi"
+    # LIBS +=  "-lSetupAPI"
+}
+
+win32:isEmpty(CROSS_COMPILE){
+    message(win32nocross)
+    LIBS += -lXPLM -lXPWidgets
     LIBS += "-LD:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Lib"
-    LIBS +=  "-lSetupAPI"
     INCLUDEPATH += D:/gnu/include
     INCLUDEPATH += "D:\\Program Files\\Microsoft SDKs\\Windows\\v7.1\\Include"
     INCLUDEPATH += .
-    SOURCES += \
-          ../../hidapi-0.7.0/windows/hid.c
+}
+
+win32:!isEmpty(CROSS_COMPILE){
+    message(win32cross)
+    QMAKE_YACC = yacc
+    QMAKE_YACCFLAGS_MANGLE  += -p $base -b $base
+    QMAKE_YACC_HEADER       = $base.tab.h
+    QMAKE_YACC_SOURCE       = $base.tab.c
+    QMAKE_DEL_FILE          = rm -f
+    INCLUDEPATH += "../../WinSDK/Include"
+    LIBS += -static-libstdc++ -static-libgcc
+}
+
+win32:contains(CROSS_COMPILE, x86_64-w64-mingw32-){
+    message(win32cross64)
+    LIBS += -L"../../WinSDK/Lib/x64"
+    LIBS += -lXPLM_64 -lXPWidgets_64
+}
+
+win32:contains(CROSS_COMPILE, i686-w64-mingw32-){
+    message(win32cross32)
+    LIBS += -L"../../WinSDK/Lib"
+    LIBS += -lXPLM -lXPWidgets
+    DEFINES += __MIDL_user_allocate_free_DEFINED__
 }
 
 unix:!macx {
