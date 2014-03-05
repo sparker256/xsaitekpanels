@@ -1,0 +1,28 @@
+#!/bin/bash
+#
+make distclean >/dev/null
+rm -rf lipo_temp
+rm -rf release
+mkdir -p lipo_temp &&
+mkdir -p release/Xsaitekpanels/64 &&
+make distclean >/dev/null
+qmake -spec macx-clang-32 && make &&
+cp plugin/libmac.xpl.dylib lipo_temp/mac32.xpl
+if [ $? != 0 ] ; then
+  exit
+fi
+
+
+make distclean >/dev/null
+qmake -spec macx-clang && make &&
+cp plugin/libmac.xpl.dylib lipo_temp/mac64.xpl
+if [ $? != 0 ] ; then
+  exit
+fi
+
+lipo -create lipo_temp/mac32.xpl lipo_temp/mac64.xpl -output release/Xsaitekpanels/mac.xpl
+
+./copy_Xsaitekpanels
+
+#
+
