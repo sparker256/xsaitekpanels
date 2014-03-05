@@ -2351,7 +2351,24 @@ void process_alt_button()
                  lastappos = 1;
              }
          }
-         if (lightdatareferencetype == 1) {
+         if (lightdatareferencetype == 0) {
+             switch(XPLMGetDatai(ApAltStat)) {
+             case 2:
+                 btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                 break;
+             case 1:
+                 if (flashon == 1) {
+                     btnleds |= (1<<4);   // * set bit 4 in btnleds to 1 *
+                 }else{
+                     btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                 }
+                 break;
+             case 0:
+                 btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+                 break;
+             }
+
+         } else if (lightdatareferencetype == 1) {
              if (XPLMGetDataf(AltLightRemapableData) > .50) {
                  altlightdata = 1;
              } else if (XPLMGetDataf(AltLightRemapableData) < .50) {
