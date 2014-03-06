@@ -2367,6 +2367,9 @@ void process_alt_button()
                  btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
                  break;
              }
+             if (XPLMGetDatai(ApMstrStat) == 0) {
+                   btnleds &= ~(1<<4);   // * clear bit 4 in btnleds to 0 *
+             }
 
          } else if (lightdatareferencetype == 1) {
              if (XPLMGetDataf(AltLightRemapableData) > .50) {
