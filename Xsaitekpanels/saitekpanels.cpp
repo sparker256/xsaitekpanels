@@ -3661,6 +3661,8 @@ void	Rad1LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad1LwrActStbySta
 
 
 
+
+
 // Radio2 upper datareferences callbacks
 
 int	Rad2UprCom1StatusGetDataiCallback(void * inRefcon)
@@ -3972,6 +3974,317 @@ void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbySta
     Rad2LwrActStbyOwnedData = Rad2LwrActStbyStatus2;
 }
 
+
+// Radio3 upper datareferences callbacks
+
+int	Rad3UprCom1StatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprCom1OwnedData;
+}
+
+void	Rad3UprCom1StatusSetDataiCallback(void * inRefcon, int Rad3UprCom1Status2)
+{
+    (void) inRefcon;
+    Rad3UprCom1OwnedData = Rad3UprCom1Status2;
+}
+
+
+int	Rad3UprCom2StatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprCom2OwnedData;
+}
+
+void	Rad3UprCom2StatusSetDataiCallback(void * inRefcon, int Rad3UprCom2Status2)
+{
+    (void) inRefcon;
+    Rad3UprCom2OwnedData = Rad3UprCom2Status2;
+}
+
+
+int	Rad3UprNav1StatusGetDataiCallback(void * inRefcon)
+{
+   (void) inRefcon;
+    return Rad3UprNav1OwnedData;
+}
+
+void	Rad3UprNav1StatusSetDataiCallback(void * inRefcon, int Rad3UprNav1Status2)
+{
+    (void) inRefcon;
+    Rad3UprNav1OwnedData = Rad3UprNav1Status2;
+}
+
+
+int	Rad3UprNav2StatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprNav2OwnedData;
+}
+
+void	Rad3UprNav2StatusSetDataiCallback(void * inRefcon, int Rad3UprNav2Status2)
+{
+    (void) inRefcon;
+    Rad3UprNav2OwnedData = Rad3UprNav2Status2;
+}
+
+
+int	Rad3UprAdfStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprAdfOwnedData;
+}
+
+void	Rad3UprAdfStatusSetDataiCallback(void * inRefcon, int Rad3UprAdfStatus2)
+{
+    (void) inRefcon;
+    Rad3UprAdfOwnedData = Rad3UprAdfStatus2;
+}
+
+
+int	Rad3UprDmeStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDmeOwnedData;
+}
+
+void	Rad3UprDmeStatusSetDataiCallback(void * inRefcon, int Rad3UprDmeStatus2)
+{
+    (void) inRefcon;
+    Rad3UprDmeOwnedData = Rad3UprDmeStatus2;
+}
+
+
+int	Rad3UprXpdrStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprXpdrOwnedData;
+}
+
+void	Rad3UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad3UprXpdrStatus2)
+{
+    (void) inRefcon;
+    Rad3UprXpdrOwnedData = Rad3UprXpdrStatus2;
+}
+
+
+int	Rad3UprCorseIncStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprCorseIncOwnedData;
+}
+
+void	Rad3UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad3UprCorseIncStatus2)
+{
+    (void) inRefcon;
+    Rad3UprCorseIncOwnedData = Rad3UprCorseIncStatus2;
+}
+
+int	Rad3UprCorseDecStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprCorseDecOwnedData;
+}
+
+void	Rad3UprCorseDecStatusSetDataiCallback(void * inRefcon, int Rad3UprCorseDecStatus2)
+{
+    (void) inRefcon;
+    Rad3UprCorseDecOwnedData = Rad3UprCorseDecStatus2;
+}
+
+
+int	Rad3UprFineIncStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprFineIncOwnedData;
+}
+
+void	Rad3UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad3UprFineIncStatus2)
+{
+    (void) inRefcon;
+    Rad3UprFineIncOwnedData = Rad3UprFineIncStatus2;
+}
+
+int	Rad3UprFineDecStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprFineDecOwnedData;
+}
+
+void	Rad3UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad3UprFineDecStatus2)
+{
+    (void) inRefcon;
+    Rad3UprFineDecOwnedData = Rad3UprFineDecStatus2;
+}
+
+
+int	Rad3UprActStbyStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprActStbyOwnedData;
+}
+
+void	Rad3UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad3UprActStbyStatus2)
+{
+    (void) inRefcon;
+    Rad3UprActStbyOwnedData = Rad3UprActStbyStatus2;
+}
+
+
+// Radio3 lower datareferences callbacks
+
+int	Rad3LwrCom1StatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrCom1OwnedData;
+}
+
+void	Rad3LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad3LwrCom1Status2)
+{
+    (void) inRefcon;
+    Rad3LwrCom1OwnedData = Rad3LwrCom1Status2;
+}
+
+
+int	Rad3LwrCom2StatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrCom2OwnedData;
+}
+
+void	Rad3LwrCom2StatusSetDataiCallback(void * inRefcon, int Rad3LwrCom2Status2)
+{
+    (void) inRefcon;
+    Rad3LwrCom2OwnedData = Rad3LwrCom2Status2;
+}
+
+
+int	Rad3LwrNav1StatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrNav1OwnedData;
+}
+
+void	Rad3LwrNav1StatusSetDataiCallback(void * inRefcon, int Rad3LwrNav1Status2)
+{
+    (void) inRefcon;
+    Rad3LwrNav1OwnedData = Rad3LwrNav1Status2;
+}
+
+
+int	Rad3LwrNav2StatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrNav2OwnedData;
+}
+
+void	Rad3LwrNav2StatusSetDataiCallback(void * inRefcon, int Rad3LwrNav2Status2)
+{
+    (void) inRefcon;
+    Rad3LwrNav2OwnedData = Rad3LwrNav2Status2;
+}
+
+
+int	Rad3LwrAdfStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrAdfOwnedData;
+}
+
+void	Rad3LwrAdfStatusSetDataiCallback(void * inRefcon, int Rad3LwrAdfStatus2)
+{
+    (void) inRefcon;
+    Rad3LwrAdfOwnedData = Rad3LwrAdfStatus2;
+}
+
+
+int	Rad3LwrDmeStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDmeOwnedData;
+}
+
+void	Rad3LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad3LwrDmeStatus2)
+{
+    (void) inRefcon;
+    Rad3LwrDmeOwnedData = Rad3LwrDmeStatus2;
+}
+
+
+int	Rad3LwrXpdrStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrXpdrOwnedData;
+}
+
+void	Rad3LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad3LwrXpdrStatus2)
+{
+    (void) inRefcon;
+    Rad3LwrXpdrOwnedData = Rad3LwrXpdrStatus2;
+}
+
+
+int	Rad3LwrCorseIncStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrCorseIncOwnedData;
+}
+
+void	Rad3LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad3LwrCorseIncStatus2)
+{
+    (void) inRefcon;
+    Rad3LwrCorseIncOwnedData = Rad3LwrCorseIncStatus2;
+}
+
+int	Rad3LwrCorseDecStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrCorseDecOwnedData;
+}
+
+void	Rad3LwrCorseDecStatusSetDataiCallback(void * inRefcon, int Rad3LwrCorseDecStatus2)
+{
+    (void) inRefcon;
+    Rad3LwrCorseDecOwnedData = Rad3LwrCorseDecStatus2;
+}
+
+
+int	Rad3LwrFineIncStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrFineIncOwnedData;
+}
+
+void	Rad3LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad3LwrFineIncStatus2)
+{
+    (void) inRefcon;
+    Rad3LwrFineIncOwnedData = Rad3LwrFineIncStatus2;
+}
+
+int	Rad3LwrFineDecStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrFineDecOwnedData;
+}
+
+void	Rad3LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad3LwrFineDecStatus2)
+{
+    (void) inRefcon;
+    Rad3LwrFineDecOwnedData = Rad3LwrFineDecStatus2;
+}
+
+
+int	Rad3LwrActStbyStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrActStbyOwnedData;
+}
+
+void	Rad3LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad3LwrActStbyStatus2)
+{
+    (void) inRefcon;
+    Rad3LwrActStbyOwnedData = Rad3LwrActStbyStatus2;
+}
 
 
 
