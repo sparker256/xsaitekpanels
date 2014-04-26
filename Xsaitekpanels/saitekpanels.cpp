@@ -119,6 +119,36 @@ XPLMCommandRef Rad2LowrNav2ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrXpdrBaroUpRemapableCmd = NULL, Rad2LowrXpdrBaroDnRemapableCmd = NULL;
 
 
+XPLMCommandRef Rad3UprCom1CrsUpRemapableCmd = NULL, Rad3UprCom1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprCom1FnUpRemapableCmd = NULL, Rad3UprCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprCom1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3UprCom2CrsUpRemapableCmd = NULL, Rad3UprCom2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprCom2FnUpRemapableCmd = NULL, Rad3UprCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprCom2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3UprNav1CrsUpRemapableCmd = NULL, Rad3UprNav1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprNav1FnUpRemapableCmd = NULL, Rad3UprNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprNav1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3UprNav2CrsUpRemapableCmd = NULL, Rad3UprNav2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprNav2FnUpRemapableCmd = NULL, Rad3UprNav2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3UpperXpdrBaroUpRemapableCmd = NULL, Rad3UpperXpdrBaroDnRemapableCmd = NULL;
+
+
+XPLMCommandRef Rad3LowrCom1CrsUpRemapableCmd = NULL, Rad3LowrCom1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrCom1FnUpRemapableCmd = NULL, Rad3LowrCom1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrCom1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrCom2CrsUpRemapableCmd = NULL, Rad3LowrCom2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrCom2FnUpRemapableCmd = NULL, Rad3LowrCom2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrCom2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrNav1CrsUpRemapableCmd = NULL, Rad3LowrNav1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrNav1FnUpRemapableCmd = NULL, Rad3LowrNav1FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrNav1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrNav2CrsUpRemapableCmd = NULL, Rad3LowrNav2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrNav2FnUpRemapableCmd = NULL, Rad3LowrNav2FnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrXpdrBaroUpRemapableCmd = NULL, Rad3LowrXpdrBaroDnRemapableCmd = NULL;
+
+
 // ************* Radio Panel Data Ref ****************
 XPLMDataRef Com1ActFreq = NULL, Com2ActFreq = NULL, Nav1ActFreq = NULL, Nav2ActFreq = NULL;
 XPLMDataRef Com1StbyFreq = NULL, Com2StbyFreq = NULL, Nav1StbyFreq = NULL, Nav2StbyFreq = NULL;
@@ -188,6 +218,26 @@ XPLMDataRef Rad2LowrNav2ActStbyRemapableData = NULL, Rad2LowrNav2ActStbyRemapabl
 XPLMDataRef Rad2LowerXpdrRemapableData = NULL, Rad2LowerXpdrRemapableMode = NULL, Rad2LowerXpdrBaroStdRemapableData = NULL;
 
 
+XPLMDataRef Rad3UpperCom1ActRemapableData = NULL, Rad3UpperCom1StbyRemapableData = NULL;
+XPLMDataRef Rad3UprCom1ActStbyRemapableData = NULL, Rad3UprCom1ActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3UpperCom2ActRemapableData = NULL, Rad3UpperCom2StbyRemapableData = NULL;
+XPLMDataRef Rad3UprCom2ActStbyRemapableData = NULL, Rad3UprCom2ActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3UpperNav1ActRemapableData = NULL, Rad3UpperNav1StbyRemapableData = NULL;
+XPLMDataRef Rad3UprNav1ActStbyRemapableData = NULL, Rad3UprNav1ActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3UpperNav2ActRemapableData = NULL, Rad3UpperNav2StbyRemapableData = NULL;
+XPLMDataRef Rad3UprNav2ActStbyRemapableData = NULL, Rad3UprNav2ActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3UpperXpdrRemapableData = NULL, Rad3UpperXpdrRemapableMode = NULL, Rad3UpperXpdrBaroStdRemapableData = NULL;
+
+
+XPLMDataRef Rad3LowerCom1ActRemapableData = NULL, Rad3LowerCom1StbyRemapableData = NULL;
+XPLMDataRef Rad3LowrCom1ActStbyRemapableData = NULL, Rad3LowrCom1ActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3LowerCom2ActRemapableData = NULL, Rad3LowerCom2StbyRemapableData = NULL;
+XPLMDataRef Rad3LowrCom2ActStbyRemapableData = NULL, Rad3LowrCom2ActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3LowerNav1ActRemapableData = NULL, Rad3LowerNav1StbyRemapableData = NULL;
+XPLMDataRef Rad3LowrNav1ActStbyRemapableData = NULL, Rad3LowrNav1ActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3LowerNav2ActRemapableData = NULL, Rad3LowerNav2StbyRemapableData = NULL;
+XPLMDataRef Rad3LowrNav2ActStbyRemapableData = NULL, Rad3LowrNav2ActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3LowerXpdrRemapableData = NULL, Rad3LowerXpdrRemapableMode = NULL, Rad3LowerXpdrBaroStdRemapableData = NULL;
 
 
 XPLMDataRef Rad1UpperCom1OwnedDataRef = NULL, Rad1UpperCom2OwnedDataRef = NULL;
@@ -204,6 +254,7 @@ XPLMDataRef Rad1LowerXpdrOwnedDataRef = NULL, Rad1LowerCorseIncOwnedDataRef = NU
 XPLMDataRef Rad1LowerCorseDecOwnedDataRef = NULL, Rad1LowerFineIncOwnedDataRef = NULL;
 XPLMDataRef Rad1LowerFineDecOwnedDataRef = NULL, Rad1LowerActStbyOwnedDataRef = NULL;
 
+
 XPLMDataRef Rad2UpperCom1OwnedDataRef = NULL, Rad2UpperCom2OwnedDataRef = NULL;
 XPLMDataRef Rad2UpperNav1OwnedDataRef = NULL, Rad2UpperNav2OwnedDataRef = NULL;
 XPLMDataRef Rad2UpperAdfOwnedDataRef = NULL, Rad2UpperDmeOwnedDataRef = NULL;
@@ -217,6 +268,21 @@ XPLMDataRef Rad2LowerAdfOwnedDataRef = NULL, Rad2LowerDmeOwnedDataRef = NULL;
 XPLMDataRef Rad2LowerXpdrOwnedDataRef = NULL, Rad2LowerCorseIncOwnedDataRef = NULL;
 XPLMDataRef Rad2LowerCorseDecOwnedDataRef = NULL, Rad2LowerFineIncOwnedDataRef = NULL;
 XPLMDataRef Rad2LowerFineDecOwnedDataRef = NULL, Rad2LowerActStbyOwnedDataRef = NULL;
+
+
+XPLMDataRef Rad3UpperCom1OwnedDataRef = NULL, Rad3UpperCom2OwnedDataRef = NULL;
+XPLMDataRef Rad3UpperNav1OwnedDataRef = NULL, Rad3UpperNav2OwnedDataRef = NULL;
+XPLMDataRef Rad3UpperAdfOwnedDataRef = NULL, Rad3UpperDmeOwnedDataRef = NULL;
+XPLMDataRef Rad3UpperXpdrOwnedDataRef = NULL, Rad3UpperCorseIncOwnedDataRef = NULL;
+XPLMDataRef Rad3UpperCorseDecOwnedDataRef = NULL, Rad3UpperFineIncOwnedDataRef = NULL;
+XPLMDataRef Rad3UpperFineDecOwnedDataRef = NULL, Rad3UpperActStbyOwnedDataRef = NULL;
+
+XPLMDataRef Rad3LowerCom1OwnedDataRef = NULL, Rad3LowerCom2OwnedDataRef = NULL;
+XPLMDataRef Rad3LowerNav1OwnedDataRef = NULL, Rad3LowerNav2OwnedDataRef = NULL;
+XPLMDataRef Rad3LowerAdfOwnedDataRef = NULL, Rad3LowerDmeOwnedDataRef = NULL;
+XPLMDataRef Rad3LowerXpdrOwnedDataRef = NULL, Rad3LowerCorseIncOwnedDataRef = NULL;
+XPLMDataRef Rad3LowerCorseDecOwnedDataRef = NULL, Rad3LowerFineIncOwnedDataRef = NULL;
+XPLMDataRef Rad3LowerFineDecOwnedDataRef = NULL, Rad3LowerActStbyOwnedDataRef = NULL;
 
 
 XPLMMenuID      RadioMenu;
@@ -667,6 +733,18 @@ int rad2lwrnav1switchremap, rad2lwrnav1actstbybtnremap;
 int rad2lwrnav2switchremap, rad2lwrnav2actstbybtnremap;
 int rad2lwrxpdrswitchremap;
 
+int rad3uprcom1switchremap, rad3uprcom1actstbybtnremap;
+int rad3uprcom2switchremap, rad3uprcom2actstbybtnremap;
+int rad3uprnav1switchremap, rad3uprnav1actstbybtnremap;
+int rad3uprnav2switchremap, rad3uprnav2actstbybtnremap;
+int rad3uprxpdrswitchremap;
+int rad3lwrcom1switchremap, rad3lwrcom1actstbybtnremap;
+int rad3lwrcom2switchremap, rad3lwrcom2actstbybtnremap;
+int rad3lwrnav1switchremap, rad3lwrnav1actstbybtnremap;
+int rad3lwrnav2switchremap, rad3lwrnav2actstbybtnremap;
+int rad3lwrxpdrswitchremap;
+
+
 int rad1_upr_com1_actstby_btn_data_on_value, rad1_upr_com1_actstby_btn_data_off_value;
 int rad1_upr_com2_actstby_btn_data_on_value, rad1_upr_com2_actstby_btn_data_off_value;
 int rad1_upr_nav1_actstby_btn_data_on_value, rad1_upr_nav1_actstby_btn_data_off_value;
@@ -686,6 +764,16 @@ int rad2_lwr_com1_actstby_btn_data_on_value, rad2_lwr_com1_actstby_btn_data_off_
 int rad2_lwr_com2_actstby_btn_data_on_value, rad2_lwr_com2_actstby_btn_data_off_value;
 int rad2_lwr_nav1_actstby_btn_data_on_value, rad2_lwr_nav1_actstby_btn_data_off_value;
 int rad2_lwr_nav2_actstby_btn_data_on_value, rad2_lwr_nav2_actstby_btn_data_off_value;
+
+int rad3_upr_com1_actstby_btn_data_on_value, rad3_upr_com1_actstby_btn_data_off_value;
+int rad3_upr_com2_actstby_btn_data_on_value, rad3_upr_com2_actstby_btn_data_off_value;
+int rad3_upr_nav1_actstby_btn_data_on_value, rad3_upr_nav1_actstby_btn_data_off_value;
+int rad3_upr_nav2_actstby_btn_data_on_value, rad3_upr_nav2_actstby_btn_data_off_value;
+
+int rad3_lwr_com1_actstby_btn_data_on_value, rad3_lwr_com1_actstby_btn_data_off_value;
+int rad3_lwr_com2_actstby_btn_data_on_value, rad3_lwr_com2_actstby_btn_data_off_value;
+int rad3_lwr_nav1_actstby_btn_data_on_value, rad3_lwr_nav1_actstby_btn_data_off_value;
+int rad3_lwr_nav2_actstby_btn_data_on_value, rad3_lwr_nav2_actstby_btn_data_off_value;
 
 
 float rad1_upr_com1_actstby_btn_dataf_on_value, rad1_upr_com1_actstby_btn_dataf_off_value;
@@ -707,6 +795,16 @@ float rad2_lwr_com1_actstby_btn_dataf_on_value, rad2_lwr_com1_actstby_btn_dataf_
 float rad2_lwr_com2_actstby_btn_dataf_on_value, rad2_lwr_com2_actstby_btn_dataf_off_value;
 float rad2_lwr_nav1_actstby_btn_dataf_on_value, rad2_lwr_nav1_actstby_btn_dataf_off_value;
 float rad2_lwr_nav2_actstby_btn_dataf_on_value, rad2_lwr_nav2_actstby_btn_dataf_off_value;
+
+float rad3_upr_com1_actstby_btn_dataf_on_value, rad3_upr_com1_actstby_btn_dataf_off_value;
+float rad3_upr_com2_actstby_btn_dataf_on_value, rad3_upr_com2_actstby_btn_dataf_off_value;
+float rad3_upr_nav1_actstby_btn_dataf_on_value, rad3_upr_nav1_actstby_btn_dataf_off_value;
+float rad3_upr_nav2_actstby_btn_datfa_on_value, rad3_upr_nav2_actstby_btn_dataf_off_value;
+
+float rad3_lwr_com1_actstby_btn_dataf_on_value, rad3_lwr_com1_actstby_btn_dataf_off_value;
+float rad3_lwr_com2_actstby_btn_dataf_on_value, rad3_lwr_com2_actstby_btn_dataf_off_value;
+float rad3_lwr_nav1_actstby_btn_dataf_on_value, rad3_lwr_nav1_actstby_btn_dataf_off_value;
+float rad3_lwr_nav2_actstby_btn_dataf_on_value, rad3_lwr_nav2_actstby_btn_dataf_off_value;
 
 
 void CreateRadioWidget(int x1, int y1, int w, int h);
@@ -731,7 +829,6 @@ static int Rad1LwrCorseDecOwnedData = 0, Rad1LwrFineIncOwnedData = 0;
 static int Rad1LwrFineDecOwnedData = 0, Rad1LwrActStbyOwnedData = 0;
 
 
-
 static int Rad2UprCom1OwnedData = 0, Rad2UprCom2OwnedData = 0;
 static int Rad2UprNav1OwnedData = 0, Rad2UprNav2OwnedData = 0;
 static int Rad2UprAdfOwnedData = 0, Rad2UprDmeOwnedData = 0;
@@ -745,6 +842,20 @@ static int Rad2LwrAdfOwnedData = 0, Rad2LwrDmeOwnedData = 0;
 static int Rad2LwrXpdrOwnedData = 0, Rad2LwrCorseIncOwnedData = 0;
 static int Rad2LwrCorseDecOwnedData = 0, Rad2LwrFineIncOwnedData = 0;
 static int Rad2LwrFineDecOwnedData = 0, Rad2LwrActStbyOwnedData = 0;
+
+static int Rad3UprCom1OwnedData = 0, Rad3UprCom2OwnedData = 0;
+static int Rad3UprNav1OwnedData = 0, Rad3UprNav2OwnedData = 0;
+static int Rad3UprAdfOwnedData = 0, Rad3UprDmeOwnedData = 0;
+static int Rad3UprXpdrOwnedData = 0, Rad3UprCorseIncOwnedData = 0;
+static int Rad3UprCorseDecOwnedData = 0, Rad3UprFineIncOwnedData = 0;
+static int Rad3UprFineDecOwnedData = 0, Rad3UprActStbyOwnedData = 0;
+
+static int Rad3LwrCom1OwnedData = 0, Rad3LwrCom2OwnedData = 0;
+static int Rad3LwrNav1OwnedData = 0, Rad3LwrNav2OwnedData = 0;
+static int Rad3LwrAdfOwnedData = 0, Rad3LwrDmeOwnedData = 0;
+static int Rad3LwrXpdrOwnedData = 0, Rad3LwrCorseIncOwnedData = 0;
+static int Rad3LwrCorseDecOwnedData = 0, Rad3LwrFineIncOwnedData = 0;
+static int Rad3LwrFineDecOwnedData = 0, Rad3LwrActStbyOwnedData = 0;
 
 
 int	RadioPanelCountGetDataiCallback(void * inRefcon);
@@ -788,8 +899,6 @@ int	Rad1UprActStbyStatusGetDataiCallback(void * inRefcon);
 void	Rad1UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad1UprActStbyStatus);
 
 
-
-
 int	Rad1LwrCom1StatusGetDataiCallback(void * inRefcon);
 void	Rad1LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad1LwrCom1Status);
 
@@ -825,8 +934,6 @@ void	Rad1LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad1LwrFineDecSta
 
 int	Rad1LwrActStbyStatusGetDataiCallback(void * inRefcon);
 void	Rad1LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad1LwrActStbyStatus);
-
-
 
 
 int	Rad2UprCom1StatusGetDataiCallback(void * inRefcon);
@@ -866,8 +973,6 @@ int	Rad2UprActStbyStatusGetDataiCallback(void * inRefcon);
 void	Rad2UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad2UprActStbyStatus);
 
 
-
-
 int	Rad2LwrCom1StatusGetDataiCallback(void * inRefcon);
 void	Rad2LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad2LwrCom1Status);
 
@@ -903,6 +1008,86 @@ void	Rad2LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad2LwrFineDecSta
 
 int	Rad2LwrActStbyStatusGetDataiCallback(void * inRefcon);
 void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbyStatus);
+
+
+
+
+
+
+
+int	Rad3UprCom1StatusGetDataiCallback(void * inRefcon);
+void	Rad3UprCom1StatusSetDataiCallback(void * inRefcon, int Rad3UprCom1Status);
+
+int	Rad3UprCom2StatusGetDataiCallback(void * inRefcon);
+void	Rad3UprCom2StatusSetDataiCallback(void * inRefcon, int Rad3UprCom2Status);
+
+int	Rad3UprNav1StatusGetDataiCallback(void * inRefcon);
+void	Rad3UprNav1StatusSetDataiCallback(void * inRefcon, int Rad3UprNav1Status);
+
+int	Rad3UprNav2StatusGetDataiCallback(void * inRefcon);
+void	Rad3UprNav2StatusSetDataiCallback(void * inRefcon, int Rad3UprNav2Status);
+
+int	Rad3UprAdfStatusGetDataiCallback(void * inRefcon);
+void	Rad3UprAdfStatusSetDataiCallback(void * inRefcon, int Rad3UprAdfStatus);
+
+int	Rad3UprDmeStatusGetDataiCallback(void * inRefcon);
+void	Rad3UprDmeStatusSetDataiCallback(void * inRefcon, int Rad3UprDmeStatus);
+
+int	Rad3UprXpdrStatusGetDataiCallback(void * inRefcon);
+void	Rad3UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad3UprXpdrStatus);
+
+int	Rad3UprCorseIncStatusGetDataiCallback(void * inRefcon);
+void	Rad3UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad3UprCorseIncStatus);
+
+int	Rad3UprCorseDecStatusGetDataiCallback(void * inRefcon);
+void	Rad3UprCorseDecStatusSetDataiCallback(void * inRefcon, int Rad3UprCorseDecStatus);
+
+int	Rad3UprFineIncStatusGetDataiCallback(void * inRefcon);
+void	Rad3UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad3UprFineIncStatus);
+
+int	Rad3UprFineDecStatusGetDataiCallback(void * inRefcon);
+void	Rad3UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad3UprFineDecStatus);
+
+int	Rad3UprActStbyStatusGetDataiCallback(void * inRefcon);
+void	Rad3UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad3UprActStbyStatus);
+
+
+int	Rad3LwrCom1StatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad3LwrCom1Status);
+
+int	Rad3LwrCom2StatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrCom2StatusSetDataiCallback(void * inRefcon, int Rad3LwrCom2Status);
+
+int	Rad3LwrNav1StatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrNav1StatusSetDataiCallback(void * inRefcon, int Rad3LwrNav1Status);
+
+int	Rad3LwrNav2StatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrNav2StatusSetDataiCallback(void * inRefcon, int Rad3LwrNav2Status);
+
+int	Rad3LwrAdfStatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrAdfStatusSetDataiCallback(void * inRefcon, int Rad3LwrAdfStatus);
+
+int	Rad3LwrDmeStatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad3LwrDmeStatus);
+
+int	Rad3LwrXpdrStatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad3LwrXpdrStatus);
+
+int	Rad3LwrCorseIncStatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad3LwrCorseIncStatus);
+
+int	Rad3LwrCorseDecStatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrCorseDecStatusSetDataiCallback(void * inRefcon, int Rad3LwrCorseDecStatus);
+
+int	Rad3LwrFineIncStatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad3LwrFineIncStatus);
+
+int	Rad3LwrFineDecStatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad3LwrFineDecStatus);
+
+int	Rad3LwrActStbyStatusGetDataiCallback(void * inRefcon);
+void	Rad3LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad3LwrActStbyStatus);
+
 
 string rad1_upper_com1_corse_up_remapable, rad1_upper_com1_corse_dn_remapable;
 string rad1_upper_com1_fine_up_remapable, rad1_upper_com1_fine_dn_remapable;
@@ -1013,6 +1198,61 @@ string rad2_lower_nav2_actstby_btn_remapable_dataf;
 
 string rad2_lower_xpdr_data_remapable, rad2_lower_xpdr_mode_remapable,  rad2_lower_xpdr_baro_std_data_remapable;
 string rad2_lower_xpdr_baro_up_remapable_cmd, rad2_lower_xpdr_baro_dn_remapable_cmd;
+
+
+string rad3_upper_com1_corse_up_remapable, rad3_upper_com1_corse_dn_remapable;
+string rad3_upper_com1_fine_up_remapable, rad3_upper_com1_fine_dn_remapable;
+string rad3_upper_com1_act_data_remapable, rad3_upper_com1_stby_data_remapable;
+string rad3_upper_com1_actstby_btn_remapable_cmd, rad3_upper_com1_actstby_btn_remapable_data;
+string rad3_upper_com1_actstby_btn_remapable_dataf;
+
+string rad3_upper_com2_corse_up_remapable, rad3_upper_com2_corse_dn_remapable;
+string rad3_upper_com2_fine_up_remapable, rad3_upper_com2_fine_dn_remapable;
+string rad3_upper_com2_act_data_remapable, rad3_upper_com2_stby_data_remapable;
+string rad3_upper_com2_actstby_btn_remapable_cmd, rad3_upper_com2_actstby_btn_remapable_data;
+string rad3_upper_com2_actstby_btn_remapable_dataf;
+
+string rad3_upper_nav1_corse_up_remapable, rad3_upper_nav1_corse_dn_remapable;
+string rad3_upper_nav1_fine_up_remapable, rad3_upper_nav1_fine_dn_remapable;
+string rad3_upper_nav1_act_data_remapable, rad3_upper_nav1_stby_data_remapable;
+string rad3_upper_nav1_actstby_btn_remapable_cmd, rad3_upper_nav1_actstby_btn_remapable_data;
+string rad3_upper_nav1_actstby_btn_remapable_dataf;
+
+string rad3_upper_nav2_corse_up_remapable, rad3_upper_nav2_corse_dn_remapable;
+string rad3_upper_nav2_fine_up_remapable, rad3_upper_nav2_fine_dn_remapable;
+string rad3_upper_nav2_act_data_remapable, rad3_upper_nav2_stby_data_remapable;
+string rad3_upper_nav2_actstby_btn_remapable_cmd, rad3_upper_nav2_actstby_btn_remapable_data;
+string rad3_upper_nav2_actstby_btn_remapable_dataf;
+
+string rad3_upper_xpdr_data_remapable, rad3_upper_xpdr_mode_remapable,  rad3_upper_xpdr_baro_std_data_remapable;
+string rad3_upper_xpdr_baro_up_remapable_cmd, rad3_upper_xpdr_baro_dn_remapable_cmd;
+
+string rad3_lower_com1_corse_up_remapable, rad3_lower_com1_corse_dn_remapable;
+string rad3_lower_com1_fine_up_remapable, rad3_lower_com1_fine_dn_remapable;
+string rad3_lower_com1_act_data_remapable, rad3_lower_com1_stby_data_remapable;
+string rad3_lower_com1_actstby_btn_remapable_cmd, rad3_lower_com1_actstby_btn_remapable_data;
+string rad3_lower_com1_actstby_btn_remapable_dataf;
+
+string rad3_lower_com2_corse_up_remapable, rad3_lower_com2_corse_dn_remapable;
+string rad3_lower_com2_fine_up_remapable, rad3_lower_com2_fine_dn_remapable;
+string rad3_lower_com2_act_data_remapable, rad3_lower_com2_stby_data_remapable;
+string rad3_lower_com2_actstby_btn_remapable_cmd, rad3_lower_com2_actstby_btn_remapable_data;
+string rad3_lower_com2_actstby_btn_remapable_dataf;
+
+string rad3_lower_nav1_corse_up_remapable, rad3_lower_nav1_corse_dn_remapable;
+string rad3_lower_nav1_fine_up_remapable, rad3_lower_nav1_fine_dn_remapable;
+string rad3_lower_nav1_act_data_remapable, rad3_lower_nav1_stby_data_remapable;
+string rad3_lower_nav1_actstby_btn_remapable_cmd, rad3_lower_nav1_actstby_btn_remapable_data;
+string rad3_lower_nav1_actstby_btn_remapable_dataf;
+
+string rad3_lower_nav2_corse_up_remapable, rad3_lower_nav2_corse_dn_remapable;
+string rad3_lower_nav2_fine_up_remapable, rad3_lower_nav2_fine_dn_remapable;
+string rad3_lower_nav2_act_data_remapable, rad3_lower_nav2_stby_data_remapable;
+string rad3_lower_nav2_actstby_btn_remapable_cmd, rad3_lower_nav2_actstby_btn_remapable_data;
+string rad3_lower_nav2_actstby_btn_remapable_dataf;
+
+string rad3_lower_xpdr_data_remapable, rad3_lower_xpdr_mode_remapable,  rad3_lower_xpdr_baro_std_data_remapable;
+string rad3lower_xpdr_baro_up_remapable_cmd, rad3_lower_xpdr_baro_dn_remapable_cmd;
 
 
 char RadioSpeedText[50][200] = {
@@ -1827,8 +2067,11 @@ void process_radio1_register_xsaitekpanels_datareference();
 void process_radio1_unregister_xsaitekpanels_datareference();
 void process_radio2_register_xsaitekpanels_datareference();
 void process_radio2_unregister_xsaitekpanels_datareference();
+void process_radio3_register_xsaitekpanels_datareference();
+void process_radio3_unregister_xsaitekpanels_datareference();
 void process_radio_find_xplane_commands();
 void process_radio_find_xplane_datareference();
+
 void process_multi_panel();
 void process_multi_register_xsaitekpanels_datareference();
 void process_multi_unregister_xsaitekpanels_datareference();
