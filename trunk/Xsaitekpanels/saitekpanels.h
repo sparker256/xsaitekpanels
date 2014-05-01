@@ -741,7 +741,7 @@ extern string rad3_lower_nav2_actstby_btn_remapable_cmd, rad3_lower_nav2_actstby
 
 extern string rad3_lower_xpdr_data_remapable, rad3_lower_xpdr_mode_remapable, rad3_lower_xpdr_baro_std_data_remapable;
 
-extern string rad3lower_xpdr_baro_up_remapable_cmd, rad3_lower_xpdr_baro_dn_remapable_cmd;
+extern string rad3_lower_xpdr_baro_up_remapable_cmd, rad3_lower_xpdr_baro_dn_remapable_cmd;
 
 
 extern float interval;
