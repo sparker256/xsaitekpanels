@@ -1,6 +1,6 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Apr 30 2014   **************
+// ****** May 01 2014   **************
 
 #define VERSION_NUMBER "2.30"
 
@@ -1010,11 +1010,6 @@ int	Rad2LwrActStbyStatusGetDataiCallback(void * inRefcon);
 void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbyStatus);
 
 
-
-
-
-
-
 int	Rad3UprCom1StatusGetDataiCallback(void * inRefcon);
 void	Rad3UprCom1StatusSetDataiCallback(void * inRefcon, int Rad3UprCom1Status);
 
@@ -1252,7 +1247,7 @@ string rad3_lower_nav2_actstby_btn_remapable_cmd, rad3_lower_nav2_actstby_btn_re
 string rad3_lower_nav2_actstby_btn_remapable_dataf;
 
 string rad3_lower_xpdr_data_remapable, rad3_lower_xpdr_mode_remapable,  rad3_lower_xpdr_baro_std_data_remapable;
-string rad3lower_xpdr_baro_up_remapable_cmd, rad3_lower_xpdr_baro_dn_remapable_cmd;
+string rad3_lower_xpdr_baro_up_remapable_cmd, rad3_lower_xpdr_baro_dn_remapable_cmd;
 
 
 char RadioSpeedText[50][200] = {
@@ -1675,21 +1670,6 @@ static int SwitchStrobeOwnedData = 0, SwitchTaxiOwnedData = 0;
 static int SwitchLandingOwnedData = 0;
 
 
-
-// These callbacks are called by the SDK to read and write the sim.
-// We provide two sets of callbacks allowing our data to appear as
-// float and double.  This is done for didactic purposes; multityped
-// should not be used in initial designs as a convenience to client
-// code.
-
-//int SwitchBatPosition, SwitchAltPosition;
-//int SwitchAvPosition, SwitchFuelPosition;
-//int SwitchDeicePosition, SwitchPitotPosition;
-//int SwitchGearUpPosition, SwitchGearDnPosition;
-//int SwitchCowlPosition, SwitchPanelPosition;
-//int SwitchBeaconPosition, SwitchNavPosition;
-//int SwitchStrobePosition, SwitchTaxiPosition;
-//int SwitchLandingPosition;
 
 int	SwitchPanelCountGetDataiCallback(void * inRefcon);
 void	SwitchPanelCountSetDataiCallback(void * inRefcon, int SwitchPanelCount);
