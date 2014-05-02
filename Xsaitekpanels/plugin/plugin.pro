@@ -24,7 +24,7 @@ win32 {
     TARGET = win.xpl
     INCLUDEPATH += .
     LIBS +=  "-lsetupapi"
-    # LIBS +=  "-lSetupAPI"
+
 }
 
 win32:isEmpty(CROSS_COMPILE){
@@ -38,10 +38,10 @@ win32:isEmpty(CROSS_COMPILE){
 
 win32:!isEmpty(CROSS_COMPILE){
     message(win32cross)
-    QMAKE_YACC = yacc
-    QMAKE_YACCFLAGS_MANGLE  += -p $base -b $base
-    QMAKE_YACC_HEADER       = $base.tab.h
-    QMAKE_YACC_SOURCE       = $base.tab.c
+#   QMAKE_YACC = yacc
+#   QMAKE_YACCFLAGS_MANGLE  += -p $base -b $base
+#   QMAKE_YACC_HEADER       = $base.tab.h
+#   QMAKE_YACC_SOURCE       = $base.tab.c
     QMAKE_DEL_FILE          = rm -f
     INCLUDEPATH += "../../WinSDK/Include"
     LIBS += -static-libstdc++ -static-libgcc
@@ -88,6 +88,7 @@ SOURCES += ../saitekpanels.cpp\
     ../radiopanels.cpp \
     ../radio1data.cpp \
     ../radio2data.cpp \
+    ../radio3data.cpp \
     ../multipanel.cpp \
     ../multidata.cpp \
     ../switchpanel.cpp \
