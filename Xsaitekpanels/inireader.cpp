@@ -16,7 +16,7 @@ struct ConfigItems {
         std::string key;
         std::string value;
 };
-ConfigItems* iniItem[1024];
+ConfigItems* iniItem[1300];
 
 int i = 0;
 
