@@ -59,6 +59,8 @@ static int FLAPS_UP_SWITCH = 23, FLAPS_DN_SWITCH = 22;
 static int TRIM_WHEEL_UP = 20, TRIM_WHEEL_DN = 21;
 static int ADJUSTMENT_UP = 2, ADJUSTMENT_DN = 1;
 
+static int Last_Adjustment_Up, Last_Adjustment_Dn;
+
 static unsigned char multibuf[4];
 static unsigned char multiwbuf[13];
 
@@ -313,7 +315,7 @@ void process_alt_switch()
         }
         upapaltf = XPLMGetDataf(ApAlt);
         upapalt = (int)(upapaltf);
-        if(testbit(multibuf,ADJUSTMENT_UP)) {
+        if((Last_Adjustment_Up == 1) && (testbit(multibuf,ADJUSTMENT_UP) == 0)) {
             altdbncinc++;
             if (altdbncinc > multispeed) {
                 n = multimul;
@@ -346,7 +348,9 @@ void process_alt_switch()
                 }
             }
         }
-        if(testbit(multibuf,ADJUSTMENT_DN)) {
+        Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+
+        if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             altdbncdec++;
             if (altdbncdec > multispeed) {
                 n = multimul;
@@ -387,6 +391,8 @@ void process_alt_switch()
 
             }
         }
+        Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
+
         upapaltf = upapalt;
 
         if (altswitchremap == 2) {
@@ -427,7 +433,7 @@ void process_vs_switch()
             upapvsf = XPLMGetDataf(ApVs);
         }
         upapvs = (int)(upapvsf);
-        if(testbit(multibuf,ADJUSTMENT_UP)) {
+        if((Last_Adjustment_Up == 1) && (testbit(multibuf,ADJUSTMENT_UP) == 0)) {
             vsdbncinc++;
             if (vsdbncinc > multispeed) {
                 n = multimul;
@@ -459,7 +465,9 @@ void process_vs_switch()
                 }
              }
         }
-        if(testbit(multibuf,ADJUSTMENT_DN)) {
+        Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+
+        if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             vsdbncdec++;
             if (vsdbncdec > multispeed) {
                 n = multimul;
@@ -489,6 +497,7 @@ void process_vs_switch()
                 }
             }
         }
+        Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
 
         upapvsf = upapvs;
         if (vsswitchremap == 2) {
@@ -546,7 +555,7 @@ void process_ias_switch()
             apasf = XPLMGetDataf(ApAs);
             apas = (int)(apasf);
         }
-        if (testbit(multibuf,ADJUSTMENT_UP)) {
+        if ((Last_Adjustment_Up == 1) && (testbit(multibuf,ADJUSTMENT_UP) == 0)) {
             iasdbncinc++;
             if (iasdbncinc > multispeed) {
                 n = multimul;
@@ -594,7 +603,9 @@ void process_ias_switch()
                 }
             }
         }
-        if (testbit(multibuf,ADJUSTMENT_DN)) {
+        Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+
+        if ((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             iasdbncdec++;
             if (iasdbncdec > multispeed) {
                 n = multimul;
@@ -643,7 +654,7 @@ void process_ias_switch()
                 }
             }
         }
-
+        Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
         if (iasismachremap == 1) {
             if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
                 if (iasswitchremap == 1) {
@@ -693,7 +704,7 @@ void process_hdg_switch()
         }
 
         upaphdg = (int)(upaphdgf);
-        if(testbit(multibuf,ADJUSTMENT_UP)) {
+        if((Last_Adjustment_Up == 1) && (testbit(multibuf,ADJUSTMENT_UP) == 0)) {
             hdgdbncinc++;
             if (hdgdbncinc > multispeed) {
                 n = multimul;
@@ -719,7 +730,9 @@ void process_hdg_switch()
                 }
             }
         }
-        if(testbit(multibuf,ADJUSTMENT_DN)) {
+        Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+
+        if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             hdgdbncdec++;
             if (hdgdbncdec > multispeed) {
                 n = multimul;
@@ -744,6 +757,7 @@ void process_hdg_switch()
                 }
             }
         }
+        Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
         if(upaphdg > 360) {
             upaphdg = 1;
         }
@@ -783,14 +797,14 @@ void process_crs_switch()
         upapcrsf = XPLMGetDataf(ApCrs);
         upapcrs = (int)(upapcrsf);
 
-        if (crsswitchremap == 1) {
+        if ((crsswitchremap == 1) || (crsswitchremap == 2)) {
             cur_apcrsf = XPLMGetDataf(CrsSwitchRemapableData);
         } else {
             //  get the appropriate course setting depending on if the toggle is down
             cur_apcrsf = XPLMGetDataf(crs_dataref);
         }
         cur_apcrs = (int)(cur_apcrsf);
-        if(testbit(multibuf,ADJUSTMENT_UP)) {
+        if((Last_Adjustment_Up == 1) && (testbit(multibuf,ADJUSTMENT_UP) == 0)) {
             crsdbncinc++;
             if (crsdbncinc > multispeed) {
                 n = multimul;
@@ -815,8 +829,9 @@ void process_crs_switch()
                 crsdbncinc = 0;
             }
         }
+        Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
 
-        if(testbit(multibuf,ADJUSTMENT_DN)) {
+        if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             crsdbncdec++;
             if (crsdbncdec > multispeed) {
                 n = multimul;
@@ -843,6 +858,7 @@ void process_crs_switch()
                 crsdbncdec = 0;
             }
         }
+        Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
 
         if(cur_apcrs > 360) {
             cur_apcrs = 1;
@@ -854,8 +870,11 @@ void process_crs_switch()
 
         cur_apcrsf = cur_apcrs;
         if (crsswitchremap == 1) {
+            upapcrsf = XPLMGetDataf(CrsSwitchRemapableData);
+            upapcrs = (int)(upapcrsf);
+        } else if (crsswitchremap == 2) {
             XPLMSetDataf(CrsSwitchRemapableData, cur_apcrsf);
-        } else {
+         } else {
             XPLMSetDataf(crs_dataref, cur_apcrsf);
         }
 
