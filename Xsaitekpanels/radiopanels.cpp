@@ -4045,7 +4045,7 @@ void process_lower_adf_switch()
                 }
 
                 // Use the Coarse knob to select digit in the up direction
-                if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
+                if ((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
                     loadfdbnccorinc[radnum] ++;
                     if(loadfdbnccorinc[radnum] > radspeed) {
                         loadfsel[radnum] ++;
@@ -4055,10 +4055,10 @@ void process_lower_adf_switch()
                         loadfsel[radnum] = 1;
                     }
                 }
-                Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
+                Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
 
                 // Use the Coarse knob to select digit in the down direction
-                if ((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
+                if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
                     loadfdbnccordec[radnum] ++;
                     if (loadfdbnccordec[radnum] > radspeed) {
                         loadfsel[radnum] --;
@@ -4068,7 +4068,7 @@ void process_lower_adf_switch()
                         loadfsel[radnum] = 3;
                     }
                 }
-                Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
+                Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
 
                 if (testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
                     XPLMCommandOnce(Adf2ActStby);
@@ -4160,7 +4160,7 @@ void process_lower_dme_switch()
                 lodmefreq[radnum] = XPLMGetDatai(DmeFreq);
                 lodmefreqhnd = lodmefreq[radnum]/100;
                 lodmefreqfrc = lodmefreq[radnum]%100;
-                if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+                if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                     if (lodmefreqfrc == 95) {
                         lodmefreqfrc = 0;
                     }
@@ -4170,9 +4170,10 @@ void process_lower_dme_switch()
                         lodmedbncfninc[radnum] = 0;
                     }
                 }
+                Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
 
-                if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+                if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                     if (lodmefreqfrc == 0) {
                         lodmefreqfrc = 95;
                     }
@@ -4182,9 +4183,10 @@ void process_lower_dme_switch()
                         lodmedbncfndec[radnum] = 0;
                     }
                 }
+                Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
 
 
-                if (testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
+                if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
                     if (lodmefreqhnd == 117) {
                         lodmefreqhnd = 108;
                     }
@@ -4194,9 +4196,10 @@ void process_lower_dme_switch()
                         lodmedbncfninc[radnum] = 0;
                     }
                 }
+                Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
 
 
-                if (testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
+                if ((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
                     if (lodmefreqhnd == 108) {
                         lodmefreqhnd = 117;
                     }
@@ -4206,6 +4209,8 @@ void process_lower_dme_switch()
                         lodmedbncfndec[radnum] = 0;
                     }
                 }
+                Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
+
                 lodmefreq[radnum] = (lodmefreqhnd * 100) + lodmefreqfrc;
                 XPLMSetDatai(DmeFreq, lodmefreq[radnum]);
                 lodmetime[radnum] = XPLMGetDataf(DmeTime);
@@ -4268,7 +4273,7 @@ void process_lower_xpdr_switch()
                     loseldis[radnum] = 9;
                 }
                 rad1lwrxpdrlastdigitremap = 0;
-                if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+                if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                     loxpdrdbncfninc[radnum]++;
                     if (loxpdrdbncfninc[radnum] > radspeed) {
                         rad1lwrxpdrdigitremap++;
@@ -4280,9 +4285,10 @@ void process_lower_xpdr_switch()
                     }
                     rad1lwrxpdrlastdigitcnt = 0;
                 }
+                Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
 
-                if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+                if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                     loxpdrdbncfninc[radnum]++;
                     if (loxpdrdbncfninc[radnum] > radspeed) {
                         rad1lwrxpdrdigitremap--;
@@ -4294,6 +4300,7 @@ void process_lower_xpdr_switch()
                     }
                     rad1lwrxpdrlastdigitcnt = 0;
                 }
+                Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
 
                 if (rad1lwrxpdrlastdigitremap == 0) {
                     if (rad1lwrxpdrlastdigitcnt < 25) {
@@ -4405,25 +4412,27 @@ void process_lower_xpdr_switch()
             }
 
             if (xpanelsfnbutton == 1) {
-                if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+                if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                     loqnhdbncfninc[radnum]++;
                     if (loqnhdbncfninc[radnum] > radspeed) {
                         XPLMCommandOnce(Rad1LowrXpdrBaroUpRemapableCmd);
                         loqnhdbncfninc[radnum] = 0;
                     }
                 }
+                Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
 
-                if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+                if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                     loqnhdbncfndec[radnum]++;
                     if (loqnhdbncfndec[radnum] > radspeed) {
                         XPLMCommandOnce(Rad1LowrXpdrBaroDnRemapableCmd);
                         loqnhdbncfndec[radnum] = 0;
                     }
                 }
+                Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
 
 
-                if (testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
+                if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
                     loqnhdbnccorinc[radnum]++;
                     if (loqnhdbnccorinc[radnum] > radspeed) {
                         radn = 10;
@@ -4434,9 +4443,10 @@ void process_lower_xpdr_switch()
                         loqnhdbnccorinc[radnum] = 0;
                     }
                 }
+                Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
 
 
-               if(testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
+               if((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
                  loqnhdbnccordec[radnum]++;
                  if (loqnhdbnccordec[radnum] > radspeed) {
                      radn = 10;
@@ -4447,6 +4457,8 @@ void process_lower_xpdr_switch()
                      loqnhdbnccordec[radnum] = 0;
                  }
                }
+               Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
+
                if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
                  XPLMSetDatai(Rad1LowerXpdrBaroStdRemapableData, 1);
                }
@@ -4479,7 +4491,7 @@ void process_lower_xpdr_switch()
 
                //loseldis[radnum] = 9;
                rad2lwrxpdrlastdigitremap = 0;
-               if(testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+               if((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                    loxpdrdbncfninc[radnum]++;
                    if (loxpdrdbncfninc[radnum] > radspeed) {
                        rad2lwrxpdrdigitremap++;
@@ -4491,7 +4503,9 @@ void process_lower_xpdr_switch()
                    }
                    rad2lwrxpdrlastdigitcnt = 0;
                }
-               if(testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+               Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
+
+               if((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                    loxpdrdbncfninc[radnum]++;
                    if (loxpdrdbncfninc[radnum] > radspeed) {
                        rad2lwrxpdrdigitremap--;
@@ -4503,6 +4517,8 @@ void process_lower_xpdr_switch()
                    }
                    rad2lwrxpdrlastdigitcnt = 0;
                }
+               Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
+
                if (rad2lwrxpdrlastdigitremap == 0) {
                    if (rad2lwrxpdrlastdigitcnt < 25) {
                        rad2lwrxpdrlastdigitcnt++;
@@ -4616,25 +4632,27 @@ void process_lower_xpdr_switch()
            }
 
            if (xpanelsfnbutton == 1) {
-               if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+               if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                    loqnhdbncfninc[radnum]++;
                    if (loqnhdbncfninc[radnum] > radspeed) {
                        XPLMCommandOnce(Rad2LowrXpdrBaroUpRemapableCmd);
                        loqnhdbncfninc[radnum] = 0;
                    }
                }
+               Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
 
-               if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+               if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                    loqnhdbncfndec[radnum]++;
                    if (loqnhdbncfndec[radnum] > radspeed) {
                        XPLMCommandOnce(Rad2LowrXpdrBaroDnRemapableCmd);
                        loqnhdbncfndec[radnum] = 0;
                    }
                }
+               Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
 
 
-               if (testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
+               if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
                    loqnhdbnccorinc[radnum]++;
                    if (loqnhdbnccorinc[radnum] > radspeed) {
                        radn = 10;
@@ -4645,9 +4663,10 @@ void process_lower_xpdr_switch()
                        loqnhdbnccorinc[radnum] = 0;
                    }
                }
+               Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
 
 
-               if (testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
+               if ((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
                    loqnhdbnccordec[radnum]++;
                    if (loqnhdbnccordec[radnum] > radspeed) {
                        radn = 10;
@@ -4658,6 +4677,7 @@ void process_lower_xpdr_switch()
                        loqnhdbnccordec[radnum] = 0;
                    }
                }
+               Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
 
 
                if (testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
@@ -4690,83 +4710,90 @@ void process_lower_xpdr_switch()
             // ****** Function button is not pushed  *******
             if (xpanelsfnbutton == 0) {
                 if (loxpdrsel[radnum] == 1) {
-                    if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+                    if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loxpdrdbncfninc[radnum]++;
                         if (loxpdrdbncfninc[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrOnesUp);
                             loxpdrdbncfninc[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
-                    if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+                    if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                         loxpdrdbncfndec[radnum]++;
                         if (loxpdrdbncfndec[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrOnesDn);
                             loxpdrdbncfndec[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
                 }
 
                 if (loxpdrsel[radnum] == 2) {
-                    if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+                    if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loxpdrdbncfninc[radnum]++;
                         if (loxpdrdbncfninc[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrTensUp);
                             loxpdrdbncfninc[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
-
-                    if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+                    if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                         loxpdrdbncfndec[radnum]++;
                         if (loxpdrdbncfndec[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrTensDn);
                             loxpdrdbncfndec[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
                 }
 
                 if (loxpdrsel[radnum] == 3) {
-                    if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+                    if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loxpdrdbncfninc[radnum]++;
                         if (loxpdrdbncfninc[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrHunUp);
                             loxpdrdbncfninc[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
 
-                    if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+                    if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                         loxpdrdbncfndec[radnum]++;
                         if (loxpdrdbncfndec[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrHunDn);
                             loxpdrdbncfndec[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
                 }
 
 
                 if (loxpdrsel[radnum] == 4) {
-                    if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+                    if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loxpdrdbncfninc[radnum]++;
                         if (loxpdrdbncfninc[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrThUp);
                             loxpdrdbncfninc[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
 
-                    if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+                    if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                         loxpdrdbncfndec[radnum]++;
                         if (loxpdrdbncfndec[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrThDn);
                             loxpdrdbncfndec[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
                 }
 
                 // Use the Coarse knob to select digit in the up direction
-                if(testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
+                if((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
                     loxpdrdbnccorinc[radnum]++;
                     if (loxpdrdbnccorinc[radnum] > radspeed) {
                         loxpdrsel[radnum] ++;
@@ -4776,9 +4803,10 @@ void process_lower_xpdr_switch()
                         loxpdrsel[radnum] = 1;
                     }
                 }
+                Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
 
                 // Use the Coarse knob to select digit in the up direction
-                if (testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
+                if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
                     loxpdrdbnccordec[radnum]++;
                     if (loxpdrdbnccordec[radnum] > radspeed) {
                         loxpdrsel[radnum] --;
@@ -4788,6 +4816,7 @@ void process_lower_xpdr_switch()
                         loxpdrsel[radnum] = 4;
                     }
                 }
+                Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
 
                 // Use the ACT/STBY button to select XPDR mode
                 if (loxpdrpushed == 0) {
@@ -4860,24 +4889,26 @@ void process_lower_xpdr_switch()
 
             // ****** Function button is pushed  *******
             if (xpanelsfnbutton == 1) {
-                if (testbit(radiobuf[radnum],LOWER_FINE_UP)) {
+                if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                     loqnhdbncfninc[radnum]++;
                     if (loqnhdbncfninc[radnum] > radspeed) {
                         XPLMCommandOnce(BaroUp);
                         loqnhdbncfninc[radnum] = 0;
                     }
                 }
+                Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
-                if (testbit(radiobuf[radnum],LOWER_FINE_DN)) {
+                if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                     loqnhdbncfndec[radnum]++;
                     if (loqnhdbncfndec[radnum] > radspeed) {
                         XPLMCommandOnce(BaroDn);
                         loqnhdbncfndec[radnum] = 0;
                     }
                 }
+                Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
 
 
-                if (testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
+                if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
                     loqnhdbnccorinc[radnum]++;
                     if (loqnhdbnccorinc[radnum] > radspeed) {
                         radn = 10;
@@ -4888,9 +4919,10 @@ void process_lower_xpdr_switch()
                         loqnhdbnccorinc[radnum] = 0;
                     }
                 }
+                Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
 
 
-                if (testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
+                if ((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
                     loqnhdbnccordec[radnum]++;
                     if (loqnhdbnccordec[radnum] > radspeed) {
                         radn = 10;
@@ -4901,6 +4933,7 @@ void process_lower_xpdr_switch()
                         loqnhdbnccordec[radnum] = 0;
                     }
                 }
+                Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
 
                 if (testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
                     XPLMCommandOnce(BaroStd);
