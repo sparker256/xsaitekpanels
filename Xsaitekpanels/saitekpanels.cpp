@@ -1,8 +1,8 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** May 29 2014   **************
+// ****** Jun 06 2014   **************
 
-#define VERSION_NUMBER "2.32"
+#define VERSION_NUMBER "2.33"
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -38,7 +38,9 @@ using namespace std;
 
 // ************* Radio Panel Command Ref ****************
 XPLMCommandRef  Com1StbyFineDn = NULL, Com1StbyFineUp = NULL, Com1StbyCorseDn = NULL, Com1StbyCorseUp = NULL;
+XPLMCommandRef  Com1StbyFineDn_833 = NULL, Com1StbyFineUp_833 = NULL;
 XPLMCommandRef  Com2StbyFineDn = NULL, Com2StbyFineUp = NULL, Com2StbyCorseDn = NULL, Com2StbyCorseUp = NULL;
+XPLMCommandRef  Com2StbyFineDn_833 = NULL, Com2StbyFineUp_833 = NULL;
 XPLMCommandRef	Nav1StbyFineDn = NULL, Nav1StbyFineUp = NULL, Nav1StbyCorseDn = NULL, Nav1StbyCorseUp = NULL;
 XPLMCommandRef	Nav2StbyFineDn = NULL, Nav2StbyFineUp = NULL, Nav2StbyCorseDn = NULL, Nav2StbyCorseUp = NULL;
 
@@ -151,7 +153,9 @@ XPLMCommandRef Rad3LowrXpdrBaroUpRemapableCmd = NULL, Rad3LowrXpdrBaroDnRemapabl
 
 // ************* Radio Panel Data Ref ****************
 XPLMDataRef Com1ActFreq = NULL, Com2ActFreq = NULL, Nav1ActFreq = NULL, Nav2ActFreq = NULL;
+XPLMDataRef Com1ActFreq_833 = NULL, Com2ActFreq_833 = NULL;
 XPLMDataRef Com1StbyFreq = NULL, Com2StbyFreq = NULL, Nav1StbyFreq = NULL, Nav2StbyFreq = NULL;
+XPLMDataRef Com1StbyFreq_833 = NULL, Com2StbyFreq_833 = NULL;
 
 XPLMDataRef Adf1StbyFreq = NULL, Adf2StbyFreq = NULL;
 XPLMDataRef Adf1ActFreq = NULL, Adf2ActFreq = NULL;
@@ -709,7 +713,7 @@ static unsigned char radiobuf[4][4], radiowbuf[4][23];
 
 unsigned char radbuf[4], radwbuf[21];
 
-int radspeed, numadf, metricpressenable;
+int radspeed, numadf, metricpressenable, channelspacing833enable;
 
 int rad1uprcom1switchremap, rad1uprcom1actstbybtnremap;
 int rad1uprcom2switchremap, rad1uprcom2actstbybtnremap;
@@ -2104,7 +2108,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 232;
+  XsaitekpanelsVersion = 233;
 
   XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
 

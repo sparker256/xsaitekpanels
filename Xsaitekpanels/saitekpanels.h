@@ -16,7 +16,9 @@ using namespace std;
 
 // ************** Radio Panel SDK Command Ref **********************
 extern XPLMCommandRef Com1StbyFineDn, Com1StbyFineUp, Com1StbyCorseDn, Com1StbyCorseUp;
+extern XPLMCommandRef Com1StbyFineDn_833, Com1StbyFineUp_833;
 extern XPLMCommandRef Com2StbyFineDn, Com2StbyFineUp, Com2StbyCorseDn, Com2StbyCorseUp;
+extern XPLMCommandRef Com2StbyFineDn_833, Com2StbyFineUp_833;
 extern XPLMCommandRef Nav1StbyFineDn, Nav1StbyFineUp, Nav1StbyCorseDn, Nav1StbyCorseUp;
 extern XPLMCommandRef Nav2StbyFineDn, Nav2StbyFineUp, Nav2StbyCorseDn, Nav2StbyCorseUp;
 
@@ -129,7 +131,9 @@ extern XPLMCommandRef Rad3LowrXpdrBaroUpRemapableCmd, Rad3LowrXpdrBaroDnRemapabl
 
 // ************** Radio Panel SDK Data Ref **********************
 extern XPLMDataRef Com1ActFreq, Com2ActFreq, Nav1ActFreq, Nav2ActFreq;
+extern XPLMDataRef Com1ActFreq_833, Com2ActFreq_833;
 extern XPLMDataRef Com1StbyFreq, Com2StbyFreq, Nav1StbyFreq, Nav2StbyFreq;
+extern XPLMDataRef Com1StbyFreq_833, Com2StbyFreq_833;
 
 extern XPLMDataRef Adf1StbyFreq, Adf2StbyFreq;
 extern XPLMDataRef Adf1ActFreq, Adf2ActFreq;
@@ -262,7 +266,7 @@ extern XPWidgetID	RadioQnh1CheckWidget[50];
 extern int radio0fd, radio1fd, radio2fd, radio3fd, radio4fd, radio5fd, radio6fd, radio7fd;
 extern int radio8fd, radio9fd, radio10fd, radio11fd, radio12fd, radio13fd, radio14fd, radio15fd;
 extern int radiofd[4], radcnt, radres;
-extern int radspeed, metricpressenable;
+extern int radspeed, metricpressenable, channelspacing833enable;
 
 extern int rad1uprcom1switchremap, rad1uprcom1actstbybtnremap;
 extern int rad1uprcom2switchremap, rad1uprcom2actstbybtnremap;
