@@ -98,6 +98,7 @@ void process_read_ini_file()
     radspeed                 = 3;
     numadf                   = 1;
     metricpressenable        = 0;
+    channelspacing833enable  = 0;
     rad1uprcom1switchremap   = 0, rad1uprcom1actstbybtnremap   = 0;
     rad1lwrcom1switchremap   = 0, rad1lwrcom1actstbybtnremap   = 0;
     rad1uprcom2switchremap   = 0, rad1uprcom2actstbybtnremap   = 0;
@@ -171,6 +172,8 @@ void process_read_ini_file()
     char xpsacfname[512];
     char xpsacfpath[512];
     XPLMGetNthAircraftModel(0, xpsacfname, xpsacfpath);
+
+    char	radtestbuf1[256];
 
     //XPLMDebugString("\nXsaitekpanels: Raw Current aircraft path is \n");
     //XPLMDebugString(xpsacfpath);
@@ -1672,6 +1675,14 @@ void process_read_ini_file()
     if (metricpressenable == 1) {
          XPSetWidgetProperty(RadioQnh1CheckWidget[0], xpProperty_ButtonState, 1);
     }
+
+
+    channelspacing833enable = getOptionToInt("Channel Spacing 883 enable");
+
+
+    sprintf(radtestbuf1, "Xsaitekpanels: channelspacing833enable ==  %d \n", channelspacing833enable);
+    XPLMDebugString(radtestbuf1);
+
 
     // ***************************  Upper Radio1 remaping  ***********************************
     // Radio1 Upper com1 switch - remapable
