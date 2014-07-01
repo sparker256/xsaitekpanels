@@ -293,7 +293,7 @@ void process_read_ini_file()
         MagOffSwitchOffCmd   = XPLMFindCommand(mag_off_switch_off.c_str());
     }
 
-    if (magoffswitchenable == 3) {
+    if ((magoffswitchenable == 3)  || (magoffswitchenable == 4)) {
         mag_off_switch_data = getOptionToString("mag_off_switch_data");
         MagOffSwitchData   = XPLMFindDataRef(mag_off_switch_data.c_str());
         mag_off_switch_data_on_value = getOptionToInt("mag_off_switch_data_on_value");
@@ -365,7 +365,7 @@ void process_read_ini_file()
             MagRightSwitchOffCmd   = XPLMFindCommand(mag_right_switch_off.c_str());
     }
 
-    if (magrightswitchenable == 3) {
+    if ((magrightswitchenable == 3)  ||(magrightswitchenable == 4)) {
         mag_right_switch_data = getOptionToString("mag_right_switch_data");
         MagRightSwitchData   = XPLMFindDataRef(mag_right_switch_data.c_str());
         mag_right_switch_data_on_value = getOptionToInt("mag_right_switch_data_on_value");
@@ -436,7 +436,7 @@ void process_read_ini_file()
             MagLeftSwitchOffCmd   = XPLMFindCommand(mag_left_switch_off.c_str());
     }
 
-    if (magleftswitchenable == 3) {
+    if ((magleftswitchenable == 3) || (magleftswitchenable == 4)) {
         mag_left_switch_data = getOptionToString("mag_left_switch_data");
         MagLeftSwitchData   = XPLMFindDataRef(mag_left_switch_data.c_str());
         mag_left_switch_data_on_value = getOptionToInt("mag_left_switch_data_on_value");
@@ -510,7 +510,7 @@ void process_read_ini_file()
             MagBothSwitchOffCmd   = XPLMFindCommand(mag_both_switch_off.c_str());
     }
 
-    if (magbothswitchenable == 3) {
+    if ((magbothswitchenable == 3) || (magbothswitchenable == 4)) {
         mag_both_switch_data = getOptionToString("mag_both_switch_data");
         MagBothSwitchData   = XPLMFindDataRef(mag_both_switch_data.c_str());
         mag_both_switch_data_on_value = getOptionToInt("mag_both_switch_data_on_value");
@@ -584,7 +584,7 @@ void process_read_ini_file()
             MagStartSwitchOffCmd   = XPLMFindCommand(mag_start_switch_off.c_str());
     }
 
-    if (magstartswitchenable == 3) {
+    if ((magstartswitchenable == 3) || (magstartswitchenable == 4)) {
         mag_start_switch_data = getOptionToString("mag_start_switch_data");
         MagStartSwitchData   = XPLMFindDataRef(mag_start_switch_data.c_str());
         mag_start_switch_data_on_value = getOptionToInt("mag_start_switch_data_on_value");
@@ -716,7 +716,7 @@ void process_read_ini_file()
 
     }
 
-    if (batmasterswitchenable == 3) {
+    if ((batmasterswitchenable == 3) || (batmasterswitchenable == 4)) {
             bat_master_switch_data = getOptionToString("bat_master_switch_data");
             BatMasterSwitchData   = XPLMFindDataRef(bat_master_switch_data.c_str());
             bat_master_switch_data_on_value = getOptionToInt("bat_master_switch_data_on_value");
@@ -780,7 +780,7 @@ void process_read_ini_file()
             AltMasterSwitchOffCmd   = XPLMFindCommand(alt_master_switch_off.c_str());
     }
 
-    if (altmasterswitchenable == 3) {
+    if ((altmasterswitchenable == 3) || (altmasterswitchenable == 4)) {
             alt_master_switch_data = getOptionToString("alt_master_switch_data");
             AltMasterSwitchData   = XPLMFindDataRef(alt_master_switch_data.c_str());
             alt_master_switch_data_on_value = getOptionToInt("alt_master_switch_data_on_value");
@@ -840,7 +840,7 @@ void process_read_ini_file()
             AvMasterSwitchOffCmd   = XPLMFindCommand(av_master_switch_off.c_str());
     }
 
-    if (avionicsmasterswitchenable == 3) {
+    if ((avionicsmasterswitchenable == 3) || (avionicsmasterswitchenable == 4)) {
             av_master_switch_data = getOptionToString("av_master_switch_data");
             AvMasterSwitchData   = XPLMFindDataRef(av_master_switch_data.c_str());
             av_master_switch_dataf = getOptionToString("av_master_switch_dataf");
@@ -992,7 +992,7 @@ void process_read_ini_file()
 
     }
 
-    if (fuelpumpswitchenable == 3) {
+    if ((fuelpumpswitchenable == 3) ||(fuelpumpswitchenable == 4))  {
         fuel_pump_switch_data = getOptionToString("fuel_pump_switch_data");
         FuelPumpSwitchData   = XPLMFindDataRef(fuel_pump_switch_data.c_str());
         fuel_pump_switch_data_on_value = getOptionToInt("fuel_pump_switch_data_on_value");
@@ -1092,7 +1092,7 @@ void process_read_ini_file()
 
     }
 
-    if (deiceswitchenable == 3) {
+    if ((deiceswitchenable == 3) || (deiceswitchenable == 4)) {
 
         deice_switch_data = getOptionToString("deice_switch_data");
         DeiceSwitchData   = XPLMFindDataRef(deice_switch_data.c_str());
@@ -1161,7 +1161,7 @@ void process_read_ini_file()
         Pitot2HeatOffCmd   = XPLMFindCommand(pitot2_heat_switch_off.c_str());
     }
 
-    if (pitotheatswitchenable == 3) {
+    if ((pitotheatswitchenable == 3) || (pitotheatswitchenable == 4)) {
         pitot_heat_switch_data = getOptionToString("pitot_heat_switch_data");
         PitotHeatSwitchData   = XPLMFindDataRef(pitot_heat_switch_data.c_str());
         pitot_heat_switch_data_on_value = getOptionToInt("pitot_heat_switch_data_on_value");
@@ -1222,7 +1222,7 @@ void process_read_ini_file()
          GearUpOnCmd   = XPLMFindCommand(gear_switch_up_off.c_str());
      }
 
-     if (landinggearknobupenable == 3) {
+     if ((landinggearknobupenable == 3) || (landinggearknobupenable == 4)) {
          gear_switch_up_data = getOptionToString("gear_up_switch_data");
          GearUpData   = XPLMFindDataRef(gear_switch_up_on.c_str());
          gear_switch_up_data_on_value = getOptionToInt("gear_up_switch_data_on_value");
@@ -1248,7 +1248,7 @@ void process_read_ini_file()
           GearDnOffCmd   = XPLMFindCommand(gear_switch_down_off.c_str());
       }
 
-      if (landinggearknobdnenable == 3) {
+      if ((landinggearknobdnenable == 3) ||(landinggearknobdnenable == 4))  {
           gear_switch_down_data = getOptionToString("gear_dn_switch_data");
           GearDnData   = XPLMFindDataRef(gear_switch_down_data.c_str());
           gear_switch_down_data_on_value = getOptionToInt("gear_dn_switch_data_on_value");
@@ -1291,7 +1291,7 @@ void process_read_ini_file()
         Cowl4FlapsCloseCmd   = XPLMFindCommand(cowl4_flaps_close.c_str());
     }
 
-    if (cowlflapsenable == 3) {
+    if ((cowlflapsenable == 3) ||(cowlflapsenable == 4)) {
         cowl_flaps_data = getOptionToString("cowl_flaps_data");
         CowlFlapsData   = XPLMFindDataRef(cowl_flaps_data.c_str());
         cowl_flaps_data_on_value = getOptionToInt("cowl_flaps_data_open_value");
