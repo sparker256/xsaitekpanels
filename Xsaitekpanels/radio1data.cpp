@@ -261,11 +261,15 @@ void process_radio_find_xplane_commands()
     // ************ Find Radio Panel Commands Ref ******************
       Com1StbyFineDn = XPLMFindCommand("sim/radios/stby_com1_fine_down");
       Com1StbyFineUp = XPLMFindCommand("sim/radios/stby_com1_fine_up");
+      Com1StbyFineDn_833 = XPLMFindCommand("sim/radios/stby_com1_fine_down_833");
+      Com1StbyFineUp_833 = XPLMFindCommand("sim/radios/stby_com1_fine_up_833");
       Com1StbyCorseDn = XPLMFindCommand("sim/radios/stby_com1_coarse_down");
       Com1StbyCorseUp = XPLMFindCommand("sim/radios/stby_com1_coarse_up");
 
       Com2StbyFineDn = XPLMFindCommand("sim/radios/stby_com2_fine_down");
       Com2StbyFineUp = XPLMFindCommand("sim/radios/stby_com2_fine_up");
+      Com2StbyFineDn_833 = XPLMFindCommand("sim/radios/stby_com2_fine_down_833");
+      Com2StbyFineUp_833 = XPLMFindCommand("sim/radios/stby_com2_fine_up_833");
       Com2StbyCorseDn = XPLMFindCommand("sim/radios/stby_com2_coarse_down");
       Com2StbyCorseUp = XPLMFindCommand("sim/radios/stby_com2_coarse_up");
 
@@ -326,12 +330,18 @@ void process_radio_find_xplane_datareference()
 
     // ************ Find Radio Panel Data Ref ******************
       Com1ActFreq = XPLMFindDataRef("sim/cockpit/radios/com1_freq_hz");
+      Com1ActFreq_833 = XPLMFindDataRef("sim/cockpit2/radios/actuators/com1_frequency_hz_833");
       Com2ActFreq = XPLMFindDataRef("sim/cockpit/radios/com2_freq_hz");
+      Com2ActFreq_833 = XPLMFindDataRef("sim/cockpit2/radios/actuators/com2_frequency_hz_833");
+
       Nav1ActFreq = XPLMFindDataRef("sim/cockpit/radios/nav1_freq_hz");
       Nav2ActFreq = XPLMFindDataRef("sim/cockpit/radios/nav2_freq_hz");
 
       Com1StbyFreq = XPLMFindDataRef("sim/cockpit/radios/com1_stdby_freq_hz");
+      Com1StbyFreq_833 = XPLMFindDataRef("sim/cockpit2/radios/actuators/com1_standby_frequency_hz_833");
       Com2StbyFreq = XPLMFindDataRef("sim/cockpit/radios/com2_stdby_freq_hz");
+      Com2StbyFreq_833 = XPLMFindDataRef("sim/cockpit2/radios/actuators/com2_standby_frequency_hz_833");
+
       Nav1StbyFreq = XPLMFindDataRef("sim/cockpit/radios/nav1_stdby_freq_hz");
       Nav2StbyFreq = XPLMFindDataRef("sim/cockpit/radios/nav2_stdby_freq_hz");
 

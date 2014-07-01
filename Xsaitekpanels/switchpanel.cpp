@@ -120,6 +120,52 @@ void process_engines_mag_off_switch()
        return;
    }
 
+
+   if(magoffswitchenable == 4) {
+       if(testbit(switchbuf,MAG_OFF)) {
+           mag_off_switch_dataf_on_value = mag_off_switch_data_on_value;
+           mag_off_switch_dataf_on_value = mag_off_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOffSwitchData, mag_off_switch_dataf_on_value);
+
+           mag_off2_switch_dataf_on_value = mag_off2_switch_data_on_value;
+           mag_off2_switch_dataf_on_value = mag_off2_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff2SwitchData, mag_off2_switch_dataf_on_value);
+
+           mag_off3_switch_dataf_on_value = mag_off3_switch_data_on_value;
+           mag_off3_switch_dataf_on_value = mag_off3_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff3SwitchData, mag_off3_switch_dataf_on_value);
+
+           mag_off4_switch_dataf_on_value = mag_off4_switch_data_on_value;
+           mag_off4_switch_dataf_on_value = mag_off4_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff4SwitchData, mag_off4_switch_dataf_on_value);
+
+           mag_off5_switch_dataf_on_value = mag_off5_switch_data_on_value;
+           mag_off5_switch_dataf_on_value = mag_off5_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff5SwitchData, mag_off5_switch_dataf_on_value);
+
+           mag_off6_switch_dataf_on_value = mag_off6_switch_data_on_value;
+           mag_off6_switch_dataf_on_value = mag_off6_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff6SwitchData, mag_off6_switch_dataf_on_value);
+
+           mag_off7_switch_dataf_on_value = mag_off7_switch_data_on_value;
+           mag_off7_switch_dataf_on_value = mag_off7_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff7SwitchData, mag_off7_switch_dataf_on_value);
+
+           mag_off8_switch_dataf_on_value = mag_off8_switch_data_on_value;
+           mag_off8_switch_dataf_on_value = mag_off8_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff8SwitchData, mag_off8_switch_dataf_on_value);
+
+           mag_off9_switch_dataf_on_value = mag_off9_switch_data_on_value;
+           mag_off9_switch_dataf_on_value = mag_off9_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff9SwitchData, mag_off9_switch_dataf_on_value);
+
+           mag_off10_switch_dataf_on_value = mag_off10_switch_data_on_value;
+           mag_off10_switch_dataf_on_value = mag_off10_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagOff10SwitchData, mag_off10_switch_dataf_on_value);
+       }
+       return;
+   }
+
 	if(testbit(switchbuf,MAG_OFF)) {
 	  if(engnum == 1){
         if(starterswitchenable == 1) {
@@ -214,6 +260,51 @@ void process_engines_right_mag_switch()
        return;
    }
 
+   if(magrightswitchenable == 4) {
+       if(testbit(switchbuf,MAG_RIGHT)) {
+           mag_right_switch_dataf_on_value = mag_right_switch_data_on_value;
+           mag_right_switch_dataf_on_value = mag_right_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRightSwitchData, mag_right_switch_dataf_on_value);
+
+           mag_right2_switch_dataf_on_value = mag_right2_switch_data_on_value;
+           mag_right2_switch_dataf_on_value = mag_right2_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight2SwitchData, mag_right2_switch_dataf_on_value);
+
+           mag_right3_switch_data_on_value = mag_right3_switch_data_on_value;
+           mag_right3_switch_data_on_value = mag_right3_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight3SwitchData, mag_right3_switch_dataf_on_value);
+
+           mag_right4_switch_dataf_on_value = mag_right4_switch_data_on_value;
+           mag_right4_switch_dataf_on_value = mag_right4_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight4SwitchData, mag_right4_switch_dataf_on_value);
+
+           mag_right5_switch_dataf_on_value = mag_right5_switch_data_on_value;
+           mag_right5_switch_dataf_on_value = mag_right5_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight5SwitchData, mag_right5_switch_dataf_on_value);
+
+           mag_right6_switch_dataf_on_value = mag_right6_switch_data_on_value;
+           mag_right6_switch_dataf_on_value = mag_right6_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight6SwitchData, mag_right6_switch_dataf_on_value);
+
+           mag_right7_switch_dataf_on_value = mag_right7_switch_data_on_value;
+           mag_right7_switch_dataf_on_value = mag_right7_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight7SwitchData, mag_right7_switch_dataf_on_value);
+
+           mag_right8_switch_dataf_on_value = mag_right8_switch_data_on_value;
+           mag_right8_switch_dataf_on_value = mag_right8_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight8SwitchData, mag_right8_switch_dataf_on_value);
+
+           mag_right9_switch_dataf_on_value = mag_right9_switch_data_on_value;
+           mag_right9_switch_dataf_on_value = mag_right9_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight9SwitchData, mag_right9_switch_dataf_on_value);
+
+           mag_right10_switch_dataf_on_value = mag_right10_switch_data_on_value;
+           mag_right10_switch_dataf_on_value = mag_right10_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagRight10SwitchData, mag_right10_switch_dataf_on_value);
+       }
+       return;
+   }
+
     if(testbit(switchbuf,MAG_RIGHT)) {
 	  if(engnum == 1){
         if(starterswitchenable == 1) {
@@ -293,6 +384,53 @@ void process_engines_left_mag_switch()
            XPLMSetDatai(MagLeft8SwitchData, mag_left8_switch_data_on_value);
            XPLMSetDatai(MagLeft9SwitchData, mag_left9_switch_data_on_value);
            XPLMSetDatai(MagLeft10SwitchData, mag_left10_switch_data_on_value);
+       }
+       return;
+   }
+
+   if(magleftswitchenable == 4) {
+       if(testbit(switchbuf,MAG_LEFT)) {
+           mag_left_switch_dataf_on_value = mag_left_switch_data_on_value;
+           mag_left_switch_dataf_on_value = mag_left_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagLeftSwitchData, mag_left_switch_dataf_on_value);
+
+           mag_left2_switch_dataf_on_value = mag_left2_switch_data_on_value;
+           mag_left2_switch_dataf_on_value = mag_left2_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagLeft2SwitchData, mag_left2_switch_dataf_on_value);
+
+           mag_left3_switch_dataf_on_value = mag_left3_switch_data_on_value;
+           mag_left3_switch_dataf_on_value = mag_left3_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagLeft3SwitchData, mag_left3_switch_dataf_on_value);
+
+           mag_left4_switch_dataf_on_value = mag_left4_switch_data_on_value;
+           mag_left4_switch_dataf_on_value = mag_left4_switch_dataf_on_value / 100;
+           XPLMSetDatai(MagLeft4SwitchData, mag_left4_switch_data_on_value);
+
+           mag_left5_switch_dataf_on_value = mag_left5_switch_data_on_value;
+           mag_left5_switch_dataf_on_value = mag_left5_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagLeft5SwitchData, mag_left5_switch_dataf_on_value);
+
+           mag_left6_switch_dataf_on_value = mag_left6_switch_data_on_value;
+           mag_left6_switch_dataf_on_value = mag_left6_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagLeft6SwitchData, mag_left6_switch_dataf_on_value);
+
+           mag_left7_switch_dataf_on_value = mag_left7_switch_data_on_value;
+           mag_left7_switch_dataf_on_value = mag_left7_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagLeft7SwitchData, mag_left7_switch_dataf_on_value);
+
+           mag_left8_switch_dataf_on_value = mag_left8_switch_data_on_value;
+           mag_left8_switch_dataf_on_value = mag_left8_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagLeft8SwitchData, mag_left8_switch_dataf_on_value);
+
+           mag_left9_switch_dataf_on_value = mag_left9_switch_data_on_value;
+           mag_left9_switch_dataf_on_value = mag_left9_switch_dataf_on_value / 100;
+           XPLMSetDatai(MagLeft9SwitchData, mag_left9_switch_data_on_value);
+
+           mag_left10_switch_dataf_on_value = mag_left10_switch_data_on_value;
+           mag_left10_switch_dataf_on_value = mag_left10_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagLeft10SwitchData, mag_left10_switch_dataf_on_value);
+
+
        }
        return;
    }
@@ -377,6 +515,54 @@ void process_engines_both_mag_switch()
            XPLMSetDatai(MagBoth8SwitchData, mag_both8_switch_data_on_value);
            XPLMSetDatai(MagBoth9SwitchData, mag_both9_switch_data_on_value);
            XPLMSetDatai(MagBoth10SwitchData, mag_both10_switch_data_on_value);
+       }
+       return;
+   }
+
+   if(magbothswitchenable == 4) {
+       if(testbit(switchbuf,MAG_BOTH)) {
+
+           mag_both_switch_dataf_on_value = mag_both_switch_data_on_value;
+           mag_both_switch_dataf_on_value = mag_both_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBothSwitchData, mag_both_switch_dataf_on_value);
+
+           mag_both2_switch_dataf_on_value = mag_both2_switch_data_on_value;
+           mag_both2_switch_dataf_on_value = mag_both2_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth2SwitchData, mag_both2_switch_dataf_on_value);
+
+           mag_both3_switch_dataf_on_value = mag_both3_switch_data_on_value;
+           mag_both3_switch_dataf_on_value = mag_both3_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth3SwitchData, mag_both3_switch_dataf_on_value);
+
+           mag_both4_switch_dataf_on_value = mag_both4_switch_data_on_value;
+           mag_both4_switch_dataf_on_value = mag_both4_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth4SwitchData, mag_both4_switch_dataf_on_value);
+
+           mag_both5_switch_dataf_on_value = mag_both5_switch_data_on_value;
+           mag_both5_switch_dataf_on_value = mag_both5_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth5SwitchData, mag_both5_switch_dataf_on_value);
+
+           mag_both6_switch_dataf_on_value = mag_both6_switch_data_on_value;
+           mag_both6_switch_dataf_on_value = mag_both6_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth6SwitchData, mag_both6_switch_dataf_on_value);
+
+           mag_both7_switch_dataf_on_value = mag_both7_switch_data_on_value;
+           mag_both7_switch_dataf_on_value = mag_both7_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth7SwitchData, mag_both7_switch_dataf_on_value);
+
+           mag_both8_switch_dataf_on_value = mag_both8_switch_data_on_value;
+           mag_both8_switch_dataf_on_value = mag_both8_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth8SwitchData, mag_both8_switch_dataf_on_value);
+
+           mag_both9_switch_dataf_on_value = mag_both9_switch_data_on_value;
+           mag_both9_switch_dataf_on_value = mag_both9_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth9SwitchData, mag_both9_switch_dataf_on_value);
+
+           mag_both10_switch_dataf_on_value = mag_both10_switch_data_on_value;
+           mag_both10_switch_dataf_on_value = mag_both10_switch_dataf_on_value / 100;
+           XPLMSetDataf(MagBoth10SwitchData, mag_both10_switch_dataf_on_value);
+
+
        }
        return;
    }
@@ -487,6 +673,104 @@ void process_engines_start_switch()
        return;
    }
 
+
+
+   if(magstartswitchenable == 4) {
+       if(testbit(switchbuf,ENG_START)) {
+           if(xpanelsleftstartfnbutton == 1) {
+
+               mag_start_switch_left_dataf_on_value = mag_start_switch_left_data_on_value;
+               mag_start_switch_left_dataf_on_value = mag_start_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStartSwitchLeftData, mag_start_switch_left_dataf_on_value);
+
+
+               mag_start2_switch_left_dataf_on_value = mag_start2_switch_left_data_on_value;
+               mag_start2_switch_left_dataf_on_value = mag_start2_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart2SwitchLeftData, mag_start2_switch_left_dataf_on_value);
+
+               mag_start3_switch_left_dataf_on_value = mag_start3_switch_left_data_on_value;
+               mag_start3_switch_left_dataf_on_value = mag_start3_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart3SwitchLeftData, mag_start3_switch_left_dataf_on_value);
+
+               mag_start4_switch_left_dataf_on_value = mag_start4_switch_left_data_on_value;
+               mag_start4_switch_left_dataf_on_value = mag_start4_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart4SwitchLeftData, mag_start4_switch_left_dataf_on_value);
+
+               mag_start5_switch_left_dataf_on_value = mag_start5_switch_left_data_on_value;
+               mag_start5_switch_left_dataf_on_value = mag_start5_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart5SwitchLeftData, mag_start5_switch_left_dataf_on_value);
+
+               mag_start6_switch_left_dataf_on_value = mag_start6_switch_left_data_on_value;
+               mag_start6_switch_left_dataf_on_value = mag_start6_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart6SwitchLeftData, mag_start6_switch_left_dataf_on_value);
+
+
+               mag_start7_switch_left_dataf_on_value = mag_start7_switch_left_data_on_value;
+               mag_start7_switch_left_dataf_on_value = mag_start7_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart7SwitchLeftData, mag_start7_switch_left_dataf_on_value);
+
+               mag_start8_switch_left_dataf_on_value = mag_start8_switch_left_data_on_value;
+               mag_start8_switch_left_dataf_on_value = mag_start8_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart8SwitchLeftData, mag_start8_switch_left_dataf_on_value);
+
+               mag_start9_switch_left_dataf_on_value = mag_start9_switch_left_data_on_value;
+               mag_start9_switch_left_dataf_on_value = mag_start9_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart9SwitchLeftData, mag_start9_switch_left_dataf_on_value);
+
+               mag_start10_switch_left_dataf_on_value = mag_start10_switch_left_data_on_value;
+               mag_start10_switch_left_dataf_on_value = mag_start10_switch_left_dataf_on_value / 100;
+               XPLMSetDataf(MagStart10SwitchLeftData, mag_start10_switch_left_dataf_on_value);
+
+
+
+
+           } else {
+
+               mag_start_switch_dataf_on_value = mag_start_switch_data_on_value;
+               mag_start_switch_dataf_on_value = mag_start_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStartSwitchData, mag_start_switch_dataf_on_value);
+
+               mag_start2_switch_dataf_on_value =  mag_start2_switch_data_on_value;
+               mag_start2_switch_dataf_on_value =  mag_start2_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart2SwitchData, mag_start2_switch_dataf_on_value);
+
+               mag_start3_switch_dataf_on_value = mag_start3_switch_data_on_value;
+               mag_start3_switch_dataf_on_value = mag_start3_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart3SwitchData, mag_start3_switch_dataf_on_value);
+
+               mag_start4_switch_dataf_on_value = mag_start4_switch_data_on_value;
+               mag_start4_switch_dataf_on_value = mag_start4_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart4SwitchData, mag_start4_switch_dataf_on_value);
+
+               mag_start5_switch_data_on_value = mag_start5_switch_data_on_value;
+               mag_start5_switch_data_on_value = mag_start5_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart5SwitchData, mag_start5_switch_dataf_on_value);
+
+
+               mag_start6_switch_dataf_on_value = mag_start6_switch_data_on_value;
+               mag_start6_switch_dataf_on_value = mag_start6_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart6SwitchData, mag_start6_switch_dataf_on_value);
+
+               mag_start7_switch_dataf_on_value = mag_start7_switch_data_on_value;
+               mag_start7_switch_dataf_on_value = mag_start7_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart7SwitchData, mag_start7_switch_dataf_on_value);
+
+               mag_start8_switch_dataf_on_value = mag_start8_switch_data_on_value;
+               mag_start8_switch_dataf_on_value = mag_start8_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart8SwitchData, mag_start8_switch_dataf_on_value);
+
+               mag_start9_switch_dataf_on_value =  mag_start9_switch_data_on_value;
+               mag_start9_switch_dataf_on_value =  mag_start9_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart9SwitchData, mag_start9_switch_dataf_on_value);
+
+               mag_start10_switch_dataf_on_value = mag_start10_switch_data_on_value;
+               mag_start10_switch_dataf_on_value = mag_start10_switch_dataf_on_value / 100;
+               XPLMSetDataf(MagStart10SwitchData, mag_start10_switch_data_on_value);
+
+           }
+       }
+       return;
+   }
 
 	if(testbit(switchbuf,ENG_START)) {
 	  if(engnum == 1){
@@ -604,6 +888,85 @@ void process_master_battery_switch()
            XPLMSetDatai(Bat6MasterSwitchData, bat6_master_switch_data_off_value);
            XPLMSetDatai(Bat7MasterSwitchData, bat7_master_switch_data_off_value);
            XPLMSetDatai(Bat8MasterSwitchData, bat8_master_switch_data_off_value);
+        }
+
+        return;
+   }
+
+   if(batmasterswitchenable == 4) {
+
+        if(testbit(switchbuf,MASTER_BATTERY)) {
+
+            bat_master_switch_dataf_on_value = bat_master_switch_data_on_value;
+            bat_master_switch_dataf_on_value = bat_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(BatMasterSwitchData, bat_master_switch_dataf_on_value);
+
+            bat2_master_switch_dataf_on_value = bat2_master_switch_data_on_value;
+            bat2_master_switch_dataf_on_value = bat2_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Bat2MasterSwitchData, bat2_master_switch_dataf_on_value);
+
+            bat3_master_switch_dataf_on_value = bat3_master_switch_data_on_value;
+            bat3_master_switch_dataf_on_value = bat3_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Bat3MasterSwitchData, bat3_master_switch_dataf_on_value);
+
+            bat4_master_switch_dataf_on_value = bat4_master_switch_data_on_value;
+            bat4_master_switch_dataf_on_value = bat4_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Bat4MasterSwitchData, bat4_master_switch_dataf_on_value);
+
+            bat5_master_switch_dataf_on_value = bat5_master_switch_data_on_value;
+            bat5_master_switch_dataf_on_value = bat5_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Bat5MasterSwitchData, bat5_master_switch_dataf_on_value);
+
+            bat6_master_switch_dataf_on_value = bat6_master_switch_data_on_value;
+            bat6_master_switch_dataf_on_value = bat6_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Bat6MasterSwitchData, bat6_master_switch_dataf_on_value);
+
+            bat7_master_switch_dataf_on_value = bat7_master_switch_data_on_value;
+            bat7_master_switch_dataf_on_value = bat7_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Bat7MasterSwitchData, bat7_master_switch_dataf_on_value);
+
+            bat8_master_switch_dataf_on_value = bat8_master_switch_data_on_value;
+            bat8_master_switch_dataf_on_value = bat8_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Bat8MasterSwitchData, bat8_master_switch_dataf_on_value);
+
+
+         }
+
+        if(!testbit(switchbuf,MASTER_BATTERY)) {
+
+           bat_master_switch_dataf_off_value = bat_master_switch_data_off_value;
+           bat_master_switch_dataf_off_value = bat_master_switch_dataf_off_value / 100;
+           XPLMSetDataf(BatMasterSwitchData, bat_master_switch_dataf_off_value);
+
+           bat2_master_switch_dataf_off_value = bat2_master_switch_data_off_value;
+           bat2_master_switch_dataf_off_value = bat2_master_switch_dataf_off_value / 100;
+           XPLMSetDataf(Bat2MasterSwitchData, bat2_master_switch_dataf_off_value);
+
+           bat3_master_switch_dataf_off_value = bat3_master_switch_data_off_value;
+           bat3_master_switch_dataf_off_value = bat3_master_switch_dataf_off_value / 100;
+           XPLMSetDataf(Bat3MasterSwitchData, bat3_master_switch_dataf_off_value);
+
+           bat4_master_switch_dataf_off_value = bat4_master_switch_data_off_value;
+           bat4_master_switch_dataf_off_value = bat4_master_switch_dataf_off_value / 100;
+           XPLMSetDataf(Bat4MasterSwitchData, bat4_master_switch_dataf_off_value);
+
+           bat5_master_switch_dataf_off_value = bat5_master_switch_data_off_value;
+           bat5_master_switch_dataf_off_value = bat5_master_switch_dataf_off_value;
+           XPLMSetDataf(Bat5MasterSwitchData, bat5_master_switch_dataf_off_value);
+
+           bat6_master_switch_dataf_off_value = bat6_master_switch_data_off_value;
+           bat6_master_switch_dataf_off_value = bat6_master_switch_dataf_off_value / 100;
+           XPLMSetDataf(Bat6MasterSwitchData, bat6_master_switch_dataf_off_value);
+
+           bat7_master_switch_dataf_off_value = bat7_master_switch_data_off_value;
+           bat7_master_switch_dataf_off_value = bat7_master_switch_dataf_off_value / 100;
+           XPLMSetDataf(Bat7MasterSwitchData, bat7_master_switch_dataf_off_value);
+
+           bat8_master_switch_dataf_off_value = bat8_master_switch_data_off_value;
+           bat8_master_switch_dataf_off_value = bat8_master_switch_dataf_off_value / 100;
+           XPLMSetDataf(Bat8MasterSwitchData, bat8_master_switch_dataf_off_value);
+
+
         }
 
         return;
@@ -778,6 +1141,85 @@ void process_master_altenator_switch()
         return;
     }
 
+
+   if(altmasterswitchenable == 4) {
+
+        if(testbit(switchbuf,MASTER_ALTENATOR)) {
+
+            alt_master_switch_dataf_on_value = alt_master_switch_data_on_value;
+            alt_master_switch_dataf_on_value = alt_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(AltMasterSwitchData, alt_master_switch_dataf_on_value);
+
+            alt2_master_switch_dataf_on_value = alt2_master_switch_data_on_value;
+            alt2_master_switch_dataf_on_value = alt2_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Alt2MasterSwitchData, alt2_master_switch_dataf_on_value);
+
+            alt3_master_switch_dataf_on_value = alt3_master_switch_data_on_value;
+            alt3_master_switch_dataf_on_value = alt3_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Alt3MasterSwitchData, alt3_master_switch_dataf_on_value);
+
+            alt4_master_switch_dataf_on_value = alt4_master_switch_data_on_value;
+            alt4_master_switch_dataf_on_value = alt4_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Alt4MasterSwitchData, alt4_master_switch_dataf_on_value);
+
+            alt5_master_switch_dataf_on_value = alt5_master_switch_data_on_value;
+            alt5_master_switch_dataf_on_value = alt5_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Alt5MasterSwitchData, alt5_master_switch_dataf_on_value);
+
+            alt6_master_switch_dataf_on_value = alt6_master_switch_data_on_value;
+            alt6_master_switch_dataf_on_value = alt6_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Alt6MasterSwitchData, alt6_master_switch_dataf_on_value);
+
+            alt7_master_switch_dataf_on_value = alt7_master_switch_data_on_value;
+            alt7_master_switch_dataf_on_value = alt7_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Alt7MasterSwitchData, alt7_master_switch_dataf_on_value);
+
+            alt8_master_switch_dataf_on_value = alt8_master_switch_data_on_value;
+            alt8_master_switch_dataf_on_value = alt8_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Alt8MasterSwitchData, alt8_master_switch_dataf_on_value);
+
+         }
+
+        if(!testbit(switchbuf,MASTER_ALTENATOR)) {
+
+            alt_master_switch_dataf_off_value = alt_master_switch_data_off_value;
+            alt_master_switch_dataf_off_value = alt_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(AltMasterSwitchData, alt_master_switch_dataf_off_value);
+
+            alt2_master_switch_dataf_off_value = alt2_master_switch_data_off_value;
+            alt2_master_switch_dataf_off_value = alt2_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Alt2MasterSwitchData, alt2_master_switch_dataf_off_value);
+
+            alt3_master_switch_dataf_off_value = alt3_master_switch_data_off_value;
+            alt3_master_switch_dataf_off_value = alt3_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Alt3MasterSwitchData, alt3_master_switch_dataf_off_value);
+
+            alt4_master_switch_dataf_off_value = alt4_master_switch_data_off_value;
+            alt4_master_switch_dataf_off_value = alt4_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Alt4MasterSwitchData, alt4_master_switch_dataf_off_value);
+
+
+            alt5_master_switch_dataf_off_value = alt5_master_switch_data_off_value;
+            alt5_master_switch_dataf_off_value = alt5_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Alt5MasterSwitchData, alt5_master_switch_dataf_off_value);
+
+            alt6_master_switch_dataf_off_value = alt6_master_switch_data_off_value;
+            alt6_master_switch_dataf_off_value = alt6_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Alt6MasterSwitchData, alt6_master_switch_dataf_off_value);
+
+            alt7_master_switch_dataf_off_value = alt7_master_switch_data_off_value;
+            alt7_master_switch_dataf_off_value = alt7_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Alt7MasterSwitchData, alt7_master_switch_dataf_off_value);
+
+            alt8_master_switch_dataf_off_value = alt8_master_switch_data_off_value;
+            alt8_master_switch_dataf_off_value = alt8_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Alt8MasterSwitchData, alt8_master_switch_dataf_off_value);
+
+
+        }
+
+        return;
+    }
 
     if(testbit(switchbuf,MASTER_ALTENATOR)) {
         if(gennum == 1) {
@@ -1107,6 +1549,87 @@ void process_fuel_pump_switch()
         return;
     }
 
+   if(fuelpumpswitchenable == 4) {
+
+        if(testbit(switchbuf,FUEL_PUMP)) {
+
+            fuel_pump_switch_dataf_on_value = fuel_pump_switch_data_on_value;
+            fuel_pump_switch_dataf_on_value = fuel_pump_switch_dataf_on_value / 100;
+            XPLMSetDataf(FuelPumpSwitchData, fuel_pump_switch_dataf_on_value);
+
+            fuel_pump2_switch_dataf_on_value = fuel_pump2_switch_data_on_value;
+            fuel_pump2_switch_dataf_on_value = fuel_pump2_switch_dataf_on_value / 100;
+            XPLMSetDataf(FuelPump2SwitchData, fuel_pump2_switch_dataf_on_value);
+
+            fuel_pump3_switch_dataf_on_value = fuel_pump3_switch_data_on_value;
+            fuel_pump3_switch_dataf_on_value = fuel_pump3_switch_dataf_on_value / 100;
+            XPLMSetDataf(FuelPump3SwitchData, fuel_pump3_switch_dataf_on_value);
+
+            fuel_pump4_switch_dataf_on_value = fuel_pump4_switch_data_on_value;
+            fuel_pump4_switch_dataf_on_value = fuel_pump4_switch_dataf_on_value / 100;
+            XPLMSetDataf(FuelPump4SwitchData, fuel_pump4_switch_dataf_on_value);
+
+            fuel_pump5_switch_dataf_on_value = fuel_pump5_switch_data_on_value;
+            fuel_pump5_switch_dataf_on_value = fuel_pump5_switch_dataf_on_value / 100;
+            XPLMSetDataf(FuelPump5SwitchData, fuel_pump5_switch_dataf_on_value);
+
+            fuel_pump6_switch_dataf_on_value = fuel_pump6_switch_data_on_value;
+            fuel_pump6_switch_dataf_on_value = fuel_pump6_switch_dataf_on_value / 100;
+            XPLMSetDataf(FuelPump6SwitchData, fuel_pump6_switch_dataf_on_value);
+
+            fuel_pump7_switch_dataf_on_value = fuel_pump7_switch_data_on_value;
+            fuel_pump7_switch_dataf_on_value = fuel_pump7_switch_dataf_on_value / 100;
+            XPLMSetDataf(FuelPump7SwitchData, fuel_pump7_switch_dataf_on_value);
+
+            fuel_pump8_switch_dataf_on_value = fuel_pump8_switch_data_on_value;
+            fuel_pump8_switch_dataf_on_value = fuel_pump8_switch_dataf_on_value / 100;
+            XPLMSetDataf(FuelPump8SwitchData, fuel_pump8_switch_dataf_on_value);
+
+
+         }
+
+        if(!testbit(switchbuf,FUEL_PUMP)) {
+
+            fuel_pump_switch_dataf_off_value = fuel_pump_switch_data_off_value;
+            fuel_pump_switch_dataf_off_value = fuel_pump_switch_dataf_off_value / 100;
+            XPLMSetDatai(FuelPumpSwitchData, fuel_pump_switch_data_off_value);
+
+            fuel_pump2_switch_dataf_off_value = fuel_pump2_switch_data_off_value;
+            fuel_pump2_switch_dataf_off_value = fuel_pump2_switch_dataf_off_value / 100;
+            XPLMSetDataf(FuelPump2SwitchData, fuel_pump2_switch_dataf_off_value);
+
+            fuel_pump3_switch_dataf_off_value = fuel_pump3_switch_data_off_value;
+            fuel_pump3_switch_dataf_off_value = fuel_pump3_switch_dataf_off_value / 100;
+            XPLMSetDataf(FuelPump3SwitchData, fuel_pump3_switch_dataf_off_value);
+
+            fuel_pump4_switch_dataf_off_value = fuel_pump4_switch_data_off_value;
+            fuel_pump4_switch_dataf_off_value = fuel_pump4_switch_dataf_off_value / 100;
+            XPLMSetDataf(FuelPump4SwitchData, fuel_pump4_switch_dataf_off_value);
+
+            fuel_pump5_switch_dataf_off_value = fuel_pump5_switch_data_off_value;
+            fuel_pump5_switch_dataf_off_value = fuel_pump5_switch_dataf_off_value / 100;
+            XPLMSetDataf(FuelPump5SwitchData, fuel_pump5_switch_dataf_off_value);
+
+            fuel_pump6_switch_dataf_off_value = fuel_pump6_switch_data_off_value;
+            fuel_pump6_switch_dataf_off_value = fuel_pump6_switch_dataf_off_value / 100;
+            XPLMSetDataf(FuelPump6SwitchData, fuel_pump6_switch_dataf_off_value);
+
+            fuel_pump7_switch_dataf_off_value = fuel_pump7_switch_data_off_value;
+            fuel_pump7_switch_dataf_off_value = fuel_pump7_switch_dataf_off_value / 100;
+            XPLMSetDataf(FuelPump7SwitchData, fuel_pump7_switch_dataf_off_value);
+
+            fuel_pump8_switch_dataf_off_value = fuel_pump8_switch_data_off_value;
+            fuel_pump8_switch_dataf_off_value = fuel_pump8_switch_dataf_off_value / 100;
+            XPLMSetDataf(FuelPump8SwitchData, fuel_pump8_switch_dataf_off_value);
+
+
+        }
+
+        return;
+    }
+
+
+
 
 	if(testbit(switchbuf,FUEL_PUMP)) {
 	  if(engnum == 1){
@@ -1228,6 +1751,86 @@ void process_de_ice_switch()
     }
 
 
+    if(deiceswitchenable == 4) {
+        if(testbit(switchbuf,DE_ICE)) {
+
+            deice_switch_dataf_on_value = deice_switch_data_on_value;
+            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
+            XPLMSetDataf(DeiceSwitchData, deice_switch_dataf_on_value);
+
+            deice_switch_dataf_on_value = deice_switch_data_on_value;
+            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice2SwitchData, deice_switch_dataf_on_value);
+
+            deice_switch_dataf_on_value = deice_switch_data_on_value;
+            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice3SwitchData, deice_switch_dataf_on_value);
+
+            deice_switch_dataf_on_value = deice_switch_data_on_value;
+            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice4SwitchData, deice_switch_dataf_on_value);
+
+            deice_switch_dataf_on_value = deice_switch_data_on_value;
+            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice5SwitchData, deice_switch_dataf_on_value);
+
+            deice_switch_data_on_value = deice_switch_data_on_value;
+            deice_switch_data_on_value = deice_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice6SwitchData, deice_switch_dataf_on_value);
+
+            deice_switch_dataf_on_value = deice_switch_data_on_value;
+            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice7SwitchData, deice_switch_dataf_on_value);
+
+            deice_switch_dataf_on_value = deice_switch_data_on_value;
+            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice8SwitchData, deice_switch_dataf_on_value);
+
+
+         }
+
+        if(!testbit(switchbuf,DE_ICE)) {
+
+            deice_switch_dataf_off_value = deice_switch_data_off_value;
+            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
+            XPLMSetDataf(DeiceSwitchData, deice_switch_dataf_off_value);
+
+            deice_switch_dataf_off_value = deice_switch_data_off_value;
+            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice2SwitchData, deice_switch_dataf_off_value);
+
+            deice_switch_dataf_off_value = deice_switch_data_off_value;
+            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice3SwitchData, deice_switch_dataf_off_value);
+
+
+            deice_switch_dataf_off_value = deice_switch_data_off_value;
+            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice4SwitchData, deice_switch_dataf_off_value);
+
+            deice_switch_dataf_off_value = deice_switch_data_off_value;
+            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice5SwitchData, deice_switch_dataf_off_value);
+
+            deice_switch_dataf_off_value = deice_switch_data_off_value;
+            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice6SwitchData, deice_switch_dataf_off_value);
+
+            deice_switch_dataf_off_value = deice_switch_data_off_value;
+            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice7SwitchData, deice_switch_dataf_off_value);
+
+            deice_switch_dataf_off_value = deice_switch_data_off_value;
+            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice8SwitchData, deice_switch_dataf_off_value);
+
+
+        }
+
+        return;
+    }
+
+
 }
 
 // ***************** Pitot Heat *******************
@@ -1299,6 +1902,81 @@ void process_pitot_heat_switch()
         }
         return;
     }
+
+    if(pitotheatswitchenable == 4) {
+        if(testbit(switchbuf,PITOT_HEAT)) {
+
+            pitot_heat_switch_dataf_on_value = pitot_heat_switch_data_on_value;
+            pitot_heat_switch_dataf_on_value = pitot_heat_switch_dataf_on_value / 100;
+            XPLMSetDataf(PitotHeatSwitchData, pitot_heat_switch_dataf_on_value);
+
+            pitot2_heat_switch_dataf_on_value = pitot2_heat_switch_data_on_value;
+            pitot2_heat_switch_dataf_on_value = pitot2_heat_switch_dataf_on_value / 100;
+            XPLMSetDataf(Pitot2HeatSwitchData, pitot2_heat_switch_dataf_on_value);
+
+            pitot3_heat_switch_data_on_value = pitot3_heat_switch_data_on_value;
+            pitot3_heat_switch_data_on_value = pitot3_heat_switch_dataf_on_value / 100;
+            XPLMSetDataf(Pitot3HeatSwitchData, pitot3_heat_switch_dataf_on_value);
+
+            pitot4_heat_switch_dataf_on_value = pitot4_heat_switch_data_on_value;
+            pitot4_heat_switch_dataf_on_value = pitot4_heat_switch_dataf_on_value / 100;
+            XPLMSetDataf(Pitot4HeatSwitchData, pitot4_heat_switch_dataf_on_value);
+
+            pitot5_heat_switch_dataf_on_value = pitot5_heat_switch_data_on_value;
+            pitot5_heat_switch_dataf_on_value = pitot5_heat_switch_dataf_on_value / 100;
+            XPLMSetDataf(Pitot5HeatSwitchData, pitot5_heat_switch_dataf_on_value);
+
+            pitot6_heat_switch_dataf_on_value = pitot6_heat_switch_data_on_value;
+            pitot6_heat_switch_dataf_on_value = pitot6_heat_switch_dataf_on_value / 100;
+            XPLMSetDataf(Pitot6HeatSwitchData, pitot6_heat_switch_dataf_on_value);
+
+            pitot7_heat_switch_dataf_on_value = pitot7_heat_switch_data_on_value;
+            pitot7_heat_switch_dataf_on_value = pitot7_heat_switch_dataf_on_value / 100;
+            XPLMSetDataf(Pitot7HeatSwitchData, pitot7_heat_switch_dataf_on_value);
+
+            pitot8_heat_switch_dataf_on_value = pitot8_heat_switch_data_on_value;
+            pitot8_heat_switch_dataf_on_value = pitot8_heat_switch_dataf_on_value / 100;
+            XPLMSetDataf(Pitot8HeatSwitchData, pitot8_heat_switch_dataf_on_value);
+
+
+        }
+        if(!testbit(switchbuf,PITOT_HEAT)) {
+
+            pitot_heat_switch_dataf_off_value = pitot_heat_switch_data_off_value;
+            pitot_heat_switch_dataf_off_value = pitot_heat_switch_dataf_off_value / 100;
+            XPLMSetDataf(PitotHeatSwitchData, pitot_heat_switch_dataf_off_value);
+
+            pitot2_heat_switch_dataf_off_value = pitot2_heat_switch_data_off_value;
+            pitot2_heat_switch_dataf_off_value = pitot2_heat_switch_dataf_off_value / 100;
+            XPLMSetDataf(Pitot2HeatSwitchData, pitot2_heat_switch_dataf_off_value);
+
+            pitot3_heat_switch_dataf_off_value = pitot3_heat_switch_data_off_value;
+            pitot3_heat_switch_dataf_off_value = pitot3_heat_switch_dataf_off_value / 100;
+            XPLMSetDataf(Pitot3HeatSwitchData, pitot3_heat_switch_dataf_off_value);
+
+            pitot4_heat_switch_dataf_off_value = pitot4_heat_switch_data_off_value;
+            pitot4_heat_switch_dataf_off_value = pitot4_heat_switch_dataf_off_value / 100;
+            XPLMSetDataf(Pitot4HeatSwitchData, pitot4_heat_switch_dataf_off_value);
+
+            pitot5_heat_switch_dataf_off_value = pitot5_heat_switch_data_off_value;
+            pitot5_heat_switch_dataf_off_value = pitot5_heat_switch_dataf_off_value / 100;
+            XPLMSetDataf(Pitot5HeatSwitchData, pitot5_heat_switch_dataf_off_value);
+
+            pitot6_heat_switch_dataf_off_value = pitot6_heat_switch_data_off_value;
+            pitot6_heat_switch_dataf_off_value = pitot6_heat_switch_dataf_off_value / 100;
+            XPLMSetDataf(Pitot6HeatSwitchData, pitot6_heat_switch_dataf_off_value);
+
+            pitot7_heat_switch_dataf_off_value = pitot7_heat_switch_data_off_value;
+            pitot7_heat_switch_dataf_off_value = pitot7_heat_switch_dataf_off_value / 100;
+            XPLMSetDataf(Pitot7HeatSwitchData, pitot7_heat_switch_dataf_off_value);
+
+            pitot8_heat_switch_dataf_off_value = pitot8_heat_switch_data_off_value;
+            pitot8_heat_switch_dataf_off_value = pitot8_heat_switch_dataf_off_value / 100;
+            XPLMSetDataf(Pitot8HeatSwitchData, pitot8_heat_switch_dataf_off_value);
+        }
+        return;
+    }
+
 
 
 }
@@ -1408,6 +2086,83 @@ void process_cowl_flaps_switch()
             XPLMSetDatai(Cowl6FlapsData, cowl6_flaps_data_off_value);
             XPLMSetDatai(Cowl7FlapsData, cowl7_flaps_data_off_value);
             XPLMSetDatai(Cowl8FlapsData, cowl8_flaps_data_off_value);
+        }
+        return;
+    }
+
+
+    if(cowlflapsenable == 4) {
+        if(testbit(switchbuf,COWL_FLAPS)) {
+
+            cowl_flaps_dataf_on_value = cowl_flaps_data_on_value;
+            cowl_flaps_dataf_on_value = cowl_flaps_dataf_on_value / 100;
+            XPLMSetDataf(CowlFlapsData, cowl_flaps_dataf_on_value);
+
+            cowl2_flaps_dataf_on_value = cowl2_flaps_data_on_value;
+            cowl2_flaps_dataf_on_value = cowl2_flaps_dataf_on_value / 100;
+            XPLMSetDataf(Cowl2FlapsData, cowl2_flaps_dataf_on_value);
+
+            cowl3_flaps_dataf_on_value = cowl3_flaps_data_on_value;
+            cowl3_flaps_dataf_on_value = cowl3_flaps_dataf_on_value / 100;
+            XPLMSetDataf(Cowl3FlapsData, cowl3_flaps_dataf_on_value);
+
+            cowl4_flaps_dataf_on_value = cowl4_flaps_data_on_value;
+            cowl4_flaps_dataf_on_value = cowl4_flaps_dataf_on_value / 100;
+            XPLMSetDataf(Cowl4FlapsData, cowl4_flaps_dataf_on_value);
+
+            cowl5_flaps_dataf_on_value = cowl5_flaps_data_on_value;
+            cowl5_flaps_dataf_on_value = cowl5_flaps_dataf_on_value / 100;
+            XPLMSetDataf(Cowl5FlapsData, cowl5_flaps_dataf_on_value);
+
+            cowl6_flaps_dataf_on_value = cowl6_flaps_data_on_value;
+            cowl6_flaps_dataf_on_value = cowl6_flaps_dataf_on_value / 100;
+            XPLMSetDataf(Cowl6FlapsData, cowl6_flaps_dataf_on_value);
+
+            cowl7_flaps_dataf_on_value = cowl7_flaps_data_on_value;
+            cowl7_flaps_dataf_on_value = cowl7_flaps_dataf_on_value / 100;
+            XPLMSetDataf(Cowl7FlapsData, cowl7_flaps_dataf_on_value);
+
+            cowl8_flaps_dataf_on_value = cowl8_flaps_data_on_value;
+            cowl8_flaps_dataf_on_value = cowl8_flaps_dataf_on_value / 100;
+            XPLMSetDataf(Cowl8FlapsData, cowl8_flaps_dataf_on_value);
+
+
+        }
+        if(!testbit(switchbuf,COWL_FLAPS)) {
+
+            cowl_flaps_dataf_off_value = cowl_flaps_data_off_value;
+            cowl_flaps_dataf_off_value = cowl_flaps_dataf_off_value / 100;
+            XPLMSetDataf(CowlFlapsData, cowl_flaps_dataf_off_value);
+
+            cowl2_flaps_dataf_off_value = cowl2_flaps_data_off_value;
+            cowl2_flaps_dataf_off_value = cowl2_flaps_dataf_off_value / 100;
+            XPLMSetDataf(Cowl2FlapsData, cowl2_flaps_dataf_off_value);
+
+            cowl3_flaps_dataf_off_value = cowl3_flaps_data_off_value;
+            cowl3_flaps_dataf_off_value = cowl3_flaps_dataf_off_value / 100;
+            XPLMSetDataf(Cowl3FlapsData, cowl3_flaps_dataf_off_value);
+
+            cowl4_flaps_dataf_off_value = cowl4_flaps_data_off_value;
+            cowl4_flaps_dataf_off_value = cowl4_flaps_dataf_off_value / 100;
+            XPLMSetDataf(Cowl4FlapsData, cowl4_flaps_dataf_off_value);
+
+            cowl5_flaps_dataf_off_value = cowl5_flaps_data_off_value;
+            cowl5_flaps_dataf_off_value = cowl5_flaps_dataf_off_value / 100;
+            XPLMSetDataf(Cowl5FlapsData, cowl5_flaps_dataf_off_value);
+
+            cowl6_flaps_dataf_off_value = cowl6_flaps_data_off_value;
+            cowl6_flaps_dataf_off_value = cowl6_flaps_dataf_off_value / 100;
+            XPLMSetDataf(Cowl6FlapsData, cowl6_flaps_dataf_off_value);
+
+            cowl7_flaps_dataf_off_value = cowl7_flaps_data_off_value;
+            cowl7_flaps_dataf_off_value = cowl7_flaps_dataf_off_value / 100;
+            XPLMSetDataf(Cowl7FlapsData, cowl7_flaps_dataf_off_value);
+
+            cowl8_flaps_dataf_off_value = cowl8_flaps_data_off_value;
+            cowl8_flaps_dataf_off_value = cowl8_flaps_dataf_off_value / 100;
+            XPLMSetDataf(Cowl8FlapsData, cowl8_flaps_dataf_off_value);
+
+
         }
         return;
     }
