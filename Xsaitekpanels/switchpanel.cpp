@@ -1318,167 +1318,181 @@ void process_avionics_power_switch()
 
         if(testbit(switchbuf,AVIONICS_POWER)) {
             XPLMSetDatai(AvMasterSwitchData, av_master_switch_data_on_value);
-            av_master_switch_dataf_on_value = (float)av_master_switch_data_on_value;
-            av_master_switch_dataf_on_value = av_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(AvMasterSwitchDataf, av_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av2MasterSwitchData, av2_master_switch_data_on_value);
-            av2_master_switch_dataf_on_value = (float)av2_master_switch_data_on_value;
-            av2_master_switch_dataf_on_value = av2_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av2MasterSwitchDataf, av2_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av3MasterSwitchData, av3_master_switch_data_on_value);
-            av3_master_switch_dataf_on_value = (float)av3_master_switch_data_on_value;
-            av3_master_switch_dataf_on_value = av3_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av3MasterSwitchDataf, av3_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av4MasterSwitchData, av4_master_switch_data_on_value);
-            av4_master_switch_dataf_on_value = (float)av4_master_switch_data_on_value;
-            av4_master_switch_dataf_on_value = av4_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av4MasterSwitchDataf, av4_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av5MasterSwitchData, av5_master_switch_data_on_value);
-            av5_master_switch_dataf_on_value = (float)av5_master_switch_data_on_value;
-            av5_master_switch_dataf_on_value = av5_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av5MasterSwitchDataf, av5_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av6MasterSwitchData, av6_master_switch_data_on_value);
-            av6_master_switch_dataf_on_value = (float)av6_master_switch_data_on_value;
-            av6_master_switch_dataf_on_value = av6_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av6MasterSwitchDataf, av6_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av7MasterSwitchData, av7_master_switch_data_on_value);
-            av7_master_switch_dataf_on_value = (float)av7_master_switch_data_on_value;
-            av7_master_switch_dataf_on_value = av7_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av7MasterSwitchDataf, av7_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av8MasterSwitchData, av8_master_switch_data_on_value);
-            av8_master_switch_dataf_on_value = (float)av8_master_switch_data_on_value;
-            av8_master_switch_dataf_on_value = av8_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av8MasterSwitchDataf, av8_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av9MasterSwitchData, av9_master_switch_data_on_value);
-            av9_master_switch_dataf_on_value = (float)av9_master_switch_data_on_value;
-            av9_master_switch_dataf_on_value = av9_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av9MasterSwitchDataf, av9_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av10MasterSwitchData, av10_master_switch_data_on_value);
-            av10_master_switch_dataf_on_value = (float)av10_master_switch_data_on_value;
-            av10_master_switch_dataf_on_value = av10_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av10MasterSwitchData, av10_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av11MasterSwitchData, av11_master_switch_data_on_value);
-            av11_master_switch_dataf_on_value = (float)av11_master_switch_data_on_value;
-            av11_master_switch_dataf_on_value = av11_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av11MasterSwitchDataf, av11_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av12MasterSwitchData, av12_master_switch_data_on_value);
-            av12_master_switch_dataf_on_value = (float)av12_master_switch_data_on_value;
-            av12_master_switch_dataf_on_value = av12_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av12MasterSwitchDataf, av12_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av13MasterSwitchData, av13_master_switch_data_on_value);
-            av13_master_switch_dataf_on_value = (float)av13_master_switch_data_on_value;
-            av13_master_switch_dataf_on_value = av13_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av13MasterSwitchDataf, av13_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av14MasterSwitchData, av14_master_switch_data_on_value);
-            av14_master_switch_dataf_on_value = (float)av14_master_switch_data_on_value;
-            av14_master_switch_dataf_on_value = av14_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av14MasterSwitchDataf, av14_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av15MasterSwitchData, av15_master_switch_data_on_value);
-            av15_master_switch_dataf_on_value = (float)av15_master_switch_data_on_value;
-            av15_master_switch_dataf_on_value = av15_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av15MasterSwitchDataf, av15_master_switch_dataf_on_value);
-
             XPLMSetDatai(Av16MasterSwitchData, av16_master_switch_data_on_value);
-            av16_master_switch_dataf_on_value = (float)av16_master_switch_data_on_value;
-            av16_master_switch_dataf_on_value = av16_master_switch_dataf_on_value / 100;
-            XPLMSetDataf(Av16MasterSwitchDataf, av16_master_switch_dataf_on_value);
+
         }
 
         if(!testbit(switchbuf,AVIONICS_POWER)) {
             XPLMSetDatai(AvMasterSwitchData, av_master_switch_data_off_value);
-            av_master_switch_dataf_off_value = (float)av_master_switch_data_off_value;
-            av_master_switch_dataf_off_value = av_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(AvMasterSwitchDataf, av_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av2MasterSwitchData, av2_master_switch_data_off_value);
-            av2_master_switch_dataf_off_value = (float)av2_master_switch_data_off_value;
-            av2_master_switch_dataf_off_value = av2_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av2MasterSwitchDataf, av2_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av3MasterSwitchData, av3_master_switch_data_off_value);
-            av3_master_switch_dataf_off_value = (float)av3_master_switch_data_off_value;
-            av3_master_switch_dataf_off_value = av3_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av3MasterSwitchDataf, av3_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av4MasterSwitchData, av4_master_switch_data_off_value);
-            av4_master_switch_dataf_off_value = (float)av4_master_switch_data_off_value;
-            av4_master_switch_dataf_off_value = av4_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av4MasterSwitchDataf, av4_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av5MasterSwitchData, av5_master_switch_data_off_value);
-            av5_master_switch_dataf_off_value = (float)av5_master_switch_data_off_value;
-            av5_master_switch_dataf_off_value = av5_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av5MasterSwitchDataf, av5_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av6MasterSwitchData, av6_master_switch_data_off_value);
-            av6_master_switch_dataf_off_value = (float)av6_master_switch_data_off_value;
-            av6_master_switch_dataf_off_value = av6_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av6MasterSwitchDataf, av6_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av7MasterSwitchData, av7_master_switch_data_off_value);
-            av7_master_switch_dataf_off_value = (float)av7_master_switch_data_off_value;
-            av7_master_switch_dataf_off_value = av7_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av7MasterSwitchDataf, av7_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av8MasterSwitchData, av8_master_switch_data_off_value);
-            av8_master_switch_dataf_off_value = (float)av8_master_switch_data_off_value;
-            av8_master_switch_dataf_off_value = av8_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av8MasterSwitchDataf, av8_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av9MasterSwitchData, av9_master_switch_data_off_value);
-            av9_master_switch_dataf_off_value = (float)av9_master_switch_data_off_value;
-            av9_master_switch_dataf_off_value = av9_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av9MasterSwitchDataf, av9_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av10MasterSwitchData, av10_master_switch_data_off_value);
-            av10_master_switch_dataf_off_value = (float)av10_master_switch_data_off_value;
-            av10_master_switch_dataf_off_value = av10_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av10MasterSwitchDataf, av10_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av11MasterSwitchData, av11_master_switch_data_off_value);
-            av11_master_switch_dataf_off_value = (float)av11_master_switch_data_off_value;
-            av11_master_switch_dataf_off_value = av11_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av11MasterSwitchDataf, av11_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av12MasterSwitchData, av12_master_switch_data_off_value);
-            av12_master_switch_dataf_off_value = (float)av12_master_switch_data_off_value;
-            av12_master_switch_dataf_off_value = av12_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av12MasterSwitchDataf, av12_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av13MasterSwitchData, av13_master_switch_data_off_value);
-            av13_master_switch_dataf_off_value = (float)av13_master_switch_data_off_value;
-            av13_master_switch_dataf_off_value = av13_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av13MasterSwitchDataf, av13_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av14MasterSwitchData, av14_master_switch_data_off_value);
-            av14_master_switch_dataf_off_value = (float)av14_master_switch_data_off_value;
-            av14_master_switch_dataf_off_value = av14_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av14MasterSwitchDataf, av14_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av15MasterSwitchData, av15_master_switch_data_off_value);
-            av15_master_switch_dataf_off_value = (float)av15_master_switch_data_off_value;
-            av15_master_switch_dataf_off_value = av15_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av15MasterSwitchDataf, av15_master_switch_dataf_off_value);
-
             XPLMSetDatai(Av16MasterSwitchData, av16_master_switch_data_off_value);
-            av16_master_switch_dataf_off_value = (float)av16_master_switch_data_off_value;
-            av16_master_switch_dataf_off_value = av16_master_switch_dataf_off_value / 100;
-            XPLMSetDataf(Av16MasterSwitchDataf, av16_master_switch_dataf_off_value);
 
+        }
+
+        return;
+    }
+
+
+   if(avionicsmasterswitchenable == 4) {
+
+        if(testbit(switchbuf,AVIONICS_POWER)) {
+            av_master_switch_dataf_on_value =  av_master_switch_data_on_value;
+            av_master_switch_dataf_on_value = av_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(AvMasterSwitchData, av_master_switch_dataf_on_value);
+
+            av2_master_switch_dataf_on_value = av2_master_switch_data_on_value;
+            av2_master_switch_dataf_on_value = av2_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av2MasterSwitchData, av2_master_switch_dataf_on_value);
+
+            av3_master_switch_dataf_on_value = av3_master_switch_data_on_value;
+            av3_master_switch_dataf_on_value = av3_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av3MasterSwitchData, av3_master_switch_dataf_on_value);
+
+            av4_master_switch_dataf_on_value = av4_master_switch_data_on_value;
+            av4_master_switch_dataf_on_value = av4_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av4MasterSwitchData, av4_master_switch_dataf_on_value);
+
+            av5_master_switch_dataf_on_value = av5_master_switch_data_on_value;
+            av5_master_switch_dataf_on_value = av5_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av5MasterSwitchData, av5_master_switch_dataf_on_value);
+
+            av6_master_switch_dataf_on_value = av6_master_switch_data_on_value;
+            av6_master_switch_dataf_on_value = av6_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av6MasterSwitchData, av6_master_switch_dataf_on_value);
+
+            av7_master_switch_dataf_on_value = av7_master_switch_data_on_value;
+            av7_master_switch_dataf_on_value = av7_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av7MasterSwitchData, av7_master_switch_dataf_on_value);
+
+            av8_master_switch_dataf_on_value = av8_master_switch_data_on_value;
+            av8_master_switch_dataf_on_value = av8_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av8MasterSwitchData, av8_master_switch_dataf_on_value);
+
+            av9_master_switch_dataf_on_value = av9_master_switch_data_on_value;
+            av9_master_switch_dataf_on_value = av9_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av9MasterSwitchData, av9_master_switch_dataf_on_value);
+
+            av10_master_switch_dataf_on_value = av10_master_switch_data_on_value;
+            av10_master_switch_dataf_on_value = av10_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av10MasterSwitchData, av10_master_switch_dataf_on_value);
+
+            av11_master_switch_dataf_on_value = av11_master_switch_data_on_value;
+            av11_master_switch_dataf_on_value = av11_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av11MasterSwitchData, av11_master_switch_dataf_on_value);
+
+            av12_master_switch_dataf_on_value = av12_master_switch_data_on_value;
+            av12_master_switch_dataf_on_value = av12_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av12MasterSwitchData, av12_master_switch_dataf_on_value);
+
+            av13_master_switch_dataf_on_value =  av13_master_switch_data_on_value;
+            av13_master_switch_dataf_on_value =  av13_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av13MasterSwitchData, av13_master_switch_dataf_on_value);
+
+            av14_master_switch_dataf_on_value = av14_master_switch_data_on_value;
+            av14_master_switch_dataf_on_value = av14_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av14MasterSwitchData, av14_master_switch_dataf_on_value);
+
+            av15_master_switch_dataf_on_value = av15_master_switch_data_on_value;
+            av15_master_switch_dataf_on_value = av15_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av15MasterSwitchData, av15_master_switch_dataf_on_value);
+
+            av16_master_switch_dataf_on_value = av16_master_switch_data_on_value;
+            av16_master_switch_dataf_on_value = av16_master_switch_dataf_on_value / 100;
+            XPLMSetDataf(Av16MasterSwitchData, av16_master_switch_dataf_on_value);
+
+        }
+
+        if(!testbit(switchbuf,AVIONICS_POWER)) {
+            av_master_switch_dataf_off_value = av_master_switch_data_off_value;
+            av_master_switch_dataf_off_value = av_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(AvMasterSwitchData, av_master_switch_dataf_off_value);
+
+            av2_master_switch_dataf_off_value = av2_master_switch_data_off_value;
+            av2_master_switch_dataf_off_value = av2_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av2MasterSwitchData, av2_master_switch_dataf_off_value);
+
+            av3_master_switch_dataf_off_value = av3_master_switch_data_off_value;
+            av3_master_switch_dataf_off_value = av3_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av3MasterSwitchData, av3_master_switch_dataf_off_value);
+
+            av4_master_switch_dataf_off_value = av4_master_switch_data_off_value;
+            av4_master_switch_dataf_off_value = av4_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av4MasterSwitchData, av4_master_switch_dataf_off_value);
+
+            av5_master_switch_dataf_off_value = av5_master_switch_data_off_value;
+            av5_master_switch_dataf_off_value = av5_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av5MasterSwitchData, av5_master_switch_dataf_off_value);
+
+            av6_master_switch_dataf_off_value = av6_master_switch_data_off_value;
+            av6_master_switch_dataf_off_value = av6_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av6MasterSwitchData, av6_master_switch_dataf_off_value);
+
+            av7_master_switch_dataf_off_value = av7_master_switch_data_off_value;
+            av7_master_switch_dataf_off_value = av7_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av7MasterSwitchData, av7_master_switch_dataf_off_value);
+
+            av8_master_switch_dataf_off_value = av8_master_switch_data_off_value;
+            av8_master_switch_dataf_off_value = av8_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av8MasterSwitchData, av8_master_switch_dataf_off_value);
+
+            av9_master_switch_dataf_off_value = av9_master_switch_data_off_value;
+            av9_master_switch_dataf_off_value = av9_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av9MasterSwitchData, av9_master_switch_dataf_off_value);
+
+            av10_master_switch_dataf_off_value = av10_master_switch_data_off_value;
+            av10_master_switch_dataf_off_value = av10_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av10MasterSwitchData, av10_master_switch_dataf_off_value);
+
+            av11_master_switch_dataf_off_value = av11_master_switch_data_off_value;
+            av11_master_switch_dataf_off_value = av11_master_switch_dataf_off_value / 100;
+            XPLMSetDatai(Av11MasterSwitchData, av11_master_switch_data_off_value);
+
+            av12_master_switch_dataf_off_value = av12_master_switch_data_off_value;
+            av12_master_switch_dataf_off_value = av12_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av12MasterSwitchData, av12_master_switch_dataf_off_value);
+
+            av13_master_switch_dataf_off_value = av13_master_switch_data_off_value;
+            av13_master_switch_dataf_off_value = av13_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av13MasterSwitchData, av13_master_switch_dataf_off_value);
+
+            av14_master_switch_dataf_off_value = av14_master_switch_data_off_value;
+            av14_master_switch_dataf_off_value = av14_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av14MasterSwitchData, av14_master_switch_dataf_off_value);
+
+            av15_master_switch_dataf_off_value = av15_master_switch_data_off_value;
+            av15_master_switch_dataf_off_value = av15_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av15MasterSwitchData, av15_master_switch_dataf_off_value);
+
+            av16_master_switch_dataf_off_value = av16_master_switch_data_off_value;
+            av16_master_switch_dataf_off_value = av16_master_switch_dataf_off_value / 100;
+            XPLMSetDataf(Av16MasterSwitchData, av16_master_switch_dataf_off_value);
 
         }
 
@@ -1592,7 +1606,7 @@ void process_fuel_pump_switch()
 
             fuel_pump_switch_dataf_off_value = fuel_pump_switch_data_off_value;
             fuel_pump_switch_dataf_off_value = fuel_pump_switch_dataf_off_value / 100;
-            XPLMSetDatai(FuelPumpSwitchData, fuel_pump_switch_data_off_value);
+            XPLMSetDataf(FuelPumpSwitchData, fuel_pump_switch_data_off_value);
 
             fuel_pump2_switch_dataf_off_value = fuel_pump2_switch_data_off_value;
             fuel_pump2_switch_dataf_off_value = fuel_pump2_switch_dataf_off_value / 100;
@@ -1727,24 +1741,24 @@ void process_de_ice_switch()
     if(deiceswitchenable == 3) {
         if(testbit(switchbuf,DE_ICE)) {
             XPLMSetDatai(DeiceSwitchData, deice_switch_data_on_value);
-            XPLMSetDatai(Deice2SwitchData, deice_switch_data_on_value);
-            XPLMSetDatai(Deice3SwitchData, deice_switch_data_on_value);
-            XPLMSetDatai(Deice4SwitchData, deice_switch_data_on_value);
-            XPLMSetDatai(Deice5SwitchData, deice_switch_data_on_value);
-            XPLMSetDatai(Deice6SwitchData, deice_switch_data_on_value);
-            XPLMSetDatai(Deice7SwitchData, deice_switch_data_on_value);
-            XPLMSetDatai(Deice8SwitchData, deice_switch_data_on_value);
+            XPLMSetDatai(Deice2SwitchData, deice2_switch_data_on_value);
+            XPLMSetDatai(Deice3SwitchData, deice3_switch_data_on_value);
+            XPLMSetDatai(Deice4SwitchData, deice4_switch_data_on_value);
+            XPLMSetDatai(Deice5SwitchData, deice5_switch_data_on_value);
+            XPLMSetDatai(Deice6SwitchData, deice6_switch_data_on_value);
+            XPLMSetDatai(Deice7SwitchData, deice7_switch_data_on_value);
+            XPLMSetDatai(Deice8SwitchData, deice8_switch_data_on_value);
          }
 
         if(!testbit(switchbuf,DE_ICE)) {
             XPLMSetDatai(DeiceSwitchData, deice_switch_data_off_value);
-            XPLMSetDatai(Deice2SwitchData, deice_switch_data_off_value);
-            XPLMSetDatai(Deice3SwitchData, deice_switch_data_off_value);
-            XPLMSetDatai(Deice4SwitchData, deice_switch_data_off_value);
-            XPLMSetDatai(Deice5SwitchData, deice_switch_data_off_value);
-            XPLMSetDatai(Deice6SwitchData, deice_switch_data_off_value);
-            XPLMSetDatai(Deice7SwitchData, deice_switch_data_off_value);
-            XPLMSetDatai(Deice8SwitchData, deice_switch_data_off_value);
+            XPLMSetDatai(Deice2SwitchData, deice2_switch_data_off_value);
+            XPLMSetDatai(Deice3SwitchData, deice3_switch_data_off_value);
+            XPLMSetDatai(Deice4SwitchData, deice4_switch_data_off_value);
+            XPLMSetDatai(Deice5SwitchData, deice5_switch_data_off_value);
+            XPLMSetDatai(Deice6SwitchData, deice6_switch_data_off_value);
+            XPLMSetDatai(Deice7SwitchData, deice7_switch_data_off_value);
+            XPLMSetDatai(Deice8SwitchData, deice8_switch_data_off_value);
         }
 
         return;
@@ -1758,33 +1772,33 @@ void process_de_ice_switch()
             deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
             XPLMSetDataf(DeiceSwitchData, deice_switch_dataf_on_value);
 
-            deice_switch_dataf_on_value = deice_switch_data_on_value;
-            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
-            XPLMSetDataf(Deice2SwitchData, deice_switch_dataf_on_value);
+            deice2_switch_dataf_on_value = deice2_switch_data_on_value;
+            deice2_switch_dataf_on_value = deice2_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice2SwitchData, deice2_switch_dataf_on_value);
 
-            deice_switch_dataf_on_value = deice_switch_data_on_value;
-            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
-            XPLMSetDataf(Deice3SwitchData, deice_switch_dataf_on_value);
+            deice3_switch_dataf_on_value = deice3_switch_data_on_value;
+            deice3_switch_dataf_on_value = deice3_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice3SwitchData, deice3_switch_dataf_on_value);
 
-            deice_switch_dataf_on_value = deice_switch_data_on_value;
-            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
-            XPLMSetDataf(Deice4SwitchData, deice_switch_dataf_on_value);
+            deice4_switch_dataf_on_value = deice4_switch_data_on_value;
+            deice4_switch_dataf_on_value = deice4_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice4SwitchData, deice4_switch_dataf_on_value);
 
-            deice_switch_dataf_on_value = deice_switch_data_on_value;
-            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
-            XPLMSetDataf(Deice5SwitchData, deice_switch_dataf_on_value);
+            deice5_switch_dataf_on_value = deice5_switch_data_on_value;
+            deice5_switch_dataf_on_value = deice5_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice5SwitchData, deice5_switch_dataf_on_value);
 
-            deice_switch_data_on_value = deice_switch_data_on_value;
-            deice_switch_data_on_value = deice_switch_dataf_on_value / 100;
-            XPLMSetDataf(Deice6SwitchData, deice_switch_dataf_on_value);
+            deice6_switch_data_on_value = deice6_switch_data_on_value;
+            deice6_switch_data_on_value = deice6_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice6SwitchData, deice6_switch_dataf_on_value);
 
-            deice_switch_dataf_on_value = deice_switch_data_on_value;
-            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
-            XPLMSetDataf(Deice7SwitchData, deice_switch_dataf_on_value);
+            deice7_switch_dataf_on_value = deice7_switch_data_on_value;
+            deice7_switch_dataf_on_value = deice7_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice7SwitchData, deice7_switch_dataf_on_value);
 
-            deice_switch_dataf_on_value = deice_switch_data_on_value;
-            deice_switch_dataf_on_value = deice_switch_dataf_on_value / 100;
-            XPLMSetDataf(Deice8SwitchData, deice_switch_dataf_on_value);
+            deice8_switch_dataf_on_value = deice8_switch_data_on_value;
+            deice8_switch_dataf_on_value = deice8_switch_dataf_on_value / 100;
+            XPLMSetDataf(Deice8SwitchData, deice8_switch_dataf_on_value);
 
 
          }
@@ -1795,34 +1809,34 @@ void process_de_ice_switch()
             deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
             XPLMSetDataf(DeiceSwitchData, deice_switch_dataf_off_value);
 
-            deice_switch_dataf_off_value = deice_switch_data_off_value;
-            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
-            XPLMSetDataf(Deice2SwitchData, deice_switch_dataf_off_value);
+            deice2_switch_dataf_off_value = deice2_switch_data_off_value;
+            deice2_switch_dataf_off_value = deice2_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice2SwitchData, deice2_switch_dataf_off_value);
 
-            deice_switch_dataf_off_value = deice_switch_data_off_value;
-            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
-            XPLMSetDataf(Deice3SwitchData, deice_switch_dataf_off_value);
+            deice3_switch_dataf_off_value = deice3_switch_data_off_value;
+            deice3_switch_dataf_off_value = deice3_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice3SwitchData, deice3_switch_dataf_off_value);
 
 
-            deice_switch_dataf_off_value = deice_switch_data_off_value;
-            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
-            XPLMSetDataf(Deice4SwitchData, deice_switch_dataf_off_value);
+            deice4_switch_dataf_off_value = deice4_switch_data_off_value;
+            deice4_switch_dataf_off_value = deice4_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice4SwitchData, deice4_switch_dataf_off_value);
 
-            deice_switch_dataf_off_value = deice_switch_data_off_value;
-            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
-            XPLMSetDataf(Deice5SwitchData, deice_switch_dataf_off_value);
+            deice5_switch_dataf_off_value = deice5_switch_data_off_value;
+            deice5_switch_dataf_off_value = deice5_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice5SwitchData, deice5_switch_dataf_off_value);
 
-            deice_switch_dataf_off_value = deice_switch_data_off_value;
-            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
-            XPLMSetDataf(Deice6SwitchData, deice_switch_dataf_off_value);
+            deice6_switch_dataf_off_value = deice6_switch_data_off_value;
+            deice6_switch_dataf_off_value = deice6_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice6SwitchData, deice6_switch_dataf_off_value);
 
-            deice_switch_dataf_off_value = deice_switch_data_off_value;
-            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
-            XPLMSetDataf(Deice7SwitchData, deice_switch_dataf_off_value);
+            deice7_switch_dataf_off_value = deice7_switch_data_off_value;
+            deice7_switch_dataf_off_value = deice7_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice7SwitchData, deice7_switch_dataf_off_value);
 
-            deice_switch_dataf_off_value = deice_switch_data_off_value;
-            deice_switch_dataf_off_value = deice_switch_dataf_off_value / 100;
-            XPLMSetDataf(Deice8SwitchData, deice_switch_dataf_off_value);
+            deice8_switch_dataf_off_value = deice8_switch_data_off_value;
+            deice8_switch_dataf_off_value = deice8_switch_dataf_off_value / 100;
+            XPLMSetDataf(Deice8SwitchData, deice8_switch_dataf_off_value);
 
 
         }
