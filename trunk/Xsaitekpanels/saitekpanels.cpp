@@ -1,6 +1,6 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jun 06 2014   **************
+// ****** Jul 14 2014   **************
 
 #define VERSION_NUMBER "2.33"
 
