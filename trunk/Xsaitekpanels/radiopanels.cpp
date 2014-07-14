@@ -3594,33 +3594,33 @@ void process_lower_com2_switch()
             if (channelspacing833enable == 0) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad1LowerCom2ActRemapableData);
                 loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
-                lostbycomfreq[radnum] = XPLMGetDatai(Rad1LowerCom1StbyRemapableData);
+                lostbycomfreq[radnum] = XPLMGetDatai(Rad1LowerCom2StbyRemapableData);
                 lostbycomfreq[radnum] = lostbycomfreq[radnum] * 10;
             } else if (channelspacing833enable == 1) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad1LowerCom2ActRemapableData);
-                lostbycomfreq[radnum] = XPLMGetDatai(Rad1LowerCom1StbyRemapableData);
+                lostbycomfreq[radnum] = XPLMGetDatai(Rad1LowerCom2StbyRemapableData);
             }
 
         } else if ((rad2lwrcom2switchremap == 1) && (radnum == 1)) {
             if (channelspacing833enable == 0) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad2LowerCom2ActRemapableData);
                 loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
-                lostbycomfreq[radnum] = XPLMGetDatai(Rad2LowerCom1StbyRemapableData);
+                lostbycomfreq[radnum] = XPLMGetDatai(Rad2LowerCom2StbyRemapableData);
                 lostbycomfreq[radnum] = lostbycomfreq[radnum] * 10;
             } else if (channelspacing833enable == 1) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad2LowerCom2ActRemapableData);
-                lostbycomfreq[radnum] = XPLMGetDatai(Rad2LowerCom1StbyRemapableData);
+                lostbycomfreq[radnum] = XPLMGetDatai(Rad2LowerCom2StbyRemapableData);
             }
 
         } else if ((rad3lwrcom2switchremap == 1) && (radnum == 2)) {
             if (channelspacing833enable == 0) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad3LowerCom2ActRemapableData);
                 loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
-                lostbycomfreq[radnum] = XPLMGetDatai(Rad3LowerCom1StbyRemapableData);
+                lostbycomfreq[radnum] = XPLMGetDatai(Rad3LowerCom2StbyRemapableData);
                 lostbycomfreq[radnum] = lostbycomfreq[radnum] * 10;
             } else if (channelspacing833enable == 1) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad3LowerCom2ActRemapableData);
-                lostbycomfreq[radnum] = XPLMGetDatai(Rad3LowerCom1StbyRemapableData);
+                lostbycomfreq[radnum] = XPLMGetDatai(Rad3LowerCom2StbyRemapableData);
             }
 
         } else {
