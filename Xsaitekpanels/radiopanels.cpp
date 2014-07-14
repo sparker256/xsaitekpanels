@@ -3399,7 +3399,7 @@ void process_lower_com1_switch()
             }
         }
 
-        if ((rad1lwrcom1actstbybtnremap == 1) && (radnum == 0)) {
+        if ((rad1lwrcom1switchremap == 1) && (radnum == 0)) {
             if (channelspacing833enable == 0) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad1LowerCom1ActRemapableData);
                 loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
@@ -3590,7 +3590,7 @@ void process_lower_com2_switch()
             }
         }
 
-        if ((rad1lwrcom2actstbybtnremap == 1) && (radnum == 0)) {
+        if ((rad1lwrcom2switchremap == 1) && (radnum == 0)) {
             if (channelspacing833enable == 0) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad1LowerCom2ActRemapableData);
                 loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
@@ -3601,7 +3601,7 @@ void process_lower_com2_switch()
                 lostbycomfreq[radnum] = XPLMGetDatai(Rad1LowerCom1StbyRemapableData);
             }
 
-        } else if ((rad2lwrcom2actstbybtnremap == 1) && (radnum == 1)) {
+        } else if ((rad2lwrcom2switchremap == 1) && (radnum == 1)) {
             if (channelspacing833enable == 0) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad2LowerCom2ActRemapableData);
                 loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
@@ -3612,7 +3612,7 @@ void process_lower_com2_switch()
                 lostbycomfreq[radnum] = XPLMGetDatai(Rad2LowerCom1StbyRemapableData);
             }
 
-        } else if ((rad3lwrcom2actstbybtnremap == 1) && (radnum == 2)) {
+        } else if ((rad3lwrcom2switchremap == 1) && (radnum == 2)) {
             if (channelspacing833enable == 0) {
                 loactcomfreq[radnum] = XPLMGetDatai(Rad3LowerCom2ActRemapableData);
                 loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
