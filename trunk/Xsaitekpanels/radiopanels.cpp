@@ -1482,8 +1482,6 @@ void process_upper_com2_switch()
                 upstbycomfreq[radnum] = XPLMGetDatai(Rad1UpperCom2StbyRemapableData);
             }
 
-
-
         } else if ((rad2uprcom2switchremap == 1) && (radnum == 1)) {
             if (channelspacing833enable == 0) {
                 upactcomfreq[radnum] = XPLMGetDatai(Rad2UpperCom2ActRemapableData);
