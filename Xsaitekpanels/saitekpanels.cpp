@@ -1,8 +1,8 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Sep 11 2014   **************
+// ****** Nov 12 2014   **************
 
-#define VERSION_NUMBER "2.33"
+#define VERSION_NUMBER "2.34"
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -2238,7 +2238,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 233;
+  XsaitekpanelsVersion = 234;
 
   XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
 
