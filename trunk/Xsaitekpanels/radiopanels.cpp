@@ -285,19 +285,18 @@ void process_radio_upper_display()
   }
 
   else if (upseldis[radnum] == 6) {
-    radioaactv = updmenavspeed[radnum];
-    radioadig1 = 15, radioadig2 = 15;
-    radioadig3 = radioaactv/100, radioarem3 =radioaactv%100;
-    radioadig4 = radioarem3/10, radioarem4 = radioarem3%10;
-    radioadig5 = radioarem4;
+      radioaactv = updmedist[radnum];
+      radioadig1 = radioaactv/10000, radioarem1 = radioaactv%10000;
+      radioadig2 = radioarem1 /1000, radioarem2 = radioarem1%1000;
+      radioadig3 = radioarem2/100, radioarem3 = radioarem2%100;
+      radioadig4 = radioarem3/10, radioarem4 = radioarem3%10;
+      radioadig4 = radioadig4+208, radioadig5 = radioarem4;
 
-    radiobstby = updmedist[radnum];
-    radiobdig1 = radiobstby/10000, radiobrem1 = radiobstby%10000;
-    radiobdig2 = radiobrem1 /1000, radiobrem2 = radiobrem1%1000;
-    radiobdig3 = radiobrem2/100, radiobrem3 = radiobrem2%100;
-    radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
-    radiobdig4 = radiobdig4+208, radiobdig5 = radiobrem4;
-
+      radiobstby = updmenavspeed[radnum];
+      radiobdig1 = 15, radiobdig2 = 15;
+      radiobdig3 = radiobstby/100, radiobrem3 =radiobstby%100;
+      radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
+      radiobdig5 = radiobrem4;
   }
 
   else if (upseldis[radnum] == 7) {
@@ -638,18 +637,20 @@ void process_radio_lower_display()
 
 
   else if (loseldis[radnum] == 6) {
-    radiocactv = lodmenavspeed[radnum];
-    radiocdig1 = 15, radiocdig2 = 15;
-    radiocdig3 = radiocactv/100, radiocrem3 =radiocactv%100;
-    radiocdig4 = radiocrem3/10, radiocrem4 = radiocrem3%10;
-    radiocdig5 = radiocrem4;
+      radiocactv = lodmedist[radnum];
+      radiocdig1 = radiocactv/10000, radiocrem1 = radiocactv%10000;
+      radiocdig2 = radiocrem1 /1000, radiocrem2 = radiocrem1%1000;
+      radiocdig3 = radiocrem2/100, radiocrem3 = radiocrem2%100;
+      radiocdig4 = radiocrem3/10, radiocrem4 = radiocrem3%10;
+      radiocdig4 = radiocdig4+208, radiocdig5 = radiocrem4;
 
-    radiodstby = lodmedist[radnum];
-    radioddig1 = radiodstby/10000, radiodrem1 = radiodstby%10000;
-    radioddig2 = radiodrem1 /1000, radiodrem2 = radiodrem1%1000;
-    radioddig3 = radiodrem2/100, radiodrem3 = radiodrem2%100;
-    radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
-    radioddig4 = radioddig4+208, radioddig5 = radiodrem4;
+      radiodstby = lodmenavspeed[radnum];
+      radioddig1 = 15, radioddig2 = 15;
+      radioddig3 = radiodstby/100, radiocrem3 =radiodstby%100;
+      radioddig4 = radiodrem3/10, radiocrem4 = radiodrem3%10;
+      radioddig5 = radiodrem4;
+
+
 
   }
 
