@@ -267,6 +267,7 @@ extern int radio0fd, radio1fd, radio2fd, radio3fd, radio4fd, radio5fd, radio6fd,
 extern int radio8fd, radio9fd, radio10fd, radio11fd, radio12fd, radio13fd, radio14fd, radio15fd;
 extern int radiofd[4], radcnt, radres;
 extern int radspeed, metricpressenable, channelspacing833enable;
+extern int dmedistspeedenable;
 
 extern int rad1uprcom1switchremap, rad1uprcom1actstbybtnremap;
 extern int rad1uprcom2switchremap, rad1uprcom2actstbybtnremap;

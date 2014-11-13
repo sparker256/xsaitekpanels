@@ -714,6 +714,7 @@ static unsigned char radiobuf[4][4], radiowbuf[4][23];
 unsigned char radbuf[4], radwbuf[21];
 
 int radspeed, numadf, metricpressenable, channelspacing833enable;
+int dmedistspeedenable;
 
 int rad1uprcom1switchremap, rad1uprcom1actstbybtnremap;
 int rad1uprcom2switchremap, rad1uprcom2actstbybtnremap;
