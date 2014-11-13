@@ -99,6 +99,8 @@ void process_read_ini_file()
     numadf                   = 1;
     metricpressenable        = 0;
     channelspacing833enable  = 0;
+    dmedistspeedenable       = 0;
+
     rad1uprcom1switchremap   = 0, rad1uprcom1actstbybtnremap   = 0;
     rad1lwrcom1switchremap   = 0, rad1lwrcom1actstbybtnremap   = 0;
     rad1uprcom2switchremap   = 0, rad1uprcom2actstbybtnremap   = 0;
@@ -1679,9 +1681,10 @@ void process_read_ini_file()
 
     channelspacing833enable = getOptionToInt("Channel Spacing 883 enable");
 
-
     sprintf(radtestbuf1, "Xsaitekpanels: channelspacing833enable ==  %d \n", channelspacing833enable);
     XPLMDebugString(radtestbuf1);
+
+    dmedistspeedenable = getOptionToInt("Dme Display Dist Speed enable");
 
 
     // ***************************  Upper Radio1 remaping  ***********************************
