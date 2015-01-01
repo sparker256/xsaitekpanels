@@ -1571,7 +1571,16 @@ void process_upper_nav1_switch()
                 upnav1dbncfninc[radnum]++;
                 if (upnav1dbncfninc[radnum] > radspeed) {
                     if(xpanelsfnbutton == 1) {
-                        XPLMCommandOnce(Obs1Up);
+                        if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
+                            XPLMCommandOnce(Rad1UprObs1FnUpRemapableCmd);
+                        } else if ((rad2uprnav1switchremap == 1) && (radnum == 1)) {
+                            XPLMCommandOnce(Rad2UprObs1FnUpRemapableCmd);
+                        } else if ((rad3uprnav1switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3UprObs1FnUpRemapableCmd);
+                        } else {
+                            XPLMCommandOnce(Obs1Up);
+                        }
+
                     } else {
                         if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
                             XPLMCommandOnce(Rad1UprNav1FnUpRemapableCmd);
@@ -1592,7 +1601,16 @@ void process_upper_nav1_switch()
                 upnav1dbncfndec[radnum]++;
                 if (upnav1dbncfndec[radnum] > radspeed) {
                     if(xpanelsfnbutton == 1) {
-                        XPLMCommandOnce(Obs1Down);
+                        if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
+                            XPLMCommandOnce(Rad1UprObs1FnDnRemapableCmd);
+                        } else if ((rad2uprnav1switchremap == 1) && (radnum == 1)) {
+                            XPLMCommandOnce(Rad2UprObs1FnDnRemapableCmd);
+                        } else if ((rad3uprnav1switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3UprObs1FnDnRemapableCmd);
+                        } else {
+                            XPLMCommandOnce(Obs1Down);
+                        }
+
                     } else {
                         if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
                             XPLMCommandOnce(Rad1UprNav1FnDnRemapableCmd);
@@ -1615,7 +1633,15 @@ void process_upper_nav1_switch()
                     radn = 10;
                     if(xpanelsfnbutton == 1) {
                         while (radn > 0) {
-                            XPLMCommandOnce(Obs1Up);
+                            if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
+                                XPLMCommandOnce(Rad1UprObs1CrsUpRemapableCmd);
+                            } else if ((rad2uprnav1switchremap == 1) && (radnum == 1)) {
+                                XPLMCommandOnce(Rad2UprObs1CrsUpRemapableCmd);
+                            } else if ((rad3uprnav1switchremap == 1) && (radnum == 2)) {
+                                XPLMCommandOnce(Rad3UprObs1CrsUpRemapableCmd);
+                            } else {
+                                XPLMCommandOnce(Obs1Up);
+                            }
                             --radn;
                         }
                     } else {
@@ -1640,7 +1666,15 @@ void process_upper_nav1_switch()
                     radn = 10;
                     if(xpanelsfnbutton == 1) {
                         while (radn > 0) {
-                            XPLMCommandOnce(Obs1Down);
+                            if ((rad1uprnav1switchremap == 1) && (radnum == 0)) {
+                                XPLMCommandOnce(Rad1UprObs1CrsDnRemapableCmd);
+                            } else if ((rad2uprnav1switchremap == 1) && (radnum == 1)) {
+                                XPLMCommandOnce(Rad2UprObs1CrsDnRemapableCmd);
+                            } else if ((rad3uprnav1switchremap == 1) && (radnum == 2)) {
+                                XPLMCommandOnce(Rad3UprObs1CrsDnRemapableCmd);
+                            } else {
+                                XPLMCommandOnce(Obs1Down);
+                            }
                             --radn;
                         }
                     } else {
@@ -1706,7 +1740,15 @@ void process_upper_nav2_switch()
                 upnav2dbncfninc[radnum]++;
                 if (upnav2dbncfninc[radnum] > radspeed) {
                     if(xpanelsfnbutton == 1) {
-                        XPLMCommandOnce(Obs2Up);
+                        if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
+                            XPLMCommandOnce(Rad1UprObs2FnUpRemapableCmd);
+                        } else if ((rad2uprnav2switchremap == 1) && (radnum == 1)) {
+                            XPLMCommandOnce(Rad2UprObs2FnUpRemapableCmd);
+                        } else if ((rad3uprnav2switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3UprObs2FnUpRemapableCmd);
+                        } else {
+                            XPLMCommandOnce(Obs2Up);
+                        }
                     } else {
                         if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
                             XPLMCommandOnce(Rad1UprNav2FnUpRemapableCmd);
@@ -1728,7 +1770,15 @@ void process_upper_nav2_switch()
                 upnav2dbncfndec[radnum]++;
                 if (upnav2dbncfndec[radnum] > radspeed) {
                     if (xpanelsfnbutton == 1) {
-                        XPLMCommandOnce(Obs2Down);
+                        if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
+                            XPLMCommandOnce(Rad1UprObs2FnDnRemapableCmd);
+                        } else if ((rad2uprnav2switchremap == 1) && (radnum == 1)) {
+                            XPLMCommandOnce(Rad2UprObs2FnDnRemapableCmd);
+                        } else if ((rad3uprnav2switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3UprObs2FnDnRemapableCmd);
+                        } else {
+                            XPLMCommandOnce(Obs2Down);
+                        }
                     } else {
                         if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
                             XPLMCommandOnce(Rad1UprNav2FnDnRemapableCmd);
@@ -1751,7 +1801,15 @@ void process_upper_nav2_switch()
                     radn = 10;
                     if (xpanelsfnbutton == 1) {
                         while (radn > 0) {
-                            XPLMCommandOnce(Obs2Up);
+                            if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
+                                XPLMCommandOnce(Rad1UprObs2CrsUpRemapableCmd);
+                            } else if ((rad2uprnav2switchremap == 1) && (radnum == 1)) {
+                                XPLMCommandOnce(Rad2UprObs2CrsUpRemapableCmd);
+                            } else if ((rad3uprnav2switchremap == 1) && (radnum == 2)) {
+                                XPLMCommandOnce(Rad3UprObs2CrsUpRemapableCmd);
+                            } else {
+                                XPLMCommandOnce(Obs2Up);
+                            }
                             --radn;
                         }
                     } else {
@@ -1776,7 +1834,15 @@ void process_upper_nav2_switch()
                     radn = 10;
                     if (xpanelsfnbutton == 1) {
                         while (radn > 0) {
-                            XPLMCommandOnce(Obs2Down);
+                            if ((rad1uprnav2switchremap == 1) && (radnum == 0)) {
+                                XPLMCommandOnce(Rad1UprObs2CrsDnRemapableCmd);
+                            } else if ((rad2uprnav2switchremap == 1) && (radnum == 1)) {
+                                XPLMCommandOnce(Rad2UprObs2CrsDnRemapableCmd);
+                            } else if ((rad3uprnav2switchremap == 1) && (radnum == 2)) {
+                                XPLMCommandOnce(Rad3UprObs2CrsDnRemapableCmd);
+                            } else {
+                                XPLMCommandOnce(Obs2Down);
+                            }
                              --radn;
                         }
                     } else {
@@ -3684,7 +3750,15 @@ void process_lower_nav1_switch()
                 lonav1dbncfninc[radnum]++;
                 if (lonav1dbncfninc[radnum] > radspeed) {
                     if (xpanelsfnbutton == 1) {
-                        XPLMCommandOnce(Obs1Up);
+                        if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
+                            XPLMCommandOnce(Rad1LowrObs1FnUpRemapableCmd);
+                        } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
+                            XPLMCommandOnce(Rad2LowrObs1FnUpRemapableCmd);
+                        } else if ((rad3lwrnav1switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3LowrObs1FnUpRemapableCmd);
+                        } else {
+                            XPLMCommandOnce(Obs1Up);
+                        }
                     } else {
                         if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
                             XPLMCommandOnce(Rad1LowrNav1FnUpRemapableCmd);
@@ -3706,7 +3780,15 @@ void process_lower_nav1_switch()
                 lonav1dbncfndec[radnum]++;
                 if (lonav1dbncfndec[radnum] > radspeed) {
                     if (xpanelsfnbutton == 1) {
-                        XPLMCommandOnce(Obs1Down);
+                        if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
+                            XPLMCommandOnce(Rad1LowrObs1FnDnRemapableCmd);
+                        } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
+                            XPLMCommandOnce(Rad2LowrObs1FnDnRemapableCmd);
+                        } else if ((rad3lwrnav1switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3LowrObs1FnDnRemapableCmd);
+                        } else {
+                            XPLMCommandOnce(Obs1Down);
+                        }
                     } else {
                         if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
                             XPLMCommandOnce(Rad1LowrNav1FnDnRemapableCmd);
@@ -3730,7 +3812,15 @@ void process_lower_nav1_switch()
                     radn = 10;
                     if (xpanelsfnbutton == 1) {
                         while (radn > 0) {
-                            XPLMCommandOnce(Obs1Up);
+                            if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
+                                XPLMCommandOnce(Rad1LowrObs1CrsUpRemapableCmd);
+                            } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
+                                XPLMCommandOnce(Rad2LowrObs1CrsUpRemapableCmd);
+                            } else if ((rad3lwrnav1switchremap == 1) && (radnum == 2)) {
+                                XPLMCommandOnce(Rad3LowrObs1CrsUpRemapableCmd);
+                            } else {
+                                XPLMCommandOnce(Obs1Up);
+                            }
                             --radn;
                         }
                     } else {
@@ -3756,7 +3846,15 @@ void process_lower_nav1_switch()
                     radn = 10;
                     if (xpanelsfnbutton == 1) {
                         while (radn > 0) {
-                            XPLMCommandOnce(Obs1Down);
+                            if ((rad1lwrnav1switchremap == 1) && (radnum == 0)) {
+                                XPLMCommandOnce(Rad1LowrObs1CrsDnRemapableCmd);
+                            } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
+                                XPLMCommandOnce(Rad2LowrObs1CrsDnRemapableCmd);
+                            } else if ((rad3lwrnav1switchremap == 1) && (radnum == 2)) {
+                                XPLMCommandOnce(Rad3LowrObs1CrsDnRemapableCmd);
+                            } else {
+                                XPLMCommandOnce(Obs1Down);
+                            }
                             --radn;
                         }
                     } else {
@@ -3764,6 +3862,8 @@ void process_lower_nav1_switch()
                             XPLMCommandOnce(Rad1LowrNav1CrsDnRemapableCmd);
                         } else if ((rad2lwrnav1switchremap == 1) && (radnum == 1)) {
                             XPLMCommandOnce(Rad2LowrNav1CrsDnRemapableCmd);
+                        } else if ((rad3lwrnav1switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3LowrNav1CrsDnRemapableCmd);
                         } else {
                             XPLMCommandOnce(Nav1StbyCorseDn);
                         }
@@ -3818,7 +3918,15 @@ void process_lower_nav2_switch()
                 lonav2dbncfninc[radnum]++;
                 if (lonav2dbncfninc[radnum] > radspeed) {
                     if (xpanelsfnbutton == 1) {
-                        XPLMCommandOnce(Obs2Up);
+                        if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
+                            XPLMCommandOnce(Rad1LowrObs2FnUpRemapableCmd);
+                        } else if ((rad2lwrnav2switchremap == 1) && (radnum == 1)) {
+                            XPLMCommandOnce(Rad2LowrObs2FnUpRemapableCmd);
+                        } else if ((rad3lwrnav2switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3LowrObs2FnUpRemapableCmd);
+                        } else {
+                            XPLMCommandOnce(Obs2Up);
+                        }
                     } else {
                         if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
                             XPLMCommandOnce(Rad1LowrNav2FnUpRemapableCmd);
@@ -3840,7 +3948,15 @@ void process_lower_nav2_switch()
                 lonav2dbncfndec[radnum]++;
                 if (lonav2dbncfndec[radnum] > radspeed) {
                     if (xpanelsfnbutton == 1) {
-                        XPLMCommandOnce(Obs2Down);
+                        if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
+                            XPLMCommandOnce(Rad1LowrObs2FnDnRemapableCmd);
+                        } else if ((rad2lwrnav2switchremap == 1) && (radnum == 1)) {
+                            XPLMCommandOnce(Rad2LowrObs2FnDnRemapableCmd);
+                        } else if ((rad3lwrnav2switchremap == 1) && (radnum == 2)) {
+                            XPLMCommandOnce(Rad3LowrObs2FnDnRemapableCmd);
+                        } else {
+                            XPLMCommandOnce(Obs2Down);
+                        }
                     } else {
                         if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
                             XPLMCommandOnce(Rad1LowrNav2FnDnRemapableCmd);
@@ -3864,7 +3980,15 @@ void process_lower_nav2_switch()
                     radn = 10;
                     if (xpanelsfnbutton == 1) {
                         while (radn > 0) {
-                            XPLMCommandOnce(Obs2Up);
+                            if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
+                                XPLMCommandOnce(Rad1LowrObs2CrsUpRemapableCmd);
+                            } else if ((rad2lwrnav2switchremap == 1) && (radnum == 1)) {
+                                XPLMCommandOnce(Rad2LowrObs2CrsUpRemapableCmd);
+                            } else if ((rad3lwrnav2switchremap == 1) && (radnum == 2)) {
+                                XPLMCommandOnce(Rad3LowrObs2CrsUpRemapableCmd);
+                            } else {
+                                XPLMCommandOnce(Obs2Up);
+                            }
                             --radn;
                         }
                     } else {
@@ -3890,7 +4014,15 @@ void process_lower_nav2_switch()
                     radn = 10;
                     if (xpanelsfnbutton == 1) {
                         while (radn > 0) {
-                            XPLMCommandOnce(Obs2Down);
+                            if ((rad1lwrnav2switchremap == 1) && (radnum == 0)) {
+                                XPLMCommandOnce(Rad1LowrObs2CrsDnRemapableCmd);
+                            } else if ((rad2lwrnav2switchremap == 1) && (radnum == 1)) {
+                                XPLMCommandOnce(Rad2LowrObs2CrsDnRemapableCmd);
+                            } else if ((rad3lwrnav2switchremap == 1) && (radnum == 2)) {
+                                XPLMCommandOnce(Rad3LowrObs2CrsDnRemapableCmd);
+                            } else {
+                                XPLMCommandOnce(Obs2Down);
+                            }
                             --radn;
                         }
                     } else {
