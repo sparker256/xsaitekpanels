@@ -1,8 +1,8 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Nov 12 2014   **************
+// ****** Jan 01 2015   **************
 
-#define VERSION_NUMBER "2.34"
+#define VERSION_NUMBER "2.35"
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -67,9 +67,13 @@ XPLMCommandRef Rad1UprCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1UprCom2CrsUpRemapableCmd = NULL, Rad1UprCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprCom2FnUpRemapableCmd = NULL, Rad1UprCom2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprCom2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1UprObs1CrsUpRemapableCmd = NULL, Rad1UprObs1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprObs1FnUpRemapableCmd = NULL, Rad1UprObs1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav1CrsUpRemapableCmd = NULL, Rad1UprNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav1FnUpRemapableCmd = NULL, Rad1UprNav1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1UprObs2CrsUpRemapableCmd = NULL, Rad1UprObs2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprObs2FnUpRemapableCmd = NULL, Rad1UprObs2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2CrsUpRemapableCmd = NULL, Rad1UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2FnUpRemapableCmd = NULL, Rad1UprNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2ActStbyRemapableCmd = NULL;
@@ -82,9 +86,13 @@ XPLMCommandRef Rad1LowrCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrCom2CrsUpRemapableCmd = NULL, Rad1LowrCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrCom2FnUpRemapableCmd = NULL, Rad1LowrCom2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrCom2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrObs1CrsUpRemapableCmd = NULL, Rad1LowrObs1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrObs1FnUpRemapableCmd = NULL, Rad1LowrObs1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav1CrsUpRemapableCmd = NULL, Rad1LowrNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav1FnUpRemapableCmd = NULL, Rad1LowrNav1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrObs2CrsUpRemapableCmd = NULL, Rad1LowrObs2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrObs2FnUpRemapableCmd = NULL, Rad1LowrObs2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2CrsUpRemapableCmd = NULL, Rad1LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2FnUpRemapableCmd = NULL, Rad1LowrNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2ActStbyRemapableCmd = NULL;
@@ -97,9 +105,13 @@ XPLMCommandRef Rad2UprCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2UprCom2CrsUpRemapableCmd = NULL, Rad2UprCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprCom2FnUpRemapableCmd = NULL, Rad2UprCom2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprCom2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad2UprObs1CrsUpRemapableCmd = NULL, Rad2UprObs1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprObs1FnUpRemapableCmd = NULL, Rad2UprObs1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav1CrsUpRemapableCmd = NULL, Rad2UprNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav1FnUpRemapableCmd = NULL, Rad2UprNav1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad2UprObs2CrsUpRemapableCmd = NULL, Rad2UprObs2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprObs2FnUpRemapableCmd = NULL, Rad2UprObs2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav2CrsUpRemapableCmd = NULL, Rad2UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav2FnUpRemapableCmd = NULL, Rad2UprNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav2ActStbyRemapableCmd = NULL;
@@ -112,9 +124,13 @@ XPLMCommandRef Rad2LowrCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrCom2CrsUpRemapableCmd = NULL, Rad2LowrCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrCom2FnUpRemapableCmd = NULL, Rad2LowrCom2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrCom2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrObs1CrsUpRemapableCmd = NULL, Rad2LowrObs1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrObs1FnUpRemapableCmd = NULL, Rad2LowrObs1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav1CrsUpRemapableCmd = NULL, Rad2LowrNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav1FnUpRemapableCmd = NULL, Rad2LowrNav1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrObs2CrsUpRemapableCmd = NULL, Rad2LowrObs2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrObs2FnUpRemapableCmd = NULL, Rad2LowrObs2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav2CrsUpRemapableCmd = NULL, Rad2LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav2FnUpRemapableCmd = NULL, Rad2LowrNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav2ActStbyRemapableCmd = NULL;
@@ -127,9 +143,13 @@ XPLMCommandRef Rad3UprCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad3UprCom2CrsUpRemapableCmd = NULL, Rad3UprCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprCom2FnUpRemapableCmd = NULL, Rad3UprCom2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprCom2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3UprObs1CrsUpRemapableCmd = NULL, Rad3UprObs1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprObs1FnUpRemapableCmd = NULL, Rad3UprObs1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprNav1CrsUpRemapableCmd = NULL, Rad3UprNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprNav1FnUpRemapableCmd = NULL, Rad3UprNav1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprNav1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3UprObs2CrsUpRemapableCmd = NULL, Rad3UprObs2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprObs2FnUpRemapableCmd = NULL, Rad3UprObs2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprNav2CrsUpRemapableCmd = NULL, Rad3UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprNav2FnUpRemapableCmd = NULL, Rad3UprNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprNav2ActStbyRemapableCmd = NULL;
@@ -142,9 +162,13 @@ XPLMCommandRef Rad3LowrCom1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrCom2CrsUpRemapableCmd = NULL, Rad3LowrCom2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrCom2FnUpRemapableCmd = NULL, Rad3LowrCom2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrCom2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrObs1CrsUpRemapableCmd = NULL, Rad3LowrObs1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrObs1FnUpRemapableCmd = NULL, Rad3LowrObs1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrNav1CrsUpRemapableCmd = NULL, Rad3LowrNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrNav1FnUpRemapableCmd = NULL, Rad3LowrNav1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrNav1ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrObs2CrsUpRemapableCmd = NULL, Rad3LowrObs2CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrObs2FnUpRemapableCmd = NULL, Rad3LowrObs2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrNav2CrsUpRemapableCmd = NULL, Rad3LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrNav2FnUpRemapableCmd = NULL, Rad3LowrNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrNav2ActStbyRemapableCmd = NULL;
@@ -696,12 +720,22 @@ static XPLMDataRef	XsaitekpanelsInteger2SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsInteger3SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsInteger4SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsInteger5SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger6SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger7SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger8SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger9SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger10SharedDataRef = NULL;
 
 static XPLMDataRef	XsaitekpanelsFloat1SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat2SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat3SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat4SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat5SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat6SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat7SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat8SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat9SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat10SharedDataRef = NULL;
 
 
 // ********************** Radio Panel variables ************************
@@ -1101,12 +1135,16 @@ string rad1_upper_com2_act_data_remapable, rad1_upper_com2_stby_data_remapable;
 string rad1_upper_com2_actstby_btn_remapable_cmd, rad1_upper_com2_actstby_btn_remapable_data;
 string rad1_upper_com2_actstby_btn_remapable_dataf;
 
+string rad1_upper_obs1_corse_up_remapable, rad1_upper_obs1_corse_dn_remapable;
+string rad1_upper_obs1_fine_up_remapable, rad1_upper_obs1_fine_dn_remapable;
 string rad1_upper_nav1_corse_up_remapable, rad1_upper_nav1_corse_dn_remapable;
 string rad1_upper_nav1_fine_up_remapable, rad1_upper_nav1_fine_dn_remapable;
 string rad1_upper_nav1_act_data_remapable, rad1_upper_nav1_stby_data_remapable;
 string rad1_upper_nav1_actstby_btn_remapable_cmd, rad1_upper_nav1_actstby_btn_remapable_data;
 string rad1_upper_nav1_actstby_btn_remapable_dataf;
 
+string rad1_upper_obs2_corse_up_remapable, rad1_upper_obs2_corse_dn_remapable;
+string rad1_upper_obs2_fine_up_remapable, rad1_upper_obs2_fine_dn_remapable;
 string rad1_upper_nav2_corse_up_remapable, rad1_upper_nav2_corse_dn_remapable;
 string rad1_upper_nav2_fine_up_remapable, rad1_upper_nav2_fine_dn_remapable;
 string rad1_upper_nav2_act_data_remapable, rad1_upper_nav2_stby_data_remapable;
@@ -1128,12 +1166,16 @@ string rad1_lower_com2_act_data_remapable, rad1_lower_com2_stby_data_remapable;
 string rad1_lower_com2_actstby_btn_remapable_cmd, rad1_lower_com2_actstby_btn_remapable_data;
 string rad1_lower_com2_actstby_btn_remapable_dataf;
 
+string rad1_lower_obs1_corse_up_remapable, rad1_lower_obs1_corse_dn_remapable;
+string rad1_lower_obs1_fine_up_remapable, rad1_lower_obs1_fine_dn_remapable;
 string rad1_lower_nav1_corse_up_remapable, rad1_lower_nav1_corse_dn_remapable;
 string rad1_lower_nav1_fine_up_remapable, rad1_lower_nav1_fine_dn_remapable;
 string rad1_lower_nav1_act_data_remapable, rad1_lower_nav1_stby_data_remapable;
 string rad1_lower_nav1_actstby_btn_remapable_cmd, rad1_lower_nav1_actstby_btn_remapable_data;
 string rad1_lower_nav1_actstby_btn_remapable_dataf;
 
+string rad1_lower_obs2_corse_up_remapable, rad1_lower_obs2_corse_dn_remapable;
+string rad1_lower_obs2_fine_up_remapable, rad1_lower_obs2_fine_dn_remapable;
 string rad1_lower_nav2_corse_up_remapable, rad1_lower_nav2_corse_dn_remapable;
 string rad1_lower_nav2_fine_up_remapable, rad1_lower_nav2_fine_dn_remapable;
 string rad1_lower_nav2_act_data_remapable, rad1_lower_nav2_stby_data_remapable;
@@ -1157,12 +1199,16 @@ string rad2_upper_com2_act_data_remapable, rad2_upper_com2_stby_data_remapable;
 string rad2_upper_com2_actstby_btn_remapable_cmd, rad2_upper_com2_actstby_btn_remapable_data;
 string rad2_upper_com2_actstby_btn_remapable_dataf;
 
+string rad2_upper_obs1_corse_up_remapable, rad2_upper_obs1_corse_dn_remapable;
+string rad2_upper_obs1_fine_up_remapable, rad2_upper_obs1_fine_dn_remapable;
 string rad2_upper_nav1_corse_up_remapable, rad2_upper_nav1_corse_dn_remapable;
 string rad2_upper_nav1_fine_up_remapable, rad2_upper_nav1_fine_dn_remapable;
 string rad2_upper_nav1_act_data_remapable, rad2_upper_nav1_stby_data_remapable;
 string rad2_upper_nav1_actstby_btn_remapable_cmd, rad2_upper_nav1_actstby_btn_remapable_data;
 string rad2_upper_nav1_actstby_btn_remapable_dataf;
 
+string rad2_upper_obs2_corse_up_remapable, rad2_upper_obs2_corse_dn_remapable;
+string rad2_upper_obs2_fine_up_remapable, rad2_upper_obs2_fine_dn_remapable;
 string rad2_upper_nav2_corse_up_remapable, rad2_upper_nav2_corse_dn_remapable;
 string rad2_upper_nav2_fine_up_remapable, rad2_upper_nav2_fine_dn_remapable;
 string rad2_upper_nav2_act_data_remapable, rad2_upper_nav2_stby_data_remapable;
@@ -1184,12 +1230,16 @@ string rad2_lower_com2_act_data_remapable, rad2_lower_com2_stby_data_remapable;
 string rad2_lower_com2_actstby_btn_remapable_cmd, rad2_lower_com2_actstby_btn_remapable_data;
 string rad2_lower_com2_actstby_btn_remapable_dataf;
 
+string rad2_lower_obs1_corse_up_remapable, rad2_lower_obs1_corse_dn_remapable;
+string rad2_lower_obs1_fine_up_remapable, rad2_lower_obs1_fine_dn_remapable;
 string rad2_lower_nav1_corse_up_remapable, rad2_lower_nav1_corse_dn_remapable;
 string rad2_lower_nav1_fine_up_remapable, rad2_lower_nav1_fine_dn_remapable;
 string rad2_lower_nav1_act_data_remapable, rad2_lower_nav1_stby_data_remapable;
 string rad2_lower_nav1_actstby_btn_remapable_cmd, rad2_lower_nav1_actstby_btn_remapable_data;
 string rad2_lower_nav1_actstby_btn_remapable_dataf;
 
+string rad2_lower_obs2_corse_up_remapable, rad2_lower_obs2_corse_dn_remapable;
+string rad2_lower_obs2_fine_up_remapable, rad2_lower_obs2_fine_dn_remapable;
 string rad2_lower_nav2_corse_up_remapable, rad2_lower_nav2_corse_dn_remapable;
 string rad2_lower_nav2_fine_up_remapable, rad2_lower_nav2_fine_dn_remapable;
 string rad2_lower_nav2_act_data_remapable, rad2_lower_nav2_stby_data_remapable;
@@ -1212,12 +1262,16 @@ string rad3_upper_com2_act_data_remapable, rad3_upper_com2_stby_data_remapable;
 string rad3_upper_com2_actstby_btn_remapable_cmd, rad3_upper_com2_actstby_btn_remapable_data;
 string rad3_upper_com2_actstby_btn_remapable_dataf;
 
+string rad3_upper_obs1_corse_up_remapable, rad3_upper_obs1_corse_dn_remapable;
+string rad3_upper_obs1_fine_up_remapable, rad3_upper_obs1_fine_dn_remapable;
 string rad3_upper_nav1_corse_up_remapable, rad3_upper_nav1_corse_dn_remapable;
 string rad3_upper_nav1_fine_up_remapable, rad3_upper_nav1_fine_dn_remapable;
 string rad3_upper_nav1_act_data_remapable, rad3_upper_nav1_stby_data_remapable;
 string rad3_upper_nav1_actstby_btn_remapable_cmd, rad3_upper_nav1_actstby_btn_remapable_data;
 string rad3_upper_nav1_actstby_btn_remapable_dataf;
 
+string rad3_upper_obs2_corse_up_remapable, rad3_upper_obs2_corse_dn_remapable;
+string rad3_upper_obs2_fine_up_remapable, rad3_upper_obs2_fine_dn_remapable;
 string rad3_upper_nav2_corse_up_remapable, rad3_upper_nav2_corse_dn_remapable;
 string rad3_upper_nav2_fine_up_remapable, rad3_upper_nav2_fine_dn_remapable;
 string rad3_upper_nav2_act_data_remapable, rad3_upper_nav2_stby_data_remapable;
@@ -1239,12 +1293,16 @@ string rad3_lower_com2_act_data_remapable, rad3_lower_com2_stby_data_remapable;
 string rad3_lower_com2_actstby_btn_remapable_cmd, rad3_lower_com2_actstby_btn_remapable_data;
 string rad3_lower_com2_actstby_btn_remapable_dataf;
 
+string rad3_lower_obs1_corse_up_remapable, rad3_lower_obs1_corse_dn_remapable;
+string rad3_lower_obs1_fine_up_remapable, rad3_lower_obs1_fine_dn_remapable;
 string rad3_lower_nav1_corse_up_remapable, rad3_lower_nav1_corse_dn_remapable;
 string rad3_lower_nav1_fine_up_remapable, rad3_lower_nav1_fine_dn_remapable;
 string rad3_lower_nav1_act_data_remapable, rad3_lower_nav1_stby_data_remapable;
 string rad3_lower_nav1_actstby_btn_remapable_cmd, rad3_lower_nav1_actstby_btn_remapable_data;
 string rad3_lower_nav1_actstby_btn_remapable_dataf;
 
+string rad3_lower_obs2_corse_up_remapable, rad3_lower_obs2_corse_dn_remapable;
+string rad3_lower_obs2_fine_up_remapable, rad3_lower_obs2_fine_dn_remapable;
 string rad3_lower_nav2_corse_up_remapable, rad3_lower_nav2_corse_dn_remapable;
 string rad3_lower_nav2_fine_up_remapable, rad3_lower_nav2_fine_dn_remapable;
 string rad3_lower_nav2_act_data_remapable, rad3_lower_nav2_stby_data_remapable;
@@ -1654,12 +1712,22 @@ static void	XsaitekpanelsInteger2DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsInteger3DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsInteger4DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsInteger5DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger6DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger7DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger8DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger9DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger10DataChangedCallback(void * inRefcon);
 
 static void	XsaitekpanelsFloat1DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsFloat2DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsFloat3DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsFloat4DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsFloat5DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat6DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat7DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat8DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat9DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat10DataChangedCallback(void * inRefcon);
 
 static int SwitchPanelCountData = 0;
 static int SwitchStartOffOwnedData = 0, SwitchStartRightOwnedData = 0;
@@ -2239,14 +2307,14 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 234;
+  XsaitekpanelsVersion = 235;
 
   XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
 
 	/* First set up our plugin info. */
   strcpy(outName, "Xsaitekpanels ver " VERSION_NUMBER);
-  strcpy(outSig, "saitekpanels.hardware uses hidapi interface");
-  strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms");
+  strcpy(outSig, "bgood.xsaitekpanels");
+  strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms using hidapi");
 
 
   XpanelsFnButtonCommand = XPLMCreateCommand("bgood/xsaitekpanels/x_panels_fn_button","Xpanels Fn Button");
@@ -2652,6 +2720,41 @@ PLUGIN_API int XPluginStart(char *		outName,
   XPLMSetDatai(XsaitekpanelsInteger5SharedDataRef, 0);
 
 
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer6", xplmType_Int,
+      XsaitekpanelsInteger6DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger6SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer6");
+  XPLMSetDatai(XsaitekpanelsInteger6SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer7", xplmType_Int,
+      XsaitekpanelsInteger7DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger7SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer7");
+  XPLMSetDatai(XsaitekpanelsInteger7SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer8", xplmType_Int,
+      XsaitekpanelsInteger8DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger8SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer8");
+  XPLMSetDatai(XsaitekpanelsInteger8SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer9", xplmType_Int,
+      XsaitekpanelsInteger9DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger9SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer9");
+  XPLMSetDatai(XsaitekpanelsInteger9SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer10", xplmType_Int,
+      XsaitekpanelsInteger10DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger10SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer10");
+  XPLMSetDatai(XsaitekpanelsInteger10SharedDataRef, 0);
+
+
 
   XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float1", xplmType_Float,
       XsaitekpanelsFloat1DataChangedCallback, NULL);
@@ -2686,6 +2789,41 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   XsaitekpanelsFloat5SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float5");
   XPLMSetDataf(XsaitekpanelsFloat5SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float6", xplmType_Float,
+      XsaitekpanelsFloat6DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat6SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float6");
+  XPLMSetDataf(XsaitekpanelsFloat6SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float7", xplmType_Float,
+      XsaitekpanelsFloat7DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat7SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float7");
+  XPLMSetDataf(XsaitekpanelsFloat7SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float8", xplmType_Float,
+      XsaitekpanelsFloat8DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat8SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float8");
+  XPLMSetDataf(XsaitekpanelsFloat8SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float9", xplmType_Float,
+      XsaitekpanelsFloat9DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat9SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float9");
+  XPLMSetDataf(XsaitekpanelsFloat9SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float10", xplmType_Float,
+      XsaitekpanelsFloat10DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat10SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float10");
+  XPLMSetDataf(XsaitekpanelsFloat10SharedDataRef, 0);
 
 
   // * Register our callback for every loop. Positive intervals
@@ -3155,6 +3293,26 @@ void	XsaitekpanelsInteger5DataChangedCallback(void * inRefcon)
 {
 }
 
+void	XsaitekpanelsInteger6DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsInteger7DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsInteger8DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsInteger9DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsInteger10DataChangedCallback(void * inRefcon)
+{
+}
+
 
 void	XsaitekpanelsFloat1DataChangedCallback(void * inRefcon)
 {
@@ -3173,6 +3331,26 @@ void	XsaitekpanelsFloat4DataChangedCallback(void * inRefcon)
 }
 
 void	XsaitekpanelsFloat5DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsFloat6DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsFloat7DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsFloat8DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsFloat9DataChangedCallback(void * inRefcon)
+{
+}
+
+void	XsaitekpanelsFloat10DataChangedCallback(void * inRefcon)
 {
 }
 
@@ -6110,12 +6288,22 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer3");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer4");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer5");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer6");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer7");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer8");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer9");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer10");
 
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float1");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float2");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float3");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float4");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float5");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float6");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float7");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float8");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float9");
+        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float10");
 
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/count");
         XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startoff/status");
