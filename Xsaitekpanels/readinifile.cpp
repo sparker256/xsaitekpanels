@@ -1782,6 +1782,11 @@ void process_read_ini_file()
         rad1_upper_obs1_fine_dn_remapable = getOptionToString("rad1_upper_obs1_fine_dn_cmd");
         Rad1UprObs1FnDnRemapableCmd   = XPLMFindCommand(rad1_upper_obs1_fine_dn_remapable.c_str());
 
+        rad1_upper_obs1_remapable_dataf = getOptionToString("rad1_upper_obs1_dataf");
+        Rad1UpperObs1RemapableDataf   = XPLMFindDataRef(rad1_upper_obs1_remapable_dataf.c_str());
+
+
+
 
         rad1_upper_nav1_corse_up_remapable = getOptionToString("rad1_upper_nav1_corse_up_cmd");
         Rad1UprNav1CrsUpRemapableCmd   = XPLMFindCommand(rad1_upper_nav1_corse_up_remapable.c_str());
@@ -1834,6 +1839,9 @@ void process_read_ini_file()
 
         rad1_upper_obs2_fine_dn_remapable = getOptionToString("rad1_upper_obs2_fine_dn_cmd");
         Rad1UprObs2FnDnRemapableCmd   = XPLMFindCommand(rad1_upper_obs2_fine_dn_remapable.c_str());
+
+        rad1_upper_obs2_remapable_dataf = getOptionToString("rad1_upper_obs2_dataf");
+        Rad1UpperObs2RemapableDataf   = XPLMFindDataRef(rad1_upper_obs2_remapable_dataf.c_str());
 
 
         rad1_upper_nav2_corse_up_remapable = getOptionToString("rad1_upper_nav2_corse_up_cmd");
@@ -1988,6 +1996,9 @@ void process_read_ini_file()
         rad1_lower_obs1_fine_dn_remapable = getOptionToString("rad1_lower_obs1_fine_dn_cmd");
         Rad1LowrObs1FnDnRemapableCmd   = XPLMFindCommand(rad1_lower_obs1_fine_dn_remapable.c_str());
 
+        rad1_lower_obs1_remapable_dataf = getOptionToString("rad1_lower_obs1_dataf");
+        Rad1LowerObs1RemapableDataf   = XPLMFindDataRef(rad1_lower_obs1_remapable_dataf.c_str());
+
 
         rad1_lower_nav1_corse_up_remapable = getOptionToString("rad1_lower_nav1_corse_up_cmd");
         Rad1LowrNav1CrsUpRemapableCmd   = XPLMFindCommand(rad1_lower_nav1_corse_up_remapable.c_str());
@@ -2031,14 +2042,17 @@ void process_read_ini_file()
          rad1_lower_obs2_corse_up_remapable = getOptionToString("rad1_lower_obs2_corse_up_cmd");
          Rad1LowrObs2CrsUpRemapableCmd   = XPLMFindCommand(rad1_lower_obs2_corse_up_remapable.c_str());
 
-         rad1_lower_nav2_corse_dn_remapable = getOptionToString("rad1_lower_obs2_corse_dn_cmd");
+         rad1_lower_obs2_corse_dn_remapable = getOptionToString("rad1_lower_obs2_corse_dn_cmd");
          Rad1LowrObs2CrsDnRemapableCmd   = XPLMFindCommand(rad1_lower_obs2_corse_dn_remapable.c_str());
 
-         rad1_lower_nav2_fine_up_remapable = getOptionToString("rad1_lower_obs2_fine_up_cmd");
+         rad1_lower_obs2_fine_up_remapable = getOptionToString("rad1_lower_obs2_fine_up_cmd");
          Rad1LowrObs2FnUpRemapableCmd   = XPLMFindCommand(rad1_lower_obs2_fine_up_remapable.c_str());
 
-         rad1_lower_nav2_fine_dn_remapable = getOptionToString("rad1_lower_obs2_fine_dn_cmd");
+         rad1_lower_obs2_fine_dn_remapable = getOptionToString("rad1_lower_obs2_fine_dn_cmd");
          Rad1LowrObs2FnDnRemapableCmd   = XPLMFindCommand(rad1_lower_obs2_fine_dn_remapable.c_str());
+
+         rad1_lower_obs2_remapable_dataf = getOptionToString("rad1_lower_obs2_dataf");
+         Rad1LowerObs2RemapableDataf   = XPLMFindDataRef(rad1_lower_obs2_remapable_dataf.c_str());
 
 
          rad1_lower_nav2_corse_up_remapable = getOptionToString("rad1_lower_nav2_corse_up_cmd");
@@ -2191,6 +2205,9 @@ void process_read_ini_file()
         rad2_upper_obs1_fine_dn_remapable = getOptionToString("rad2_upper_obs1_fine_dn_cmd");
         Rad2UprObs1FnDnRemapableCmd   = XPLMFindCommand(rad2_upper_obs1_fine_dn_remapable.c_str());
 
+        rad2_upper_obs1_remapable_dataf = getOptionToString("rad2_upper_obs1_dataf");
+        Rad2UpperObs1RemapableDataf   = XPLMFindDataRef(rad2_upper_obs1_remapable_dataf.c_str());
+
 
         rad2_upper_nav1_corse_up_remapable = getOptionToString("rad2_upper_nav1_corse_up_cmd");
         Rad2UprNav1CrsUpRemapableCmd   = XPLMFindCommand(rad2_upper_nav1_corse_up_remapable.c_str());
@@ -2241,6 +2258,9 @@ void process_read_ini_file()
 
         rad2_upper_obs2_fine_dn_remapable = getOptionToString("rad2_upper_obs2_fine_dn_cmd");
         Rad2UprObs2FnDnRemapableCmd   = XPLMFindCommand(rad2_upper_obs2_fine_dn_remapable.c_str());
+
+        rad2_upper_obs2_remapable_dataf = getOptionToString("rad2_upper_obs2_dataf");
+        Rad2UpperObs2RemapableDataf   = XPLMFindDataRef(rad2_upper_obs2_remapable_dataf.c_str());
 
 
         rad2_upper_nav2_corse_up_remapable = getOptionToString("rad2_upper_nav2_corse_up_cmd");
@@ -2396,6 +2416,9 @@ void process_read_ini_file()
         rad2_lower_obs1_fine_dn_remapable = getOptionToString("rad2_lower_obs1_fine_dn_cmd");
         Rad2LowrObs1FnDnRemapableCmd   = XPLMFindCommand(rad2_lower_obs1_fine_dn_remapable.c_str());
 
+        rad2_lower_obs1_remapable_dataf = getOptionToString("rad2_lower_obs1_dataf");
+        Rad2LowerObs1RemapableDataf   = XPLMFindDataRef(rad2_lower_obs1_remapable_dataf.c_str());
+
 
         rad2_lower_nav1_corse_up_remapable = getOptionToString("rad2_lower_nav1_corse_up_cmd");
         Rad2LowrNav1CrsUpRemapableCmd   = XPLMFindCommand(rad2_lower_nav1_corse_up_remapable.c_str());
@@ -2446,6 +2469,9 @@ void process_read_ini_file()
 
         rad2_lower_obs2_fine_dn_remapable = getOptionToString("rad2_lower_obs2_fine_dn_cmd");
         Rad2LowrObs2FnDnRemapableCmd   = XPLMFindCommand(rad2_lower_obs2_fine_dn_remapable.c_str());
+
+        rad2_lower_obs2_remapable_dataf = getOptionToString("rad2_lower_obs2_dataf");
+        Rad2LowerObs2RemapableDataf   = XPLMFindDataRef(rad2_lower_obs2_remapable_dataf.c_str());
 
 
         rad2_lower_nav2_corse_up_remapable = getOptionToString("rad2_lower_nav2_corse_up_cmd");
@@ -2597,6 +2623,9 @@ void process_read_ini_file()
        rad3_upper_obs1_fine_dn_remapable = getOptionToString("rad3_upper_obs1_fine_dn_cmd");
        Rad3UprObs1FnDnRemapableCmd   = XPLMFindCommand(rad3_upper_obs1_fine_dn_remapable.c_str());
 
+       rad3_upper_obs1_remapable_dataf = getOptionToString("rad3_upper_obs1_dataf");
+       Rad3UpperObs1RemapableDataf   = XPLMFindDataRef(rad3_upper_obs1_remapable_dataf.c_str());
+
 
        rad3_upper_nav1_corse_up_remapable = getOptionToString("rad3_upper_nav1_corse_up_cmd");
        Rad3UprNav1CrsUpRemapableCmd   = XPLMFindCommand(rad3_upper_nav1_corse_up_remapable.c_str());
@@ -2647,6 +2676,9 @@ void process_read_ini_file()
 
        rad3_upper_obs2_fine_dn_remapable = getOptionToString("rad3_upper_obs2_fine_dn_cmd");
        Rad3UprObs2FnDnRemapableCmd   = XPLMFindCommand(rad3_upper_obs2_fine_dn_remapable.c_str());
+
+       rad3_upper_obs2_remapable_dataf = getOptionToString("rad3_upper_obs2_dataf");
+       Rad3UpperObs2RemapableDataf   = XPLMFindDataRef(rad3_upper_obs2_remapable_dataf.c_str());
 
 
        rad3_upper_nav2_corse_up_remapable = getOptionToString("rad3_upper_nav2_corse_up_cmd");
@@ -2802,6 +2834,9 @@ void process_read_ini_file()
        rad3_lower_obs1_fine_dn_remapable = getOptionToString("rad3_lower_obs1_fine_dn_cmd");
        Rad3LowrObs1FnDnRemapableCmd   = XPLMFindCommand(rad3_lower_obs1_fine_dn_remapable.c_str());
 
+       rad3_lower_obs1_remapable_dataf = getOptionToString("rad3_lower_obs1_dataf");
+       Rad3LowerObs1RemapableDataf   = XPLMFindDataRef(rad3_lower_obs1_remapable_dataf.c_str());
+
 
 
        rad3_lower_nav1_corse_up_remapable = getOptionToString("rad3_lower_nav1_corse_up_cmd");
@@ -2853,6 +2888,9 @@ void process_read_ini_file()
 
        rad3_lower_obs2_fine_dn_remapable = getOptionToString("rad3_lower_obs2_fine_dn_cmd");
        Rad3LowrObs2FnDnRemapableCmd   = XPLMFindCommand(rad3_lower_obs2_fine_dn_remapable.c_str());
+
+       rad3_lower_obs2_remapable_dataf = getOptionToString("rad3_lower_obs2_dataf");
+       Rad3LowerObs2RemapableDataf   = XPLMFindDataRef(rad3_lower_obs2_remapable_dataf.c_str());
 
 
        rad3_lower_nav2_corse_up_remapable = getOptionToString("rad3_lower_nav2_corse_up_cmd");
