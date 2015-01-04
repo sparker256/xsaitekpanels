@@ -1,6 +1,6 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jan 01 2015   **************
+// ****** Jan 04 2015   **************
 
 #define VERSION_NUMBER "2.35"
 
@@ -2350,6 +2350,8 @@ PLUGIN_API int XPluginStart(char *		outName,
         radiohandle[radcnt] = hid_open_path(rad_cur_dev->path);
         hid_set_nonblocking(radiohandle[radcnt], 1);
         radiores = hid_read(radiohandle[radcnt], radiobuf[radcnt], sizeof(radiobuf[radcnt]));
+        radiowbuf[0][1] = 1, radiowbuf[1][1] = 2, radiowbuf[2][1] = 3;
+        radiowbuf[0][11] = 1, radiowbuf[1][11] = 2, radiowbuf[2][11] = 3;
         hid_send_feature_report(radiohandle[radcnt], radiowbuf[radcnt], 23);
         radcnt++;
         rad_cur_dev = rad_cur_dev->next;
