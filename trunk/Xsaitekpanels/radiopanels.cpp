@@ -2054,6 +2054,7 @@ void process_upper_dme_switch()
 
     if (testbit(radiobuf[radnum],UPPER_DME)) {
         // ****** Function button is not pushed  *******
+        // Set Dme mode with ACT/STBY button
         if (xpanelsfnbutton == 0) {
             if (updmepushed == 0) {
                 if (XPLMGetDatai(DmeMode) == 0) {
@@ -2094,19 +2095,25 @@ void process_upper_dme_switch()
                     updmeloop = 0;
                 }
             }
+            // Get DME display mode, where 0 is remote, 1 is frequency, and 2 is groundspeed-time
+            // Get Slave Source DME display selection of what NAV radio to display. 0 for Nav1, 1 for Nav2
             updmemode[radnum] = XPLMGetDatai(DmeMode);
             updmesource[radnum] = XPLMGetDatai(DmeSlvSource);
+            // If Dme mode is 0 (remote) do following
             if (updmemode[radnum] == 0) {
+                // Avionics and Battery must be on or blank display
                 if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
                     upseldis[radnum] = 10;
                 } else {
                     upseldis[radnum] = 6;
                 }
+                // Slave source is 0 so use Nav1 to get speed and distance
                 if (updmesource[radnum] == 0) {
                     updmenav1speedf[radnum] = XPLMGetDataf(Nav1DmeSpeed);
                     updmenavspeed[radnum] = (int)(updmenav1speedf[radnum]);
                     updmedistf[radnum] = XPLMGetDataf(Nav1DmeNmDist);
                     updmedist[radnum] = (int)(updmedistf[radnum] * 10.0f);
+                // Slave source is 1 so use Nav2 to get speed and distance
                 } else if (updmesource[radnum] == 1) {
                     updmenav2speedf[radnum] = XPLMGetDataf(Nav2DmeSpeed);
                     updmenavspeed[radnum] = (int)(updmenav2speedf[radnum]);
@@ -2114,12 +2121,15 @@ void process_upper_dme_switch()
                     updmedist[radnum] = (int)(updmedistf[radnum] * 10.0f);
                 }
             }
+            // If Dme mode is 1 (frequency) do the following
             if (updmemode[radnum] == 1) {
+                // Avionics and Battery must be on or blank display
                 if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
                     upseldis[radnum] = 10;
                 } else {
                     upseldis[radnum] = 7;
                 }
+                // Get Dme frequency to be adjusted by silver knobs
                 updmefreq[radnum] = XPLMGetDatai(DmeFreq);
                 updmefreqhnd = updmefreq[radnum]/100;
                 updmefreqfrc = updmefreq[radnum]%100;
@@ -2175,9 +2185,10 @@ void process_upper_dme_switch()
                 updmefreq[radnum] = (updmefreqhnd * 100) + updmefreqfrc;
                 XPLMSetDatai(DmeFreq, updmefreq[radnum]);
                 updmetime[radnum] = XPLMGetDataf(DmeTime);
-           }
-
+            }
+            // if Dme mode is 2 (groundspeed-time) do the following
            if (updmemode[radnum] == 2) {
+               // Avionics and Battery must be on or blank display
                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
                    upseldis[radnum] = 10;
                 } else {
