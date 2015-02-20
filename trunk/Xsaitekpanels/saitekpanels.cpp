@@ -2,7 +2,7 @@
 // ****  William R. Good   ***********
 // ****** Jan 04 2015   **************
 
-#define VERSION_NUMBER "2.35"
+#define VERSION_NUMBER "2.36"
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -2325,7 +2325,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 235;
+  XsaitekpanelsVersion = 236;
 
   XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
 
@@ -6220,10 +6220,6 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
 
          }
 
-
-
-
-
             if(inParam1 == (intptr_t)MultiAt0CheckWidget[0] ||
                inParam1 == (intptr_t)MultiAt1CheckWidget[0] ) {
 
@@ -6293,167 +6289,165 @@ return 0;
 
 float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int counter, void * refcon)
 {
+
     void *Param = NULL;
     (void) elapsedMe;
     (void) elapsedSim;
     (void) counter;
     (void) refcon;
-    XPLMPluginID PluginID = XPLMFindPluginBySignature("xplanesdk.examples.DataRefEditor");
-    if (PluginID != XPLM_NO_PLUGIN_ID){
-
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/version");
-
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer1");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer2");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer3");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer4");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer5");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer6");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer7");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer8");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer9");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/integer10");
-
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float1");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float2");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float3");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float4");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float5");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float6");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float7");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float8");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float9");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/sharedata/float10");
-
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/count");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startoff/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startright/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startleft/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startboth/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/startstart/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/bat/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/alt/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/av/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/fuel/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/dice/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/pitot/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/gearup/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/geardn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/cowl/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/panel/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/beacon/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/nav/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/strobe/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/taxi/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/switchpanel/landing/status");
-
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/count");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcom1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcom2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprnav1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprnav2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1upradf/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdme/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprxpdr/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcorseinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcorsedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprfineinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprfinedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1upractstby/status");
-
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcom1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcom2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrnav1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrnav2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwradf/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdme/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrxpdr/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcorseinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcorsedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrfineinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrfinedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwractstby/status");
 
 
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprcom1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprcom2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprnav1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprnav2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2upradf/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdme/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprxpdr/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprcorseinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprcorsedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprfineinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprfinedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2upractstby/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/version");
 
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcom1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcom2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrnav1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrnav2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwradf/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdme/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrxpdr/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcorseinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcorsedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrfineinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrfinedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwractstby/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer1");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer2");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer3");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer4");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer5");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer6");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer7");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer8");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer9");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer10");
 
 
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprcom1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprcom2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprnav1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprnav2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3upradf/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdme/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprxpdr/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprcorseinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprcorsedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprfineinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprfinedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3upractstby/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float1");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float2");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float3");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float4");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float5");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float6");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float7");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float8");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float9");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float10");
 
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcom1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcom2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrnav1/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrnav2/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwradf/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdme/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrxpdr/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcorseinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcorsedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrfineinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrfinedec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwractstby/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/count");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/startoff/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/startright/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/startleft/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/startboth/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/startstart/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/bat/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/alt/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/av/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/fuel/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/dice/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/pitot/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/gearup/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/geardn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/cowl/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/panel/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/beacon/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/nav/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/strobe/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/taxi/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/landing/status");
+
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/count");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcom1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcom2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprnav1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprnav2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1upradf/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdme/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprxpdr/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcorseinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcorsedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprfineinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprfinedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1upractstby/status");
+
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcom1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcom2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrnav1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrnav2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwradf/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdme/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrxpdr/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcorseinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcorsedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrfineinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrfinedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwractstby/status");
 
 
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/count");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/altswitch/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/vsswitch/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/iasswitch/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/hdgswitch/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/crsswitch/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/knobinc/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/knobdec/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/at/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/trimup/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/trimdn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/flapsup/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/flapsdn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/apbtn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/hdgbtn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/navbtn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/iasbtn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/altbtn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
-        XPLMSendMessageToPlugin(PluginID, MSG_ADD_DATAREF, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprcom1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprcom2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprnav1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprnav2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2upradf/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdme/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprxpdr/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprcorseinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprcorsedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprfineinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprfinedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2upractstby/status");
 
-    }
-    // etc
-    // etc
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcom1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcom2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrnav1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrnav2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwradf/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdme/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrxpdr/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcorseinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcorsedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrfineinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrfinedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwractstby/status");
+
+
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprcom1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprcom2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprnav1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprnav2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3upradf/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdme/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprxpdr/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprcorseinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprcorsedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprfineinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprfinedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3upractstby/status");
+
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcom1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcom2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrnav1/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrnav2/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwradf/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdme/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrxpdr/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcorseinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcorsedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrfineinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrfinedec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwractstby/status");
+
+
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/count");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/altswitch/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/vsswitch/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/iasswitch/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/hdgswitch/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/crsswitch/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/knobinc/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/knobdec/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/at/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/trimup/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/trimdn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/flapsup/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/flapsdn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/apbtn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/hdgbtn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/navbtn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/iasbtn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/altbtn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
+
     return 0;
 }
 
@@ -6494,7 +6488,7 @@ float	MyPanelsFlightLoopCallback(
   } else if (readiniloop == 50) {
       process_read_ini_file();
       readiniloop = 51;
-      if (dre_enable == 1) {
+      if (dre_enable == 1 || dre_enable == 2) {
           XPLMRegisterFlightLoopCallback(XsaitekpanelsCustomDatarefLoopCB, 1, NULL);
 
       } else {
