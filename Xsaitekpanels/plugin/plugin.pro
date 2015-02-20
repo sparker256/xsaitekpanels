@@ -44,7 +44,7 @@ win32:!isEmpty(CROSS_COMPILE){
 #   QMAKE_YACC_SOURCE       = $base.tab.c
     QMAKE_DEL_FILE          = rm -f
     INCLUDEPATH += "../../WinSDK/Include"
-    LIBS += -static-libstdc++ -static-libgcc
+    LIBS += -static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic
 }
 
 win32:contains(CROSS_COMPILE, x86_64-w64-mingw32-){
@@ -65,9 +65,9 @@ unix:!macx {
     TARGET = lin.xpl
     # WARNING! This requires the latest version of the X-SDK !!!!
     QMAKE_CXXFLAGS += -fvisibility=hidden
-    SOURCES += \
-          ../../hidapi-0.8.0-rc1/linux/hid.c
+    SOURCES += ../../hidapi-0.8.0-rc1/linux/hid.c
     LIBS += `pkg-config libudev --libs`
+
 
 }
 
