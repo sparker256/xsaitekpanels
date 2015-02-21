@@ -6488,7 +6488,7 @@ float	MyPanelsFlightLoopCallback(
   } else if (readiniloop == 50) {
       process_read_ini_file();
       readiniloop = 51;
-      if (dre_enable == 1 || dre_enable == 2) {
+      if (dre_enable == 1) {
           XPLMRegisterFlightLoopCallback(XsaitekpanelsCustomDatarefLoopCB, 1, NULL);
 
       } else {
