@@ -2,7 +2,7 @@
 // ****  William R. Good   ***********
 // ****** Jan 04 2015   **************
 
-#define VERSION_NUMBER "2.36"
+#define VERSION_NUMBER "2.37"
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -2325,7 +2325,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 236;
+  XsaitekpanelsVersion = 237;
 
   XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
 
@@ -3295,83 +3295,103 @@ void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVers
  */
 void	XsaitekpanelsInteger1DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger2DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger3DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger4DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger5DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger6DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger7DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger8DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger9DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsInteger10DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 
 void	XsaitekpanelsFloat1DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat2DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat3DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat4DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat5DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat6DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat7DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat8DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat9DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 void	XsaitekpanelsFloat10DataChangedCallback(void * inRefcon)
 {
+    (void) inRefcon;
 }
 
 
@@ -6290,7 +6310,7 @@ return 0;
 float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int counter, void * refcon)
 {
 
-    void *Param = NULL;
+    // void *Param = NULL;
     (void) elapsedMe;
     (void) elapsedSim;
     (void) counter;

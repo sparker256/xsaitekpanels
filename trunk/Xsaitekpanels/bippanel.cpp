@@ -79,7 +79,7 @@ struct  BipTableStructure
     char            WhatToDo;
     float           FloatValueToSet;
     float           FloatLimit;
-    char            CSVDebugString[512];
+    char            CSVDebugString[513];
 };
 
 static BipTableStructure    BipTable[4][MAXTABLEELEMENTS];
@@ -155,7 +155,7 @@ void WriteCSVTableToDisk(void)
 
 string convert_Mac_Bip_Path(string bip_in_path) {
 
-    char bip_seperator_number_buffer[255] = {0};
+    // char bip_seperator_number_buffer[255] = {0};
 
     std::size_t bip_len = bip_in_path.length();
     std::size_t bip_pos = bip_in_path.find(":");
@@ -202,7 +202,7 @@ bool ReadConfigFile(string PlaneICAO)
   char           *bip2ConfigurationPath;
   char           *bip3ConfigurationPath;
   const char     *foundd2bpath, *foundd2bpath2, *foundd2bpath3;
-  char           buff[256];
+  // char           buff[256];
 
   PlaneICAO.erase(PlaneICAO.find(']')+1);
   LetWidgetSay(PlaneICAO);
@@ -394,6 +394,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].FloatLimit = Limit;
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].WhatToDo = 'v';
             //BipTable[0][LastTableElement[0]].CSVDebugString = DataRefString;
+            BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString[512] = '0';
             strcpy(BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString, DataRefString);
             continue;
         }
@@ -435,6 +436,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].FloatValueToSet = Argument;
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].FloatLimit = Limit;
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].WhatToDo = 'v';
+            BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString[512] = '0';
             strcpy(BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString, DataRefString);
             continue;
         }
@@ -617,6 +619,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].FloatValueToSet = Argument;
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].FloatLimit = Limit;
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].WhatToDo = 'v';
+            BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString[512] = '0';
             strcpy(BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString, DataRefString);
             continue;
         }
@@ -658,6 +661,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].FloatValueToSet = Argument;
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].FloatLimit = Limit;
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].WhatToDo = 'v';
+            BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString[512] = '0';
             strcpy(BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString, DataRefString);
             continue;
         }
@@ -837,6 +841,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatValueToSet = Argument;
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatLimit = Limit;
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].WhatToDo = 'v';
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString[512] = '0';
             strcpy(BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString, DataRefString);
             continue;
         }
@@ -878,6 +883,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatValueToSet = Argument;
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatLimit = Limit;
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].WhatToDo = 'v';
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString[512] = '0';
             strcpy(BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString, DataRefString);
             continue;
         }
@@ -1121,7 +1127,7 @@ void process_bip_what_to_do_v()
 void process_bip_panel()
 
 {
-    char	buf1[256];
+    // char	buf1[256];
 
     if (biploop[bipnum] < 2) {
       // Clear Display on first loop
