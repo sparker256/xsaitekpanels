@@ -62,7 +62,6 @@ using namespace std;
 float   LookAtThisValue;
 int     LookAtThisIntValue;
 
-//static int bipnum = 0;
 static unsigned char bipwbuf[4][10];
 static unsigned char lastbipwbuf[4][10];
 
@@ -79,7 +78,7 @@ struct  BipTableStructure
     char            WhatToDo;
     float           FloatValueToSet;
     float           FloatLimit;
-    char            CSVDebugString[513];
+    char            CSVDebugString[512];
 };
 
 static BipTableStructure    BipTable[4][MAXTABLEELEMENTS];
@@ -155,8 +154,6 @@ void WriteCSVTableToDisk(void)
 
 string convert_Mac_Bip_Path(string bip_in_path) {
 
-    // char bip_seperator_number_buffer[255] = {0};
-
     std::size_t bip_len = bip_in_path.length();
     std::size_t bip_pos = bip_in_path.find(":");
     bip_in_path.erase (bip_in_path.begin()+0, bip_in_path.end()-(bip_len - bip_pos));
@@ -164,8 +161,6 @@ string convert_Mac_Bip_Path(string bip_in_path) {
     int bip_count = 0;
     for (int i = 0; i < bip_in_path.size(); i++)
         if (bip_in_path[i] == ':') bip_count++;
-             // sprintf(bip_seperator_number_buffer, "How many path seperators are in the path = %d\n", bip_count);
-             // XPLMDebugString(bip_seperator_number_buffer);
 
     size_t bip_found;
     int n = bip_count;
@@ -202,7 +197,6 @@ bool ReadConfigFile(string PlaneICAO)
   char           *bip2ConfigurationPath;
   char           *bip3ConfigurationPath;
   const char     *foundd2bpath, *foundd2bpath2, *foundd2bpath3;
-  // char           buff[256];
 
   PlaneICAO.erase(PlaneICAO.find(']')+1);
   LetWidgetSay(PlaneICAO);
@@ -238,16 +232,9 @@ bool ReadConfigFile(string PlaneICAO)
 
   if(bipnum == bipwcscmp0) {
 
-      //sprintf(buff, "if(bipnum == bipwcscmp0) bipnum %d == bipwcscmp0 %d\n", bipnum, bipwcscmp0);
-      //XPLMDebugString(buff);
-
       bip1ConfigurationPath = "./Resources/plugins/Xsaitekpanels/D2B_config.txt";
 
       xpsbipd2b_path_name.append("D2B_config.txt");
-
-      //XPLMDebugString("\nXsaitekpanels: The full path for D2B_config.txt in the current aircraft folder is\n");
-      //XPLMDebugString(xpsbipd2b_path_name.c_str());
-      //XPLMDebugString("\n");
 
       std::vector<char> parse_d2b_path_name(xpsbipd2b_path_name.size() + 1);
       std::copy(xpsbipd2b_path_name.begin(), xpsbipd2b_path_name.end(), parse_d2b_path_name.begin());
@@ -294,7 +281,7 @@ bool ReadConfigFile(string PlaneICAO)
       BipTable[bipwcscmp0][i].WhatToDo = '0';
       BipTable[bipwcscmp0][i].FloatValueToSet = 0;
       BipTable[bipwcscmp0][i].FloatLimit = 0;
-      BipTable[bipwcscmp0][i].CSVDebugString[512] = '0';
+      BipTable[bipwcscmp0][i].CSVDebugString[0] = 0;
     }
 
     while (getline(ReadBipFile, LineToEncrypt[0]))
@@ -393,8 +380,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].FloatValueToSet = Argument;
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].FloatLimit = Limit;
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].WhatToDo = 'v';
-            //BipTable[0][LastTableElement[0]].CSVDebugString = DataRefString;
-            BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString[512] = '0';
+            BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString[0] = 0;
             strcpy(BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString, DataRefString);
             continue;
         }
@@ -436,7 +422,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].FloatValueToSet = Argument;
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].FloatLimit = Limit;
             BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].WhatToDo = 'v';
-            BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString[512] = '0';
+            BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString[0] = 0;
             strcpy(BipTable[bipwcscmp0][LastTableElement[bipwcscmp0]].CSVDebugString, DataRefString);
             continue;
         }
@@ -452,23 +438,15 @@ bool ReadConfigFile(string PlaneICAO)
     }
 
     ReadBipFile.close();
-    //return true;
 
    }
 
 
     if(bipnum == bipwcscmp1) {
 
-        //sprintf(buff, "if(bipnum == bipwcscmp1) bipnum %d == bipwcscmp1 %d\n", bipnum, bipwcscmp1);
-        //XPLMDebugString(buff);
-
         bip2ConfigurationPath = "./Resources/plugins/Xsaitekpanels/D2B_config2.txt";
 
         xpsbipd2b_path_name2.append("D2B_config2.txt");
-
-        //XPLMDebugString("\nXsaitekpanels: The full path for D2B_config2.txt in the current aircraft folder is\n");
-        //XPLMDebugString(xpsbipd2b_path_name2.c_str());
-        //XPLMDebugString("\n");
 
         std::vector<char> parse_d2b_path_name2(xpsbipd2b_path_name2.size() + 1);
         std::copy(xpsbipd2b_path_name2.begin(), xpsbipd2b_path_name2.end(), parse_d2b_path_name2.begin());
@@ -518,7 +496,7 @@ bool ReadConfigFile(string PlaneICAO)
         BipTable[bipwcscmp1][i1].WhatToDo = '0';
         BipTable[bipwcscmp1][i1].FloatValueToSet = 0;
         BipTable[bipwcscmp1][i1].FloatLimit = 0;
-        BipTable[bipwcscmp1][i1].CSVDebugString[512] = '0';
+        BipTable[bipwcscmp1][i1].CSVDebugString[0] = 0;
     }
 
     while (getline(ReadBip2File, LineToEncrypt[bipwcscmp1]))
@@ -548,7 +526,7 @@ bool ReadConfigFile(string PlaneICAO)
         }
         if (LineToEncrypt[bipwcscmp1].find("[") == 0)
         {
-            //if ((LineToEncrypt[1].find("[DEFAULT2]") == 0) || (LineToEncrypt[1].find(PlaneICAO) == 0))
+
             if ((LineToEncrypt[bipwcscmp1].find("[DEFAULT]") == 0) || (LineToEncrypt[bipwcscmp1].find(PlaneICAO) == 0))
             {
                 CorrectICAO = true;
@@ -557,7 +535,7 @@ bool ReadConfigFile(string PlaneICAO)
             {
                 CorrectICAO = false;
             }
-            //if ((LineToEncrypt[1].find("[DEFAULT2]") != 0) && (++LastMenuEntry[1] < 50))
+
             if ((LineToEncrypt[bipwcscmp1].find("[DEFAULT]") != 0) && (++LastMenuEntry[bipwcscmp1] < 50))
             {
                 strcpy(MenuEntries[bipwcscmp1][LastMenuEntry[bipwcscmp1]], LineToEncrypt[bipwcscmp1].c_str());
@@ -619,7 +597,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].FloatValueToSet = Argument;
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].FloatLimit = Limit;
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].WhatToDo = 'v';
-            BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString[512] = '0';
+            BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString[0] = 0;
             strcpy(BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString, DataRefString);
             continue;
         }
@@ -661,7 +639,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].FloatValueToSet = Argument;
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].FloatLimit = Limit;
             BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].WhatToDo = 'v';
-            BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString[512] = '0';
+            BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString[0] = 0;
             strcpy(BipTable[bipwcscmp1][LastTableElement[bipwcscmp1]].CSVDebugString, DataRefString);
             continue;
         }
@@ -678,15 +656,11 @@ bool ReadConfigFile(string PlaneICAO)
     }
 
     ReadBip2File.close();
-    //return true;
 
    }
 
 
     if(bipnum == bipwcscmp2) {
-
-        //sprintf(buff, "if(Xsaitekpanels: bipnum == bipwcscmp2) bipnum %d == bipwcscmp2 %d\n", bipnum, bipwcscmp2);
-        //XPLMDebugString(buff);
 
         bip3ConfigurationPath = "./Resources/plugins/Xsaitekpanels/D2B_config3.txt";
 
@@ -740,7 +714,7 @@ bool ReadConfigFile(string PlaneICAO)
         BipTable[bipwcscmp2][i1].WhatToDo = '0';
         BipTable[bipwcscmp2][i1].FloatValueToSet = 0;
         BipTable[bipwcscmp2][i1].FloatLimit = 0;
-        BipTable[bipwcscmp2][i1].CSVDebugString[512] = '0';
+        BipTable[bipwcscmp2][i1].CSVDebugString[0] = 0;
     }
 
     while (getline(ReadBip3File, LineToEncrypt[bipwcscmp2]))
@@ -770,7 +744,7 @@ bool ReadConfigFile(string PlaneICAO)
         }
         if (LineToEncrypt[bipwcscmp2].find("[") == 0)
         {
-            //if ((LineToEncrypt[1].find("[DEFAULT2]") == 0) || (LineToEncrypt[1].find(PlaneICAO) == 0))
+
             if ((LineToEncrypt[bipwcscmp2].find("[DEFAULT]") == 0) || (LineToEncrypt[bipwcscmp2].find(PlaneICAO) == 0))
             {
                 CorrectICAO = true;
@@ -779,7 +753,7 @@ bool ReadConfigFile(string PlaneICAO)
             {
                 CorrectICAO = false;
             }
-            //if ((LineToEncrypt[1].find("[DEFAULT2]") != 0) && (++LastMenuEntry[1] < 50))
+
             if ((LineToEncrypt[bipwcscmp2].find("[DEFAULT]") != 0) && (++LastMenuEntry[bipwcscmp2] < 50))
             {
                 strcpy(MenuEntries[bipwcscmp2][LastMenuEntry[bipwcscmp2]], LineToEncrypt[bipwcscmp2].c_str());
@@ -841,7 +815,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatValueToSet = Argument;
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatLimit = Limit;
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].WhatToDo = 'v';
-            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString[512] = '0';
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString[0] = 0;
             strcpy(BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString, DataRefString);
             continue;
         }
@@ -883,7 +857,7 @@ bool ReadConfigFile(string PlaneICAO)
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatValueToSet = Argument;
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].FloatLimit = Limit;
             BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].WhatToDo = 'v';
-            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString[512] = '0';
+            BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString[0] = 0;
             strcpy(BipTable[bipwcscmp2][LastTableElement[bipwcscmp2]].CSVDebugString, DataRefString);
             continue;
         }
@@ -918,7 +892,6 @@ void process_bip_menu()
       XPLMAppendMenuItem(BipMenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
       XPLMAppendMenuItem(BipMenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
       XPLMAppendMenuSeparator(BipMenuId);
-      //XPLMAppendMenuItem(BipMenuId, MenuEntries[0][LastMenuEntry[0]], (void *) MenuEntries[0][LastMenuEntry[0]], 1);
       XPLMAppendMenuItem(BipMenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
 
     }
@@ -929,7 +902,6 @@ void process_bip_menu()
         XPLMAppendMenuItem(Bip2MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
         XPLMAppendMenuItem(Bip2MenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
         XPLMAppendMenuSeparator(Bip2MenuId);
-        //XPLMAppendMenuItem(Bip2MenuId, MenuEntries[1][LastMenuEntry[1]], (void *) MenuEntries[1][LastMenuEntry[1]], 1);
         XPLMAppendMenuItem(Bip2MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
 
     }
@@ -941,7 +913,6 @@ void process_bip_menu()
         XPLMAppendMenuItem(Bip3MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
         XPLMAppendMenuItem(Bip3MenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
         XPLMAppendMenuSeparator(Bip3MenuId);
-        //XPLMAppendMenuItem(Bip2MenuId, MenuEntries[1][LastMenuEntry[1]], (void *) MenuEntries[1][LastMenuEntry[1]], 1);
         XPLMAppendMenuItem(Bip3MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
 
     }
@@ -958,7 +929,6 @@ void process_bip_what_to_do_v()
     for (i[bipnum] = 0; i[bipnum] <= LastTableElement[bipnum]; i[bipnum]++) {
 
         if (BipTable[bipnum][i[bipnum]].WhatToDo == 'v') {
-            // "#SET BIP %c %i %c FROM DATAREF %s RANGE %f TO %f" or "#SET BIP %s %i %s FROM ARRAY %s %i RANGE %f TO %f""
             if (BipTable[bipnum][i[bipnum]].DataRefType == xplmType_Float) LookAtThisValue = XPLMGetDataf(BipTable[bipnum][i[bipnum]].DataRefToSet);
             if (BipTable[bipnum][i[bipnum]].DataRefType == xplmType_Int) LookAtThisValue = (float) XPLMGetDatai(BipTable[bipnum][i[bipnum]].DataRefToSet);
             if (BipTable[bipnum][i[bipnum]].DataRefType == xplmType_FloatArray) XPLMGetDatavf(BipTable[bipnum][i[bipnum]].DataRefToSet, &LookAtThisValue, BipTable[bipnum][i[bipnum]].DataRefIndex, 1);
@@ -1127,15 +1097,12 @@ void process_bip_what_to_do_v()
 void process_bip_panel()
 
 {
-    // char	buf1[256];
 
     if (biploop[bipnum] < 2) {
       // Clear Display on first loop
       bipwbuf[bipnum][0] = 0xb8;  //0xb8 Report ID to display
       bipwbuf[bipnum][1] = 0, bipwbuf[bipnum][2] = 0, bipwbuf[bipnum][3] = 0;
       bipwbuf[bipnum][4] = 0, bipwbuf[bipnum][5] = 0, bipwbuf[bipnum][6] = 0;
-      //sprintf(buf1, "Xsaitekpanels hid_send_feature_report(biphandle[bipnum] %d\n", bipnum);
-      //XPLMDebugString(buf1);
       res = hid_send_feature_report(biphandle[bipnum], bipwbuf[bipnum], 10);
       biploop[bipnum]++;
     }
