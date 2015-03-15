@@ -22,7 +22,7 @@
 
 string convert_Mac_Path(string in_path) {
 
-    char seperator_number_buffer[255] = {0};
+    //char seperator_number_buffer[255] = {0};
 
     std::size_t len = in_path.length();
     std::size_t pos = in_path.find(":");
