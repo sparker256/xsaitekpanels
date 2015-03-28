@@ -1,8 +1,8 @@
 // ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Mar 15 2015   **************
+// ****** Mar 27 2015   **************
 
-#define VERSION_NUMBER "2.37"
+#define VERSION_NUMBER "2.38"
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -719,7 +719,9 @@ XPWidgetID      Bip3WidgetID = NULL;
 XPWidgetID      Bip4WidgetID = NULL;
 
 // ********************* Saitek Panels Data Ref  ************************
-XPLMDataRef XsaitekpanelsVersionDataRef = NULL;
+static XPLMDataRef XsaitekpanelsVersionDataRef = NULL;
+static XPLMDataRef XsaitekpanelsFnButtonDataRef = NULL;
+static XPLMDataRef XsaitekpanelsLeftStartFnButtonDataRef = NULL;
 
 static XPLMDataRef	XsaitekpanelsInteger1SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsInteger2SharedDataRef = NULL;
@@ -1719,9 +1721,17 @@ int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 // This is the storage for the data we own.
 
 static int XsaitekpanelsVersionData = 0;
+static int XsaitekpanelsFnButtonData = 0;
+static int XsaitekpanelsLeftStartFnButtonData = 0;
 
 int	XsaitekpanelsVersionGetDataiCallback(void * inRefcon);
 void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVersion);
+
+int	XsaitekpanelsFnButtonGetDataiCallback(void * inRefcon);
+void	XsaitekpanelsFnButtonSetDataiCallback(void * inRefcon, int XsaitekpanelsFnButton);
+
+int	XsaitekpanelsLeftStartFnButtonGetDataiCallback(void * inRefcon);
+void	XsaitekpanelsLeftStartFnButtonSetDataiCallback(void * inRefcon, int XsaitekpanelsLeftStartFnButton);
 
 /* This callback is called whenever our shared data is changed. */
 
@@ -2249,6 +2259,9 @@ void WriteCSVTableToDisk(void);
 
 int             XsaitekpanelsMenuItem;
 int             XsaitekpanelsVersion;
+int             XsaitekpanelsFnButton;
+int             XsaitekpanelsLeftStartFnButton;
+
 
 int             BipMenuItem;
 
@@ -2325,7 +2338,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 237;
+  XsaitekpanelsVersion = 238;
 
   XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
 
@@ -2674,9 +2687,21 @@ PLUGIN_API int XPluginStart(char *		outName,
                            NULL, NULL, NULL, NULL, NULL);
 
 
+  XsaitekpanelsFnButtonDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/fnbutton/status",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsFnButtonGetDataiCallback,
+                           XsaitekpanelsFnButtonSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
 
-
-
+  XsaitekpanelsLeftStartFnButtonDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/leftstartfnbutton/status",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsLeftStartFnButtonGetDataiCallback,
+                           XsaitekpanelsLeftStartFnButtonSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
 
   SwitchPanelCountDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/switchpanel/count",
                            xplmType_Int,
@@ -3286,6 +3311,33 @@ void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVers
     (void) inRefcon;
     XsaitekpanelsVersionData = XsaitekpanelsVersionData2;
 }
+
+
+int	XsaitekpanelsFnButtonGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsFnButtonData;
+}
+
+void	XsaitekpanelsFnButtonSetDataiCallback(void * inRefcon, int XsaitekpanelsFnButtonData2)
+{
+    (void) inRefcon;
+    XsaitekpanelsFnButtonData = XsaitekpanelsFnButtonData2;
+}
+
+
+int	XsaitekpanelsLeftStartFnButtonGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsLeftStartFnButtonData;
+}
+
+void	XsaitekpanelsLeftStartFnButtonSetDataiCallback(void * inRefcon, int XsaitekpanelsLeftStartFnButtonData2)
+{
+    (void) inRefcon;
+    XsaitekpanelsLeftStartFnButtonData = XsaitekpanelsLeftStartFnButtonData2;
+}
+
 
 
 /*
@@ -6318,6 +6370,8 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
 
 
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/version");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/fnbutton/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/leftstartfnbutton/status");
 
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer1");
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer2");
@@ -6518,6 +6572,11 @@ float	MyPanelsFlightLoopCallback(
 
   XPLMSetDatai(XsaitekpanelsVersionDataRef, XsaitekpanelsVersion);
 
+  XsaitekpanelsFnButton = xpanelsfnbutton;
+  XPLMSetDatai(XsaitekpanelsFnButtonDataRef, XsaitekpanelsFnButton);
+
+  XsaitekpanelsLeftStartFnButton = xpanelsleftstartfnbutton;
+  XPLMSetDatai(XsaitekpanelsLeftStartFnButtonDataRef, XsaitekpanelsLeftStartFnButton);
 
   XPLMSetDatai(SwitchPanelCountDataRef, switchcnt);
   XPLMSetDatai(RadioPanelCountDataRef, radcnt);
