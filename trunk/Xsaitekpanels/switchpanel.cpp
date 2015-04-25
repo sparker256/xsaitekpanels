@@ -765,7 +765,7 @@ void process_engines_start_switch()
 
                mag_start10_switch_dataf_on_value = mag_start10_switch_data_on_value;
                mag_start10_switch_dataf_on_value = mag_start10_switch_dataf_on_value / 100;
-               XPLMSetDataf(MagStart10SwitchData, mag_start10_switch_data_on_value);
+               XPLMSetDataf(MagStart10SwitchData, mag_start10_switch_dataf_on_value);
 
            }
        }
@@ -1606,7 +1606,7 @@ void process_fuel_pump_switch()
 
             fuel_pump_switch_dataf_off_value = fuel_pump_switch_data_off_value;
             fuel_pump_switch_dataf_off_value = fuel_pump_switch_dataf_off_value / 100;
-            XPLMSetDataf(FuelPumpSwitchData, fuel_pump_switch_data_off_value);
+            XPLMSetDataf(FuelPumpSwitchData, fuel_pump_switch_dataf_off_value);
 
             fuel_pump2_switch_dataf_off_value = fuel_pump2_switch_data_off_value;
             fuel_pump2_switch_dataf_off_value = fuel_pump2_switch_dataf_off_value / 100;
