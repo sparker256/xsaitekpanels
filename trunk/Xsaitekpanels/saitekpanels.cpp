@@ -1,8 +1,8 @@
-// ****** saitekpanels.cpp ***********
+﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** April 25 2015   **************
+// ****** May 27 2015   **************
 
-#define VERSION_NUMBER "2.40"
+#define VERSION_NUMBER "2.41"
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -2308,6 +2308,13 @@ float	MyPanelsFlightLoopCallback(
                                    int                  inCounter,    
                                    void *               inRefcon);
 
+float	MyPanelsDeferredInitNewAircraftFLCB(
+                                   float                inElapsedSinceLastCall,
+                                   float                inElapsedTimeSinceLastFlightLoop,
+                                   int                  inCounter,
+                                   void *               inRefcon);
+
+
 float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int counter, void * refcon);
 
 
@@ -2338,7 +2345,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 240;
+  XsaitekpanelsVersion = 241;
 
   XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
 
@@ -2879,6 +2886,8 @@ PLUGIN_API int XPluginStart(char *		outName,
                         interval,			// * Interval -1 every loop*
                         NULL);				// * refcon not used. *
 
+  XPLMRegisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, -1, NULL);
+
 
   // Register our custom commands
   XPLMRegisterCommandHandler(XpanelsFnButtonCommand,           // in Command name
@@ -3226,6 +3235,7 @@ PLUGIN_API void	XPluginStop(void)
 
   // ********** Unregitser the callback on quit. *************
   XPLMUnregisterFlightLoopCallback(MyPanelsFlightLoopCallback, NULL);
+  XPLMUnregisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, NULL);
   XPLMUnregisterFlightLoopCallback(XsaitekpanelsCustomDatarefLoopCB, NULL);
   XPLMUnregisterCommandHandler(XpanelsFnButtonCommand, XpanelsFnButtonCommandHandler, 1, NULL);
   XPLMUnregisterCommandHandler(XpanelsLeftStartFnButtonCommand, XpanelsLeftStartFnButtonCommandHandler, 1, NULL);
@@ -3272,7 +3282,7 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 
 
     if ((inMessage == XPLM_MSG_PLANE_LOADED) & ((intptr_t) inParam == 0)) {
-      process_read_ini_file();
+        XPLMRegisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, -1, NULL);
     }
 
     if(bipcnt > 0){
@@ -6535,6 +6545,25 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
 
     return 0;
 }
+
+
+// ************************* Aircraft Loaded Deferred Init Callback  *************************
+float MyPanelsDeferredInitNewAircraftFLCB(float MyPanelselapsedMe, float MyPanelselapsedSim, int MyPanelscounter, void * MyPanelsrefcon)
+{
+    (void) MyPanelselapsedMe; // To get rid of warnings on unused variables
+    (void) MyPanelselapsedSim; // To get rid of warnings on unused variables
+    (void) MyPanelscounter; // To get rid of warnings on unused variables
+    (void) MyPanelsrefcon; // To get rid of warnings on unused variables
+
+    static int MyPanelsFLCBStartUpFlag = 0;
+    if ( MyPanelsFLCBStartUpFlag == 0 )
+    {
+        MyPanelsFLCBStartUpFlag = 1; // Flag tells init has already been completed
+        process_read_ini_file();
+    }
+    return 0; // Returning 0 stops DeferredInitFLCB from being looped again.
+}
+
 
 
 // ************************* Panels Callback  *************************
