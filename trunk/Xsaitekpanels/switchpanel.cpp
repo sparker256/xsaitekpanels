@@ -2902,6 +2902,31 @@ void process_gear_switch_switch()
         return;
     }
 
+    if(landinggearknobupenable == 4) {
+        if(testbit(switchbuf,GEAR_SWITCH_UP)) {
+            gear_switch_up_dataf_on_value = gear_switch_up_data_on_value;
+            gear_switch_up_dataf_on_value = gear_switch_up_dataf_on_value / 100;
+            XPLMSetDataf(GearUpData, gear_switch_up_dataf_on_value);
+        }
+        if(!testbit(switchbuf,GEAR_SWITCH_UP)) {
+            gear_switch_up_dataf_off_value= gear_switch_up_data_off_value;
+            gear_switch_up_dataf_off_value = gear_switch_up_dataf_off_value / 100;
+            XPLMSetDataf(GearUpData, gear_switch_up_dataf_off_value);
+
+        }
+        if(testbit(switchbuf,GEAR_SWITCH_DN)) {
+            gear_switch_down_dataf_on_value = gear_switch_down_data_on_value;
+            gear_switch_down_dataf_on_value = gear_switch_down_dataf_on_value / 100;
+            XPLMSetDataf(GearDnData, gear_switch_down_dataf_on_value);
+        }
+        if(!testbit(switchbuf,GEAR_SWITCH_DN)) {
+            gear_switch_down_dataf_off_value = gear_switch_down_data_off_value;
+            gear_switch_down_dataf_off_value = gear_switch_down_dataf_off_value / 100;
+            XPLMSetDataf(GearDnData, gear_switch_down_dataf_off_value);
+        }
+        return;
+    }
+
 
 	
 	if(XPLMGetDatai(GearRetract) > 0){
