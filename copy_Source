@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+scp src/bippanel.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/bippanel.cpp
+scp src/inireader.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/inireader.cpp
+scp src/inireader.h Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/inireader.h
+scp src/multidata.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/multidata.cpp
+scp src/multipanel.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/multipanel.cpp
+scp src/radio1data.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/radio1data.cpp
+scp src/radio2data.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/radio2data.cpp
+scp src/radio3data.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/radio3data.cpp
+scp src/radiopanels.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/radiopanels.cpp
+scp src/readinifile.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/readinifile.cpp
+scp src/saitekpanels.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/saitekpanels.cpp
+scp src/saitekpanels.h Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/saitekpanels.h
+scp src/switchdata.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/switchdata.cpp
+scp src/switchpanel.cpp Williams-Mac-Pro.local:xp10plugins_github/Xsaitekpanels/switchpanel.cpp
