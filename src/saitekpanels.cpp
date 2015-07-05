@@ -1,8 +1,8 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jun 09 2015   **************
+// ****** Jul 04 2015   **************
 
-#define VERSION_NUMBER "2.42"
+#define VERSION_NUMBER "2.43"
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -77,6 +77,12 @@ XPLMCommandRef Rad1UprObs2FnUpRemapableCmd = NULL, Rad1UprObs2FnDnRemapableCmd =
 XPLMCommandRef Rad1UprNav2CrsUpRemapableCmd = NULL, Rad1UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2FnUpRemapableCmd = NULL, Rad1UprNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1UprAdfCrsUpRemapableCmd = NULL, Rad1UprAdfCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprAdfFnUpRemapableCmd = NULL, Rad1UprAdfFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprAdfActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1UprDmeCrsUpRemapableCmd = NULL, Rad1UprDmeCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprDmeFnUpRemapableCmd = NULL, Rad1UprDmeFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprDmeActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1UpperXpdrBaroUpRemapableCmd = NULL, Rad1UpperXpdrBaroDnRemapableCmd = NULL;
 
 
@@ -96,6 +102,12 @@ XPLMCommandRef Rad1LowrObs2FnUpRemapableCmd = NULL, Rad1LowrObs2FnDnRemapableCmd
 XPLMCommandRef Rad1LowrNav2CrsUpRemapableCmd = NULL, Rad1LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2FnUpRemapableCmd = NULL, Rad1LowrNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrAdfCrsUpRemapableCmd = NULL, Rad1LowrAdfCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrAdfFnUpRemapableCmd = NULL, Rad1LowrAdfFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrAdfActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrDmeCrsUpRemapableCmd = NULL, Rad1LowrDmeCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrDmeFnUpRemapableCmd = NULL, Rad1LowrDmeFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad1LowrDmeActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1LowrXpdrBaroUpRemapableCmd = NULL, Rad1LowrXpdrBaroDnRemapableCmd = NULL;
 
 
@@ -115,6 +127,12 @@ XPLMCommandRef Rad2UprObs2FnUpRemapableCmd = NULL, Rad2UprObs2FnDnRemapableCmd =
 XPLMCommandRef Rad2UprNav2CrsUpRemapableCmd = NULL, Rad2UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav2FnUpRemapableCmd = NULL, Rad2UprNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2UprNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad2UprAdfCrsUpRemapableCmd = NULL, Rad2UprAdfCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprAdfFnUpRemapableCmd = NULL, Rad2UprAdfFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprAdfActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad2UprDmeCrsUpRemapableCmd = NULL, Rad2UprDmeCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprDmeFnUpRemapableCmd = NULL, Rad2UprDmeFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2UprDmeActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2UpperXpdrBaroUpRemapableCmd = NULL, Rad2UpperXpdrBaroDnRemapableCmd = NULL;
 
 
@@ -134,6 +152,12 @@ XPLMCommandRef Rad2LowrObs2FnUpRemapableCmd = NULL, Rad2LowrObs2FnDnRemapableCmd
 XPLMCommandRef Rad2LowrNav2CrsUpRemapableCmd = NULL, Rad2LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav2FnUpRemapableCmd = NULL, Rad2LowrNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrAdfCrsUpRemapableCmd = NULL, Rad2LowrAdfCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrAdfFnUpRemapableCmd = NULL, Rad2LowrAdfFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrAdfActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrDmeCrsUpRemapableCmd = NULL, Rad2LowrDmeCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrDmeFnUpRemapableCmd = NULL, Rad2LowrDmeFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad2LowrDmeActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad2LowrXpdrBaroUpRemapableCmd = NULL, Rad2LowrXpdrBaroDnRemapableCmd = NULL;
 
 
@@ -153,6 +177,12 @@ XPLMCommandRef Rad3UprObs2FnUpRemapableCmd = NULL, Rad3UprObs2FnDnRemapableCmd =
 XPLMCommandRef Rad3UprNav2CrsUpRemapableCmd = NULL, Rad3UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprNav2FnUpRemapableCmd = NULL, Rad3UprNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3UprNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3UprAdfCrsUpRemapableCmd = NULL, Rad3UprAdfCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprAdfFnUpRemapableCmd = NULL, Rad3UprAdfFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprAdfActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3UprDmeCrsUpRemapableCmd = NULL, Rad3UprDmeCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprDmeFnUpRemapableCmd = NULL, Rad3UprDmeFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3UprDmeActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad3UpperXpdrBaroUpRemapableCmd = NULL, Rad3UpperXpdrBaroDnRemapableCmd = NULL;
 
 
@@ -172,6 +202,12 @@ XPLMCommandRef Rad3LowrObs2FnUpRemapableCmd = NULL, Rad3LowrObs2FnDnRemapableCmd
 XPLMCommandRef Rad3LowrNav2CrsUpRemapableCmd = NULL, Rad3LowrNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrNav2FnUpRemapableCmd = NULL, Rad3LowrNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrNav2ActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrAdfCrsUpRemapableCmd = NULL, Rad3LowrAdfCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrAdfFnUpRemapableCmd = NULL, Rad3LowrAdfFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrAdfActStbyRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrDmeCrsUpRemapableCmd = NULL, Rad3LowrDmeCrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrDmeFnUpRemapableCmd = NULL, Rad3LowrDmeFnDnRemapableCmd = NULL;
+XPLMCommandRef Rad3LowrDmeActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad3LowrXpdrBaroUpRemapableCmd = NULL, Rad3LowrXpdrBaroDnRemapableCmd = NULL;
 
 
@@ -210,6 +246,9 @@ XPLMDataRef Rad1UprNav1ActStbyRemapableData = NULL, Rad1UprNav1ActStbyRemapableD
 XPLMDataRef Rad1UpperNav2ActRemapableData = NULL, Rad1UpperNav2StbyRemapableData = NULL;
 XPLMDataRef Rad1UprNav2ActStbyRemapableData = NULL, Rad1UprNav2ActStbyRemapableDataf = NULL;
 XPLMDataRef Rad1UpperObs1RemapableDataf = NULL, Rad1UpperObs2RemapableDataf = NULL;
+XPLMDataRef Rad1UpperAdfActRemapableData = NULL, Rad1UpperAdfStbyRemapableData = NULL;
+XPLMDataRef Rad1UprAdfActStbyRemapableData = NULL, Rad1UprAdfActStbyRemapableDataf = NULL;
+XPLMDataRef Rad1UpperDmeActRemapableData = NULL, Rad1UpperDmeStbyRemapableData = NULL;
 XPLMDataRef Rad1UpperXpdrRemapableData = NULL, Rad1UpperXpdrRemapableMode = NULL, Rad1UpperXpdrBaroStdRemapableData = NULL;
 
 XPLMDataRef RadioPanelCountDataRef = NULL;
@@ -223,6 +262,9 @@ XPLMDataRef Rad1LowrNav1ActStbyRemapableData = NULL, Rad1LowrNav1ActStbyRemapabl
 XPLMDataRef Rad1LowerNav2ActRemapableData = NULL, Rad1LowerNav2StbyRemapableData = NULL;
 XPLMDataRef Rad1LowrNav2ActStbyRemapableData = NULL, Rad1LowrNav2ActStbyRemapableDataf = NULL;
 XPLMDataRef Rad1LowerObs1RemapableDataf = NULL, Rad1LowerObs2RemapableDataf = NULL;
+XPLMDataRef Rad1LowerAdfActRemapableData = NULL, Rad1LowerAdfStbyRemapableData = NULL;
+XPLMDataRef Rad1LowrAdfActStbyRemapableData = NULL, Rad1LowrAdfActStbyRemapableDataf = NULL;
+XPLMDataRef Rad1LowerDmeActRemapableData = NULL, Rad1LowerDmeStbyRemapableData = NULL;
 XPLMDataRef Rad1LowerXpdrRemapableData = NULL, Rad1LowerXpdrRemapableMode = NULL, Rad1LowerXpdrBaroStdRemapableData = NULL;
 
 
@@ -235,6 +277,9 @@ XPLMDataRef Rad2UprNav1ActStbyRemapableData = NULL, Rad2UprNav1ActStbyRemapableD
 XPLMDataRef Rad2UpperNav2ActRemapableData = NULL, Rad2UpperNav2StbyRemapableData = NULL;
 XPLMDataRef Rad2UprNav2ActStbyRemapableData = NULL, Rad2UprNav2ActStbyRemapableDataf = NULL;
 XPLMDataRef Rad2UpperObs1RemapableDataf = NULL, Rad2UpperObs2RemapableDataf = NULL;
+XPLMDataRef Rad2UpperAdfActRemapableData = NULL, Rad2UpperAdfstbyRemapableData = NULL;
+XPLMDataRef Rad2UprAdfActStbyRemapableData = NULL, Rad2UprAdfActStbyRemapableDataf = NULL;
+XPLMDataRef Rad2UpperDmeActRemapableData = NULL, Rad2UpperDmeStbyRemapableData = NULL;
 XPLMDataRef Rad2UpperXpdrRemapableData = NULL, Rad2UpperXpdrRemapableMode = NULL, Rad2UpperXpdrBaroStdRemapableData = NULL;
 
 
@@ -247,6 +292,9 @@ XPLMDataRef Rad2LowrNav1ActStbyRemapableData = NULL, Rad2LowrNav1ActStbyRemapabl
 XPLMDataRef Rad2LowerNav2ActRemapableData = NULL, Rad2LowerNav2StbyRemapableData = NULL;
 XPLMDataRef Rad2LowrNav2ActStbyRemapableData = NULL, Rad2LowrNav2ActStbyRemapableDataf = NULL;
 XPLMDataRef Rad2LowerObs1RemapableDataf = NULL, Rad2LowerObs2RemapableDataf = NULL;
+XPLMDataRef Rad2LowerAdfActRemapableData = NULL, Rad2LowerAdfStbyRemapableData = NULL;
+XPLMDataRef Rad2LowrAdfActStbyRemapableData = NULL, Rad2LowrAdfActStbyRemapableDataf = NULL;
+XPLMDataRef Rad2LowerDmeActRemapableData = NULL, Rad2LowerDmeStbyRemapableData = NULL;
 XPLMDataRef Rad2LowerXpdrRemapableData = NULL, Rad2LowerXpdrRemapableMode = NULL, Rad2LowerXpdrBaroStdRemapableData = NULL;
 
 
@@ -259,6 +307,9 @@ XPLMDataRef Rad3UprNav1ActStbyRemapableData = NULL, Rad3UprNav1ActStbyRemapableD
 XPLMDataRef Rad3UpperNav2ActRemapableData = NULL, Rad3UpperNav2StbyRemapableData = NULL;
 XPLMDataRef Rad3UprNav2ActStbyRemapableData = NULL, Rad3UprNav2ActStbyRemapableDataf = NULL;
 XPLMDataRef Rad3UpperObs1RemapableDataf = NULL, Rad3UpperObs2RemapableDataf = NULL;
+XPLMDataRef Rad3UpperAdfActRemapableData = NULL, Rad3UpperAdfStbyRemapableData = NULL;
+XPLMDataRef Rad3UprAdfActStbyRemapableData = NULL, Rad3UprAdfActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3UpperDmeActRemapableData = NULL, Rad3UpperDmeStbyRemapableData = NULL;
 XPLMDataRef Rad3UpperXpdrRemapableData = NULL, Rad3UpperXpdrRemapableMode = NULL, Rad3UpperXpdrBaroStdRemapableData = NULL;
 
 
@@ -271,6 +322,9 @@ XPLMDataRef Rad3LowrNav1ActStbyRemapableData = NULL, Rad3LowrNav1ActStbyRemapabl
 XPLMDataRef Rad3LowerNav2ActRemapableData = NULL, Rad3LowerNav2StbyRemapableData = NULL;
 XPLMDataRef Rad3LowrNav2ActStbyRemapableData = NULL, Rad3LowrNav2ActStbyRemapableDataf = NULL;
 XPLMDataRef Rad3LowerObs1RemapableDataf = NULL, Rad3LowerObs2RemapableDataf = NULL;
+XPLMDataRef Rad3LowerAdfActRemapableData = NULL, Rad3LowerAdfStbyRemapableData = NULL;
+XPLMDataRef Rad3LowrAdfActStbyRemapableData = NULL, Rad3LowrAdfActStbyRemapableDataf = NULL;
+XPLMDataRef Rad3LowerDmeActRemapableData = NULL, Rad3LowerDmeStbyRemapableData = NULL;
 XPLMDataRef Rad3LowerXpdrRemapableData = NULL, Rad3LowerXpdrRemapableMode = NULL, Rad3LowerXpdrBaroStdRemapableData = NULL;
 
 
@@ -762,33 +816,45 @@ int rad1uprcom1switchremap, rad1uprcom1actstbybtnremap;
 int rad1uprcom2switchremap, rad1uprcom2actstbybtnremap;
 int rad1uprnav1switchremap, rad1uprnav1actstbybtnremap;
 int rad1uprnav2switchremap, rad1uprnav2actstbybtnremap;
+int rad1upradfswitchremap, rad1upradfactstbybtnremap;
+int rad1uprdmeswitchremap, rad1uprdmeactstbybtnremap;
 int rad1uprxpdrswitchremap;
 int rad1lwrcom1switchremap, rad1lwrcom1actstbybtnremap;
 int rad1lwrcom2switchremap, rad1lwrcom2actstbybtnremap;
 int rad1lwrnav1switchremap, rad1lwrnav1actstbybtnremap;
 int rad1lwrnav2switchremap, rad1lwrnav2actstbybtnremap;
+int rad1lwradfswitchremap, rad1lwradfactstbybtnremap;
+int rad1lwrdmeswitchremap, rad1lwrdmeactstbybtnremap;
 int rad1lwrxpdrswitchremap;
 
 int rad2uprcom1switchremap, rad2uprcom1actstbybtnremap;
 int rad2uprcom2switchremap, rad2uprcom2actstbybtnremap;
 int rad2uprnav1switchremap, rad2uprnav1actstbybtnremap;
 int rad2uprnav2switchremap, rad2uprnav2actstbybtnremap;
+int rad2upradfswitchremap, rad2upradfactstbybtnremap;
+int rad2uprdmeswitchremap, rad2uprdmeactstbybtnremap;
 int rad2uprxpdrswitchremap;
 int rad2lwrcom1switchremap, rad2lwrcom1actstbybtnremap;
 int rad2lwrcom2switchremap, rad2lwrcom2actstbybtnremap;
 int rad2lwrnav1switchremap, rad2lwrnav1actstbybtnremap;
 int rad2lwrnav2switchremap, rad2lwrnav2actstbybtnremap;
+int rad2lwradfswitchremap, rad2lwradfactstbybtnremap;
+int rad2lwrdmeswitchremap, rad2lwrdmeactstbybtnremap;
 int rad2lwrxpdrswitchremap;
 
 int rad3uprcom1switchremap, rad3uprcom1actstbybtnremap;
 int rad3uprcom2switchremap, rad3uprcom2actstbybtnremap;
 int rad3uprnav1switchremap, rad3uprnav1actstbybtnremap;
 int rad3uprnav2switchremap, rad3uprnav2actstbybtnremap;
+int rad3upradfswitchremap, rad3upradfactstbybtnremap;
+int rad3uprdmeswitchremap, rad3uprdmeactstbybtnremap;
 int rad3uprxpdrswitchremap;
 int rad3lwrcom1switchremap, rad3lwrcom1actstbybtnremap;
 int rad3lwrcom2switchremap, rad3lwrcom2actstbybtnremap;
 int rad3lwrnav1switchremap, rad3lwrnav1actstbybtnremap;
 int rad3lwrnav2switchremap, rad3lwrnav2actstbybtnremap;
+int rad3lwradfswitchremap, rad3lwradfactstbybtnremap;
+int rad3lwrdmeswitchremap, rad3lwrdmeactstbybtnremap;
 int rad3lwrxpdrswitchremap;
 
 
@@ -796,62 +862,86 @@ int rad1_upr_com1_actstby_btn_data_on_value, rad1_upr_com1_actstby_btn_data_off_
 int rad1_upr_com2_actstby_btn_data_on_value, rad1_upr_com2_actstby_btn_data_off_value;
 int rad1_upr_nav1_actstby_btn_data_on_value, rad1_upr_nav1_actstby_btn_data_off_value;
 int rad1_upr_nav2_actstby_btn_data_on_value, rad1_upr_nav2_actstby_btn_data_off_value;
+int rad1_upr_adf_actstby_btn_data_on_value, rad1_upr_adf_actstby_btn_data_off_value;
+int rad1_upr_dme_actstby_btn_data_on_value, rad1_upr_dme_actstby_btn_data_off_value;
 
 int rad1_lwr_com1_actstby_btn_data_on_value, rad1_lwr_com1_actstby_btn_data_off_value;
 int rad1_lwr_com2_actstby_btn_data_on_value, rad1_lwr_com2_actstby_btn_data_off_value;
 int rad1_lwr_nav1_actstby_btn_data_on_value, rad1_lwr_nav1_actstby_btn_data_off_value;
 int rad1_lwr_nav2_actstby_btn_data_on_value, rad1_lwr_nav2_actstby_btn_data_off_value;
+int rad1_lwr_adf_actstby_btn_data_on_value, rad1_lwr_adf_actstby_btn_data_off_value;
+int rad1_lwr_dme_actstby_btn_data_on_value, rad1_lwr_dme_actstby_btn_data_off_value;
 
 int rad2_upr_com1_actstby_btn_data_on_value, rad2_upr_com1_actstby_btn_data_off_value;
 int rad2_upr_com2_actstby_btn_data_on_value, rad2_upr_com2_actstby_btn_data_off_value;
 int rad2_upr_nav1_actstby_btn_data_on_value, rad2_upr_nav1_actstby_btn_data_off_value;
 int rad2_upr_nav2_actstby_btn_data_on_value, rad2_upr_nav2_actstby_btn_data_off_value;
+int rad2_upr_adf_actstby_btn_data_on_value, rad2_upr_adf_actstby_btn_data_off_value;
+int rad2_upr_dme_actstby_btn_data_on_value, rad2_upr_dme_actstby_btn_data_off_value;
 
 int rad2_lwr_com1_actstby_btn_data_on_value, rad2_lwr_com1_actstby_btn_data_off_value;
 int rad2_lwr_com2_actstby_btn_data_on_value, rad2_lwr_com2_actstby_btn_data_off_value;
 int rad2_lwr_nav1_actstby_btn_data_on_value, rad2_lwr_nav1_actstby_btn_data_off_value;
 int rad2_lwr_nav2_actstby_btn_data_on_value, rad2_lwr_nav2_actstby_btn_data_off_value;
+int rad2_lwr_adf_actstby_btn_data_on_value, rad2_lwr_adf_actstby_btn_data_off_value;
+int rad2_lwr_dme_actstby_btn_data_on_value, rad2_lwr_dme_actstby_btn_data_off_value;
 
 int rad3_upr_com1_actstby_btn_data_on_value, rad3_upr_com1_actstby_btn_data_off_value;
 int rad3_upr_com2_actstby_btn_data_on_value, rad3_upr_com2_actstby_btn_data_off_value;
 int rad3_upr_nav1_actstby_btn_data_on_value, rad3_upr_nav1_actstby_btn_data_off_value;
 int rad3_upr_nav2_actstby_btn_data_on_value, rad3_upr_nav2_actstby_btn_data_off_value;
+int rad3_upr_adf_actstby_btn_data_on_value, rad3_upr_adf_actstby_btn_data_off_value;
+int rad3_upr_dme_actstby_btn_data_on_value, rad3_upr_dme_actstby_btn_data_off_value;
 
 int rad3_lwr_com1_actstby_btn_data_on_value, rad3_lwr_com1_actstby_btn_data_off_value;
 int rad3_lwr_com2_actstby_btn_data_on_value, rad3_lwr_com2_actstby_btn_data_off_value;
 int rad3_lwr_nav1_actstby_btn_data_on_value, rad3_lwr_nav1_actstby_btn_data_off_value;
 int rad3_lwr_nav2_actstby_btn_data_on_value, rad3_lwr_nav2_actstby_btn_data_off_value;
+int rad3_lwr_adf_actstby_btn_data_on_value, rad3_lwr_adf_actstby_btn_data_off_value;
+int rad3_lwr_dme_actstby_btn_data_on_value, rad3_lwr_dme_actstby_btn_data_off_value;
 
 
 float rad1_upr_com1_actstby_btn_dataf_on_value, rad1_upr_com1_actstby_btn_dataf_off_value;
 float rad1_upr_com2_actstby_btn_dataf_on_value, rad1_upr_com2_actstby_btn_dataf_off_value;
 float rad1_upr_nav1_actstby_btn_dataf_on_value, rad1_upr_nav1_actstby_btn_dataf_off_value;
-float rad1_upr_nav2_actstby_btn_datfa_on_value, rad1_upr_nav2_actstby_btn_dataf_off_value;
+float rad1_upr_nav2_actstby_btn_dataf_on_value, rad1_upr_nav2_actstby_btn_dataf_off_value;
+float rad1_upr_adf_actstby_btn_dataf_on_value, rad1_upr_adf_actstby_btn_dataf_off_value;
+float rad1_upr_dme_actstby_btn_datfa_on_value, rad1_upr_dme_actstby_btn_dataf_off_value;
 
 float rad1_lwr_com1_actstby_btn_dataf_on_value, rad1_lwr_com1_actstby_btn_dataf_off_value;
 float rad1_lwr_com2_actstby_btn_dataf_on_value, rad1_lwr_com2_actstby_btn_dataf_off_value;
 float rad1_lwr_nav1_actstby_btn_dataf_on_value, rad1_lwr_nav1_actstby_btn_dataf_off_value;
 float rad1_lwr_nav2_actstby_btn_dataf_on_value, rad1_lwr_nav2_actstby_btn_dataf_off_value;
+float rad1_lwr_adf_actstby_btn_dataf_on_value, rad1_lwr_adf_actstby_btn_dataf_off_value;
+float rad1_lwr_dme_actstby_btn_dataf_on_value, rad1_lwr_dme_actstby_btn_dataf_off_value;
 
 float rad2_upr_com1_actstby_btn_dataf_on_value, rad2_upr_com1_actstby_btn_dataf_off_value;
 float rad2_upr_com2_actstby_btn_dataf_on_value, rad2_upr_com2_actstby_btn_dataf_off_value;
 float rad2_upr_nav1_actstby_btn_dataf_on_value, rad2_upr_nav1_actstby_btn_dataf_off_value;
 float rad2_upr_nav2_actstby_btn_datfa_on_value, rad2_upr_nav2_actstby_btn_dataf_off_value;
+float rad2_upr_adf_actstby_btn_dataf_on_value, rad2_upr_adf_actstby_btn_dataf_off_value;
+float rad2_upr_dme_actstby_btn_dataf_on_value, rad2_upr_dme_actstby_btn_dataf_off_value;
 
 float rad2_lwr_com1_actstby_btn_dataf_on_value, rad2_lwr_com1_actstby_btn_dataf_off_value;
 float rad2_lwr_com2_actstby_btn_dataf_on_value, rad2_lwr_com2_actstby_btn_dataf_off_value;
 float rad2_lwr_nav1_actstby_btn_dataf_on_value, rad2_lwr_nav1_actstby_btn_dataf_off_value;
 float rad2_lwr_nav2_actstby_btn_dataf_on_value, rad2_lwr_nav2_actstby_btn_dataf_off_value;
+float rad2_lwr_adf_actstby_btn_dataf_on_value, rad2_lwr_adf_actstby_btn_dataf_off_value;
+float rad2_lwr_dme_actstby_btn_dataf_on_value, rad2_lwr_dme_actstby_btn_dataf_off_value;
 
 float rad3_upr_com1_actstby_btn_dataf_on_value, rad3_upr_com1_actstby_btn_dataf_off_value;
 float rad3_upr_com2_actstby_btn_dataf_on_value, rad3_upr_com2_actstby_btn_dataf_off_value;
 float rad3_upr_nav1_actstby_btn_dataf_on_value, rad3_upr_nav1_actstby_btn_dataf_off_value;
 float rad3_upr_nav2_actstby_btn_datfa_on_value, rad3_upr_nav2_actstby_btn_dataf_off_value;
+float rad3_upr_adf_actstby_btn_dataf_on_value, rad3_upr_adf_actstby_btn_dataf_off_value;
+float rad3_upr_dme_actstby_btn_datfa_on_value, rad3_upr_dme_actstby_btn_dataf_off_value;
 
 float rad3_lwr_com1_actstby_btn_dataf_on_value, rad3_lwr_com1_actstby_btn_dataf_off_value;
 float rad3_lwr_com2_actstby_btn_dataf_on_value, rad3_lwr_com2_actstby_btn_dataf_off_value;
 float rad3_lwr_nav1_actstby_btn_dataf_on_value, rad3_lwr_nav1_actstby_btn_dataf_off_value;
 float rad3_lwr_nav2_actstby_btn_dataf_on_value, rad3_lwr_nav2_actstby_btn_dataf_off_value;
+float rad3_lwr_adf_actstby_btn_dataf_on_value, rad3_lwr_adf_actstby_btn_dataf_off_value;
+float rad3_lwr_dme_actstby_btn_dataf_on_value, rad3_lwr_dme_actstby_btn_dataf_off_value;
 
 
 void CreateRadioWidget(int x1, int y1, int w, int h);
@@ -1161,6 +1251,18 @@ string rad1_upper_nav2_act_data_remapable, rad1_upper_nav2_stby_data_remapable;
 string rad1_upper_nav2_actstby_btn_remapable_cmd, rad1_upper_nav2_actstby_btn_remapable_data;
 string rad1_upper_nav2_actstby_btn_remapable_dataf;
 
+string rad1_upper_adf_corse_up_remapable, rad1_upper_adf_corse_dn_remapable;
+string rad1_upper_adf_fine_up_remapable, rad1_upper_adf_fine_dn_remapable;
+string rad1_upper_adf_act_data_remapable, rad1_upper_adf_stby_data_remapable;
+string rad1_upper_adf_actstby_btn_remapable_cmd, rad1_upper_adf_actstby_btn_remapable_data;
+string rad1_upper_adf_actstby_btn_remapable_dataf;
+
+string rad1_upper_dme_corse_up_remapable, rad1_upper_dme_corse_dn_remapable;
+string rad1_upper_dme_fine_up_remapable, rad1_upper_dme_fine_dn_remapable;
+string rad1_upper_dme_act_data_remapable, rad1_upper_dme_stby_data_remapable;
+string rad1_upper_dme_actstby_btn_remapable_cmd, rad1_upper_dme_actstby_btn_remapable_data;
+string rad1_upper_dme_actstby_btn_remapable_dataf;
+
 string rad1_upper_xpdr_data_remapable, rad1_upper_xpdr_mode_remapable, rad1_upper_xpdr_baro_std_data_remapable;
 string rad1_upper_xpdr_baro_up_remapable_cmd, rad1_upper_xpdr_baro_dn_remapable_cmd;
 
@@ -1193,6 +1295,18 @@ string rad1_lower_nav2_fine_up_remapable, rad1_lower_nav2_fine_dn_remapable;
 string rad1_lower_nav2_act_data_remapable, rad1_lower_nav2_stby_data_remapable;
 string rad1_lower_nav2_actstby_btn_remapable_cmd, rad1_lower_nav2_actstby_btn_remapable_data;
 string rad1_lower_nav2_actstby_btn_remapable_dataf;
+
+string rad1_lower_adf_corse_up_remapable, rad1_lower_adf_corse_dn_remapable;
+string rad1_lower_adf_fine_up_remapable, rad1_lower_adf_fine_dn_remapable;
+string rad1_lower_adf_act_data_remapable, rad1_lower_adf_stby_data_remapable;
+string rad1_lower_adf_actstby_btn_remapable_cmd, rad1_lower_adf_actstby_btn_remapable_data;
+string rad1_lower_adf_actstby_btn_remapable_dataf;
+
+string rad1_lower_dme_corse_up_remapable, rad1_lower_dme_corse_dn_remapable;
+string rad1_lower_dme_fine_up_remapable, rad1_lower_dme_fine_dn_remapable;
+string rad1_lower_dme_act_data_remapable, rad1_lower_dme_stby_data_remapable;
+string rad1_lower_dme_actstby_btn_remapable_cmd, rad1_lower_dme_actstby_btn_remapable_data;
+string rad1_lower_dme_actstby_btn_remapable_dataf;
 
 string rad1_lower_xpdr_data_remapable, rad1_lower_xpdr_mode_remapable;
 string rad1_lower_xpdr_baro_std_data_remapable;
@@ -1229,6 +1343,18 @@ string rad2_upper_nav2_act_data_remapable, rad2_upper_nav2_stby_data_remapable;
 string rad2_upper_nav2_actstby_btn_remapable_cmd, rad2_upper_nav2_actstby_btn_remapable_data;
 string rad2_upper_nav2_actstby_btn_remapable_dataf;
 
+string rad2_upper_adf_corse_up_remapable, rad2_upper_adf_corse_dn_remapable;
+string rad2_upper_adf_fine_up_remapable, rad2_upper_adf_fine_dn_remapable;
+string rad2_upper_adf_act_data_remapable, rad2_upper_adf_stby_data_remapable;
+string rad2_upper_adf_actstby_btn_remapable_cmd, rad2_upper_adf_actstby_btn_remapable_data;
+string rad2_upper_adf_actstby_btn_remapable_dataf;
+
+string rad2_upper_dme_corse_up_remapable, rad2_upper_dme_corse_dn_remapable;
+string rad2_upper_dme_fine_up_remapable, rad2_upper_dme_fine_dn_remapable;
+string rad2_upper_dme_act_data_remapable, rad2_upper_dme_stby_data_remapable;
+string rad2_upper_dme_actstby_btn_remapable_cmd, rad2_upper_dme_actstby_btn_remapable_data;
+string rad2_upper_dme_actstby_btn_remapable_dataf;
+
 string rad2_upper_xpdr_data_remapable, rad2_upper_xpdr_mode_remapable,  rad2_upper_xpdr_baro_std_data_remapable;
 string rad2_upper_xpdr_baro_up_remapable_cmd, rad2_upper_xpdr_baro_dn_remapable_cmd;
 
@@ -1261,6 +1387,18 @@ string rad2_lower_nav2_fine_up_remapable, rad2_lower_nav2_fine_dn_remapable;
 string rad2_lower_nav2_act_data_remapable, rad2_lower_nav2_stby_data_remapable;
 string rad2_lower_nav2_actstby_btn_remapable_cmd, rad2_lower_nav2_actstby_btn_remapable_data;
 string rad2_lower_nav2_actstby_btn_remapable_dataf;
+
+string rad2_lower_adf_corse_up_remapable, rad2_lower_adf_corse_dn_remapable;
+string rad2_lower_adf_fine_up_remapable, rad2_lower_adf_fine_dn_remapable;
+string rad2_lower_adf_act_data_remapable, rad2_lower_adf_stby_data_remapable;
+string rad2_lower_adf_actstby_btn_remapable_cmd, rad2_lower_adf_actstby_btn_remapable_data;
+string rad2_lower_adf_actstby_btn_remapable_dataf;
+
+string rad2_lower_dme_corse_up_remapable, rad2_lower_dme_corse_dn_remapable;
+string rad2_lower_dme_fine_up_remapable, rad2_lower_dme_fine_dn_remapable;
+string rad2_lower_dme_act_data_remapable, rad2_lower_dme_stby_data_remapable;
+string rad2_lower_dme_actstby_btn_remapable_cmd, rad2_lower_dme_actstby_btn_remapable_data;
+string rad2_lower_dme_actstby_btn_remapable_dataf;
 
 string rad2_lower_xpdr_data_remapable, rad2_lower_xpdr_mode_remapable,  rad2_lower_xpdr_baro_std_data_remapable;
 string rad2_lower_xpdr_baro_up_remapable_cmd, rad2_lower_xpdr_baro_dn_remapable_cmd;
@@ -1296,6 +1434,18 @@ string rad3_upper_nav2_act_data_remapable, rad3_upper_nav2_stby_data_remapable;
 string rad3_upper_nav2_actstby_btn_remapable_cmd, rad3_upper_nav2_actstby_btn_remapable_data;
 string rad3_upper_nav2_actstby_btn_remapable_dataf;
 
+string rad3_upper_adf_corse_up_remapable, rad3_upper_adf_corse_dn_remapable;
+string rad3_upper_adf_fine_up_remapable, rad3_upper_adf_fine_dn_remapable;
+string rad3_upper_adf_act_data_remapable, rad3_upper_adf_stby_data_remapable;
+string rad3_upper_adf_actstby_btn_remapable_cmd, rad3_upper_adf_actstby_btn_remapable_data;
+string rad3_upper_adf_actstby_btn_remapable_dataf;
+
+string rad3_upper_dme_corse_up_remapable, rad3_upper_dme_corse_dn_remapable;
+string rad3_upper_dme_fine_up_remapable, rad3_upper_dme_fine_dn_remapable;
+string rad3_upper_dme_act_data_remapable, rad3_upper_dme_stby_data_remapable;
+string rad3_upper_dme_actstby_btn_remapable_cmd, rad3_upper_dme_actstby_btn_remapable_data;
+string rad3_upper_dme_actstby_btn_remapable_dataf;
+
 string rad3_upper_xpdr_data_remapable, rad3_upper_xpdr_mode_remapable,  rad3_upper_xpdr_baro_std_data_remapable;
 string rad3_upper_xpdr_baro_up_remapable_cmd, rad3_upper_xpdr_baro_dn_remapable_cmd;
 
@@ -1328,6 +1478,18 @@ string rad3_lower_nav2_fine_up_remapable, rad3_lower_nav2_fine_dn_remapable;
 string rad3_lower_nav2_act_data_remapable, rad3_lower_nav2_stby_data_remapable;
 string rad3_lower_nav2_actstby_btn_remapable_cmd, rad3_lower_nav2_actstby_btn_remapable_data;
 string rad3_lower_nav2_actstby_btn_remapable_dataf;
+
+string rad3_lower_adf_corse_up_remapable, rad3_lower_adf_corse_dn_remapable;
+string rad3_lower_adf_fine_up_remapable, rad3_lower_adf_fine_dn_remapable;
+string rad3_lower_adf_act_data_remapable, rad3_lower_adf_stby_data_remapable;
+string rad3_lower_adf_actstby_btn_remapable_cmd, rad3_lower_adf_actstby_btn_remapable_data;
+string rad3_lower_adf_actstby_btn_remapable_dataf;
+
+string rad3_lower_dme_corse_up_remapable, rad3_lower_dme_corse_dn_remapable;
+string rad3_lower_dme_fine_up_remapable, rad3_lower_dme_fine_dn_remapable;
+string rad3_lower_dme_act_data_remapable, rad3_lower_dme_stby_data_remapable;
+string rad3_lower_dme_actstby_btn_remapable_cmd, rad3_lower_dme_actstby_btn_remapable_data;
+string rad3_lower_dme_actstby_btn_remapable_dataf;
 
 string rad3_lower_xpdr_data_remapable, rad3_lower_xpdr_mode_remapable,  rad3_lower_xpdr_baro_std_data_remapable;
 string rad3_lower_xpdr_baro_up_remapable_cmd, rad3_lower_xpdr_baro_dn_remapable_cmd;
@@ -2345,7 +2507,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 242;
+  XsaitekpanelsVersion = 243;
 
   XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
 
