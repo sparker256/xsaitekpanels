@@ -2914,7 +2914,7 @@ void process_read_ini_file()
       Rad3UprAdfFnDnRemapableCmd   = XPLMFindCommand(rad3_upper_adf_fine_dn_remapable.c_str());
 
       rad3_upper_adf_act_data_remapable = getOptionToString("rad3_upper_adf_act_data");
-      Rad2UpperAdfActRemapableData   = XPLMFindDataRef(rad3_upper_adf_act_data_remapable.c_str());
+      Rad3UpperAdfActRemapableData   = XPLMFindDataRef(rad3_upper_adf_act_data_remapable.c_str());
 
       rad3_upper_adf_stby_data_remapable = getOptionToString("rad3_upper_adf_stby_data");
       Rad3UpperAdfStbyRemapableData   = XPLMFindDataRef(rad3_upper_adf_stby_data_remapable.c_str());

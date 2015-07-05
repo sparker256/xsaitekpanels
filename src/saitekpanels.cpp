@@ -277,7 +277,7 @@ XPLMDataRef Rad2UprNav1ActStbyRemapableData = NULL, Rad2UprNav1ActStbyRemapableD
 XPLMDataRef Rad2UpperNav2ActRemapableData = NULL, Rad2UpperNav2StbyRemapableData = NULL;
 XPLMDataRef Rad2UprNav2ActStbyRemapableData = NULL, Rad2UprNav2ActStbyRemapableDataf = NULL;
 XPLMDataRef Rad2UpperObs1RemapableDataf = NULL, Rad2UpperObs2RemapableDataf = NULL;
-XPLMDataRef Rad2UpperAdfActRemapableData = NULL, Rad2UpperAdfstbyRemapableData = NULL;
+XPLMDataRef Rad2UpperAdfActRemapableData = NULL, Rad2UpperAdfStbyRemapableData;
 XPLMDataRef Rad2UprAdfActStbyRemapableData = NULL, Rad2UprAdfActStbyRemapableDataf = NULL;
 XPLMDataRef Rad2UpperDmeActRemapableData = NULL, Rad2UpperDmeStbyRemapableData = NULL;
 XPLMDataRef Rad2UpperXpdrRemapableData = NULL, Rad2UpperXpdrRemapableMode = NULL, Rad2UpperXpdrBaroStdRemapableData = NULL;
