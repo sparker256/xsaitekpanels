@@ -217,7 +217,7 @@ void process_radio_upper_display()
         radiobdig5 = radiobdig5;
     }
 
-   if(xpanelsfnbutton == 0) {
+   if((xpanelsfnbutton == 0) || (rad1upradfswitchremap == 1) || (rad2upradfswitchremap == 1) ||  (rad3upradfswitchremap == 1)) {
 
 
     if (upadfsel[radnum] == 1) {
@@ -591,7 +591,7 @@ void process_radio_lower_display()
 
     }
 
-    if(xpanelsfnbutton == 0) {
+    if((xpanelsfnbutton == 0) || (rad1lwradfswitchremap == 1) || (rad2lwradfswitchremap == 1) || (rad3lwradfswitchremap == 1)) {
 
 
     if (loadfsel[radnum] == 1) {
@@ -1920,6 +1920,12 @@ void proecss_upper_adf_switch()
         UpAdf1CardDirDegm[radnum] = XPLMGetDataf(Adf1CardDirDegm);
         upstbyadf1dir[radnum] = (int)(UpAdf1CardDirDegm[radnum]);
         if (xpanelsfnbutton == 1) {
+            if ((rad1upradfswitchremap == 1) || (rad2upradfswitchremap == 1) ||  (rad3upradfswitchremap == 1)) {
+                upactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
+                upstbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
+                return;
+            }
+
             if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_UP) == 0)) {
                 upadfdbdirfninc[radnum]++;
                 if (upadfdbdirfninc[radnum] > radspeed) {
@@ -4194,6 +4200,11 @@ void process_lower_adf_switch()
 
         if (numadf == 1) {
             if (xpanelsfnbutton == 1) {
+                if ((rad1lwradfswitchremap == 1) || (rad2lwradfswitchremap == 1) || (rad3lwradfswitchremap == 1)) {
+                    loactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
+                    lostbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
+                    return;
+                }
                 if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                     loadfdbdirfninc[radnum]++;
                     if (loadfdbdirfninc[radnum] > radspeed) {
@@ -4422,6 +4433,11 @@ void process_lower_adf_switch()
         // Second ADF on the lower position
         if (numadf == 2) {
             if (xpanelsfnbutton == 1) {
+                if ((rad1lwradfswitchremap == 1) || (rad2lwradfswitchremap == 1) || (rad3lwradfswitchremap == 1)) {
+                    loactadffreq[radnum] = XPLMGetDatai(Adf2ActFreq);
+                    lostbyadffreq[radnum] = XPLMGetDatai(Adf2StbyFreq);
+                    return;
+                }
                 if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                     loadfdbdirfninc[radnum]++;
                     if (loadfdbdirfninc[radnum] > radspeed) {
