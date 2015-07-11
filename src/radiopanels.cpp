@@ -222,14 +222,16 @@ void process_radio_upper_display()
 
     if (upadfsel[radnum] == 1) {
       radioaactv = upactadffreq[radnum];
-      radioadig1 = 15, radioadig2 = 15;
-      radioadig3 = radioaactv/100, radioarem3 =radioaactv%100;
+      radioadig1 = 15;
+      radioadig2 = radioaactv/1000, radioarem2 =radioaactv%1000;
+      radioadig3 = radioarem2/100, radioarem3 =radioarem2%100;
       radioadig4 = radioarem3/10, radioarem4 = radioarem3%10;
       radioadig5 = radioarem4;
 
       radiobstby = upstbyadffreq[radnum];
-      radiobdig1 = 15, radiobdig2 = 15;
-      radiobdig3 = radiobstby/100, radiobrem3 =radiobstby%100;
+      radiobdig1 = 15;
+      radiobdig2 = radiobstby/1000, radiobrem2 =radiobstby%1000;
+      radiobdig3 = radiobrem2/100, radiobrem3 =radiobrem2%100;
       radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
       radiobdig5 = radiobrem4;
       radiobdig5 = radiobdig5+208;
@@ -237,28 +239,32 @@ void process_radio_upper_display()
 
     if (upadfsel[radnum] == 2) {
       radioaactv = upactadffreq[radnum];
-      radioadig1 = 15, radioadig2 = 15;
-      radioadig3 = radioaactv/100, radioarem3 =radioaactv%100;
+      radioadig1 = 15;
+      radioadig2 = radioaactv/1000, radioarem2 =radioaactv%1000;
+      radioadig3 = radioarem2/100, radioarem3 =radioarem2%100;
       radioadig4 = radioarem3/10, radioarem4 = radioarem3%10;
       radioadig5 = radioarem4;
 
       radiobstby = upstbyadffreq[radnum];
-      radiobdig1 = 15, radiobdig2 = 15;
-      radiobdig3 = radiobstby/100, radiobrem3 =radiobstby%100;
+      radiobdig1 = 15;
+      radiobdig2 = radiobstby/1000, radiobrem2 =radiobstby%1000;
+      radiobdig3 = radiobrem2/100, radiobrem3 =radiobrem2%100;
       radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
       radiobdig4 = radiobdig4+208, radiobdig5 = radiobrem4;
     }
 
     if (upadfsel[radnum] == 3) {
       radioaactv = upactadffreq[radnum];
-      radioadig1 = 15, radioadig2 = 15;
-      radioadig3 = radioaactv/100, radioarem3 =radioaactv%100;
+      radioadig1 = 15;
+      radioadig2 = radioaactv/1000, radioarem2 =radioaactv%1000;
+      radioadig3 = radioarem2/100, radioarem3 =radioarem2%100;
       radioadig4 = radioarem3/10, radioarem4 = radioarem3%10;
       radioadig5 = radioarem4;
 
       radiobstby = upstbyadffreq[radnum];
-      radiobdig1 = 15, radiobdig2 = 15;
-      radiobdig3 = radiobstby/100, radiobrem3 =radiobstby%100;
+      radiobdig1 = 15;
+      radiobdig2 = radiobstby/1000, radiobrem2 =radiobstby%1000;
+      radiobdig3 = radiobrem2/100, radiobrem3 =radiobrem2%100;
       radiobdig3 = radiobdig3+208;
       radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
       radiobdig5 = radiobrem4;
@@ -266,14 +272,16 @@ void process_radio_upper_display()
 
     if (upadfsel[radnum] > 3) {
       radioaactv = upactadffreq[radnum];
-      radioadig1 = 15, radioadig2 = 15;
-      radioadig3 = radioaactv/100, radioarem3 =radioaactv%100;
+      radioadig1 = 15;
+      radioadig2 = radioaactv/1000, radioarem2 =radioaactv%1000;
+      radioadig3 = radioarem2/100, radioarem3 =radioarem2%100;
       radioadig4 = radioarem3/10, radioarem4 = radioarem3%10;
       radioadig5 = radioarem4;
 
       radiobstby = upstbyadffreq[radnum];
-      radiobdig1 = 15, radiobdig2 = 15;
-      radiobdig3 = radiobstby/100, radiobrem3 =radiobstby%100;
+      radiobdig1 = 15;
+      radiobdig2 = radiobstby/1000, radiobrem2 =radiobstby%1000;
+      radiobdig3 = radiobrem2/100, radiobrem3 =radiobrem2%100;
       radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
       radiobdig5 = radiobrem4;
     }
@@ -588,14 +596,16 @@ void process_radio_lower_display()
 
     if (loadfsel[radnum] == 1) {
       radiocactv = loactadffreq[radnum];
-      radiocdig1 = 15, radiocdig2 = 15;
-      radiocdig3 = radiocactv/100, radiocrem3 =radiocactv%100;
+      radiocdig1 = 15;
+      radiocdig2 = radiocactv/1000, radiocrem2 =radiocactv%1000;
+      radiocdig3 = radiocrem2/100, radiocrem3 =radiocrem2%100;
       radiocdig4 = radiocrem3/10, radiocrem4 = radiocrem3%10;
       radiocdig5 = radiocrem4;
 
       radiodstby = lostbyadffreq[radnum];
-      radioddig1 = 15, radioddig2 = 15;
-      radioddig3 = radiodstby/100, radiodrem3 = radiodstby%100;
+      radioddig1 = 15;
+      radioddig2 = radiodstby/1000, radiodrem2 = radiodstby%1000;
+      radioddig3 = radiodrem2/100, radiodrem3 = radiodrem2%100;
       radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
       radioddig5 = radiodrem4;
       radioddig5 = radioddig5+208;
@@ -604,14 +614,16 @@ void process_radio_lower_display()
 
     if (loadfsel[radnum] == 2) {
       radiocactv = loactadffreq[radnum];
-      radiocdig1 = 15, radiocdig2 = 15;
-      radiocdig3 = radiocactv/100, radiocrem3 =radiocactv%100;
+      radiocdig1 = 15;
+      radiocdig2 = radiocactv/1000, radiocrem2 =radiocactv%1000;
+      radiocdig3 = radiocrem2/100, radiocrem3 =radiocrem2%100;
       radiocdig4 = radiocrem3/10, radiocrem4 = radiocrem3%10;
       radiocdig5 = radiocrem4;
 
       radiodstby = lostbyadffreq[radnum];
-      radioddig1 = 15, radioddig2 = 15;
-      radioddig3 = radiodstby/100, radiodrem3 = radiodstby%100;
+      radioddig1 = 15;
+      radioddig2 = radiodstby/1000, radiodrem2 = radiodstby%1000;
+      radioddig3 = radiodrem2/100, radiodrem3 = radiodrem2%100;
       radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
       radioddig4 = radioddig4+208;
       radioddig5 = radiodrem4;
@@ -619,14 +631,16 @@ void process_radio_lower_display()
 
     if (loadfsel[radnum] == 3) {
       radiocactv = loactadffreq[radnum];
-      radiocdig1 = 15, radiocdig2 = 15;
-      radiocdig3 = radiocactv/100, radiocrem3 =radiocactv%100;
+      radiocdig1 = 15;
+      radiocdig2 = radiocactv/1000, radiocrem2 =radiocactv%1000;
+      radiocdig3 = radiocrem2/100, radiocrem3 =radiocrem2%100;
       radiocdig4 = radiocrem3/10, radiocrem4 = radiocrem3%10;
       radiocdig5 = radiocrem4;
 
       radiodstby = lostbyadffreq[radnum];
-      radioddig1 = 15, radioddig2 = 15;
-      radioddig3 = radiodstby/100, radiodrem3 = radiodstby%100;
+      radioddig1 = 15;
+      radioddig2 = radiodstby/1000, radiodrem2 = radiodstby%1000;
+      radioddig3 = radiodrem2/100, radiodrem3 = radiodrem2%100;
       radioddig3 = radioddig3+208;
       radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
       radioddig5 = radiodrem4;
@@ -634,14 +648,16 @@ void process_radio_lower_display()
 
     if (loadfsel[radnum] > 3) {
       radiocactv = loactadffreq[radnum];
-      radiocdig1 = 15, radiocdig2 = 15;
-      radiocdig3 = radiocactv/100, radiocrem3 =radiocactv%100;
+      radiocdig1 = 15;
+      radiocdig2 = radiocactv/1000, radiocrem2 =radiocactv%1000;
+      radiocdig3 = radiocrem2/100, radiocrem3 =radiocrem2%100;
       radiocdig4 = radiocrem3/10, radiocrem4 = radiocrem3%10;
       radiocdig5 = radiocrem4;
 
       radiodstby = lostbyadffreq[radnum];
-      radioddig1 = 15, radioddig2 = 15;
-      radioddig3 = radiodstby/100, radiodrem3 = radiodstby%100;
+      radioddig1 = 15;
+      radioddig2 = radiodstby/1000, radiodrem2 = radiodstby%1000;
+      radioddig3 = radiodrem2/100, radiodrem3 = radiodrem2%100;
       radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
       radioddig5 = radiodrem4;
     }
@@ -1984,8 +2000,9 @@ void proecss_upper_adf_switch()
                         upadfdbncfndec[radnum] = 0;
                     }
                 }
+                Last_Upper_Fine_Dn[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
             }
-            Last_Upper_Fine_Dn[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
+
 
             if (upadfsel[radnum] == 2) {
                 if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_UP) == 0)) {
@@ -2020,8 +2037,9 @@ void proecss_upper_adf_switch()
                         upadfdbncfndec[radnum] = 0;
                     }
                 }
+                Last_Upper_Fine_Dn[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
             }
-            Last_Upper_Fine_Dn[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
+
 
             if (upadfsel[radnum] == 3) {
                 if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_UP) == 0)) {
@@ -2055,6 +2073,7 @@ void proecss_upper_adf_switch()
                         }
                         upadfdbncfndec[radnum] = 0;
                     }
+
                 }
                 Last_Upper_Fine_Dn[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
              }
@@ -4543,6 +4562,7 @@ void process_lower_adf_switch()
                             loadfdbncfninc[radnum] = 0;
                         }
                     }
+                    Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
                     if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                         loadfdbncfndec[radnum]++;
