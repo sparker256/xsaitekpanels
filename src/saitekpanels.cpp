@@ -3250,7 +3250,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 PLUGIN_API void	XPluginStop(void)
 {
 
-  XPLMDebugString("XPluginStop has been called \n");
+  XPLMDebugString("Xsaitekpanels: XPluginStop has been called \n");
 
 
   if (switchMenuItem == 1)
