@@ -1969,7 +1969,7 @@ void proecss_upper_adf_switch()
                 upstbyadf1dir[radnum] = 360;
             }
             upstbyadf1dirf[radnum] = upstbyadf1dir[radnum];
-            XPLMSetDataf(Adf1CardDirDegm, upstbyadf1dirf[radnum]);
+            XPLMSetDataf(Adf1CardDirDegm, (float)upstbyadf1dirf[radnum]);
         }
 
         if (xpanelsfnbutton == 0) {
@@ -4251,7 +4251,7 @@ void process_lower_adf_switch()
                 }
 
                 lostbyadf1dirf[radnum] = lostbyadf1dir[radnum];
-                XPLMSetDataf(Adf1CardDirDegm, lostbyadf1dirf[radnum]);
+                XPLMSetDataf(Adf1CardDirDegm, (float)lostbyadf1dirf[radnum]);
 
             }
 
@@ -4484,7 +4484,7 @@ void process_lower_adf_switch()
                 }
 
                 lostbyadf2dirf[radnum] = lostbyadf2dir[radnum];
-                XPLMSetDataf(Adf2CardDirDegm, lostbyadf2dirf[radnum]);
+                XPLMSetDataf(Adf2CardDirDegm, (float)lostbyadf2dirf[radnum]);
             }
 
             if (xpanelsfnbutton == 0) {

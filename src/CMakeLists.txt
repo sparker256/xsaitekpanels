@@ -2,9 +2,15 @@
 SET(SRC bippanel.cpp inireader.cpp multidata.cpp multipanel.cpp radio1data.cpp radio2data.cpp radio3data.cpp radiopanels.cpp readinifile.cpp saitekpanels.cpp switchdata.cpp switchpanel.cpp)
 SET(HDR inireader.h saitekpanels.h)
 
+if(APPLE)
+	SET(HIDAPI_SRC ../../hidapi-0.8.0-rc1/mac/hid.c)
+elseif(UNIX)
+	SET(HIDAPI_SRC ../../hidapi-0.8.0-rc1/linux/hid.c)
+elseif(WIN32)
+	SET(HIDAPI_SRC ../../hidapi-0.8.0-rc1/windows/hid.c)
+endif()
 
-
-SET(ALL_SRC ${SRC} ${HDR})
+SET(ALL_SRC ${SRC} ${HIDAPI_SRC} ${HDR})
 LIST(SORT ALL_SRC)
 
 if(APPLE)
