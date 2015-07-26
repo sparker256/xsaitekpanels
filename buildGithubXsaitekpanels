@@ -1,9 +1,0 @@
-#!/bin/bash
-#
-cd X-Plane_Github_Plugins/xsaitekpanels &&
-./build4linux &&
-./Copy_Source &&
-ssh -v Williams-Mac-Pro.local ". ~/.bash_profile && cd xp10plugins_github/Xsaitekpanels_test && ./build4mac"
-exec $SHELL
-#
-
