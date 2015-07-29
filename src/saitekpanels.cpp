@@ -5474,7 +5474,7 @@ void CreateSwitchWidget(int x, int y, int w, int h)
 int	SwitchHandler(XPWidgetMessage  SwitchinMessage, XPWidgetID  SwitchWidgetID, intptr_t  inParam1, intptr_t  inParam2)
 {
         (void) inParam2;
-        int State;
+        intptr_t State;
         int Index1;
         if (SwitchinMessage == xpMessage_CloseButtonPushed)
         {
@@ -6050,8 +6050,7 @@ void CreateRadioWidget(int x, int y, int w, int h)
 int	RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, intptr_t  inParam1, intptr_t  inParam2)
 {
         (void) inParam2;
-        int State; //, State1, State2;
-        //int Index1;
+        intptr_t State;
         if (RadioinMessage == xpMessage_CloseButtonPushed)
         {
                 if (radioMenuItem == 1)
@@ -6382,7 +6381,7 @@ void CreateMultiWidget(int x, int y, int w, int h)
 int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, intptr_t  inParam1, intptr_t  inParam2)
 {
         (void) inParam2;
-        int State;
+        intptr_t State;
         if (MultiinMessage == xpMessage_CloseButtonPushed)
         {
                 if (multiMenuItem == 1)
