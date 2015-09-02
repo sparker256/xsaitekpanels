@@ -1,8 +1,8 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jul 26 2015   **************
+// ****** Sep 01 2015   **************
 
-#define VERSION_NUMBER "2.44"
+#define PLUGIN_VERSION "2.44 stable build " __DATE__ " " __TIME__
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -2509,10 +2509,10 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   XsaitekpanelsVersion = 244;
 
-  XPLMDebugString("Xsaitekpanels: ver " VERSION_NUMBER "\n");
+  XPLMDebugString("Xsaitekpanels: ver " PLUGIN_VERSION "\n");
 
 	/* First set up our plugin info. */
-  strcpy(outName, "Xsaitekpanels ver " VERSION_NUMBER);
+  strcpy(outName, "Xsaitekpanels ver " PLUGIN_VERSION);
   strcpy(outSig, "bgood.xsaitekpanels");
   strcpy(outDesc, "A plugin allows use of Saitek Pro Flight Panels on all platforms using hidapi");
 
@@ -6700,8 +6700,8 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/iasbtn/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/altbtn/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
-        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
-        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/vsbtn/status");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/aprbtn/status");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/revbtn/status");
     }
 
     return 0;

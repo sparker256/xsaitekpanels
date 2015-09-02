@@ -17,7 +17,7 @@ if [ $? != 0 ] ; then
 fi
 
 make distclean >/dev/null
-qmake -spec linux-g++-4.8-64 && make &&
+qmake -spec linux-g++-4.7-64 && make &&
 cp plugin/liblin.xpl.so release/Xsaitekpanels/64/lin.xpl
 if [ $? != 0 ] ; then
   exit
@@ -25,7 +25,7 @@ fi
 
 
 make distclean >/dev/null
-qmake -spec linux-g++-4.8-32 && make &&
+qmake -spec linux-g++-4.7-32 && make &&
 cp plugin/liblin.xpl.so release/Xsaitekpanels/lin.xpl
 if [ $? != 0 ] ; then
   exit
