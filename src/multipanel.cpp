@@ -3478,29 +3478,27 @@ void process_rev_button()
 // ***************** Flaps Switch *******************
 void process_flaps_switch()
 {
-    if (flapsupremap == 0) {
-        if (XPLMGetDatai(BatPwrOn) == 1) {
-            if (multires > 0) {
-                if(testbit(multibuf,FLAPS_UP_SWITCH)) {
+    if (multires > 0) {
+        if(testbit(multibuf,FLAPS_UP_SWITCH)) {
+            if (flapsupremap == 1) {
+                XPLMCommandOnce(FlapsUpRemapableCmd);
+            } else {
+                if (XPLMGetDatai(BatPwrOn) == 1) {
                     XPLMCommandOnce(FlapsUp);
                 }
-                if(testbit(multibuf,FLAPS_DN_SWITCH)) {
+            }
+        }
+        if(testbit(multibuf,FLAPS_DN_SWITCH)) {
+            if (flapsdnremap == 1) {
+                XPLMCommandOnce(FlapsDnRemapableCmd);
+            } else {
+                if (XPLMGetDatai(BatPwrOn) == 1) {
                     XPLMCommandOnce(FlapsDn);
                 }
             }
         }
-    } else if (flapsupremap == 1) {
-
-        if (multires > 0) {
-            if(testbit(multibuf,FLAPS_UP_SWITCH)) {
-                XPLMCommandOnce(FlapsUpRemapableCmd);
-            }
-            if(testbit(multibuf,FLAPS_DN_SWITCH)) {
-                XPLMCommandOnce(FlapsDnRemapableCmd);
-            }
-        }
     }
-}
+ }
 
 // *************** Trim Wheel *********************
 void process_trim_wheel()
