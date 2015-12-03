@@ -1,8 +1,8 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Oct 26 2015   **************
+// ****** Dec 02 2015   **************
 
-#define PLUGIN_VERSION "2.46 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION "2.47 stable build " __DATE__ " " __TIME__
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -365,12 +365,24 @@ XPLMDataRef Rad3UpperXpdrOwnedDataRef = NULL, Rad3UpperCorseIncOwnedDataRef = NU
 XPLMDataRef Rad3UpperCorseDecOwnedDataRef = NULL, Rad3UpperFineIncOwnedDataRef = NULL;
 XPLMDataRef Rad3UpperFineDecOwnedDataRef = NULL, Rad3UpperActStbyOwnedDataRef = NULL;
 
+XPLMDataRef Rad3UpperDigit1OwnedDataRef = NULL, Rad3UpperDigit2OwnedDataRef = NULL;
+XPLMDataRef Rad3UpperDigit3OwnedDataRef = NULL, Rad3UpperDigit4OwnedDataRef = NULL;
+XPLMDataRef Rad3UpperDigit5OwnedDataRef = NULL, Rad3UpperDigit6OwnedDataRef = NULL;
+XPLMDataRef Rad3UpperDigit7OwnedDataRef = NULL, Rad3UpperDigit8OwnedDataRef = NULL;
+XPLMDataRef Rad3UpperDigit9OwnedDataRef = NULL, Rad3UpperDigit10OwnedDataRef = NULL;
+
 XPLMDataRef Rad3LowerCom1OwnedDataRef = NULL, Rad3LowerCom2OwnedDataRef = NULL;
 XPLMDataRef Rad3LowerNav1OwnedDataRef = NULL, Rad3LowerNav2OwnedDataRef = NULL;
 XPLMDataRef Rad3LowerAdfOwnedDataRef = NULL, Rad3LowerDmeOwnedDataRef = NULL;
 XPLMDataRef Rad3LowerXpdrOwnedDataRef = NULL, Rad3LowerCorseIncOwnedDataRef = NULL;
 XPLMDataRef Rad3LowerCorseDecOwnedDataRef = NULL, Rad3LowerFineIncOwnedDataRef = NULL;
 XPLMDataRef Rad3LowerFineDecOwnedDataRef = NULL, Rad3LowerActStbyOwnedDataRef = NULL;
+
+XPLMDataRef Rad3LowerDigit1OwnedDataRef = NULL, Rad3LowerDigit2OwnedDataRef = NULL;
+XPLMDataRef Rad3LowerDigit3OwnedDataRef = NULL, Rad3LowerDigit4OwnedDataRef = NULL;
+XPLMDataRef Rad3LowerDigit5OwnedDataRef = NULL, Rad3LowerDigit6OwnedDataRef = NULL;
+XPLMDataRef Rad3LowerDigit7OwnedDataRef = NULL, Rad3LowerDigit8OwnedDataRef = NULL;
+XPLMDataRef Rad3LowerDigit9OwnedDataRef = NULL, Rad3LowerDigit10OwnedDataRef = NULL;
 
 
 XPLMMenuID      RadioMenu;
@@ -987,12 +999,27 @@ static int Rad3UprXpdrOwnedData = 0, Rad3UprCorseIncOwnedData = 0;
 static int Rad3UprCorseDecOwnedData = 0, Rad3UprFineIncOwnedData = 0;
 static int Rad3UprFineDecOwnedData = 0, Rad3UprActStbyOwnedData = 0;
 
+
+static int Rad3UprDigit1OwnedData = 0, Rad3UprDigit2OwnedData = 0;
+static int Rad3UprDigit3OwnedData = 0, Rad3UprDigit4OwnedData = 0;
+static int Rad3UprDigit5OwnedData = 0, Rad3UprDigit6OwnedData = 0;
+static int Rad3UprDigit7OwnedData = 0, Rad3UprDigit8OwnedData = 0;
+static int Rad3UprDigit9OwnedData = 0, Rad3UprDigit10OwnedData = 0;
+
+
 static int Rad3LwrCom1OwnedData = 0, Rad3LwrCom2OwnedData = 0;
 static int Rad3LwrNav1OwnedData = 0, Rad3LwrNav2OwnedData = 0;
 static int Rad3LwrAdfOwnedData = 0, Rad3LwrDmeOwnedData = 0;
 static int Rad3LwrXpdrOwnedData = 0, Rad3LwrCorseIncOwnedData = 0;
 static int Rad3LwrCorseDecOwnedData = 0, Rad3LwrFineIncOwnedData = 0;
 static int Rad3LwrFineDecOwnedData = 0, Rad3LwrActStbyOwnedData = 0;
+
+
+static int Rad3LwrDigit1OwnedData = 0, Rad3LwrDigit2OwnedData = 0;
+static int Rad3LwrDigit3OwnedData = 0, Rad3LwrDigit4OwnedData = 0;
+static int Rad3LwrDigit5OwnedData = 0, Rad3LwrDigit6OwnedData = 0;
+static int Rad3LwrDigit7OwnedData = 0, Rad3LwrDigit8OwnedData = 0;
+static int Rad3LwrDigit9OwnedData = 0, Rad3LwrDigit10OwnedData = 0;
 
 
 int	RadioPanelCountGetDataiCallback(void * inRefcon);
@@ -1184,6 +1211,39 @@ int	Rad3UprActStbyStatusGetDataiCallback(void * inRefcon);
 void	Rad3UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad3UprActStbyStatus);
 
 
+
+int	Rad3UprDigit1ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit1ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit1Value);
+
+int	Rad3UprDigit2ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit2ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit2Value);
+
+int	Rad3UprDigit3ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit3ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit3Value);
+
+int	Rad3UprDigit4ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit4ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit4Value);
+
+int	Rad3UprDigit5ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit5ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit5Value);
+
+int	Rad3UprDigit6ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit6ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit6Value);
+
+int	Rad3UprDigit7ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit7ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit7Value);
+
+int	Rad3UprDigit8ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit8ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit8Value);
+
+int	Rad3UprDigit9ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit9ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit9Value);
+
+int	Rad3UprDigit10ValueGetDataiCallback(void * inRefcon);
+void	Rad3UprDigit10ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit10Value);
+
+
+
 int	Rad3LwrCom1StatusGetDataiCallback(void * inRefcon);
 void	Rad3LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad3LwrCom1Status);
 
@@ -1219,6 +1279,37 @@ void	Rad3LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad3LwrFineDecSta
 
 int	Rad3LwrActStbyStatusGetDataiCallback(void * inRefcon);
 void	Rad3LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad3LwrActStbyStatus);
+
+
+int	Rad3LwrDigit1ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit1ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit1Value);
+
+int	Rad3LwrDigit2ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit2ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit2Value);
+
+int	Rad3LwrDigit3ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit3ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit3Value);
+
+int	Rad3LwrDigit4ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit4ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit4Value);
+
+int	Rad3LwrDigit5ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit5ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit5Value);
+
+int	Rad3LwrDigit6ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit6ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit6Value);
+
+int	Rad3LwrDigit7ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit7ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit7Value);
+
+int	Rad3LwrDigit8ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit8ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit8Value);
+
+int	Rad3LwrDigit9ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit9ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit9Value);
+
+int	Rad3LwrDigit10ValueGetDataiCallback(void * inRefcon);
+void	Rad3LwrDigit10ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit10Value);
 
 
 string rad1_upper_com1_corse_up_remapable, rad1_upper_com1_corse_dn_remapable;
@@ -4692,6 +4783,138 @@ void	Rad3UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad3UprActStbySta
 }
 
 
+
+
+int	Rad3UprDigit1ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit1OwnedData;
+}
+
+void	Rad3UprDigit1ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit1Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit1OwnedData = Rad3UprDigit1Value2;
+}
+
+
+int	Rad3UprDigit2ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit2OwnedData;
+}
+
+void	Rad3UprDigit2ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit2Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit2OwnedData = Rad3UprDigit2Value2;
+}
+
+int	Rad3UprDigit3ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit3OwnedData;
+}
+
+void	Rad3UprDigit3ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit3Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit3OwnedData = Rad3UprDigit3Value2;
+}
+
+
+int	Rad3UprDigit4ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit4OwnedData;
+}
+
+void	Rad3UprDigit4ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit4Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit4OwnedData = Rad3UprDigit4Value2;
+}
+
+
+int	Rad3UprDigit5ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit5OwnedData;
+}
+
+void	Rad3UprDigit5ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit5Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit5OwnedData = Rad3UprDigit5Value2;
+}
+
+
+int	Rad3UprDigit6ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit6OwnedData;
+}
+
+void	Rad3UprDigit6ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit6Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit6OwnedData = Rad3UprDigit6Value2;
+}
+
+
+int	Rad3UprDigit7ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit7OwnedData;
+}
+
+void	Rad3UprDigit7ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit7Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit7OwnedData = Rad3UprDigit7Value2;
+}
+
+
+int	Rad3UprDigit8ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit8OwnedData;
+}
+
+void	Rad3UprDigit8ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit8Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit8OwnedData = Rad3UprDigit8Value2;
+}
+
+
+int	Rad3UprDigit9ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit9OwnedData;
+}
+
+void	Rad3UprDigit9ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit9Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit9OwnedData = Rad3UprDigit9Value2;
+}
+
+
+int	Rad3UprDigit10ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3UprDigit10OwnedData;
+}
+
+void	Rad3UprDigit10ValueSetDataiCallback(void * inRefcon, int Rad3UprDigit10Value2)
+{
+    (void) inRefcon;
+    Rad3UprDigit10OwnedData = Rad3UprDigit10Value2;
+}
+
+
+
 // Radio3 lower datareferences callbacks
 
 int	Rad3LwrCom1StatusGetDataiCallback(void * inRefcon)
@@ -4846,6 +5069,145 @@ void	Rad3LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad3LwrActStbySta
     (void) inRefcon;
     Rad3LwrActStbyOwnedData = Rad3LwrActStbyStatus2;
 }
+
+
+
+
+int	Rad3LwrDigit1ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit1OwnedData;
+}
+
+void	Rad3LwrDigit1ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit1Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit1OwnedData = Rad3LwrDigit1Value2;
+}
+
+
+int	Rad3LwrDigit2ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit2OwnedData;
+}
+
+void	Rad3LwrDigit2ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit2Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit2OwnedData = Rad3LwrDigit2Value2;
+}
+
+int	Rad3LwrDigit3ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit3OwnedData;
+}
+
+void	Rad3LwrDigit3ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit3Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit3OwnedData = Rad3LwrDigit3Value2;
+}
+
+
+int	Rad3LwrDigit4ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit4OwnedData;
+}
+
+void	Rad3LwrDigit4ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit4Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit4OwnedData = Rad3LwrDigit4Value2;
+}
+
+
+int	Rad3LwrDigit5ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit5OwnedData;
+}
+
+void	Rad3LwrDigit5ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit5Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit5OwnedData = Rad3LwrDigit5Value2;
+}
+
+
+int	Rad3LwrDigit6ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit6OwnedData;
+}
+
+void	Rad3LwrDigit6ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit6Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit6OwnedData = Rad3LwrDigit6Value2;
+}
+
+
+int	Rad3LwrDigit7ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit7OwnedData;
+}
+
+void	Rad3LwrDigit7ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit7Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit7OwnedData = Rad3LwrDigit7Value2;
+}
+
+
+int	Rad3LwrDigit8ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit8OwnedData;
+}
+
+void	Rad3LwrDigit8ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit8Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit8OwnedData = Rad3LwrDigit8Value2;
+}
+
+
+int	Rad3LwrDigit9ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit9OwnedData;
+}
+
+void	Rad3LwrDigit9ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit9Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit9OwnedData = Rad3LwrDigit9Value2;
+}
+
+
+int	Rad3LwrDigit10ValueGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return Rad3LwrDigit10OwnedData;
+}
+
+void	Rad3LwrDigit10ValueSetDataiCallback(void * inRefcon, int Rad3LwrDigit10Value2)
+{
+    (void) inRefcon;
+    Rad3LwrDigit10OwnedData = Rad3LwrDigit10Value2;
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -6665,6 +7027,19 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprfinedec/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3upractstby/status");
 
+
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit1/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit2/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit3/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit4/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit5/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit6/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit7/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit8/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit9/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit10/value");
+
+
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcom1/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrcom2/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrnav1/status");
@@ -6677,6 +7052,19 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrfineinc/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrfinedec/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwractstby/status");
+
+
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit1/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit2/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit3/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit4/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit5/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit6/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit7/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit8/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit9/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit10/value");
+
     }
 
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/count");
