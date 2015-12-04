@@ -538,10 +538,24 @@ void process_radio_upper_display()
 
       }
 
+  }
 
+  else if (upseldis[radnum] == 12) {
 
+      radioadig1 = Rad3UprDigit1OwnedData;
+      radioadig2 = Rad3UprDigit2OwnedData;
+      radioadig3 = Rad3UprDigit3OwnedData;
+      radioadig4 = Rad3UprDigit4OwnedData;
+      radioadig5 = Rad3UprDigit5OwnedData;
+
+      radiobdig1 = Rad3UprDigit6OwnedData;
+      radiobrem2 = Rad3UprDigit7OwnedData;
+      radiobdig3 = Rad3UprDigit8OwnedData;
+      radiobdig4 = Rad3UprDigit9OwnedData;
+      radiobdig5 = Rad3UprDigit10OwnedData;
 
   }
+
 
 
 }
@@ -917,6 +931,24 @@ void process_radio_lower_display()
 
       }
   }
+
+
+  else if (loseldis[radnum] == 12) {
+
+      radiocdig1 = Rad3LwrDigit1OwnedData;
+      radiocdig2 = Rad3LwrDigit2OwnedData;
+      radiocdig3 = Rad3LwrDigit3OwnedData;
+      radiocdig4 = Rad3LwrDigit4OwnedData;
+      radiocdig5 = Rad3LwrDigit5OwnedData;
+
+      radioddig1 = Rad3LwrDigit6OwnedData;
+      radioddig2 = Rad3LwrDigit7OwnedData;
+      radioddig3 = Rad3LwrDigit8OwnedData;
+      radioddig4 = Rad3LwrDigit9OwnedData;
+      radioddig5 = Rad3LwrDigit10OwnedData;
+
+  }
+
 
 }
 
@@ -2151,6 +2183,13 @@ void process_upper_dme_switch()
 {
 
     if (testbit(radiobuf[radnum],UPPER_DME)) {
+         if (rad3uprdmeswitchremap == 2) {
+            if (radnum == 2) {
+                upseldis[radnum] = 12;
+            }
+            return;
+        }
+
         // ****** Function button is not pushed  *******
         // Set Dme mode with ACT/STBY button
         if (xpanelsfnbutton == 0) {
@@ -4662,6 +4701,13 @@ void process_lower_adf_switch()
 void process_lower_dme_switch()
 {
     if (testbit(radiobuf[radnum],LOWER_DME)) {
+        if (rad3lwrdmeswitchremap == 2) {
+            if (radnum == 2) {
+                loseldis[radnum] = 12;
+            }
+            return;
+        }
+
         // ****** Function button is not pushed  *******
         if (xpanelsfnbutton == 0) {
             if (lodmepushed == 0) {

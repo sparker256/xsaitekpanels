@@ -2938,7 +2938,8 @@ void process_read_ini_file()
   }
 
 
-
+  // Radio3 Upper Dme switch - remapable
+  rad3uprdmeswitchremap = getOptionToInt("Radio3 Upper Dme remapable");
 
 
 
@@ -3192,6 +3193,10 @@ void process_read_ini_file()
       rad3_lwr_adf_actstby_btn_data_on_value = getOptionToInt("rad3_lwr_adf_actstby_btn_data_on_value");
       rad3_lwr_adf_actstby_btn_data_off_value = getOptionToInt("rad3_lwr_adf_actstby_btn_data_off_value");
   }
+
+
+  // Radio3 Lower Dme switch - remapable
+  rad3lwrdmeswitchremap = getOptionToInt("Radio3 Lower Dme remapable");
 
 
    // Radio3 Lower Xpdr switch - remapable

@@ -992,19 +992,19 @@ static int Rad2LwrXpdrOwnedData = 0, Rad2LwrCorseIncOwnedData = 0;
 static int Rad2LwrCorseDecOwnedData = 0, Rad2LwrFineIncOwnedData = 0;
 static int Rad2LwrFineDecOwnedData = 0, Rad2LwrActStbyOwnedData = 0;
 
-static int Rad3UprCom1OwnedData = 0, Rad3UprCom2OwnedData = 0;
-static int Rad3UprNav1OwnedData = 0, Rad3UprNav2OwnedData = 0;
-static int Rad3UprAdfOwnedData = 0, Rad3UprDmeOwnedData = 0;
-static int Rad3UprXpdrOwnedData = 0, Rad3UprCorseIncOwnedData = 0;
-static int Rad3UprCorseDecOwnedData = 0, Rad3UprFineIncOwnedData = 0;
-static int Rad3UprFineDecOwnedData = 0, Rad3UprActStbyOwnedData = 0;
+int Rad3UprCom1OwnedData = 0, Rad3UprCom2OwnedData = 0;
+int Rad3UprNav1OwnedData = 0, Rad3UprNav2OwnedData = 0;
+int Rad3UprAdfOwnedData = 0, Rad3UprDmeOwnedData = 0;
+int Rad3UprXpdrOwnedData = 0, Rad3UprCorseIncOwnedData = 0;
+int Rad3UprCorseDecOwnedData = 0, Rad3UprFineIncOwnedData = 0;
+int Rad3UprFineDecOwnedData = 0, Rad3UprActStbyOwnedData = 0;
 
 
-static int Rad3UprDigit1OwnedData = 0, Rad3UprDigit2OwnedData = 0;
-static int Rad3UprDigit3OwnedData = 0, Rad3UprDigit4OwnedData = 0;
-static int Rad3UprDigit5OwnedData = 0, Rad3UprDigit6OwnedData = 0;
-static int Rad3UprDigit7OwnedData = 0, Rad3UprDigit8OwnedData = 0;
-static int Rad3UprDigit9OwnedData = 0, Rad3UprDigit10OwnedData = 0;
+int Rad3UprDigit1OwnedData = 0, Rad3UprDigit2OwnedData = 0;
+int Rad3UprDigit3OwnedData = 0, Rad3UprDigit4OwnedData = 0;
+int Rad3UprDigit5OwnedData = 0, Rad3UprDigit6OwnedData = 0;
+int Rad3UprDigit7OwnedData = 0, Rad3UprDigit8OwnedData = 0;
+int Rad3UprDigit9OwnedData = 0, Rad3UprDigit10OwnedData = 0;
 
 
 static int Rad3LwrCom1OwnedData = 0, Rad3LwrCom2OwnedData = 0;
@@ -1015,11 +1015,11 @@ static int Rad3LwrCorseDecOwnedData = 0, Rad3LwrFineIncOwnedData = 0;
 static int Rad3LwrFineDecOwnedData = 0, Rad3LwrActStbyOwnedData = 0;
 
 
-static int Rad3LwrDigit1OwnedData = 0, Rad3LwrDigit2OwnedData = 0;
-static int Rad3LwrDigit3OwnedData = 0, Rad3LwrDigit4OwnedData = 0;
-static int Rad3LwrDigit5OwnedData = 0, Rad3LwrDigit6OwnedData = 0;
-static int Rad3LwrDigit7OwnedData = 0, Rad3LwrDigit8OwnedData = 0;
-static int Rad3LwrDigit9OwnedData = 0, Rad3LwrDigit10OwnedData = 0;
+int Rad3LwrDigit1OwnedData = 0, Rad3LwrDigit2OwnedData = 0;
+int Rad3LwrDigit3OwnedData = 0, Rad3LwrDigit4OwnedData = 0;
+int Rad3LwrDigit5OwnedData = 0, Rad3LwrDigit6OwnedData = 0;
+int Rad3LwrDigit7OwnedData = 0, Rad3LwrDigit8OwnedData = 0;
+int Rad3LwrDigit9OwnedData = 0, Rad3LwrDigit10OwnedData = 0;
 
 
 int	RadioPanelCountGetDataiCallback(void * inRefcon);
