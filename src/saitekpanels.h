@@ -538,6 +538,45 @@ extern int	Rad1UprActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad1UprActStbyStatus);
 
 
+extern int	Rad1UprDigit1ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit1ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit1Value);
+
+extern int	Rad1UprDigit2ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit2ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit2Value);
+
+extern int	Rad1UprDigit3ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit3ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit3Value);
+
+extern int	Rad1UprDigit4ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit4ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit4Value);
+
+extern int	Rad1UprDigit5ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit5ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit5Value);
+
+extern int	Rad1UprDigit6ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit6ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit6Value);
+
+extern int	Rad1UprDigit7ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit7ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit7Value);
+
+extern int	Rad1UprDigit8ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit8ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit8Value);
+
+extern int	Rad1UprDigit9ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit9ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit9Value);
+
+extern int	Rad1UprDigit10ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit10ValueSetDataiCallback(void * inRefcon, int Rad1UprDigit10Value);
+
+
+extern int Rad1UprDigit1OwnedData, Rad1UprDigit2OwnedData;
+extern int Rad1UprDigit3OwnedData, Rad1UprDigit4OwnedData;
+extern int Rad1UprDigit5OwnedData, Rad1UprDigit6OwnedData;
+extern int Rad1UprDigit7OwnedData, Rad1UprDigit8OwnedData;
+extern int Rad1UprDigit9OwnedData, Rad1UprDigit10OwnedData;
+
+
+
 extern int	Rad1LwrCom1StatusGetDataiCallback(void * inRefcon);
 extern void	Rad1LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad1LwrCom1Status);
 
@@ -573,6 +612,47 @@ extern void	Rad1LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad1LwrFin
 
 extern int	Rad1LwrActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad1LwrActStbyStatus);
+
+
+
+extern int	Rad1LwrDigit1ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDigit1ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit1Value);
+
+extern int	Rad1LwrDigit2ValueGetDataiCallback(void * inRefcon);
+extern void	Rad3LwrDigit2ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit2Value);
+
+extern int	Rad1LwrDigit3ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDigit3ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit3Value);
+
+extern int	Rad1LwrDigit4ValueGetDataiCallback(void * inRefcon);
+void	Rad1LwrDigit4ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit4Value);
+
+extern int	Rad1LwrDigit5ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDigit5ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit5Value);
+
+extern int	Rad1LwrDigit6ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDigit6ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit6Value);
+
+extern int	Rad1LwrDigit7ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDigit7ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit7Value);
+
+extern int	Rad1LwrDigit8ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDigit8ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit8Value);
+
+extern int	Rad1LwrDigit9ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDigit9ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit9Value);
+
+extern int	Rad1LwrDigit10ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrDigit10ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit10Value);
+
+
+extern int Rad1LwrDigit1OwnedData, Rad1LwrDigit2OwnedData;
+extern int Rad1LwrDigit3OwnedData, Rad1LwrDigit4OwnedData;
+extern int Rad1LwrDigit5OwnedData, Rad1LwrDigit6OwnedData;
+extern int Rad1LwrDigit7OwnedData, Rad1LwrDigit8OwnedData;
+extern int Rad1LwrDigit9OwnedData, Rad1LwrDigit10OwnedData;
+
+
 
 
 extern int	Rad2UprCom1StatusGetDataiCallback(void * inRefcon);
@@ -612,6 +692,46 @@ extern int	Rad2UprActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad2UprActStbyStatus);
 
 
+extern int	Rad2UprDigit1ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit1ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit1Value);
+
+extern int	Rad2UprDigit2ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit2ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit2Value);
+
+int	Rad2UprDigit3ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit3ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit3Value);
+
+extern int	Rad2UprDigit4ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit4ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit4Value);
+
+extern int	Rad1UprDigit5ValueGetDataiCallback(void * inRefcon);
+extern void	Rad1UprDigit5ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit5Value);
+
+extern int	Rad2UprDigit6ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit6ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit6Value);
+
+extern int	Rad2UprDigit7ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit7ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit7Value);
+
+extern int	Rad2UprDigit8ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit8ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit8Value);
+
+extern int	Rad2UprDigit9ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit9ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit9Value);
+
+extern int	Rad2UprDigit10ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit10ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit10Value);
+
+
+extern int Rad2UprDigit1OwnedData, Rad2UprDigit2OwnedData;
+extern int Rad2UprDigit3OwnedData, Rad2UprDigit4OwnedData;
+extern int Rad2UprDigit5OwnedData, Rad2UprDigit6OwnedData;
+extern int Rad2UprDigit7OwnedData, Rad2UprDigit8OwnedData;
+extern int Rad2UprDigit9OwnedData, Rad2UprDigit10OwnedData;
+
+
+
+
 extern int	Rad2LwrCom1StatusGetDataiCallback(void * inRefcon);
 extern void	Rad2LwrCom1StatusSetDataiCallback(void * inRefcon, int Rad2LwrCom1Status);
 
@@ -647,6 +767,47 @@ extern void	Rad2LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad2LwrFin
 
 extern int	Rad2LwrActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbyStatus);
+
+
+
+extern int	Rad2LwrDigit1ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit1ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit1Value);
+
+extern int	Rad2LwrDigit2ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit2ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit2Value);
+
+extern int	Rad2LwrDigit3ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit3ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit3Value);
+
+extern int	Rad2LwrDigit4ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit4ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit4Value);
+
+extern int	Rad2LwrDigit5ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit5ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit5Value);
+
+extern int	Rad2LwrDigit6ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit6ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit6Value);
+
+extern int	Rad2LwrDigit7ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit7ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit7Value);
+
+extern int	Rad2LwrDigit8ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit8ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit8Value);
+
+extern int	Rad2LwrDigit9ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit9ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit9Value);
+
+extern int	Rad2LwrDigit10ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrDigit10ValueSetDataiCallback(void * inRefcon, int Rad2LwrDigit10Value);
+
+
+extern int Rad2LwrDigit1OwnedData, Rad2LwrDigit2OwnedData;
+extern int Rad2LwrDigit3OwnedData, Rad2LwrDigit4OwnedData;
+extern int Rad2LwrDigit5OwnedData, Rad2LwrDigit6OwnedData;
+extern int Rad2LwrDigit7OwnedData, Rad2LwrDigit8OwnedData;
+extern int Rad2LwrDigit9OwnedData, Rad2LwrDigit10OwnedData;
+
+
 
 
 extern int	Rad3UprCom1StatusGetDataiCallback(void * inRefcon);

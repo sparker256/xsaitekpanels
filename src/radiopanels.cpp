@@ -549,7 +549,7 @@ void process_radio_upper_display()
       radioadig5 = Rad3UprDigit5OwnedData;
 
       radiobdig1 = Rad3UprDigit6OwnedData;
-      radiobrem2 = Rad3UprDigit7OwnedData;
+      radiobdig2 = Rad3UprDigit7OwnedData;
       radiobdig3 = Rad3UprDigit8OwnedData;
       radiobdig4 = Rad3UprDigit9OwnedData;
       radiobdig5 = Rad3UprDigit10OwnedData;
