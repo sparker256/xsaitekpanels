@@ -117,6 +117,96 @@ void process_radio1_upper_datareference()
                                  NULL, NULL, NULL, NULL, NULL);
 
 
+
+
+
+        Rad1UpperDigit1OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit1/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit1ValueGetDataiCallback,
+                                 Rad1UprDigit1ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+
+        Rad1UpperDigit2OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit2/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit2ValueGetDataiCallback,
+                                 Rad1UprDigit2ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1UpperDigit3OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit3/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit3ValueGetDataiCallback,
+                                 Rad1UprDigit3ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1UpperDigit4OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit4/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit4ValueGetDataiCallback,
+                                 Rad1UprDigit4ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1UpperDigit5OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit5/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit5ValueGetDataiCallback,
+                                 Rad1UprDigit5ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1UpperDigit6OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit6/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit6ValueGetDataiCallback,
+                                 Rad1UprDigit6ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1UpperDigit7OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit7/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit7ValueGetDataiCallback,
+                                 Rad1UprDigit7ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1UpperDigit8OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit8/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit8ValueGetDataiCallback,
+                                 Rad1UprDigit8ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1UpperDigit9OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit9/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit9ValueGetDataiCallback,
+                                 Rad1UprDigit9ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+
+        Rad1UpperDigit10OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprdigit10/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1UprDigit10ValueGetDataiCallback,
+                                 Rad1UprDigit10ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+
+
+
+
+
 }
 
 void process_radio1_lower_datareference()
@@ -222,6 +312,94 @@ void process_radio1_lower_datareference()
                                  NULL, NULL, NULL, NULL, NULL);
 
 
+
+
+        Rad1LowerDigit1OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit1/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit1ValueGetDataiCallback,
+                                 Rad1LwrDigit1ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+
+        Rad1LowerDigit2OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit2/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit2ValueGetDataiCallback,
+                                 Rad1LwrDigit2ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1LowerDigit3OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit3/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit3ValueGetDataiCallback,
+                                 Rad1LwrDigit3ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1LowerDigit4OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit4/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit4ValueGetDataiCallback,
+                                 Rad1LwrDigit4ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1LowerDigit5OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit5/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit5ValueGetDataiCallback,
+                                 Rad1LwrDigit5ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1LowerDigit6OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit6/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit6ValueGetDataiCallback,
+                                 Rad1LwrDigit6ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1LowerDigit7OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit7/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit7ValueGetDataiCallback,
+                                 Rad1LwrDigit7ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1LowerDigit8OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit8/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit8ValueGetDataiCallback,
+                                 Rad1LwrDigit8ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+        Rad1LowerDigit9OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit9/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit9ValueGetDataiCallback,
+                                 Rad1LwrDigit9ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+
+        Rad1LowerDigit10OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1lwrdigit10/value",
+                                 xplmType_Int,
+                                 1,
+                                 Rad1LwrDigit10ValueGetDataiCallback,
+                                 Rad1LwrDigit10ValueSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+
+
+
+
 }
 
 void process_radio1_unregister_xsaitekpanels_datareference()
@@ -239,6 +417,19 @@ void process_radio1_unregister_xsaitekpanels_datareference()
     XPLMUnregisterDataAccessor(Rad1UpperFineDecOwnedDataRef);
     XPLMUnregisterDataAccessor(Rad1UpperActStbyOwnedDataRef);
 
+
+    XPLMUnregisterDataAccessor(Rad1UpperDigit1OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit2OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit3OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit4OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit5OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit6OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit7OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit8OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit9OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1UpperDigit10OwnedDataRef);
+
+
     XPLMUnregisterDataAccessor(Rad1LowerCom1OwnedDataRef);
     XPLMUnregisterDataAccessor(Rad1LowerCom2OwnedDataRef);
     XPLMUnregisterDataAccessor(Rad1LowerNav1OwnedDataRef);
@@ -251,6 +442,18 @@ void process_radio1_unregister_xsaitekpanels_datareference()
     XPLMUnregisterDataAccessor(Rad1LowerFineIncOwnedDataRef);
     XPLMUnregisterDataAccessor(Rad1LowerFineDecOwnedDataRef);
     XPLMUnregisterDataAccessor(Rad1LowerActStbyOwnedDataRef);
+
+
+    XPLMUnregisterDataAccessor(Rad1LowerDigit1OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit2OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit3OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit4OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit5OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit6OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit7OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit8OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit9OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad1LowerDigit10OwnedDataRef);
 
     return;
 

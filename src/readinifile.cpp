@@ -1934,6 +1934,10 @@ void process_read_ini_file()
     }
 
 
+    // Radio1 Upper Dme switch - remapable
+    rad1uprdmeswitchremap = getOptionToInt("Radio1 Upper Dme remapable");
+
+
 
     // Radio1 Upper Xpdr switch - remapable
 
@@ -2186,6 +2190,10 @@ void process_read_ini_file()
      }
 
 
+     // Radio1 Lower Dme switch - remapable
+     rad1lwrdmeswitchremap = getOptionToInt("Radio1 Lower Dme remapable");
+
+
      // Radio1 Lower Xpdr switch - remapable
 
      rad1lwrxpdrswitchremap = getOptionToInt("Radio1 Lower Xpdr Switch remapable");
@@ -2436,6 +2444,8 @@ void process_read_ini_file()
    }
 
 
+   // Radio2 Upper Dme switch - remapable
+   rad2uprdmeswitchremap = getOptionToInt("Radio2 Upper Dme remapable");
 
 
     // Radio2 Upper Xpdr switch - remapable
@@ -2688,6 +2698,10 @@ void process_read_ini_file()
        rad2_lwr_adf_actstby_btn_data_on_value = getOptionToInt("rad2_lwr_adf_actstby_btn_data_on_value");
        rad2_lwr_adf_actstby_btn_data_off_value = getOptionToInt("rad2_lwr_adf_actstby_btn_data_off_value");
    }
+
+   // Radio2 Lower Dme switch - remapable
+   rad2lwrdmeswitchremap = getOptionToInt("Radio2 Lower Dme remapable");
+
 
 
     // Radio2 Lower Xpdr switch - remapable

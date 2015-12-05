@@ -423,6 +423,18 @@ void process_radio3_unregister_xsaitekpanels_datareference()
     XPLMUnregisterDataAccessor(Rad3UpperFineDecOwnedDataRef);
     XPLMUnregisterDataAccessor(Rad3UpperActStbyOwnedDataRef);
 
+    XPLMUnregisterDataAccessor(Rad3UpperDigit1OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit2OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit3OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit4OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit5OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit6OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit7OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit8OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit9OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3UpperDigit10OwnedDataRef);
+
+
     XPLMUnregisterDataAccessor(Rad3LowerCom1OwnedDataRef);
     XPLMUnregisterDataAccessor(Rad3LowerCom2OwnedDataRef);
     XPLMUnregisterDataAccessor(Rad3LowerNav1OwnedDataRef);
@@ -435,6 +447,19 @@ void process_radio3_unregister_xsaitekpanels_datareference()
     XPLMUnregisterDataAccessor(Rad3LowerFineIncOwnedDataRef);
     XPLMUnregisterDataAccessor(Rad3LowerFineDecOwnedDataRef);
     XPLMUnregisterDataAccessor(Rad3LowerActStbyOwnedDataRef);
+
+
+    XPLMUnregisterDataAccessor(Rad3LowerDigit1OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit2OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit3OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit4OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit5OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit6OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit7OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit8OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit9OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3LowerDigit10OwnedDataRef);
+
 
     return;
 

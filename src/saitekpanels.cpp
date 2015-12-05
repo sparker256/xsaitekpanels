@@ -335,12 +335,25 @@ XPLMDataRef Rad1UpperXpdrOwnedDataRef = NULL, Rad1UpperCorseIncOwnedDataRef = NU
 XPLMDataRef Rad1UpperCorseDecOwnedDataRef = NULL, Rad1UpperFineIncOwnedDataRef = NULL;
 XPLMDataRef Rad1UpperFineDecOwnedDataRef = NULL, Rad1UpperActStbyOwnedDataRef = NULL;
 
+XPLMDataRef Rad1UpperDigit1OwnedDataRef = NULL, Rad1UpperDigit2OwnedDataRef = NULL;
+XPLMDataRef Rad1UpperDigit3OwnedDataRef = NULL, Rad1UpperDigit4OwnedDataRef = NULL;
+XPLMDataRef Rad1UpperDigit5OwnedDataRef = NULL, Rad1UpperDigit6OwnedDataRef = NULL;
+XPLMDataRef Rad1UpperDigit7OwnedDataRef = NULL, Rad1UpperDigit8OwnedDataRef = NULL;
+XPLMDataRef Rad1UpperDigit9OwnedDataRef = NULL, Rad1UpperDigit10OwnedDataRef = NULL;
+
+
 XPLMDataRef Rad1LowerCom1OwnedDataRef = NULL, Rad1LowerCom2OwnedDataRef = NULL;
 XPLMDataRef Rad1LowerNav1OwnedDataRef = NULL, Rad1LowerNav2OwnedDataRef = NULL;
 XPLMDataRef Rad1LowerAdfOwnedDataRef = NULL, Rad1LowerDmeOwnedDataRef = NULL;
 XPLMDataRef Rad1LowerXpdrOwnedDataRef = NULL, Rad1LowerCorseIncOwnedDataRef = NULL;
 XPLMDataRef Rad1LowerCorseDecOwnedDataRef = NULL, Rad1LowerFineIncOwnedDataRef = NULL;
 XPLMDataRef Rad1LowerFineDecOwnedDataRef = NULL, Rad1LowerActStbyOwnedDataRef = NULL;
+
+XPLMDataRef Rad1LowerDigit1OwnedDataRef = NULL, Rad1LowerDigit2OwnedDataRef = NULL;
+XPLMDataRef Rad1LowerDigit3OwnedDataRef = NULL, Rad1LowerDigit4OwnedDataRef = NULL;
+XPLMDataRef Rad1LowerDigit5OwnedDataRef = NULL, Rad1LowerDigit6OwnedDataRef = NULL;
+XPLMDataRef Rad1LowerDigit7OwnedDataRef = NULL, Rad1LowerDigit8OwnedDataRef = NULL;
+XPLMDataRef Rad1LowerDigit9OwnedDataRef = NULL, Rad1LowerDigit10OwnedDataRef = NULL;
 
 
 XPLMDataRef Rad2UpperCom1OwnedDataRef = NULL, Rad2UpperCom2OwnedDataRef = NULL;
@@ -350,12 +363,25 @@ XPLMDataRef Rad2UpperXpdrOwnedDataRef = NULL, Rad2UpperCorseIncOwnedDataRef = NU
 XPLMDataRef Rad2UpperCorseDecOwnedDataRef = NULL, Rad2UpperFineIncOwnedDataRef = NULL;
 XPLMDataRef Rad2UpperFineDecOwnedDataRef = NULL, Rad2UpperActStbyOwnedDataRef = NULL;
 
+XPLMDataRef Rad2UpperDigit1OwnedDataRef = NULL, Rad2UpperDigit2OwnedDataRef = NULL;
+XPLMDataRef Rad2UpperDigit3OwnedDataRef = NULL, Rad2UpperDigit4OwnedDataRef = NULL;
+XPLMDataRef Rad2UpperDigit5OwnedDataRef = NULL, Rad2UpperDigit6OwnedDataRef = NULL;
+XPLMDataRef Rad2UpperDigit7OwnedDataRef = NULL, Rad2UpperDigit8OwnedDataRef = NULL;
+XPLMDataRef Rad2UpperDigit9OwnedDataRef = NULL, Rad2UpperDigit10OwnedDataRef = NULL;
+
+
 XPLMDataRef Rad2LowerCom1OwnedDataRef = NULL, Rad2LowerCom2OwnedDataRef = NULL;
 XPLMDataRef Rad2LowerNav1OwnedDataRef = NULL, Rad2LowerNav2OwnedDataRef = NULL;
 XPLMDataRef Rad2LowerAdfOwnedDataRef = NULL, Rad2LowerDmeOwnedDataRef = NULL;
 XPLMDataRef Rad2LowerXpdrOwnedDataRef = NULL, Rad2LowerCorseIncOwnedDataRef = NULL;
 XPLMDataRef Rad2LowerCorseDecOwnedDataRef = NULL, Rad2LowerFineIncOwnedDataRef = NULL;
 XPLMDataRef Rad2LowerFineDecOwnedDataRef = NULL, Rad2LowerActStbyOwnedDataRef = NULL;
+
+XPLMDataRef Rad2LowerDigit1OwnedDataRef = NULL, Rad2LowerDigit2OwnedDataRef = NULL;
+XPLMDataRef Rad2LowerDigit3OwnedDataRef = NULL, Rad2LowerDigit4OwnedDataRef = NULL;
+XPLMDataRef Rad2LowerDigit5OwnedDataRef = NULL, Rad2LowerDigit6OwnedDataRef = NULL;
+XPLMDataRef Rad2LowerDigit7OwnedDataRef = NULL, Rad2LowerDigit8OwnedDataRef = NULL;
+XPLMDataRef Rad2LowerDigit9OwnedDataRef = NULL, Rad2LowerDigit10OwnedDataRef = NULL;
 
 
 XPLMDataRef Rad3UpperCom1OwnedDataRef = NULL, Rad3UpperCom2OwnedDataRef = NULL;
@@ -370,6 +396,7 @@ XPLMDataRef Rad3UpperDigit3OwnedDataRef = NULL, Rad3UpperDigit4OwnedDataRef = NU
 XPLMDataRef Rad3UpperDigit5OwnedDataRef = NULL, Rad3UpperDigit6OwnedDataRef = NULL;
 XPLMDataRef Rad3UpperDigit7OwnedDataRef = NULL, Rad3UpperDigit8OwnedDataRef = NULL;
 XPLMDataRef Rad3UpperDigit9OwnedDataRef = NULL, Rad3UpperDigit10OwnedDataRef = NULL;
+
 
 XPLMDataRef Rad3LowerCom1OwnedDataRef = NULL, Rad3LowerCom2OwnedDataRef = NULL;
 XPLMDataRef Rad3LowerNav1OwnedDataRef = NULL, Rad3LowerNav2OwnedDataRef = NULL;
@@ -7656,6 +7683,18 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprfinedec/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1upractstby/status");
 
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit1/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit2/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit3/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit4/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit5/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit6/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit7/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit8/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit9/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprdigit10/value");
+
+
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcom1/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrcom2/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrnav1/status");
@@ -7668,6 +7707,18 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrfineinc/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrfinedec/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwractstby/status");
+
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit1/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit2/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit3/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit4/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit5/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit6/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit7/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit8/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit9/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1lwrdigit10/value");
+
     }
 
     if (radcnt > 1) {
@@ -7684,6 +7735,18 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprfinedec/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2upractstby/status");
 
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit1/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit2/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit3/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit4/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit5/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit6/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit7/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit8/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit9/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2uprdigit10/value");
+
+
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcom1/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrcom2/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrnav1/status");
@@ -7696,6 +7759,18 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrfineinc/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrfinedec/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwractstby/status");
+
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit1/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit2/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit3/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit4/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit5/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit6/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit7/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit8/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit9/value");
+        XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad2lwrdigit10/value");
+
     }
 
     if (radcnt > 2) {
@@ -7711,7 +7786,6 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprfineinc/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprfinedec/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3upractstby/status");
-
 
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit1/value");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3uprdigit2/value");
@@ -7737,7 +7811,6 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrfineinc/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrfinedec/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwractstby/status");
-
 
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit1/value");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad3lwrdigit2/value");

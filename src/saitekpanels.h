@@ -280,12 +280,26 @@ extern XPLMDataRef Rad1UpperXpdrOwnedDataRef, Rad1UpperCorseIncOwnedDataRef;
 extern XPLMDataRef Rad1UpperCorseDecOwnedDataRef, Rad1UpperFineIncOwnedDataRef;
 extern XPLMDataRef Rad1UpperFineDecOwnedDataRef, Rad1UpperActStbyOwnedDataRef;
 
+extern XPLMDataRef Rad1UpperDigit1OwnedDataRef, Rad1UpperDigit2OwnedDataRef;
+extern XPLMDataRef Rad1UpperDigit3OwnedDataRef, Rad1UpperDigit4OwnedDataRef;
+extern XPLMDataRef Rad1UpperDigit5OwnedDataRef, Rad1UpperDigit6OwnedDataRef;
+extern XPLMDataRef Rad1UpperDigit7OwnedDataRef, Rad1UpperDigit8OwnedDataRef;
+extern XPLMDataRef Rad1UpperDigit9OwnedDataRef, Rad1UpperDigit10OwnedDataRef;
+
+
 extern XPLMDataRef Rad1LowerCom1OwnedDataRef, Rad1LowerCom2OwnedDataRef;
 extern XPLMDataRef Rad1LowerNav1OwnedDataRef, Rad1LowerNav2OwnedDataRef;
 extern XPLMDataRef Rad1LowerAdfOwnedDataRef, Rad1LowerDmeOwnedDataRef;
 extern XPLMDataRef Rad1LowerXpdrOwnedDataRef, Rad1LowerCorseIncOwnedDataRef;
 extern XPLMDataRef Rad1LowerCorseDecOwnedDataRef, Rad1LowerFineIncOwnedDataRef;
 extern XPLMDataRef Rad1LowerFineDecOwnedDataRef, Rad1LowerActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad1LowerDigit1OwnedDataRef, Rad1LowerDigit2OwnedDataRef;
+extern XPLMDataRef Rad1LowerDigit3OwnedDataRef, Rad1LowerDigit4OwnedDataRef;
+extern XPLMDataRef Rad1LowerDigit5OwnedDataRef, Rad1LowerDigit6OwnedDataRef;
+extern XPLMDataRef Rad1LowerDigit7OwnedDataRef, Rad1LowerDigit8OwnedDataRef;
+extern XPLMDataRef Rad1LowerDigit9OwnedDataRef, Rad1LowerDigit10OwnedDataRef;
+
 
 extern XPLMDataRef Rad2UpperCom1OwnedDataRef, Rad2UpperCom2OwnedDataRef;
 extern XPLMDataRef Rad2UpperNav1OwnedDataRef, Rad2UpperNav2OwnedDataRef;
@@ -295,6 +309,13 @@ extern XPLMDataRef Rad2UpperXpdrOwnedDataRef, Rad2UpperCorseIncOwnedDataRef;
 extern XPLMDataRef Rad2UpperCorseDecOwnedDataRef, Rad2UpperFineIncOwnedDataRef;
 extern XPLMDataRef Rad2UpperFineDecOwnedDataRef, Rad2UpperActStbyOwnedDataRef;
 
+extern XPLMDataRef Rad2UpperDigit1OwnedDataRef, Rad2UpperDigit2OwnedDataRef;
+extern XPLMDataRef Rad2UpperDigit3OwnedDataRef, Rad2UpperDigit4OwnedDataRef;
+extern XPLMDataRef Rad2UpperDigit5OwnedDataRef, Rad2UpperDigit6OwnedDataRef;
+extern XPLMDataRef Rad2UpperDigit7OwnedDataRef, Rad2UpperDigit8OwnedDataRef;
+extern XPLMDataRef Rad2UpperDigit9OwnedDataRef, Rad2UpperDigit10OwnedDataRef;
+
+
 extern XPLMDataRef Rad2LowerCom1OwnedDataRef, Rad2LowerCom2OwnedDataRef;
 extern XPLMDataRef Rad2LowerNav1OwnedDataRef, Rad2LowerNav2OwnedDataRef;
 extern XPLMDataRef Rad2LowerAdfOwnedDataRef, Rad2LowerDmeOwnedDataRef;
@@ -302,6 +323,12 @@ extern XPLMDataRef Rad2LowerCom1OwnedDataRe, Rad2LowerCom2OwnedDataRef;
 extern XPLMDataRef Rad2LowerXpdrOwnedDataRef, Rad2LowerCorseIncOwnedDataRef;
 extern XPLMDataRef Rad2LowerCorseDecOwnedDataRef, Rad2LowerFineIncOwnedDataRef;
 extern XPLMDataRef Rad2LowerFineDecOwnedDataRef, Rad2LowerActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad2LowerDigit1OwnedDataRef, Rad2LowerDigit2OwnedDataRef;
+extern XPLMDataRef Rad2LowerDigit3OwnedDataRef, Rad2LowerDigit4OwnedDataRef;
+extern XPLMDataRef Rad2LowerDigit5OwnedDataRef, Rad2LowerDigit6OwnedDataRef;
+extern XPLMDataRef Rad2LowerDigit7OwnedDataRef, Rad2LowerDigit8OwnedDataRef;
+extern XPLMDataRef Rad2LowerDigit9OwnedDataRef, Rad2LowerDigit10OwnedDataRef;
 
 
 extern XPLMDataRef Rad3UpperCom1OwnedDataRef, Rad3UpperCom2OwnedDataRef;
@@ -619,7 +646,7 @@ extern int	Rad1LwrDigit1ValueGetDataiCallback(void * inRefcon);
 extern void	Rad1LwrDigit1ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit1Value);
 
 extern int	Rad1LwrDigit2ValueGetDataiCallback(void * inRefcon);
-extern void	Rad3LwrDigit2ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit2Value);
+extern void	Rad1LwrDigit2ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit2Value);
 
 extern int	Rad1LwrDigit3ValueGetDataiCallback(void * inRefcon);
 extern void	Rad1LwrDigit3ValueSetDataiCallback(void * inRefcon, int Rad1LwrDigit3Value);
@@ -704,8 +731,8 @@ extern void	Rad2UprDigit3ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit
 extern int	Rad2UprDigit4ValueGetDataiCallback(void * inRefcon);
 extern void	Rad2UprDigit4ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit4Value);
 
-extern int	Rad1UprDigit5ValueGetDataiCallback(void * inRefcon);
-extern void	Rad1UprDigit5ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit5Value);
+extern int	Rad2UprDigit5ValueGetDataiCallback(void * inRefcon);
+extern void	Rad2UprDigit5ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit5Value);
 
 extern int	Rad2UprDigit6ValueGetDataiCallback(void * inRefcon);
 extern void	Rad2UprDigit6ValueSetDataiCallback(void * inRefcon, int Rad2UprDigit6Value);

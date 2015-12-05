@@ -542,6 +542,38 @@ void process_radio_upper_display()
 
   else if (upseldis[radnum] == 12) {
 
+      radioadig1 = Rad1UprDigit1OwnedData;
+      radioadig2 = Rad1UprDigit2OwnedData;
+      radioadig3 = Rad1UprDigit3OwnedData;
+      radioadig4 = Rad1UprDigit4OwnedData;
+      radioadig5 = Rad1UprDigit5OwnedData;
+
+      radiobdig1 = Rad1UprDigit6OwnedData;
+      radiobdig2 = Rad1UprDigit7OwnedData;
+      radiobdig3 = Rad1UprDigit8OwnedData;
+      radiobdig4 = Rad1UprDigit9OwnedData;
+      radiobdig5 = Rad1UprDigit10OwnedData;
+
+  }
+
+  else if (upseldis[radnum] == 13) {
+
+      radioadig1 = Rad2UprDigit1OwnedData;
+      radioadig2 = Rad2UprDigit2OwnedData;
+      radioadig3 = Rad2UprDigit3OwnedData;
+      radioadig4 = Rad2UprDigit4OwnedData;
+      radioadig5 = Rad2UprDigit5OwnedData;
+
+      radiobdig1 = Rad2UprDigit6OwnedData;
+      radiobdig2 = Rad2UprDigit7OwnedData;
+      radiobdig3 = Rad2UprDigit8OwnedData;
+      radiobdig4 = Rad2UprDigit9OwnedData;
+      radiobdig5 = Rad2UprDigit10OwnedData;
+
+  }
+
+  else if (upseldis[radnum] == 14) {
+
       radioadig1 = Rad3UprDigit1OwnedData;
       radioadig2 = Rad3UprDigit2OwnedData;
       radioadig3 = Rad3UprDigit3OwnedData;
@@ -555,7 +587,6 @@ void process_radio_upper_display()
       radiobdig5 = Rad3UprDigit10OwnedData;
 
   }
-
 
 
 }
@@ -933,7 +964,39 @@ void process_radio_lower_display()
   }
 
 
-  else if (loseldis[radnum] == 12) {
+  else if (loseldis[radnum] == 15) {
+
+      radiocdig1 = Rad1LwrDigit1OwnedData;
+      radiocdig2 = Rad1LwrDigit2OwnedData;
+      radiocdig3 = Rad1LwrDigit3OwnedData;
+      radiocdig4 = Rad1LwrDigit4OwnedData;
+      radiocdig5 = Rad1LwrDigit5OwnedData;
+
+      radioddig1 = Rad1LwrDigit6OwnedData;
+      radioddig2 = Rad1LwrDigit7OwnedData;
+      radioddig3 = Rad1LwrDigit8OwnedData;
+      radioddig4 = Rad1LwrDigit9OwnedData;
+      radioddig5 = Rad1LwrDigit10OwnedData;
+
+  }
+
+  else if (loseldis[radnum] == 16) {
+
+      radiocdig1 = Rad2LwrDigit1OwnedData;
+      radiocdig2 = Rad2LwrDigit2OwnedData;
+      radiocdig3 = Rad2LwrDigit3OwnedData;
+      radiocdig4 = Rad2LwrDigit4OwnedData;
+      radiocdig5 = Rad2LwrDigit5OwnedData;
+
+      radioddig1 = Rad2LwrDigit6OwnedData;
+      radioddig2 = Rad2LwrDigit7OwnedData;
+      radioddig3 = Rad2LwrDigit8OwnedData;
+      radioddig4 = Rad2LwrDigit9OwnedData;
+      radioddig5 = Rad2LwrDigit10OwnedData;
+
+  }
+
+  else if (loseldis[radnum] == 17) {
 
       radiocdig1 = Rad3LwrDigit1OwnedData;
       radiocdig2 = Rad3LwrDigit2OwnedData;
@@ -2183,12 +2246,29 @@ void process_upper_dme_switch()
 {
 
     if (testbit(radiobuf[radnum],UPPER_DME)) {
-         if (rad3uprdmeswitchremap == 2) {
-            if (radnum == 2) {
+        if (rad1uprdmeswitchremap == 2) {
+            if (radnum == 0) {
                 upseldis[radnum] = 12;
             }
+        }
+
+
+        if (rad2uprdmeswitchremap == 2) {
+            if (radnum == 1) {
+                upseldis[radnum] = 13;
+            }
+        }
+
+        if (rad3uprdmeswitchremap == 2) {
+            if (radnum == 2) {
+                upseldis[radnum] = 14;
+            }
+        }
+
+        if ((rad1uprdmeswitchremap == 2) || (rad2uprdmeswitchremap == 2) || (rad3uprdmeswitchremap == 2)) {
             return;
         }
+
 
         // ****** Function button is not pushed  *******
         // Set Dme mode with ACT/STBY button
@@ -4701,11 +4781,27 @@ void process_lower_adf_switch()
 void process_lower_dme_switch()
 {
     if (testbit(radiobuf[radnum],LOWER_DME)) {
+        if (rad1lwrdmeswitchremap == 2) {
+            if (radnum == 0) {
+                loseldis[radnum] = 15;
+            }
+        }
+
+        if (rad2lwrdmeswitchremap == 2) {
+            if (radnum == 1) {
+                loseldis[radnum] = 16;
+            }
+        }
+
+
         if (rad3lwrdmeswitchremap == 2) {
             if (radnum == 2) {
-                loseldis[radnum] = 12;
+                loseldis[radnum] = 17;
             }
+        }
+        if ((rad1lwrdmeswitchremap == 2) || (rad2lwrdmeswitchremap == 2) || (rad3lwrdmeswitchremap == 2)) {
             return;
+
         }
 
         // ****** Function button is not pushed  *******
