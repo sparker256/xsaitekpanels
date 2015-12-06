@@ -2246,26 +2246,26 @@ void process_upper_dme_switch()
 {
 
     if (testbit(radiobuf[radnum],UPPER_DME)) {
-        if (rad1uprdmeswitchremap == 2) {
+        if (rad1uprdmeswitchremap == 5) {
             if (radnum == 0) {
                 upseldis[radnum] = 12;
             }
         }
 
 
-        if (rad2uprdmeswitchremap == 2) {
+        if (rad2uprdmeswitchremap == 5) {
             if (radnum == 1) {
                 upseldis[radnum] = 13;
             }
         }
 
-        if (rad3uprdmeswitchremap == 2) {
+        if (rad3uprdmeswitchremap == 5) {
             if (radnum == 2) {
                 upseldis[radnum] = 14;
             }
         }
 
-        if ((rad1uprdmeswitchremap == 2) || (rad2uprdmeswitchremap == 2) || (rad3uprdmeswitchremap == 2)) {
+        if ((rad1uprdmeswitchremap == 5) || (rad2uprdmeswitchremap == 5) || (rad3uprdmeswitchremap == 5)) {
             return;
         }
 
@@ -2452,6 +2452,29 @@ void process_upper_dme_switch()
 void process_upper_xpdr_switch()
 {
     if(testbit(radiobuf[radnum],UPPER_XPDR)) {
+        if (rad1uprxpdrswitchremap == 5) {
+            if (radnum == 0) {
+                upseldis[radnum] = 12;
+            }
+        }
+
+
+        if (rad2uprxpdrswitchremap == 5) {
+            if (radnum == 1) {
+                upseldis[radnum] = 13;
+            }
+        }
+
+        if (rad3uprxpdrswitchremap == 5) {
+            if (radnum == 2) {
+                upseldis[radnum] = 14;
+            }
+        }
+
+        if ((rad1uprdmeswitchremap == 5) || (rad2uprxpdrswitchremap == 5) || (rad3uprxpdrswitchremap == 5)) {
+            return;
+        }
+
         if ((rad1uprxpdrswitchremap == 777) && (radnum == 0)) {
             if(xpanelsfnbutton == 0) {
                 if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
@@ -4781,25 +4804,25 @@ void process_lower_adf_switch()
 void process_lower_dme_switch()
 {
     if (testbit(radiobuf[radnum],LOWER_DME)) {
-        if (rad1lwrdmeswitchremap == 2) {
+        if (rad1lwrdmeswitchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
             }
         }
 
-        if (rad2lwrdmeswitchremap == 2) {
+        if (rad2lwrdmeswitchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
             }
         }
 
 
-        if (rad3lwrdmeswitchremap == 2) {
+        if (rad3lwrdmeswitchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
             }
         }
-        if ((rad1lwrdmeswitchremap == 2) || (rad2lwrdmeswitchremap == 2) || (rad3lwrdmeswitchremap == 2)) {
+        if ((rad1lwrdmeswitchremap == 5) || (rad2lwrdmeswitchremap == 5) || (rad3lwrdmeswitchremap == 5)) {
             return;
 
         }
@@ -4984,6 +5007,32 @@ void process_lower_dme_switch()
 void process_lower_xpdr_switch()
 {
     if (testbit(radiobuf[radnum],LOWER_XPDR)) {
+        if (rad1lwrxpdrswitchremap == 5) {
+            if (radnum == 0) {
+                loseldis[radnum] = 15;
+            }
+        }
+
+        if (rad2lwrxpdrswitchremap == 5) {
+            if (radnum == 1) {
+                loseldis[radnum] = 16;
+            }
+        }
+
+
+        if (rad3lwrxpdrswitchremap == 5) {
+            if (radnum == 2) {
+                loseldis[radnum] = 17;
+            }
+        }
+        if ((rad1lwrxpdrswitchremap == 5) || (rad2lwrxpdrswitchremap == 5) || (rad3lwrxpdrswitchremap == 5)) {
+            return;
+
+        }
+
+
+
+
         if ((rad1lwrxpdrswitchremap == 777)  && (radnum == 0)) {
             if (xpanelsfnbutton == 0) {
                 if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
