@@ -2249,6 +2249,7 @@ void process_upper_dme_switch()
         if (rad1uprdmeswitchremap == 5) {
             if (radnum == 0) {
                 upseldis[radnum] = 12;
+                return;
             }
         }
 
@@ -2256,17 +2257,15 @@ void process_upper_dme_switch()
         if (rad2uprdmeswitchremap == 5) {
             if (radnum == 1) {
                 upseldis[radnum] = 13;
+                return;
             }
         }
 
         if (rad3uprdmeswitchremap == 5) {
             if (radnum == 2) {
                 upseldis[radnum] = 14;
+                return;
             }
-        }
-
-        if ((rad1uprdmeswitchremap == 5) || (rad2uprdmeswitchremap == 5) || (rad3uprdmeswitchremap == 5)) {
-            return;
         }
 
 
@@ -2455,6 +2454,7 @@ void process_upper_xpdr_switch()
         if (rad1uprxpdrswitchremap == 5) {
             if (radnum == 0) {
                 upseldis[radnum] = 12;
+                return;
             }
         }
 
@@ -2462,18 +2462,17 @@ void process_upper_xpdr_switch()
         if (rad2uprxpdrswitchremap == 5) {
             if (radnum == 1) {
                 upseldis[radnum] = 13;
+                return;
             }
         }
 
         if (rad3uprxpdrswitchremap == 5) {
             if (radnum == 2) {
                 upseldis[radnum] = 14;
+                return;
             }
         }
 
-        if ((rad1uprdmeswitchremap == 5) || (rad2uprxpdrswitchremap == 5) || (rad3uprxpdrswitchremap == 5)) {
-            return;
-        }
 
         if ((rad1uprxpdrswitchremap == 777) && (radnum == 0)) {
             if(xpanelsfnbutton == 0) {
@@ -4807,12 +4806,14 @@ void process_lower_dme_switch()
         if (rad1lwrdmeswitchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                return;
             }
         }
 
         if (rad2lwrdmeswitchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                return;
             }
         }
 
@@ -4820,12 +4821,10 @@ void process_lower_dme_switch()
         if (rad3lwrdmeswitchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                return;
             }
         }
-        if ((rad1lwrdmeswitchremap == 5) || (rad2lwrdmeswitchremap == 5) || (rad3lwrdmeswitchremap == 5)) {
-            return;
 
-        }
 
         // ****** Function button is not pushed  *******
         if (xpanelsfnbutton == 0) {
@@ -5010,12 +5009,14 @@ void process_lower_xpdr_switch()
         if (rad1lwrxpdrswitchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                return;
             }
         }
 
         if (rad2lwrxpdrswitchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                return;
             }
         }
 
@@ -5023,14 +5024,9 @@ void process_lower_xpdr_switch()
         if (rad3lwrxpdrswitchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                return;
             }
         }
-        if ((rad1lwrxpdrswitchremap == 5) || (rad2lwrxpdrswitchremap == 5) || (rad3lwrxpdrswitchremap == 5)) {
-            return;
-
-        }
-
-
 
 
         if ((rad1lwrxpdrswitchremap == 777)  && (radnum == 0)) {
