@@ -6010,30 +6010,30 @@ void process_radio_panel()
   process_radio_lower_display();
   process_radio_make_message();
 
-// ******* Write on changes or timeout ********
+// ******* Write on WriteNowOwnedData true ********
 
      if (radnum == 0) {
-         if (Rad1NoWriteOwnedData > 0) {
+         if (Rad1WriteNowOwnedData > 0) {
             radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
-            Rad1NoWriteOwnedData = 0;
+            Rad1WriteNowOwnedData = 0;
         }
      }
 
      if (radnum == 1) {
-         if (Rad2NoWriteOwnedData > 0) {
+         if (Rad2WriteNowOwnedData > 0) {
              radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
-             Rad2NoWriteOwnedData = 0;
+             Rad2WriteNowOwnedData = 0;
          }
      }
 
      if (radnum == 2) {
-         if (Rad3NoWriteOwnedData > 0) {
+         if (Rad3WriteNowOwnedData > 0) {
              radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
-             Rad3NoWriteOwnedData = 0;
+             Rad3WriteNowOwnedData = 0;
          }
      }
 
-
+// ******* Write on changes or timeout *******
 
     if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (radionowrite[radnum] > 50) || (xpanelsfnbutton == 1)) {
         radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
