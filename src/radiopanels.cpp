@@ -6012,6 +6012,29 @@ void process_radio_panel()
 
 // ******* Write on changes or timeout ********
 
+     if (radnum == 0) {
+         if (Rad1NoWriteOwnedData > 0) {
+            radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
+            Rad1NoWriteOwnedData = 0;
+        }
+     }
+
+     if (radnum == 1) {
+         if (Rad2NoWriteOwnedData > 0) {
+             radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
+             Rad2NoWriteOwnedData = 0;
+         }
+     }
+
+     if (radnum == 2) {
+         if (Rad3NoWriteOwnedData > 0) {
+             radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
+             Rad3NoWriteOwnedData = 0;
+         }
+     }
+
+
+
     if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (radionowrite[radnum] > 50) || (xpanelsfnbutton == 1)) {
         radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
         radionowrite[radnum] = 1;

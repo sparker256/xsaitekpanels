@@ -210,6 +210,15 @@ void process_radio3_upper_datareference()
                                  NULL, NULL, NULL, NULL, NULL);
 
 
+        Rad3NoWriteOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad3nowrite",
+                                 xplmType_Int,
+                                 1,
+                                 Rad3NoWriteGetDataiCallback,
+                                 Rad3NoWriteSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
+
 }
 
 
@@ -403,8 +412,6 @@ void process_radio3_lower_datareference()
 
 
 
-
-
 }
 
 
@@ -433,6 +440,7 @@ void process_radio3_unregister_xsaitekpanels_datareference()
     XPLMUnregisterDataAccessor(Rad3UpperDigit8OwnedDataRef);
     XPLMUnregisterDataAccessor(Rad3UpperDigit9OwnedDataRef);
     XPLMUnregisterDataAccessor(Rad3UpperDigit10OwnedDataRef);
+    XPLMUnregisterDataAccessor(Rad3NoWriteOwnedDataRef);
 
 
     XPLMUnregisterDataAccessor(Rad3LowerCom1OwnedDataRef);
