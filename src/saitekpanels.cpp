@@ -1,8 +1,8 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Dec 18 2015   **************
+// ****** Dec 25 2015   **************
 
-#define PLUGIN_VERSION "2.47 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION "2.48 stable build " __DATE__ " " __TIME__
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -2797,7 +2797,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 246;
+  XsaitekpanelsVersion = 248;
 
   XPLMDebugString("Xsaitekpanels: ver " PLUGIN_VERSION "\n");
 
