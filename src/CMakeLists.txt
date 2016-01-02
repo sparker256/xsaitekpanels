@@ -7,7 +7,7 @@ if(APPLE)
 elseif(UNIX)
 	SET(HIDAPI_SRC ../../hidapi-0.8.0-rc1/linux/hid.c)
 elseif(WIN32)
-	SET(HIDAPI_SRC ../../hidapi-0.7.0/windows/hid.c)
+	SET(HIDAPI_SRC ../../hidapi-0.8.0-rc1_Patched/windows/hid.c)
 endif()
 
 SET(ALL_SRC ${SRC} ${HIDAPI_SRC} ${HDR})

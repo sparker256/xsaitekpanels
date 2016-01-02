@@ -10,7 +10,7 @@ VERSION = 1.0.0
 INCLUDEPATH += ../../SDK/CHeaders/XPLM
 INCLUDEPATH += ../../SDK/CHeaders/Wrappers
 INCLUDEPATH += ../../SDK/CHeaders/Widgets
-# INCLUDEPATH += ../../hidapi-0.8.0-rc1/hidapi
+
 
 # Defined to use X-Plane SDK 2.0 capabilities - no backward compatibility before 9.0
 DEFINES += XPLM200
@@ -19,8 +19,8 @@ win32 {
     message(win32)
     CONFIG += dll    	
     DEFINES += APL=0 IBM=1 LIN=0
-    INCLUDEPATH += ../../hidapi-0.7.0/hidapi
-    SOURCES += ../../hidapi-0.7.0/windows/hid.c
+    INCLUDEPATH += ../../hidapi-0.8.0-rc1_Patched/hidapi
+    SOURCES += ../../hidapi-0.8.0-rc1_Patched/windows/hid.c
     LIBS += -L../../SDK/Libraries/Win
     TARGET = win.xpl
     INCLUDEPATH += .
