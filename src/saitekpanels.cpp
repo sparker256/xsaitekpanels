@@ -524,6 +524,7 @@ XPLMDataRef	MultiAltSwitchOwnedDataRef = NULL, MultiVsSwitchOwnedDataRef = NULL;
 XPLMDataRef	MultiIasSwitchOwnedDataRef = NULL, MultiHdgSwitchOwnedDataRef = NULL;
 XPLMDataRef	MultiCrsSwitchOwnedDataRef = NULL;
 XPLMDataRef	MultiKnobIncOwnedDataRef = NULL, MultiKnobDecOwnedDataRef = NULL;
+XPLMDataRef MultiKnobIncTicksOwnedDataRef = NULL, MultiKnobDecTicksOwnedDataRef = NULL;
 XPLMDataRef	MultiAtOwnedDataRef = NULL, MultiTrimUpOwnedDataRef = NULL;
 XPLMDataRef	MultiTrimDnOwnedDataRef = NULL, MultiFlapsUpOwnedDataRef = NULL;
 XPLMDataRef	MultiFlapsDnOwnedDataRef = NULL, MultiApBtnOwnedDataRef = NULL;
@@ -1836,6 +1837,7 @@ static int MultiAltSwitchOwnedData = 0, MultiVsSwitchOwnedData = 0;
 static int MultiIasSwitchOwnedData = 0, MultiHdgSwitchOwnedData = 0;
 static int MultiCrsSwitchOwnedData = 0;
 static int MultiKnobIncOwnedData = 0, MultiKnobDecOwnedData = 0;
+static int MultiKnobIncTicksOwnedData = 0, MultiKnobDecTicksOwnedData = 0;
 static int MultiAtOwnedData = 0, MultiTrimUpOwnedData = 0;
 static int MultiTrimDnOwnedData = 0, MultiFlapsUpOwnedData = 0;
 static int MultiFlapsDnOwnedData = 0, MultiApBtnOwnedData = 0;
@@ -1873,6 +1875,12 @@ void	MultiKnobIncStatusSetDataiCallback(void * inRefcon, int MultiKnobIncStatus)
 
 int	MultiKnobDecStatusGetDataiCallback(void * inRefcon);
 void	MultiKnobDecStatusSetDataiCallback(void * inRefcon, int MultiKnobDecStatus);
+
+int	MultiKnobIncTicksStatusGetDataiCallback(void * inRefcon);
+void	MultiKnobIncTicksStatusSetDataiCallback(void * inRefcon, int MultiKnobIncTicksStatus);
+
+int	MultiKnobDecTicksStatusGetDataiCallback(void * inRefcon);
+void	MultiKnobDecTicksStatusSetDataiCallback(void * inRefcon, int MultiKnobDecTicksStatus);
 
 int	MultiAtStatusGetDataiCallback(void * inRefcon);
 void	MultiAtStatusSetDataiCallback(void * inRefcon, int MultiAtStatus);
@@ -6067,6 +6075,32 @@ void	MultiKnobDecStatusSetDataiCallback(void * inRefcon, int MultiKnobDecStatus2
 {
    (void) inRefcon;
     MultiKnobDecOwnedData = MultiKnobDecStatus2;
+}
+
+
+int	MultiKnobIncTicksStatusGetDataiCallback(void * inRefcon)
+{
+  (void)inRefcon;
+  return MultiKnobIncTicksOwnedData;
+}
+
+void	MultiKnobIncTicksStatusSetDataiCallback(void * inRefcon, int MultiKnobIncTicksStatus2)
+{
+  (void)inRefcon;
+  MultiKnobIncTicksOwnedData = MultiKnobIncTicksStatus2;
+}
+
+
+int	MultiKnobDecTicksStatusGetDataiCallback(void * inRefcon)
+{
+  (void)inRefcon;
+  return MultiKnobDecTicksOwnedData;
+}
+
+void	MultiKnobDecTicksStatusSetDataiCallback(void * inRefcon, int MultiKnobDecTicksStatus2)
+{
+  (void)inRefcon;
+  MultiKnobDecTicksOwnedData = MultiKnobDecTicksStatus2;
 }
 
 

@@ -294,6 +294,16 @@ void process_multi_panel_datareference_values()
         XPLMSetDatai(MultiRevBtnOwnedDataRef, 0);
     }
 
+    int adjustment_up = XPLMGetDatai(MultiKnobIncOwnedDataRef);
+    if (Last_Adjustment_Up != 0 && adjustment_up == 0)
+    {
+      XPLMSetDatai(MultiKnobIncTicksOwnedDataRef, XPLMGetDatai(MultiKnobIncTicksOwnedDataRef) + 1);
+    }
+    int adjustment_dn = XPLMGetDatai(MultiKnobDecOwnedDataRef);
+    if (Last_Adjustment_Dn != 0 && adjustment_dn == 0)
+    {
+      XPLMSetDatai(MultiKnobDecTicksOwnedDataRef, XPLMGetDatai(MultiKnobDecTicksOwnedDataRef) + 1);
+    }
 }
 
 // ***************** ALT Switch Position *******************
@@ -3569,6 +3579,9 @@ void process_multi_panel()
 
 {
     process_multi_menu();
+
+    XPLMSetDatai(MultiKnobIncTicksOwnedDataRef, 0);
+    XPLMSetDatai(MultiKnobDecTicksOwnedDataRef, 0);
 
     // ******* Only do a read if something new to be read ********
     hid_set_nonblocking(multihandle, 1);

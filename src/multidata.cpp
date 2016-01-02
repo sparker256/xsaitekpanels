@@ -74,6 +74,22 @@ void process_multi_panel_datareferences()
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
 
+    MultiKnobIncTicksOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/knobincticks/status",
+                             xplmType_Int,
+                             1,
+                             MultiKnobIncTicksStatusGetDataiCallback,
+                             MultiKnobIncTicksStatusSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
+    MultiKnobDecTicksOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/knobdecticks/status",
+                             xplmType_Int,
+                             1,
+                             MultiKnobDecTicksStatusGetDataiCallback,
+                             MultiKnobDecTicksStatusSetDataiCallback,
+                             NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                             NULL, NULL, NULL, NULL, NULL);
+
     MultiAtOwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/at/status",
                              xplmType_Int,
                              1,
@@ -190,6 +206,8 @@ void process_multi_unregister_xsaitekpanels_datareference()
      XPLMUnregisterDataAccessor(MultiCrsSwitchOwnedDataRef);
      XPLMUnregisterDataAccessor(MultiKnobIncOwnedDataRef);
      XPLMUnregisterDataAccessor(MultiKnobDecOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiKnobIncTicksOwnedDataRef);
+     XPLMUnregisterDataAccessor(MultiKnobDecTicksOwnedDataRef);
      XPLMUnregisterDataAccessor(MultiAtOwnedDataRef);
      XPLMUnregisterDataAccessor(MultiTrimUpOwnedDataRef);
      XPLMUnregisterDataAccessor(MultiTrimDnOwnedDataRef);

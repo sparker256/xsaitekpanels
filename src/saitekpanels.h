@@ -1340,6 +1340,7 @@ extern XPLMDataRef	MultiAltSwitchOwnedDataRef, MultiVsSwitchOwnedDataRef;
 extern XPLMDataRef	MultiIasSwitchOwnedDataRef, MultiHdgSwitchOwnedDataRef;
 extern XPLMDataRef	MultiCrsSwitchOwnedDataRef;
 extern XPLMDataRef	MultiKnobIncOwnedDataRef, MultiKnobDecOwnedDataRef;
+extern XPLMDataRef	MultiKnobIncTicksOwnedDataRef, MultiKnobDecTicksOwnedDataRef;
 extern XPLMDataRef	MultiAtOwnedDataRef, MultiTrimUpOwnedDataRef;
 extern XPLMDataRef	MultiTrimDnOwnedDataRef, MultiFlapsUpOwnedDataRef;
 extern XPLMDataRef	MultiFlapsDnOwnedDataRef, MultiApBtnOwnedDataRef;
@@ -1416,6 +1417,12 @@ extern void	MultiKnobIncStatusSetDataiCallback(void * inRefcon, int MultiKnobInc
 
 extern int	MultiKnobDecStatusGetDataiCallback(void * inRefcon);
 extern void	MultiKnobDecStatusSetDataiCallback(void * inRefcon, int MultiKnobDecStatus);
+
+extern int	MultiKnobIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	MultiKnobIncTicksStatusSetDataiCallback(void * inRefcon, int MultiKnobIncTicksStatus);
+
+extern int	MultiKnobDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	MultiKnobDecTicksStatusSetDataiCallback(void * inRefcon, int MultiKnobDecTicksStatus);
 
 extern int	MultiAtStatusGetDataiCallback(void * inRefcon);
 extern void	MultiAtStatusSetDataiCallback(void * inRefcon, int MultiAtStatus);
