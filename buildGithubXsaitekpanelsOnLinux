@@ -2,7 +2,7 @@
 #
 cd X-Plane_Github_Plugins/xsaitekpanels &&
 ./build4linux &&
-ssh -v Williams-Mac-Pro.local ". ~/.bash_profile && cd X-Plane_Github_Plugins/xsaitekpanels && git pull && ./build4mac"
+ssh -v Williams-Mac-Pro-Mav.local ". ~/.bash_profile && cd X-Plane_Github_Plugins/xsaitekpanels && git pull && ./build4mac"
 exec $SHELL
 #
 

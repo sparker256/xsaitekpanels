@@ -10,7 +10,7 @@ VERSION = 1.0.0
 INCLUDEPATH += ../../SDK/CHeaders/XPLM
 INCLUDEPATH += ../../SDK/CHeaders/Wrappers
 INCLUDEPATH += ../../SDK/CHeaders/Widgets
-INCLUDEPATH += ../../hidapi-0.8.0-rc1/hidapi
+# INCLUDEPATH += ../../hidapi-0.8.0-rc1/hidapi
 
 # Defined to use X-Plane SDK 2.0 capabilities - no backward compatibility before 9.0
 DEFINES += XPLM200
@@ -19,7 +19,8 @@ win32 {
     message(win32)
     CONFIG += dll    	
     DEFINES += APL=0 IBM=1 LIN=0
-    SOURCES += ../../hidapi-0.8.0-rc1/windows/hid.c
+    INCLUDEPATH += ../../hidapi-0.7.0/hidapi
+    SOURCES += ../../hidapi-0.7.0/windows/hid.c
     LIBS += -L../../SDK/Libraries/Win
     TARGET = win.xpl
     INCLUDEPATH += .
@@ -49,6 +50,7 @@ unix:!macx {
     TARGET = lin.xpl
     # WARNING! This requires the latest version of the X-SDK !!!!
     QMAKE_CXXFLAGS += -fvisibility=hidden
+    INCLUDEPATH += ../../hidapi-0.8.0-rc1/hidapi
     SOURCES += ../../hidapi-0.8.0-rc1/linux/hid.c
     LIBS += `pkg-config libudev --libs`
     QMAKE_LFLAGS += -Wl,-rpath=./Resources/plugins/Xsaitekpanels/64
@@ -61,7 +63,7 @@ macx {
     DEFINES += APL=1 IBM=0 LIN=0
     TARGET = mac.xpl
     QMAKE_LFLAGS += -F../../SDK/Libraries/Mac/ -framework XPWidgets -framework XPLM
-
+    INCLUDEPATH += ../../hidapi-0.8.0-rc1/hidapi
     SOURCES += \
           ../../hidapi-0.8.0-rc1/mac/hid.c
     LIBS += -framework IOKit -framework CoreFoundation
