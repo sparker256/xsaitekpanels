@@ -276,9 +276,13 @@ extern XPLMDataRef Rad1UpperCom1OwnedDataRef, Rad1UpperCom2OwnedDataRef;
 extern XPLMDataRef Rad1UpperNav1OwnedDataRef, Rad1UpperNav2OwnedDataRef;
 extern XPLMDataRef Rad1UpperAdfOwnedDataRef, Rad1UpperDmeOwnedDataRef;
 extern XPLMDataRef Rad1UpperCom1OwnedDataRef, Rad1UpperCom2OwnedDataRef;
-extern XPLMDataRef Rad1UpperXpdrOwnedDataRef, Rad1UpperCorseIncOwnedDataRef;
-extern XPLMDataRef Rad1UpperCorseDecOwnedDataRef, Rad1UpperFineIncOwnedDataRef;
-extern XPLMDataRef Rad1UpperFineDecOwnedDataRef, Rad1UpperActStbyOwnedDataRef;
+extern XPLMDataRef Rad1UpperXpdrOwnedDataRef, Rad1UpperActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad1UpperFineIncOwnedDataRef, Rad1UpperFineDecOwnedDataRef;
+extern XPLMDataRef Rad1UpperCorseIncOwnedDataRef, Rad1UpperCorseDecOwnedDataRef;
+
+extern XPLMDataRef Rad1UpperFineIncTicksOwnedDataRef, Rad1UpperFineDecTicksOwnedDataRef;
+extern XPLMDataRef Rad1UpperCorseIncTicksOwnedDataRef, Rad1UpperCorseDecTicksOwnedDataRef;
 
 extern XPLMDataRef Rad1UpperDigit1OwnedDataRef, Rad1UpperDigit2OwnedDataRef;
 extern XPLMDataRef Rad1UpperDigit3OwnedDataRef, Rad1UpperDigit4OwnedDataRef;
@@ -291,9 +295,14 @@ extern XPLMDataRef Rad1WriteNowOwnedDataRef;
 extern XPLMDataRef Rad1LowerCom1OwnedDataRef, Rad1LowerCom2OwnedDataRef;
 extern XPLMDataRef Rad1LowerNav1OwnedDataRef, Rad1LowerNav2OwnedDataRef;
 extern XPLMDataRef Rad1LowerAdfOwnedDataRef, Rad1LowerDmeOwnedDataRef;
-extern XPLMDataRef Rad1LowerXpdrOwnedDataRef, Rad1LowerCorseIncOwnedDataRef;
-extern XPLMDataRef Rad1LowerCorseDecOwnedDataRef, Rad1LowerFineIncOwnedDataRef;
-extern XPLMDataRef Rad1LowerFineDecOwnedDataRef, Rad1LowerActStbyOwnedDataRef;
+extern XPLMDataRef Rad1LowerXpdrOwnedDataRef, Rad1LowerActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad1LowerFineIncOwnedDataRef, Rad1LowerFineDecOwnedDataRef;
+extern XPLMDataRef Rad1LowerCorseIncOwnedDataRef, Rad1LowerCorseDecOwnedDataRef;
+
+extern XPLMDataRef Rad1LowerFineIncTicksOwnedDataRef, Rad1LowerFineDecTicksOwnedDataRef;
+extern XPLMDataRef Rad1LowerCorseIncTicksOwnedDataRef, Rad1LowerCorseDecTicksOwnedDataRef;
+
 
 extern XPLMDataRef Rad1LowerDigit1OwnedDataRef, Rad1LowerDigit2OwnedDataRef;
 extern XPLMDataRef Rad1LowerDigit3OwnedDataRef, Rad1LowerDigit4OwnedDataRef;
@@ -307,9 +316,14 @@ extern XPLMDataRef Rad2UpperCom1OwnedDataRef, Rad2UpperCom2OwnedDataRef;
 extern XPLMDataRef Rad2UpperNav1OwnedDataRef, Rad2UpperNav2OwnedDataRef;
 extern XPLMDataRef Rad2UpperAdfOwnedDataRef, Rad2UpperDmeOwnedDataRef;
 extern XPLMDataRef Rad2UpperCom1OwnedDataRe, Rad2UpperCom2OwnedDataRef;
-extern XPLMDataRef Rad2UpperXpdrOwnedDataRef, Rad2UpperCorseIncOwnedDataRef;
-extern XPLMDataRef Rad2UpperCorseDecOwnedDataRef, Rad2UpperFineIncOwnedDataRef;
-extern XPLMDataRef Rad2UpperFineDecOwnedDataRef, Rad2UpperActStbyOwnedDataRef;
+extern XPLMDataRef Rad2UpperXpdrOwnedDataRef, Rad2UpperActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad2UpperFineIncOwnedDataRef, Rad2UpperFineDecOwnedDataRef;
+extern XPLMDataRef Rad2UpperCorseIncOwnedDataRef, Rad2UpperCorseDecOwnedDataRef;
+
+extern XPLMDataRef Rad2UpperFineIncTicksOwnedDataRef, Rad2UpperFineDecTicksOwnedDataRef;
+extern XPLMDataRef Rad2UpperCorseIncTicksOwnedDataRef, Rad2UpperCorseDecTicksOwnedDataRef;
+
 
 extern XPLMDataRef Rad2UpperDigit1OwnedDataRef, Rad2UpperDigit2OwnedDataRef;
 extern XPLMDataRef Rad2UpperDigit3OwnedDataRef, Rad2UpperDigit4OwnedDataRef;
@@ -323,9 +337,14 @@ extern XPLMDataRef Rad2LowerCom1OwnedDataRef, Rad2LowerCom2OwnedDataRef;
 extern XPLMDataRef Rad2LowerNav1OwnedDataRef, Rad2LowerNav2OwnedDataRef;
 extern XPLMDataRef Rad2LowerAdfOwnedDataRef, Rad2LowerDmeOwnedDataRef;
 extern XPLMDataRef Rad2LowerCom1OwnedDataRe, Rad2LowerCom2OwnedDataRef;
-extern XPLMDataRef Rad2LowerXpdrOwnedDataRef, Rad2LowerCorseIncOwnedDataRef;
-extern XPLMDataRef Rad2LowerCorseDecOwnedDataRef, Rad2LowerFineIncOwnedDataRef;
-extern XPLMDataRef Rad2LowerFineDecOwnedDataRef, Rad2LowerActStbyOwnedDataRef;
+extern XPLMDataRef Rad2LowerXpdrOwnedDataRef, Rad2LowerActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad2LowerFineIncOwnedDataRef, Rad2LowerFineDecOwnedDataRef;
+extern XPLMDataRef Rad2LowerCorseIncOwnedDataRef, Rad2LowerCorseDecOwnedDataRef;
+
+extern XPLMDataRef Rad2LowerFineIncTicksOwnedDataRef, Rad2LowerFineDecTicksOwnedDataRef;
+extern XPLMDataRef Rad2LowerCorseIncTicksOwnedDataRef, Rad2LowerCorseDecTicksOwnedDataRef;
+
 
 extern XPLMDataRef Rad2LowerDigit1OwnedDataRef, Rad2LowerDigit2OwnedDataRef;
 extern XPLMDataRef Rad2LowerDigit3OwnedDataRef, Rad2LowerDigit4OwnedDataRef;
@@ -338,9 +357,14 @@ extern XPLMDataRef Rad3UpperCom1OwnedDataRef, Rad3UpperCom2OwnedDataRef;
 extern XPLMDataRef Rad3UpperNav1OwnedDataRef, Rad3UpperNav2OwnedDataRef;
 extern XPLMDataRef Rad3UpperAdfOwnedDataRef, Rad3UpperDmeOwnedDataRef;
 extern XPLMDataRef Rad3UpperCom1OwnedDataRe, Rad3UpperCom2OwnedDataRef;
-extern XPLMDataRef Rad3UpperXpdrOwnedDataRef, Rad3UpperCorseIncOwnedDataRef;
-extern XPLMDataRef Rad3UpperCorseDecOwnedDataRef, Rad3UpperFineIncOwnedDataRef;
-extern XPLMDataRef Rad3UpperFineDecOwnedDataRef, Rad3UpperActStbyOwnedDataRef;
+extern XPLMDataRef Rad3UpperXpdrOwnedDataRef, Rad3UpperActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad3UpperFineIncOwnedDataRef, Rad3UpperFineDecOwnedDataRef;
+extern XPLMDataRef Rad3UpperCorseIncOwnedDataRef, Rad3UpperCorseDecOwnedDataRef;
+
+extern XPLMDataRef Rad3UpperFineIncTicksOwnedDataRef, Rad3UpperFineDecTicksOwnedDataRef;
+extern XPLMDataRef Rad3UpperCorseIncTicksOwnedDataRef, Rad3UpperCorseDecTicksOwnedDataRef;
+
 
 extern XPLMDataRef Rad3UpperDigit1OwnedDataRef, Rad3UpperDigit2OwnedDataRef;
 extern XPLMDataRef Rad3UpperDigit3OwnedDataRef, Rad3UpperDigit4OwnedDataRef;
@@ -354,9 +378,14 @@ extern XPLMDataRef Rad3LowerCom1OwnedDataRef, Rad3LowerCom2OwnedDataRef;
 extern XPLMDataRef Rad3LowerNav1OwnedDataRef, Rad3LowerNav2OwnedDataRef;
 extern XPLMDataRef Rad3LowerAdfOwnedDataRef, Rad3LowerDmeOwnedDataRef;
 extern XPLMDataRef Rad3LowerCom1OwnedDataRe, Rad3LowerCom2OwnedDataRef;
-extern XPLMDataRef Rad3LowerXpdrOwnedDataRef, Rad3LowerCorseIncOwnedDataRef;
-extern XPLMDataRef Rad3LowerCorseDecOwnedDataRef, Rad3LowerFineIncOwnedDataRef;
-extern XPLMDataRef Rad3LowerFineDecOwnedDataRef, Rad3LowerActStbyOwnedDataRef;
+extern XPLMDataRef Rad3LowerXpdrOwnedDataRef, Rad3LowerActStbyOwnedDataRef;
+
+extern XPLMDataRef Rad3LowerFineIncOwnedDataRef, Rad3LowerFineDecOwnedDataRef;
+extern XPLMDataRef Rad3LowerCorseIncOwnedDataRef, Rad3LowerCorseDecOwnedDataRef;
+
+extern XPLMDataRef Rad3LowerFineIncTicksOwnedDataRef, Rad3LowerFineDecTicksOwnedDataRef;
+extern XPLMDataRef Rad3LowerCorseIncTicksOwnedDataRef, Rad3LowerCorseDecTicksOwnedDataRef;
+
 
 extern XPLMDataRef Rad3LowerDigit1OwnedDataRef, Rad3LowerDigit2OwnedDataRef;
 extern XPLMDataRef Rad3LowerDigit3OwnedDataRef, Rad3LowerDigit4OwnedDataRef;
@@ -554,6 +583,8 @@ extern void	Rad1UprDmeStatusSetDataiCallback(void * inRefcon, int Rad1UprDmeStat
 extern int	Rad1UprXpdrStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad1UprXpdrStatus);
 
+
+
 extern int	Rad1UprCorseIncStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseIncStatus);
 
@@ -565,6 +596,37 @@ extern void	Rad1UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad1UprFin
 
 extern int	Rad1UprFineDecStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad1UprFineDecStatus);
+
+
+
+extern int	Rad1UprCorseIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseIncTicksStatus);
+
+extern int	Rad1UprCorseDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprCorseDecTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseDecTicksStatus);
+
+extern int	Rad1UprFineIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprFineIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprFineIncTicksStatus);
+
+extern int	Rad1UprFineDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprFineDecTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprFineDecTicksStatus);
+
+
+
+
+extern int	Rad1UprCorseIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseIncTicksStatus);
+
+extern int	Rad1UprCorseDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprCorseDecTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseDecTicksStatus);
+
+extern int	Rad1UprFineIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprFineIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprFineIncTicksStatus);
+
+extern int	Rad1UprFineDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1UprFineDecTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprFineDecTicksStatus);
+
+
 
 extern int	Rad1UprActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad1UprActStbyStatus);
@@ -634,6 +696,8 @@ extern void	Rad1LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad1LwrDmeStat
 extern int	Rad1LwrXpdrStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad1LwrXpdrStatus);
 
+
+
 extern int	Rad1LwrCorseIncStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad1LwrCorseIncStatus);
 
@@ -645,6 +709,23 @@ extern void	Rad1LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad1LwrFin
 
 extern int	Rad1LwrFineDecStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad1LwrFineDecStatus);
+
+
+
+extern int	Rad1LwrCorseIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1LwrCorseIncTicksStatus);
+
+extern int	Rad1LwrCorseDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrCorseDecTicksStatusSetDataiCallback(void * inRefcon, int Rad1LwrCorseDecTicksStatus);
+
+extern int	Rad1LwrFineIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrFineIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1LwrFineIncTicksStatus);
+
+extern int	Rad1LwrFineDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad1LwrFineDecTicksStatusSetDataiCallback(void * inRefcon, int Rad1LwrFineDecTicksStatus);
+
+
+
 
 extern int	Rad1LwrActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad1LwrActStbyStatus);
@@ -711,6 +792,9 @@ extern void	Rad2UprDmeStatusSetDataiCallback(void * inRefcon, int Rad2UprDmeStat
 extern int	Rad2UprXpdrStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad2UprXpdrStatus);
 
+
+
+
 extern int	Rad2UprCorseIncStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad2UprCorseIncStatus);
 
@@ -722,6 +806,22 @@ extern void	Rad2UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad2UprFin
 
 extern int	Rad2UprFineDecStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad2UprFineDecStatus);
+
+
+
+extern int	Rad2UprCorseIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad2UprCorseIncTicksStatus);
+
+extern int	Rad2UprCorseDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprCorseDecTicksStatusSetDataiCallback(void * inRefcon, int Rad2UprCorseDecTicksStatus);
+
+extern int	Rad2UprFineIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprFineIncTicksStatusSetDataiCallback(void * inRefcon, int Rad2UprFineIncTicksStatus);
+
+extern int	Rad2UprFineDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2UprFineDecTicksStatusSetDataiCallback(void * inRefcon, int Rad2UprFineDecTicksStatus);
+
+
 
 extern int	Rad2UprActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad2UprActStbyStatus);
@@ -791,6 +891,9 @@ extern void	Rad2LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad2LwrDmeStat
 extern int	Rad2LwrXpdrStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad2LwrXpdrStatus);
 
+
+
+
 extern int	Rad2LwrCorseIncStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad2LwrCorseIncStatus);
 
@@ -802,6 +905,22 @@ extern void	Rad2LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad2LwrFin
 
 extern int	Rad2LwrFineDecStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad2LwrFineDecStatus);
+
+
+
+extern int	Rad2LwrCorseIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad2LwrCorseIncTicksStatus);
+
+extern int	Rad2LwrCorseDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrCorseDecTicksStatusSetDataiCallback(void * inRefcon, int Rad2LwrCorseDecTicksStatus);
+
+extern int	Rad2LwrFineIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrFineIncTicksStatusSetDataiCallback(void * inRefcon, int Rad2LwrFineIncTicksStatus);
+
+extern int	Rad2LwrFineDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad2LwrFineDecTicksStatusSetDataiCallback(void * inRefcon, int Rad2LwrFineDecTicksStatus);
+
+
 
 extern int	Rad2LwrActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad2LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad2LwrActStbyStatus);
@@ -870,6 +989,9 @@ extern void	Rad3UprDmeStatusSetDataiCallback(void * inRefcon, int Rad3UprDmeStat
 extern int	Rad3UprXpdrStatusGetDataiCallback(void * inRefcon);
 extern void	Rad3UprXpdrStatusSetDataiCallback(void * inRefcon, int Rad3UprXpdrStatus);
 
+
+
+
 extern int	Rad3UprCorseIncStatusGetDataiCallback(void * inRefcon);
 extern void	Rad3UprCorseIncStatusSetDataiCallback(void * inRefcon, int Rad3UprCorseIncStatus);
 
@@ -881,6 +1003,23 @@ extern void	Rad3UprFineIncStatusSetDataiCallback(void * inRefcon, int Rad3UprFin
 
 extern int	Rad3UprFineDecStatusGetDataiCallback(void * inRefcon);
 extern void	Rad3UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad3UprFineDecStatus);
+
+
+
+extern int	Rad3UprCorseIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad3UprCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad3UprCorseIncTicksStatus);
+
+extern int	Rad3UprCorseDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad3UprCorseDecTicksStatusSetDataiCallback(void * inRefcon, int Rad3UprCorseDecTicksStatus);
+
+extern int	Rad3UprFineIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad3UprFineIncTicksStatusSetDataiCallback(void * inRefcon, int Rad3UprFineIncTicksStatus);
+
+extern int	Rad3UprFineDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad3UprFineDecTicksStatusSetDataiCallback(void * inRefcon, int Rad3UprFineDecTicksStatus);
+
+
+
 
 extern int	Rad3UprActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad3UprActStbyStatusSetDataiCallback(void * inRefcon, int Rad3UprActStbyStatus);
@@ -949,6 +1088,9 @@ extern void	Rad3LwrDmeStatusSetDataiCallback(void * inRefcon, int Rad3LwrDmeStat
 extern int	Rad3LwrXpdrStatusGetDataiCallback(void * inRefcon);
 extern void	Rad3LwrXpdrStatusSetDataiCallback(void * inRefcon, int Rad3LwrXpdrStatus);
 
+
+
+
 extern int	Rad3LwrCorseIncStatusGetDataiCallback(void * inRefcon);
 extern void	Rad3LwrCorseIncStatusSetDataiCallback(void * inRefcon, int Rad3LwrCorseIncStatus);
 
@@ -960,6 +1102,23 @@ extern void	Rad3LwrFineIncStatusSetDataiCallback(void * inRefcon, int Rad3LwrFin
 
 extern int	Rad3LwrFineDecStatusGetDataiCallback(void * inRefcon);
 extern void	Rad3LwrFineDecStatusSetDataiCallback(void * inRefcon, int Rad3LwrFineDecStatus);
+
+
+
+extern int	Rad3LwrCorseIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad3LwrCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad3LwrCorseIncTicksStatus);
+
+extern int	Rad3LwrCorseDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad3LwrCorseDecTicksStatusSetDataiCallback(void * inRefcon, int Rad3LwrCorseDecTicksStatus);
+
+extern int	Rad3LwrFineIncTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad3LwrFineIncTicksStatusSetDataiCallback(void * inRefcon, int Rad3LwrFineIncTicksStatus);
+
+extern int	Rad3LwrFineDecTicksStatusGetDataiCallback(void * inRefcon);
+extern void	Rad3LwrFineDecTicksStatusSetDataiCallback(void * inRefcon, int Rad3LwrFineDecTicksStatus);
+
+
+
 
 extern int	Rad3LwrActStbyStatusGetDataiCallback(void * inRefcon);
 extern void	Rad3LwrActStbyStatusSetDataiCallback(void * inRefcon, int Rad3LwrActStbyStatus);

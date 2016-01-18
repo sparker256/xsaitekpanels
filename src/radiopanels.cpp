@@ -1274,6 +1274,79 @@ void process_upper_datareferences()
     }
 
 
+
+    if (radnum == 0) {
+        int rad1_upper_fine_adjustment_up = XPLMGetDatai(Rad1UpperFineIncOwnedDataRef);
+        if(Last_Upper_Fine_Up[radnum] !=0 && rad1_upper_fine_adjustment_up == 0) {
+            XPLMSetDatai(Rad1UpperFineIncTicksOwnedDataRef, XPLMGetDatai(Rad1UpperFineIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad1_upper_fine_adjustment_dn = XPLMGetDatai(Rad1UpperFineDecOwnedDataRef);
+        if(Last_Upper_Fine_Dn[radnum] !=0 && rad1_upper_fine_adjustment_dn == 0) {
+            XPLMSetDatai(Rad1UpperFineDecTicksOwnedDataRef, XPLMGetDatai(Rad1UpperFineDecTicksOwnedDataRef) + 1);
+        }
+
+        int rad1_upper_corse_adjustment_up = XPLMGetDatai(Rad1UpperCorseIncOwnedDataRef);
+        if(Last_Upper_Coarse_Up[radnum] !=0 && rad1_upper_corse_adjustment_up == 0) {
+            XPLMSetDatai(Rad1UpperCorseIncTicksOwnedDataRef, XPLMGetDatai(Rad1UpperCorseIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad1_upper_corse_adjustment_dn = XPLMGetDatai(Rad1UpperCorseDecOwnedDataRef);
+        if(Last_Upper_Coarse_Dn[radnum] !=0 && rad1_upper_corse_adjustment_dn == 0) {
+            XPLMSetDatai(Rad1UpperCorseDecTicksOwnedDataRef, XPLMGetDatai(Rad1UpperCorseDecTicksOwnedDataRef) + 1);
+        }
+    }
+
+
+    if (radnum == 1) {
+        int rad2_upper_fine_adjustment_up = XPLMGetDatai(Rad2UpperFineIncOwnedDataRef);
+        if(Last_Upper_Fine_Up[radnum] !=0 && rad2_upper_fine_adjustment_up == 0) {
+            XPLMSetDatai(Rad2UpperFineIncTicksOwnedDataRef, XPLMGetDatai(Rad2UpperFineIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad2_upper_fine_adjustment_dn = XPLMGetDatai(Rad2UpperFineDecOwnedDataRef);
+        if(Last_Upper_Fine_Dn[radnum] !=0 && rad2_upper_fine_adjustment_dn == 0) {
+            XPLMSetDatai(Rad2UpperFineDecTicksOwnedDataRef, XPLMGetDatai(Rad2UpperFineDecTicksOwnedDataRef) + 1);
+        }
+
+        int rad2_upper_corse_adjustment_up = XPLMGetDatai(Rad2UpperCorseIncOwnedDataRef);
+        if(Last_Upper_Coarse_Up[radnum] !=0 && rad2_upper_corse_adjustment_up == 0) {
+            XPLMSetDatai(Rad2UpperCorseIncTicksOwnedDataRef, XPLMGetDatai(Rad2UpperCorseIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad2_upper_corse_adjustment_dn = XPLMGetDatai(Rad2UpperCorseDecOwnedDataRef);
+        if(Last_Upper_Coarse_Dn[radnum] !=0 && rad2_upper_corse_adjustment_dn == 0) {
+            XPLMSetDatai(Rad2UpperCorseDecTicksOwnedDataRef, XPLMGetDatai(Rad2UpperCorseDecTicksOwnedDataRef) + 1);
+        }
+
+    }
+
+
+    if (radnum == 2) {
+        int rad3_upper_fine_adjustment_up = XPLMGetDatai(Rad3UpperFineIncOwnedDataRef);
+        if(Last_Upper_Fine_Up[radnum] !=0 && rad3_upper_fine_adjustment_up == 0) {
+            XPLMSetDatai(Rad3UpperFineIncTicksOwnedDataRef, XPLMGetDatai(Rad3UpperFineIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad3_upper_fine_adjustment_dn = XPLMGetDatai(Rad3UpperFineDecOwnedDataRef);
+        if(Last_Upper_Fine_Dn[radnum] !=0 && rad3_upper_fine_adjustment_dn == 0) {
+            XPLMSetDatai(Rad3UpperFineDecTicksOwnedDataRef, XPLMGetDatai(Rad3UpperFineDecTicksOwnedDataRef) + 1);
+        }
+
+        int rad3_upper_corse_adjustment_up = XPLMGetDatai(Rad3UpperCorseIncOwnedDataRef);
+        if(Last_Upper_Coarse_Up[radnum] !=0 && rad3_upper_corse_adjustment_up == 0) {
+            XPLMSetDatai(Rad3UpperCorseIncTicksOwnedDataRef, XPLMGetDatai(Rad3UpperCorseIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad3_upper_corse_adjustment_dn = XPLMGetDatai(Rad3UpperCorseDecOwnedDataRef);
+        if(Last_Upper_Coarse_Dn[radnum] !=0 && rad3_upper_corse_adjustment_dn == 0) {
+            XPLMSetDatai(Rad3UpperCorseDecTicksOwnedDataRef, XPLMGetDatai(Rad3UpperCorseDecTicksOwnedDataRef) + 1);
+        }
+
+    }
+
+
+
 }
 
 
@@ -3704,6 +3777,81 @@ void process_lower_datareferences()
             XPLMSetDatai(Rad3LowerActStbyOwnedDataRef, 0);
         }
     }
+
+
+    if (radnum == 0) {
+        int rad1_lower_fine_adjustment_up = XPLMGetDatai(Rad1LowerFineIncOwnedDataRef);
+        if(Last_Lower_Fine_Up[radnum] !=0 && rad1_lower_fine_adjustment_up == 0) {
+            XPLMSetDatai(Rad1LowerFineIncTicksOwnedDataRef, XPLMGetDatai(Rad1LowerFineIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad1_lower_fine_adjustment_dn = XPLMGetDatai(Rad1LowerFineDecOwnedDataRef);
+        if(Last_Lower_Fine_Dn[radnum] !=0 && rad1_lower_fine_adjustment_dn == 0) {
+            XPLMSetDatai(Rad1LowerFineDecTicksOwnedDataRef, XPLMGetDatai(Rad1LowerFineDecTicksOwnedDataRef) + 1);
+        }
+
+        int rad1_lower_corse_adjustment_up = XPLMGetDatai(Rad1LowerCorseIncOwnedDataRef);
+        if(Last_Lower_Coarse_Up[radnum] !=0 && rad1_lower_corse_adjustment_up == 0) {
+            XPLMSetDatai(Rad1LowerCorseIncTicksOwnedDataRef, XPLMGetDatai(Rad1LowerCorseIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad1_lower_corse_adjustment_dn = XPLMGetDatai(Rad1LowerCorseDecOwnedDataRef);
+        if(Last_Lower_Coarse_Dn[radnum] !=0 && rad1_lower_corse_adjustment_dn == 0) {
+            XPLMSetDatai(Rad1LowerCorseDecTicksOwnedDataRef, XPLMGetDatai(Rad1LowerCorseDecTicksOwnedDataRef) + 1);
+        }
+
+    }
+
+
+    if (radnum == 1) {
+        int rad2_lower_fine_adjustment_up = XPLMGetDatai(Rad2LowerFineIncOwnedDataRef);
+        if(Last_Lower_Fine_Up[radnum] !=0 && rad2_lower_fine_adjustment_up == 0) {
+            XPLMSetDatai(Rad2LowerFineIncTicksOwnedDataRef, XPLMGetDatai(Rad2LowerFineIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad2_lower_fine_adjustment_dn = XPLMGetDatai(Rad2LowerFineDecOwnedDataRef);
+        if(Last_Lower_Fine_Dn[radnum] !=0 && rad2_lower_fine_adjustment_dn == 0) {
+            XPLMSetDatai(Rad2LowerFineDecTicksOwnedDataRef, XPLMGetDatai(Rad2LowerFineDecTicksOwnedDataRef) + 1);
+        }
+
+        int rad2_lower_corse_adjustment_up = XPLMGetDatai(Rad2LowerCorseIncOwnedDataRef);
+        if(Last_Lower_Coarse_Up[radnum] !=0 && rad2_lower_corse_adjustment_up == 0) {
+            XPLMSetDatai(Rad2LowerCorseIncTicksOwnedDataRef, XPLMGetDatai(Rad2LowerCorseIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad2_lower_corse_adjustment_dn = XPLMGetDatai(Rad2LowerCorseDecOwnedDataRef);
+        if(Last_Lower_Coarse_Dn[radnum] !=0 && rad2_lower_corse_adjustment_dn == 0) {
+            XPLMSetDatai(Rad2LowerCorseDecTicksOwnedDataRef, XPLMGetDatai(Rad2LowerCorseDecTicksOwnedDataRef) + 1);
+        }
+
+    }
+
+
+    if (radnum == 2) {
+        int rad3_lower_fine_adjustment_up = XPLMGetDatai(Rad3LowerFineIncOwnedDataRef);
+        if(Last_Lower_Fine_Up[radnum] !=0 && rad3_lower_fine_adjustment_up == 0) {
+            XPLMSetDatai(Rad3LowerFineIncTicksOwnedDataRef, XPLMGetDatai(Rad3LowerFineIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad3_lower_fine_adjustment_dn = XPLMGetDatai(Rad3LowerFineDecOwnedDataRef);
+        if(Last_Lower_Fine_Dn[radnum] !=0 && rad3_lower_fine_adjustment_dn == 0) {
+            XPLMSetDatai(Rad3LowerFineDecTicksOwnedDataRef, XPLMGetDatai(Rad3LowerFineDecTicksOwnedDataRef) + 1);
+        }
+
+        int rad3_lower_corse_adjustment_up = XPLMGetDatai(Rad3LowerCorseIncOwnedDataRef);
+        if(Last_Lower_Coarse_Up[radnum] !=0 && rad3_lower_corse_adjustment_up == 0) {
+            XPLMSetDatai(Rad3LowerCorseIncTicksOwnedDataRef, XPLMGetDatai(Rad3LowerCorseIncTicksOwnedDataRef) + 1);
+        }
+
+        int rad3_lower_corse_adjustment_dn = XPLMGetDatai(Rad3LowerCorseDecOwnedDataRef);
+        if(Last_Lower_Coarse_Dn[radnum] !=0 && rad3_lower_corse_adjustment_dn == 0) {
+            XPLMSetDatai(Rad3LowerCorseDecTicksOwnedDataRef, XPLMGetDatai(Rad3LowerCorseDecTicksOwnedDataRef) + 1);
+        }
+
+    }
+
+
+
 
 }
 
@@ -6179,6 +6327,43 @@ void process_radio_panel()
 
 {
     process_radio_menu();
+
+    XPLMSetDatai( Rad1UpperFineIncTicksOwnedDataRef, 0);
+    XPLMSetDatai( Rad2UpperFineIncTicksOwnedDataRef, 0);
+    XPLMSetDatai( Rad3UpperFineIncTicksOwnedDataRef, 0);
+
+    XPLMSetDatai( Rad1UpperFineDecTicksOwnedDataRef, 0);
+    XPLMSetDatai( Rad2UpperFineDecTicksOwnedDataRef, 0);
+    XPLMSetDatai( Rad3UpperFineDecTicksOwnedDataRef, 0);
+
+
+    XPLMSetDatai( Rad1UpperCorseIncTicksOwnedDataRef, 0);
+    XPLMSetDatai( Rad2UpperCorseIncTicksOwnedDataRef, 0);
+    XPLMSetDatai( Rad3UpperCorseIncTicksOwnedDataRef, 0);
+
+    XPLMSetDatai( Rad1UpperCorseDecTicksOwnedDataRef, 0);
+    XPLMSetDatai( Rad2UpperCorseDecTicksOwnedDataRef, 0);
+    XPLMSetDatai( Rad3UpperCorseDecTicksOwnedDataRef, 0);
+
+
+    XPLMSetDatai(Rad1LowerFineIncTicksOwnedDataRef, 0);
+    XPLMSetDatai(Rad2LowerFineIncTicksOwnedDataRef, 0);
+    XPLMSetDatai(Rad3LowerFineIncTicksOwnedDataRef, 0);
+
+    XPLMSetDatai(Rad1LowerFineDecTicksOwnedDataRef, 0);
+    XPLMSetDatai(Rad2LowerFineDecTicksOwnedDataRef, 0);
+    XPLMSetDatai(Rad3LowerFineDecTicksOwnedDataRef, 0);
+
+
+    XPLMSetDatai(Rad1LowerCorseIncTicksOwnedDataRef, 0);
+    XPLMSetDatai(Rad2LowerCorseIncTicksOwnedDataRef, 0);
+    XPLMSetDatai(Rad3LowerCorseIncTicksOwnedDataRef, 0);
+
+    XPLMSetDatai(Rad1LowerCorseDecTicksOwnedDataRef, 0);
+    XPLMSetDatai(Rad2LowerCorseDecTicksOwnedDataRef, 0);
+    XPLMSetDatai(Rad3LowerCorseDecTicksOwnedDataRef, 0);
+
+
 
 // ******* Only do a read if something new to be read ********
 
