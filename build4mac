@@ -6,7 +6,7 @@ rm -rf release
 mkdir -p lipo_temp &&
 mkdir -p release/Xsaitekpanels/64 &&
 make distclean >/dev/null
-qmake -spec macx-clang-32 && make &&
+qmake -spec /Volumes/MavericksHome/bill/Qt5.1.1/5.1.1/clang_64/mkspecs/macx-clang-32 && make &&
 cp plugin/libmac.xpl.dylib lipo_temp/mac32.xpl
 if [ $? != 0 ] ; then
   exit
@@ -14,7 +14,7 @@ fi
 
 
 make distclean >/dev/null
-qmake -spec macx-clang && make &&
+qmake -spec /Volumes/MavericksHome/bill/Qt5.1.1/5.1.1/clang_64/mkspecs/macx-clang && make &&
 cp plugin/libmac.xpl.dylib lipo_temp/mac64.xpl
 if [ $? != 0 ] ; then
   exit
