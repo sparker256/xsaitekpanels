@@ -598,22 +598,6 @@ extern int	Rad1UprFineDecStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprFineDecStatusSetDataiCallback(void * inRefcon, int Rad1UprFineDecStatus);
 
 
-
-extern int	Rad1UprCorseIncTicksStatusGetDataiCallback(void * inRefcon);
-extern void	Rad1UprCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseIncTicksStatus);
-
-extern int	Rad1UprCorseDecTicksStatusGetDataiCallback(void * inRefcon);
-extern void	Rad1UprCorseDecTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseDecTicksStatus);
-
-extern int	Rad1UprFineIncTicksStatusGetDataiCallback(void * inRefcon);
-extern void	Rad1UprFineIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprFineIncTicksStatus);
-
-extern int	Rad1UprFineDecTicksStatusGetDataiCallback(void * inRefcon);
-extern void	Rad1UprFineDecTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprFineDecTicksStatus);
-
-
-
-
 extern int	Rad1UprCorseIncTicksStatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprCorseIncTicksStatusSetDataiCallback(void * inRefcon, int Rad1UprCorseIncTicksStatus);
 

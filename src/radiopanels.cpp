@@ -154,6 +154,22 @@ static int Last_Lower_Fine_Up[4], Last_Lower_Fine_Dn[4];
 static int Last_Upper_Coarse_Up[4], Last_Upper_Coarse_Dn[4];
 static int Last_Lower_Coarse_Up[4], Last_Lower_Coarse_Dn[4];
 
+static int Last_Rad1_Upper_Fine_Up, Last_Rad1_Upper_Fine_Dn;
+static int Last_Rad2_Upper_Fine_Up, Last_Rad2_Upper_Fine_Dn;
+static int Last_Rad3_Upper_Fine_Up, Last_Rad3_Upper_Fine_Dn;
+
+static int Last_Rad1_Lower_Fine_Up, Last_Rad1_Lower_Fine_Dn;
+static int Last_Rad2_Lower_Fine_Up, Last_Rad2_Lower_Fine_Dn;
+static int Last_Rad3_Lower_Fine_Up, Last_Rad3_Lower_Fine_Dn;
+
+static int Last_Rad1_Upper_Corse_Up, Last_Rad1_Upper_Corse_Dn;
+static int Last_Rad2_Upper_Corse_Up, Last_Rad2_Upper_Corse_Dn;
+static int Last_Rad3_Upper_Corse_Up, Last_Rad3_Upper_Corse_Dn;
+
+static int Last_Rad1_Lower_Corse_Up, Last_Rad1_Lower_Corse_Dn;
+static int Last_Rad2_Lower_Corse_Up, Last_Rad2_Lower_Corse_Dn;
+static int Last_Rad3_Lower_Corse_Up, Last_Rad3_Lower_Corse_Dn;
+
 
 static int upmodeturnoff, lomodeturnoff;
 
@@ -2360,7 +2376,7 @@ void proecss_upper_adf_switch()
              }
 
             // Use the Coarse knob to select digit in the up direction
-           if ((Last_Upper_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_DN) == 0)) {
+           if ((Last_Upper_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_UP) == 0)) {
                upadfdbnccorinc[radnum] ++;
                if (upadfdbnccorinc[radnum] > radspeed) {
                    if ((rad1upradfswitchremap == 1) && (radnum == 0)) {
@@ -2378,10 +2394,10 @@ void proecss_upper_adf_switch()
                    }
                }
            }
-           Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
+           Last_Upper_Coarse_Up[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
 
            // Use the Coarse knob to select digit in the down direction
-           if ((Last_Upper_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_UP) == 0)) {
+           if ((Last_Upper_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_DN) == 0)) {
                upadfdbnccordec[radnum] ++;
                if (upadfdbnccordec[radnum] > radspeed) {
                    if ((rad1upradfswitchremap == 1) && (radnum == 0)) {
@@ -2400,7 +2416,7 @@ void proecss_upper_adf_switch()
                }
 
            }
-           Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
+           Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
 
            if (testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
                if ((rad1upradfactstbybtnremap == 1) && (radnum == 0)) {
@@ -2529,7 +2545,7 @@ void process_upper_dme_switch()
                 updmefreq[radnum] = XPLMGetDatai(DmeFreq);
                 updmefreqhnd = updmefreq[radnum]/100;
                 updmefreqfrc = updmefreq[radnum]%100;
-                if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_UP) ==0)) {
+                if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_UP) == 0)) {
                     if (updmefreqfrc == 95) {
                         updmefreqfrc = 0;
                     }
@@ -2542,7 +2558,7 @@ void process_upper_dme_switch()
                 Last_Upper_Fine_Up[radnum] = testbit(radiobuf[radnum],UPPER_FINE_UP);
 
 
-                if ((Last_Upper_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_DN) ==0)) {
+                if ((Last_Upper_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_DN) == 0)) {
                     if (updmefreqfrc == 0) {
                         updmefreqfrc = 95;
                     }
@@ -2552,7 +2568,7 @@ void process_upper_dme_switch()
                         updmedbncfndec[radnum] = 0;
                     }
                 }
-                Last_Upper_Fine_Up[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
+                Last_Upper_Fine_Dn[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
 
                 if ((Last_Upper_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_UP) == 0)) {
                     if (updmefreqhnd == 117) {
@@ -2689,7 +2705,7 @@ void process_upper_xpdr_switch()
                     }
                     rad1uprxpdrlastdigitcnt = 0;
                 }
-                Last_Upper_Fine_Up[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
+                Last_Upper_Fine_Dn[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
 
 
                 if (rad1uprxpdrlastdigitremap == 0) {
@@ -3048,7 +3064,7 @@ void process_upper_xpdr_switch()
                         upqnhdbnccorinc[radnum] = 0;
                     }
                 }
-                Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
+                Last_Upper_Coarse_Up[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
 
 
                 if ((Last_Upper_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_DN) == 0)) {
@@ -3113,7 +3129,7 @@ void process_upper_xpdr_switch()
                 Last_Upper_Fine_Up[radnum] = testbit(radiobuf[radnum],UPPER_FINE_UP);
 
 
-                if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_DN) == 0)) {
+                if ((Last_Upper_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_DN) == 0)) {
                     upxpdrdbncfninc[radnum]++;
                     if (upxpdrdbncfninc[radnum] > radspeed) {
                         rad3uprxpdrdigitremap--;
@@ -3329,7 +3345,7 @@ void process_upper_xpdr_switch()
                             upxpdrdbncfndec[radnum] = 0;
                         }
                     }
-                    Last_Upper_Fine_Up[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
+                    Last_Upper_Fine_Dn[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
 
                 } else if (upxpdrsel[radnum] == 2) {
                     if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_FINE_UP) == 0)) {
@@ -5024,7 +5040,7 @@ void process_lower_adf_switch()
                 }
 
                 if (loadfsel[radnum] == 2) {
-                    if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
+                    if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loadfdbncfninc[radnum]++;
                         if (loadfdbncfninc[radnum] > radspeed) {
                             if ((rad1lwradfswitchremap == 1) && (radnum == 0)) {
