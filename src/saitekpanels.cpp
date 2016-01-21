@@ -1,6 +1,6 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jan 16 2016   **************
+// ****** Jan 21 2016   **************
 
 #define PLUGIN_VERSION "2.50 stable build " __DATE__ " " __TIME__
 
