@@ -154,12 +154,13 @@ static int Last_Lower_Fine_Up[4], Last_Lower_Fine_Dn[4];
 static int Last_Upper_Coarse_Up[4], Last_Upper_Coarse_Dn[4];
 static int Last_Lower_Coarse_Up[4], Last_Lower_Coarse_Dn[4];
 
-static int Last_Upper_Fine_Up_Ticks[4], Last_Upper_Fine_Dn_Ticks[4];
-static int Last_Lower_Fine_Up_Ticks[4], Last_Lower_Fine_Dn_Ticks[4];
-static int Last_Upper_Coarse_Up_Ticks[4], Last_Upper_Coarse_Dn_Ticks[4];
-static int Last_Lower_Coarse_Up_Ticks[4], Last_Lower_Coarse_Dn_Ticks[4];
+static int Last_Upper_Fine_Up_Raw[4], Last_Upper_Fine_Dn_Raw[4];
+static int Last_Lower_Fine_Up_Raw[4], Last_Lower_Fine_Dn_Raw[4];
+static int Last_Upper_Coarse_Up_Raw[4], Last_Upper_Coarse_Dn_Raw[4];
+static int Last_Lower_Coarse_Up_Raw[4], Last_Lower_Coarse_Dn_Raw[4];
 
-static int Raw1, Raw2, Raw3;
+static int Upper_Raw1, Upper_Raw2, Upper_Raw3;
+static int Lower_Raw1, Lower_Raw2, Lower_Raw3;
 
 static int upmodeturnoff, lomodeturnoff;
 
@@ -175,6 +176,12 @@ void process_upper_com_freq();
 void process_upper_nav_freq();
 void process_lower_com_freq();
 void process_lower_nav_freq();
+
+
+void process_store_upper_radio_knobs_last_status();
+void process_retrive_upper_radio_knobs_last_status();
+void process_store_lower_radio_knobs_last_status();
+void process_retrive_lower_radio_knobs_last_status();
 
 
 void process_radio_menu()
@@ -1283,11 +1290,8 @@ void process_upper_datareferences()
 
 
     if (radnum == 0) {
-        if (Raw1 == 1) {
-            Last_Upper_Fine_Up[radnum] = Last_Upper_Fine_Up_Ticks[radnum];
-            Last_Upper_Fine_Dn[radnum] = Last_Upper_Fine_Dn_Ticks[radnum];
-            Last_Upper_Coarse_Up[radnum] = Last_Upper_Coarse_Up_Ticks[radnum];
-            Last_Upper_Coarse_Dn[radnum] = Last_Upper_Coarse_Dn_Ticks[radnum];
+        if (Upper_Raw1 == 1) {
+            process_retrive_upper_radio_knobs_last_status();
         } else {
 
         }
@@ -1314,11 +1318,8 @@ void process_upper_datareferences()
 
 
     if (radnum == 1) {
-        if (Raw2 == 1) {
-            Last_Upper_Fine_Up[radnum] = Last_Upper_Fine_Up_Ticks[radnum];
-            Last_Upper_Fine_Dn[radnum] = Last_Upper_Fine_Dn_Ticks[radnum];
-            Last_Upper_Coarse_Up[radnum] = Last_Upper_Coarse_Up_Ticks[radnum];
-            Last_Upper_Coarse_Dn[radnum] = Last_Upper_Coarse_Dn_Ticks[radnum];
+        if (Upper_Raw2 == 1) {
+            process_retrive_upper_radio_knobs_last_status();
         } else {
 
         }
@@ -1346,11 +1347,8 @@ void process_upper_datareferences()
 
 
     if (radnum == 2) {
-        if (Raw3 == 1) {
-            Last_Upper_Fine_Up[radnum] = Last_Upper_Fine_Up_Ticks[radnum];
-            Last_Upper_Fine_Dn[radnum] = Last_Upper_Fine_Dn_Ticks[radnum];
-            Last_Upper_Coarse_Up[radnum] = Last_Upper_Coarse_Up_Ticks[radnum];
-            Last_Upper_Coarse_Dn[radnum] = Last_Upper_Coarse_Dn_Ticks[radnum];
+        if (Upper_Raw3 == 1) {
+            process_retrive_upper_radio_knobs_last_status();
         } else {
 
         }
@@ -1390,23 +1388,37 @@ void process_upper_com1_switch()
         if (rad1uprcom1switchremap == 5) {
             if (radnum == 0) {
                 upseldis[radnum] = 12;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw1 = 1;
                 return;
             }
+        } else {
+            Upper_Raw1 = 0;
         }
 
 
         if (rad2uprcom1switchremap == 5) {
             if (radnum == 1) {
                 upseldis[radnum] = 13;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw2 = 1;
                 return;
+            } else {
+
             }
+        } else {
+            Upper_Raw2 = 0;
         }
 
         if (rad3uprcom1switchremap == 5) {
             if (radnum == 2) {
                 upseldis[radnum] = 14;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw3 = 1;
                 return;
             }
+        } else {
+           Upper_Raw3 = 0;
         }
 
         if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
@@ -1605,23 +1617,35 @@ void process_upper_com2_switch()
          if (rad1uprcom2switchremap == 5) {
             if (radnum == 0) {
                 upseldis[radnum] = 12;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw1 = 1;
                 return;
             }
-        }
+         } else {
+             Upper_Raw1 = 0;
+         }
 
 
         if (rad2uprcom2switchremap == 5) {
             if (radnum == 1) {
                 upseldis[radnum] = 13;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw2 = 1;
                 return;
             }
+        } else {
+            Upper_Raw2 = 0;
         }
 
         if (rad3uprcom2switchremap == 5) {
             if (radnum == 2) {
                 upseldis[radnum] = 14;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw3 = 1;
                 return;
             }
+        } else {
+            Upper_Raw3 = 0;
         }
 
         if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
@@ -1823,26 +1847,38 @@ void process_upper_nav1_switch()
         if (rad1uprnav1switchremap == 5) {
            if (radnum == 0) {
                upseldis[radnum] = 12;
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw1 = 1;
                return;
            }
-       }
+        } else {
+            Upper_Raw1 = 0;
+        }
 
 
        if (rad2uprnav1switchremap == 5) {
            if (radnum == 1) {
                upseldis[radnum] = 13;
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw2 = 1;
                return;
            }
+       } else {
+           Upper_Raw2 = 0;
        }
 
        if (rad3uprnav1switchremap == 5) {
            if (radnum == 2) {
                upseldis[radnum] = 14;
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw3 = 1;
                return;
            }
+       } else {
+           Upper_Raw3 = 0;
        }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+       if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
             upseldis[radnum] = 10;
         } else {
            upseldis[radnum] = 3;
@@ -2013,23 +2049,37 @@ void process_upper_nav2_switch()
         if (rad1uprnav2switchremap == 5) {
            if (radnum == 0) {
                upseldis[radnum] = 12;
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw1 = 1;
                return;
            }
-       }
+        } else {
+            Upper_Raw1 = 0;
+        }
 
        if (rad2uprnav2switchremap == 5) {
            if (radnum == 1) {
                upseldis[radnum] = 13;
+
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw2 = 1;
                return;
            }
+       } else {
+           Upper_Raw2 = 0;
        }
 
        if (rad3uprnav2switchremap == 5) {
            if (radnum == 2) {
                upseldis[radnum] = 14;
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw3 = 1;
                return;
            }
+       } else {
+           Upper_Raw3 = 0;
        }
+
        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
             upseldis[radnum] = 10;
        } else {
@@ -2200,23 +2250,36 @@ void proecss_upper_adf_switch()
         if (rad1upradfswitchremap == 5) {
            if (radnum == 0) {
                upseldis[radnum] = 12;
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw1 = 1;
                return;
            }
-       }
+        } else {
+            Upper_Raw1 = 0;
+        }
 
-       if (rad2upradfswitchremap == 5) {
+        if (rad2upradfswitchremap == 5) {
            if (radnum == 1) {
                upseldis[radnum] = 13;
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw2 = 1;
                return;
            }
-       }
+        } else {
+            Upper_Raw2 = 0;
+        }
 
-       if (rad3upradfswitchremap == 5) {
+        if (rad3upradfswitchremap == 5) {
            if (radnum == 2) {
                upseldis[radnum] = 14;
+               process_store_upper_radio_knobs_last_status();
+               Upper_Raw3 = 1;
                return;
            }
-       }
+        } else {
+            Upper_Raw3 = 0;
+        }
+
         if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
             upseldis[radnum] = 10;
         } else {
@@ -2460,37 +2523,34 @@ void process_upper_dme_switch()
         if (rad1uprdmeswitchremap == 5) {
             if (radnum == 0) {
                 upseldis[radnum] = 12;
-                Last_Upper_Fine_Up_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_FINE_UP);
-                Last_Upper_Fine_Dn_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
-                Last_Upper_Coarse_Up_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
-                Last_Upper_Coarse_Dn_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
-                Raw1 = 1;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw1 = 1;
                 return;
             }
+        } else {
+            Upper_Raw1 = 0;
         }
 
         if (rad2uprdmeswitchremap == 5) {
             if (radnum == 1) {
                 upseldis[radnum] = 13;
-                Last_Upper_Fine_Up_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_FINE_UP);
-                Last_Upper_Fine_Dn_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
-                Last_Upper_Coarse_Up_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
-                Last_Upper_Coarse_Dn_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
-                Raw2 = 1;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw2 = 1;
                 return;
             }
+        } else {
+            Upper_Raw2 = 0;
         }
 
         if (rad3uprdmeswitchremap == 5) {
             if (radnum == 2) {
                 upseldis[radnum] = 14;
-                Last_Upper_Fine_Up_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_FINE_UP);
-                Last_Upper_Fine_Dn_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
-                Last_Upper_Coarse_Up_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
-                Last_Upper_Coarse_Dn_Ticks[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
-                Raw3 = 1;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw3 = 1;
                 return;
             }
+        } else {
+            Upper_Raw3 = 0;
         }
 
 
@@ -2679,23 +2739,35 @@ void process_upper_xpdr_switch()
         if (rad1uprxpdrswitchremap == 5) {
             if (radnum == 0) {
                 upseldis[radnum] = 12;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw1 = 1;
                 return;
             }
+        } else {
+           Upper_Raw1 = 0;
         }
 
 
         if (rad2uprxpdrswitchremap == 5) {
             if (radnum == 1) {
                 upseldis[radnum] = 13;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw2 = 1;
                 return;
             }
+        } else {
+            Upper_Raw2 = 0;
         }
 
         if (rad3uprxpdrswitchremap == 5) {
             if (radnum == 2) {
                 upseldis[radnum] = 14;
+                process_store_upper_radio_knobs_last_status();
+                Upper_Raw3 = 1;
                 return;
             }
+        } else {
+            Upper_Raw3 = 0;
         }
 
 
@@ -3825,6 +3897,11 @@ void process_lower_datareferences()
 
 
     if (radnum == 0) {
+        if (Lower_Raw1 == 1) {
+            process_retrive_lower_radio_knobs_last_status();
+        } else {
+
+        }
         int rad1_lower_fine_adjustment_up = XPLMGetDatai(Rad1LowerFineIncOwnedDataRef);
         if(Last_Lower_Fine_Up[radnum] !=0 && rad1_lower_fine_adjustment_up == 0) {
             XPLMSetDatai(Rad1LowerFineIncTicksOwnedDataRef, XPLMGetDatai(Rad1LowerFineIncTicksOwnedDataRef) + 1);
@@ -3849,6 +3926,11 @@ void process_lower_datareferences()
 
 
     if (radnum == 1) {
+        if (Lower_Raw2 == 1) {
+            process_retrive_lower_radio_knobs_last_status();
+        } else {
+
+        }
         int rad2_lower_fine_adjustment_up = XPLMGetDatai(Rad2LowerFineIncOwnedDataRef);
         if(Last_Lower_Fine_Up[radnum] !=0 && rad2_lower_fine_adjustment_up == 0) {
             XPLMSetDatai(Rad2LowerFineIncTicksOwnedDataRef, XPLMGetDatai(Rad2LowerFineIncTicksOwnedDataRef) + 1);
@@ -3873,6 +3955,11 @@ void process_lower_datareferences()
 
 
     if (radnum == 2) {
+        if (Lower_Raw3 == 1) {
+            process_retrive_lower_radio_knobs_last_status();
+        } else {
+
+        }
         int rad3_lower_fine_adjustment_up = XPLMGetDatai(Rad3LowerFineIncOwnedDataRef);
         if(Last_Lower_Fine_Up[radnum] !=0 && rad3_lower_fine_adjustment_up == 0) {
             XPLMSetDatai(Rad3LowerFineIncTicksOwnedDataRef, XPLMGetDatai(Rad3LowerFineIncTicksOwnedDataRef) + 1);
@@ -3910,22 +3997,34 @@ void process_lower_com1_switch()
         if (rad1lwrcom1switchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw1 = 1;
                 return;
             }
+        } else {
+            Lower_Raw1 = 0;
         }
 
         if (rad2lwrcom1switchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw2 = 1;
                 return;
             }
+        } else {
+           Lower_Raw2 = 0;
         }
 
         if (rad3lwrcom1switchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw3 = 1;
                 return;
             }
+        } else {
+            Lower_Raw3 = 0;
         }
 
         if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
@@ -4122,23 +4221,36 @@ void process_lower_com2_switch()
         if (rad1lwrcom2switchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw1 = 1;
                 return;
             }
+        } else {
+            Lower_Raw1 = 0;
         }
 
         if (rad2lwrcom2switchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw2 = 1;
                 return;
             }
+        } else {
+            Lower_Raw2 = 0;
         }
 
         if (rad3lwrcom2switchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw3 = 1;
                 return;
             }
+        } else {
+            Lower_Raw3 = 0;
         }
+
         if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
             loseldis[radnum] = 10;
         } else {
@@ -4333,23 +4445,36 @@ void process_lower_nav1_switch()
         if (rad1lwrnav1switchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw1 = 1;
                 return;
             }
+        } else {
+            Lower_Raw1 = 0;
         }
 
         if (rad2lwrnav1switchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw2 = 1;
                 return;
             }
+        } else {
+            Lower_Raw2 = 0;
         }
 
         if (rad3lwrnav1switchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw3 = 1;
                 return;
             }
+        } else {
+            Lower_Raw3 = 0;
         }
+
         if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
             loseldis[radnum] = 10;
         } else {
@@ -4521,23 +4646,36 @@ void process_lower_nav2_switch()
         if (rad1lwrnav2switchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw1 = 1;
                 return;
             }
+        } else {
+            Lower_Raw1 = 0;
         }
 
         if (rad2lwrnav2switchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw2 = 1;
                 return;
             }
+        } else {
+            Lower_Raw2 = 0;
         }
 
         if (rad3lwrnav2switchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw3 = 1;
                 return;
             }
+        } else {
+            Lower_Raw3 = 0;
         }
+
         if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
             loseldis[radnum] = 10;
         } else {
@@ -4711,23 +4849,36 @@ void process_lower_adf_switch()
         if (rad1lwradfswitchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw1 = 1;
                 return;
             }
+        } else {
+            Lower_Raw1 = 0;
         }
 
         if (rad2lwradfswitchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw2 = 1;
                 return;
             }
+        } else {
+            Lower_Raw2 = 0;
         }
 
         if (rad3lwradfswitchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw3 = 1;
                 return;
             }
+        } else {
+            Lower_Raw3 = 0;
         }
+
         if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
             loseldis[radnum] = 10;
         } else {
@@ -5207,23 +5358,35 @@ void process_lower_dme_switch()
         if (rad1lwrdmeswitchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw1 = 1;
                 return;
             }
+        } else {
+            Lower_Raw1 = 0;
         }
 
         if (rad2lwrdmeswitchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw2 = 1;
                 return;
             }
+        } else {
+            Lower_Raw2 = 0;
         }
 
 
         if (rad3lwrdmeswitchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw3 = 1;
                 return;
             }
+        } else {
+           Lower_Raw3 = 0;
         }
 
 
@@ -5410,23 +5573,35 @@ void process_lower_xpdr_switch()
         if (rad1lwrxpdrswitchremap == 5) {
             if (radnum == 0) {
                 loseldis[radnum] = 15;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw1 = 1;
                 return;
             }
+        } else {
+            Lower_Raw1 = 0;
         }
 
         if (rad2lwrxpdrswitchremap == 5) {
             if (radnum == 1) {
                 loseldis[radnum] = 16;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw3 = 1;
                 return;
             }
+        } else {
+            Lower_Raw3 = 0;
         }
 
 
         if (rad3lwrxpdrswitchremap == 5) {
             if (radnum == 2) {
                 loseldis[radnum] = 17;
+                process_store_lower_radio_knobs_last_status();
+                Lower_Raw3 = 1;
                 return;
             }
+        } else {
+            Lower_Raw3 = 0;
         }
 
 
@@ -6366,6 +6541,49 @@ void process_lower_nav_freq()
 
   return;
 }
+
+
+void process_retrive_upper_radio_knobs_last_status()
+
+{
+    Last_Upper_Fine_Up[radnum] = Last_Upper_Fine_Up_Raw[radnum];
+    Last_Upper_Fine_Dn[radnum] = Last_Upper_Fine_Dn_Raw[radnum];
+    Last_Upper_Coarse_Up[radnum] = Last_Upper_Coarse_Up_Raw[radnum];
+    Last_Upper_Coarse_Dn[radnum] = Last_Upper_Coarse_Dn_Raw[radnum];
+    return;
+}
+
+void process_store_upper_radio_knobs_last_status()
+
+{
+    Last_Upper_Fine_Up_Raw[radnum] = testbit(radiobuf[radnum],UPPER_FINE_UP);
+    Last_Upper_Fine_Dn_Raw[radnum] = testbit(radiobuf[radnum],UPPER_FINE_DN);
+    Last_Upper_Coarse_Up_Raw[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
+    Last_Upper_Coarse_Dn_Raw[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
+    return;
+}
+
+
+void process_retrive_lower_radio_knobs_last_status()
+
+{
+    Last_Lower_Fine_Up[radnum] = Last_Lower_Fine_Up_Raw[radnum];
+    Last_Lower_Fine_Dn[radnum] = Last_Lower_Fine_Dn_Raw[radnum];
+    Last_Lower_Coarse_Up[radnum] = Last_Lower_Coarse_Up_Raw[radnum];
+    Last_Lower_Coarse_Dn[radnum] = Last_Lower_Coarse_Dn_Raw[radnum];
+    return;
+}
+
+void process_store_lower_radio_knobs_last_status()
+
+{
+    Last_Lower_Fine_Up_Raw[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
+    Last_Lower_Fine_Dn_Raw[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
+    Last_Lower_Coarse_Up_Raw[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
+    Last_Lower_Coarse_Dn_Raw[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
+    return;
+}
+
 
 // ***** Radio Panel Process  *******
 void process_radio_panel()
