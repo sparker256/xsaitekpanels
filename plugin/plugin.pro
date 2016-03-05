@@ -7,9 +7,9 @@ CONFIG -= thread exceptions qt rtti debug
 
 VERSION = 1.0.0
 
-INCLUDEPATH += ../../SDK/CHeaders/XPLM
-INCLUDEPATH += ../../SDK/CHeaders/Wrappers
-INCLUDEPATH += ../../SDK/CHeaders/Widgets
+INCLUDEPATH += ../SDK/CHeaders/XPLM
+INCLUDEPATH += ../SDK/CHeaders/Wrappers
+INCLUDEPATH += ../SDK/CHeaders/Widgets
 
 
 # Defined to use X-Plane SDK 2.0 capabilities - no backward compatibility before 9.0
@@ -21,25 +21,25 @@ win32 {
     DEFINES += APL=0 IBM=1 LIN=0
     INCLUDEPATH += ../../hidapi-0.8.0-rc1_Patched/hidapi
     SOURCES += ../../hidapi-0.8.0-rc1_Patched/windows/hid.c
-    LIBS += -L../../SDK/Libraries/Win
+    LIBS += -L../SDK/Libraries/Win
     TARGET = win.xpl
     INCLUDEPATH += .
     LIBS +=  "-lsetupapi"
     QMAKE_DEL_FILE          = rm -f
-    INCLUDEPATH += "../../WinSDK/Include"
+    INCLUDEPATH += "../WinSDK/Include"
     LIBS += -static-libstdc++ -static-libgcc -Wl,-Bstatic -lstdc++ -lpthread -Wl,-Bdynamic
 
 }
 
 win32:contains(CROSS_COMPILE, x86_64-w64-mingw32-){
     message(win32cross64)
-    LIBS += -L"../../WinSDK/Lib/x64"
+    LIBS += -L"../WinSDK/Lib/x64"
     LIBS += -lXPLM_64 -lXPWidgets_64
 }
 
 win32:contains(CROSS_COMPILE, i686-w64-mingw32-){
     message(win32cross32)
-    LIBS += -L"../../WinSDK/Lib"
+    LIBS += -L"../WinSDK/Lib"
     LIBS += -lXPLM -lXPWidgets
     DEFINES += __MIDL_user_allocate_free_DEFINED__
 }
@@ -50,8 +50,8 @@ unix:!macx {
     TARGET = lin.xpl
     # WARNING! This requires the latest version of the X-SDK !!!!
     QMAKE_CXXFLAGS += -fvisibility=hidden
-    INCLUDEPATH += ../../hidapi-0.8.0-rc1/hidapi
-    SOURCES += ../../hidapi-0.8.0-rc1/linux/hid.c
+    INCLUDEPATH += ../../hidapi-0.8.0-rc1_Patched/hidapi
+    SOURCES += ../../hidapi-0.8.0-rc1_Patched/linux/hid.c
     LIBS += `pkg-config libudev --libs`
     QMAKE_LFLAGS += -Wl,-rpath=./Resources/plugins/Xsaitekpanels/64
     QMAKE_RPATH=
@@ -62,10 +62,10 @@ unix:!macx {
 macx {
     DEFINES += APL=1 IBM=0 LIN=0
     TARGET = mac.xpl
-    QMAKE_LFLAGS += -F../../SDK/Libraries/Mac/ -framework XPWidgets -framework XPLM
-    INCLUDEPATH += ../../hidapi-0.8.0-rc1/hidapi
+    QMAKE_LFLAGS += -F../SDK/Libraries/Mac/ -framework XPWidgets -framework XPLM
+    INCLUDEPATH += ../../hidapi-0.8.0-rc1_Patched/hidapi
     SOURCES += \
-          ../../hidapi-0.8.0-rc1/mac/hid.c
+          ../../hidapi-0.8.0-rc1_Patched/mac/hid.c
     LIBS += -framework IOKit -framework CoreFoundation
 }
 
