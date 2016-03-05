@@ -1,0 +1,48 @@
+language: cpp
+dist: trusty
+sudo: false
+os:
+- linux
+- osx
+compiler:
+- clang
+- gcc
+matrix:
+  exclude:
+  - os: linux
+    compiler: clang
+  - os: osx
+    compiler: gcc
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - cmake
+    - libx11-dev
+    - libudev-dev
+    - gcc-4.9
+    - g++-4.9
+    - libbz2-dev
+    - libstdc++-4.9-dev
+    - sshpass
+before_install:
+- cmake --version
+- $CC --version
+- $CXX --version
+- if [ "$CXX" = "g++" ] && [ "$TRAVIS_OS_NAME" = "linux" ] ; then export CXX="g++-4.9"
+  CC="gcc-4.9"; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install http://git.io/sshpass.rb ; fi
+script:
+- mkdir build
+- cd build
+- cmake -DCMAKE_BUILD_TYPE=Release ..
+- make
+- export SSHPASS=$DEPLOY_PASS
+- sshpass -e ssh -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST mkdir -p /home/$DEPLOY_USER/drt/${TRAVIS_COMMIT}
+- sshpass -e scp ../bin/datareftool/*.xpl  $DEPLOY_USER@$DEPLOY_HOST:/home/$DEPLOY_USER/drt/${TRAVIS_COMMIT}
+- sshpass -e ssh $DEPLOY_USER@$DEPLOY_HOST cp /home/$DEPLOY_USER/drt/${TRAVIS_COMMIT}/*.xpl /home/$DEPLOY_USER/drt/latest/
+after_success:
+- if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L ../bin/datareftool/*.xpl ; fi
+- if [[ "$TRAVIS_OS_NAME" == "linux" ]]; ldd ../bin/datareftool/*.xpl ; fi
