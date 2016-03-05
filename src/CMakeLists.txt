@@ -36,7 +36,7 @@ endif()
 
 #libraries
 if(UNIX)
-	target_include_directories(plugin PUBLIC "../SDK/CHeaders/XPLM/" "../SDK/CHeaders/Widgets/" "../SDK/CHeaders/Wrappers/" "../hidapi-0.8.0-rc1_Patched/hidapi")
+	include_directories(plugin PUBLIC "../SDK/CHeaders/XPLM/" "../SDK/CHeaders/Widgets/" "../SDK/CHeaders/Wrappers/" "../hidapi-0.8.0-rc1_Patched/hidapi")
 endif(UNIX)
 if(APPLE)
 	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -arch x86_64")
