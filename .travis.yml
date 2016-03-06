@@ -40,7 +40,6 @@ script:
 - cmake -DCMAKE_BUILD_TYPE=Release ..
 - make
 - export SSHPASS=$DEPLOY_PASS
-- sshpass -e ssh -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST mkdir -p /home/$DEPLOY_USER/xsaitekpanels/${TRAVIS_COMMIT}
 after_success:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L ../bin/Xsaitekpanels/*.xpl ; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; ldd ../bin/Xsaitekpanels/*.xpl ; fi
