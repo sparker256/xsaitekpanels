@@ -1,4 +1,5 @@
-# Xsaitekpanels X-Plane plugin for Saitek Switch, Radio, Multi & BIP panels.
+# Xsaitekpanels
+# X-Plane plugin for Saitek Switch, Radio, Multi & BIP panels.
 [![Travis Build Status](https://travis-ci.org/sparker256/xsaitekpanels.svg)](https://travis-ci.org/sparker256/xsaitekpanels)
 
 ### Author
