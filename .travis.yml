@@ -40,10 +40,6 @@ script:
 - cmake -DCMAKE_BUILD_TYPE=Release ..
 - make
 - export SSHPASS=$DEPLOY_PASS
-- sshpass -e ssh -oStrictHostKeyChecking=no root@192.168.1.12 mkdir -p Xsaitekpanels/
 after_success:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L ../bin/Xsaitekpanels/*.xpl ; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; ldd ../bin/Xsaitekpanels/*.xpl ; fi
-env:
-  global:
-  - secure: YLFNeCWlIL6RNMpPKyPdjVwmlCVr2m6uBkByA9tl4A9VYHBE2+ut7vgRD8fDCRhWFN6qZalTV1rsXm94qP8uAbRSz2elWqu9qPjJg+ZDokbjiyUxMNtbI+PBvpI5jq0/4TNF1CnNMRVwnn8QAFbpfdH2sxmGQeVZRRhT8Dr/MW5MMeA9J0kBNDf1i+uQuuCYmqplLQNnWdbpJuvdiFzh6uvNrxxNPORRl76bGxLhfrF3ZV1JL+BZO4MsRqLTnWLuwJHeTYpstoRnuX6cCOrFIMZ/1rAm6zDZUhexdvvgnR/B+liNnwvG0niTNrTAseuU9zcZ080db3DP/LPsORv3EOVTMlQ89i7CqwGYnI+7hSOBN71IA0irP4bQq3gE+TaJcZk0XVopQPBU7nipi8ZtMacECWoO++KjAP5gHPOkbaPEB3DAYV5omOK0GurKQ0OycC39FkDkx/hVhqzjEkpvmRUYMVoNvOSGL/LhzsHR1B8AJOzWYfaOr2HVRXnLqg5N3FRdbKBtoe2JnuwwWnREaNS+8A1++COoMG6ir1f7M2glmzwIPjxkpcxDjm/fsTOw/q0C47Iyt3emtLgxMH7mIjuPx8UCvJwlZcQqzOvH27Xg0m51RqI7jJB2L1elu+6CN+BRkVvqRNEGr88Gtq8IBMdb8QIoSBLV4nTdoV/cRZg=
