@@ -20,7 +20,7 @@ addons:
     packages:
     - cmake
     - libx11-dev
-    - libudev-dev
+    - libudev1-dev
     - gcc-4.9
     - g++-4.9
     - libbz2-dev
