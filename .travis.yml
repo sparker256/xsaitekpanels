@@ -30,6 +30,7 @@ before_install:
 - cmake --version
 - $CC --version
 - $CXX --version
+- sudo apt-get install -y libudev1-dev
 - if [ "$CXX" = "g++" ] && [ "$TRAVIS_OS_NAME" = "linux" ] ; then export CXX="g++-4.9"
   CC="gcc-4.9"; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
