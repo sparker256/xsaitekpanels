@@ -40,7 +40,7 @@ script:
 - cmake -DCMAKE_BUILD_TYPE=Release ..
 - make
 - export SSHPASS=$DEPLOY_PASS
-- sshpass -e ssh -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST mkdir -p home/$DEPLOY_USER/Xsaitekpanels/${TRAVIS_COMMIT}
+- sshpass -e ssh -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST mkdir -p /home/$DEPLOY_USER/Xsaitekpanels/${TRAVIS_COMMIT}
 - sshpass -e scp ../bin/Xsaitekpanels/*.xpl  $DEPLOY_USER@$DEPLOY_HOST:/home/$DEPLOY_USER/Xsaitekpanels/${TRAVIS_COMMIT}
 after_success:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L ../bin/Xsaitekpanels/*.xpl ; fi
