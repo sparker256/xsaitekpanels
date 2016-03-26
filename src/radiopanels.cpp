@@ -5585,11 +5585,11 @@ void process_lower_xpdr_switch()
             if (radnum == 1) {
                 loseldis[radnum] = 16;
                 process_store_lower_radio_knobs_last_status();
-                Lower_Raw3 = 1;
+                Lower_Raw2 = 1;
                 return;
             }
         } else {
-            Lower_Raw3 = 0;
+            Lower_Raw2 = 0;
         }
 
 
