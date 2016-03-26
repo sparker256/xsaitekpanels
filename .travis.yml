@@ -41,6 +41,7 @@ script:
 - make
 - export SSHPASS=$DEPLOY_PASS
 - sshpass -e ssh -oStrictHostKeyChecking=no $DEPLOY_USER@$DEPLOY_HOST mkdir -p home/$DEPLOY_USER/Xsaitekpanels/${TRAVIS_COMMIT}
+- sshpass -e scp ../bin/xsaitekpanels/*.xpl  $DEPLOY_USER@$DEPLOY_HOST:/home/$DEPLOY_USER/Xsaitekpanels/${TRAVIS_COMMIT}
 after_success:
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then otool -L ../bin/Xsaitekpanels/*.xpl ; fi
 - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; ldd ../bin/Xsaitekpanels/*.xpl ; fi
