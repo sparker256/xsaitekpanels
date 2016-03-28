@@ -31,8 +31,8 @@ before_install:
 - cmake --version
 - $CC --version
 - $CXX --version
-- if [ "$TRAVIS_OS_NAME" = "linux" ] ; then sudo apt-get update -q"
-- if [ "$TRAVIS_OS_NAME" = "linux" ] ; then  sudo apt-get install libudev1 -y
+- if [ "$TRAVIS_OS_NAME" = "linux" ] ; then sudo apt-get update -q ; fi
+- if [ "$TRAVIS_OS_NAME" = "linux" ] ; then  sudo apt-get install libudev1 -y ; fi
 - if [ "$CXX" = "g++" ] && [ "$TRAVIS_OS_NAME" = "linux" ] ; then export CXX="g++-4.9"
   CC="gcc-4.9"; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
