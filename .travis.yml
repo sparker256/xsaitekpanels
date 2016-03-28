@@ -1,6 +1,6 @@
 language: cpp
 dist: trusty
-sudo: false
+sudo: require
 os:
 - linux
 - osx
@@ -31,6 +31,8 @@ before_install:
 - cmake --version
 - $CC --version
 - $CXX --version
+- sudo apt-get update -q
+- sudo apt-get install libudev1 -y
 - if [ "$CXX" = "g++" ] && [ "$TRAVIS_OS_NAME" = "linux" ] ; then export CXX="g++-4.9"
   CC="gcc-4.9"; fi
 - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew update ; fi
