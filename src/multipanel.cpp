@@ -1,4 +1,4 @@
-// ****** multipanel.cpp **********
+﻿// ****** multipanel.cpp **********
 // ****  William R. Good  ********
 
 
@@ -323,7 +323,7 @@ void process_alt_switch()
         } else {
             upapaltf = XPLMGetDataf(ApAlt);
         }
-        upapaltf = XPLMGetDataf(ApAlt);
+ //       upapaltf = XPLMGetDataf(ApAlt);
         upapalt = (int)(upapaltf);
         if((Last_Adjustment_Up == 1) && (testbit(multibuf,ADJUSTMENT_UP) == 0)) {
             altdbncinc++;
@@ -561,6 +561,9 @@ void process_ias_switch()
             }
         } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
             apmasf = XPLMGetDataf(ApAs);
+        } else if ((iasswitchremap == 1) | (iasswitchremap == 2)) {
+            apasf = XPLMGetDataf(IasSwitchRemapableData);
+            apas = (int)(apasf);
         } else {
             apasf = XPLMGetDataf(ApAs);
             apas = (int)(apasf);
@@ -596,6 +599,8 @@ void process_ias_switch()
                 if (xpanelsfnbutton == 0) {
                     if (iasswitchremap == 1) {
                         XPLMCommandOnce(IasSwitchUpRemapableCmd);
+                    } else if (iasswitchremap == 2) {
+                        apas = apas + 1;
                     } else {
                         if (iasismachremap == 1) {
                             if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
@@ -647,6 +652,8 @@ void process_ias_switch()
                 if (xpanelsfnbutton == 0) {
                     if (iasswitchremap == 1) {
                         XPLMCommandOnce(IasSwitchDnRemapableCmd);
+                    } else if (iasswitchremap == 2) {
+                        apas = apas - 1;
                     } else {
                         if (iasismachremap == 1) {
                             if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
@@ -689,9 +696,12 @@ void process_ias_switch()
         } else {
             apasout = apas;
             apasf = apas;
-            XPLMSetDataf(ApAs, apasf);
+            if ((iasswitchremap == 1) | (iasswitchremap == 2)) {
+                XPLMSetDataf(IasSwitchRemapableData, apasf);
+            } else {
+                XPLMSetDataf(ApAs, apasf);
+            }
         }
-
     }
 }
 

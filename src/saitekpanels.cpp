@@ -1,8 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Mar 25 2016   **************
+// ****** Jun 03 2016   **************
 
-#define PLUGIN_VERSION "2.51 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION "2.52 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 252
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -863,6 +864,18 @@ static XPLMDataRef	XsaitekpanelsInteger8SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsInteger9SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsInteger10SharedDataRef = NULL;
 
+static XPLMDataRef	XsaitekpanelsInteger11SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger12SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger13SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger14SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger15SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger16SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger17SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger18SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger19SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsInteger20SharedDataRef = NULL;
+
+
 static XPLMDataRef	XsaitekpanelsFloat1SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat2SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat3SharedDataRef = NULL;
@@ -873,6 +886,17 @@ static XPLMDataRef	XsaitekpanelsFloat7SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat8SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat9SharedDataRef = NULL;
 static XPLMDataRef	XsaitekpanelsFloat10SharedDataRef = NULL;
+
+static XPLMDataRef	XsaitekpanelsFloat11SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat12SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat13SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat14SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat15SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat16SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat17SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat18SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat19SharedDataRef = NULL;
+static XPLMDataRef	XsaitekpanelsFloat20SharedDataRef = NULL;
 
 
 // ********************** Radio Panel variables ************************
@@ -2373,6 +2397,17 @@ static void	XsaitekpanelsInteger7DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsInteger8DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsInteger9DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsInteger10DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger11DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger12DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger13DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger14DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger15DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger16DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger17DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger18DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger19DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsInteger20DataChangedCallback(void * inRefcon);
+
 
 static void	XsaitekpanelsFloat1DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsFloat2DataChangedCallback(void * inRefcon);
@@ -2384,6 +2419,18 @@ static void	XsaitekpanelsFloat7DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsFloat8DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsFloat9DataChangedCallback(void * inRefcon);
 static void	XsaitekpanelsFloat10DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat11DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat12DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat13DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat14DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat15DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat16DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat17DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat18DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat19DataChangedCallback(void * inRefcon);
+static void	XsaitekpanelsFloat20DataChangedCallback(void * inRefcon);
+
+
 
 static int SwitchPanelCountData = 0;
 static int SwitchStartOffOwnedData = 0, SwitchStartRightOwnedData = 0;
@@ -2973,7 +3020,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   printf("gXPlaneVersion = %d gXPLMVersion = %d gHostID = %d\n", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID);
 
-  XsaitekpanelsVersion = 249;
+  XsaitekpanelsVersion = PLUGIN_VERSION_NUMBER;
 
   XPLMDebugString("Xsaitekpanels: ver " PLUGIN_VERSION "\n");
 
@@ -3435,6 +3482,76 @@ PLUGIN_API int XPluginStart(char *		outName,
   XPLMSetDatai(XsaitekpanelsInteger10SharedDataRef, 0);
 
 
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer11", xplmType_Int,
+      XsaitekpanelsInteger11DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger11SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer11");
+  XPLMSetDatai(XsaitekpanelsInteger11SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer12", xplmType_Int,
+      XsaitekpanelsInteger12DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger12SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer12");
+  XPLMSetDatai(XsaitekpanelsInteger12SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer13", xplmType_Int,
+      XsaitekpanelsInteger13DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger13SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer13");
+  XPLMSetDatai(XsaitekpanelsInteger13SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer14", xplmType_Int,
+      XsaitekpanelsInteger14DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger14SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer14");
+  XPLMSetDatai(XsaitekpanelsInteger14SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer15", xplmType_Int,
+      XsaitekpanelsInteger15DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger15SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer15");
+  XPLMSetDatai(XsaitekpanelsInteger15SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer16", xplmType_Int,
+      XsaitekpanelsInteger16DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger16SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer16");
+  XPLMSetDatai(XsaitekpanelsInteger16SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer17", xplmType_Int,
+      XsaitekpanelsInteger17DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger17SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer17");
+  XPLMSetDatai(XsaitekpanelsInteger17SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer18", xplmType_Int,
+      XsaitekpanelsInteger18DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger18SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer18");
+  XPLMSetDatai(XsaitekpanelsInteger18SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer19", xplmType_Int,
+      XsaitekpanelsInteger19DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger19SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer19");
+  XPLMSetDatai(XsaitekpanelsInteger19SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/integer20", xplmType_Int,
+      XsaitekpanelsInteger20DataChangedCallback, NULL);
+
+  XsaitekpanelsInteger20SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/integer20");
+  XPLMSetDatai(XsaitekpanelsInteger20SharedDataRef, 0);
+
+
 
   XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float1", xplmType_Float,
       XsaitekpanelsFloat1DataChangedCallback, NULL);
@@ -3504,6 +3621,80 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   XsaitekpanelsFloat10SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float10");
   XPLMSetDataf(XsaitekpanelsFloat10SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float11", xplmType_Float,
+      XsaitekpanelsFloat11DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat11SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float11");
+  XPLMSetDataf(XsaitekpanelsFloat11SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float12", xplmType_Float,
+      XsaitekpanelsFloat12DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat12SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float12");
+  XPLMSetDataf(XsaitekpanelsFloat12SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float13", xplmType_Float,
+      XsaitekpanelsFloat13DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat13SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float13");
+  XPLMSetDataf(XsaitekpanelsFloat13SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float14", xplmType_Float,
+      XsaitekpanelsFloat14DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat14SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float14");
+  XPLMSetDataf(XsaitekpanelsFloat14SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float15", xplmType_Float,
+      XsaitekpanelsFloat15DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat15SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float15");
+  XPLMSetDataf(XsaitekpanelsFloat15SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float16", xplmType_Float,
+      XsaitekpanelsFloat16DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat16SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float16");
+  XPLMSetDataf(XsaitekpanelsFloat16SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float17", xplmType_Float,
+      XsaitekpanelsFloat17DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat17SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float17");
+  XPLMSetDataf(XsaitekpanelsFloat17SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float18", xplmType_Float,
+      XsaitekpanelsFloat18DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat18SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float18");
+  XPLMSetDataf(XsaitekpanelsFloat18SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float19", xplmType_Float,
+      XsaitekpanelsFloat19DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat19SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float19");
+  XPLMSetDataf(XsaitekpanelsFloat19SharedDataRef, 0);
+
+
+  XsaitekpanelsSharedRetVal = XPLMShareData("bgood/xsaitekpanels/sharedata/float20", xplmType_Float,
+      XsaitekpanelsFloat20DataChangedCallback, NULL);
+
+  XsaitekpanelsFloat20SharedDataRef = XPLMFindDataRef("bgood/xsaitekpanels/sharedata/float20");
+  XPLMSetDataf(XsaitekpanelsFloat20SharedDataRef, 0);
+
+
+
+
 
 
   // * Register our callback for every loop. Positive intervals
@@ -4033,6 +4224,60 @@ void	XsaitekpanelsInteger10DataChangedCallback(void * inRefcon)
     (void) inRefcon;
 }
 
+void	XsaitekpanelsInteger11DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger12DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger13DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger14DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger15DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger16DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger17DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger18DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger19DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsInteger20DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+
+
+
+
 
 void	XsaitekpanelsFloat1DataChangedCallback(void * inRefcon)
 {
@@ -4080,6 +4325,56 @@ void	XsaitekpanelsFloat9DataChangedCallback(void * inRefcon)
 }
 
 void	XsaitekpanelsFloat10DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat11DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat12DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat13DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat14DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat15DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat16DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat17DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat18DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat19DataChangedCallback(void * inRefcon)
+{
+    (void) inRefcon;
+}
+
+void	XsaitekpanelsFloat20DataChangedCallback(void * inRefcon)
 {
     (void) inRefcon;
 }
@@ -8264,6 +8559,17 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer9");
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer10");
 
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer11");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer12");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer13");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer14");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer15");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer16");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer17");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer18");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer19");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer20");
+
 
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float1");
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float2");
@@ -8275,6 +8581,17 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float8");
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float9");
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float10");
+
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float11");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float12");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float13");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float14");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float15");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float16");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float17");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float18");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float19");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/float20");
 
 
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/switchpanel/count");
