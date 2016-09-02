@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jun 03 2016   **************
+// ****** Sep 01 2016   **************
 
-#define PLUGIN_VERSION "2.52 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 252
+#define PLUGIN_VERSION "2.53 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 253
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -847,6 +847,11 @@ XPWidgetID      BipWidgetID = NULL;
 XPWidgetID      Bip2WidgetID = NULL;
 XPWidgetID      Bip3WidgetID = NULL;
 XPWidgetID      Bip4WidgetID = NULL;
+
+
+// ******************* TPM Panel Data Ref ********************
+
+XPLMDataRef TpmPanelCountDataRef = NULL;
 
 // ********************* Saitek Panels Data Ref  ************************
 static XPLMDataRef XsaitekpanelsVersionDataRef = NULL;
@@ -2175,6 +2180,7 @@ char MultiTrimSpeedText[50][200] = {
 
 hid_device *multihandle;
 
+
 // ****************** Switch Panel variables *******************************
 int switchcnt = 0, switchres, stopswitchcnt;
 
@@ -2928,6 +2934,18 @@ int bip_serial_number[4];
 
 hid_device *biphandle[4];
 
+
+// ****************** TPM Panel variables *******************************
+int tpmcnt = 0, tpmres;
+unsigned char tpmbuf[4];
+hid_device *tpmhandle;
+
+static int TpmPanelCountData = 0;
+
+int	TpmPanelCountGetDataiCallback(void * inRefcon);
+void	TpmPanelCountSetDataiCallback(void * inRefcon, int TpmPanelCount);
+
+
 // ****************** Saitek Panels variables *******************************
 void XsaitekpanelsMenuHandler(void *, void *);
 void WriteCSVTableToDisk(void);
@@ -3357,7 +3375,24 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   bipcnt = biptmpcnt;
 
-  sprintf(buf, "Xsaitekpanels: found %d Switch  %d Radio  %d Multi  %d BIP Panels\n", switchcnt, radcnt, multicnt, bipcnt);
+
+  // *** Find Connected TPM Panel *****
+
+    struct hid_device_info *tpm_devs, *tpm_cur_dev;
+
+    tpm_devs = hid_enumerate(0x6a3, 0x0b4d);
+    tpm_cur_dev = tpm_devs;
+    while (tpm_cur_dev) {
+          tpmhandle = hid_open_path(tpm_cur_dev->path);
+          hid_set_nonblocking(tpmhandle, 1);
+          tpmres = hid_read(tpmhandle, tpmbuf, sizeof(tpmbuf));
+//          hid_send_feature_report(tpmhandle, switchwbuf, 2);
+          tpmcnt++;
+          tpm_cur_dev = tpm_cur_dev->next;
+    }
+    hid_free_enumeration(tpm_devs);
+
+  sprintf(buf, "Xsaitekpanels: found %d Switch  %d Radio  %d Multi  %d BIP  %d TPM Panels\n", switchcnt, radcnt, multicnt, bipcnt, tpmcnt);
   XPLMDebugString(buf);
 
   XsaitekpanelsVersionDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/version",
@@ -3406,6 +3441,14 @@ PLUGIN_API int XPluginStart(char *		outName,
                            1,
                            MultiPanelCountGetDataiCallback,
                            MultiPanelCountSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  TpmPanelCountDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/tpmpanel/count",
+                           xplmType_Int,
+                           1,
+                           TpmPanelCountGetDataiCallback,
+                           TpmPanelCountSetDataiCallback,
                            NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                            NULL, NULL, NULL, NULL, NULL);
 
@@ -7129,6 +7172,24 @@ void	MultiRevBtnStatusSetDataiCallback(void * inRefcon, int MultiRevBtnStatus2)
 }
 
 
+// TPM panel data references call backs
+
+
+int	TpmPanelCountGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return TpmPanelCountData;
+}
+
+void	TpmPanelCountSetDataiCallback(void * inRefcon, int TpmPanelCountData2)
+{
+    (void) inRefcon;
+    TpmPanelCountData = TpmPanelCountData2;
+}
+
+
+
+
 
 // Menu handler
 
@@ -8805,6 +8866,8 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/multipanel/revbtn/status");
     }
 
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/tpmpanel/count");
+
     return 0;
 }
 
@@ -8883,6 +8946,7 @@ float	MyPanelsFlightLoopCallback(
   XPLMSetDatai(SwitchPanelCountDataRef, switchcnt);
   XPLMSetDatai(RadioPanelCountDataRef, radcnt);
   XPLMSetDatai(MultiPanelCountDataRef, multicnt);
+  XPLMSetDatai(TpmPanelCountDataRef, tpmcnt);
 
   return interval;
 }
