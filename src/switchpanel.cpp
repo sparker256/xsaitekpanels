@@ -1284,11 +1284,11 @@ void process_avionics_power_switch()
     if(avionicsmasterswitchenable == 1) {
         if(testbit(switchbuf,AVIONICS_POWER)) {
 
-            if (XPLMGetDatai(BatPwrOn) == 1) {
+            if (BatPwrIsOn()) {
                 XPLMSetDatai(AvPwrOn, 1);
             }
 
-            if (XPLMGetDatai(BatPwrOn) == 0) {
+            if (!BatPwrIsOn()) {
                 XPLMSetDatai(AvPwrOn, 0);
             }
         }
@@ -3168,11 +3168,11 @@ void process_switch_panel()
     // * if no gear do not write *
 
       if(XPLMGetDatai(GearRetract) > 0){
-        if (XPLMGetDatai(BatPwrOn) == 0) {
+        if (!BatPwrIsOn()) {
               switchwbuf[0] = 0, switchwbuf[1] = 0;
               switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
         }
-        if (XPLMGetDatai(BatPwrOn) == 1) {
+        if (BatPwrIsOn()) {
               switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
         }
       }

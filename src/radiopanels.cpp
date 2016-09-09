@@ -1421,7 +1421,7 @@ void process_upper_com1_switch()
            Upper_Raw3 = 0;
         }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             upseldis[radnum] = 10;
         } else {
            upseldis[radnum] = 1;
@@ -1648,7 +1648,7 @@ void process_upper_com2_switch()
             Upper_Raw3 = 0;
         }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             upseldis[radnum] = 10;
         } else {
            upseldis[radnum] = 2;
@@ -1878,7 +1878,7 @@ void process_upper_nav1_switch()
            Upper_Raw3 = 0;
        }
 
-       if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+       if (!AvPwrIsOn() || !BatPwrIsOn()) {
             upseldis[radnum] = 10;
         } else {
            upseldis[radnum] = 3;
@@ -2080,7 +2080,7 @@ void process_upper_nav2_switch()
            Upper_Raw3 = 0;
        }
 
-       if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+       if (!AvPwrIsOn() || !BatPwrIsOn()) {
             upseldis[radnum] = 10;
        } else {
            upseldis[radnum] = 4;
@@ -2280,7 +2280,7 @@ void proecss_upper_adf_switch()
             Upper_Raw3 = 0;
         }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             upseldis[radnum] = 10;
         } else {
            upseldis[radnum] = 5;
@@ -2603,7 +2603,7 @@ void process_upper_dme_switch()
             // If Dme mode is 0 (remote) do following
             if (updmemode[radnum] == 0) {
                 // Avionics and Battery must be on or blank display
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     upseldis[radnum] = 10;
                 } else {
                     upseldis[radnum] = 6;
@@ -2625,7 +2625,7 @@ void process_upper_dme_switch()
             // If Dme mode is 1 (frequency) do the following
             if (updmemode[radnum] == 1) {
                 // Avionics and Battery must be on or blank display
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     upseldis[radnum] = 10;
                 } else {
                     upseldis[radnum] = 7;
@@ -2690,7 +2690,7 @@ void process_upper_dme_switch()
             // if Dme mode is 2 (groundspeed-time) do the following
            if (updmemode[radnum] == 2) {
                // Avionics and Battery must be on or blank display
-               if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+               if (!AvPwrIsOn() || !BatPwrIsOn()) {
                    upseldis[radnum] = 10;
                 } else {
                    upseldis[radnum] = 8;
@@ -2773,7 +2773,7 @@ void process_upper_xpdr_switch()
 
         if ((rad1uprxpdrswitchremap == 777) && (radnum == 0)) {
             if(xpanelsfnbutton == 0) {
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     upseldis[radnum] = 10;
                 } else {
                    upseldis[radnum] = 9;
@@ -2816,7 +2816,7 @@ void process_upper_xpdr_switch()
                 }
 
                 if (rad1uprxpdrlastdigitcnt < 25) {
-                    if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
                         upseldis[radnum] = 10;
                     } else {
                        upseldis[radnum] = 11;
@@ -2825,7 +2825,7 @@ void process_upper_xpdr_switch()
                 }
 
                 if (rad1uprxpdrlastdigitcnt == 25) {
-                    if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
                         upseldis[radnum] = 10;
                     } else {
                        upseldis[radnum] = 9;
@@ -2990,7 +2990,7 @@ void process_upper_xpdr_switch()
         } else if ((rad2uprxpdrswitchremap == 777)  && (radnum == 1)) {
 
             if(xpanelsfnbutton == 0) {
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     upseldis[radnum] = 10;
                 } else {
                    upseldis[radnum] = 9;
@@ -3034,7 +3034,7 @@ void process_upper_xpdr_switch()
                 }
 
                 if (rad2uprxpdrlastdigitcnt < 25) {
-                    if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
                         upseldis[radnum] = 10;
                     } else {
                        upseldis[radnum] = 11;
@@ -3043,7 +3043,7 @@ void process_upper_xpdr_switch()
                 }
 
                 if (rad2uprxpdrlastdigitcnt == 25) {
-                    if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
                         upseldis[radnum] = 10;
                     } else {
                        upseldis[radnum] = 9;
@@ -3208,7 +3208,7 @@ void process_upper_xpdr_switch()
         } else if ((rad3uprxpdrswitchremap == 777)  && (radnum == 2)) {
 
             if(xpanelsfnbutton == 0) {
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     upseldis[radnum] = 10;
                 } else {
                    upseldis[radnum] = 9;
@@ -3252,7 +3252,7 @@ void process_upper_xpdr_switch()
                 }
 
                 if (rad3uprxpdrlastdigitcnt < 25) {
-                    if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
                         upseldis[radnum] = 10;
                     } else {
                        upseldis[radnum] = 11;
@@ -3261,7 +3261,7 @@ void process_upper_xpdr_switch()
                 }
 
                 if (rad3uprxpdrlastdigitcnt == 25) {
-                    if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
                         upseldis[radnum] = 10;
                     } else {
                        upseldis[radnum] = 9;
@@ -3420,7 +3420,7 @@ void process_upper_xpdr_switch()
 
 
         } else {
-            if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+            if (!AvPwrIsOn() || !BatPwrIsOn()) {
                 upseldis[radnum] = 10;
             } else {
                upseldis[radnum] = 9;
@@ -4027,7 +4027,7 @@ void process_lower_com1_switch()
             Lower_Raw3 = 0;
         }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             loseldis[radnum] = 10;
         } else {
            loseldis[radnum] = 1;
@@ -4251,7 +4251,7 @@ void process_lower_com2_switch()
             Lower_Raw3 = 0;
         }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             loseldis[radnum] = 10;
         } else {
             loseldis[radnum] = 2;
@@ -4475,7 +4475,7 @@ void process_lower_nav1_switch()
             Lower_Raw3 = 0;
         }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             loseldis[radnum] = 10;
         } else {
            loseldis[radnum] = 3;
@@ -4676,7 +4676,7 @@ void process_lower_nav2_switch()
             Lower_Raw3 = 0;
         }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             loseldis[radnum] = 10;
         } else {
             loseldis[radnum] = 4;
@@ -4879,7 +4879,7 @@ void process_lower_adf_switch()
             Lower_Raw3 = 0;
         }
 
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             loseldis[radnum] = 10;
         } else {
            loseldis[radnum] = 5;
@@ -5436,7 +5436,7 @@ void process_lower_dme_switch()
             lodmemode[radnum] = XPLMGetDatai(DmeMode);
             lodmesource[radnum] = XPLMGetDatai(DmeSlvSource);
             if (lodmemode[radnum] == 0) {
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     loseldis[radnum] = 10;
                 } else {
                     loseldis[radnum] = 6;
@@ -5457,7 +5457,7 @@ void process_lower_dme_switch()
             }
 
             if (lodmemode[radnum] == 1) {
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     loseldis[radnum] = 10;
                 } else {
                     loseldis[radnum] = 7;
@@ -5522,7 +5522,7 @@ void process_lower_dme_switch()
             }
 
             if (lodmemode[radnum] == 2) {
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     loseldis[radnum] = 10;
                 } else {
                     loseldis[radnum] = 8;
@@ -5607,7 +5607,7 @@ void process_lower_xpdr_switch()
 
         if ((rad1lwrxpdrswitchremap == 777)  && (radnum == 0)) {
             if (xpanelsfnbutton == 0) {
-                if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
                     loseldis[radnum] = 10;
                 } else {
                     loseldis[radnum] = 9;
@@ -5650,7 +5650,7 @@ void process_lower_xpdr_switch()
                 }
 
                 if (rad1lwrxpdrlastdigitcnt < 25) {
-                    if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
                         loseldis[radnum] = 10;
                     } else {
                         loseldis[radnum] = 11;
@@ -5658,7 +5658,7 @@ void process_lower_xpdr_switch()
                 }
 
                 if (rad1lwrxpdrlastdigitcnt == 25) {
-                    if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
                         loseldis[radnum] = 10;
                     } else {
                         loseldis[radnum] = 9;
@@ -5823,7 +5823,7 @@ void process_lower_xpdr_switch()
 
 
            if(xpanelsfnbutton == 0) {
-               if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+               if (!AvPwrIsOn() || !BatPwrIsOn()) {
                    loseldis[radnum] = 10;
                } else {
                   loseldis[radnum] = 9;
@@ -5866,7 +5866,7 @@ void process_lower_xpdr_switch()
 
                }
                if (rad2lwrxpdrlastdigitcnt < 25) {
-                   if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                   if (!AvPwrIsOn() || !BatPwrIsOn()) {
                        loseldis[radnum] = 10;
                    } else {
                       loseldis[radnum] = 11;
@@ -5875,7 +5875,7 @@ void process_lower_xpdr_switch()
                    //loseldis[radnum] = 11;
                }
                if (rad2lwrxpdrlastdigitcnt == 25) {
-                   if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+                   if (!AvPwrIsOn() || !BatPwrIsOn()) {
                        loseldis[radnum] = 10;
                    } else {
                       loseldis[radnum] = 9;
@@ -6040,7 +6040,7 @@ void process_lower_xpdr_switch()
            lobaroset[radnum] = (int)lobarosetf[radnum];
 
        } else {
-            if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+            if (!AvPwrIsOn() || !BatPwrIsOn()) {
                 loseldis[radnum] = 10;
             } else {
                 loseldis[radnum] = 9;
@@ -6303,12 +6303,12 @@ void process_radio_blank_display()
 {
 
 
-	if (XPLMGetDatai(AvPwrOn) == 0) {
+	if (!AvPwrIsOn()) {
           upseldis[radnum] = 10;
           loseldis[radnum] = 10;
 	}
 
-	if (XPLMGetDatai(BatPwrOn) == 0) {
+	if (!BatPwrIsOn()) {
           upseldis[radnum] = 10;
           loseldis[radnum] = 10;
 	}
