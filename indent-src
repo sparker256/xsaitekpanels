@@ -1,0 +1,22 @@
+#!/bin/sh
+# This file contains the GNU indent formatting presets used by Xsaitekpanels.
+# To use this, simply run:
+# $ ./indent-src <source-file-name>
+
+case `uname` in
+	Linux) INDENT=/usr/bin/indent ;;
+	Darwin) INDENT=/opt/local/bin/gnuindent ;;
+	SunOS) INDENT=/usr/gnu/bin/indent ;;
+esac
+
+if ! [ -x "$INDENT" ]; then
+	echo "Missing GNU indent package. Please install GNU indent." >&2
+	exit 1
+fi
+
+if [ -z "$1" ]; then
+	echo "Missing filename argument." >&2
+	exit 1
+fi
+
+"$INDENT" -npsl -nlp -nut -br -bls -cdw -bli0 -npcs -i4 -bc -ce "$1"

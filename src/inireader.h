@@ -18,7 +18,7 @@
  * @param	fileName The name of the file to parse
  * @return	none
  */
-void parseIniFile(char *fileName);
+void parseIniFile(const char *fileName);
 
 /**
  * If you are finished with the config item, use this function to cleanup the results
@@ -40,15 +40,16 @@ std::string getOptionToString(std::string key);
  *
  * @param	key The option key
  * @return	int The value of the requested key
- * @note	If item is not an integer (or does not exist) then 0 will be returned.
+ * @note	If item is not an integer (or does not exist) then 0 will
+ *		be returned.
  */
 int getOptionToInt(std::string key);
 
 /**
  * Return the value of the requested key in with the char type
  *
- * @param    key The option key
- * @return   char The value of the requested key
+ * @param	key The option key
+ * @return	char The value of the requested key
  */
 const char *getOptionToChar(std::string key);
 
@@ -58,5 +59,4 @@ std::string trim(std::string s);
 std::string rtrim(std::string s);
 std::string ltrim(std::string s);
 
-#endif	/* INIREADER_H */
-
+#endif /* INIREADER_H */
