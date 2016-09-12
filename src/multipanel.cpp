@@ -311,7 +311,7 @@ void process_alt_switch()
 {
     if(testbit(multibuf,ALT_SWITCH)) {
 
-        if (XPLMGetDatai(AvPwrOn) == 0) {
+        if (!AvPwrIsOn()) {
             multiseldis = 5;
         } else {
            multiseldis = 1;
@@ -431,7 +431,7 @@ void process_alt_switch()
 void process_vs_switch()
 {
     if(testbit(multibuf,VS_SWITCH)) {
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             multiseldis = 5;
         } else {
            multiseldis = 1;
@@ -547,7 +547,7 @@ void process_ias_switch()
 {
     if (testbit(multibuf,IAS_SWITCH)) {
         //multiseldis = 2;
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             multiseldis = 5;
         } else {
            multiseldis = 2;
@@ -711,7 +711,7 @@ void process_hdg_switch()
 
     if(testbit(multibuf,HDG_SWITCH)) {
         //multiseldis = 3;
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             multiseldis = 5;
         } else {
            multiseldis = 3;
@@ -808,7 +808,7 @@ void process_crs_switch()
 
 	if(testbit(multibuf,CRS_SWITCH)) {
         //multiseldis = 4;
-        if ((XPLMGetDatai(AvPwrOn) == 0) | (XPLMGetDatai(BatPwrOn) == 0)) {
+        if (!AvPwrIsOn() || !BatPwrIsOn()) {
             multiseldis = 5;
         } else {
            multiseldis = 4;
@@ -3503,7 +3503,7 @@ void process_flaps_switch()
             if (flapsupremap == 1) {
                 XPLMCommandOnce(FlapsUpRemapableCmd);
             } else {
-                if (XPLMGetDatai(BatPwrOn) == 1) {
+                if (BatPwrIsOn()) {
                     XPLMCommandOnce(FlapsUp);
                 }
             }
@@ -3512,7 +3512,7 @@ void process_flaps_switch()
             if (flapsdnremap == 1) {
                 XPLMCommandOnce(FlapsDnRemapableCmd);
             } else {
-                if (XPLMGetDatai(BatPwrOn) == 1) {
+                if (BatPwrIsOn()) {
                     XPLMCommandOnce(FlapsDn);
                 }
             }
@@ -3564,10 +3564,10 @@ void process_multi_flash()
 // ***************** Blank Display *******************
 void process_multi_blank_display()
 {
-    if (XPLMGetDatai(AvPwrOn) == 0) {
+    if (!AvPwrIsOn()) {
         multiseldis = 5;
     }
-    if (XPLMGetDatai(BatPwrOn) == 0) {
+    if (!BatPwrIsOn()) {
         multiseldis = 5;
     }
     if(switchcnt > 0)  {

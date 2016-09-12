@@ -206,6 +206,11 @@ extern XPLMDataRef Nav2DmeNmDist, Nav2DmeSpeed;
 extern XPLMDataRef DmeFreq, DmeTime, DmeSpeed;
 
 extern XPLMDataRef AvPwrOn, BatPwrOn;
+extern int AvPwrOnConfig, BatPwrOnConfig;
+extern XPLMDataRef AvPwrOnCustomDataref, BatPwrOnCustomDataref;
+
+extern bool AvPwrIsOn();
+extern bool BatPwrIsOn();
 
 extern XPLMDataRef Nav1PwrOn, Nav2PwrOn, Com1PwrOn, Com2PwrOn;
 extern XPLMDataRef Afd1PwrOn, DmePwrOn;

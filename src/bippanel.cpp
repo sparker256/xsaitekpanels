@@ -1118,12 +1118,12 @@ void process_bip_panel()
       if (bipchange == 0) {
       }
       if (bipchange != 0) {
-        if (XPLMGetDatai(BatPwrOn) == 1) {
+        if (BatPwrIsOn()) {
             res = hid_send_feature_report(biphandle[bipnum], bipwbuf[bipnum], 10);
             memcpy(lastbipwbuf[bipnum], bipwbuf[bipnum], 10);
         }
       }
-      if (XPLMGetDatai(BatPwrOn) == 0) {
+      if (!BatPwrIsOn()) {
             bipwbuf[bipnum][0] = 0xb8;  //0xb8 Report ID to display
             bipwbuf[bipnum][1] = 0, bipwbuf[bipnum][2] = 0, bipwbuf[bipnum][3] = 0;
             bipwbuf[bipnum][4] = 0, bipwbuf[bipnum][5] = 0, bipwbuf[bipnum][6] = 0;

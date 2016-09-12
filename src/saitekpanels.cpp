@@ -230,6 +230,8 @@ XPLMDataRef Nav2DmeNmDist = NULL, Nav2DmeSpeed = NULL;
 XPLMDataRef DmeFreq = NULL, DmeTime = NULL, DmeSpeed = NULL;
 
 XPLMDataRef AvPwrOn = NULL, BatPwrOn = NULL;
+int AvPwrOnConfig = 0, BatPwrOnConfig = 0;
+XPLMDataRef AvPwrOnCustomDataref = NULL, BatPwrOnCustomDataref = NULL;
 
 XPLMDataRef Nav1PwrOn = NULL, Nav2PwrOn = NULL, Com1PwrOn = NULL, Com2PwrOn = NULL;
 XPLMDataRef Afd1PwrOn = NULL, DmePwrOn = NULL;
@@ -8949,4 +8951,44 @@ float	MyPanelsFlightLoopCallback(
   XPLMSetDatai(TpmPanelCountDataRef, tpmcnt);
 
   return interval;
+}
+
+/*
+ * Returns true if avionics power is on, otherwise returns false.
+ * Related INI options:
+ *	Avionics Power On = [0|1|2]
+ *		0: consult sim/cockpit2/switches/avionics_power_on (default)
+ *		1: ignore avionics power status, avionics is always on
+ *		2: consult custom dataref set by the
+ *		   avionics_power_on_remapable_data INI file option
+ */
+bool AvPwrIsOn()
+{
+  if (AvPwrOnConfig == 1) {
+    return true;
+  } else if (AvPwrOnConfig == 2 && AvPwrOnCustomDataref != NULL) {
+    return XPLMGetDatai(AvPwrOnCustomDataref) == 1;
+  } else {
+    return XPLMGetDatai(AvPwrOn) == 1;
+  }
+}
+
+/*
+ * Returns true if battery power is on, otherwise returns false.
+ * Related INI options:
+ *	Battery Power On = [0|1|2]
+ *		0: consult sim/cockpit/electrical/battery_on (default)
+ *		1: ignore battery power status, battery is always on
+ *		2: consult custom dataref set by the
+ *		   battery_power_on_remapable_data INI file option
+ */
+bool BatPwrIsOn()
+{
+  if (BatPwrOnConfig == 1) {
+    return true;
+  } else if (BatPwrOnConfig == 2 && BatPwrOnCustomDataref != NULL) {
+    return XPLMGetDatai(BatPwrOnCustomDataref) == 1;
+  } else {
+    return XPLMGetDatai(BatPwrOn) == 1;
+  }
 }

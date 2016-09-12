@@ -3571,7 +3571,17 @@ void process_read_ini_file()
          FlapsDnRemapableCmd = XPLMFindCommand(flaps_dn_remapable.c_str());
     }
 
+    BatPwrOnConfig = getOptionToInt("Battery Power On");
+    if (BatPwrOnConfig == 2) {
+         BatPwrOnCustomDataref = XPLMFindDataRef(getOptionToString(
+            "battery_power_on_remapable_data").c_str());
+    }
 
+    AvPwrOnConfig = getOptionToInt("Avionics Power On");
+    if (AvPwrOnConfig == 2) {
+         AvPwrOnCustomDataref = XPLMFindDataRef(getOptionToString(
+            "avionics_power_on_remapable_data").c_str());
+    }
 
   return;
 }
