@@ -1,6 +1,12 @@
 // ****** readinifile.cpp **********
 // ****  William R. Good  ********
 
+#include <assert.h>
+#include <vector>
+#include <iostream>
+#include <fstream>
+#include <string.h>
+
 #include "XPLMPlugin.h"
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -13,11 +19,120 @@
 
 #include "saitekpanels.h"
 #include "inireader.h"
-#include <vector>
+#include "readinifile.h"
+#include "multipanel.h"
 
-#include <iostream>
-#include <fstream>
-#include <string.h>
+using namespace xsaitekpanels;
+
+static void cmd_from_ini(XPLMCommandRef *cmd, const char *opt_name)
+{
+    *cmd = XPLMFindCommand(getOptionToString(opt_name).c_str());
+}
+
+static void dr_from_ini(Dataref **dr, const char *opt_name)
+{
+    if (*dr != NULL)
+        delete (*dr);
+    *dr = new Dataref(getOptionToString(opt_name).c_str());
+}
+
+/*
+ * This configures a remapable set of variables based on a INI file remap
+ * option. The remap option to be examined is "remap_name" and it is
+ * interpreted as an integer. Its behavior depends on the specific variable
+ * to be interpreted. Besides the remap_name variable, this function takes
+ * additional enum arguments from the I2R_... enum, each with their own
+ * set of subarguments:
+ *      *) I2R_CMD_ARG: takes three additional arguments, a command name
+ *         (char *), a default command name (char *) and a result command
+ *         pointer(XPLMCommandRef *). If the remap != 0, the command ref is
+ *         populated by performing an XPLMFindCommand for the command name
+ *         in the INI option. Otherwise, if the default command name is
+ *         non-NULL, that's used for the lookup and placed in the result
+ *         command, or if it is NULL, the result command is set to NULL.
+ *      *) I2R_INT_ARG: takes three additional arguments, INI option name
+ *         (char *), a default value (int) and a result pointer (int *). If
+ *         remap != 0, the result is filled with the integer value of the
+ *         INI option. Otherwise, the result is filled with the default value.
+ *      *) I2R_FLOAT_ARG: same as I2R_INT_ARG, but the ints are floats.
+ *      *) I2R_DR_ARG: takes three additional arguments, an INI option name
+ *         (char *), a default dataref name (char *) and a result dataref
+ *         pointer (XPLMDataRef *). If remap != 0, the INI option's string
+ *         value is resolved as a dataref and placed in to the result
+ *         dataref pointer. Otherwise, if the default dataref name argument
+ *         is non-NULL, it is resolved to a dataref and placed in the result
+ *         dataref pointer, or if the default dataref name is NULL, the
+ *         result dataref pointer is filled with NULL.
+ *      *) I2R_END_ARG: takes no arguments and terminates the argument list.
+ *         Every invocation of ini2remap must end with this argument.
+ */
+void xsaitekpanels::ini2remap(const char *remap_name, ...)
+{
+    va_list ap;
+    int remap_state;
+    int arg_type;
+
+    va_start(ap, remap_name);
+    remap_state = getOptionToInt(remap_name);
+
+    while ((arg_type = va_arg(ap, int)) != I2R_END_ARG) {
+        const char *opt_name = va_arg(ap, const char *);
+
+        assert(opt_name != NULL);
+        if (arg_type == I2R_CMD_ARG) {
+            const char *dfl_cmd_name = va_arg(ap, const char *);
+            XPLMCommandRef *cmd = va_arg(ap, XPLMCommandRef *);
+
+            assert(cmd != NULL);
+            if (remap_state == 1) {
+                cmd_from_ini(cmd, opt_name);
+            } else {
+                if (dfl_cmd_name != NULL) {
+                    *cmd = XPLMFindCommand(dfl_cmd_name);
+                    assert(*cmd != NULL);
+                } else {
+                    *cmd = NULL;
+                }
+            }
+        } else if (arg_type == I2R_DR_ARG) {
+            const char *dfl_dr_name = va_arg(ap, const char *);
+            Dataref **dr = va_arg(ap, Dataref **);
+
+            assert(dr != NULL);
+            if (remap_state == 1 || remap_state == 2) {
+                dr_from_ini(dr, opt_name);
+            } else {
+                if (dfl_dr_name != NULL) {
+                    *dr = new Dataref(dfl_dr_name);
+                    assert(*dr != NULL);
+                } else {
+                    *dr = NULL;
+                }
+            }
+        } else if (arg_type == I2R_INT_ARG) {
+            int dfl_value = va_arg(ap, int);
+            int *result = va_arg(ap, int *);
+
+            assert(result != NULL);
+            if (remap_state == 1 || remap_state == 2)
+                *result = getOptionToInt(opt_name);
+            else
+                *result = dfl_value;
+        } else if (arg_type == I2R_FLOAT_ARG) {
+            double dfl_value = va_arg(ap, double);
+            float *result = va_arg(ap, float *);
+
+            assert(result != NULL);
+            if (remap_state == 1 || remap_state == 2)
+                *result = getOptionToInt(opt_name);
+            else
+                *result = dfl_value;
+        } else {
+            assert(0);
+        }
+    }
+    va_end(ap);
+}
 
 string convert_Mac_Path(string in_path)
 {
@@ -155,9 +270,6 @@ void process_read_ini_file()
     trimupremap = 0;
     trimdnremap = 0;
 
-    flapsupremap = 0;
-    flapsdnremap = 0;
-
     lightdatareferencetype = 0;
 
     apbuttonremap = 0;
@@ -201,8 +313,8 @@ void process_read_ini_file()
 
     std::ifstream ifile(&parse_ini_path_name[0]);
     if (ifile) {
-        XPLMDebugString
-            ("\nXsaitekpanels: Found xsaitekpanels.ini in the current aircraft path and it is\n");
+        XPLMDebugString("\nXsaitekpanels: Found xsaitekpanels.ini in the "
+            "current aircraft path and it is\n");
         XPLMDebugString(&parse_ini_path_name[0]);
         XPLMDebugString("\n");
 
@@ -210,8 +322,8 @@ void process_read_ini_file()
     } else {
         std::ifstream ifile(iniDefaultPluginPath);
         if (ifile) {
-            XPLMDebugString
-                ("\nXsaitekpanels: Found xsaitekpanels.ini in the Xsaitekpanels plugin path and it is\n");
+            XPLMDebugString("\nXsaitekpanels: Found xsaitekpanels.ini in "
+                "the Xsaitekpanels plugin path and it is\n");
             XPLMDebugString(iniDefaultPluginPath);
             XPLMDebugString("\n");
 
@@ -4484,212 +4596,22 @@ void process_read_ini_file()
 
     }
 
+
 //  ***********************   Multi Panel Commands **************************
 
-    multispeed = getOptionToInt("Multi Freq Knob Pulse per Command");
-    XPSetWidgetProperty(MultiSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
-    XPSetWidgetProperty(MultiSpeed2CheckWidget[0], xpProperty_ButtonState, 0);
-    XPSetWidgetProperty(MultiSpeed3CheckWidget[0], xpProperty_ButtonState, 0);
-    XPSetWidgetProperty(MultiSpeed4CheckWidget[0], xpProperty_ButtonState, 0);
-    XPSetWidgetProperty(MultiSpeed5CheckWidget[0], xpProperty_ButtonState, 0);
-    if (multispeed == 1) {
-        XPSetWidgetProperty(MultiSpeed1CheckWidget[0], xpProperty_ButtonState,
-            1);
-    }
-    if (multispeed == 2) {
-        XPSetWidgetProperty(MultiSpeed2CheckWidget[0], xpProperty_ButtonState,
-            1);
-    }
-    if (multispeed == 3) {
-        XPSetWidgetProperty(MultiSpeed3CheckWidget[0], xpProperty_ButtonState,
-            1);
-    }
-    if (multispeed == 4) {
-        XPSetWidgetProperty(MultiSpeed4CheckWidget[0], xpProperty_ButtonState,
-            1);
-    }
-    if (multispeed == 5) {
-        XPSetWidgetProperty(MultiSpeed5CheckWidget[0], xpProperty_ButtonState,
-            1);
-    }
-
-    trimspeed = getOptionToInt("Multi Trim Speed");
-    XPSetWidgetProperty(MultiTrimSpeed1CheckWidget[0], xpProperty_ButtonState,
-        0);
-    XPSetWidgetProperty(MultiTrimSpeed2CheckWidget[0], xpProperty_ButtonState,
-        0);
-    XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0], xpProperty_ButtonState,
-        0);
-    if (trimspeed == 1) {
-        XPSetWidgetProperty(MultiTrimSpeed1CheckWidget[0],
-            xpProperty_ButtonState, 1);
-    }
-    if (trimspeed == 2) {
-        XPSetWidgetProperty(MultiTrimSpeed2CheckWidget[0],
-            xpProperty_ButtonState, 1);
-    }
-    if (trimspeed == 3) {
-        XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0],
-            xpProperty_ButtonState, 1);
-    }
-    // auto throttle switch - remapable
-    autothrottleswitchenable = getOptionToInt("Auto Throttle Switch enable");
-    XPSetWidgetProperty(MultiAt0CheckWidget[0], xpProperty_ButtonState, 0);
-    XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 0);
-    if (autothrottleswitchenable == 0) {
-        XPSetWidgetProperty(MultiAt0CheckWidget[0], xpProperty_ButtonState,
-            1);
-    }
-    if (autothrottleswitchenable == 1) {
-        XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState,
-            1);
-    }
-    // auto throttle switch armed value
-    autothrottleswitcharmedvalue =
-        getOptionToInt("Auto Throttle Switch Armed value");
-
-    // alt switch - remapable
-    altswitchremap = getOptionToInt("Alt Switch remapable");
-    if (altswitchremap == 1) {
-        alt_switch_up_remapable =
-            getOptionToString("alt_switch_up_remapable_cmd");
-        AltSwitchUpRemapableCmd =
-            XPLMFindCommand(alt_switch_up_remapable.c_str());
-        alt_switch_dn_remapable =
-            getOptionToString("alt_switch_dn_remapable_cmd");
-        AltSwitchDnRemapableCmd =
-            XPLMFindCommand(alt_switch_dn_remapable.c_str());
-        alt_switch_data_remapable =
-            getOptionToString("alt_switch_remapable_data");
-        AltSwitchRemapableData =
-            XPLMFindDataRef(alt_switch_data_remapable.c_str());
-
-    } else if (altswitchremap == 2) {
-        alt_switch_data_remapable =
-            getOptionToString("alt_switch_remapable_data");
-        AltSwitchRemapableData =
-            XPLMFindDataRef(alt_switch_data_remapable.c_str());
-
-    }
-    // vs switch - remapable
-    vsswitchremap = getOptionToInt("Vs Switch remapable");
-    if (vsswitchremap == 1) {
-        vs_switch_up_remapable =
-            getOptionToString("vs_switch_up_remapable_cmd");
-        VsSwitchUpRemapableCmd =
-            XPLMFindCommand(vs_switch_up_remapable.c_str());
-        vs_switch_dn_remapable =
-            getOptionToString("vs_switch_dn_remapable_cmd");
-        VsSwitchDnRemapableCmd =
-            XPLMFindCommand(vs_switch_dn_remapable.c_str());
-        vs_switch_data_remapable =
-            getOptionToString("vs_switch_remapable_data");
-        VsSwitchRemapableData =
-            XPLMFindDataRef(vs_switch_data_remapable.c_str());
-
-    } else if (vsswitchremap == 2) {
-        vs_switch_data_remapable =
-            getOptionToString("vs_switch_remapable_data");
-        VsSwitchRemapableData =
-            XPLMFindDataRef(vs_switch_data_remapable.c_str());
-    }
-    // ias switch - remapable
-    iasswitchremap = getOptionToInt("Ias Switch remapable");
-    if (iasswitchremap == 1) {
-        ias_switch_up_remapable =
-            getOptionToString("ias_switch_up_remapable_cmd");
-        IasSwitchUpRemapableCmd =
-            XPLMFindCommand(ias_switch_up_remapable.c_str());
-        ias_switch_dn_remapable =
-            getOptionToString("ias_switch_dn_remapable_cmd");
-        IasSwitchDnRemapableCmd =
-            XPLMFindCommand(ias_switch_dn_remapable.c_str());
-        ias_switch_data_remapable =
-            getOptionToString("ias_switch_remapable_data");
-        IasSwitchRemapableData =
-            XPLMFindDataRef(ias_switch_data_remapable.c_str());
-
-    } else if (iasswitchremap == 2) {
-        ias_switch_data_remapable =
-            getOptionToString("ias_switch_remapable_data");
-        IasSwitchRemapableData =
-            XPLMFindDataRef(ias_switch_data_remapable.c_str());
-    }
-    // hdg switch - remapable
-    hdgswitchremap = getOptionToInt("Hdg Switch remapable");
-    if (hdgswitchremap == 1) {
-        hdg_switch_up_remapable =
-            getOptionToString("hdg_switch_up_remapable_cmd");
-        HdgSwitchUpRemapableCmd =
-            XPLMFindCommand(hdg_switch_up_remapable.c_str());
-        hdg_switch_dn_remapable =
-            getOptionToString("hdg_switch_dn_remapable_cmd");
-        HdgSwitchDnRemapableCmd =
-            XPLMFindCommand(hdg_switch_dn_remapable.c_str());
-        hdg_switch_data_remapable =
-            getOptionToString("hdg_switch_remapable_data");
-        HdgSwitchRemapableData =
-            XPLMFindDataRef(hdg_switch_data_remapable.c_str());
-
-    } else if (hdgswitchremap == 2) {
-        hdg_switch_data_remapable =
-            getOptionToString("hdg_switch_remapable_data");
-        HdgSwitchRemapableData =
-            XPLMFindDataRef(hdg_switch_data_remapable.c_str());
-    }
-    // crs switch - remapable
-    crsswitchremap = getOptionToInt("Crs Switch remapable");
-    if (crsswitchremap == 1) {
-        crs_switch_up_remapable =
-            getOptionToString("crs_switch_up_remapable_cmd");
-        CrsSwitchUpRemapableCmd =
-            XPLMFindCommand(crs_switch_up_remapable.c_str());
-        crs_switch_dn_remapable =
-            getOptionToString("crs_switch_dn_remapable_cmd");
-        CrsSwitchDnRemapableCmd =
-            XPLMFindCommand(crs_switch_dn_remapable.c_str());
-        crs_switch_data_remapable =
-            getOptionToString("crs_switch_remapable_data");
-        CrsSwitchRemapableData =
-            XPLMFindDataRef(crs_switch_data_remapable.c_str());
-
-    } else if (crsswitchremap == 2) {
-        crs_switch_data_remapable =
-            getOptionToString("crs_switch_remapable_data");
-        CrsSwitchRemapableData =
-            XPLMFindDataRef(crs_switch_data_remapable.c_str());
-    }
-    // ias ismach - remapable
-    iasismachremap = getOptionToInt("Ias Ismach remapable");
-    if (iasismachremap == 1) {
-        ias_ismach_remapable = getOptionToString("ias_ismach_remapable_data");
-        IasIsmachRemapableData =
-            XPLMFindDataRef(ias_ismach_remapable.c_str());
-        iasismachvalue = getOptionToInt("ias_ismach_remapable_value");
-    }
-    // auto throttle switch - remapable
-    attrswitchremap = getOptionToInt("Auto Throttle Switch enable");
-    if (attrswitchremap == 2) {
-        attr_switch_remapable =
-            getOptionToString("auto_throttle_switch_remapable_data");
-        AttrSwitchRemapableData =
-            XPLMFindDataRef(attr_switch_remapable.c_str());
-    }
+    reconfigure_all_multipanels();
 
     // Light datareference type
     lightdatareferencetype = getOptionToInt("Light datareference type");
 
     // ap button - remapable
     apbuttonremap = getOptionToInt("Ap Button remapable");
-    if (apbuttonremap == 1) {
-        ap_button_remapable = getOptionToString("ap_button_remapable_cmd");
-        ApButtonRemapableCmd = XPLMFindCommand(ap_button_remapable.c_str());
-    } else if ((apbuttonremap == 2) || (apbuttonremap == 3)) {
-        ap_button_data_remapable =
-            getOptionToString("ap_button_remapable_data");
-        ApButtonRemapableData =
-            XPLMFindDataRef(ap_button_data_remapable.c_str());
-    }
+    if (apbuttonremap == 1)
+        cmd_from_ini(&ApButtonRemapableCmd, "ap_button_remapable_cmd");
+    else if ((apbuttonremap == 2) || (apbuttonremap == 3))
+        ApButtonRemapableData = XPLMFindDataRef(getOptionToString(
+            "ap_button_remapable_data").c_str());
+
     // ap light - remapable
     if ((apbuttonremap == 1) || (apbuttonremap == 2) || (apbuttonremap == 3)) {
         ap_light_remapable = getOptionToString("ap_light_remapable_data");
@@ -4888,19 +4810,6 @@ void process_read_ini_file()
     if (trimdnremap == 1) {
         trim_dn_remapable = getOptionToString("trim_dn_remapable_cmd");
         TrimDnRemapableCmd = XPLMFindCommand(trim_dn_remapable.c_str());
-    }
-
-    // flaps up - remapable
-    flapsupremap = getOptionToInt("Flaps Up remapable");
-    if (flapsupremap == 1) {
-        flaps_up_remapable = getOptionToString("flaps_up_remapable_cmd");
-        FlapsUpRemapableCmd = XPLMFindCommand(flaps_up_remapable.c_str());
-    }
-    // flaps dn - remapable
-    flapsdnremap = getOptionToInt("Flaps Dn remapable");
-    if (flapsdnremap == 1) {
-        flaps_dn_remapable = getOptionToString("flaps_dn_remapable_cmd");
-        FlapsDnRemapableCmd = XPLMFindCommand(flaps_dn_remapable.c_str());
     }
 
     BatPwrOnConfig = getOptionToInt("Battery Power On");

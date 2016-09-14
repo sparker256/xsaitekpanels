@@ -28,7 +28,12 @@
 #include <sstream>
 #include <vector>
 #include <wchar.h>
-    using namespace std;
+#include "Log.h"
+#include "saitekpanels.h"
+#include "multipanel.h"
+
+using namespace std;
+using namespace xsaitekpanels;
 
 // ************* Radio Panel Command Ref ****************
 XPLMCommandRef Com1StbyFineDn = NULL,
@@ -793,40 +798,6 @@ XPWidgetID RadioQnh1TextWidget[50] = { NULL };
 
 
 
-// ****************** Multi Panel Command Ref **********************
-XPLMCommandRef ApAltDn = NULL,
-    ApAltUp = NULL,
-    ApVsDn = NULL,
-    ApVsUp = NULL;
-XPLMCommandRef ApAsDn = NULL,
-    ApAsUp = NULL,
-    ApHdgDn = NULL,
-    ApHdgUp = NULL;
-XPLMCommandRef ApCrsDn = NULL,
-    ApCrsUp = NULL,
-    ApCrsDn2 = NULL,
-    ApCrsUp2 = NULL;
-
-XPLMCommandRef ApMstrBtnUp = NULL,
-    ApMstrBtnDn = NULL,
-    ApMstrBtnOff = NULL;
-XPLMCommandRef ApHdgBtn = NULL,
-    ApNavBtn = NULL,
-    ApAltBtn = NULL,
-    ApAltArmBtn = NULL;
-XPLMCommandRef ApIasBtn = NULL;
-
-XPLMCommandRef ApVsBtn = NULL,
-    ApAprBtn = NULL,
-    ApRevBtn = NULL;
-XPLMCommandRef ApKnotsMachTgl = NULL;
-
-XPLMCommandRef FlapsDn = NULL,
-    FlapsUp = NULL;
-XPLMCommandRef PitchTrimDn = NULL,
-    PitchTrimUp = NULL,
-    PitchTrimTkOff = NULL;
-
 XPLMCommandRef XpanelsFnButtonCommand = NULL,
     XpanelsCrsToggleCommand = NULL;
 XPLMCommandRef XpanelsLeftStartFnButtonCommand = NULL;
@@ -862,27 +833,6 @@ XPLMCommandRef TrimUpRemapableCmd = NULL,
 XPLMCommandRef FlapsUpRemapableCmd = NULL,
     FlapsDnRemapableCmd = NULL;
 
-// ***************** Multi Panel Data Ref *********************
-XPLMDataRef ApAlt = NULL,
-    ApVs = NULL,
-    ApAs = NULL,
-    ApHdg = NULL,
-    ApCrs = NULL,
-    ApCrs2 = NULL;
-
-XPLMDataRef ApMstrStat = NULL,
-    ApHdgStat = NULL,
-    ApNavStat = NULL,
-    ApIasStat = NULL;
-XPLMDataRef ApAltStat = NULL,
-    ApVsStat = NULL,
-    ApAprStat = NULL,
-    ApRevStat = NULL;
-XPLMDataRef ApState = NULL,
-    ApAutThr;
-XPLMDataRef Frp = NULL,
-    MHdg = NULL;
-
 XPLMDataRef ApButtonRemapableData = NULL,
     HdgButtonRemapableData = NULL;
 XPLMDataRef NavButtonVorlocRemapableData = NULL,
@@ -894,15 +844,11 @@ XPLMDataRef AltButtonRemapableData = NULL,
 XPLMDataRef AprButtonRemapableData = NULL,
     RevButtonRemapableData = NULL;
 
-XPLMDataRef AltSwitchRemapableData = NULL;
-XPLMDataRef VsSwitchRemapableData = NULL;
-XPLMDataRef IasSwitchRemapableData = NULL;
-XPLMDataRef HdgSwitchRemapableData = NULL;
-XPLMDataRef CrsSwitchRemapableData = NULL;
-
-XPLMDataRef AttrSwitchRemapableData = NULL;
-
-XPLMDataRef IasIsmachRemapableData = NULL;
+Dataref *AltSwitchRemapableData = NULL,
+    *VsSwitchRemapableData = NULL,
+    *IasSwitchRemapableData = NULL,
+    *HdgSwitchRemapableData = NULL,
+    *CrsSwitchRemapableData = NULL;
 
 XPLMDataRef ApLightRemapableData = NULL,
     HdgLightRemapableData = NULL;
@@ -925,38 +871,12 @@ XPLMDataRef AprLightFlashRemapableData = NULL,
     RevLightFlashRemapableData = NULL;
 
 
-XPLMDataRef AirspeedIsMach = NULL,
-    Airspeed = NULL;
+Dataref *AirspeedIsMach = NULL,
+    *Airspeed = NULL;
 
 XPLMDataRef HsiSelector = NULL;
 
 XPLMDataRef MultiPanelCountDataRef = NULL;
-
-XPLMDataRef MultiAltSwitchOwnedDataRef = NULL,
-    MultiVsSwitchOwnedDataRef = NULL;
-XPLMDataRef MultiIasSwitchOwnedDataRef = NULL,
-    MultiHdgSwitchOwnedDataRef = NULL;
-XPLMDataRef MultiCrsSwitchOwnedDataRef = NULL;
-XPLMDataRef MultiKnobIncOwnedDataRef = NULL,
-    MultiKnobDecOwnedDataRef = NULL;
-XPLMDataRef MultiKnobIncTicksOwnedDataRef = NULL,
-    MultiKnobDecTicksOwnedDataRef = NULL;
-XPLMDataRef MultiAtOwnedDataRef = NULL,
-    MultiTrimUpOwnedDataRef = NULL;
-XPLMDataRef MultiTrimDnOwnedDataRef = NULL,
-    MultiFlapsUpOwnedDataRef = NULL;
-XPLMDataRef MultiFlapsDnOwnedDataRef = NULL,
-    MultiApBtnOwnedDataRef = NULL;
-XPLMDataRef MultiHdgBtnOwnedDataRef = NULL,
-    MultiNavBtnOwnedDataRef = NULL;
-XPLMDataRef MultiIasBtnOwnedDataRef = NULL,
-    MultiAltBtnOwnedDataRef = NULL;
-XPLMDataRef MultiVsBtnOwnedDataRef = NULL,
-    MultiAprBtnOwnedDataRef = NULL;
-XPLMDataRef MultiRevBtnOwnedDataRef = NULL;
-
-XPLMMenuID MultiMenu;
-XPLMMenuID MultiMenuId;
 
 XPWidgetID MultiWidgetID = NULL;
 XPWidgetID MultiWindow = NULL;
@@ -3092,13 +3012,6 @@ char RadioSpeedText[50][200] = {
 hid_device *radiohandle[4];
 
 // ********************** Multi Panel variables ***********************
-int multicnt = 0,
-    multires,
-    stopmulticnt;
-static unsigned char blankmultiwbuf[13];
-unsigned char multibuf[4],
-    multiwbuf[13];
-
 int loaded737 = 0;
 
 int trimspeed,
@@ -3116,9 +3029,7 @@ int altbuttonremap,
     revbuttonremap;
 int lightdatareferencetype;
 
-int aplightdata,
-    hdglightdata,
-    navlightvorlocdata,
+int navlightvorlocdata,
     navlightlnavdata;
 int iaslightdata,
     altlightdata,
@@ -3126,8 +3037,7 @@ int iaslightdata,
     aprlightdata,
     revlightdata;
 
-int aplightflashdata,
-    hdglightflashdata,
+int hdglightflashdata,
     navlightflashvorlocdata,
     navlightflashlnavdata;
 int iaslightflashdata,
@@ -3159,123 +3069,10 @@ int xpanelsleftstartfnbutton = 0;
 
 // This is the storage for the data we own.
 
-static int MultiPanelCountData = 0;
-static int MultiAltSwitchOwnedData = 0,
-    MultiVsSwitchOwnedData = 0;
-static int MultiIasSwitchOwnedData = 0,
-    MultiHdgSwitchOwnedData = 0;
-static int MultiCrsSwitchOwnedData = 0;
-static int MultiKnobIncOwnedData = 0,
-    MultiKnobDecOwnedData = 0;
-static int MultiKnobIncTicksOwnedData = 0,
-    MultiKnobDecTicksOwnedData = 0;
-static int MultiAtOwnedData = 0,
-    MultiTrimUpOwnedData = 0;
-static int MultiTrimDnOwnedData = 0,
-    MultiFlapsUpOwnedData = 0;
-static int MultiFlapsDnOwnedData = 0,
-    MultiApBtnOwnedData = 0;
-static int MultiHdgBtnOwnedData = 0,
-    MultiNavBtnOwnedData = 0;
-static int MultiIasBtnOwnedData = 0,
-    MultiAltBtnOwnedData = 0;
-static int MultiVsBtnOwnedData = 0,
-    MultiAprBtnOwnedData = 0;
-static int MultiRevBtnOwnedData = 0;
-
-// These callbacks are called by the SDK to read and write the sim.
-// We provide two sets of callbacks allowing our data to appear as
-// float and double.  This is done for didactic purposes; multityped
-// should not be used in initial designs as a convenience to client
-// code.
-
-int MultiPanelCountGetDataiCallback(void *inRefcon);
-void MultiPanelCountSetDataiCallback(void *inRefcon, int MultiPanelCount);
-
-int MultiAltSwitchStatusGetDataiCallback(void *inRefcon);
-void MultiAltSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiAltSwitchStatus);
-
-int MultiVsSwitchStatusGetDataiCallback(void *inRefcon);
-void MultiVsSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiVsSwitchStatus);
-
-int MultiIasSwitchStatusGetDataiCallback(void *inRefcon);
-void MultiIasSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiIasSwitchStatus);
-
-int MultiHdgSwitchStatusGetDataiCallback(void *inRefcon);
-void MultiHdgSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiHdgSwitchStatus);
-
-int MultiCrsSwitchStatusGetDataiCallback(void *inRefcon);
-void MultiCrsSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiCrsswitchStatus);
-
-int MultiKnobIncStatusGetDataiCallback(void *inRefcon);
-void MultiKnobIncStatusSetDataiCallback(void *inRefcon,
-    int MultiKnobIncStatus);
-
-int MultiKnobDecStatusGetDataiCallback(void *inRefcon);
-void MultiKnobDecStatusSetDataiCallback(void *inRefcon,
-    int MultiKnobDecStatus);
-
-int MultiKnobIncTicksStatusGetDataiCallback(void *inRefcon);
-void MultiKnobIncTicksStatusSetDataiCallback(void *inRefcon,
-    int MultiKnobIncTicksStatus);
-
-int MultiKnobDecTicksStatusGetDataiCallback(void *inRefcon);
-void MultiKnobDecTicksStatusSetDataiCallback(void *inRefcon,
-    int MultiKnobDecTicksStatus);
-
-int MultiAtStatusGetDataiCallback(void *inRefcon);
-void MultiAtStatusSetDataiCallback(void *inRefcon, int MultiAtStatus);
-
-int MultiTrimUpStatusGetDataiCallback(void *inRefcon);
-void MultiTrimUpStatusSetDataiCallback(void *inRefcon, int MultiTrimUpStatus);
-
-int MultiTrimDnStatusGetDataiCallback(void *inRefcon);
-void MultiTrimDnStatusSetDataiCallback(void *inRefcon, int MultiTrimDnStatus);
-
-int MultiFlapsUpStatusGetDataiCallback(void *inRefcon);
-void MultiFlapsUpStatusSetDataiCallback(void *inRefcon,
-    int MultiFlapsUpStatus);
-
-int MultiFlapsDnStatusGetDataiCallback(void *inRefcon);
-void MultiFlapsDnStatusSetDataiCallback(void *inRefcon,
-    int MultiFlapsDnStatus);
-
-int MultiApBtnStatusGetDataiCallback(void *inRefcon);
-void MultiApBtnStatusSetDataiCallback(void *inRefcon, int MultiApBtnStatus);
-
-int MultiHdgBtnStatusGetDataiCallback(void *inRefcon);
-void MultiHdgBtnStatusSetDataiCallback(void *inRefcon, int MultiHdgBtnStatus);
-
-int MultiNavBtnStatusGetDataiCallback(void *inRefcon);
-void MultiNavBtnStatusSetDataiCallback(void *inRefcon, int MultiNavBtnStatus);
-
-int MultiIasBtnStatusGetDataiCallback(void *inRefcon);
-void MultiIasBtnStatusSetDataiCallback(void *inRefcon, int MultiIasBtnStatus);
-
-int MultiAltBtnStatusGetDataiCallback(void *inRefcon);
-void MultiAltBtnStatusSetDataiCallback(void *inRefcon, int MultiAltBtnStatus);
-
-int MultiVsBtnStatusGetDataiCallback(void *inRefcon);
-void MultiVsBtnStatusSetDataiCallback(void *inRefcon, int MultiVsBtnStatus);
-
-int MultiAprBtnStatusGetDataiCallback(void *inRefcon);
-void MultiAprBtnStatusSetDataiCallback(void *inRefcon, int MultiAprBtnStatus);
-
-int MultiRevBtnStatusGetDataiCallback(void *inRefcon);
-void MultiRevBtnStatusSetDataiCallback(void *inRefcon, int MultiRevBtnStatus);
-
-
 
 void CreateMultiWidget(int x1, int y1, int w, int h);
 int MultiHandler(XPWidgetMessage MultiinMessage, XPWidgetID MultiWidgetID,
     intptr_t inParam1, intptr_t inParam2);
-
-int multiMenuItem;
 
 string ap_button_remapable,
     hdg_button_remapable,
@@ -4866,11 +4663,6 @@ void process_radio3_unregister_xsaitekpanels_datareference();
 void process_radio_find_xplane_commands();
 void process_radio_find_xplane_datareference();
 
-void process_multi_panel();
-void process_multi_register_xsaitekpanels_datareference();
-void process_multi_unregister_xsaitekpanels_datareference();
-void process_multi_find_xplane_commands();
-void process_multi_find_xplane_datareference();
 void process_switch_panel();
 void process_switch_register_xsaitekpanels_datareference();
 void process_switch_unregister_xsaitekpanels_datareference();
@@ -4910,8 +4702,7 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
     int BipSubMenuItem,
         Bip2SubMenuItem,
         Bip3SubMenuItem;
-    int MultiSubMenuItem,
-        RadioSubMenuItem;
+    int RadioSubMenuItem;
     int SwitchSubMenuItem;
     int XsaitekpanelsSharedRetVal;
 
@@ -4963,20 +4754,7 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
 
 // *** Find Connected Multi Panel *****
 
-    struct hid_device_info *multi_devs,
-    *multi_cur_dev;
-
-    multi_devs = hid_enumerate(0x6a3, 0x0d06);
-    multi_cur_dev = multi_devs;
-    while (multi_cur_dev) {
-        multihandle = hid_open_path(multi_cur_dev->path);
-        hid_set_nonblocking(multihandle, 1);
-        multires = hid_read(multihandle, multibuf, sizeof(multibuf));
-        hid_send_feature_report(multihandle, multiwbuf, 13);
-        multicnt++;
-        multi_cur_dev = multi_cur_dev->next;
-    }
-    hid_free_enumeration(multi_devs);
+    open_all_multipanels();
 
 // *** Find Connected Switch Panel *****
 
@@ -5347,8 +5125,8 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
     hid_free_enumeration(tpm_devs);
 
     sprintf(buf,
-        "Xsaitekpanels: found %d Switch  %d Radio  %d Multi  %d BIP  %d TPM Panels\n",
-        switchcnt, radcnt, multicnt, bipcnt, tpmcnt);
+        "Xsaitekpanels: found %d Switch  %d Radio  %d BIP  %d TPM Panels\n",
+        switchcnt, radcnt, bipcnt, tpmcnt);
     XPLMDebugString(buf);
 
     XsaitekpanelsVersionDataRef =
@@ -5385,9 +5163,8 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
 
     MultiPanelCountDataRef =
         XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/count",
-        xplmType_Int, 1, MultiPanelCountGetDataiCallback,
-        MultiPanelCountSetDataiCallback, NULL, NULL, NULL, NULL, NULL, NULL,
-        NULL, NULL, NULL, NULL, NULL, NULL);
+        xplmType_Int, 1, (int(*)(void *))get_num_multipanels, NULL, NULL, NULL, NULL, NULL,
+        NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
     TpmPanelCountDataRef =
         XPLMRegisterDataAccessor("bgood/xsaitekpanels/tpmpanel/count",
@@ -5811,14 +5588,6 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
         process_radio3_register_xsaitekpanels_datareference();
     }
 
-    // If you find a multi panel then create
-    // datareferences for all of the multi panel switch positions
-    if (multicnt > 0) {
-        process_multi_register_xsaitekpanels_datareference();
-        process_multi_find_xplane_commands();
-        process_multi_find_xplane_datareference();
-    }
-
     // Create our menu
 
     XsaitekpanelsMenuItem = XPLMAppendMenuItem(XPLMFindPluginsMenu(),
@@ -5879,17 +5648,6 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
                 Bip3SubMenuItem, XsaitekpanelsMenuHandler, (void *) 4);
         }
 
-    }
-
-    if (multicnt > 0) {
-
-        MultiSubMenuItem = XPLMAppendMenuItem(XsaitekpanelsMenu,
-            "Multi", NULL, 5);
-
-
-        MultiMenuId = XPLMCreateMenu("Multi",
-            XsaitekpanelsMenu,
-            MultiSubMenuItem, XsaitekpanelsMenuHandler, (void *) 5);
     }
 
     if (radcnt > 0) {
@@ -6029,18 +5787,7 @@ PLUGIN_API void XPluginStop(void)
 
 
     // *** if open blank display and then close that multi panel ***
-    if (multicnt > 0) {
-        blankmultiwbuf[0] = 0, blankmultiwbuf[1] = 15, blankmultiwbuf[2] = 15;
-        blankmultiwbuf[3] = 15, blankmultiwbuf[4] = 15, blankmultiwbuf[5] =
-            15;
-        blankmultiwbuf[6] = 15, blankmultiwbuf[7] = 15, blankmultiwbuf[8] =
-            15;
-        blankmultiwbuf[9] = 15, blankmultiwbuf[10] = 15, blankmultiwbuf[11] =
-            0;
-        multires = hid_send_feature_report(multihandle, blankmultiwbuf, 13);
-        hid_close(multihandle);
-
-    }
+    close_all_multipanels();
 
 // *** if open close that switch panel ***
 
@@ -6119,13 +5866,12 @@ PLUGIN_API void XPluginStop(void)
     process_switch_unregister_xsaitekpanels_datareference();
     process_radio1_unregister_xsaitekpanels_datareference();
     process_radio2_unregister_xsaitekpanels_datareference();
-    process_multi_unregister_xsaitekpanels_datareference();
+    unregister_multipanel_drs();
 
     XPDestroyWidget(BipWidgetID, 1);
     XPLMDestroyMenu(BipMenuId);
     XPLMDestroyMenu(Bip2MenuId);
     XPLMDestroyMenu(Bip3MenuId);
-    XPLMDestroyMenu(MultiMenuId);
     XPLMDestroyMenu(RadioMenuId);
     XPLMDestroyMenu(SwitchMenuId);
 
@@ -9021,319 +8767,6 @@ void Rad3LwrDigit10ValueSetDataiCallback(void *inRefcon,
 }
 
 
-// Multi panel data references call backs
-
-
-int MultiPanelCountGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiPanelCountData;
-}
-
-void MultiPanelCountSetDataiCallback(void *inRefcon, int MultiPanelCountData2)
-{
-    (void) inRefcon;
-    MultiPanelCountData = MultiPanelCountData2;
-}
-
-
-
-int MultiAltSwitchStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiAltSwitchOwnedData;
-}
-
-void MultiAltSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiAltSwitchStatus2)
-{
-    (void) inRefcon;
-    MultiAltSwitchOwnedData = MultiAltSwitchStatus2;
-}
-
-
-int MultiVsSwitchStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiVsSwitchOwnedData;
-}
-
-void MultiVsSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiVsSwitchStatus2)
-{
-    (void) inRefcon;
-    MultiVsSwitchOwnedData = MultiVsSwitchStatus2;
-}
-
-
-int MultiIasSwitchStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiIasSwitchOwnedData;
-}
-
-void MultiIasSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiIasSwitchStatus2)
-{
-    (void) inRefcon;
-    MultiIasSwitchOwnedData = MultiIasSwitchStatus2;
-}
-
-
-int MultiHdgSwitchStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiHdgSwitchOwnedData;
-}
-
-void MultiHdgSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiHdgSwitchStatus2)
-{
-    (void) inRefcon;
-    MultiHdgSwitchOwnedData = MultiHdgSwitchStatus2;
-}
-
-
-int MultiCrsSwitchStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiCrsSwitchOwnedData;
-}
-
-void MultiCrsSwitchStatusSetDataiCallback(void *inRefcon,
-    int MultiCrsSwitchStatus2)
-{
-    (void) inRefcon;
-    MultiCrsSwitchOwnedData = MultiCrsSwitchStatus2;
-}
-
-
-int MultiKnobIncStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiKnobIncOwnedData;
-}
-
-void MultiKnobIncStatusSetDataiCallback(void *inRefcon,
-    int MultiKnobIncStatus2)
-{
-    (void) inRefcon;
-    MultiKnobIncOwnedData = MultiKnobIncStatus2;
-}
-
-
-int MultiKnobDecStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiKnobDecOwnedData;
-}
-
-void MultiKnobDecStatusSetDataiCallback(void *inRefcon,
-    int MultiKnobDecStatus2)
-{
-    (void) inRefcon;
-    MultiKnobDecOwnedData = MultiKnobDecStatus2;
-}
-
-
-int MultiKnobIncTicksStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiKnobIncTicksOwnedData;
-}
-
-void MultiKnobIncTicksStatusSetDataiCallback(void *inRefcon,
-    int MultiKnobIncTicksStatus2)
-{
-    (void) inRefcon;
-    MultiKnobIncTicksOwnedData = MultiKnobIncTicksStatus2;
-}
-
-
-int MultiKnobDecTicksStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiKnobDecTicksOwnedData;
-}
-
-void MultiKnobDecTicksStatusSetDataiCallback(void *inRefcon,
-    int MultiKnobDecTicksStatus2)
-{
-    (void) inRefcon;
-    MultiKnobDecTicksOwnedData = MultiKnobDecTicksStatus2;
-}
-
-
-int MultiAtStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiAtOwnedData;
-}
-
-void MultiAtStatusSetDataiCallback(void *inRefcon, int MultiAtStatus2)
-{
-    (void) inRefcon;
-    MultiAtOwnedData = MultiAtStatus2;
-}
-
-
-int MultiTrimUpStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiTrimUpOwnedData;
-}
-
-void MultiTrimUpStatusSetDataiCallback(void *inRefcon, int MultiTrimUpStatus2)
-{
-    (void) inRefcon;
-    MultiTrimUpOwnedData = MultiTrimUpStatus2;
-}
-
-
-int MultiTrimDnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiTrimDnOwnedData;
-}
-
-void MultiTrimDnStatusSetDataiCallback(void *inRefcon, int MultiTrimDnStatus2)
-{
-    (void) inRefcon;
-    MultiTrimDnOwnedData = MultiTrimDnStatus2;
-}
-
-
-int MultiFlapsUpStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiFlapsUpOwnedData;
-}
-
-void MultiFlapsUpStatusSetDataiCallback(void *inRefcon,
-    int MultiFlapsUpStatus2)
-{
-    (void) inRefcon;
-    MultiFlapsUpOwnedData = MultiFlapsUpStatus2;
-}
-
-
-int MultiFlapsDnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiFlapsDnOwnedData;
-}
-
-void MultiFlapsDnStatusSetDataiCallback(void *inRefcon,
-    int MultiFlapsDnStatus2)
-{
-    (void) inRefcon;
-    MultiFlapsDnOwnedData = MultiFlapsDnStatus2;
-}
-
-
-int MultiApBtnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiApBtnOwnedData;
-}
-
-void MultiApBtnStatusSetDataiCallback(void *inRefcon, int MultiApBtnStatus2)
-{
-    (void) inRefcon;
-    MultiApBtnOwnedData = MultiApBtnStatus2;
-}
-
-
-int MultiHdgBtnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiHdgBtnOwnedData;
-}
-
-void MultiHdgBtnStatusSetDataiCallback(void *inRefcon, int MultiHdgBtnStatus2)
-{
-    (void) inRefcon;
-    MultiHdgBtnOwnedData = MultiHdgBtnStatus2;
-}
-
-
-int MultiNavBtnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiNavBtnOwnedData;
-}
-
-void MultiNavBtnStatusSetDataiCallback(void *inRefcon, int MultiNavBtnStatus2)
-{
-    (void) inRefcon;
-    MultiNavBtnOwnedData = MultiNavBtnStatus2;
-}
-
-
-int MultiIasBtnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiIasBtnOwnedData;
-}
-
-void MultiIasBtnStatusSetDataiCallback(void *inRefcon, int MultiIasBtnStatus2)
-{
-    (void) inRefcon;
-    MultiIasBtnOwnedData = MultiIasBtnStatus2;
-}
-
-
-int MultiAltBtnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiAltBtnOwnedData;
-}
-
-void MultiAltBtnStatusSetDataiCallback(void *inRefcon, int MultiAltBtnStatus2)
-{
-    (void) inRefcon;
-    MultiAltBtnOwnedData = MultiAltBtnStatus2;
-}
-
-int MultiVsBtnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiVsBtnOwnedData;
-}
-
-void MultiVsBtnStatusSetDataiCallback(void *inRefcon, int MultiVsBtnStatus2)
-{
-    (void) inRefcon;
-    MultiVsBtnOwnedData = MultiVsBtnStatus2;
-}
-
-
-int MultiAprBtnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiAprBtnOwnedData;
-}
-
-void MultiAprBtnStatusSetDataiCallback(void *inRefcon, int MultiAprBtnStatus2)
-{
-    (void) inRefcon;
-    MultiAprBtnOwnedData = MultiAprBtnStatus2;
-}
-
-
-int MultiRevBtnStatusGetDataiCallback(void *inRefcon)
-{
-    (void) inRefcon;
-    return MultiRevBtnOwnedData;
-}
-
-void MultiRevBtnStatusSetDataiCallback(void *inRefcon, int MultiRevBtnStatus2)
-{
-    (void) inRefcon;
-    MultiRevBtnOwnedData = MultiRevBtnStatus2;
-}
-
-
 // TPM panel data references call backs
 
 
@@ -9430,14 +8863,6 @@ void XsaitekpanelsMenuHandler(void *inMenuRef, void *inItemRef)
 
 
     if ((intptr_t) inMenuRef == 5) {
-        if (strcmp((char *) inItemRef, "MULTI_WIDGET") == 0) {
-            CreateMultiWidget(05, 700, 300, 330);       //left, top, right, bottom.
-            multiMenuItem = 1;
-        }
-
-    }
-
-    if ((intptr_t) inMenuRef == 6) {
 
         if (strcmp((char *) inItemRef, "RADIO_WIDGET") == 0) {
             CreateRadioWidget(15, 700, 300, 300);       //left, top, right, bottom.
@@ -9446,7 +8871,7 @@ void XsaitekpanelsMenuHandler(void *inMenuRef, void *inItemRef)
 
     }
 
-    if ((intptr_t) inMenuRef == 7) {
+    if ((intptr_t) inMenuRef == 6) {
         if (strcmp((char *) inItemRef, "SWITCH_WIDGET") == 0) {
             CreateSwitchWidget(05, 700, 300, 510);      //left, top, right, bottom.
             switchMenuItem = 1;
@@ -9454,10 +8879,6 @@ void XsaitekpanelsMenuHandler(void *inMenuRef, void *inItemRef)
         }
 
     }
-
-
-
-    return;
 }
 
 
@@ -10769,11 +10190,9 @@ int MultiHandler(XPWidgetMessage MultiinMessage, XPWidgetID MultiWidgetID,
     intptr_t inParam1, intptr_t inParam2)
 {
     (void) inParam2;
+    (void) MultiWidgetID;
     intptr_t State;
     if (MultiinMessage == xpMessage_CloseButtonPushed) {
-        if (multiMenuItem == 1) {
-            XPHideWidget(MultiWidgetID);
-        }
         return 1;
     }
 
@@ -11392,7 +10811,7 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim,
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000,
         (void *) "bgood/xsaitekpanels/multipanel/count");
 
-    if (multicnt > 0) {
+/*    if (multicnt > 0) {
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000,
             (void *) "bgood/xsaitekpanels/multipanel/altswitch/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000,
@@ -11433,7 +10852,7 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim,
             (void *) "bgood/xsaitekpanels/multipanel/aprbtn/status");
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000,
             (void *) "bgood/xsaitekpanels/multipanel/revbtn/status");
-    }
+    }*/
 
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000,
         (void *) "bgood/xsaitekpanels/tpmpanel/count");
@@ -11474,10 +10893,7 @@ float MyPanelsFlightLoopCallback(float inElapsedSinceLastCall,
         process_radio_panel();
     }
 
-    if (multicnt > 0) {
-        process_multi_panel();
-    }
-
+    process_all_multipanels();
 
     if (switchcnt > 0) {
         process_switch_panel();
@@ -11513,7 +10929,7 @@ float MyPanelsFlightLoopCallback(float inElapsedSinceLastCall,
 
     XPLMSetDatai(SwitchPanelCountDataRef, switchcnt);
     XPLMSetDatai(RadioPanelCountDataRef, radcnt);
-    XPLMSetDatai(MultiPanelCountDataRef, multicnt);
+//    XPLMSetDatai(MultiPanelCountDataRef, multicnt);
     XPLMSetDatai(TpmPanelCountDataRef, tpmcnt);
 
     return interval;

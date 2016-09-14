@@ -10,7 +10,10 @@
 
 #include <string>
 
+#include "Dataref.h"
+
 using namespace std;
+using namespace xsaitekpanels;
 
 // ****************  Start Radio Panel Section  ***************************
 
@@ -2327,9 +2330,7 @@ extern XPLMCommandRef ApKnotsMachTgl;
 
 extern XPLMCommandRef FlapsDn,
   FlapsUp;
-extern XPLMCommandRef PitchTrimDn,
-  PitchTrimUp,
-  PitchTrimTkOff;
+extern XPLMCommandRef PitchTrimTkOff;
 
 extern XPLMCommandRef ApButtonRemapableCmd,
   HdgButtonRemapableCmd;
@@ -2357,50 +2358,25 @@ extern XPLMCommandRef ApVsUpRemapableCmd,
   ApVsDnRemapableCmd;
 extern XPLMCommandRef TrimUpRemapableCmd,
   TrimDnRemapableCmd;
-extern XPLMCommandRef FlapsUpRemapableCmd,
-  FlapsDnRemapableCmd;
 
 // ************ Multi Panel Data Ref *****************
-extern XPLMDataRef ApAlt,
-  ApVs,
-  ApAs,
-  ApHdg,
-  ApCrs,
-  ApCrs2;
-
-extern XPLMDataRef ApMstrStat,
-  ApHdgStat,
-  ApNavStat,
-  ApIasStat;
-extern XPLMDataRef ApAltStat,
-  ApVsStat,
-  ApAprStat,
-  ApRevStat;
-extern XPLMDataRef ApState,
-  ApAutThr;
-extern XPLMDataRef AirspeedIsMach,
-  Airspeed;
 
 extern XPLMDataRef ApButtonRemapableData,
-  HdgButtonRemapableData;
-extern XPLMDataRef NavButtonVorlocRemapableData,
-  NavButtonLnavRemapableData;
-extern XPLMDataRef IasButtonRemapableData,
-  IasChangeoverButtonRemapableData;
-extern XPLMDataRef AltButtonRemapableData,
-  VsButtonRemapableData;
-extern XPLMDataRef AprButtonRemapableData,
+  HdgButtonRemapableData,
+  NavButtonVorlocRemapableData,
+  NavButtonLnavRemapableData,
+  IasButtonRemapableData,
+  IasChangeoverButtonRemapableData,
+  AltButtonRemapableData,
+  VsButtonRemapableData,
+  AprButtonRemapableData,
   RevButtonRemapableData;
 
-extern XPLMDataRef AltSwitchRemapableData;
-extern XPLMDataRef VsSwitchRemapableData;
-extern XPLMDataRef IasSwitchRemapableData;
-extern XPLMDataRef HdgSwitchRemapableData;
-extern XPLMDataRef CrsSwitchRemapableData;
-
-extern XPLMDataRef AttrSwitchRemapableData;
-
-extern XPLMDataRef IasIsmachRemapableData;
+extern Dataref *AltSwitchRemapableData,
+  *VsSwitchRemapableData,
+  *IasSwitchRemapableData,
+  *HdgSwitchRemapableData,
+  *CrsSwitchRemapableData;
 
 extern XPLMDataRef ApLightRemapableData,
   HdgLightRemapableData;
@@ -2423,34 +2399,6 @@ extern XPLMDataRef AprLightFlashRemapableData,
   RevLightFlashRemapableData;
 
 extern XPLMDataRef HsiSelector;
-
-extern XPLMDataRef MultiAltSwitchOwnedDataRef,
-  MultiVsSwitchOwnedDataRef;
-extern XPLMDataRef MultiIasSwitchOwnedDataRef,
-  MultiHdgSwitchOwnedDataRef;
-extern XPLMDataRef MultiCrsSwitchOwnedDataRef;
-extern XPLMDataRef MultiKnobIncOwnedDataRef,
-  MultiKnobDecOwnedDataRef;
-extern XPLMDataRef MultiKnobIncTicksOwnedDataRef,
-  MultiKnobDecTicksOwnedDataRef;
-extern XPLMDataRef MultiAtOwnedDataRef,
-  MultiTrimUpOwnedDataRef;
-extern XPLMDataRef MultiTrimDnOwnedDataRef,
-  MultiFlapsUpOwnedDataRef;
-extern XPLMDataRef MultiFlapsDnOwnedDataRef,
-  MultiApBtnOwnedDataRef;
-extern XPLMDataRef MultiHdgBtnOwnedDataRef,
-  MultiNavBtnOwnedDataRef;
-extern XPLMDataRef MultiIasBtnOwnedDataRef,
-  MultiAltBtnOwnedDataRef;
-extern XPLMDataRef MultiVsBtnOwnedDataRef,
-  MultiAprBtnOwnedDataRef;
-extern XPLMDataRef MultiRevBtnOwnedDataRef;
-
-extern XPLMMenuID MultiMenu;
-extern XPLMMenuID MultiMenuId;
-extern XPLMMenuID Frp;
-extern XPLMMenuID MHdg;
 
 extern XPWidgetID MultiSpeed1CheckWidget[50];
 extern XPWidgetID MultiSpeed2CheckWidget[50];
@@ -2482,9 +2430,7 @@ extern int altbuttonremap,
   revbuttonremap;
 extern int lightdatareferencetype;
 
-extern int aplightdata,
-  hdglightdata,
-  navlightvorlocdata,
+extern int navlightvorlocdata,
   navlightlnavdata;
 extern int iaslightdata,
   altlightdata,
@@ -2492,8 +2438,7 @@ extern int iaslightdata,
   aprlightdata,
   revlightdata;
 
-extern int aplightflashdata,
-  hdglightflashdata,
+extern int hdglightflashdata,
   navlightflashvorlocdata,
   navlightflashlnavdata;
 extern int iaslightflashdata,
@@ -2515,8 +2460,6 @@ extern int iasismachremap,
 
 extern int trimupremap,
   trimdnremap;
-extern int flapsupremap,
-  flapsdnremap;
 
 extern int xpanelsfnbutton;
 extern int xpanelscrstoggle;

@@ -12,51 +12,60 @@
 #include <fstream>
 #include <algorithm>
 
-/**
- * Parse a configuration file
- *
- * @param	fileName The name of the file to parse
- * @return	none
- */
-void parseIniFile(const char *fileName);
+namespace xsaitekpanels {
 
-/**
- * If you are finished with the config item, use this function to cleanup the results
- *
- * @return none
- */
-void cleanupIniReader();
+    /**
+     * Parse a configuration file
+     *
+     * @param	fileName The name of the file to parse
+     * @return	none
+     */
+    void parseIniFile(const char *fileName);
 
-/**
- * Return the value of the requested key in with the string type
- *
- * @param	key The option key
- * @return	string The value of the requested key
- */
-std::string getOptionToString(std::string key);
+    /**
+     * If you are finished with the config item, use this function
+     * to cleanup the results
+     *
+     * @return none
+     */
+    void cleanupIniReader();
 
-/**
- * Return the value of the requested key in with the int type
- *
- * @param	key The option key
- * @return	int The value of the requested key
- * @note	If item is not an integer (or does not exist) then 0 will
- *		be returned.
- */
-int getOptionToInt(std::string key);
+    /**
+     * Return the value of the requested key in with the string type
+     *
+     * @param	key The option key
+     * @return	string The value of the requested key
+     */
+    std::string getOptionToString(std::string key);
 
-/**
- * Return the value of the requested key in with the char type
- *
- * @param	key The option key
- * @return	char The value of the requested key
- */
-const char *getOptionToChar(std::string key);
+    /**
+     * Return the value of the requested key in with the int type
+     *
+     * @param	key The option key
+     * @return	int The value of the requested key
+     * @note	If item is not an integer (or does not exist) then 0 will
+     *		be returned.
+     */
+    int getOptionToInt(std::string key);
 
-std::string parseOptionName(std::string value);
-std::string parseOptionValue(std::string value);
-std::string trim(std::string s);
-std::string rtrim(std::string s);
-std::string ltrim(std::string s);
+    /**
+     * Return the value of the requested key in with the char type
+     *
+     * @param	key The option key
+     * @return	char The value of the requested key
+     */
+    const char *getOptionToChar(std::string key);
+
+    /*
+     * Same thing as getOptionToInt, but returning a double.
+     */
+    double getOptionToFloat(std::string key);
+
+    std::string parseOptionName(std::string value);
+    std::string parseOptionValue(std::string value);
+    std::string trim(std::string s);
+    std::string rtrim(std::string s);
+    std::string ltrim(std::string s);
+}
 
 #endif /* INIREADER_H */
