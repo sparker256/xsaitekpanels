@@ -6315,8 +6315,10 @@ void process_radio_blank_display()
 
     if(switchcnt > 0)  {
         if (XPLMGetDatai(SwitchAvOwnedDataRef) == 0) {
-              upseldis[radnum] = 10;
-              loseldis[radnum] = 10;
+            if (AvPwrOnConfig == 0) {
+                upseldis[radnum] = 10;
+                loseldis[radnum] = 10;
+            }
         }
 
     } else {

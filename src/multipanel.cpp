@@ -3572,7 +3572,9 @@ void process_multi_blank_display()
     }
     if(switchcnt > 0)  {
         if (XPLMGetDatai(SwitchAvOwnedDataRef) == 0) {
-            multiseldis = 5;
+            if (AvPwrOnConfig == 0) {
+               multiseldis = 5;
+            }
         }
 
     } else {
