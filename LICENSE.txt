@@ -1,0 +1,3 @@
+Xsaitekpanels can be used under one license.
+
+The GNU General Public License, version 3.0, in LICENSE-gpl3.txt
