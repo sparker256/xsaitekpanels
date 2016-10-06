@@ -2,6 +2,7 @@
 #define _XSP_TIME_H_
 
 #include <stdlib.h>
+#include <stdint.h>
 
 namespace xsaitekpanels {
     uint64_t microclock();

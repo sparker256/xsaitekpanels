@@ -94,6 +94,7 @@ namespace xsaitekpanels {
         unsigned        panel_num;
         hid_device      *handle;
         int             display_readout;
+        uint8_t         adigits[5], bdigits[5];
         int             btnleds;
 
         double altitude, vs, airspeed, hdg, crs;
@@ -124,22 +125,11 @@ namespace xsaitekpanels {
         uint64_t trim_down_last;
         float trim_down_accel, trim_down_max_accel;
 
-        Dataref *ap_master_stat;
-        Dataref *ap_hdg_stat;
-        Dataref *ap_nav_stat;
-        Dataref *ap_ias_stat;
-        Dataref *ap_alt_stat;
-        Dataref *ap_vs_stat;
-        Dataref *ap_apr_stat;
-        Dataref *ap_rev_stat;
-        Dataref *ap_at_stat;
-        Dataref *acf_hdg;
-
         bool flashon;
 
-        void process_light(const button_light_info_t *info, int bitn,
+        bool process_light(const button_light_info_t *info, int bitn,
             bool flash_on);
-        void process_lights();
+        bool process_lights();
 
         void process_switch_adjustment(int value, uint64_t *lastadj_time,
             Dataref *dr, XPLMCommandRef cmd, double maxval, double minval,
@@ -167,6 +157,7 @@ namespace xsaitekpanels {
         void process_multi_flash();
 
         void process_drs();
+        void sched_update_command();
 
         /* this is a private copy of `buttons' used only by the main thread */
         int buttons_main[STATUS_BITS];

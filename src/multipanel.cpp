@@ -12,6 +12,7 @@
 #include <math.h>
 #include <assert.h>
 #include <vector>
+#include <arpa/inet.h>
 
 #include "Log.h"
 #include "time.h"
@@ -45,9 +46,10 @@ enum {
     ACCEL_THRESH = 80000,                       /* 80 ms*/
     HOLD_BTN_TIMEOUT = 1000000,                 /* 1 second */
     AUTO_UPDATE_INTVAL = 250000,                /* 200 ms */
-    BTN_DOUBLE_PRESS_SUPP_INTVAL = 70000,       /* 50 ms */
-    DFL_FLASH_INTVAL = 1                        /* 1 second */
+    BTN_DOUBLE_PRESS_SUPP_INTVAL = 70000        /* 70 ms */
 };
+
+#define DFL_FLASH_INTVAL 1.0                    /* 1 second */
 
 enum {
     FLAPS_UP_SWITCH = 0,
@@ -96,8 +98,8 @@ enum {
     } while (0);
 
 #if     IBM
-#define mutex_enter(mtx)        WaitForSingleObject(mtx, INFINITE)
-#define mutex_exit(mtx)         ReleaseMutex(mtx)
+#define mutex_enter(mtx)        WaitForSingleObject(*(mtx), INFINITE)
+#define mutex_exit(mtx)         ReleaseMutex(*(mtx))
 #else   /* !IBM */
 #define mutex_enter(mtx)        pthread_mutex_lock(mtx)
 #define mutex_exit(mtx)         pthread_mutex_unlock(mtx)
@@ -152,6 +154,8 @@ static Dataref *MultiAltSwitchOwnedDataRef = NULL,
     *MultiAprBtnOwnedDataRef = NULL,
     *MultiRevBtnOwnedDataRef = NULL;
 
+#define getbit(arg, bit)        (((arg) >> bit) & 1)
+
 static void setbit(int *targ, int bitn, int val)
 {
     if (val)
@@ -185,6 +189,10 @@ Multipanel::Multipanel(unsigned panel_number, const char *hidpath)
     send_cmd = false;
     reader_shutdown = false;
 
+    enable_readout(READOUT_NONE);
+    process_multi_display();
+    sched_update_command();
+
 #if IBM
     mtx = CreateMutex(NULL, FALSE, NULL);
     assert(mtx != NULL);
@@ -204,10 +212,6 @@ void *xsaitekpanels::multipanel_reader_thread(void *arg)
 
 Multipanel::~Multipanel()
 {
-    /* blank out display before shutdown */
-    enable_readout(READOUT_NONE);
-    process_multi_display();
-
     hid_close(handle);
 
     VAR_DESTROY(athr_sw_dr);
@@ -219,6 +223,7 @@ Multipanel::~Multipanel()
 
 #if     IBM
     CloseHandle(mtx);
+    CloseHandle(reader);
 #endif  /* IBM */
 }
 
@@ -284,8 +289,6 @@ static void int2digits(uint8_t digits[NUM_DIGITS], const char *fmt, int value)
 
 void Multipanel::process_multi_display()
 {
-    uint8_t adigits[NUM_DIGITS], bdigits[NUM_DIGITS];
-
     switch (display_readout) {
     case READOUT_ALT_VS:
         int2digits(adigits, "%04d", altitude);
@@ -310,7 +313,10 @@ void Multipanel::process_multi_display()
         btnleds = 0;
         break;
     }
+}
 
+void Multipanel::sched_update_command()
+{
     /* load array with message of digits and button LEDs */
     mutex_enter(&mtx);
 
@@ -523,51 +529,87 @@ void Multipanel::process_autothrottle_switch()
         athr_sw_dr->set(athr_sw_disabled_val);
 }
 
-void Multipanel::process_light(const button_light_info_t *info, int bitn,
+#define UPDATE_LIGHT_BIT(bitn, newval) \
+    do { \
+        int v = (newval); \
+        if (getbit(btnleds, bitn) != v) { \
+            setbit(&btnleds, bitn, v); \
+            updated = true; \
+        } \
+    } while (0)
+
+bool Multipanel::process_light(const button_light_info_t *info, int bitn,
     bool flash_on)
 {
+    bool updated = false;
+
     switch(info->type) {
     case OnOffFlashLight:
     case OnOffFlashLight_dup:
         if (info->flash_dr != NULL && info->flash_dr->getd() >= 0.5)
-            setbit(&btnleds, bitn, flash_on);
+            UPDATE_LIGHT_BIT(bitn, flash_on);
         else if (info->dr != NULL)
-            setbit(&btnleds, bitn, info->dr->getd() >= 0.5);
+            UPDATE_LIGHT_BIT(bitn, info->dr->getd() >= 0.5);
         break;
     case OnOffFlash3StateLight:
         if (info->dr != NULL) {
             switch(info->dr->geti()) {
             case 0:
-                setbit(&btnleds, bitn, 0);
+                UPDATE_LIGHT_BIT(bitn, 0);
                 break;
             case 1:
-                setbit(&btnleds, bitn, flash_on);
+                UPDATE_LIGHT_BIT(bitn, flash_on);
                 break;
             case 2:
-                setbit(&btnleds, bitn, 1);
+                UPDATE_LIGHT_BIT(bitn, 1);
                 break;
             }
         }
         break;
     default:
+        UPDATE_LIGHT_BIT(bitn, 0);
         break;
     }
+
+    return (updated);
 }
 
-void Multipanel::process_lights()
+#undef UPDATE_LIGHT_BIT
+
+/*
+ * Here we process all the light datarefs for our buttons and illuminate them
+ * accordingly.
+ */
+bool Multipanel::process_lights()
 {
+    /*
+     * When a button is supposed to be flashing, the `flash_on' variable
+     * determines if the button is supposed to be illumuninated at this
+     * instant. We base it on the system clock and the flash_intval. We
+     * modularly subdivide the current system time by the flash_intval
+     * and if the remainder is in the first half of flash_intval, the
+     * lights are off, otherwise they are on.
+     */
     uint64_t now_ms = microclock() / 1000.0;
     uint64_t flash_ms = flash_intval * 1000;
     bool flash_on = (now_ms % flash_ms) > (flash_ms / 2);
+    bool updated = false;
 
-    process_light(&button_lights[AP_BTN_INFO], AP_LIGHT_BIT, flash_on);
-    process_light(&button_lights[HDG_BTN_INFO], HDG_LIGHT_BIT, flash_on);
-    process_light(&button_lights[NAV_BTN_INFO], NAV_LIGHT_BIT, flash_on);
-    process_light(&button_lights[IAS_BTN_INFO], IAS_LIGHT_BIT, flash_on);
-    process_light(&button_lights[ALT_BTN_INFO], ALT_LIGHT_BIT, flash_on);
-    process_light(&button_lights[VS_BTN_INFO], VS_LIGHT_BIT, flash_on);
-    process_light(&button_lights[APR_BTN_INFO], APR_LIGHT_BIT, flash_on);
-    process_light(&button_lights[REV_BTN_INFO], REV_LIGHT_BIT, flash_on);
+    /*
+     * The bitwise OR here is so that any single light update triggers
+     * us to return true.
+     */
+    updated =
+        process_light(&button_lights[AP_BTN_INFO], AP_LIGHT_BIT, flash_on) |
+        process_light(&button_lights[HDG_BTN_INFO], HDG_LIGHT_BIT, flash_on) |
+        process_light(&button_lights[NAV_BTN_INFO], NAV_LIGHT_BIT, flash_on) |
+        process_light(&button_lights[IAS_BTN_INFO], IAS_LIGHT_BIT, flash_on) |
+        process_light(&button_lights[ALT_BTN_INFO], ALT_LIGHT_BIT, flash_on) |
+        process_light(&button_lights[VS_BTN_INFO], VS_LIGHT_BIT, flash_on) |
+        process_light(&button_lights[APR_BTN_INFO], APR_LIGHT_BIT, flash_on) |
+        process_light(&button_lights[REV_BTN_INFO], REV_LIGHT_BIT, flash_on);
+
+    return (updated);
 }
 
 /*
@@ -746,6 +788,7 @@ static int dampen_knob_ticks(int ticks, int *dampen, int ticks_per_step)
 
 void Multipanel::process()
 {
+    bool sched_update = false;
     bool updated;
     uint64_t now = microclock();
 
@@ -801,12 +844,17 @@ void Multipanel::process()
     process_button_common(FLAPS_UP_SWITCH, &button_info[FLAPS_UP_BTN_INFO]);
     process_button_common(FLAPS_DN_SWITCH, &button_info[FLAPS_DN_BTN_INFO]);
 
+    sched_update = process_lights();
+
     if (updated || now - last_auto_update_time > AUTO_UPDATE_INTVAL) {
-        process_lights();
         process_drs();
         process_multi_display();
         last_auto_update_time = now;
+        sched_update = true;
     }
+
+    if (sched_update)
+        sched_update_command();
 }
 
 void Multipanel::shutdown()
@@ -847,6 +895,7 @@ void xsaitekpanels::reconfigure_all_multipanels()
 void Multipanel::reconfigure()
 {
     ini_opt_setup("Multi Freq Knob Pulse per Command", &knob_speed, 2);
+    ini_opt_setup("Multi Flash Interval", &flash_intval, DFL_FLASH_INTVAL);
 
     ini_opt_setup("Auto Throttle Switch enable", &athr_sw_enabled, true);
     ini_opt_setup("Auto Throttle Switch Armed value",
@@ -1235,5 +1284,6 @@ void Multipanel::reader_main()
      */
     enable_readout(READOUT_NONE);
     process_multi_display();
+    sched_update_command();
     hid_send_feature_report(handle, sendbuf, sizeof(sendbuf));
 }

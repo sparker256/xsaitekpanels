@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <string.h>
+#include <stdarg.h>
 
 #include "XPLMPlugin.h"
 #include "XPLMDisplay.h"
