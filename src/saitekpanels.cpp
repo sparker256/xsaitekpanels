@@ -4738,8 +4738,14 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
 
     rad_devs = hid_enumerate(0x6a3, 0x0d05);
     rad_cur_dev = rad_devs;
-    while (rad_cur_dev) {
+    for (rad_cur_dev = rad_devs; rad_cur_dev != NULL;
+        rad_cur_dev = rad_cur_dev->next) {
         radiohandle[radcnt] = hid_open_path(rad_cur_dev->path);
+        if (radiohandle[radcnt] == NULL) {
+            logMsg("Error opening radio path %s: %s\n", rad_cur_dev->path,
+                strerror(errno));
+            continue;
+        }
         hid_set_nonblocking(radiohandle[radcnt], 1);
         radiores =
             hid_read(radiohandle[radcnt], radiobuf[radcnt],
@@ -4748,7 +4754,6 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
         radiowbuf[0][11] = 1, radiowbuf[1][11] = 2, radiowbuf[2][11] = 3;
         hid_send_feature_report(radiohandle[radcnt], radiowbuf[radcnt], 23);
         radcnt++;
-        rad_cur_dev = rad_cur_dev->next;
     }
     hid_free_enumeration(rad_devs);
 
@@ -5536,7 +5541,7 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
     XPLMSetDataf(XsaitekpanelsFloat20SharedDataRef, 0);
 
 
-
+    (void) XsaitekpanelsSharedRetVal;
 
 
 
