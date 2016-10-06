@@ -467,7 +467,7 @@ void Multipanel::process_switch(const switch_info_t *sw)
 
 void Multipanel::enable_readout(int readout)
 {
-    assert(readout >= READOUT_ALT_VS && readout <= READOUT_CRS);
+    assert(readout >= READOUT_ALT_VS && readout <= READOUT_NONE);
     display_readout = (BatPwrIsOn() && AvPwrIsOn()) ? readout : READOUT_NONE;
 }
 
