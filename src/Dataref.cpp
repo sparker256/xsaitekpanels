@@ -41,8 +41,7 @@ Dataref::~Dataref()
 template <typename T>void Dataref::get(T *value) const
 {
     if (dr == NULL) {
-        logMsg("Xsaitekpanels: attempting to scalar-read nonexistent "
-            "dataref %s", drname);
+        logMsg("attempting to scalar-read nonexistent dataref %s\n", drname);
         return;
     }
 
@@ -61,8 +60,8 @@ template <typename T>void Dataref::get(T *value) const
         XPLMGetDatavf(dr, &fvalue, offset, 1);
         *value = fvalue;
     } else {
-        logMsg("Xsaitekpanels: attempting to scalar-read unknown "
-            "type (%d) dataref %s", type, drname);
+        logMsg("attempting to scalar-read unknown type (%d) dataref %s\n",
+            type, drname);
     }
 }
 
@@ -90,13 +89,11 @@ double Dataref::getd() const
 template <typename T>void Dataref::set(T value)
 {
     if (dr == NULL) {
-        logMsg("Xsaitekpanels: attempting to scalar-write nonexistent "
-            "dataref %s", drname);
+        logMsg("attempting to scalar-write nonexistent dataref %s\n", drname);
         return;
     }
     if (!writable) {
-        logMsg("Xsaitekpanels: attempting to scalar-write read-only "
-            "dataref %s", drname);
+        logMsg("attempting to scalar-write read-only dataref %s\n", drname);
         return;
     }
 
@@ -113,8 +110,8 @@ template <typename T>void Dataref::set(T value)
         float fvalue = value;
         XPLMSetDatavf(dr, &fvalue, offset, 1);
     } else {
-        logMsg("Xsaitekpanels: attempting to scalar-write unknown "
-            "type (%d) dataref %s", type, drname);
+        logMsg("attempting to scalar-write unknown type (%d) dataref %s\n",
+            type, drname);
     }
 }
 
@@ -129,8 +126,7 @@ template <typename T>size_t Dataref::getv(T *values, size_t off,
     assert(num > 0);
 
     if (dr == NULL) {
-        logMsg("Xsaitekpanels: attempting to scalar-read nonexistent "
-            "dataref %s", drname);
+        logMsg("attempting to scalar-read nonexistent dataref %s\n", drname);
         return (0);
     }
 
@@ -167,13 +163,12 @@ template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
     assert(num > 0);
 
     if (dr == NULL) {
-        logMsg("Xsaitekpanels: attempting to vector-write to "
-            "nonexistent dataref %s", drname);
+        logMsg("attempting to vector-write to nonexistent dataref %s\n",
+            drname);
         return;
     }
     if (!writable) {
-        logMsg("Xsaitekpanels: Attempting to vector-write to "
-            "read-only dataref %s", drname);
+        logMsg("Attempting to vector-write to read-only dataref %s\n", drname);
         return;
     }
 
@@ -194,8 +189,8 @@ template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
             fvalues[i] = values[i];
         XPLMSetDatavf(dr, fvalues, off == -1lu ? offset : off, num);
     } else {
-        logMsg("Xsaitekpanels: attempting to vector-write unknown "
-            "type (%d) dataref %s", type, drname);
+        logMsg("attempting to vector-write unknown type (%d) dataref %s\n",
+            type, drname);
     }
 }
 
@@ -240,6 +235,9 @@ void xsaitekpanels::write_int_array(void *user_info, int *values, int offset,
     if (user_info == NULL || values == NULL)
         return;
     std::vector<int> *dst = (std::vector<int> *)user_info;
-    for (int i = 0, n = dst->size(); i + offset < n && i < count; i++)
+    logMsg("write: %p, v[0]: %i, off: %i, cnt: %i size: %lu\n",
+        user_info, values[0], offset, count, dst->size());
+    for (int i = 0, n = dst->size(); i + offset < n && i < count; i++) {
         (*dst)[i + offset] = values[i];
+    }
 }

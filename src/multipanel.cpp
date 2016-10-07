@@ -10,7 +10,6 @@
 #include <fcntl.h>
 #include <string.h>
 #include <math.h>
-#include <assert.h>
 #include <vector>
 #include <arpa/inet.h>
 
@@ -35,11 +34,12 @@ enum {
 };
 
 enum {
-    READOUT_ALT_VS = 1,
-    READOUT_IAS = 2,
-    READOUT_HDG = 3,
-    READOUT_CRS = 4,
-    READOUT_NONE = 5
+    READOUT_ALT_VS,
+    READOUT_IAS,
+    READOUT_HDG,
+    READOUT_CRS,
+    READOUT_PANEL_NUM,
+    READOUT_NONE
 };
 
 enum {
@@ -88,24 +88,25 @@ enum {
         if ((var) != NULL) \
             delete (var); \
         (var) = NULL; \
-    } while (0);
+    } while (0)
 
 #define DR_DESTROY_ACCESSOR(dr) \
     do { \
         XPLMUnregisterDataAccessor((dr)->getDataref()); \
         delete (dr); \
         (dr) = NULL; \
-    } while (0);
+    } while (0)
 
 #if     IBM
-#define mutex_enter(mtx)        WaitForSingleObject(*(mtx), INFINITE)
-#define mutex_exit(mtx)         ReleaseMutex(*(mtx))
+#define mutex_enter(mtx) \
+    VERIFY(WaitForSingleObject(*(mtx), INFINITE) == WAIT_OBJECT_0)
+#define mutex_exit(mtx)         VERIFY(ReleaseMutex(*(mtx)) != 0)
 #else   /* !IBM */
-#define mutex_enter(mtx)        pthread_mutex_lock(mtx)
-#define mutex_exit(mtx)         pthread_mutex_unlock(mtx)
+#define mutex_enter(mtx)        VERIFY(pthread_mutex_lock(mtx) == 0)
+#define mutex_exit(mtx)         VERIFY(pthread_mutex_unlock(mtx) == 0)
 #endif  /* !IBM */
 
-static std::vector<Multipanel *> multipanels;
+static vector<Multipanel *> multipanels;
 static double flash_intval = DFL_FLASH_INTVAL;
 
 static vector<int> MultiAltSwitchOwnedData,
@@ -172,6 +173,13 @@ Multipanel::Multipanel(unsigned panel_number, const char *hidpath)
     memset(sendbuf, 0, sizeof (sendbuf));
     panel_num = panel_number;
 
+    display_readout = READOUT_NONE;
+    memset(adigits, 0, sizeof (adigits));
+    memset(bdigits, 0, sizeof (bdigits));
+    btnleds = 0;
+
+    altitude = vs = airspeed = hdg = crs = 0.0;
+
     handle = hid_open_path(hidpath);
     hid_set_nonblocking(handle, 0);
 
@@ -186,21 +194,24 @@ Multipanel::Multipanel(unsigned panel_number, const char *hidpath)
     reconfigure();
 
     memset(buttons, 0, sizeof (buttons));
+    memset(buttons_main, 0, sizeof (buttons_main));
     send_cmd = false;
     reader_shutdown = false;
 
-    enable_readout(READOUT_NONE);
-    process_multi_display();
-    sched_update_command();
-
 #if IBM
     mtx = CreateMutex(NULL, FALSE, NULL);
-    assert(mtx != NULL);
+    VERIFY(mtx != NULL);
     reader = CreateThread(NULL, 0,
         (LPTHREAD_START_ROUTINE)multipanel_reader_thread, this, 0, NULL);
+    VERIFY(reader != NULL);
 #else
-    pthread_create(&reader, NULL, multipanel_reader_thread, this);
+    VERIFY(pthread_mutex_init(&mtx, NULL) == 0);
+    VERIFY(pthread_create(&reader, NULL, multipanel_reader_thread, this) == 0);
 #endif
+
+    enable_readout(READOUT_PANEL_NUM);
+    process_multi_display();
+    sched_update_command();
 }
 
 void *xsaitekpanels::multipanel_reader_thread(void *arg)
@@ -224,7 +235,9 @@ Multipanel::~Multipanel()
 #if     IBM
     CloseHandle(mtx);
     CloseHandle(reader);
-#endif  /* IBM */
+#else   /* !IBM */
+    pthread_mutex_destroy(&mtx);
+#endif  /* !IBM */
 }
 
 int
@@ -267,7 +280,7 @@ static void int2digits(uint8_t digits[NUM_DIGITS], const char *fmt, int value)
     char strbuf[8];
     int n = snprintf(strbuf, sizeof(strbuf), fmt, value);
 
-    assert(n < 8);
+    VERIFY((unsigned long)n < sizeof (strbuf));
     for (int i = 1; i <= NUM_DIGITS; i++) {
         if (n - i >= 0) {
             switch (strbuf[n - i]) {
@@ -306,6 +319,11 @@ void Multipanel::process_multi_display()
         int2digits(adigits, "%03d", crs);
         int2digits(bdigits, "", 0);
         break;
+    case READOUT_PANEL_NUM:
+        int2digits(adigits, "%05d", panel_num);
+        int2digits(bdigits, "%05d", panel_num);
+        btnleds = 0;
+        break;
     case READOUT_NONE:
     default:
         int2digits(adigits, "", 0);
@@ -334,63 +352,53 @@ void Multipanel::process_drs()
 {
     int val;
 
-    mutex_enter(&mtx);
-    val = buttons_main[ALT_SWITCH] != 0;
+    logMsg("process_drs\n");
+
+    val = (buttons_main[ALT_SWITCH] != 0);
     MultiAltSwitchOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[VS_SWITCH] != 0;
+    val = (buttons_main[VS_SWITCH] != 0);
     MultiVsSwitchOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[IAS_SWITCH] != 0;
+    val = (buttons_main[IAS_SWITCH] != 0);
     MultiIasSwitchOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[HDG_SWITCH] != 0;
+    val = (buttons_main[HDG_SWITCH] != 0);
     MultiHdgSwitchOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[CRS_SWITCH] != 0;
+    val = (buttons_main[CRS_SWITCH] != 0);
     MultiCrsSwitchOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[ADJUSTMENT_UP] != 0;
+    val = (buttons_main[ADJUSTMENT_UP] != 0);
     MultiKnobIncOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[ADJUSTMENT_DN] != 0;
+    val = (buttons_main[ADJUSTMENT_DN] != 0);
     MultiKnobDecOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[AUTO_THROTTLE_SWITCH] != 0;
+    val = (buttons_main[AUTO_THROTTLE_SWITCH] != 0);
     MultiAtOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[TRIM_WHEEL_UP] != 0;
+    val = (buttons_main[TRIM_WHEEL_UP] != 0);
     MultiTrimUpOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[TRIM_WHEEL_DN] != 0;
+    val = (buttons_main[TRIM_WHEEL_DN] != 0);
     MultiTrimDnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[FLAPS_UP_SWITCH] != 0;
+    val = (buttons_main[FLAPS_UP_SWITCH] != 0);
     MultiFlapsUpOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[FLAPS_DN_SWITCH] != 0;
+    val = (buttons_main[FLAPS_DN_SWITCH] != 0);
     MultiFlapsDnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[AP_MASTER_BUTTON] != 0;
+    val = (buttons_main[AP_MASTER_BUTTON] != 0);
     MultiApBtnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[HDG_BUTTON] != 0;
+    val = (buttons_main[HDG_BUTTON] != 0);
     MultiHdgBtnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[NAV_BUTTON] != 0;
+    val = (buttons_main[NAV_BUTTON] != 0);
     MultiNavBtnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[IAS_BUTTON] != 0;
+    val = (buttons_main[IAS_BUTTON] != 0);
     MultiIasBtnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[ALT_BUTTON] != 0;
+    val = (buttons_main[ALT_BUTTON] != 0);
     MultiAltBtnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[VS_BUTTON] != 0;
+    val = (buttons_main[VS_BUTTON] != 0);
     MultiVsBtnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[APR_BUTTON] != 0;
+    val = (buttons_main[APR_BUTTON] != 0);
     MultiAprBtnOwnedDataRef->setv(&val, panel_num, 1);
-    val = buttons_main[REV_BUTTON] != 0;
+    val = (buttons_main[REV_BUTTON] != 0);
     MultiRevBtnOwnedDataRef->setv(&val, panel_num, 1);
-    mutex_exit(&mtx);
 
-    int adjustment_up, adjustment_dn;
-    MultiKnobIncOwnedDataRef->getv(&adjustment_up, panel_num, 1);
-    MultiKnobDecOwnedDataRef->getv(&adjustment_dn, panel_num, 1);
-
-    if (knob_last_up && adjustment_up == 0) {
-        MultiKnobIncTicksOwnedDataRef->getv(&val, panel_num, 1);
-        val++;
-        MultiKnobIncTicksOwnedDataRef->setv(&val, panel_num, 1);
-    }
-    if (knob_last_dn && adjustment_dn == 0) {
-        MultiKnobDecTicksOwnedDataRef->getv(&val, panel_num, 1);
-        val++;
-        MultiKnobDecTicksOwnedDataRef->setv(&val, panel_num, 1);
-    }
+    MultiKnobIncTicksOwnedDataRef->setv(&buttons_main[ADJUSTMENT_UP],
+        panel_num, 1);
+    MultiKnobDecTicksOwnedDataRef->setv(&buttons_main[ADJUSTMENT_DN],
+        panel_num, 1);
 }
 
 static double adjust_value(double value, double maxval, double minval,
@@ -463,12 +471,15 @@ void Multipanel::process_switch(const switch_info_t *sw)
             &knob_dn_time, sw->dr, sw->dn_cmd, sw->maxval, sw->minval,
             -sw->step, sw->loop, sw->accel, sw->max_accel);
     }
+    /* mark events as consumed */
+    buttons_main[ADJUSTMENT_UP] = 0;
+    buttons_main[ADJUSTMENT_DN] = 0;
 }
 
 void Multipanel::enable_readout(int readout)
 {
-    assert(readout >= READOUT_ALT_VS && readout <= READOUT_NONE);
-    display_readout = (BatPwrIsOn() && AvPwrIsOn()) ? readout : READOUT_NONE;
+    VERIFY(readout >= READOUT_ALT_VS && readout <= READOUT_NONE);
+    display_readout = readout;
 }
 
 void Multipanel::update_alt_vs_readout()
@@ -769,6 +780,9 @@ void Multipanel::process_trim_wheel()
     process_switch_adjustment(buttons_main[TRIM_WHEEL_DN],
         &trim_down_last, NULL, trim_down_cmd, 0, 0, 0,
         false, trim_down_accel, trim_down_max_accel);
+    /* mark events as consumed */
+    buttons_main[TRIM_WHEEL_UP] = 0;
+    buttons_main[TRIM_WHEEL_DN] = 0;
 }
 
 static int dampen_knob_ticks(int ticks, int *dampen, int ticks_per_step)
@@ -803,6 +817,19 @@ void Multipanel::process()
 
     mutex_exit(&mtx);
 
+    /* check power status */
+    if (!BatPwrIsOn() || !AvPwrIsOn()) {
+        if (display_readout != READOUT_NONE) {
+            enable_readout(READOUT_NONE);
+            process_multi_display();
+            sched_update_command();
+        }
+        return;
+    }
+    /* if the display was blank, we're coming out of power-off */
+    if (display_readout == READOUT_NONE)
+        updated = true;
+
     /* process the knob dampening */
     if (updated) {
         buttons_main[ADJUSTMENT_UP] = dampen_knob_ticks(
@@ -812,6 +839,12 @@ void Multipanel::process()
     }
 
     if (updated) {
+        /*
+         * We need to process these first, because the switch processing
+         * consumes the knob & trim wheel events.
+         */
+        process_drs();
+
         if (buttons_main[CRS_SWITCH])
             process_crs_switch();
         else if (buttons_main[HDG_SWITCH])
@@ -847,7 +880,6 @@ void Multipanel::process()
     sched_update = process_lights();
 
     if (updated || now - last_auto_update_time > AUTO_UPDATE_INTVAL) {
-        process_drs();
         process_multi_display();
         last_auto_update_time = now;
         sched_update = true;
@@ -1063,138 +1095,39 @@ void Multipanel::reconfigure()
 
 void xsaitekpanels::register_multipanel_drs()
 {
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/altbtn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiAltBtnOwnedData, &MultiAltBtnOwnedData);
-    MultiAltBtnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/altbtn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/altswitch/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiAltSwitchOwnedData, &MultiAltSwitchOwnedData);
-    MultiAltSwitchOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/altswitch/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/apbtn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiApBtnOwnedData, &MultiApBtnOwnedData);
-    MultiApBtnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/apbtn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/aprbtn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiAprBtnOwnedData, &MultiAprBtnOwnedData);
-    MultiAprBtnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/aprbtn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/at/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiAtOwnedData, &MultiAtOwnedData);
-    MultiAtOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/at/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/crsswitch/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiCrsSwitchOwnedData, &MultiCrsSwitchOwnedData);
-    MultiCrsSwitchOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/crsswitch/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/flapsdn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiFlapsDnOwnedData, &MultiFlapsDnOwnedData);
-    MultiFlapsDnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/flapsdn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/flapsup/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiFlapsUpOwnedData, &MultiFlapsUpOwnedData);
-    MultiFlapsUpOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/flapsup/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/hdgbtn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiHdgBtnOwnedData, &MultiHdgBtnOwnedData);
-    MultiHdgBtnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/hdgbtn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/hdgswitch/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiHdgSwitchOwnedData, &MultiHdgSwitchOwnedData);
-    MultiHdgSwitchOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/hdgswitch/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/iasbtn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiIasBtnOwnedData, &MultiIasBtnOwnedData);
-    MultiIasBtnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/iasbtn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/iasswitch/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiIasSwitchOwnedData, &MultiIasSwitchOwnedData);
-    MultiIasSwitchOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/iasswitch/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/knobdec/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiKnobDecOwnedData, &MultiKnobDecOwnedData);
-    MultiKnobDecOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/knobdec/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/knobdecticks/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiKnobDecTicksOwnedData, &MultiKnobDecTicksOwnedData);
-    MultiKnobDecTicksOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/knobdecticks/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/knobinc/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiKnobIncOwnedData, &MultiKnobIncOwnedData);
-    MultiKnobIncOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/knobinc/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/knobincticks/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiKnobIncTicksOwnedData, &MultiKnobIncTicksOwnedData);
-    MultiKnobIncTicksOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/knobincticks/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/navbtn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiNavBtnOwnedData, &MultiNavBtnOwnedData);
-    MultiNavBtnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/navbtn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/revbtn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiRevBtnOwnedData, &MultiRevBtnOwnedData);
-    MultiRevBtnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/revbtn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/trimdn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiTrimDnOwnedData, &MultiTrimDnOwnedData);
-    MultiTrimDnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/trimdn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/trimup/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiTrimUpOwnedData, &MultiTrimUpOwnedData);
-    MultiTrimUpOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/trimup/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/vsbtn/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiVsBtnOwnedData, &MultiVsBtnOwnedData);
-    MultiVsBtnOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/vsbtn/status");
-    XPLMRegisterDataAccessor("bgood/xsaitekpanels/multipanel/vsswitch/status",
-        xplmType_IntArray, 1, NULL, NULL, NULL, NULL, NULL, NULL,
-        read_int_array, write_int_array, NULL, NULL, NULL, NULL,
-        &MultiVsSwitchOwnedData, &MultiVsSwitchOwnedData);
-    MultiVsSwitchOwnedDataRef = new Dataref(
-        "bgood/xsaitekpanels/multipanel/vsswitch/status");
+#define DR_REGISTER_ACCESSOR(basename, name) \
+    do { \
+        const char *drname = "bgood/xsaitekpanels/multipanel/" name "/status"; \
+        vector<int> *data = &(basename ## OwnedData); \
+        XPLMRegisterDataAccessor(drname, xplmType_IntArray, 1, NULL, NULL, \
+            NULL, NULL, NULL, NULL, read_int_array, write_int_array, NULL, \
+            NULL, NULL, NULL, data, data); \
+        (basename ## OwnedDataRef) = new Dataref(drname); \
+        data->resize(multipanels.size()); \
+    } while (0)
+    DR_REGISTER_ACCESSOR(MultiAltBtn, "altbtn");
+    DR_REGISTER_ACCESSOR(MultiAltSwitch, "altswitch");
+    DR_REGISTER_ACCESSOR(MultiApBtn, "apbtn");
+    DR_REGISTER_ACCESSOR(MultiAprBtn, "aprbtn");
+    DR_REGISTER_ACCESSOR(MultiAt, "at");
+    DR_REGISTER_ACCESSOR(MultiCrsSwitch, "crsswitch");
+    DR_REGISTER_ACCESSOR(MultiFlapsDn, "flapsdn");
+    DR_REGISTER_ACCESSOR(MultiFlapsUp, "flapsup");
+    DR_REGISTER_ACCESSOR(MultiHdgBtn, "hdgbtn");
+    DR_REGISTER_ACCESSOR(MultiHdgSwitch, "hdgswitch");
+    DR_REGISTER_ACCESSOR(MultiIasBtn, "iasbtn");
+    DR_REGISTER_ACCESSOR(MultiIasSwitch, "iasswitch");
+    DR_REGISTER_ACCESSOR(MultiKnobDec, "knobdec");
+    DR_REGISTER_ACCESSOR(MultiKnobDecTicks, "knobdecticks");
+    DR_REGISTER_ACCESSOR(MultiKnobInc, "knobinc");
+    DR_REGISTER_ACCESSOR(MultiKnobIncTicks, "knobincticks");
+    DR_REGISTER_ACCESSOR(MultiNavBtn, "navbtn");
+    DR_REGISTER_ACCESSOR(MultiRevBtn, "revbtn");
+    DR_REGISTER_ACCESSOR(MultiTrimDn, "trimdn");
+    DR_REGISTER_ACCESSOR(MultiTrimUp, "trimup");
+    DR_REGISTER_ACCESSOR(MultiVsBtn, "vsbtn");
+    DR_REGISTER_ACCESSOR(MultiVsSwitch, "vsswitch");
+#undef DR_REGISTER_ACCESSOR
 }
 
 void xsaitekpanels::unregister_multipanel_drs()
@@ -1238,7 +1171,7 @@ static uint32_t read_status(hid_device *handle, int timeout, unsigned panel_num)
     if (sz == 0)
         return (-1u);
 
-    assert(sz <= sizeof (status_word));
+    VERIFY((unsigned long)sz <= sizeof (status_word));
 
     /* right-align as big endian & bswap to native endianness */
     memcpy(((uint8_t *)&status_word) + (sizeof (status_word) - sz),

@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
+#if     !IBM
+#include <execinfo.h>   /* used for stack tracing */
+#endif  /* !IBM */
+
 #include "XPLMUtilities.h"
 #include "Log.h"
 
@@ -56,4 +60,40 @@ void xsaitekpanels::logMsg_v_impl(const char *filename, int line,
     XPLMDebugString(buf);
 
     free(buf);
+}
+
+#define MAX_TRACE        128
+#define BACKTRACE_STR    "Backtrace is:\n"
+#if     defined(__GNUC__) || defined(__clang__)
+#define BACKTRACE_STRLEN __builtin_strlen(BACKTRACE_STR)
+#else   /* !__GNUC__ && !__clang__ */
+#define BACKTRACE_STRLEN strlen(BACKTRACE_STR)
+#endif  /* !__GNUC__ && !__clang__ */
+
+void xsaitekpanels::logBacktrace()
+{
+#if     IBM
+#else   /* !IBM */
+    char *msg;
+    size_t msg_len;
+    void *trace[MAX_TRACE];
+    size_t i, j, sz;
+    char **fnames;
+
+    sz = backtrace(trace, MAX_TRACE);
+    fnames = backtrace_symbols(trace, sz);
+
+    for (i = 1, msg_len = BACKTRACE_STRLEN; i < sz; i++)
+        msg_len += snprintf(NULL, 0, "%s\n", fnames[i]);
+
+    msg = (char *)malloc(msg_len + 1);
+    strcpy(msg, BACKTRACE_STR);
+    for (i = 1, j = BACKTRACE_STRLEN; i < sz; i++)
+        j += sprintf(&msg[j], "%s\n", fnames[i]);
+
+    XPLMDebugString(msg);
+
+    free(msg);
+    free(fnames);
+#endif  /* !IBM */
 }

@@ -91,11 +91,12 @@ namespace xsaitekpanels {
     void *multipanel_reader_thread(void *arg);
 
     class Multipanel {
-        unsigned        panel_num;
-        hid_device      *handle;
-        int             display_readout;
-        uint8_t         adigits[5], bdigits[5];
-        int             btnleds;
+        unsigned panel_num;
+        hid_device *handle;
+
+        int display_readout;
+        uint8_t adigits[5], bdigits[5];
+        int btnleds;
 
         double altitude, vs, airspeed, hdg, crs;
 
