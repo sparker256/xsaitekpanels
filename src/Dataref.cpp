@@ -235,8 +235,6 @@ void xsaitekpanels::write_int_array(void *user_info, int *values, int offset,
     if (user_info == NULL || values == NULL)
         return;
     std::vector<int> *dst = (std::vector<int> *)user_info;
-    logMsg("write: %p, v[0]: %i, off: %i, cnt: %i size: %lu\n",
-        user_info, values[0], offset, count, dst->size());
     for (int i = 0, n = dst->size(); i + offset < n && i < count; i++) {
         (*dst)[i + offset] = values[i];
     }
