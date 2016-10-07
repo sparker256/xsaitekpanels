@@ -90,13 +90,6 @@ enum {
         (var) = NULL; \
     } while (0)
 
-#define DR_DESTROY_ACCESSOR(dr) \
-    do { \
-        XPLMUnregisterDataAccessor((dr)->getDataref()); \
-        delete (dr); \
-        (dr) = NULL; \
-    } while (0)
-
 #if     IBM
 #define mutex_enter(mtx) \
     VERIFY(WaitForSingleObject(*(mtx), INFINITE) == WAIT_OBJECT_0)
@@ -1132,6 +1125,14 @@ void xsaitekpanels::register_multipanel_drs()
 
 void xsaitekpanels::unregister_multipanel_drs()
 {
+#define DR_DESTROY_ACCESSOR(dr) \
+    do { \
+        if ((dr) != NULL) { \
+            XPLMUnregisterDataAccessor((dr)->getDataref()); \
+            delete (dr); \
+            (dr) = NULL; \
+        } \
+    } while (0)
     DR_DESTROY_ACCESSOR(MultiAltSwitchOwnedDataRef);
     DR_DESTROY_ACCESSOR(MultiVsSwitchOwnedDataRef);
     DR_DESTROY_ACCESSOR(MultiIasSwitchOwnedDataRef);
@@ -1154,6 +1155,7 @@ void xsaitekpanels::unregister_multipanel_drs()
     DR_DESTROY_ACCESSOR(MultiVsBtnOwnedDataRef);
     DR_DESTROY_ACCESSOR(MultiAprBtnOwnedDataRef);
     DR_DESTROY_ACCESSOR(MultiRevBtnOwnedDataRef);
+#undef DR_DESTROY_ACCESSOR
 }
 
 static uint32_t read_status(hid_device *handle, int timeout, unsigned panel_num)
