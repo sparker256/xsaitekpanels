@@ -345,8 +345,6 @@ void Multipanel::process_drs()
 {
     int val;
 
-    logMsg("process_drs\n");
-
     val = (buttons_main[ALT_SWITCH] != 0);
     MultiAltSwitchOwnedDataRef->setv(&val, panel_num, 1);
     val = (buttons_main[VS_SWITCH] != 0);

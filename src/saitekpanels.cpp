@@ -28,6 +28,8 @@
 #include <sstream>
 #include <vector>
 #include <wchar.h>
+#include <errno.h>
+
 #include "Log.h"
 #include "saitekpanels.h"
 #include "multipanel.h"
