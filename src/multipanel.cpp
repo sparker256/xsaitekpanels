@@ -13,6 +13,7 @@
 #include <vector>
 #include <arpa/inet.h>
 
+#include "Command.h"
 #include "Log.h"
 #include "time.h"
 #include "inireader.h"
@@ -219,10 +220,16 @@ Multipanel::~Multipanel()
     hid_close(handle);
 
     VAR_DESTROY(athr_sw_dr);
-    for (int i = 0; i < NUM_SW_INFOS; i++)
+    for (int i = 0; i < NUM_SW_INFOS; i++) {
         VAR_DESTROY(switches[i].dr);
-    for (int i = 0; i < NUM_BTN_INFOS; i++)
+        VAR_DESTROY(switches[i].up_cmd);
+        VAR_DESTROY(switches[i].dn_cmd);
+    }
+    for (int i = 0; i < NUM_BTN_INFOS; i++) {
         VAR_DESTROY(button_info[i].dr);
+        VAR_DESTROY(button_info[i].cmd);
+        VAR_DESTROY(button_info[i].rev_cmd);
+    }
     VAR_DESTROY(ias_is_mach_dr);
 
 #if     IBM
@@ -270,10 +277,10 @@ void xsaitekpanels::close_all_multipanels()
 
 static void int2digits(uint8_t digits[NUM_DIGITS], const char *fmt, int value)
 {
-    char strbuf[8];
+    char strbuf[NUM_DIGITS + 1];
     int n = snprintf(strbuf, sizeof(strbuf), fmt, value);
 
-    VERIFY((unsigned long)n < sizeof (strbuf));
+    n = MIN(n, NUM_DIGITS);
     for (int i = 1; i <= NUM_DIGITS; i++) {
         if (n - i >= 0) {
             switch (strbuf[n - i]) {
@@ -416,7 +423,7 @@ static double adjust_value(double value, double maxval, double minval,
 }
 
 void Multipanel::process_switch_adjustment(int value, uint64_t *lastadj_time,
-    Dataref *dr, XPLMCommandRef cmd, double maxval, double minval, double step,
+    Dataref *dr, Command *cmd, double maxval, double minval, double step,
     bool loop, float accel, int max_accel_mult)
 {
     if (value <= 0)
@@ -437,12 +444,16 @@ void Multipanel::process_switch_adjustment(int value, uint64_t *lastadj_time,
 
     mult = MIN(accel_mult, max_accel_mult);
 
-    if (dr != NULL) {
+    /*
+     * We first try the command to adjust and only then directly manipulate
+     * the dataref.
+     */
+    if (cmd != NULL) {
+        while (mult-- > 0)
+            cmd->once();
+    } else if (dr != NULL) {
         dr->set(adjust_value(dr->getd() + step * mult, maxval, minval,
             step, loop));
-    } else if (cmd != NULL) {
-        while (mult--)
-            XPLMCommandOnce(cmd);
     }
 
     *lastadj_time = now;
@@ -686,7 +697,7 @@ void Multipanel::process_button_common(int btn_id, button_info_t *btn_info)
             if (btn_info->cmd != NULL) {
                 /* start the command on depression */
                 if (first_press)
-                    XPLMCommandBegin(btn_info->cmd);
+                    btn_info->cmd->begin();
             } else if (btn_info->dr != NULL) {
                 /* keep trying to set the on_value continuously */
                 btn_info->dr->set(btn_info->on_value);
@@ -695,7 +706,7 @@ void Multipanel::process_button_common(int btn_id, button_info_t *btn_info)
             if (btn_info->cmd != NULL) {
                 /* run the command once on depression */
                 if (first_press)
-                    XPLMCommandOnce(btn_info->cmd);
+                    btn_info->cmd->once();
             } else if (btn_info->dr != NULL) {
                 /* try to set the on_value once on depression */
                 if (first_press)
@@ -705,7 +716,7 @@ void Multipanel::process_button_common(int btn_id, button_info_t *btn_info)
             if (btn_info->cmd != NULL) {
                 /* run the command once on depression */
                 if (first_press)
-                    XPLMCommandOnce(btn_info->cmd);
+                    btn_info->cmd->once();
             } else if (btn_info->dr != NULL) {
                 /* toggle the dataref between the on_value and off_value */
                 if (first_press) {
@@ -724,7 +735,7 @@ void Multipanel::process_button_common(int btn_id, button_info_t *btn_info)
                 btn_info->n_fired++;
 
                 if (btn_info->rev_cmd != NULL) {
-                    XPLMCommandOnce(btn_info->rev_cmd);
+                    btn_info->rev_cmd->once();
                 } else if (btn_info->dr != NULL) {
                     double old_val = btn_info->dr->getd();
                     /* only decrement if we're above min_value */
@@ -737,7 +748,7 @@ void Multipanel::process_button_common(int btn_id, button_info_t *btn_info)
         if (btn_info->type == MomentaryPushButton) {
             if (btn_info->cmd != NULL)
                 /* end the command on button release */
-                XPLMCommandEnd(btn_info->cmd);
+                btn_info->cmd->end();
             else if (btn_info->dr != NULL)
                 /* try to set the off_value once */
                 btn_info->dr->set(btn_info->off_value);
@@ -745,7 +756,7 @@ void Multipanel::process_button_common(int btn_id, button_info_t *btn_info)
             /* only fire the up action if we weren't held for too long */
             if (btn_info->n_fired == 0) {
                 if (btn_info->cmd != NULL)
-                    XPLMCommandOnce(btn_info->cmd);
+                    btn_info->cmd->once();
                 else if (btn_info->dr != NULL) {
                     double old_val = btn_info->dr->getd();
                     /* only increment if we're below min_value */
@@ -932,8 +943,8 @@ void Multipanel::reconfigure()
 
 #define SWITCH_FROM_INI_ARGS(sw, basename, dfl_data, dfl_maxval, dfl_minval, \
     dfl_step, dfl_accel, dfl_max_accel, dfl_loop) \
-        I2R_CMD_ARG, basename "_up_cmd", NULL, &(sw)->up_cmd, \
-        I2R_CMD_ARG, basename "_dn_cmd", NULL, &(sw)->dn_cmd, \
+        I2R_CMD_ARG, basename "_up_remapable_cmd", NULL, &(sw)->up_cmd, \
+        I2R_CMD_ARG, basename "_dn_remapable_cmd", NULL, &(sw)->dn_cmd, \
         I2R_DR_ARG, basename "_remapable_data", dfl_data, &(sw)->dr, \
         I2R_FLOAT_ARG, basename "_maxval", dfl_maxval, &(sw)->maxval, \
         I2R_FLOAT_ARG, basename "_minval", dfl_minval, &(sw)->minval, \

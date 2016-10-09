@@ -22,19 +22,54 @@
 #include "inireader.h"
 #include "readinifile.h"
 #include "multipanel.h"
+#include "Log.h"
+#include "Dataref.h"
+#include "Command.h"
 
 using namespace xsaitekpanels;
 
-static void cmd_from_ini(XPLMCommandRef *cmd, const char *opt_name)
+static void cmd_from_ini(Command **cmd, const char *opt_name,
+    const char *dfl_cmdname)
 {
-    *cmd = XPLMFindCommand(getOptionToString(opt_name).c_str());
+    const char *cmdname = getOptionToString(opt_name).c_str();
+
+    logMsg("cmd_from_ini: %s = %s\n", opt_name, cmdname);
+
+    if ((*cmd) != NULL)
+        delete (*cmd);
+
+    if (strcmp(cmdname, "null") == 0)
+        *cmd = NULL;
+    else if (strcmp(cmdname, "") != 0) {
+        *cmd = new Command(cmdname);
+        if ((*cmd) == NULL)
+            logMsg("command %s not found\n", cmdname);
+    } else if (dfl_cmdname != NULL)
+        *cmd = new Command(dfl_cmdname);
+    else
+        *cmd = NULL;
 }
 
-static void dr_from_ini(Dataref **dr, const char *opt_name)
+static void dr_from_ini(Dataref **dr, const char *opt_name,
+    const char *dfl_drname)
 {
-    if (*dr != NULL)
+    const char *drname = getOptionToString(opt_name).c_str();
+
+    logMsg("dr_from_ini: %s = %s\n", opt_name, drname);
+
+    if ((*dr) != NULL)
         delete (*dr);
-    *dr = new Dataref(getOptionToString(opt_name).c_str());
+
+    if (strcmp(drname, "null") == 0)
+        *dr = NULL;
+    else if (strcmp(drname, "") != 0) {
+        *dr = new Dataref(drname);
+        if ((*dr) == NULL)
+            logMsg("dr %s not found\n", drname);
+    } else if (dfl_drname != NULL)
+        *dr = new Dataref(dfl_drname);
+    else
+        *dr = NULL;
 }
 
 /*
@@ -46,8 +81,8 @@ static void dr_from_ini(Dataref **dr, const char *opt_name)
  * set of subarguments:
  *      *) I2R_CMD_ARG: takes three additional arguments, a command name
  *         (char *), a default command name (char *) and a result command
- *         pointer(XPLMCommandRef *). If the remap != 0, the command ref is
- *         populated by performing an XPLMFindCommand for the command name
+ *         double-pointer(Command **). If the remap != 0, the command ref is
+ *         populated by performing a Command construction for the command name
  *         in the INI option. Otherwise, if the default command name is
  *         non-NULL, that's used for the lookup and placed in the result
  *         command, or if it is NULL, the result command is set to NULL.
@@ -82,14 +117,14 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
         assert(opt_name != NULL);
         if (arg_type == I2R_CMD_ARG) {
             const char *dfl_cmd_name = va_arg(ap, const char *);
-            XPLMCommandRef *cmd = va_arg(ap, XPLMCommandRef *);
+            Command **cmd = va_arg(ap, Command **);
 
             assert(cmd != NULL);
-            if (remap_state == 1) {
-                cmd_from_ini(cmd, opt_name);
+            if (remap_state != 0) {
+                cmd_from_ini(cmd, opt_name, dfl_cmd_name);
             } else {
                 if (dfl_cmd_name != NULL) {
-                    *cmd = XPLMFindCommand(dfl_cmd_name);
+                    *cmd = new Command(dfl_cmd_name);
                     assert(*cmd != NULL);
                 } else {
                     *cmd = NULL;
@@ -100,8 +135,8 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
             Dataref **dr = va_arg(ap, Dataref **);
 
             assert(dr != NULL);
-            if (remap_state == 1 || remap_state == 2) {
-                dr_from_ini(dr, opt_name);
+            if (remap_state != 0) {
+                dr_from_ini(dr, opt_name, dfl_dr_name);
             } else {
                 if (dfl_dr_name != NULL) {
                     *dr = new Dataref(dfl_dr_name);
@@ -116,7 +151,7 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
 
             assert(result != NULL);
             if (remap_state == 1 || remap_state == 2)
-                *result = getOptionToInt(opt_name);
+                *result = getOptionToInt(opt_name, dfl_value);
             else
                 *result = dfl_value;
         } else if (arg_type == I2R_FLOAT_ARG) {
@@ -125,7 +160,7 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
 
             assert(result != NULL);
             if (remap_state == 1 || remap_state == 2)
-                *result = getOptionToInt(opt_name);
+                *result = getOptionToInt(opt_name, dfl_value);
             else
                 *result = dfl_value;
         } else {
@@ -4604,14 +4639,6 @@ void process_read_ini_file()
 
     // Light datareference type
     lightdatareferencetype = getOptionToInt("Light datareference type");
-
-    // ap button - remapable
-    apbuttonremap = getOptionToInt("Ap Button remapable");
-    if (apbuttonremap == 1)
-        cmd_from_ini(&ApButtonRemapableCmd, "ap_button_remapable_cmd");
-    else if ((apbuttonremap == 2) || (apbuttonremap == 3))
-        ApButtonRemapableData = XPLMFindDataRef(getOptionToString(
-            "ap_button_remapable_data").c_str());
 
     // ap light - remapable
     if ((apbuttonremap == 1) || (apbuttonremap == 2) || (apbuttonremap == 3)) {

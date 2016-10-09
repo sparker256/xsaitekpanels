@@ -44,6 +44,12 @@ const char *xsaitekpanels::log_basename(const char *filename);
         } \
     } while (0)
 
+#ifndef NDEBUG
+#define ASSERT(x) VERIFY(x)
+#else   /* NDEBUG */
+#define ASSERT(x) (void)(x)
+#endif  /* NDEBUG */
+
 namespace xsaitekpanels {
 
 #define logMsg(...) logMsg_impl(log_basename(__FILE__), __LINE__, __VA_ARGS__)

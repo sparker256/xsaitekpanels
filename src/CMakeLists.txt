@@ -4,7 +4,7 @@ project(plugin CXX)
 SET(SRC bippanel.cpp inireader.cpp multipanel.cpp radio1data.cpp
     radio2data.cpp radio3data.cpp radiopanels.cpp readinifile.cpp
     saitekpanels.cpp switchdata.cpp switchpanel.cpp Dataref.cpp Log.cpp
-    time.cpp)
+    time.cpp Command.cpp)
 SET(HDR inireader.h saitekpanels.h)
 
 if(APPLE)
@@ -20,8 +20,11 @@ LIST(SORT ALL_SRC)
 
 if(APPLE)
 	add_executable(plugin ${ALL_SRC})
+	SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -g")
 elseif(UNIX)
 	add_library(plugin SHARED ${ALL_SRC})
+	SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE}")
+	SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -O0 -ggdb3")
 elseif(WIN32)
 	add_library(plugin MODULE ${ALL_SRC})
 	SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")

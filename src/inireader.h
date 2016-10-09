@@ -37,6 +37,7 @@ namespace xsaitekpanels {
      * @return	string The value of the requested key
      */
     std::string getOptionToString(std::string key);
+    std::string getOptionToString(std::string key, std::string dfl_value);
 
     /**
      * Return the value of the requested key in with the int type
@@ -47,6 +48,7 @@ namespace xsaitekpanels {
      *		be returned.
      */
     int getOptionToInt(std::string key);
+    int getOptionToInt(std::string key, int dfl_value);
 
     /**
      * Return the value of the requested key in with the char type
@@ -55,11 +57,13 @@ namespace xsaitekpanels {
      * @return	char The value of the requested key
      */
     const char *getOptionToChar(std::string key);
+    const char *getOptionToChar(std::string key, const char *dfl_value);
 
     /*
      * Same thing as getOptionToInt, but returning a double.
      */
     double getOptionToFloat(std::string key);
+    double getOptionToFloat(std::string key, double dfl_value);
 
     std::string parseOptionName(std::string value);
     std::string parseOptionValue(std::string value);

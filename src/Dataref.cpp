@@ -41,7 +41,8 @@ Dataref::~Dataref()
 template <typename T>void Dataref::get(T *value) const
 {
     if (dr == NULL) {
-        logMsg("attempting to scalar-read nonexistent dataref %s\n", drname);
+        logMsg("attempting to scalar-read nonexistent dataref \"%s\"\n",
+            drname);
         return;
     }
 
@@ -60,9 +61,15 @@ template <typename T>void Dataref::get(T *value) const
         XPLMGetDatavf(dr, &fvalue, offset, 1);
         *value = fvalue;
     } else {
-        logMsg("attempting to scalar-read unknown type (%d) dataref %s\n",
+        logMsg("attempting to scalar-read unknown type (%d) dataref \"%s\"\n",
             type, drname);
+        *value = 0;
     }
+}
+
+const char *Dataref::get_drname()
+{
+    return (drname);
 }
 
 int Dataref::geti() const
@@ -89,11 +96,13 @@ double Dataref::getd() const
 template <typename T>void Dataref::set(T value)
 {
     if (dr == NULL) {
-        logMsg("attempting to scalar-write nonexistent dataref %s\n", drname);
+        logMsg("attempting to scalar-write nonexistent dataref \"%s\"\n",
+            drname);
         return;
     }
     if (!writable) {
-        logMsg("attempting to scalar-write read-only dataref %s\n", drname);
+        logMsg("attempting to scalar-write read-only dataref \"%s\"\n",
+            drname);
         return;
     }
 
@@ -110,7 +119,7 @@ template <typename T>void Dataref::set(T value)
         float fvalue = value;
         XPLMSetDatavf(dr, &fvalue, offset, 1);
     } else {
-        logMsg("attempting to scalar-write unknown type (%d) dataref %s\n",
+        logMsg("attempting to scalar-write unknown type (%d) dataref \"%s\"\n",
             type, drname);
     }
 }
@@ -126,7 +135,8 @@ template <typename T>size_t Dataref::getv(T *values, size_t off,
     assert(num > 0);
 
     if (dr == NULL) {
-        logMsg("attempting to scalar-read nonexistent dataref %s\n", drname);
+        logMsg("attempting to scalar-read nonexistent dataref \"%s\"\n",
+            drname);
         return (0);
     }
 
@@ -163,12 +173,13 @@ template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
     assert(num > 0);
 
     if (dr == NULL) {
-        logMsg("attempting to vector-write to nonexistent dataref %s\n",
+        logMsg("attempting to vector-write to nonexistent dataref \"%s\"\n",
             drname);
         return;
     }
     if (!writable) {
-        logMsg("Attempting to vector-write to read-only dataref %s\n", drname);
+        logMsg("Attempting to vector-write to read-only dataref \"%s\"\n",
+            drname);
         return;
     }
 
@@ -189,7 +200,7 @@ template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
             fvalues[i] = values[i];
         XPLMSetDatavf(dr, fvalues, off == -1lu ? offset : off, num);
     } else {
-        logMsg("attempting to vector-write unknown type (%d) dataref %s\n",
+        logMsg("attempting to vector-write unknown type (%d) dataref \"%s\"\n",
             type, drname);
     }
 }

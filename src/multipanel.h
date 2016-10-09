@@ -13,6 +13,9 @@
 #include "XPLMDataAccess.h"
 #include "hidapi.h"
 
+#include "Dataref.h"
+#include "Command.h"
+
 namespace xsaitekpanels {
 
     /*
@@ -69,7 +72,7 @@ namespace xsaitekpanels {
         uint64_t press_time, release_time;
         uint64_t n_fired;
         button_type_t type;
-        XPLMCommandRef cmd, rev_cmd;
+        Command *cmd, *rev_cmd;
         Dataref *dr;
         double on_value, off_value;
         double max_value, min_value;
@@ -82,7 +85,7 @@ namespace xsaitekpanels {
 
     struct switch_info_t {
         Dataref *dr;
-        XPLMCommandRef up_cmd, dn_cmd;
+        Command *up_cmd, *dn_cmd;
         float maxval, minval, step;
         float max_accel, accel;
         bool loop;
@@ -116,12 +119,12 @@ namespace xsaitekpanels {
         button_light_info_t button_lights[NUM_BTN_INFOS];
         Dataref *ias_is_mach_dr;
 
-        XPLMCommandRef trim_up_cmd;
+        Command *trim_up_cmd;
         int trim_wheel_up_dampen;
         uint64_t trim_up_last;
         float trim_up_accel, trim_up_max_accel;
 
-        XPLMCommandRef trim_down_cmd;
+        Command *trim_down_cmd;
         int trim_wheel_down_dampen;
         uint64_t trim_down_last;
         float trim_down_accel, trim_down_max_accel;
@@ -133,7 +136,7 @@ namespace xsaitekpanels {
         bool process_lights();
 
         void process_switch_adjustment(int value, uint64_t *lastadj_time,
-            Dataref *dr, XPLMCommandRef cmd, double maxval, double minval,
+            Dataref *dr, Command *cmd, double maxval, double minval,
             double step, bool loop, float accel, int max_accel_mult);
         void process_switch(const switch_info_t *sw);
 

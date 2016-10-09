@@ -68,9 +68,14 @@ void xsaitekpanels::cleanupIniReader()
 
 string xsaitekpanels::getOptionToString(string key)
 {
+    return (getOptionToString(key, ""));
+}
+
+string xsaitekpanels::getOptionToString(string key, string dfl_value)
+{
     //Check to see if anything got parsed?
     if (i == 0) {
-        return "";
+        return (dfl_value);
     }
 
     for (int x = 0; x <= i; x++) {
@@ -79,14 +84,19 @@ string xsaitekpanels::getOptionToString(string key)
         }
     }
 
-    return "";
+    return (dfl_value);
 }
 
 const char *xsaitekpanels::getOptionToChar(string key)
 {
+    return (getOptionToChar(key, ""));
+}
+
+const char *xsaitekpanels::getOptionToChar(string key, const char *dfl_value)
+{
     //Check to see if anything got parsed?
     if (i == 0) {
-        return "";
+        return (dfl_value);
     }
 
     for (int x = 0; x <= i; x++) {
@@ -95,14 +105,19 @@ const char *xsaitekpanels::getOptionToChar(string key)
         }
     }
 
-    return "";
+    return (dfl_value);
 }
 
 int xsaitekpanels::getOptionToInt(string key)
 {
+    return (getOptionToInt(key, 0));
+}
+
+int xsaitekpanels::getOptionToInt(string key, int dfl_value)
+{
     //Check to see if anything got parsed?
     if (i == 0) {
-        return 0;
+        return (dfl_value);
     }
 
     for (int x = 0; x <= i; x++) {
@@ -111,14 +126,19 @@ int xsaitekpanels::getOptionToInt(string key)
         }
     }
 
-    return 0;
+    return (dfl_value);
 }
 
 double xsaitekpanels::getOptionToFloat(string key)
 {
+    return (getOptionToFloat(key, 0.0));
+}
+
+double xsaitekpanels::getOptionToFloat(string key, double dfl_value)
+{
     //Check to see if anything got parsed?
     if (i == 0) {
-        return 0;
+        return (dfl_value);
     }
 
     for (int x = 0; x <= i; x++) {
@@ -127,7 +147,7 @@ double xsaitekpanels::getOptionToFloat(string key)
         }
     }
 
-    return 0;
+    return (dfl_value);
 }
 
 string xsaitekpanels::parseOptionName(string value)

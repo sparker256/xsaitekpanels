@@ -1,3 +1,6 @@
+#ifndef _XSP_DATAREF_H_
+#define _XSP_DATAREF_H_
+
 #include <stdlib.h>
 #include "XPLMDataAccess.h"
 
@@ -13,6 +16,8 @@ namespace xsaitekpanels {
         Dataref(const char *drname);
         Dataref(XPLMDataRef xplm_dr);
         ~Dataref();
+
+        const char *get_drname();
 
         template <typename T>void get(T *value) const;
         template <typename T>void set(T value);
@@ -34,3 +39,5 @@ namespace xsaitekpanels {
     int read_int_array(void *user_info, int *values, int offset, int count);
     void write_int_array(void *user_info, int *values, int offset, int count);
 }
+
+#endif  /* _XSP_DATAREF_H_ */
