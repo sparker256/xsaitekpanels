@@ -11,7 +11,9 @@
 #include <string.h>
 #include <math.h>
 #include <vector>
+#if     APL || LIN
 #include <arpa/inet.h>
+#endif  /* APL || LIN */
 
 #include "Command.h"
 #include "Log.h"
