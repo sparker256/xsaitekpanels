@@ -9,6 +9,8 @@
 #include <pthread.h>
 #endif  /* !IBM */
 
+#include <stdint.h>
+
 #include "XPLMUtilities.h"
 #include "XPLMDataAccess.h"
 #include "hidapi.h"
