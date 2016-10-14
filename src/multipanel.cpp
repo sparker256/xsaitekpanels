@@ -11,9 +11,6 @@
 #include <string.h>
 #include <math.h>
 #include <vector>
-#if     APL || LIN
-#include <arpa/inet.h>
-#endif  /* APL || LIN */
 
 #include "Command.h"
 #include "Log.h"
@@ -24,6 +21,33 @@
 #include "multipanel.h"
 
 using namespace xsaitekpanels;
+
+/*
+ * Compiler-specific endianness and builtin byteswap detection.
+ */
+#if defined(__GNUC__) || defined(__clang__)
+#  define BSWAP32(x) __builtin_bswap32(x)
+#  if __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
+#    ifndef LITTLE_ENDIAN
+#      define LITTLE_ENDIAN
+#    endif  /* LITTLE_ENDIAN */
+#  elif __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
+#    ifndef BIG_ENDIAN
+#      define BIG_ENDIAN
+#    endif  /* BIG_ENDIAN */
+#  else   /* __BYTE_ORDER__ != __ORDER_[LITTLE|BIG]_ENDIAN__ */
+#    error "Unsupported platform endianness"
+#  endif  /* __BYTE_ORDER__ != __ORDER_[LITTLE|BIG]_ENDIAN__ */
+#elif defined(_MSC_VER)
+#  define BSWAP32(x) _byteswap_ulong(x)
+#  if REG_DWORD == REG_DWORD_LITTLE_ENDIAN
+#    define LITTLE_ENDIAN
+#  else   /* REG_DWORD != REG_DWORD_LITTLE_ENDIAN */
+#    define BIG_ENDIAN
+#  endif  /* REG_DWORD != REG_DWORD_LITTLE_ENDIAN */
+#else   /* !defined(__GNUC__) && !defined(__clang__) && !defined(_MSC_VER) */
+#  error "Unsupported compiler"
+#endif  /* !defined(__GNUC__) && !defined(__clang__) && !defined(_MSC_VER) */
 
 enum {
     AP_LIGHT_BIT = 0,
@@ -152,6 +176,15 @@ static Dataref *MultiAltSwitchOwnedDataRef = NULL,
     *MultiRevBtnOwnedDataRef = NULL;
 
 #define getbit(arg, bit)        (((arg) >> bit) & 1)
+
+static inline uint32_t my_ntohl(uint32_t x)
+{
+#ifdef LITTLE_ENDIAN
+    return (BSWAP32(x));
+#else   /* !LITTLE_ENDIAN */
+    return (x);
+#endif  /* !LITTLE_ENDIAN */
+}
 
 static void setbit(int *targ, int bitn, int val)
 {
@@ -1189,7 +1222,7 @@ static uint32_t read_status(hid_device *handle, int timeout, unsigned panel_num)
     /* right-align as big endian & bswap to native endianness */
     memcpy(((uint8_t *)&status_word) + (sizeof (status_word) - sz),
         recvbuf, sz);
-    status_word = ntohl(status_word);
+    status_word = my_ntohl(status_word);
 
     return (status_word);
 }

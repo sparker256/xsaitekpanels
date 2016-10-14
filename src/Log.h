@@ -37,8 +37,8 @@ const char *xsaitekpanels::log_basename(const char *filename);
     do { \
         if (!(x)) { \
             xsaitekpanels::logMsg("assertion \"" #x "\" failed\n"); \
-            fprintf(stderr, "%s:%d: assertion \"" #x "\" failed\n", __FILE__, \
-                __LINE__); \
+            fprintf(stderr, "%s:%d: assertion \"" #x "\" failed\n", \
+                log_basename(__FILE__), __LINE__); \
             xsaitekpanels::logBacktrace(); \
             abort(); \
         } \
