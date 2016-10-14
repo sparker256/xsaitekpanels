@@ -1,23 +1,29 @@
 #!/bin/bash
-#
+
+# We'll try to build on N+1 CPUs we have available. The extra +1 is to allow
+# for one make instance to be blocking on disk.
+NCPUS=$(( $(grep 'processor[[:space:]]\+:' /proc/cpuinfo  | wc -l) + 1 ))
+
 make distclean >/dev/null
 rm -rf release
 mkdir -p release/Xsaitekpanels/64 &&
-qmake -spec win32-g++ && qmake -set CROSS_COMPILE x86_64-w64-mingw32- && make &&
-cp plugin/release/win.xpl1.dll release/Xsaitekpanels/64/win.xpl
+qmake -spec win32-g++ && qmake -set CROSS_COMPILE x86_64-w64-mingw32- && \
+    make -j $NCPUS && \
+    cp plugin/release/win.xpl1.dll release/Xsaitekpanels/64/win.xpl
 if [ $? != 0 ] ; then
   exit
 fi
 
 make distclean >/dev/null
-qmake -spec win32-g++ && qmake -set CROSS_COMPILE i686-w64-mingw32- && make &&
-cp plugin/release/win.xpl1.dll release/Xsaitekpanels/win.xpl
+qmake -spec win32-g++ && qmake -set CROSS_COMPILE i686-w64-mingw32- && \
+    make -j $NCPUS && \
+    cp plugin/release/win.xpl1.dll release/Xsaitekpanels/win.xpl
 if [ $? != 0 ] ; then
   exit
 fi
 
 make distclean >/dev/null
-qmake -spec linux-g++-4.7-64 && make &&
+qmake -spec linux-g++-64 && make -j $NCPUS &&
 cp plugin/liblin.xpl.so release/Xsaitekpanels/64/lin.xpl
 if [ $? != 0 ] ; then
   exit
@@ -25,7 +31,7 @@ fi
 
 
 make distclean >/dev/null
-qmake -spec linux-g++-4.7-32 && make &&
+qmake -spec linux-g++-32 && make -j $NCPUS &&
 cp plugin/liblin.xpl.so release/Xsaitekpanels/lin.xpl
 if [ $? != 0 ] ; then
   exit

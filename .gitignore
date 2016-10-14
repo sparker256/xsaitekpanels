@@ -6,3 +6,7 @@ cmake_install.cmake
 src/CMakeFiles
 src/Makefile
 src/cmake_install.cmake
+release
+plugin/object_script.win.xpl.Debug
+plugin/object_script.win.xpl.Release
+plugin/win.xpl_resource.rc

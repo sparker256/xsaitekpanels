@@ -33,8 +33,6 @@ static void cmd_from_ini(Command **cmd, const char *opt_name,
 {
     const char *cmdname = getOptionToString(opt_name).c_str();
 
-    logMsg("cmd_from_ini: %s = %s\n", opt_name, cmdname);
-
     if ((*cmd) != NULL)
         delete (*cmd);
 
@@ -54,8 +52,6 @@ static void dr_from_ini(Dataref **dr, const char *opt_name,
     const char *dfl_drname)
 {
     const char *drname = getOptionToString(opt_name).c_str();
-
-    logMsg("dr_from_ini: %s = %s\n", opt_name, drname);
 
     if ((*dr) != NULL)
         delete (*dr);

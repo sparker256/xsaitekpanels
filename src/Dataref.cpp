@@ -18,11 +18,18 @@ Dataref::Dataref(const char *drname_in)
     bracket = strstr(drname, "[");
     if (bracket != NULL) {
         char drname_only[strlen(drname) + 1];
+        unsigned long offset_l;
+
         strcpy(drname_only, drname);
         drname_only[bracket - drname] = '\0';
         dr = XPLMFindDataRef(drname_only);
-        if (sscanf(&drname[1], "%lu", &offset) != -1)
+        if (sscanf(&drname[1], "%lu", &offset_l) == 1) {
+            offset = offset_l;
+        } else {
+            logMsg("Error parsing bracket array offset in dataref specifier "
+                "\"%s\"\n", drname_in);
             dr = NULL;
+        }
     } else {
         dr = XPLMFindDataRef(drname);
         offset = 0;
@@ -40,6 +47,7 @@ Dataref::~Dataref()
 
 template <typename T>void Dataref::get(T *value) const
 {
+    *value = 0;
     if (dr == NULL) {
         logMsg("attempting to scalar-read nonexistent dataref \"%s\"\n",
             drname);
@@ -63,7 +71,6 @@ template <typename T>void Dataref::get(T *value) const
     } else {
         logMsg("attempting to scalar-read unknown type (%d) dataref \"%s\"\n",
             type, drname);
-        *value = 0;
     }
 }
 
