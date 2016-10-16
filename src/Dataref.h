@@ -7,6 +7,7 @@
 
 namespace xsaitekpanels {
     class Dataref {
+        bool is_null;
         std::string drname;
         std::string drname_only;
         int dr_index;

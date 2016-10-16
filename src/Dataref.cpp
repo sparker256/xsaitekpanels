@@ -11,32 +11,34 @@ using namespace xsaitekpanels;
 
 Dataref::Dataref(string drname_in)
 {
-    size_t open_bracket, close_bracket;
-
     drname = drname_in;
     dr = NULL;
     drname_only = drname;
     dr_index = 0;
+    is_null = (drname_in == "null");
 
-    open_bracket = drname.find('[');
-    close_bracket = drname.find('[');
+    if (!is_null) {
+        size_t open_bracket = drname.find('[');
+        size_t close_bracket = drname.find(']');
 
-    if (open_bracket != string::npos && close_bracket != string::npos &&
-        open_bracket < close_bracket) {
-        string idx = drname.substr(open_bracket + 1,
-            close_bracket - open_bracket - 1); 
+        if (open_bracket != string::npos && close_bracket != string::npos &&
+            open_bracket < close_bracket) {
+            string idx = drname.substr(open_bracket + 1,
+                close_bracket - open_bracket - 1);
 
-        drname_only = drname.substr(0, open_bracket - 1);
+            drname_only = drname.substr(0, open_bracket - 1);
 
-        if (sscanf(idx.c_str(), "%u", (unsigned *)&dr_index) != 1) {
-            logMsg("Error parsing bracket array offset in dataref specifier "
-                "\"%s\"\n", drname_in.c_str());
+            if (sscanf(idx.c_str(), "%u", (unsigned *)&dr_index) != 1) {
+                logMsg("Error parsing bracket array offset in dataref "
+                    "specifier \"%s\"\n", drname_in.c_str());
+            }
         }
     }
 }
 
 bool Dataref::lazy_init()
 {
+    ASSERT(!is_null);
     if (dr != NULL)
         return (true);
 
@@ -52,7 +54,9 @@ bool Dataref::lazy_init()
 
 template <typename T>void Dataref::get(T *value)
 {
-    *value = 0;
+    *value = (T)0;
+    if (is_null)
+        return;
     if (!lazy_init()) {
         logMsg("attempting to scalar-read nonexistent dataref \"%s\"\n",
             drname.c_str());
@@ -107,6 +111,8 @@ double Dataref::getd()
 
 template <typename T>void Dataref::set(T value)
 {
+    if (is_null)
+        return;
     if (!lazy_init()) {
         logMsg("attempting to scalar-write nonexistent dataref \"%s\"\n",
             drname.c_str());
@@ -136,14 +142,20 @@ template <typename T>void Dataref::set(T value)
     }
 }
 
-template void Dataref::set<bool>(bool);
-template void Dataref::set<int>(int);
-template void Dataref::set<float>(float);
-template void Dataref::set<double>(double);
+template void Dataref::set(bool);
+template void Dataref::set(int);
+template void Dataref::set(float);
+template void Dataref::set(double);
 
 template <typename T>size_t Dataref::getv(T *values, size_t off, size_t num)
 {
     assert(num > 0);
+
+    if (is_null) {
+        for (size_t i = 0; i < num; i++)
+            values[i] = (T)0;
+        return (num);
+    }
 
     if (!lazy_init()) {
         logMsg("attempting to vector-read nonexistent dataref \"%s\"\n",
@@ -176,18 +188,22 @@ template <typename T>size_t Dataref::getv(T *values, size_t off, size_t num)
     return (0);
 }
 
-template size_t Dataref::getv(int *values, size_t off, size_t num);
-template size_t Dataref::getv(float *values, size_t off, size_t num);
+template size_t Dataref::getv(int *, size_t, size_t);
+template size_t Dataref::getv(float *, size_t, size_t);
 
 template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
 {
     assert(num > 0);
+
+    if (is_null)
+        return;
 
     if (!lazy_init()) {
         logMsg("attempting to vector-write to nonexistent dataref \"%s\"\n",
             drname.c_str());
         return;
     }
+
     if (!writable) {
         logMsg("Attempting to vector-write to read-only dataref \"%s\"\n",
             drname.c_str());
@@ -216,8 +232,8 @@ template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
     }
 }
 
-template void Dataref::setv(const int *values, size_t off, size_t num);
-template void Dataref::setv(const float *values, size_t off, size_t num);
+template void Dataref::setv(const int *, size_t, size_t);
+template void Dataref::setv(const float *, size_t, size_t);
 
 XPLMDataRef Dataref::getDataref()
 {

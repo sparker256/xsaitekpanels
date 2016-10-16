@@ -36,9 +36,7 @@ static void cmd_from_ini(Command **cmd, const char *opt_name,
     if ((*cmd) != NULL)
         delete (*cmd);
 
-    if (cmdname == "null")
-        *cmd = NULL;
-    else if (cmdname != "")
+    if (cmdname != "")
         *cmd = new Command(cmdname);
     else if (dfl_cmdname != NULL)
         *cmd = new Command(string(dfl_cmdname));
@@ -54,9 +52,7 @@ static void dr_from_ini(Dataref **dr, const char *opt_name,
     if ((*dr) != NULL)
         delete (*dr);
 
-    if (drname == "null")
-        *dr = NULL;
-    else if (drname != "")
+    if (drname != "")
         *dr = new Dataref(drname);
     else if (dfl_drname != NULL)
         *dr = new Dataref(string(dfl_drname));
@@ -112,8 +108,10 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
             Command **cmd = va_arg(ap, Command **);
 
             assert(cmd != NULL);
-            if (remap_state != 0) {
+            if (remap_state > 0) {
                 cmd_from_ini(cmd, opt_name, dfl_cmd_name);
+            } else if (remap_state < 0) {
+                *cmd = NULL;
             } else {
                 if (dfl_cmd_name != NULL) {
                     *cmd = new Command(dfl_cmd_name);
@@ -127,8 +125,10 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
             Dataref **dr = va_arg(ap, Dataref **);
 
             assert(dr != NULL);
-            if (remap_state != 0) {
+            if (remap_state > 0) {
                 dr_from_ini(dr, opt_name, dfl_dr_name);
+            } else if (remap_state < 0) {
+                *dr = new Dataref("null");
             } else {
                 if (dfl_dr_name != NULL) {
                     *dr = new Dataref(dfl_dr_name);
@@ -142,7 +142,7 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
             int *result = va_arg(ap, int *);
 
             assert(result != NULL);
-            if (remap_state == 1 || remap_state == 2)
+            if (remap_state > 0)
                 *result = getOption(opt_name, dfl_value);
             else
                 *result = dfl_value;
@@ -151,7 +151,7 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
             float *result = va_arg(ap, float *);
 
             assert(result != NULL);
-            if (remap_state == 1 || remap_state == 2)
+            if (remap_state > 0)
                 *result = getOption(opt_name, dfl_value);
             else
                 *result = dfl_value;
