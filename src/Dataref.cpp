@@ -6,51 +6,56 @@
 #include "Log.h"
 #include "Dataref.h"
 
+using namespace std;
 using namespace xsaitekpanels;
 
-Dataref::Dataref(const char *drname_in)
+Dataref::Dataref(string drname_in)
 {
-    const char *bracket;
+    size_t open_bracket, close_bracket;
 
-    drname = (char *)malloc(strlen(drname_in) + 1);
-    strcpy(drname, drname_in);
+    drname = drname_in;
+    dr = NULL;
+    drname_only = drname;
+    dr_index = 0;
 
-    bracket = strstr(drname, "[");
-    if (bracket != NULL) {
-        char drname_only[strlen(drname) + 1];
-        unsigned long offset_l;
+    open_bracket = drname.find('[');
+    close_bracket = drname.find('[');
 
-        strcpy(drname_only, drname);
-        drname_only[bracket - drname] = '\0';
-        dr = XPLMFindDataRef(drname_only);
-        if (sscanf(&drname[1], "%lu", &offset_l) == 1) {
-            offset = offset_l;
-        } else {
+    if (open_bracket != string::npos && close_bracket != string::npos &&
+        open_bracket < close_bracket) {
+        string idx = drname.substr(open_bracket + 1,
+            close_bracket - open_bracket - 1); 
+
+        drname_only = drname.substr(0, open_bracket - 1);
+
+        if (sscanf(idx.c_str(), "%u", (unsigned *)&dr_index) != 1) {
             logMsg("Error parsing bracket array offset in dataref specifier "
-                "\"%s\"\n", drname_in);
-            dr = NULL;
+                "\"%s\"\n", drname_in.c_str());
         }
-    } else {
-        dr = XPLMFindDataRef(drname);
-        offset = 0;
-    }
-    if (dr != NULL) {
-        type = XPLMGetDataRefTypes(dr);
-        writable = XPLMCanWriteDataRef(dr);
     }
 }
 
-Dataref::~Dataref()
+bool Dataref::lazy_init()
 {
-    free(drname);
+    if (dr != NULL)
+        return (true);
+
+    dr = XPLMFindDataRef(drname_only.c_str());
+    if (dr == NULL)
+        return (false);
+
+    type = XPLMGetDataRefTypes(dr);
+    writable = XPLMCanWriteDataRef(dr);
+
+    return (true);
 }
 
-template <typename T>void Dataref::get(T *value) const
+template <typename T>void Dataref::get(T *value)
 {
     *value = 0;
-    if (dr == NULL) {
+    if (!lazy_init()) {
         logMsg("attempting to scalar-read nonexistent dataref \"%s\"\n",
-            drname);
+            drname.c_str());
         return;
     }
 
@@ -70,30 +75,30 @@ template <typename T>void Dataref::get(T *value) const
         *value = fvalue;
     } else {
         logMsg("attempting to scalar-read unknown type (%d) dataref \"%s\"\n",
-            type, drname);
+            type, drname.c_str());
     }
 }
 
-const char *Dataref::get_drname()
+const string Dataref::get_drname() const
 {
     return (drname);
 }
 
-int Dataref::geti() const
+int Dataref::geti()
 {
     int x;
     this->get(&x);
     return (x);
 }
 
-float Dataref::getf() const
+float Dataref::getf()
 {
     float x;
     this->get(&x);
     return (x);
 }
 
-double Dataref::getd() const
+double Dataref::getd()
 {
     double x;
     this->get(&x);
@@ -102,14 +107,14 @@ double Dataref::getd() const
 
 template <typename T>void Dataref::set(T value)
 {
-    if (dr == NULL) {
+    if (!lazy_init()) {
         logMsg("attempting to scalar-write nonexistent dataref \"%s\"\n",
-            drname);
+            drname.c_str());
         return;
     }
     if (!writable) {
         logMsg("attempting to scalar-write read-only dataref \"%s\"\n",
-            drname);
+            drname.c_str());
         return;
     }
 
@@ -127,7 +132,7 @@ template <typename T>void Dataref::set(T value)
         XPLMSetDatavf(dr, &fvalue, offset, 1);
     } else {
         logMsg("attempting to scalar-write unknown type (%d) dataref \"%s\"\n",
-            type, drname);
+            type, drname.c_str());
     }
 }
 
@@ -136,14 +141,13 @@ template void Dataref::set<int>(int);
 template void Dataref::set<float>(float);
 template void Dataref::set<double>(double);
 
-template <typename T>size_t Dataref::getv(T *values, size_t off,
-    size_t num) const
+template <typename T>size_t Dataref::getv(T *values, size_t off, size_t num)
 {
     assert(num > 0);
 
-    if (dr == NULL) {
-        logMsg("attempting to scalar-read nonexistent dataref \"%s\"\n",
-            drname);
+    if (!lazy_init()) {
+        logMsg("attempting to vector-read nonexistent dataref \"%s\"\n",
+            drname.c_str());
         return (0);
     }
 
@@ -172,21 +176,21 @@ template <typename T>size_t Dataref::getv(T *values, size_t off,
     return (0);
 }
 
-template size_t Dataref::getv(int *values, size_t off, size_t num) const;
-template size_t Dataref::getv(float *values, size_t off, size_t num) const;
+template size_t Dataref::getv(int *values, size_t off, size_t num);
+template size_t Dataref::getv(float *values, size_t off, size_t num);
 
 template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
 {
     assert(num > 0);
 
-    if (dr == NULL) {
+    if (!lazy_init()) {
         logMsg("attempting to vector-write to nonexistent dataref \"%s\"\n",
-            drname);
+            drname.c_str());
         return;
     }
     if (!writable) {
         logMsg("Attempting to vector-write to read-only dataref \"%s\"\n",
-            drname);
+            drname.c_str());
         return;
     }
 
@@ -208,7 +212,7 @@ template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
         XPLMSetDatavf(dr, fvalues, off == -1lu ? offset : off, num);
     } else {
         logMsg("attempting to vector-write unknown type (%d) dataref \"%s\"\n",
-            type, drname);
+            type, drname.c_str());
     }
 }
 
@@ -217,6 +221,7 @@ template void Dataref::setv(const float *values, size_t off, size_t num);
 
 XPLMDataRef Dataref::getDataref()
 {
+    (void) lazy_init();
     return (dr);
 }
 

@@ -5,200 +5,142 @@
  * Created on August 26, 2010, 2:49 PM
  */
 
-#include <functional>
-#include <cctype>
+#include <unordered_map>
+
+#include "Log.h"
 
 #include "inireader.h"
 
 using namespace std;
 
-struct ConfigItems
-{
-    std::string key;
-    std::string value;
-};
-static ConfigItems *iniItem[1300];
+static unordered_map<string, string> *ini = NULL;
 
-static int i = 0;
+static string parseOptionName(string value);
+static string parseOptionValue(string value);
+static string trim(string str, bool left, bool right);
 
 void xsaitekpanels::parseIniFile(const char *fileName)
 {
-    std::string optionValue;
-    std::ifstream infile;
+    ifstream infile;
+    unordered_map<string, string> *newINI = NULL;
+    string key;
+
     infile.open(fileName);
 
     //Does the file exist?
-    if (infile.is_open() != true) {
+    if (infile.is_open() != true)
         return;
-    }
 
-    std::string key;
+    newINI = new unordered_map<std::string, std::string>;
 
     while (!infile.eof())       // To get you all the lines.
     {
-        getline(infile, optionValue);   // Saves the line in STRING.
+        string line;
 
-        //Is the option a comment
-        if (optionValue.substr(0, 1) == "#") {
+        getline(infile, line);   // Saves the line in STRING.
+
+        /* trim leading whitespace */
+        line = trim(line, true, false);
+
+        /* Is the option a comment */
+        if (line[0] == '#' || line[0] == ';')
             continue;
-        }
 
-        key = parseOptionName(optionValue);
-
-        if (key.length() > 0) {
-            iniItem[i] = new ConfigItems;
-            iniItem[i]->key = key;
-            iniItem[i]->value = parseOptionValue(optionValue);
-            i++;
-        }
+        key = parseOptionName(line);
+        if (key.length() > 0)
+            (*newINI)[key] = parseOptionValue(line);
     }
 
-    i--;
     infile.close();
+
+    if (ini != NULL)
+        delete ini;
+    ini = newINI;
 }
 
 void xsaitekpanels::cleanupIniReader()
 {
-    for (int x = 0; x <= i; x++) {
-        delete iniItem[x];
+    if (ini != NULL) {
+        delete ini;
+        ini = NULL;
     }
-
-    i = 0;
 }
 
 string xsaitekpanels::getOptionToString(string key)
 {
-    return (getOptionToString(key, ""));
+    return (getOption(key, ""));
 }
 
-string xsaitekpanels::getOptionToString(string key, string dfl_value)
+string xsaitekpanels::getOption(string key, string dfl_value)
 {
-    //Check to see if anything got parsed?
-    if (i == 0) {
+    if (ini == NULL || ini->find(key) == ini->end())
         return (dfl_value);
-    }
-
-    for (int x = 0; x <= i; x++) {
-        if (key == iniItem[x]->key) {
-            return iniItem[x]->value;
-        }
-    }
-
-    return (dfl_value);
-}
-
-const char *xsaitekpanels::getOptionToChar(string key)
-{
-    return (getOptionToChar(key, ""));
-}
-
-const char *xsaitekpanels::getOptionToChar(string key, const char *dfl_value)
-{
-    //Check to see if anything got parsed?
-    if (i == 0) {
-        return (dfl_value);
-    }
-
-    for (int x = 0; x <= i; x++) {
-        if (key == iniItem[x]->key) {
-            return iniItem[x]->value.c_str();
-        }
-    }
-
-    return (dfl_value);
+    return ((*ini)[key]);
 }
 
 int xsaitekpanels::getOptionToInt(string key)
 {
-    return (getOptionToInt(key, 0));
+    return (getOption(key, 0));
 }
 
-int xsaitekpanels::getOptionToInt(string key, int dfl_value)
+int xsaitekpanels::getOption(string key, int dfl_value)
 {
-    //Check to see if anything got parsed?
-    if (i == 0) {
+    if (ini == NULL || ini->find(key) == ini->end())
         return (dfl_value);
-    }
-
-    for (int x = 0; x <= i; x++) {
-        if (key == iniItem[x]->key) {
-            return atoi(iniItem[x]->value.c_str());
-        }
-    }
-
-    return (dfl_value);
+    return (atoi((*ini)[key].c_str()));
 }
 
 double xsaitekpanels::getOptionToFloat(string key)
 {
-    return (getOptionToFloat(key, 0.0));
+    return (getOption(key, 0.0));
 }
 
-double xsaitekpanels::getOptionToFloat(string key, double dfl_value)
+double xsaitekpanels::getOption(string key, double dfl_value)
 {
-    //Check to see if anything got parsed?
-    if (i == 0) {
+    if (ini == NULL || ini->find(key) == ini->end())
         return (dfl_value);
-    }
+    return (atof((*ini)[key].c_str()));
+}
 
-    for (int x = 0; x <= i; x++) {
-        if (key == iniItem[x]->key) {
-            return atof(iniItem[x]->value.c_str());
+static string parseOptionName(string value)
+{
+    size_t found = value.find('=');
+
+    if (found == string::npos)
+        return "";
+
+    return (trim(value.substr(0, found - 1), true, true));
+}
+
+static string parseOptionValue(string value)
+{
+    size_t found = value.find('=');
+
+    if (found == string::npos)
+        return ("");
+
+    return (trim(value.substr(found + 1), true, true));
+}
+
+static string trim(string str, bool left, bool right)
+{
+    int n = str.length();
+    int s = 0, e = n - 1;
+
+    if (left) {
+        for (; s < n; s++) {
+            if (!isspace(str[s]))
+                break;
         }
     }
-
-    return (dfl_value);
-}
-
-string xsaitekpanels::parseOptionName(string value)
-{
-    size_t found;
-
-    found = value.find('=');
-
-    if (found > 100) {
-        return "";
+    if (right) {
+        for (e = n - 1; e >= 0; e--) {
+            if (!isspace(str[e]))
+                break;
+        }
     }
-
-    std::string key = value.substr(0, (found - 1));
-    key = trim(key);
-
-    return key;
-}
-
-string xsaitekpanels::parseOptionValue(string value)
-{
-    size_t found;
-
-    found = value.find('=');
-
-    if (found > 100) {
-        return "";
-    }
-
-    std::string keyValue = value.substr((found + 1));
-    keyValue = trim(keyValue);
-
-    return keyValue;
-}
-
-string xsaitekpanels::trim(string s)
-{
-    return ltrim(rtrim(s));
-}
-
-// trim from start
-string xsaitekpanels::ltrim(string s)
-{
-    s.erase(s.begin(), std::find_if(s.begin(), s.end(),
-        std::not1(std::ptr_fun < int, int >(std::isspace))));
-    return s;
-}
-
-// trim from end
-string xsaitekpanels::rtrim(string s)
-{
-    s.erase(std::find_if(s.rbegin(), s.rend(), std::not1(std::ptr_fun < int,
-        int >(std::isspace))).base(), s.end());
-    return s;
+    if (s <= e)
+        return (str.substr(s, e - s + 1));
+    else
+        return ("");
 }

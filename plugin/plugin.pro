@@ -11,6 +11,7 @@ INCLUDEPATH += ../SDK/CHeaders/XPLM
 INCLUDEPATH += ../SDK/CHeaders/Wrappers
 INCLUDEPATH += ../SDK/CHeaders/Widgets
 
+QMAKE_CXXFLAGS += -std=c++11
 
 # Defined to use X-Plane SDK 2.0 capabilities - no backward compatibility before 9.0
 DEFINES += XPLM200

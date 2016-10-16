@@ -184,6 +184,8 @@ namespace xsaitekpanels {
         bool buttons_updated;
         bool send_cmd, reader_shutdown;
 
+        void config_cleanup();
+
     public:
         Multipanel(unsigned panel_number, const char *hidpath);
         ~Multipanel();

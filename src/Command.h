@@ -1,26 +1,26 @@
 #ifndef _XSP_COMMAND_H_
 #define _XSP_COMMAND_H_
 
+#include <string>
 #include <stdlib.h>
 #include "XPLMUtilities.h"
 
 namespace xsaitekpanels {
     class Command {
-        char *cmdname;
+        std::string cmdname;
         XPLMCommandRef cmd;
 
-        bool resolve_command();
+        bool lazy_init();
         void perform_command(void (*perform_func)(XPLMCommandRef));
 
     public:
-        Command(const char *cmdname);
-        ~Command();
+        Command(std::string cmdname);
 
         void begin();
         void end();
         void once();
 
-        const char *get_cmdname();
+        const std::string get_cmdname() const;
 
         XPLMCommandRef getCommand();
     };

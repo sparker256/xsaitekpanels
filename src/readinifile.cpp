@@ -31,19 +31,17 @@ using namespace xsaitekpanels;
 static void cmd_from_ini(Command **cmd, const char *opt_name,
     const char *dfl_cmdname)
 {
-    const char *cmdname = getOptionToString(opt_name).c_str();
+    string cmdname = getOptionToString(string(opt_name));
 
     if ((*cmd) != NULL)
         delete (*cmd);
 
-    if (strcmp(cmdname, "null") == 0)
+    if (cmdname == "null")
         *cmd = NULL;
-    else if (strcmp(cmdname, "") != 0) {
+    else if (cmdname != "")
         *cmd = new Command(cmdname);
-        if ((*cmd) == NULL)
-            logMsg("command %s not found\n", cmdname);
-    } else if (dfl_cmdname != NULL)
-        *cmd = new Command(dfl_cmdname);
+    else if (dfl_cmdname != NULL)
+        *cmd = new Command(string(dfl_cmdname));
     else
         *cmd = NULL;
 }
@@ -51,19 +49,17 @@ static void cmd_from_ini(Command **cmd, const char *opt_name,
 static void dr_from_ini(Dataref **dr, const char *opt_name,
     const char *dfl_drname)
 {
-    const char *drname = getOptionToString(opt_name).c_str();
+    string drname = getOptionToString(string(opt_name));
 
     if ((*dr) != NULL)
         delete (*dr);
 
-    if (strcmp(drname, "null") == 0)
+    if (drname == "null")
         *dr = NULL;
-    else if (strcmp(drname, "") != 0) {
+    else if (drname != "")
         *dr = new Dataref(drname);
-        if ((*dr) == NULL)
-            logMsg("dr %s not found\n", drname);
-    } else if (dfl_drname != NULL)
-        *dr = new Dataref(dfl_drname);
+    else if (dfl_drname != NULL)
+        *dr = new Dataref(string(dfl_drname));
     else
         *dr = NULL;
 }
@@ -147,7 +143,7 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
 
             assert(result != NULL);
             if (remap_state == 1 || remap_state == 2)
-                *result = getOptionToInt(opt_name, dfl_value);
+                *result = getOption(opt_name, dfl_value);
             else
                 *result = dfl_value;
         } else if (arg_type == I2R_FLOAT_ARG) {
@@ -156,7 +152,7 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
 
             assert(result != NULL);
             if (remap_state == 1 || remap_state == 2)
-                *result = getOptionToInt(opt_name, dfl_value);
+                *result = getOption(opt_name, dfl_value);
             else
                 *result = dfl_value;
         } else {

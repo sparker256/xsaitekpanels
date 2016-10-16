@@ -1,34 +1,38 @@
 #ifndef _XSP_DATAREF_H_
 #define _XSP_DATAREF_H_
 
+#include <string>
 #include <stdlib.h>
 #include "XPLMDataAccess.h"
 
 namespace xsaitekpanels {
     class Dataref {
-        char *drname;
+        std::string drname;
+        std::string drname_only;
+        int dr_index;
+
         XPLMDataRef dr;
         XPLMDataTypeID type;
         size_t offset;
         bool writable;
 
+        bool lazy_init();
+
     public:
-        Dataref(const char *drname);
+        Dataref(std::string drname);
         Dataref(XPLMDataRef xplm_dr);
-        ~Dataref();
 
-        const char *get_drname();
+        const std::string get_drname() const;
 
-        template <typename T>void get(T *value) const;
+        template <typename T>void get(T *value);
         template <typename T>void set(T value);
-        template <typename T>size_t getv(T *values, size_t off, size_t num)
-            const;
+        template <typename T>size_t getv(T *values, size_t off, size_t num);
         template <typename T>void setv(const T *values, size_t off, size_t num);
 
         /* helpers for get() overloading */
-        int geti() const;
-        float getf() const;
-        double getd() const;
+        int geti();
+        float getf();
+        double getd();
 
         XPLMDataRef getDataref();
     };

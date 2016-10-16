@@ -72,7 +72,7 @@ enum {
 enum {
     ACCEL_THRESH = 80000,                       /* 80 ms*/
     HOLD_BTN_TIMEOUT = 1000000,                 /* 1 second */
-    AUTO_UPDATE_INTVAL = 250000,                /* 200 ms */
+    AUTO_UPDATE_INTVAL = 200000,                /* 200 ms */
     BTN_DOUBLE_PRESS_SUPP_INTVAL = 70000        /* 70 ms */
 };
 
@@ -196,15 +196,10 @@ static void setbit(int *targ, int bitn, int val)
 
 Multipanel::Multipanel(unsigned panel_number, const char *hidpath)
 {
-    memset(switches, 0, sizeof (switches));
-    memset(button_info, 0, sizeof (button_info));
-    memset(button_lights, 0, sizeof (button_lights));
-    memset(sendbuf, 0, sizeof (sendbuf));
+    memset(this, 0, sizeof (Multipanel));
     panel_num = panel_number;
 
     display_readout = READOUT_NONE;
-    memset(adigits, 0, sizeof (adigits));
-    memset(bdigits, 0, sizeof (bdigits));
     btnleds = 0;
 
     altitude = vs = airspeed = hdg = crs = 0.0;
@@ -220,12 +215,10 @@ Multipanel::Multipanel(unsigned panel_number, const char *hidpath)
     knob_up_time = 0;
     knob_dn_time = 0;
 
-    reconfigure();
-
-    memset(buttons, 0, sizeof (buttons));
-    memset(buttons_main, 0, sizeof (buttons_main));
     send_cmd = false;
     reader_shutdown = false;
+
+    reconfigure();
 
 #if IBM
     mtx = CreateMutex(NULL, FALSE, NULL);
@@ -253,19 +246,7 @@ void *xsaitekpanels::multipanel_reader_thread(void *arg)
 Multipanel::~Multipanel()
 {
     hid_close(handle);
-
-    VAR_DESTROY(athr_sw_dr);
-    for (int i = 0; i < NUM_SW_INFOS; i++) {
-        VAR_DESTROY(switches[i].dr);
-        VAR_DESTROY(switches[i].up_cmd);
-        VAR_DESTROY(switches[i].dn_cmd);
-    }
-    for (int i = 0; i < NUM_BTN_INFOS; i++) {
-        VAR_DESTROY(button_info[i].dr);
-        VAR_DESTROY(button_info[i].cmd);
-        VAR_DESTROY(button_info[i].rev_cmd);
-    }
-    VAR_DESTROY(ias_is_mach_dr);
+    config_cleanup();
 
 #if     IBM
     CloseHandle(mtx);
@@ -839,9 +820,10 @@ static int dampen_knob_ticks(int ticks, int *dampen, int ticks_per_step)
 
 void Multipanel::process()
 {
+    uint64_t now = microclock();
     bool sched_update = false;
     bool updated;
-    uint64_t now = microclock();
+    bool auto_update = (now - last_auto_update_time > AUTO_UPDATE_INTVAL);
 
     mutex_enter(&mtx);
 
@@ -881,7 +863,8 @@ void Multipanel::process()
          * consumes the knob & trim wheel events.
          */
         process_drs();
-
+    }
+    if (updated || auto_update) {
         if (buttons_main[CRS_SWITCH])
             process_crs_switch();
         else if (buttons_main[HDG_SWITCH])
@@ -916,7 +899,7 @@ void Multipanel::process()
 
     sched_update = process_lights();
 
-    if (updated || now - last_auto_update_time > AUTO_UPDATE_INTVAL) {
+    if (updated || auto_update) {
         process_multi_display();
         last_auto_update_time = now;
         sched_update = true;
@@ -961,8 +944,30 @@ void xsaitekpanels::reconfigure_all_multipanels()
     }
 }
 
+#if 0
+static void
+debug_print_switch(const char *name, const struct switch_info_t *sw)
+{
+    logMsg("switch: %s\n"
+        "dr: %s\n"
+        "up_cmd: %s\n"
+        "dn_cmd: %s\n"
+        "maxval: %.1f\n"
+        "minval: %.1f\n"
+        "step: %.1f\n"
+        "accel: %.1f\n"
+        "max_accel: %.1f\n"
+        "loop: %d\n", name, sw->dr ? sw->dr->get_drname().c_str() : "",
+        sw->up_cmd ? sw->up_cmd->get_cmdname().c_str() : "",
+        sw->dn_cmd ? sw->dn_cmd->get_cmdname().c_str() : "",
+        sw->maxval, sw->minval, sw->step, sw->accel, sw->max_accel, sw->loop);
+}
+#endif
+
 void Multipanel::reconfigure()
 {
+    config_cleanup();
+
     ini_opt_setup("Multi Freq Knob Pulse per Command", &knob_speed, 2);
     ini_opt_setup("Multi Flash Interval", &flash_intval, DFL_FLASH_INTVAL);
 
@@ -1265,4 +1270,20 @@ void Multipanel::reader_main()
     process_multi_display();
     sched_update_command();
     hid_send_feature_report(handle, sendbuf, sizeof(sendbuf));
+}
+
+void Multipanel::config_cleanup()
+{
+    VAR_DESTROY(athr_sw_dr);
+    for (int i = 0; i < NUM_SW_INFOS; i++) {
+        VAR_DESTROY(switches[i].dr);
+        VAR_DESTROY(switches[i].up_cmd);
+        VAR_DESTROY(switches[i].dn_cmd);
+    }
+    for (int i = 0; i < NUM_BTN_INFOS; i++) {
+        VAR_DESTROY(button_info[i].dr);
+        VAR_DESTROY(button_info[i].cmd);
+        VAR_DESTROY(button_info[i].rev_cmd);
+    }
+    VAR_DESTROY(ias_is_mach_dr);
 }

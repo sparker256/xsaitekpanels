@@ -3,26 +3,20 @@
 #include "Log.h"
 #include "Command.h"
 
+using namespace std;
 using namespace xsaitekpanels;
 
-Command::Command(const char *cmdname_in)
+Command::Command(string cmdname_in)
 {
-    VERIFY(cmdname_in != NULL);
-    cmdname = (char *)malloc(strlen(cmdname_in) + 1);
-    strcpy(cmdname, cmdname_in);
+    cmdname = cmdname_in;
     cmd = NULL;
 }
 
-Command::~Command()
-{
-    free(cmdname);
-}
-
-bool Command::resolve_command()
+bool Command::lazy_init()
 {
     if (cmd != NULL)
         return (true);
-    cmd = XPLMFindCommand(cmdname);
+    cmd = XPLMFindCommand(cmdname.c_str());
     if (cmd == NULL) {
         return (false);
     }
@@ -31,7 +25,7 @@ bool Command::resolve_command()
 
 void Command::perform_command(void (*perform_func)(XPLMCommandRef))
 {
-    if (!resolve_command())
+    if (!lazy_init())
         return;
     ASSERT(cmd != NULL);
     perform_func(cmd);
@@ -52,13 +46,13 @@ void Command::once()
     perform_command(XPLMCommandOnce);
 }
 
-const char *Command::get_cmdname()
+const string Command::get_cmdname() const
 {
     return (cmdname);
 }
 
 XPLMCommandRef Command::getCommand()
 {
-    resolve_command();
+    (void) lazy_init();
     return (cmd);
 }
