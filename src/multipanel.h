@@ -88,8 +88,8 @@ namespace xsaitekpanels {
     struct switch_info_t {
         Dataref *dr;
         Command *up_cmd, *dn_cmd;
-        float maxval, minval, step;
-        float max_accel, accel;
+        double maxval, minval, step;
+        double max_accel, accel;
         bool loop;
     };
 
@@ -124,12 +124,12 @@ namespace xsaitekpanels {
         Command *trim_up_cmd;
         int trim_wheel_up_dampen;
         uint64_t trim_up_last;
-        float trim_up_accel, trim_up_max_accel;
+        double trim_up_accel, trim_up_max_accel;
 
         Command *trim_down_cmd;
         int trim_wheel_down_dampen;
         uint64_t trim_down_last;
-        float trim_down_accel, trim_down_max_accel;
+        double trim_down_accel, trim_down_max_accel;
 
         bool flashon;
 
@@ -139,7 +139,7 @@ namespace xsaitekpanels {
 
         void process_switch_adjustment(int value, uint64_t *lastadj_time,
             Dataref *dr, Command *cmd, double maxval, double minval,
-            double step, bool loop, float accel, int max_accel_mult);
+            double step, bool loop, double accel, int max_accel_mult);
         void process_switch(const switch_info_t *sw);
 
         void update_alt_vs_readout();

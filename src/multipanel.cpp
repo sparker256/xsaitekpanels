@@ -177,6 +177,44 @@ static Dataref *MultiAltSwitchOwnedDataRef = NULL,
 
 #define getbit(arg, bit)        (((arg) >> bit) & 1)
 
+#if 0
+static void
+debug_print_switch(const char *name, const switch_info_t *sw)
+{
+    logMsg("switch: %s\n"
+        "dr: %s\n"
+        "up_cmd: %s\n"
+        "dn_cmd: %s\n"
+        "maxval: %.1f\n"
+        "minval: %.1f\n"
+        "step: %.1f\n"
+        "accel: %.1f\n"
+        "max_accel: %.1f\n"
+        "loop: %d\n", name, sw->dr ? sw->dr->get_drname().c_str() : "",
+        sw->up_cmd ? sw->up_cmd->get_cmdname().c_str() : "",
+        sw->dn_cmd ? sw->dn_cmd->get_cmdname().c_str() : "",
+        sw->maxval, sw->minval, sw->step, sw->accel, sw->max_accel, sw->loop);
+}
+
+static void
+debug_print_button(const char *name, const button_info_t *btn)
+{
+    logMsg("button: %s\n"
+        "type: %d\n"
+        "cmd: %s\n"
+        "rev_cmd: %s\n"
+        "dr: %s\n"
+        "on: %.1f\n"
+        "off: %.1f\n"
+        "max: %.1f\n"
+        "min: %.1f\n", name, btn->type,
+        btn->cmd ? btn->cmd->get_cmdname().c_str() : "",
+        btn->rev_cmd ? btn->rev_cmd->get_cmdname().c_str() : "",
+        btn->dr ? btn->dr->get_drname().c_str() : "",
+        btn->on_value, btn->off_value, btn->max_value, btn->min_value);
+}
+#endif
+
 static inline uint32_t my_ntohl(uint32_t x)
 {
 #ifdef LITTLE_ENDIAN
@@ -440,7 +478,7 @@ static double adjust_value(double value, double maxval, double minval,
 
 void Multipanel::process_switch_adjustment(int value, uint64_t *lastadj_time,
     Dataref *dr, Command *cmd, double maxval, double minval, double step,
-    bool loop, float accel, int max_accel_mult)
+    bool loop, double accel, int max_accel_mult)
 {
     if (value <= 0)
         return;
@@ -931,7 +969,7 @@ template <typename T>static void ini_opt_setup(const char *optname,
     T *option, T dfl_value)
 {
     if (getOptionToString(optname) != "")
-        *option = getOptionToFloat(optname);
+        *option = getOptionToDouble(optname);
     else
         *option = dfl_value;
 }
@@ -943,26 +981,6 @@ void xsaitekpanels::reconfigure_all_multipanels()
         mp->reconfigure();
     }
 }
-
-#if 0
-static void
-debug_print_switch(const char *name, const struct switch_info_t *sw)
-{
-    logMsg("switch: %s\n"
-        "dr: %s\n"
-        "up_cmd: %s\n"
-        "dn_cmd: %s\n"
-        "maxval: %.1f\n"
-        "minval: %.1f\n"
-        "step: %.1f\n"
-        "accel: %.1f\n"
-        "max_accel: %.1f\n"
-        "loop: %d\n", name, sw->dr ? sw->dr->get_drname().c_str() : "",
-        sw->up_cmd ? sw->up_cmd->get_cmdname().c_str() : "",
-        sw->dn_cmd ? sw->dn_cmd->get_cmdname().c_str() : "",
-        sw->maxval, sw->minval, sw->step, sw->accel, sw->max_accel, sw->loop);
-}
-#endif
 
 void Multipanel::reconfigure()
 {
@@ -986,11 +1004,11 @@ void Multipanel::reconfigure()
         I2R_CMD_ARG, basename "_up_remapable_cmd", NULL, &(sw)->up_cmd, \
         I2R_CMD_ARG, basename "_dn_remapable_cmd", NULL, &(sw)->dn_cmd, \
         I2R_DR_ARG, basename "_remapable_data", dfl_data, &(sw)->dr, \
-        I2R_FLOAT_ARG, basename "_maxval", dfl_maxval, &(sw)->maxval, \
-        I2R_FLOAT_ARG, basename "_minval", dfl_minval, &(sw)->minval, \
-        I2R_FLOAT_ARG, basename "_step", dfl_step, &(sw)->step, \
-        I2R_FLOAT_ARG, basename "_accel", dfl_accel, &(sw)->accel, \
-        I2R_FLOAT_ARG, basename "_max_accel", dfl_max_accel, &(sw)->max_accel, \
+        I2R_DOUBLE_ARG, basename "_maxval", dfl_maxval, &(sw)->maxval, \
+        I2R_DOUBLE_ARG, basename "_minval", dfl_minval, &(sw)->minval, \
+        I2R_DOUBLE_ARG, basename "_step", dfl_step, &(sw)->step, \
+        I2R_DOUBLE_ARG, basename "_accel", dfl_accel, &(sw)->accel, \
+        I2R_DOUBLE_ARG, basename "_max_accel", dfl_max_accel, &(sw)->max_accel,\
         I2R_INT_ARG, basename "_loop", dfl_loop, &(sw)->loop, \
         I2R_END_ARG
     ini2remap("Alt Switch remapable",
@@ -1023,14 +1041,14 @@ void Multipanel::reconfigure()
     ini2remap("Trim Up remapable",
         I2R_CMD_ARG, "trim_up_remapable_cmd",
         "sim/flight_controls/pitch_trim_up", &trim_up_cmd,
-        I2R_FLOAT_ARG, "trim_up_accel", 1.0, &trim_up_accel,
-        I2R_FLOAT_ARG, "trim_up_max_accel", 3.0, &trim_up_max_accel,
+        I2R_DOUBLE_ARG, "trim_up_accel", 1.0, &trim_up_accel,
+        I2R_DOUBLE_ARG, "trim_up_max_accel", 3.0, &trim_up_max_accel,
         I2R_END_ARG);
     ini2remap("Trim Dn remapable",
         I2R_CMD_ARG, "trim_dn_remapable_cmd",
         "sim/flight_controls/pitch_trim_down", &trim_down_cmd,
-        I2R_FLOAT_ARG, "trim_dn_accel", 1.0, &trim_down_accel,
-        I2R_FLOAT_ARG, "trim_dn_max_accel", 3.0, &trim_down_max_accel,
+        I2R_DOUBLE_ARG, "trim_dn_accel", 1.0, &trim_down_accel,
+        I2R_DOUBLE_ARG, "trim_dn_max_accel", 3.0, &trim_down_max_accel,
         I2R_END_ARG);
 
 #define BUTTON_FROM_INI_ARGS(btn, basename, dfl_type, dfl_cmd, dfl_rev_cmd, \
@@ -1040,13 +1058,13 @@ void Multipanel::reconfigure()
         I2R_CMD_ARG, basename "_remapable_cmd_rev", dfl_rev_cmd, \
         &(btn)->rev_cmd, \
         I2R_DR_ARG, basename "_remapable_data", dfl_dr, &(btn)->dr, \
-        I2R_FLOAT_ARG, basename "_remapable_data_on_value", \
+        I2R_DOUBLE_ARG, basename "_remapable_data_on_value", \
         dfl_on_val, &(btn)->on_value, \
-        I2R_FLOAT_ARG, basename "_remapable_data_off_value", \
+        I2R_DOUBLE_ARG, basename "_remapable_data_off_value", \
         dfl_off_val, &(btn)->off_value, \
-        I2R_FLOAT_ARG, basename "_remapable_data_max_value", dfl_max, \
+        I2R_DOUBLE_ARG, basename "_remapable_data_max_value", dfl_max, \
         &(btn)->max_value, \
-        I2R_FLOAT_ARG, basename "_remapable_data_min_value", dfl_min, \
+        I2R_DOUBLE_ARG, basename "_remapable_data_min_value", dfl_min, \
         &(btn)->min_value, \
         I2R_END_ARG
     ini2remap("Ap Button remapable",

@@ -90,7 +90,7 @@ int xsaitekpanels::getOption(string key, int dfl_value)
     return (atoi((*ini)[key].c_str()));
 }
 
-double xsaitekpanels::getOptionToFloat(string key)
+double xsaitekpanels::getOptionToDouble(string key)
 {
     return (getOption(key, 0.0));
 }

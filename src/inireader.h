@@ -53,7 +53,7 @@ namespace xsaitekpanels {
     /*
      * Same thing as getOptionToInt, but returning a double.
      */
-    double getOptionToFloat(std::string key);
+    double getOptionToDouble(std::string key);
     double getOption(std::string key, double dfl_value);
 }
 

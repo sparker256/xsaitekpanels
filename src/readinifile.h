@@ -6,7 +6,7 @@ namespace xsaitekpanels {
         I2R_END_ARG,
         I2R_CMD_ARG,
         I2R_INT_ARG,
-        I2R_FLOAT_ARG,
+        I2R_DOUBLE_ARG,
         I2R_DR_ARG
     };
 

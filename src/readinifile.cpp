@@ -36,7 +36,9 @@ static void cmd_from_ini(Command **cmd, const char *opt_name,
     if ((*cmd) != NULL)
         delete (*cmd);
 
-    if (cmdname != "")
+    if (cmdname == "null")
+        *cmd = NULL;
+    else if (cmdname != "")
         *cmd = new Command(cmdname);
     else if (dfl_cmdname != NULL)
         *cmd = new Command(string(dfl_cmdname));
@@ -78,7 +80,7 @@ static void dr_from_ini(Dataref **dr, const char *opt_name,
  *         (char *), a default value (int) and a result pointer (int *). If
  *         remap != 0, the result is filled with the integer value of the
  *         INI option. Otherwise, the result is filled with the default value.
- *      *) I2R_FLOAT_ARG: same as I2R_INT_ARG, but the ints are floats.
+ *      *) I2R_DOUBLE_ARG: same as I2R_INT_ARG, but the ints are doubles.
  *      *) I2R_DR_ARG: takes three additional arguments, an INI option name
  *         (char *), a default dataref name (char *) and a result dataref
  *         pointer (XPLMDataRef *). If remap != 0, the INI option's string
@@ -146,9 +148,9 @@ void xsaitekpanels::ini2remap(const char *remap_name, ...)
                 *result = getOption(opt_name, dfl_value);
             else
                 *result = dfl_value;
-        } else if (arg_type == I2R_FLOAT_ARG) {
+        } else if (arg_type == I2R_DOUBLE_ARG) {
             double dfl_value = va_arg(ap, double);
-            float *result = va_arg(ap, float *);
+            double *result = va_arg(ap, double *);
 
             assert(result != NULL);
             if (remap_state > 0)
