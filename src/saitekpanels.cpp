@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Sep 14 2016   **************
+// ****** Oct 19 2016   **************
 
-#define PLUGIN_VERSION "2.54 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 254
+#define PLUGIN_VERSION "2.55 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 255
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -4096,6 +4096,12 @@ PLUGIN_API void	XPluginStop(void)
        hid_close(biphandle[stopbipcnt]);
        stopbipcnt--;
   }
+
+  // *** if open close that tpm panel ***
+
+    if (tpmcnt > 0) {
+        hid_close(tpmhandle);
+    }
 
   // ********** Unregitser the callback on quit. *************
   XPLMUnregisterFlightLoopCallback(MyPanelsFlightLoopCallback, NULL);
