@@ -1747,7 +1747,6 @@ void process_upper_com2_switch()
                     }
                 }
             } else if (radnum == 1) {
-                sprintf(radtestbuf, "Xsaitekpanels: rad2uprcom2actstbybtnremap ==  %d \n", rad2uprcom2actstbybtnremap);
                 XPLMDebugString(radtestbuf);
                 if (rad2uprcom2actstbybtnremap == 2) {
                     if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
@@ -1765,7 +1764,6 @@ void process_upper_com2_switch()
                     }
                 }
             } else if (radnum == 2) {
-                sprintf(radtestbuf, "Xsaitekpanels: rad3uprcom2actstbybtnremap ==  %d \n", rad3uprcom2actstbybtnremap);
                 XPLMDebugString(radtestbuf);
                 if (rad3uprcom2actstbybtnremap == 2) {
                     if(testbit(radiobuf[radnum],UPPER_ACT_STBY)) {

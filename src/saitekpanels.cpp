@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Oct 19 2016   **************
+// ****** Oct 20 2016   **************
 
-#define PLUGIN_VERSION "2.55 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 255
+#define PLUGIN_VERSION "2.56 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 256
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -69,12 +69,12 @@ XPLMCommandRef Rad1UprCom2CrsUpRemapableCmd = NULL, Rad1UprCom2CrsDnRemapableCmd
 XPLMCommandRef Rad1UprCom2FnUpRemapableCmd = NULL, Rad1UprCom2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprCom2ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1UprObs1CrsUpRemapableCmd = NULL, Rad1UprObs1CrsDnRemapableCmd = NULL;
+XPLMCommandRef Rad1UprObs2FnUpRemapableCmd = NULL, Rad1UprObs2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprObs1FnUpRemapableCmd = NULL, Rad1UprObs1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav1CrsUpRemapableCmd = NULL, Rad1UprNav1CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav1FnUpRemapableCmd = NULL, Rad1UprNav1FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav1ActStbyRemapableCmd = NULL;
 XPLMCommandRef Rad1UprObs2CrsUpRemapableCmd = NULL, Rad1UprObs2CrsDnRemapableCmd = NULL;
-XPLMCommandRef Rad1UprObs2FnUpRemapableCmd = NULL, Rad1UprObs2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2CrsUpRemapableCmd = NULL, Rad1UprNav2CrsDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2FnUpRemapableCmd = NULL, Rad1UprNav2FnDnRemapableCmd = NULL;
 XPLMCommandRef Rad1UprNav2ActStbyRemapableCmd = NULL;
@@ -3394,6 +3394,12 @@ PLUGIN_API int XPluginStart(char *		outName,
     }
     hid_free_enumeration(tpm_devs);
 
+    // *** if open close that tpm panel ***
+
+      if (tpmcnt > 0) {
+          hid_close(tpmhandle);
+      }
+
   sprintf(buf, "Xsaitekpanels: found %d Switch  %d Radio  %d Multi  %d BIP  %d TPM Panels\n", switchcnt, radcnt, multicnt, bipcnt, tpmcnt);
   XPLMDebugString(buf);
 
@@ -4097,11 +4103,6 @@ PLUGIN_API void	XPluginStop(void)
        stopbipcnt--;
   }
 
-  // *** if open close that tpm panel ***
-
-    if (tpmcnt > 0) {
-        hid_close(tpmhandle);
-    }
 
   // ********** Unregitser the callback on quit. *************
   XPLMUnregisterFlightLoopCallback(MyPanelsFlightLoopCallback, NULL);

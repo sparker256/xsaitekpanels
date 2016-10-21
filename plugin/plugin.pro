@@ -19,8 +19,8 @@ win32 {
     message(win32)
     CONFIG += dll    	
     DEFINES += APL=0 IBM=1 LIN=0
-    INCLUDEPATH += ../../hidapi-0.8.0-rc1_Patched/hidapi
-    SOURCES += ../../hidapi-0.8.0-rc1_Patched/windows/hid.c
+    INCLUDEPATH += ../hidapi/hidapi
+    SOURCES += ../hidapi/windows/hid.c
     LIBS += -L../SDK/Libraries/Win
     TARGET = win.xpl
     INCLUDEPATH += .
@@ -50,8 +50,8 @@ unix:!macx {
     TARGET = lin.xpl
     # WARNING! This requires the latest version of the X-SDK !!!!
     QMAKE_CXXFLAGS += -fvisibility=hidden
-    INCLUDEPATH += ../../hidapi-0.8.0-rc1_Patched/hidapi
-    SOURCES += ../../hidapi-0.8.0-rc1_Patched/linux/hid.c
+    INCLUDEPATH += ../hidapi/hidapi
+    SOURCES += ../hidapi/linux/hid.c
     LIBS += `pkg-config libudev --libs`
     QMAKE_LFLAGS += -Wl,-rpath=./Resources/plugins/Xsaitekpanels/64
     QMAKE_RPATH=
@@ -63,9 +63,9 @@ macx {
     DEFINES += APL=1 IBM=0 LIN=0
     TARGET = mac.xpl
     QMAKE_LFLAGS += -F../SDK/Libraries/Mac/ -framework XPWidgets -framework XPLM
-    INCLUDEPATH += ../../hidapi-0.8.0-rc1_Patched/hidapi
+    INCLUDEPATH += ../hidapi/hidapi
     SOURCES += \
-          ../../hidapi-0.8.0-rc1_Patched/mac/hid.c
+          ../hidapi/mac/hid.c
     LIBS += -framework IOKit -framework CoreFoundation
 }
 
