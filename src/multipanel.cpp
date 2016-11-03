@@ -126,6 +126,8 @@ enum {
 #define mutex_exit(mtx)         VERIFY(pthread_mutex_unlock(mtx) == 0)
 #endif  /* !IBM */
 
+static int multipanel_debug = 0;
+
 static vector<Multipanel *> multipanels;
 static double flash_intval = DFL_FLASH_INTVAL;
 
@@ -177,43 +179,45 @@ static Dataref *MultiAltSwitchOwnedDataRef = NULL,
 
 #define getbit(arg, bit)        (((arg) >> bit) & 1)
 
-#if 0
+static const char *
+button_type2string(button_type_t type)
+{
+    switch (type) {
+    case MomentaryPushButton:
+        return "MomentaryPushButton";
+    case OneShotButton:
+        return "OneShotButton";
+    case ToggleButton:
+        return "ToggleButton";
+    default:
+        ASSERT(type == MomentaryPushUpHoldDownButton);
+        return "MomentaryPushUpHoldDownButton";
+    }
+}
+
 static void
 debug_print_switch(const char *name, const switch_info_t *sw)
 {
-    logMsg("switch: %s\n"
-        "dr: %s\n"
-        "up_cmd: %s\n"
-        "dn_cmd: %s\n"
-        "maxval: %.1f\n"
-        "minval: %.1f\n"
-        "step: %.1f\n"
-        "accel: %.1f\n"
-        "max_accel: %.1f\n"
-        "loop: %d\n", name, sw->dr ? sw->dr->get_drname().c_str() : "",
-        sw->up_cmd ? sw->up_cmd->get_cmdname().c_str() : "",
-        sw->dn_cmd ? sw->dn_cmd->get_cmdname().c_str() : "",
+    dbg_log(multipanel, 1,
+        "switch %s dr: %s up_cmd: %s dn_cmd: %s maxval: %g minval: %g "
+        "step: %g accel: %g max_accel: %g loop: %d", name,
+        sw->dr ? sw->dr->get_drname().c_str() : "",
+        sw->up_cmd ? sw->up_cmd->get_cmdname().c_str() : "(null)",
+        sw->dn_cmd ? sw->dn_cmd->get_cmdname().c_str() : "(null)",
         sw->maxval, sw->minval, sw->step, sw->accel, sw->max_accel, sw->loop);
 }
 
 static void
 debug_print_button(const char *name, const button_info_t *btn)
 {
-    logMsg("button: %s\n"
-        "type: %d\n"
-        "cmd: %s\n"
-        "rev_cmd: %s\n"
-        "dr: %s\n"
-        "on: %.1f\n"
-        "off: %.1f\n"
-        "max: %.1f\n"
-        "min: %.1f\n", name, btn->type,
+    dbg_log(multipanel, 1,
+        "button %s type: %s cmd: %s rev_cmd: %s dr: %s on: %g "
+        "off: %g max: %g min: %g", name, button_type2string(btn->type),
         btn->cmd ? btn->cmd->get_cmdname().c_str() : "",
         btn->rev_cmd ? btn->rev_cmd->get_cmdname().c_str() : "",
         btn->dr ? btn->dr->get_drname().c_str() : "",
         btn->on_value, btn->off_value, btn->max_value, btn->min_value);
 }
-#endif
 
 static inline uint32_t my_ntohl(uint32_t x)
 {
@@ -561,7 +565,7 @@ void Multipanel::process_ias_switch()
 {
     bool ismach;
 
-    ismach = (ias_is_mach_dr->geti() == 1);
+    ismach = (ias_is_mach_dr->geti() != 0);
     process_switch(&switches[!ismach ? IAS_SW_INFO : IAS_MACH_SW_INFO]);
 
     enable_readout(READOUT_IAS);
@@ -976,6 +980,7 @@ template <typename T>static void ini_opt_setup(const char *optname,
 
 void xsaitekpanels::reconfigure_all_multipanels()
 {
+    multipanel_debug = getOptionToInt("multipanel_debug");
     for (size_t i = 0, n = multipanels.size(); i < n; i++) {
         Multipanel *mp = multipanels[i];
         mp->reconfigure();
@@ -1044,12 +1049,18 @@ void Multipanel::reconfigure()
         I2R_DOUBLE_ARG, "trim_up_accel", 1.0, &trim_up_accel,
         I2R_DOUBLE_ARG, "trim_up_max_accel", 3.0, &trim_up_max_accel,
         I2R_END_ARG);
+    dbg_log(multipanel, 1, "trim_up cmd: %s accel: %g max_accel: %g",
+        trim_up_cmd ? trim_up_cmd->get_cmdname().c_str() : "(null)",
+        trim_up_accel, trim_up_max_accel);
     ini2remap("Trim Dn remapable",
         I2R_CMD_ARG, "trim_dn_remapable_cmd",
         "sim/flight_controls/pitch_trim_down", &trim_down_cmd,
         I2R_DOUBLE_ARG, "trim_dn_accel", 1.0, &trim_down_accel,
         I2R_DOUBLE_ARG, "trim_dn_max_accel", 3.0, &trim_down_max_accel,
         I2R_END_ARG);
+    dbg_log(multipanel, 1, "trim_dn cmd: %s accel: %g max_accel: %g",
+        trim_down_cmd ? trim_down_cmd->get_cmdname().c_str() : "(null)",
+        trim_down_accel, trim_down_max_accel);
 
 #define BUTTON_FROM_INI_ARGS(btn, basename, dfl_type, dfl_cmd, dfl_rev_cmd, \
     dfl_dr, dfl_on_val, dfl_off_val, dfl_max, dfl_min) \
@@ -1151,6 +1162,30 @@ void Multipanel::reconfigure()
         OnOffFlash3StateLight, "sim/cockpit2/autopilot/backcourse_status",
         NULL));
 #undef BUTTON_LIGHT_FROM_INI_ARGS
+
+    debug_print_switch("Alt Switch", &switches[ALT_SW_INFO]);
+    debug_print_switch("Vs Switch", &switches[VS_SW_INFO]);
+    debug_print_switch("Ias Switch", &switches[IAS_SW_INFO]);
+    debug_print_switch("Ias Mach Switch", &switches[IAS_MACH_SW_INFO]);
+    dbg_log(multipanel, 1, "ias_ismach_remapable_data = %s",
+        ias_is_mach_dr->get_drname().c_str());
+    debug_print_switch("Hdg Switch", &switches[HDG_SW_INFO]);
+    debug_print_switch("Crs Switch", &switches[CRS_SW_INFO]);
+    debug_print_switch("Crs2 Switch", &switches[CRS2_SW_INFO]);
+
+    debug_print_button("Ap Button", &button_info[AP_BTN_INFO]);
+    debug_print_button("Hdg Button", &button_info[HDG_BTN_INFO]);
+    debug_print_button("Nav Button", &button_info[NAV_BTN_INFO]);
+    debug_print_button("Lnav Button", &button_info[LNAV_BTN_INFO]);
+    debug_print_button("Ias Button", &button_info[IAS_BTN_INFO]);
+    debug_print_button("Ias Changeover Button",
+        &button_info[IAS_CHANGEOVER_BTN_INFO]);
+    debug_print_button("Alt Button", &button_info[ALT_BTN_INFO]);
+    debug_print_button("Vs Button", &button_info[VS_BTN_INFO]);
+    debug_print_button("Apr Button", &button_info[APR_BTN_INFO]);
+    debug_print_button("Rev Button", &button_info[REV_BTN_INFO]);
+    debug_print_button("Flaps Up Button", &button_info[FLAPS_UP_BTN_INFO]);
+    debug_print_button("Flaps Dn Button", &button_info[FLAPS_DN_BTN_INFO]);
 }
 
 void xsaitekpanels::register_multipanel_drs()

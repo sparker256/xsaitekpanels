@@ -28,6 +28,17 @@
 const char *xsaitekpanels::log_basename(const char *filename);
 #endif  /* !__GNUC__ && !__clang__ */
 
+namespace xsaitekpanels {
+    void logMsg_impl(const char *filename, int line, const char *fmt, ...)
+        PRINTF_ATTR(3);
+    void logMsg_v_impl(const char *filename, int line, const char *fmt,
+        va_list ap);
+    void log_backtrace();
+}
+
+#define logMsg(...) xsaitekpanels::logMsg_impl(log_basename(__FILE__), \
+    __LINE__, __VA_ARGS__)
+
 /*
  * This is an assert-like macro, except that we always perform the assertion
  * check, regardless of the setting of the NDEBUG macro. We also drop a msg
@@ -36,10 +47,10 @@ const char *xsaitekpanels::log_basename(const char *filename);
 #define VERIFY(x) \
     do { \
         if (!(x)) { \
-            xsaitekpanels::logMsg("assertion \"" #x "\" failed\n"); \
+            logMsg("assertion \"" #x "\" failed\n"); \
             fprintf(stderr, "%s:%d: assertion \"" #x "\" failed\n", \
                 log_basename(__FILE__), __LINE__); \
-            xsaitekpanels::logBacktrace(); \
+            xsaitekpanels::log_backtrace(); \
             abort(); \
         } \
     } while (0)
@@ -50,14 +61,19 @@ const char *xsaitekpanels::log_basename(const char *filename);
 #define ASSERT(x) (void)(x)
 #endif  /* NDEBUG */
 
-namespace xsaitekpanels {
-
-#define logMsg(...) logMsg_impl(log_basename(__FILE__), __LINE__, __VA_ARGS__)
-    void logMsg_impl(const char *filename, int line, const char *fmt, ...)
-        PRINTF_ATTR(3);
-    void logMsg_v_impl(const char *filename, int line, const char *fmt,
-        va_list ap);
-    void logBacktrace();
-}
+/*
+ * This macro can be used to emit debug messages at various levels of
+ * verbosity. It checks if the value of an integer variable named
+ * <class>_debug is greater than or equal to <level>. If it is, it will
+ * generate a log message using the remaining macro arguments.
+ * Make sure to set the associated debug variable appropriately to see
+ * these debug messages. See xsaitekpanels::reconfigure_all_multipanels()
+ * for an example.
+ */
+#define dbg_log(class, level, ...) \
+    do { \
+        if (class ## _debug >= level) \
+            logMsg(__VA_ARGS__); \
+    } while (0)
 
 #endif /* _XSAITEKPANELS_LOG_H_ */

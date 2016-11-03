@@ -30,7 +30,7 @@ Dataref::Dataref(string drname_in)
 
             if (sscanf(idx.c_str(), "%u", (unsigned *)&dr_index) != 1) {
                 logMsg("Error parsing bracket array offset in dataref "
-                    "specifier \"%s\"\n", drname_in.c_str());
+                    "specifier \"%s\"", drname_in.c_str());
             }
         }
     }
@@ -58,7 +58,7 @@ template <typename T>void Dataref::get(T *value)
     if (is_null)
         return;
     if (!lazy_init()) {
-        logMsg("attempting to scalar-read nonexistent dataref \"%s\"\n",
+        logMsg("attempting to scalar-read nonexistent dataref \"%s\"",
             drname.c_str());
         return;
     }
@@ -78,7 +78,7 @@ template <typename T>void Dataref::get(T *value)
         XPLMGetDatavf(dr, &fvalue, offset, 1);
         *value = fvalue;
     } else {
-        logMsg("attempting to scalar-read unknown type (%d) dataref \"%s\"\n",
+        logMsg("attempting to scalar-read unknown type (%d) dataref \"%s\"",
             type, drname.c_str());
     }
 }
@@ -114,12 +114,12 @@ template <typename T>void Dataref::set(T value)
     if (is_null)
         return;
     if (!lazy_init()) {
-        logMsg("attempting to scalar-write nonexistent dataref \"%s\"\n",
+        logMsg("attempting to scalar-write nonexistent dataref \"%s\"",
             drname.c_str());
         return;
     }
     if (!writable) {
-        logMsg("attempting to scalar-write read-only dataref \"%s\"\n",
+        logMsg("attempting to scalar-write read-only dataref \"%s\"",
             drname.c_str());
         return;
     }
@@ -137,7 +137,7 @@ template <typename T>void Dataref::set(T value)
         float fvalue = value;
         XPLMSetDatavf(dr, &fvalue, offset, 1);
     } else {
-        logMsg("attempting to scalar-write unknown type (%d) dataref \"%s\"\n",
+        logMsg("attempting to scalar-write unknown type (%d) dataref \"%s\"",
             type, drname.c_str());
     }
 }
@@ -158,7 +158,7 @@ template <typename T>size_t Dataref::getv(T *values, size_t off, size_t num)
     }
 
     if (!lazy_init()) {
-        logMsg("attempting to vector-read nonexistent dataref \"%s\"\n",
+        logMsg("attempting to vector-read nonexistent dataref \"%s\"",
             drname.c_str());
         return (0);
     }
@@ -199,13 +199,13 @@ template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
         return;
 
     if (!lazy_init()) {
-        logMsg("attempting to vector-write to nonexistent dataref \"%s\"\n",
+        logMsg("attempting to vector-write to nonexistent dataref \"%s\"",
             drname.c_str());
         return;
     }
 
     if (!writable) {
-        logMsg("Attempting to vector-write to read-only dataref \"%s\"\n",
+        logMsg("Attempting to vector-write to read-only dataref \"%s\"",
             drname.c_str());
         return;
     }
@@ -227,7 +227,7 @@ template <typename T>void Dataref::setv(const T *values, size_t off, size_t num)
             fvalues[i] = values[i];
         XPLMSetDatavf(dr, fvalues, off == -1lu ? offset : off, num);
     } else {
-        logMsg("attempting to vector-write unknown type (%d) dataref \"%s\"\n",
+        logMsg("attempting to vector-write unknown type (%d) dataref \"%s\"",
             type, drname.c_str());
     }
 }

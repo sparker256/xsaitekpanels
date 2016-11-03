@@ -36,14 +36,21 @@ void xsaitekpanels::parseIniFile(const char *fileName)
     while (!infile.eof())       // To get you all the lines.
     {
         string line;
+        size_t comment;
 
         getline(infile, line);   // Saves the line in STRING.
 
-        /* trim leading whitespace */
-        line = trim(line, true, false);
+        /* trim leading and trailing whitespace */
+        line = trim(line, true, true);
 
-        /* Is the option a comment */
-        if (line[0] == '#' || line[0] == ';')
+        /* strip a trailing comment */
+        if ((comment = line.find('#')) != string::npos ||
+            (comment = line.find(';')) != string::npos)
+            /* retrim right-side whitespace */
+            line = trim(line.substr(0, comment), false, true);
+
+        /* skip empty lines */
+        if (line.length() == 0)
             continue;
 
         key = parseOptionName(line);
@@ -109,7 +116,8 @@ static string parseOptionName(string value)
     if (found == string::npos)
         return "";
 
-    return (trim(value.substr(0, found - 1), true, true));
+    /* loading whitespace will have already been trimmed */
+    return (trim(value.substr(0, found), false, true));
 }
 
 static string parseOptionValue(string value)
@@ -119,7 +127,8 @@ static string parseOptionValue(string value)
     if (found == string::npos)
         return ("");
 
-    return (trim(value.substr(found + 1), true, true));
+    /* trailing whitespace will have already been trimmed */
+    return (trim(value.substr(found + 1), true, false));
 }
 
 static string trim(string str, bool left, bool right)
@@ -134,7 +143,7 @@ static string trim(string str, bool left, bool right)
         }
     }
     if (right) {
-        for (e = n - 1; e >= 0; e--) {
+        for (; e >= 0; e--) {
             if (!isspace(str[e]))
                 break;
         }

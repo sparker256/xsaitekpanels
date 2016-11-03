@@ -22,7 +22,7 @@ win32 {
     DEFINES += APL=0 IBM=1 LIN=0
     INCLUDEPATH += ../hidapi-0.8.0-rc1_Patched/hidapi
     SOURCES += ../hidapi-0.8.0-rc1_Patched/windows/hid.c
-    LIBS += -L../SDK/Libraries/Win
+    LIBS += -L../SDK/Libraries/Win -ldbghelp
     TARGET = win.xpl
     INCLUDEPATH += .
     LIBS +=  "-lsetupapi"
