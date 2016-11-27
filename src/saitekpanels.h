@@ -762,24 +762,6 @@ extern XPLMDataRef Rad3LowerDigit9OwnedDataRef,
   Rad3LowerDigit10OwnedDataRef;
 
 
-extern XPLMMenuID RadioMenu;
-extern XPLMMenuID RadioMenuId;
-
-extern XPWidgetID RadioWidgetID;
-extern XPWidgetID RadioWindow;
-extern XPWidgetID RadioSpeed1CheckWidget[50];
-extern XPWidgetID RadioSpeed2CheckWidget[50];
-extern XPWidgetID RadioSpeed3CheckWidget[50];
-extern XPWidgetID RadioSpeed4CheckWidget[50];
-extern XPWidgetID RadioSpeed5CheckWidget[50];
-
-extern XPWidgetID RadioAdf1CheckWidget[50];
-extern XPWidgetID RadioAdf2CheckWidget[50];
-
-extern XPWidgetID RadioQnh0CheckWidget[50];
-extern XPWidgetID RadioQnh1CheckWidget[50];
-
-
 // ************************ Radio Panel variables **************************
 extern int radio0fd,
   radio1fd,
@@ -2579,6 +2561,7 @@ extern string ias_button_data_remapable,
 extern string apr_button_data_remapable,
   rev_button_data_remapable;
 
+
 extern string ap_light_remapable,
   hdg_light_remapable,
   nav_light_vorloc_remapable,
@@ -2599,6 +2582,7 @@ extern string ias_light_flash_remapable,
   apr_light_flash_remapable,
   rev_light_flash_remapable;
 
+/*
 extern string alt_switch_up_remapable,
   alt_switch_dn_remapable;
 extern string vs_switch_up_remapable,
@@ -2612,7 +2596,6 @@ extern string crs_switch_up_remapable,
 
 extern string attr_switch_remapable;
 
-
 extern string ias_ismach_remapable;
 
 extern string alt_switch_data_remapable;
@@ -2624,12 +2607,15 @@ extern string crs_switch_data_remapable;
 extern string ap_vs_up_remapable,
   ap_vs_dn_remapable;
 
+*/
+
 extern string trim_up_remapable,
   trim_dn_remapable;
 extern string flaps_up_remapable,
   flaps_dn_remapable;
 
 extern hid_device *multihandle;
+
 
 // ****************  End Multi Panel Section  ***************************
 
@@ -3154,17 +3140,6 @@ extern int SwitchLandingPositionGetDataiCallback(void *inRefcon);
 extern void SwitchLandingPositionSetDataiCallback(void *inRefcon,
     int SwitchLandingPosition);
 
-
-
-extern XPLMMenuID SwitchMenu;
-extern XPLMMenuID SwitchMenuId;
-extern XPWidgetID SwitchEnableCheckWidget[50];
-extern XPWidgetID SwitchDisableCheckWidget[50];
-extern XPWidgetID SwitchRemapCheckWidget[50];
-extern XPWidgetID SwitchBatAltCheckWidget[50];
-extern XPWidgetID SwitchAltBatCheckWidget[50];
-extern XPWidgetID SwitchStartSwitchOldCheckWidget[50];
-extern XPWidgetID SwitchStartSwitchNewCheckWidget[50];
 
 // ***************** Switch Panel variables ********************
 extern int switchfd;

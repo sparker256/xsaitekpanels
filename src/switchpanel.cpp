@@ -80,26 +80,6 @@ static unsigned char switchwbuf[2],
   gearled;
 
 
-void process_switch_menu()
-{
-
-    XPLMClearAllMenuItems(SwitchMenuId);
-
-    XPLMAppendMenuItem(SwitchMenuId, "Switch Panel Widget",
-        (void *) "SWITCH_WIDGET", 4);
-
-
-    switchwbuf[0] = 0;
-    switchwbuf[1] = gearled;
-    if (bataltinverse == 0) {
-        MASTER_BATTERY = 7, MASTER_ALTENATOR = 6;
-    }
-    if (bataltinverse == 1) {
-        MASTER_BATTERY = 6, MASTER_ALTENATOR = 7;
-    }
-
-}
-
 // ***************** Engines Mag Off ********************
 
 void process_engines_mag_off_switch()
@@ -3979,7 +3959,6 @@ void process_gear_switch_switch()
 //  ***** Switch Panel Process  *****
 void process_switch_panel()
 {
-    process_switch_menu();
 
     // ******* Only do a read if something new to be read ********
 

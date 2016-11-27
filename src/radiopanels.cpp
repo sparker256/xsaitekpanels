@@ -338,15 +338,6 @@ void process_store_lower_radio_knobs_last_status();
 void process_retrive_lower_radio_knobs_last_status();
 
 
-void process_radio_menu()
-{
-
-    XPLMClearAllMenuItems(RadioMenuId);
-    XPLMAppendMenuItem(RadioMenuId, "Radio Panel Widget",
-        (void *) "RADIO_WIDGET", 1);
-
-}
-
 void process_radio_upper_display()
 {
 
@@ -7333,7 +7324,6 @@ void process_store_lower_radio_knobs_last_status()
 // ***** Radio Panel Process  *******
 void process_radio_panel()
 {
-    process_radio_menu();
 
     XPLMSetDatai(Rad1UpperFineIncTicksOwnedDataRef, 0);
     XPLMSetDatai(Rad2UpperFineIncTicksOwnedDataRef, 0);
