@@ -2382,6 +2382,7 @@ extern XPLMDataRef AprLightFlashRemapableData,
 
 extern XPLMDataRef HsiSelector;
 
+/*
 extern XPWidgetID MultiSpeed1CheckWidget[50];
 extern XPWidgetID MultiSpeed2CheckWidget[50];
 extern XPWidgetID MultiSpeed3CheckWidget[50];
@@ -2392,6 +2393,7 @@ extern XPWidgetID MultiTrimSpeed2CheckWidget[50];
 extern XPWidgetID MultiTrimSpeed3CheckWidget[50];
 extern XPWidgetID MultiAt0CheckWidget[50];
 extern XPWidgetID MultiAt1CheckWidget[50];
+*/
 
 // **************** Multi Panel variables *******************
 extern int multifd;
