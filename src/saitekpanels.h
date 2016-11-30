@@ -2343,57 +2343,9 @@ extern XPLMCommandRef TrimUpRemapableCmd,
 
 // ************ Multi Panel Data Ref *****************
 
-extern XPLMDataRef ApButtonRemapableData,
-  HdgButtonRemapableData,
-  NavButtonVorlocRemapableData,
-  NavButtonLnavRemapableData,
-  IasButtonRemapableData,
-  IasChangeoverButtonRemapableData,
-  AltButtonRemapableData,
-  VsButtonRemapableData,
-  AprButtonRemapableData,
-  RevButtonRemapableData;
-
-extern Dataref *AltSwitchRemapableData,
-  *VsSwitchRemapableData,
-  *IasSwitchRemapableData,
-  *HdgSwitchRemapableData,
-  *CrsSwitchRemapableData;
-
-extern XPLMDataRef ApLightRemapableData,
-  HdgLightRemapableData;
-extern XPLMDataRef NavLightVorlocRemapableData,
-  NavLightLnavRemapableData;
-extern XPLMDataRef IasLightRemapableData;
-extern XPLMDataRef AltLightRemapableData,
-  VsLightRemapableData;
-extern XPLMDataRef AprLightRemapableData,
-  RevLightRemapableData;
-
-extern XPLMDataRef ApLightFlashRemapableData,
-  HdgLightFlashRemapableData;
-extern XPLMDataRef NavLightVorlocFlashRemapableData,
-  NavLightLnavFlashRemapableData;
-extern XPLMDataRef IasLightFlashRemapableData;
-extern XPLMDataRef AltLightFlashRemapableData,
-  VsLightFlashRemapableData;
-extern XPLMDataRef AprLightFlashRemapableData,
-  RevLightFlashRemapableData;
 
 extern XPLMDataRef HsiSelector;
 
-/*
-extern XPWidgetID MultiSpeed1CheckWidget[50];
-extern XPWidgetID MultiSpeed2CheckWidget[50];
-extern XPWidgetID MultiSpeed3CheckWidget[50];
-extern XPWidgetID MultiSpeed4CheckWidget[50];
-extern XPWidgetID MultiSpeed5CheckWidget[50];
-extern XPWidgetID MultiTrimSpeed1CheckWidget[50];
-extern XPWidgetID MultiTrimSpeed2CheckWidget[50];
-extern XPWidgetID MultiTrimSpeed3CheckWidget[50];
-extern XPWidgetID MultiAt0CheckWidget[50];
-extern XPWidgetID MultiAt1CheckWidget[50];
-*/
 
 // **************** Multi Panel variables *******************
 extern int multifd;
@@ -2537,79 +2489,6 @@ extern void MultiAprBtnStatusSetDataiCallback(void *inRefcon,
 extern int MultiRevBtnStatusGetDataiCallback(void *inRefcon);
 extern void MultiRevBtnStatusSetDataiCallback(void *inRefcon,
     int MultiRevBtnStatus);
-
-
-
-
-extern string ap_button_remapable,
-  hdg_button_remapable,
-  nav_button_vorloc_remapable,
-  nav_button_lnav_remapable;
-extern string ias_button_remapable,
-  ias_changeover_button_remapable,
-  alt_button_remapable,
-  vs_button_remapable;
-extern string apr_button_remapable,
-  rev_button_remapable;
-
-extern string ap_button_data_remapable,
-  hdg_button_data_remapable,
-  nav_button_data_vorloc_remapable,
-  nav_button_data_lnav_remapable;
-extern string ias_button_data_remapable,
-  ias_changeover_button_data_remapable,
-  alt_button_data_remapable,
-  vs_button_data_remapable;
-extern string apr_button_data_remapable,
-  rev_button_data_remapable;
-
-
-extern string ap_light_remapable,
-  hdg_light_remapable,
-  nav_light_vorloc_remapable,
-  nav_light_lnav_remapable;
-extern string ias_light_remapable,
-  alt_light_remapable,
-  vs_light_remapable,
-  apr_light_remapable,
-  rev_light_remapable;
-
-extern string ap_light_flash_remapable,
-  hdg_light_flash_remapable,
-  nav_light_vorloc_flash_remapable,
-  nav_light_lnav_flash_remapable;
-extern string ias_light_flash_remapable,
-  alt_light_flash_remapable,
-  vs_light_flash_remapable,
-  apr_light_flash_remapable,
-  rev_light_flash_remapable;
-
-/*
-extern string alt_switch_up_remapable,
-  alt_switch_dn_remapable;
-extern string vs_switch_up_remapable,
-  vs_switch_dn_remapable;
-extern string ias_switch_up_remapable,
-  ias_switch_dn_remapable;
-extern string hdg_switch_up_remapable,
-  hdg_switch_dn_remapable;
-extern string crs_switch_up_remapable,
-  crs_switch_dn_remapable;
-
-extern string attr_switch_remapable;
-
-extern string ias_ismach_remapable;
-
-extern string alt_switch_data_remapable;
-extern string vs_switch_data_remapable;
-extern string ias_switch_data_remapable;
-extern string hdg_switch_data_remapable;
-extern string crs_switch_data_remapable;
-
-extern string ap_vs_up_remapable,
-  ap_vs_dn_remapable;
-
-*/
 
 extern string trim_up_remapable,
   trim_dn_remapable;

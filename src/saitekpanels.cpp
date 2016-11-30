@@ -780,78 +780,9 @@ XPLMCommandRef XpanelsFnButtonCommand = NULL,
 XPLMCommandRef XpanelsLeftStartFnButtonCommand = NULL;
 
 
-XPLMCommandRef ApButtonRemapableCmd = NULL,
-    HdgButtonRemapableCmd = NULL;
-XPLMCommandRef NavButtonVorlocRemapableCmd = NULL,
-    NavButtonLnavRemapableCmd = NULL;
-XPLMCommandRef IasButtonRemapableCmd = NULL,
-    IasChangeoverButtonRemapableCmd = NULL;
-XPLMCommandRef AltButtonRemapableCmd = NULL,
-    VsButtonRemapableCmd = NULL;
-XPLMCommandRef AprButtonRemapableCmd = NULL,
-    RevButtonRemapableCmd = NULL;
-
-XPLMCommandRef AltSwitchUpRemapableCmd = NULL,
-    AltSwitchDnRemapableCmd = NULL;
-XPLMCommandRef VsSwitchUpRemapableCmd = NULL,
-    VsSwitchDnRemapableCmd = NULL;
-XPLMCommandRef IasSwitchUpRemapableCmd = NULL,
-    IasSwitchDnRemapableCmd = NULL;
-XPLMCommandRef HdgSwitchUpRemapableCmd = NULL,
-    HdgSwitchDnRemapableCmd = NULL;
-XPLMCommandRef CrsSwitchUpRemapableCmd = NULL,
-    CrsSwitchDnRemapableCmd = NULL;
-
-XPLMCommandRef ApVsUpRemapableCmd = NULL,
-    ApVsDnRemapableCmd = NULL;
-
-XPLMCommandRef TrimUpRemapableCmd = NULL,
-    TrimDnRemapableCmd = NULL;
-XPLMCommandRef FlapsUpRemapableCmd = NULL,
-    FlapsDnRemapableCmd = NULL;
-
-XPLMDataRef ApButtonRemapableData = NULL,
-    HdgButtonRemapableData = NULL;
-XPLMDataRef NavButtonVorlocRemapableData = NULL,
-    NavButtonLnavRemapableData = NULL;
-XPLMDataRef IasButtonRemapableData = NULL,
-    IasChangeoverButtonRemapableData = NULL;
-XPLMDataRef AltButtonRemapableData = NULL,
-    VsButtonRemapableData = NULL;
-XPLMDataRef AprButtonRemapableData = NULL,
-    RevButtonRemapableData = NULL;
-
-Dataref *AltSwitchRemapableData = NULL,
-    *VsSwitchRemapableData = NULL,
-    *IasSwitchRemapableData = NULL,
-    *HdgSwitchRemapableData = NULL,
-    *CrsSwitchRemapableData = NULL;
-
-XPLMDataRef ApLightRemapableData = NULL,
-    HdgLightRemapableData = NULL;
-XPLMDataRef NavLightVorlocRemapableData = NULL,
-    NavLightLnavRemapableData = NULL;
-XPLMDataRef IasLightRemapableData = NULL;
-XPLMDataRef AltLightRemapableData = NULL,
-    VsLightRemapableData = NULL;
-XPLMDataRef AprLightRemapableData = NULL,
-    RevLightRemapableData = NULL;
-
-XPLMDataRef ApLightFlashRemapableData = NULL,
-    HdgLightFlashRemapableData = NULL;
-XPLMDataRef NavLightVorlocFlashRemapableData = NULL,
-    NavLightLnavFlashRemapableData = NULL;
-XPLMDataRef IasLightFlashRemapableData = NULL;
-XPLMDataRef AltLightFlashRemapableData = NULL,
-    VsLightFlashRemapableData = NULL;
-XPLMDataRef AprLightFlashRemapableData = NULL,
-    RevLightFlashRemapableData = NULL;
-
-
-Dataref *AirspeedIsMach = NULL,
-    *Airspeed = NULL;
-
 XPLMDataRef HsiSelector = NULL;
+
+
 
 XPLMDataRef MultiPanelCountDataRef = NULL;
 
@@ -2944,54 +2875,6 @@ char RadioSpeedText[50][200] = {
 hid_device *radiohandle[4];
 
 // ********************** Multi Panel variables ***********************
-int loaded737 = 0;
-
-int trimspeed,
-    multispeed,
-    autothrottleswitchenable,
-    autothrottleswitcharmedvalue;
-
-int apbuttonremap,
-    hdgbuttonremap,
-    navbuttonremap,
-    iasbuttonremap;
-int altbuttonremap,
-    vsbuttonremap,
-    aprbuttonremap,
-    revbuttonremap;
-int lightdatareferencetype;
-
-int navlightvorlocdata,
-    navlightlnavdata;
-int iaslightdata,
-    altlightdata,
-    vslightdata,
-    aprlightdata,
-    revlightdata;
-
-int hdglightflashdata,
-    navlightflashvorlocdata,
-    navlightflashlnavdata;
-int iaslightflashdata,
-    altlightflashdata,
-    vslightflashdata,
-    aprlightflashdata,
-    revlightflashdata;
-
-int altswitchremap,
-    vsswitchremap,
-    iasswitchremap;
-int hdgswitchremap,
-    crsswitchremap;
-int trimupremap,
-    trimdnremap;
-int flapsupremap,
-    flapsdnremap;
-
-int attrswitchremap;
-
-int iasismachremap,
-    iasismachvalue;
 
 
 int xpanelsfnbutton = 0,
@@ -3001,78 +2884,6 @@ int xpanelsleftstartfnbutton = 0;
 
 // This is the storage for the data we own.
 
-
-string ap_button_remapable,
-    hdg_button_remapable,
-    nav_button_vorloc_remapable,
-    nav_button_lnav_remapable;
-string ias_button_remapable,
-    ias_changeover_button_remapable,
-    alt_button_remapable,
-    vs_button_remapable;
-string apr_button_remapable,
-    rev_button_remapable;
-
-string ap_button_data_remapable,
-    hdg_button_data_remapable,
-    nav_button_data_vorloc_remapable,
-    nav_button_data_lnav_remapable;
-string ias_button_data_remapable,
-    ias_changeover_button_data_remapable,
-    alt_button_data_remapable,
-    vs_button_data_remapable;
-string apr_button_data_remapable,
-    rev_button_data_remapable;
-
-
-string ap_light_remapable,
-    hdg_light_remapable,
-    nav_light_vorloc_remapable,
-    nav_light_lnav_remapable;
-string ias_light_remapable,
-    alt_light_remapable,
-    vs_light_remapable,
-    apr_light_remapable,
-    rev_light_remapable;
-
-string ap_light_flash_remapable,
-    hdg_light_flash_remapable,
-    nav_light_vorloc_flash_remapable,
-    nav_light_lnav_flash_remapable;
-string ias_light_flash_remapable,
-    alt_light_flash_remapable,
-    vs_light_flash_remapable,
-    apr_light_flash_remapable,
-    rev_light_flash_remapable;
-
-/*
-string alt_switch_up_remapable,
-    alt_switch_dn_remapable;
-string vs_switch_up_remapable,
-    vs_switch_dn_remapable;
-string ias_switch_up_remapable,
-    ias_switch_dn_remapable;
-string hdg_switch_up_remapable,
-    hdg_switch_dn_remapable;
-string crs_switch_up_remapable,
-    crs_switch_dn_remapable;
-
-string attr_switch_remapable;
-
-string ias_ismach_remapable;
-
-string alt_switch_data_remapable;
-string vs_switch_data_remapable;
-string ias_switch_data_remapable;
-string hdg_switch_data_remapable;
-string crs_switch_data_remapable;
-
-string attr_switch_data_remapable;
-
-string ap_vs_up_remapable,
-    ap_vs_dn_remapable;
-
-*/
 
 
 string trim_up_remapable,
@@ -4605,8 +4416,8 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
     int BipSubMenuItem,
         Bip2SubMenuItem,
         Bip3SubMenuItem;
-    int RadioSubMenuItem;
-    int SwitchSubMenuItem;
+//    int RadioSubMenuItem;
+//    int SwitchSubMenuItem;
     int XsaitekpanelsSharedRetVal;
 
     XPLMGetVersions(&wrgXPlaneVersion, &wrgXPLMVersion, &wrgHostID);
