@@ -127,6 +127,7 @@ namespace xsaitekpanels {
         uint64_t trim_up_last;
         double trim_up_maxval, trim_up_minval;
         double trim_up_step;
+        bool trim_up_loop;
         double trim_up_accel, trim_up_max_accel;
 
         Command *trim_down_cmd;
@@ -135,6 +136,7 @@ namespace xsaitekpanels {
         uint64_t trim_down_last;
         double trim_down_maxval, trim_down_minval;
         double trim_down_step;
+        bool trim_down_loop;
         double trim_down_accel, trim_down_max_accel;
 
         bool flashon;

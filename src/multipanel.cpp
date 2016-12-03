@@ -836,10 +836,10 @@ void Multipanel::process_trim_wheel()
 {
     process_switch_adjustment(buttons_main[TRIM_WHEEL_UP],
         &trim_up_last, trim_up_data, trim_up_cmd, trim_up_maxval, trim_up_minval, trim_up_step,
-        false, trim_up_accel, trim_up_max_accel);
+        trim_up_loop, trim_up_accel, trim_up_max_accel);
     process_switch_adjustment(buttons_main[TRIM_WHEEL_DN],
         &trim_down_last, trim_down_data, trim_down_cmd, trim_down_maxval, trim_down_minval, trim_down_step,
-        false, trim_down_accel, trim_down_max_accel);
+        trim_down_loop, trim_down_accel, trim_down_max_accel);
     /* mark events as consumed */
     buttons_main[TRIM_WHEEL_UP] = 0;
     buttons_main[TRIM_WHEEL_DN] = 0;
@@ -1051,6 +1051,7 @@ void Multipanel::reconfigure()
         I2R_DOUBLE_ARG, "trim_up_maxval", 1.0, &trim_up_maxval,
         I2R_DOUBLE_ARG, "trim_up_minval", 0.0, &trim_up_minval,
         I2R_DOUBLE_ARG, "trim_up_step", 0.1, &trim_up_step,
+        I2R_INT_ARG, "trim_up_loop", 0, &trim_up_loop,
         I2R_DOUBLE_ARG, "trim_up_accel", 1.0, &trim_up_accel,
         I2R_DOUBLE_ARG, "trim_up_max_accel", 3.0, &trim_up_max_accel,
         I2R_END_ARG);
@@ -1065,6 +1066,7 @@ void Multipanel::reconfigure()
         I2R_DOUBLE_ARG, "trim_dn_maxval", 1.0, &trim_down_maxval,
         I2R_DOUBLE_ARG, "trim_dn_minval", 0.0, &trim_down_minval,
         I2R_DOUBLE_ARG, "trim_dn_step", 0.1, &trim_down_step,
+        I2R_INT_ARG, "trim_down_loop", 0, &trim_down_loop,
         I2R_DOUBLE_ARG, "trim_dn_accel", 1.0, &trim_down_accel,
         I2R_DOUBLE_ARG, "trim_dn_max_accel", 3.0, &trim_down_max_accel,
         I2R_END_ARG);
