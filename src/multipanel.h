@@ -122,13 +122,19 @@ namespace xsaitekpanels {
         Dataref *ias_is_mach_dr;
 
         Command *trim_up_cmd;
+        Dataref *trim_up_data;
         int trim_wheel_up_dampen;
         uint64_t trim_up_last;
+        double trim_up_maxval, trim_up_minval;
+        double trim_up_step;
         double trim_up_accel, trim_up_max_accel;
 
         Command *trim_down_cmd;
+        Dataref *trim_down_data;
         int trim_wheel_down_dampen;
         uint64_t trim_down_last;
+        double trim_down_maxval, trim_down_minval;
+        double trim_down_step;
         double trim_down_accel, trim_down_max_accel;
 
         bool flashon;

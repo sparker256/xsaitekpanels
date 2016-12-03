@@ -835,10 +835,10 @@ void Multipanel::process_button_common(int btn_id, button_info_t *btn_info)
 void Multipanel::process_trim_wheel()
 {
     process_switch_adjustment(buttons_main[TRIM_WHEEL_UP],
-        &trim_up_last, NULL, trim_up_cmd, 0, 0, 0,
+        &trim_up_last, trim_up_data, trim_up_cmd, trim_up_maxval, trim_up_minval, trim_up_step,
         false, trim_up_accel, trim_up_max_accel);
     process_switch_adjustment(buttons_main[TRIM_WHEEL_DN],
-        &trim_down_last, NULL, trim_down_cmd, 0, 0, 0,
+        &trim_down_last, trim_down_data, trim_down_cmd, trim_down_maxval, trim_down_minval, trim_down_step,
         false, trim_down_accel, trim_down_max_accel);
     /* mark events as consumed */
     buttons_main[TRIM_WHEEL_UP] = 0;
@@ -1046,6 +1046,11 @@ void Multipanel::reconfigure()
     ini2remap("Trim Up remapable",
         I2R_CMD_ARG, "trim_up_remapable_cmd",
         "sim/flight_controls/pitch_trim_up", &trim_up_cmd,
+        I2R_DR_ARG, "trim_up_remapable_data",
+        "sim/flightmodel2/controls/elevator_trim", &trim_up_data,
+        I2R_DOUBLE_ARG, "trim_up_maxval", 1.0, &trim_up_maxval,
+        I2R_DOUBLE_ARG, "trim_up_minval", 0.0, &trim_up_minval,
+        I2R_DOUBLE_ARG, "trim_up_step", 0.1, &trim_up_step,
         I2R_DOUBLE_ARG, "trim_up_accel", 1.0, &trim_up_accel,
         I2R_DOUBLE_ARG, "trim_up_max_accel", 3.0, &trim_up_max_accel,
         I2R_END_ARG);
@@ -1055,6 +1060,11 @@ void Multipanel::reconfigure()
     ini2remap("Trim Dn remapable",
         I2R_CMD_ARG, "trim_dn_remapable_cmd",
         "sim/flight_controls/pitch_trim_down", &trim_down_cmd,
+        I2R_DR_ARG, "trim_dn_remapable_data",
+        "sim/flightmodel2/controls/elevator_trim", &trim_down_data,
+        I2R_DOUBLE_ARG, "trim_dn_maxval", 1.0, &trim_down_maxval,
+        I2R_DOUBLE_ARG, "trim_dn_minval", 0.0, &trim_down_minval,
+        I2R_DOUBLE_ARG, "trim_dn_step", 0.1, &trim_down_step,
         I2R_DOUBLE_ARG, "trim_dn_accel", 1.0, &trim_down_accel,
         I2R_DOUBLE_ARG, "trim_dn_max_accel", 3.0, &trim_down_max_accel,
         I2R_END_ARG);
