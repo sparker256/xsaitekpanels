@@ -260,9 +260,11 @@ void xsaitekpanels::write_int(void *user_info, int value)
 int xsaitekpanels::read_int_array(void *user_info, int *values, int offset,
     int count)
 {
-    if (user_info == NULL || values == NULL)
+    if (user_info == NULL)
         return (0);
     std::vector<int> *src = (std::vector<int> *)user_info;
+    if (values == NULL)
+        return (src->size());
     for (int i = 0, n = src->size(); i + offset < n && i < count; i++)
         values[i] = (*src)[i + offset];
     return (count);
