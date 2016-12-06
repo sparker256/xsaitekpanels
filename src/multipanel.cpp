@@ -1055,9 +1055,13 @@ void Multipanel::reconfigure()
         I2R_DOUBLE_ARG, "trim_up_accel", 1.0, &trim_up_accel,
         I2R_DOUBLE_ARG, "trim_up_max_accel", 3.0, &trim_up_max_accel,
         I2R_END_ARG);
-    dbg_log(multipanel, 1, "trim_up cmd: %s accel: %g max_accel: %g",
+    dbg_log(multipanel, 1, "trim_up cmd: %s  trim_up_data: %s  "
+        "trim_up_maxval: %g  trim_up_minval: %g  trim_up_step: %g  "
+        "trim_up_loop: %d  trim_upaccel: %g  trim_upmax_accel: %g  ",
         trim_up_cmd ? trim_up_cmd->get_cmdname().c_str() : "(null)",
-        trim_up_accel, trim_up_max_accel);
+        trim_up_data ? trim_up_data->get_drname().c_str() : "",
+        trim_up_maxval, trim_up_minval, trim_up_step,
+        trim_up_loop, trim_up_accel, trim_up_max_accel);
     ini2remap("Trim Dn remapable",
         I2R_CMD_ARG, "trim_dn_remapable_cmd",
         "sim/flight_controls/pitch_trim_down", &trim_down_cmd,
@@ -1066,13 +1070,17 @@ void Multipanel::reconfigure()
         I2R_DOUBLE_ARG, "trim_dn_maxval", 1.0, &trim_down_maxval,
         I2R_DOUBLE_ARG, "trim_dn_minval", 0.0, &trim_down_minval,
         I2R_DOUBLE_ARG, "trim_dn_step", 0.1, &trim_down_step,
-        I2R_INT_ARG, "trim_down_loop", 0, &trim_down_loop,
+        I2R_INT_ARG, "trim_dn_loop", 0, &trim_down_loop,
         I2R_DOUBLE_ARG, "trim_dn_accel", 1.0, &trim_down_accel,
         I2R_DOUBLE_ARG, "trim_dn_max_accel", 3.0, &trim_down_max_accel,
         I2R_END_ARG);
-    dbg_log(multipanel, 1, "trim_dn cmd: %s accel: %g max_accel: %g",
+    dbg_log(multipanel, 1, "trim_down_cmd: %s  trim_down_data: %s  "
+        "trim_down_maxval: %g  trim_down_minval: %g  trim_down_step: %g  "
+        "trim_down_loop: %d  accel: %g  max_accel: %g  ",
         trim_down_cmd ? trim_down_cmd->get_cmdname().c_str() : "(null)",
-        trim_down_accel, trim_down_max_accel);
+        trim_down_data ? trim_down_data->get_drname().c_str() : "",
+        trim_down_maxval, trim_down_minval, trim_down_step,
+        trim_down_loop, trim_down_accel, trim_down_max_accel);
 
 #define BUTTON_FROM_INI_ARGS(btn, basename, dfl_type, dfl_cmd, dfl_rev_cmd, \
     dfl_dr, dfl_on_val, dfl_off_val, dfl_max, dfl_min) \
