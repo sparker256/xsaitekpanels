@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Oct 20 2016   **************
+// ****** Dec 08 2016   **************
 
-#define PLUGIN_VERSION "2.56 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 256
+#define PLUGIN_VERSION "2.57 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 257
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -3856,7 +3856,11 @@ PLUGIN_API int XPluginStart(char *		outName,
                XsaitekpanelsMenuHandler,
                (void *)2);
 
-
+       XPLMClearAllMenuItems(BipMenuId);
+       XPLMAppendMenuItem(BipMenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
+       XPLMAppendMenuItem(BipMenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
+       XPLMAppendMenuSeparator(BipMenuId);
+       XPLMAppendMenuItem(BipMenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
 
        BipWidgetID = XPCreateWidget(XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_width"))-150,
                                     XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_height")),
@@ -3882,6 +3886,13 @@ PLUGIN_API int XPluginStart(char *		outName,
            Bip2SubMenuItem,
            XsaitekpanelsMenuHandler,
            (void *)3);
+
+       XPLMClearAllMenuItems(Bip2MenuId);
+       XPLMAppendMenuItem(Bip2MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
+       XPLMAppendMenuItem(Bip2MenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
+       XPLMAppendMenuSeparator(Bip2MenuId);
+       XPLMAppendMenuItem(Bip2MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
+
      }
 
      if(bipcnt > 2) {
@@ -3897,6 +3908,13 @@ PLUGIN_API int XPluginStart(char *		outName,
            Bip3SubMenuItem,
            XsaitekpanelsMenuHandler,
            (void *)4);
+
+       XPLMClearAllMenuItems(Bip3MenuId);
+       XPLMAppendMenuItem(Bip3MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
+       XPLMAppendMenuItem(Bip3MenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
+       XPLMAppendMenuSeparator(Bip3MenuId);
+       XPLMAppendMenuItem(Bip3MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
+
      }
 
    }
@@ -3916,6 +3934,9 @@ PLUGIN_API int XPluginStart(char *		outName,
                MultiSubMenuItem,
                XsaitekpanelsMenuHandler,
                (void *)5);
+
+       XPLMClearAllMenuItems(MultiMenuId);
+       XPLMAppendMenuItem(MultiMenuId, "Multi Panel Widget", (void *) "MULTI_WIDGET", 1);
   }
 
    if (radcnt > 0) {
@@ -3933,6 +3954,10 @@ PLUGIN_API int XPluginStart(char *		outName,
                RadioSubMenuItem,
                XsaitekpanelsMenuHandler,
                (void *)6);
+
+       XPLMClearAllMenuItems(RadioMenuId);
+       XPLMAppendMenuItem(RadioMenuId, "Radio Panel Widget", (void *) "RADIO_WIDGET", 1);
+
   }
 
    if (switchcnt > 0) {
@@ -3950,6 +3975,11 @@ PLUGIN_API int XPluginStart(char *		outName,
                SwitchSubMenuItem,
                XsaitekpanelsMenuHandler,
                (void *)7);
+
+       XPLMClearAllMenuItems(SwitchMenuId);
+
+       XPLMAppendMenuItem(SwitchMenuId, "Switch Panel Widget", (void *) "SWITCH_WIDGET", 4);
+
   }
 
   return 1;

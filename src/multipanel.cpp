@@ -65,13 +65,6 @@ static unsigned char multibuf[4];
 static unsigned char multiwbuf[13];
 
 
-void process_multi_menu()
-{
-    XPLMClearAllMenuItems(MultiMenuId);
-    XPLMAppendMenuItem(MultiMenuId, "Multi Panel Widget", (void *) "MULTI_WIDGET", 1);
-}
-
-
 void process_multi_display()
 {
   switch(multiseldis){
@@ -3590,7 +3583,6 @@ void process_multi_blank_display()
 void process_multi_panel()
 
 {
-    process_multi_menu();
 
     XPLMSetDatai(MultiKnobIncTicksOwnedDataRef, 0);
     XPLMSetDatai(MultiKnobDecTicksOwnedDataRef, 0);

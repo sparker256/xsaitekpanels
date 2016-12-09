@@ -882,45 +882,6 @@ bool ReadConfigFile(string PlaneICAO)
 return true;
 }
 
-void process_bip_menu()
-
-{
-
-    if(bipnum == bipwcscmp0) {
-
-      XPLMClearAllMenuItems(BipMenuId);
-      XPLMAppendMenuItem(BipMenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
-      XPLMAppendMenuItem(BipMenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
-      XPLMAppendMenuSeparator(BipMenuId);
-      XPLMAppendMenuItem(BipMenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
-
-    }
-
-    if(bipnum == bipwcscmp1) {
-
-        XPLMClearAllMenuItems(Bip2MenuId);
-        XPLMAppendMenuItem(Bip2MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
-        XPLMAppendMenuItem(Bip2MenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
-        XPLMAppendMenuSeparator(Bip2MenuId);
-        XPLMAppendMenuItem(Bip2MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
-
-    }
-
-
-    if(bipnum == bipwcscmp2) {
-
-        XPLMClearAllMenuItems(Bip3MenuId);
-        XPLMAppendMenuItem(Bip3MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
-        XPLMAppendMenuItem(Bip3MenuId, "Write a CSV Table for debugging", (void *) "<<CSV>>", 1);
-        XPLMAppendMenuSeparator(Bip3MenuId);
-        XPLMAppendMenuItem(Bip3MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
-
-    }
-
-
-    return;
-
-}
 
 void process_bip_what_to_do_v()
 
@@ -1108,7 +1069,6 @@ void process_bip_panel()
     }
 
 
-    process_bip_menu();
     process_bip_what_to_do_v();
 
 
