@@ -63,11 +63,6 @@ static unsigned char switchwbuf[2], gearled;
 void process_switch_menu()
 {
 
-    XPLMClearAllMenuItems(SwitchMenuId);
-
-    XPLMAppendMenuItem(SwitchMenuId, "Switch Panel Widget", (void *) "SWITCH_WIDGET", 4);
-
-
   switchwbuf[0] = 0;
   switchwbuf[1] = gearled;
   if (bataltinverse == 0) {
