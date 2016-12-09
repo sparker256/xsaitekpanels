@@ -5341,6 +5341,14 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
                 BipSubMenuItem, XsaitekpanelsMenuHandler, (void *) 2);
 
 
+            XPLMClearAllMenuItems(BipMenuId);
+            XPLMAppendMenuItem(BipMenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
+            XPLMAppendMenuItem(BipMenuId, "Write a CSV Table for debugging",
+                (void *) "<<CSV>>", 1);
+            XPLMAppendMenuSeparator(BipMenuId);
+            XPLMAppendMenuItem(BipMenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
+
+
 
             BipWidgetID = XPCreateWidget(XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_width")) - 150, XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_height")), XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_width")) - 10, XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_height")) - 10,  // screen coordinates
                 1,              // visible
@@ -5357,6 +5365,15 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
             Bip2MenuId = XPLMCreateMenu("Bip2",
                 XsaitekpanelsMenu,
                 Bip2SubMenuItem, XsaitekpanelsMenuHandler, (void *) 3);
+
+            XPLMClearAllMenuItems(Bip2MenuId);
+            XPLMAppendMenuItem(Bip2MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
+            XPLMAppendMenuItem(Bip2MenuId, "Write a CSV Table for debugging",
+                (void *) "<<CSV>>", 1);
+            XPLMAppendMenuSeparator(Bip2MenuId);
+            XPLMAppendMenuItem(Bip2MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
+
+
         }
 
         if (bipcnt > 2) {
@@ -5366,6 +5383,14 @@ PLUGIN_API int XPluginStart(char *outName, char *outSig, char *outDesc)
             Bip3MenuId = XPLMCreateMenu("Bip3",
                 XsaitekpanelsMenu,
                 Bip3SubMenuItem, XsaitekpanelsMenuHandler, (void *) 4);
+
+            XPLMClearAllMenuItems(Bip3MenuId);
+            XPLMAppendMenuItem(Bip3MenuId, "[DEFAULT]", (void *) "[DEFAULT]", 1);
+            XPLMAppendMenuItem(Bip3MenuId, "Write a CSV Table for debugging",
+                (void *) "<<CSV>>", 1);
+            XPLMAppendMenuSeparator(Bip3MenuId);
+            XPLMAppendMenuItem(Bip3MenuId, "[BIP_TEST]", (void *) "[BIP_TEST]", 1);
+
         }
 
     }
