@@ -2538,6 +2538,7 @@ extern int wrgHostID;
 
 extern int dre_enable;
 
+extern int icao_enable;
 
 
 #endif

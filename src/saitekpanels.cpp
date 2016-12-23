@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Dec 08 2016   **************
+// ****** Dec 21 2016   **************
 
-#define PLUGIN_VERSION "2.57 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 257
+#define PLUGIN_VERSION "2.58 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 258
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -2967,6 +2967,9 @@ int wrgXPLMVersion = 0;
 int wrgHostID = 0;
 
 int dre_enable = 0;
+
+int icao_enable = 0;
+
 
 int readiniloop = 0;
 
@@ -8986,6 +8989,12 @@ float	MyPanelsFlightLoopCallback(
   XPLMSetDatai(RadioPanelCountDataRef, radcnt);
   XPLMSetDatai(MultiPanelCountDataRef, multicnt);
   XPLMSetDatai(TpmPanelCountDataRef, tpmcnt);
+
+  if (icao_enable == 0) {
+      XPHideWidget(BipWidgetID);
+  } else {
+      XPShowWidget(BipWidgetID);
+  }
 
   return interval;
 }

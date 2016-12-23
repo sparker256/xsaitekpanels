@@ -250,6 +250,8 @@ void process_read_ini_file()
     // Do we want to enable data reference editor?
     dre_enable = getOptionToInt("Data Reference Editor enable");
 
+    // Do we want to display the plane icao on screen?
+    icao_enable = getOptionToInt("Display Plane ICAO On Screen Enable");
 
     // bat alt normal alt bat cessna
     bataltinverse = getOptionToInt("Bat Alt inverse");
