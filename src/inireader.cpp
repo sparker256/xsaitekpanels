@@ -7,18 +7,13 @@
 
 #include <functional>
 #include <cctype>
+#include <map>
 
 #include "inireader.h"
 
 using namespace std;
 
-struct ConfigItems {
-        std::string key;
-        std::string value;
-};
-ConfigItems* iniItem[1300];
-
-int i = 0;
+std::map<std::string, std::string> configMap;
 
 void parseIniFile(char *fileName)
 {
@@ -48,82 +43,55 @@ void parseIniFile(char *fileName)
 
                 if (key.length() > 0)
                 {
-                        iniItem[i] = new ConfigItems;
-                        iniItem[i]->key = key;
-                        iniItem[i]->value = parseOptionValue(optionValue);
-                        i++;
+                        configMap[key] = parseOptionValue(optionValue);
                 }
         }
 
-        i--;
         infile.close();
 }
 
 void cleanupIniReader()
 {
-        for (int x = 0; x <= i; x++)
-        {
-                delete iniItem[x];
-        }
-
-        i = 0;
+        configMap.clear();
 }
 
 std::string getOptionToString(std::string key)
 {
-        //Check to see if anything got parsed?
-        if (i == 0)
-        {
-                return "";
-        }
-
-        for (int x = 0; x <= i; x++)
-        {
-                if (key == iniItem[x]->key)
-                {
-                        return iniItem[x]->value;
-                }
-        }
-
+    try {
+        return configMap.at(key);
+    }
+    catch (const std::out_of_range& oor) {
         return "";
+    }
 }
 
 const char *getOptionToChar(std::string key)
 {
-        //Check to see if anything got parsed?
-        if (i == 0)
-        {
-                return "";
-        }
-
-        for (int x = 0; x <= i; x++)
-        {
-                if (key == iniItem[x]->key)
-                {
-                        return iniItem[x]->value.c_str();
-                }
-        }
-
+    try {
+        return configMap.at(key).c_str();
+    }
+    catch (const std::out_of_range& oor) {
         return "";
+    }
 }
 
 int getOptionToInt(std::string key)
 {
-        //Check to see if anything got parsed?
-        if (i == 0)
-        {
-                return 0;
-        }
-
-        for (int x = 0; x <= i; x++)
-        {
-                if (key == iniItem[x]->key)
-                {
-                        return atoi(iniItem[x]->value.c_str());
-                }
-        }
-
+    try {
+        return atoi(configMap.at(key).c_str());
+    }
+    catch (const std::out_of_range& oor) {
         return 0;
+    }
+}
+
+void readOptionAsInt(std::string key, int * value)
+{
+    try {
+        *value = atoi(configMap.at(key).c_str());
+    }
+    catch (const std::out_of_range& oor) {
+    }
 }
 
 std::string parseOptionName(std::string value)
