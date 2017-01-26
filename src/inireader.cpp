@@ -8,6 +8,7 @@
 #include <functional>
 #include <cctype>
 #include <map>
+#include <stdexcept>
 
 #include "inireader.h"
 
