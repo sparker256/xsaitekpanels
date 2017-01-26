@@ -45,6 +45,14 @@ std::string getOptionToString(std::string key);
 int getOptionToInt(std::string key);
 
 /**
+ * Write the value of the requested key to the variable provided by pointer.
+ *
+ * @param	key The option key
+ * @return	none
+ */
+void readOptionAsInt(std::string key, int * value);
+
+/**
  * Return the value of the requested key in with the char type
  *
  * @param    key The option key
