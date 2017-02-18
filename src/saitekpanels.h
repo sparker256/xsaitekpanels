@@ -1668,28 +1668,85 @@ extern XPLMCommandRef StLtOn, StLtOff, NvLtOn, NvLtOff;
 extern XPLMCommandRef BcLtOn, BcLtOff, GearUp, GearDn;
 
 extern XPLMCommandRef MagOffSwitchOnCmd, MagOffSwitchOffCmd;
+extern XPLMCommandRef MagOff2SwitchOnCmd, MagOff2SwitchOffCmd;
+extern XPLMCommandRef MagOff3SwitchOnCmd, MagOff3SwitchOffCmd;
+extern XPLMCommandRef MagOff4SwitchOnCmd, MagOff4SwitchOffCmd;
+extern XPLMCommandRef MagOff5SwitchOnCmd, MagOff5SwitchOffCmd;
+extern XPLMCommandRef MagOff6SwitchOnCmd, MagOff6SwitchOffCmd;
+extern XPLMCommandRef MagOff7SwitchOnCmd, MagOff7SwitchOffCmd;
+extern XPLMCommandRef MagOff8SwitchOnCmd, MagOff8SwitchOffCmd;
+
 extern XPLMCommandRef MagRightSwitchOnCmd, MagRightSwitchOffCmd;
+extern XPLMCommandRef MagRight2SwitchOnCmd, MagRight2SwitchOffCmd;
+extern XPLMCommandRef MagRight3SwitchOnCmd, MagRight3SwitchOffCmd;
+extern XPLMCommandRef MagRight4SwitchOnCmd, MagRight4SwitchOffCmd;
+extern XPLMCommandRef MagRight5SwitchOnCmd, MagRight5SwitchOffCmd;
+extern XPLMCommandRef MagRight6SwitchOnCmd, MagRight6SwitchOffCmd;
+extern XPLMCommandRef MagRight7SwitchOnCmd, MagRight7SwitchOffCmd;
+extern XPLMCommandRef MagRight8SwitchOnCmd, MagRight8SwitchOffCmd;
+
 extern XPLMCommandRef MagLeftSwitchOnCmd, MagLeftSwitchOffCmd;
+extern XPLMCommandRef MagLeft2SwitchOnCmd, MagLeft2SwitchOffCmd;
+extern XPLMCommandRef MagLeft3SwitchOnCmd, MagLeft3SwitchOffCmd;
+extern XPLMCommandRef MagLeft4SwitchOnCmd, MagLeft4SwitchOffCmd;
+extern XPLMCommandRef MagLeft5SwitchOnCmd, MagLeft5SwitchOffCmd;
+extern XPLMCommandRef MagLeft6SwitchOnCmd, MagLeft6SwitchOffCmd;
+extern XPLMCommandRef MagLeft7SwitchOnCmd, MagLeft7SwitchOffCmd;
+extern XPLMCommandRef MagLeft8SwitchOnCmd, MagLeft8SwitchOffCmd;
+
 extern XPLMCommandRef MagBothSwitchOnCmd, MagBothSwitchOffCmd;
+extern XPLMCommandRef MagBoth2SwitchOnCmd, MagBoth2SwitchOffCmd;
+extern XPLMCommandRef MagBoth3SwitchOnCmd, MagBoth3SwitchOffCmd;
+extern XPLMCommandRef MagBoth4SwitchOnCmd, MagBoth4SwitchOffCmd;
+extern XPLMCommandRef MagBoth5SwitchOnCmd, MagBoth5SwitchOffCmd;
+extern XPLMCommandRef MagBoth6SwitchOnCmd, MagBoth6SwitchOffCmd;
+extern XPLMCommandRef MagBoth7SwitchOnCmd, MagBoth7SwitchOffCmd;
+extern XPLMCommandRef MagBoth8SwitchOnCmd, MagBoth8SwitchOffCmd;
+
 extern XPLMCommandRef MagStartSwitchOnCmd, MagStartSwitchOffCmd;
+extern XPLMCommandRef MagStart2SwitchOnCmd, MagStart2SwitchOffCmd;
+extern XPLMCommandRef MagStart3SwitchOnCmd, MagStart3SwitchOffCmd;
+extern XPLMCommandRef MagStart4SwitchOnCmd, MagStart4SwitchOffCmd;
+extern XPLMCommandRef MagStart5SwitchOnCmd, MagStart5SwitchOffCmd;
+extern XPLMCommandRef MagStart6SwitchOnCmd, MagStart6SwitchOffCmd;
+extern XPLMCommandRef MagStart7SwitchOnCmd, MagStart7SwitchOffCmd;
+extern XPLMCommandRef MagStart8SwitchOnCmd, MagStart8SwitchOffCmd;
 
 extern XPLMCommandRef BatMasterSwitchOnCmd, BatMasterSwitchOffCmd;
-
-
+extern XPLMCommandRef BatMaster2SwitchOnCmd, BatMaster2SwitchOffCmd;
+extern XPLMCommandRef BatMaster3SwitchOnCmd, BatMaster3SwitchOffCmd;
+extern XPLMCommandRef BatMaster4SwitchOnCmd, BatMaster4SwitchOffCmd;
+extern XPLMCommandRef BatMaster5SwitchOnCmd, BatMaster5SwitchOffCmd;
+extern XPLMCommandRef BatMaster6SwitchOnCmd, BatMaster6SwitchOffCmd;
+extern XPLMCommandRef BatMaster7SwitchOnCmd, BatMaster7SwitchOffCmd;
+extern XPLMCommandRef BatMaster8SwitchOnCmd, BatMaster8SwitchOffCmd;
 
 extern XPLMCommandRef AltMasterSwitchOnCmd, AltMasterSwitchOffCmd;
-
-
+extern XPLMCommandRef AltMaster2SwitchOnCmd, AltMaster2SwitchOffCmd;
+extern XPLMCommandRef AltMaster3SwitchOnCmd, AltMaster3SwitchOffCmd;
+extern XPLMCommandRef AltMaster4SwitchOnCmd, AltMaster4SwitchOffCmd;
+extern XPLMCommandRef AltMaster5SwitchOnCmd, AltMaster5SwitchOffCmd;
+extern XPLMCommandRef AltMaster6SwitchOnCmd, AltMaster6SwitchOffCmd;
+extern XPLMCommandRef AltMaster7SwitchOnCmd, AltMaster7SwitchOffCmd;
+extern XPLMCommandRef AltMaster8SwitchOnCmd, AltMaster8SwitchOffCmd;
 
 extern XPLMCommandRef AvMasterSwitchOnCmd, AvMasterSwitchOffCmd;
-
-
-
+extern XPLMCommandRef AvMaster2SwitchOnCmd, AvMaster2SwitchOffCmd;
+extern XPLMCommandRef AvMaster3SwitchOnCmd, AvMaster3SwitchOffCmd;
+extern XPLMCommandRef AvMaster4SwitchOnCmd, AvMaster4SwitchOffCmd;
+extern XPLMCommandRef AvMaster5SwitchOnCmd, AvMaster5SwitchOffCmd;
+extern XPLMCommandRef AvMaster6SwitchOnCmd, AvMaster6SwitchOffCmd;
+extern XPLMCommandRef AvMaster7SwitchOnCmd, AvMaster7SwitchOffCmd;
+extern XPLMCommandRef AvMaster8SwitchOnCmd, AvMaster8SwitchOffCmd;
 
 extern XPLMCommandRef FuelPumpOnCmd, FuelPumpOffCmd;
 extern XPLMCommandRef FuelPump2OnCmd, FuelPump2OffCmd;
 extern XPLMCommandRef FuelPump3OnCmd, FuelPump3OffCmd;
 extern XPLMCommandRef FuelPump4OnCmd, FuelPump4OffCmd;
+extern XPLMCommandRef FuelPump5OnCmd, FuelPump5OffCmd;
+extern XPLMCommandRef FuelPump6OnCmd, FuelPump6OffCmd;
+extern XPLMCommandRef FuelPump7OnCmd, FuelPump7OffCmd;
+extern XPLMCommandRef FuelPump8OnCmd, FuelPump8OffCmd;
 
 extern XPLMCommandRef DeiceOnCmd, DeiceOffCmd;
 extern XPLMCommandRef DeiceOnCmd2, DeiceOffCmd2;
@@ -1701,22 +1758,94 @@ extern XPLMCommandRef DeiceOnCmd7, DeiceOffCmd7;
 extern XPLMCommandRef DeiceOnCmd8, DeiceOffCmd8;
 
 extern XPLMCommandRef PitotHeatOnCmd, PitotHeatOffCmd;
-extern XPLMCommandRef Pitot2HeatOnCmd, Pitot2HeatOffCmd;
+extern XPLMCommandRef PitotHeat2OnCmd, PitotHeat2OffCmd;
+extern XPLMCommandRef PitotHeat3OnCmd, PitotHeat3OffCmd;
+extern XPLMCommandRef PitotHeat4OnCmd, PitotHeat4OffCmd;
+extern XPLMCommandRef PitotHeat5OnCmd, PitotHeat5OffCmd;
+extern XPLMCommandRef PitotHeat6OnCmd, PitotHeat6OffCmd;
+extern XPLMCommandRef PitotHeat7OnCmd, PitotHeat7OffCmd;
+extern XPLMCommandRef PitotHeat8OnCmd, PitotHeat8OffCmd;
 
 extern XPLMCommandRef GearUpOnCmd, GearUpOffCmd;
+extern XPLMCommandRef GearUp2OnCmd, GearUp2OffCmd;
+extern XPLMCommandRef GearUp3OnCmd, GearUp3OffCmd;
+extern XPLMCommandRef GearUp4OnCmd, GearUp4OffCmd;
+extern XPLMCommandRef GearUp5OnCmd, GearUp5OffCmd;
+extern XPLMCommandRef GearUp6OnCmd, GearUp6OffCmd;
+extern XPLMCommandRef GearUp7OnCmd, GearUp7OffCmd;
+extern XPLMCommandRef GearUp8OnCmd, GearUp8OffCmd;
+
 extern XPLMCommandRef GearDnOnCmd, GearDnOffCmd;
+extern XPLMCommandRef GearDn2OnCmd, GearDn2OffCmd;
+extern XPLMCommandRef GearDn3OnCmd, GearDn3OffCmd;
+extern XPLMCommandRef GearDn4OnCmd, GearDn4OffCmd;
+extern XPLMCommandRef GearDn5OnCmd, GearDn5OffCmd;
+extern XPLMCommandRef GearDn6OnCmd, GearDn6OffCmd;
+extern XPLMCommandRef GearDn7OnCmd, GearDn7OffCmd;
+extern XPLMCommandRef GearDn8OnCmd, GearDn8OffCmd;
 
 extern XPLMCommandRef CowlFlapsOpenCmd, CowlFlapsCloseCmd;
-extern XPLMCommandRef Cowl2FlapsOpenCmd, Cowl2FlapsCloseCmd;
-extern XPLMCommandRef Cowl3FlapsOpenCmd, Cowl3FlapsCloseCmd;
-extern XPLMCommandRef Cowl4FlapsOpenCmd, Cowl4FlapsCloseCmd;
+extern XPLMCommandRef CowlFlaps2OpenCmd, CowlFlaps2CloseCmd;
+extern XPLMCommandRef CowlFlaps3OpenCmd, CowlFlaps3CloseCmd;
+extern XPLMCommandRef CowlFlaps4OpenCmd, CowlFlaps4CloseCmd;
+extern XPLMCommandRef CowlFlaps5OpenCmd, CowlFlaps5CloseCmd;
+extern XPLMCommandRef CowlFlaps6OpenCmd, CowlFlaps6CloseCmd;
+extern XPLMCommandRef CowlFlaps7OpenCmd, CowlFlaps7CloseCmd;
+extern XPLMCommandRef CowlFlaps8OpenCmd, CowlFlaps8CloseCmd;
 
 extern XPLMCommandRef PanelLightsOnCmd, PanelLightsOffCmd;
+extern XPLMCommandRef PanelLights2OnCmd, PanelLights2OffCmd;
+extern XPLMCommandRef PanelLights3OnCmd, PanelLights3OffCmd;
+extern XPLMCommandRef PanelLights4OnCmd, PanelLights4OffCmd;
+extern XPLMCommandRef PanelLights5OnCmd, PanelLights5OffCmd;
+extern XPLMCommandRef PanelLights6OnCmd, PanelLights6OffCmd;
+extern XPLMCommandRef PanelLights7OnCmd, PanelLights7OffCmd;
+extern XPLMCommandRef PanelLights8OnCmd, PanelLights8OffCmd;
+
 extern XPLMCommandRef BeaconLightsOnCmd, BeaconLightsOffCmd;
+extern XPLMCommandRef BeaconLights2OnCmd, BeaconLights2OffCmd;
+extern XPLMCommandRef BeaconLights3OnCmd, BeaconLights3OffCmd;
+extern XPLMCommandRef BeaconLights4OnCmd, BeaconLights4OffCmd;
+extern XPLMCommandRef BeaconLights5OnCmd, BeaconLights5OffCmd;
+extern XPLMCommandRef BeaconLights6OnCmd, BeaconLights6OffCmd;
+extern XPLMCommandRef BeaconLights7OnCmd, BeaconLights7OffCmd;
+extern XPLMCommandRef BeaconLights8OnCmd, BeaconLights8OffCmd;
+
 extern XPLMCommandRef NavLightsOnCmd, NavLightsOffCmd;
+extern XPLMCommandRef NavLights2OnCmd, NavLights2OffCmd;
+extern XPLMCommandRef NavLights3OnCmd, NavLights3OffCmd;
+extern XPLMCommandRef NavLights4OnCmd, NavLights4OffCmd;
+extern XPLMCommandRef NavLights5OnCmd, NavLights5OffCmd;
+extern XPLMCommandRef NavLights6OnCmd, NavLights6OffCmd;
+extern XPLMCommandRef NavLights7OnCmd, NavLights7OffCmd;
+extern XPLMCommandRef NavLights8OnCmd, NavLights8OffCmd;
+
 extern XPLMCommandRef StrobeLightsOnCmd, StrobeLightsOffCmd;
+extern XPLMCommandRef StrobeLights2OnCmd, StrobeLights2OffCmd;
+extern XPLMCommandRef StrobeLights3OnCmd, StrobeLights3OffCmd;
+extern XPLMCommandRef StrobeLights4OnCmd, StrobeLights4OffCmd;
+extern XPLMCommandRef StrobeLights5OnCmd, StrobeLights5OffCmd;
+extern XPLMCommandRef StrobeLights6OnCmd, StrobeLights6OffCmd;
+extern XPLMCommandRef StrobeLights7OnCmd, StrobeLights7OffCmd;
+extern XPLMCommandRef StrobeLights8OnCmd, StrobeLights8OffCmd;
+
 extern XPLMCommandRef TaxiLightsOnCmd, TaxiLightsOffCmd;
+extern XPLMCommandRef TaxiLights2OnCmd, TaxiLights2OffCmd;
+extern XPLMCommandRef TaxiLights3OnCmd, TaxiLights3OffCmd;
+extern XPLMCommandRef TaxiLights4OnCmd, TaxiLights4OffCmd;
+extern XPLMCommandRef TaxiLights5OnCmd, TaxiLights5OffCmd;
+extern XPLMCommandRef TaxiLights6OnCmd, TaxiLights6OffCmd;
+extern XPLMCommandRef TaxiLights7OnCmd, TaxiLights7OffCmd;
+extern XPLMCommandRef TaxiLights8OnCmd, TaxiLights8OffCmd;
+
 extern XPLMCommandRef LandingLightsOnCmd, LandingLightsOffCmd;
+extern XPLMCommandRef LandingLights2OnCmd, LandingLights2OffCmd;
+extern XPLMCommandRef LandingLights3OnCmd, LandingLights3OffCmd;
+extern XPLMCommandRef LandingLights4OnCmd, LandingLights4OffCmd;
+extern XPLMCommandRef LandingLights5OnCmd, LandingLights5OffCmd;
+extern XPLMCommandRef LandingLights6OnCmd, LandingLights6OffCmd;
+extern XPLMCommandRef LandingLights7OnCmd, LandingLights7OffCmd;
+extern XPLMCommandRef LandingLights8OnCmd, LandingLights8OffCmd;
 
 extern XPLMCommandRef MagOff1, MagOff2, MagOff3, MagOff4;
 extern XPLMCommandRef MagOff5, MagOff6, MagOff7, MagOff8;
@@ -2449,7 +2578,7 @@ extern string fuel_pump8_switch_on, fuel_pump8_switch_off, fuel_pump8_switch_dat
 extern string deice_switch_on, deice_switch_off, deice_switch_data;
 extern string deice2_switch_on, deice2_switch_off, deice2_switch_data;
 extern string deice3_switch_on, deice3_switch_off, deice3_switch_data;
-extern string deice4_switch_on, deice4_switch_off, deice4_switch_data ;
+extern string deice4_switch_on, deice4_switch_off, deice4_switch_data;
 extern string deice5_switch_on, deice5_switch_off, deice5_switch_data;
 extern string deice6_switch_on, deice6_switch_off, deice6_switch_data;
 extern string deice7_switch_on, deice7_switch_off, deice7_switch_data;
@@ -2465,7 +2594,22 @@ extern string pitot7_heat_switch_on, pitot7_heat_switch_off, pitot7_heat_switch_
 extern string pitot8_heat_switch_on, pitot8_heat_switch_off, pitot8_heat_switch_data;
 
 extern string gear_switch_up_on, gear_switch_up_off, gear_switch_up_data;
-extern string gear_switch_down_on, gear_switch_down_off, gear_switch_down_data ;
+extern string gear2_switch_up_on, gear2_switch_up_off, gear2_switch_up_data;
+extern string gear3_switch_up_on, gear3_switch_up_off, gear3_switch_up_data;
+extern string gear4_switch_up_on, gear4_switch_up_off, gear4_switch_up_data;
+extern string gear5_switch_up_on, gear5_switch_up_off, gear5_switch_up_data;
+extern string gear6_switch_up_on, gear6_switch_up_off, gear6_switch_up_data;
+extern string gear7_switch_up_on, gear7_switch_up_off, gear7_switch_up_data;
+extern string gear8_switch_up_on, gear8_switch_up_off, gear8_switch_up_data;
+
+extern string gear_switch_down_on, gear_switch_down_off, gear_switch_down_data;
+extern string gear2_switch_down_on, gear2_switch_down_off, gear2_switch_down_data;
+extern string gear3_switch_down_on, gear3_switch_down_off, gear3_switch_down_data;
+extern string gear4_switch_down_on, gear4_switch_down_off, gear4_switch_down_data;
+extern string gear5_switch_down_on, gear5_switch_down_off, gear5_switch_down_data;
+extern string gear6_switch_down_on, gear6_switch_down_off, gear6_switch_down_data;
+extern string gear7_switch_down_on, gear7_switch_down_off, gear7_switch_down_data;
+extern string gear8_switch_down_on, gear8_switch_down_off, gear8_switch_down_data;
 
 extern string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data ;
 extern string cowl2_flaps_open, cowl2_flaps_close, cowl2_flaps_data;
@@ -2489,26 +2633,46 @@ extern string beacon_lights_switch_on, beacon_lights_switch_off, beacon_lights_s
 extern string beacon_lights_switch2_on, beacon_lights_switch2_off, beacon_lights_switch2_data;
 extern string beacon_lights_switch3_on, beacon_lights_switch3_off, beacon_lights_switch3_data;
 extern string beacon_lights_switch4_on, beacon_lights_switch4_off, beacon_lights_switch4_data;
+extern string beacon_lights_switch5_on, beacon_lights_switch5_off, beacon_lights_switch5_data;
+extern string beacon_lights_switch6_on, beacon_lights_switch6_off, beacon_lights_switch6_data;
+extern string beacon_lights_switch7_on, beacon_lights_switch7_off, beacon_lights_switch7_data;
+extern string beacon_lights_switch8_on, beacon_lights_switch8_off, beacon_lights_switch8_data;
 
 extern string nav_lights_switch_on, nav_lights_switch_off, nav_lights_switch_data;
 extern string nav_lights_switch2_on, nav_lights_switch2_off, nav_lights_switch2_data;
 extern string nav_lights_switch3_on, nav_lights_switch3_off, nav_lights_switch3_data;
-extern string nav_lights_switch4_on, nav_lights_switc4h_off, nav_lights_switch4_data;
+extern string nav_lights_switch4_on, nav_lights_switch4_off, nav_lights_switch4_data;
+extern string nav_lights_switch5_on, nav_lights_switch5_off, nav_lights_switch5_data;
+extern string nav_lights_switch6_on, nav_lights_switch6_off, nav_lights_switch6_data;
+extern string nav_lights_switch7_on, nav_lights_switch7_off, nav_lights_switch7_data;
+extern string nav_lights_switch8_on, nav_lights_switch8_off, nav_lights_switch8_data;
 
 extern string strobe_lights_switch_on, strobe_lights_switch_off, strobe_lights_switch_data;
 extern string strobe_lights_switch2_on, strobe_lights_switch2_off, strobe_lights_switch2_data;
 extern string strobe_lights_switch3_on, strobe_lights_switch3_off, strobe_lights_switch3_data;
 extern string strobe_lights_switch4_on, strobe_lights_switch4_off, strobe_lights_switch4_data;
+extern string strobe_lights_switch5_on, strobe_lights_switch5_off, strobe_lights_switch5_data;
+extern string strobe_lights_switch6_on, strobe_lights_switch6_off, strobe_lights_switch6_data;
+extern string strobe_lights_switch7_on, strobe_lights_switch7_off, strobe_lights_switch7_data;
+extern string strobe_lights_switch8_on, strobe_lights_switch8_off, strobe_lights_switch8_data;
 
 extern string taxi_lights_switch_on, taxi_lights_switch_off, taxi_lights_switch_data;
 extern string taxi_lights_switch2_on, taxi_lights_switch2_off, taxi_lights_switch2_data;
 extern string taxi_lights_switch3_on, taxi_lights_switch3_off, taxi_lights_switch3_data;
 extern string taxi_lights_switch4_on, taxi_lights_switch4_off, taxi_lights_switch4_data;
+extern string taxi_lights_switch5_on, taxi_lights_switch5_off, taxi_lights_switch5_data;
+extern string taxi_lights_switch6_on, taxi_lights_switch6_off, taxi_lights_switch6_data;
+extern string taxi_lights_switch7_on, taxi_lights_switch7_off, taxi_lights_switch7_data;
+extern string taxi_lights_switch8_on, taxi_lights_switch8_off, taxi_lights_switch8_data;
 
 extern string landing_lights_switch_on, landing_lights_switch_off, landing_lights_switch_data;
 extern string landing_lights_switch2_on, landing_lights_switch2_off, landing_lights_switch2_data;
 extern string landing_lights_switch3_on, landing_lights_switch3_off, landing_lights_switch3_data;
 extern string landing_lights_switch4_on, landing_lights_switch4_off, landing_lights_switch4_data;
+extern string landing_lights_switch5_on, landing_lights_switch5_off, landing_lights_switch5_data;
+extern string landing_lights_switch6_on, landing_lights_switch6_off, landing_lights_switch6_data;
+extern string landing_lights_switch7_on, landing_lights_switch7_off, landing_lights_switch7_data;
+extern string landing_lights_switch8_on, landing_lights_switch8_off, landing_lights_switch8_data;
 
 extern int switchloop;
 

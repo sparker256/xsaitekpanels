@@ -1,6 +1,6 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jan 26 2017   **************
+// ****** Feb 18 2017   **************
 
 #define PLUGIN_VERSION "2.59 stable build " __DATE__ " " __TIME__
 #define PLUGIN_VERSION_NUMBER 259
@@ -599,19 +599,85 @@ XPLMCommandRef StLtOn = NULL, StLtOff = NULL, NvLtOn = NULL, NvLtOff = NULL;
 XPLMCommandRef BcLtOn = NULL, BcLtOff = NULL, GearUp = NULL, GearDn = NULL;
 
 XPLMCommandRef MagOffSwitchOnCmd = NULL, MagOffSwitchOffCmd = NULL;
+XPLMCommandRef MagOff2SwitchOnCmd = NULL, MagOff2SwitchOffCmd = NULL;
+XPLMCommandRef MagOff3SwitchOnCmd = NULL, MagOff3SwitchOffCmd = NULL;
+XPLMCommandRef MagOff4SwitchOnCmd = NULL, MagOff4SwitchOffCmd = NULL;
+XPLMCommandRef MagOff5SwitchOnCmd = NULL, MagOff5SwitchOffCmd = NULL;
+XPLMCommandRef MagOff6SwitchOnCmd = NULL, MagOff6SwitchOffCmd = NULL;
+XPLMCommandRef MagOff7SwitchOnCmd = NULL, MagOff7SwitchOffCmd = NULL;
+XPLMCommandRef MagOff8SwitchOnCmd = NULL, MagOff8SwitchOffCmd = NULL;
+
 XPLMCommandRef MagRightSwitchOnCmd = NULL, MagRightSwitchOffCmd = NULL;
+XPLMCommandRef MagRight2SwitchOnCmd = NULL, MagRight2SwitchOffCmd = NULL;
+XPLMCommandRef MagRight3SwitchOnCmd = NULL, MagRight3SwitchOffCmd = NULL;
+XPLMCommandRef MagRight4SwitchOnCmd = NULL, MagRight4SwitchOffCmd = NULL;
+XPLMCommandRef MagRight5SwitchOnCmd = NULL, MagRight5SwitchOffCmd = NULL;
+XPLMCommandRef MagRight6SwitchOnCmd = NULL, MagRight6SwitchOffCmd = NULL;
+XPLMCommandRef MagRight7SwitchOnCmd = NULL, MagRight7SwitchOffCmd = NULL;
+XPLMCommandRef MagRight8SwitchOnCmd = NULL, MagRight8SwitchOffCmd = NULL;
+
 XPLMCommandRef MagLeftSwitchOnCmd = NULL, MagLeftSwitchOffCmd = NULL;
+XPLMCommandRef MagLeft2SwitchOnCmd = NULL, MagLeft2SwitchOffCmd = NULL;
+XPLMCommandRef MagLeft3SwitchOnCmd = NULL, MagLeft3SwitchOffCmd = NULL;
+XPLMCommandRef MagLeft4SwitchOnCmd = NULL, MagLeft4SwitchOffCmd = NULL;
+XPLMCommandRef MagLeft5SwitchOnCmd = NULL, MagLeft5SwitchOffCmd = NULL;
+XPLMCommandRef MagLeft6SwitchOnCmd = NULL, MagLeft6SwitchOffCmd = NULL;
+XPLMCommandRef MagLeft7SwitchOnCmd = NULL, MagLeft7SwitchOffCmd = NULL;
+XPLMCommandRef MagLeft8SwitchOnCmd = NULL, MagLeft8SwitchOffCmd = NULL;
+
 XPLMCommandRef MagBothSwitchOnCmd = NULL, MagBothSwitchOffCmd = NULL;
+XPLMCommandRef MagBoth2SwitchOnCmd = NULL, MagBoth2SwitchOffCmd = NULL;
+XPLMCommandRef MagBoth3SwitchOnCmd = NULL, MagBoth3SwitchOffCmd = NULL;
+XPLMCommandRef MagBoth4SwitchOnCmd = NULL, MagBoth4SwitchOffCmd = NULL;
+XPLMCommandRef MagBoth5SwitchOnCmd = NULL, MagBoth5SwitchOffCmd = NULL;
+XPLMCommandRef MagBoth6SwitchOnCmd = NULL, MagBoth6SwitchOffCmd = NULL;
+XPLMCommandRef MagBoth7SwitchOnCmd = NULL, MagBoth7SwitchOffCmd = NULL;
+XPLMCommandRef MagBoth8SwitchOnCmd = NULL, MagBoth8SwitchOffCmd = NULL;
+
 XPLMCommandRef MagStartSwitchOnCmd = NULL, MagStartSwitchOffCmd = NULL;
+XPLMCommandRef MagStart2SwitchOnCmd = NULL, MagStart2SwitchOffCmd = NULL;
+XPLMCommandRef MagStart3SwitchOnCmd = NULL, MagStart3SwitchOffCmd = NULL;
+XPLMCommandRef MagStart4SwitchOnCmd = NULL, MagStart4SwitchOffCmd = NULL;
+XPLMCommandRef MagStart5SwitchOnCmd = NULL, MagStart5SwitchOffCmd = NULL;
+XPLMCommandRef MagStart6SwitchOnCmd = NULL, MagStart6SwitchOffCmd = NULL;
+XPLMCommandRef MagStart7SwitchOnCmd = NULL, MagStart7SwitchOffCmd = NULL;
+XPLMCommandRef MagStart8SwitchOnCmd = NULL, MagStart8SwitchOffCmd = NULL;
 
 XPLMCommandRef BatMasterSwitchOnCmd = NULL, BatMasterSwitchOffCmd = NULL;
+XPLMCommandRef BatMaster2SwitchOnCmd = NULL, BatMaster2SwitchOffCmd = NULL;
+XPLMCommandRef BatMaster3SwitchOnCmd = NULL, BatMaster3SwitchOffCmd = NULL;
+XPLMCommandRef BatMaster4SwitchOnCmd = NULL, BatMaster4SwitchOffCmd = NULL;
+XPLMCommandRef BatMaster5SwitchOnCmd = NULL, BatMaster5SwitchOffCmd = NULL;
+XPLMCommandRef BatMaster6SwitchOnCmd = NULL, BatMaster6SwitchOffCmd = NULL;
+XPLMCommandRef BatMaster7SwitchOnCmd = NULL, BatMaster7SwitchOffCmd = NULL;
+XPLMCommandRef BatMaster8SwitchOnCmd = NULL, BatMaster8SwitchOffCmd = NULL;
+
 XPLMCommandRef AltMasterSwitchOnCmd = NULL, AltMasterSwitchOffCmd = NULL;
+XPLMCommandRef AltMaster2SwitchOnCmd = NULL, AltMaster2SwitchOffCmd = NULL;
+XPLMCommandRef AltMaster3SwitchOnCmd = NULL, AltMaster3SwitchOffCmd = NULL;
+XPLMCommandRef AltMaster4SwitchOnCmd = NULL, AltMaster4SwitchOffCmd = NULL;
+XPLMCommandRef AltMaster5SwitchOnCmd = NULL, AltMaster5SwitchOffCmd = NULL;
+XPLMCommandRef AltMaster6SwitchOnCmd = NULL, AltMaster6SwitchOffCmd = NULL;
+XPLMCommandRef AltMaster7SwitchOnCmd = NULL, AltMaster7SwitchOffCmd = NULL;
+XPLMCommandRef AltMaster8SwitchOnCmd = NULL, AltMaster8SwitchOffCmd = NULL;
+
 XPLMCommandRef AvMasterSwitchOnCmd = NULL, AvMasterSwitchOffCmd = NULL;
+XPLMCommandRef AvMaster2SwitchOnCmd = NULL, AvMaster2SwitchOffCmd = NULL;
+XPLMCommandRef AvMaster3SwitchOnCmd = NULL, AvMaster3SwitchOffCmd = NULL;
+XPLMCommandRef AvMaster4SwitchOnCmd = NULL, AvMaster4SwitchOffCmd = NULL;
+XPLMCommandRef AvMaster5SwitchOnCmd = NULL, AvMaster5SwitchOffCmd = NULL;
+XPLMCommandRef AvMaster6SwitchOnCmd = NULL, AvMaster6SwitchOffCmd = NULL;
+XPLMCommandRef AvMaster7SwitchOnCmd = NULL, AvMaster7SwitchOffCmd = NULL;
+XPLMCommandRef AvMaster8SwitchOnCmd = NULL, AvMaster8SwitchOffCmd = NULL;
 
 XPLMCommandRef FuelPumpOnCmd = NULL, FuelPumpOffCmd = NULL;
 XPLMCommandRef FuelPump2OnCmd = NULL, FuelPump2OffCmd = NULL;
 XPLMCommandRef FuelPump3OnCmd = NULL, FuelPump3OffCmd = NULL;
 XPLMCommandRef FuelPump4OnCmd = NULL, FuelPump4OffCmd = NULL;
+XPLMCommandRef FuelPump5OnCmd = NULL, FuelPump5OffCmd = NULL;
+XPLMCommandRef FuelPump6OnCmd = NULL, FuelPump6OffCmd = NULL;
+XPLMCommandRef FuelPump7OnCmd = NULL, FuelPump7OffCmd = NULL;
+XPLMCommandRef FuelPump8OnCmd = NULL, FuelPump8OffCmd = NULL;
 
 XPLMCommandRef DeiceOnCmd = NULL, DeiceOffCmd = NULL;
 XPLMCommandRef DeiceOnCmd1 = NULL, DeiceOffCmd1 = NULL;
@@ -624,21 +690,94 @@ XPLMCommandRef DeiceOnCmd7 = NULL, DeiceOffCmd7 = NULL;
 XPLMCommandRef DeiceOnCmd8 = NULL, DeiceOffCmd8 = NULL;
 
 XPLMCommandRef PitotHeatOnCmd = NULL, PitotHeatOffCmd = NULL;
-XPLMCommandRef Pitot2HeatOnCmd = NULL, Pitot2HeatOffCmd = NULL;
+XPLMCommandRef PitotHeat2OnCmd = NULL, PitotHeat2OffCmd = NULL;
+XPLMCommandRef PitotHeat3OnCmd = NULL, PitotHeat3OffCmd = NULL;
+XPLMCommandRef PitotHeat4OnCmd = NULL, PitotHeat4OffCmd = NULL;
+XPLMCommandRef PitotHeat5OnCmd = NULL, PitotHeat5OffCmd = NULL;
+XPLMCommandRef PitotHeat6OnCmd = NULL, PitotHeat6OffCmd = NULL;
+XPLMCommandRef PitotHeat7OnCmd = NULL, PitotHeat7OffCmd = NULL;
+XPLMCommandRef PitotHeat8OnCmd = NULL, PitotHeat8OffCmd = NULL;
+
 XPLMCommandRef GearUpOnCmd = NULL, GearOnOffCmd = NULL;
+XPLMCommandRef GearUp2OnCmd = NULL, GearOn2OffCmd = NULL;
+XPLMCommandRef GearUp3OnCmd = NULL, GearOn3OffCmd = NULL;
+XPLMCommandRef GearUp4OnCmd = NULL, GearOn4OffCmd = NULL;
+XPLMCommandRef GearUp5OnCmd = NULL, GearOnO5ffCmd = NULL;
+XPLMCommandRef GearUp6OnCmd = NULL, GearOn6OffCmd = NULL;
+XPLMCommandRef GearUp7OnCmd = NULL, GearOn7OffCmd = NULL;
+XPLMCommandRef GearUp8OnCmd = NULL, GearOn8OffCmd = NULL;
+
 XPLMCommandRef GearDnOnCmd = NULL, GearDnOffCmd = NULL;
+XPLMCommandRef GearDn2OnCmd = NULL, GearDn2OffCmd = NULL;
+XPLMCommandRef GearDn3OnCmd = NULL, GearDn3OffCmd = NULL;
+XPLMCommandRef GearDn4OnCmd = NULL, GearDn4OffCmd = NULL;
+XPLMCommandRef GearDn5OnCmd = NULL, GearDn5OffCmd = NULL;
+XPLMCommandRef GearDn6OnCmd = NULL, GearDn6OffCmd = NULL;
+XPLMCommandRef GearDn7OnCmd = NULL, GearDn7OffCmd = NULL;
+XPLMCommandRef GearDn8OnCmd = NULL, GearDn8OffCmd = NULL;
 
 XPLMCommandRef CowlFlapsOpenCmd = NULL, CowlFlapsCloseCmd = NULL;
-XPLMCommandRef Cowl2FlapsOpenCmd = NULL, Cowl2FlapsCloseCmd = NULL;
-XPLMCommandRef Cowl3FlapsOpenCmd = NULL, Cowl3FlapsCloseCmd = NULL;
-XPLMCommandRef Cowl4FlapsOpenCmd = NULL, Cowl4FlapsCloseCmd = NULL;
+XPLMCommandRef CowlFlaps2OpenCmd = NULL, CowlFlaps2CloseCmd = NULL;
+XPLMCommandRef CowlFlaps3OpenCmd = NULL, CowlFlaps3CloseCmd = NULL;
+XPLMCommandRef CowlFlaps4OpenCmd = NULL, CowlFlaps4CloseCmd = NULL;
+XPLMCommandRef CowlFlaps5OpenCmd = NULL, CowlFlaps5CloseCmd = NULL;
+XPLMCommandRef CowlFlaps6OpenCmd = NULL, CowlFlaps6CloseCmd = NULL;
+XPLMCommandRef CowlFlaps7OpenCmd = NULL, CowlFlaps7CloseCmd = NULL;
+XPLMCommandRef CowlFlaps8OpenCmd = NULL, CowlFlaps8CloseCmd = NULL;
 
 XPLMCommandRef PanelLightsOnCmd = NULL, PanelLightsOffCmd = NULL;
+XPLMCommandRef PanelLights2OnCmd = NULL, PanelLights2OffCmd = NULL;
+XPLMCommandRef PanelLights3OnCmd = NULL, PanelLights3OffCmd = NULL;
+XPLMCommandRef PanelLights4OnCmd = NULL, PanelLights4OffCmd = NULL;
+XPLMCommandRef PanelLights5OnCmd = NULL, PanelLights5OffCmd = NULL;
+XPLMCommandRef PanelLights6OnCmd = NULL, PanelLights6OffCmd = NULL;
+XPLMCommandRef PanelLights7OnCmd = NULL, PanelLights7OffCmd = NULL;
+XPLMCommandRef PanelLights8OnCmd = NULL, PanelLights8OffCmd = NULL;
+
 XPLMCommandRef BeaconLightsOnCmd = NULL, BeaconLightsOffCmd = NULL;
+XPLMCommandRef BeaconLights2OnCmd = NULL, BeaconLights2OffCmd = NULL;
+XPLMCommandRef BeaconLights3OnCmd = NULL, BeaconLights3OffCmd = NULL;
+XPLMCommandRef BeaconLights4OnCmd = NULL, BeaconLights4OffCmd = NULL;
+XPLMCommandRef BeaconLights5OnCmd = NULL, BeaconLights5OffCmd = NULL;
+XPLMCommandRef BeaconLights6OnCmd = NULL, BeaconLights6OffCmd = NULL;
+XPLMCommandRef BeaconLights7OnCmd = NULL, BeaconLights7OffCmd = NULL;
+XPLMCommandRef BeaconLights8OnCmd = NULL, BeaconLights8OffCmd = NULL;
+
 XPLMCommandRef NavLightsOnCmd = NULL, NavLightsOffCmd = NULL;
+XPLMCommandRef NavLights2OnCmd = NULL, NavLights2OffCmd = NULL;
+XPLMCommandRef NavLights3OnCmd = NULL, NavLights3OffCmd = NULL;
+XPLMCommandRef NavLights4OnCmd = NULL, NavLights4OffCmd = NULL;
+XPLMCommandRef NavLights5OnCmd = NULL, NavLights5OffCmd = NULL;
+XPLMCommandRef NavLights6OnCmd = NULL, NavLights6OffCmd = NULL;
+XPLMCommandRef NavLights7OnCmd = NULL, NavLights7OffCmd = NULL;
+XPLMCommandRef NavLights8OnCmd = NULL, NavLights8OffCmd = NULL;
+
 XPLMCommandRef StrobeLightsOnCmd = NULL, StrobeLightsOffCmd = NULL;
+XPLMCommandRef StrobeLights2OnCmd = NULL, StrobeLights2OffCmd = NULL;
+XPLMCommandRef StrobeLights3OnCmd = NULL, StrobeLights3OffCmd = NULL;
+XPLMCommandRef StrobeLights4OnCmd = NULL, StrobeLights4OffCmd = NULL;
+XPLMCommandRef StrobeLights5OnCmd = NULL, StrobeLights5OffCmd = NULL;
+XPLMCommandRef StrobeLights6OnCmd = NULL, StrobeLights6OffCmd = NULL;
+XPLMCommandRef StrobeLights7OnCmd = NULL, StrobeLights7OffCmd = NULL;
+XPLMCommandRef StrobeLights8OnCmd = NULL, StrobeLights8OffCmd = NULL;
+
 XPLMCommandRef TaxiLightsOnCmd = NULL, TaxiLightsOffCmd = NULL;
+XPLMCommandRef TaxiLights2OnCmd = NULL, TaxiLights2OffCmd = NULL;
+XPLMCommandRef TaxiLights3OnCmd = NULL, TaxiLights3OffCmd = NULL;
+XPLMCommandRef TaxiLights4OnCmd = NULL, TaxiLights4OffCmd = NULL;
+XPLMCommandRef TaxiLights5OnCmd = NULL, TaxiLights5OffCmd = NULL;
+XPLMCommandRef TaxiLights6OnCmd = NULL, TaxiLights6OffCmd = NULL;
+XPLMCommandRef TaxiLights7OnCmd = NULL, TaxiLights7OffCmd = NULL;
+XPLMCommandRef TaxiLights8OnCmd = NULL, TaxiLights8OffCmd = NULL;
+
 XPLMCommandRef LandingLightsOnCmd = NULL, LandingLightsOffCmd = NULL;
+XPLMCommandRef LandingLights2OnCmd = NULL, LandingLights2OffCmd = NULL;
+XPLMCommandRef LandingLights3OnCmd = NULL, LandingLights3OffCmd = NULL;
+XPLMCommandRef LandingLights4OnCmd = NULL, LandingLights4OffCmd = NULL;
+XPLMCommandRef LandingLights5OnCmd = NULL, LandingLights5OffCmd = NULL;
+XPLMCommandRef LandingLights6OnCmd = NULL, LandingLights6OffCmd = NULL;
+XPLMCommandRef LandingLights7OnCmd = NULL, LandingLights7OffCmd = NULL;
+XPLMCommandRef LandingLights8OnCmd = NULL, LandingLights8OffCmd = NULL;
 
 XPLMCommandRef MagOff1 = NULL, MagOff2 = NULL, MagOff3 = NULL, MagOff4 = NULL;
 XPLMCommandRef MagOff5 = NULL, MagOff6 = NULL, MagOff7 = NULL, MagOff8 = NULL;
@@ -2834,7 +2973,22 @@ string pitot7_heat_switch_on, pitot7_heat_switch_off, pitot7_heat_switch_data;
 string pitot8_heat_switch_on, pitot8_heat_switch_off, pitot8_heat_switch_data;
 
 string gear_switch_up_on, gear_switch_up_off,gear_switch_up_data ;
+string gear2_switch_up_on, gear2_switch_up_off,gear2_switch_up_data ;
+string gear3_switch_up_on, gear3_switch_up_off,gear3_switch_up_data ;
+string gear4_switch_up_on, gear4_switch_up_off,gear4_switch_up_data ;
+string gear5_switch_up_on, gear5_switch_up_off,gear5_switch_up_data ;
+string gear6_switch_up_on, gear6_switch_up_off,gear6_switch_up_data ;
+string gear7_switch_up_on, gear7_switch_up_off,gear7_switch_up_data ;
+string gear8_switch_up_on, gear8_switch_up_off,gear8_switch_up_data ;
+
 string gear_switch_down_on, gear_switch_down_off, gear_switch_down_data;
+string gear2_switch_down_on, gear2_switch_down_off, gear2_switch_down_data;
+string gear3_switch_down_on, gear3_switch_down_off, gear3_switch_down_data;
+string gear4_switch_down_on, gear4_switch_down_off, gear4_switch_down_data;
+string gear5_switch_down_on, gear5_switch_down_off, gear5_switch_down_data;
+string gear6_switch_down_on, gear6_switch_down_off, gear6_switch_down_data;
+string gear7_switch_down_on, gear7_switch_down_off, gear7_switch_down_data;
+string gear8_switch_down_on, gear8_switch_down_off, gear8_switch_down_data;
 
 string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data ;
 string cowl2_flaps_open, cowl2_flaps_close, cowl2_flaps_data;
@@ -2844,7 +2998,6 @@ string cowl5_flaps_open, cowl5_flaps_close, cowl5_flaps_data;
 string cowl6_flaps_open, cowl6_flaps_close, cowl6_flaps_data;
 string cowl7_flaps_open, cowl7_flaps_close, cowl7_flaps_data;
 string cowl8_flaps_open, cowl8_flaps_close, cowl8_flaps_data;
-
 
 string panel_lights_switch_on, panel_lights_switch_off, panel_lights_switch_data;
 string panel_lights_switch2_on, panel_lights_switch2_off, panel_lights_switch2_data;
@@ -2859,28 +3012,46 @@ string beacon_lights_switch_on, beacon_lights_switch_off, beacon_lights_switch_d
 string beacon_lights_switch2_on, beacon_lights_switch2_off, beacon_lights_switch2_data;
 string beacon_lights_switch3_on, beacon_lights_switch3_off, beacon_lights_switch3_data;
 string beacon_lights_switch4_on, beacon_lights_switch4_off, beacon_lights_switch4_data;
+string beacon_lights_switch5_on, beacon_lights_switch5_off, beacon_lights_switch5_data;
+string beacon_lights_switch6_on, beacon_lights_switch6_off, beacon_lights_switch6_data;
+string beacon_lights_switch7_on, beacon_lights_switch7_off, beacon_lights_switch7_data;
+string beacon_lights_switch8_on, beacon_lights_switch8_off, beacon_lights_switch8_data;
 
 string nav_lights_switch_on, nav_lights_switch_off, nav_lights_switch_data;
 string nav_lights_switch2_on, nav_lights_switch2_off, nav_lights_switch2_data;
 string nav_lights_switch3_on, nav_lights_switch3_off, nav_lights_switch3_data;
 string nav_lights_switch4_on, nav_lights_switch4_off, nav_lights_switch4_data;
+string nav_lights_switch5_on, nav_lights_switch5_off, nav_lights_switch5_data;
+string nav_lights_switch6_on, nav_lights_switch6_off, nav_lights_switch6_data;
+string nav_lights_switch7_on, nav_lights_switch7_off, nav_lights_switch7_data;
+string nav_lights_switch8_on, nav_lights_switch8_off, nav_lights_switch8_data;
 
 string strobe_lights_switch_on, strobe_lights_switch_off, strobe_lights_switch_data;
 string strobe_lights_switch2_on, strobe_lights_switch2_off, strobe_lights_switch2_data;
 string strobe_lights_switch3_on, strobe_lights_switch3_off, strobe_lights_switch3_data;
 string strobe_lights_switch4_on, strobe_lights_switch4_off, strobe_lights_switch4_data;
+string strobe_lights_switch5_on, strobe_lights_switch5_off, strobe_lights_switch5_data;
+string strobe_lights_switch6_on, strobe_lights_switch6_off, strobe_lights_switch6_data;
+string strobe_lights_switch7_on, strobe_lights_switch7_off, strobe_lights_switch7_data;
+string strobe_lights_switch8_on, strobe_lights_switch8_off, strobe_lights_switch8_data;
 
 string taxi_lights_switch_on, taxi_lights_switch_off, taxi_lights_switch_data;
-string taxi_lights_switch2_on, taxi_lights_switc2h_off, taxi_lights_switch2_data;
+string taxi_lights_switch2_on, taxi_lights_switch2_off, taxi_lights_switch2_data;
 string taxi_lights_switch3_on, taxi_lights_switch3_off, taxi_lights_switch3_data;
 string taxi_lights_switch4_on, taxi_lights_switch4_off, taxi_lights_switch4_data;
+string taxi_lights_switch5_on, taxi_lights_switch5_off, taxi_lights_switch5_data;
+string taxi_lights_switch6_on, taxi_lights_switch6_off, taxi_lights_switch6_data;
+string taxi_lights_switch7_on, taxi_lights_switch7_off, taxi_lights_switch7_data;
+string taxi_lights_switch8_on, taxi_lights_switch8_off, taxi_lights_switch8_data;
 
 string landing_lights_switch_on, landing_lights_switch_off, landing_lights_switch_data;
 string landing_lights_switch2_on, landing_lights_switch2_off, landing_lights_switch2_data;
 string landing_lights_switch3_on, landing_lights_switch3_off, landing_lights_switch3_data;
 string landing_lights_switch4_on, landing_lights_switch4_off, landing_lights_switch4_data;
-
-
+string landing_lights_switch5_on, landing_lights_switch5_off, landing_lights_switch5_data;
+string landing_lights_switch6_on, landing_lights_switch6_off, landing_lights_switch6_data;
+string landing_lights_switch7_on, landing_lights_switch7_off, landing_lights_switch7_data;
+string landing_lights_switch8_on, landing_lights_switch8_off, landing_lights_switch8_data;
 
 
 const char *GearTestStrUp;
