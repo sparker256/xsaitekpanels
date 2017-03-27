@@ -19,6 +19,69 @@
 // ****************** Switch Panel variables *******************************
 static int switchnowrite = 0;
 static int switchres, switchwres;
+
+
+static int MagOffSwitchAllreadyOn = 0;
+static int MagOffSwitchAllreadyOff = 0;
+
+static int MagRightSwitchAllreadyOn = 0;
+static int MagRightSwitchAllreadyOff = 0;
+
+static int MagLeftSwitchAllreadyOn = 0;
+static int MagLeftSwitchAllreadyOff = 0;
+
+static int MagBothSwitchAllreadyOn = 0;
+static int MagBothSwitchAllreadyOff = 0;
+
+static int MagStartSwitchAllreadyOn = 0;
+static int MagStartSwitchAllreadyOff = 0;
+
+static int BatMasterSwitchAllreadyOn = 0;
+static int BatMasterSwitchAllreadyOff = 0;
+
+static int AltMasterSwitchAllreadyOn = 0;
+static int AltMasterSwitchAllreadyOff = 0;
+
+static int AvMasterSwitchAllreadyOn = 0;
+static int AvMasterSwitchAllreadyOff = 0;
+
+static int FuelPumpAllreadyOn = 0;
+static int FuelPumpAllreadyOff = 0;
+
+static int DeiceAllreadyOn = 0;
+static int DeiceAllreadyOff = 0;
+
+static int PitotHeatAllreadyOn = 0;
+static int PitotHeatAllreadyOff = 0;
+
+static int CowlFlapsAllreadyOpen = 0;
+static int CowlFlapsAllreadyClose = 0;
+
+static int PanelLightsAllreadyOn = 0;
+static int PanelLightsAllreadyOff = 0;
+
+static int BeaconLightsAllreadyOn = 0;
+static int BeaconLightsAllreadyOff = 0;
+
+static int NavLightsAllreadyOn = 0;
+static int NavLightsAllreadyOff = 0;
+
+static int StrobeLightsAllreadyOn = 0;
+static int StrobeLightsAllreadyOff = 0;
+
+static int TaxiLightsAllreadyOn = 0;
+static int TaxiLightsAllreadyOff = 0;
+
+static int LandingLightsAllreadyOn = 0;
+static int LandingLightsAllreadyOff = 0;
+
+static int GearUpAllreadyOn = 0;
+static int GearUpAllreadyOff = 0;
+
+static int GearDnAllreadyOn = 0;
+static int GearDnAllreadyOff = 0;
+
+
 //static int avf, avf2, avf3, avf4, avf5, avf6, avf7, avf8;
 //static int avf9, avf10, avf11, avf12, avf13, avf14, avf15, avf16;
 
@@ -91,24 +154,32 @@ void process_engines_mag_off_switch()
 
    if(magoffswitchenable == 2) {
        if(testbit(switchbuf,MAG_OFF)) {
-           XPLMCommandOnce(MagOffSwitchOnCmd);
-           XPLMCommandOnce(MagOff2SwitchOnCmd);
-           XPLMCommandOnce(MagOff3SwitchOnCmd);
-           XPLMCommandOnce(MagOff4SwitchOnCmd);
-           XPLMCommandOnce(MagOff5SwitchOnCmd);
-           XPLMCommandOnce(MagOff6SwitchOnCmd);
-           XPLMCommandOnce(MagOff7SwitchOnCmd);
-           XPLMCommandOnce(MagOff8SwitchOnCmd);
+           if (MagOffSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagOffSwitchOnCmd);
+               XPLMCommandOnce(MagOff2SwitchOnCmd);
+               XPLMCommandOnce(MagOff3SwitchOnCmd);
+               XPLMCommandOnce(MagOff4SwitchOnCmd);
+               XPLMCommandOnce(MagOff5SwitchOnCmd);
+               XPLMCommandOnce(MagOff6SwitchOnCmd);
+               XPLMCommandOnce(MagOff7SwitchOnCmd);
+               XPLMCommandOnce(MagOff8SwitchOnCmd);
+               MagOffSwitchAllreadyOn = 1;
+               MagOffSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,MAG_OFF)) {
-           XPLMCommandOnce(MagOffSwitchOffCmd);
-           XPLMCommandOnce(MagOff2SwitchOffCmd);
-           XPLMCommandOnce(MagOff3SwitchOffCmd);
-           XPLMCommandOnce(MagOff4SwitchOffCmd);
-           XPLMCommandOnce(MagOff5SwitchOffCmd);
-           XPLMCommandOnce(MagOff6SwitchOffCmd);
-           XPLMCommandOnce(MagOff7SwitchOffCmd);
-           XPLMCommandOnce(MagOff8SwitchOffCmd);
+           if (MagOffSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagOffSwitchOffCmd);
+               XPLMCommandOnce(MagOff2SwitchOffCmd);
+               XPLMCommandOnce(MagOff3SwitchOffCmd);
+               XPLMCommandOnce(MagOff4SwitchOffCmd);
+               XPLMCommandOnce(MagOff5SwitchOffCmd);
+               XPLMCommandOnce(MagOff6SwitchOffCmd);
+               XPLMCommandOnce(MagOff7SwitchOffCmd);
+               XPLMCommandOnce(MagOff8SwitchOffCmd);
+               MagOffSwitchAllreadyOff = 1;
+               MagOffSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
@@ -245,24 +316,32 @@ void process_engines_right_mag_switch()
 
    if(magrightswitchenable == 2) {
        if(testbit(switchbuf,MAG_RIGHT)) {
-           XPLMCommandOnce(MagRightSwitchOnCmd);
-           XPLMCommandOnce(MagRight2SwitchOnCmd);
-           XPLMCommandOnce(MagRight3SwitchOnCmd);
-           XPLMCommandOnce(MagRight4SwitchOnCmd);
-           XPLMCommandOnce(MagRight5SwitchOnCmd);
-           XPLMCommandOnce(MagRight6SwitchOnCmd);
-           XPLMCommandOnce(MagRight7SwitchOnCmd);
-           XPLMCommandOnce(MagRight8SwitchOnCmd);
+           if (MagRightSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagRightSwitchOnCmd);
+               XPLMCommandOnce(MagRight2SwitchOnCmd);
+               XPLMCommandOnce(MagRight3SwitchOnCmd);
+               XPLMCommandOnce(MagRight4SwitchOnCmd);
+               XPLMCommandOnce(MagRight5SwitchOnCmd);
+               XPLMCommandOnce(MagRight6SwitchOnCmd);
+               XPLMCommandOnce(MagRight7SwitchOnCmd);
+               XPLMCommandOnce(MagRight8SwitchOnCmd);
+               MagRightSwitchAllreadyOn = 1;
+               MagRightSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,MAG_RIGHT)) {
-           XPLMCommandOnce(MagRightSwitchOffCmd);
-           XPLMCommandOnce(MagRight2SwitchOffCmd);
-           XPLMCommandOnce(MagRight3SwitchOffCmd);
-           XPLMCommandOnce(MagRight4SwitchOffCmd);
-           XPLMCommandOnce(MagRight5SwitchOffCmd);
-           XPLMCommandOnce(MagRight6SwitchOffCmd);
-           XPLMCommandOnce(MagRight7SwitchOffCmd);
-           XPLMCommandOnce(MagRight8SwitchOffCmd);
+           if (MagRightSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagRightSwitchOffCmd);
+               XPLMCommandOnce(MagRight2SwitchOffCmd);
+               XPLMCommandOnce(MagRight3SwitchOffCmd);
+               XPLMCommandOnce(MagRight4SwitchOffCmd);
+               XPLMCommandOnce(MagRight5SwitchOffCmd);
+               XPLMCommandOnce(MagRight6SwitchOffCmd);
+               XPLMCommandOnce(MagRight7SwitchOffCmd);
+               XPLMCommandOnce(MagRight8SwitchOffCmd);
+               MagRightSwitchAllreadyOff = 1;
+               MagRightSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
@@ -387,24 +466,34 @@ void process_engines_left_mag_switch()
 
    if(magleftswitchenable == 2) {
        if(testbit(switchbuf,MAG_LEFT)) {
-           XPLMCommandOnce(MagLeftSwitchOnCmd);
-           XPLMCommandOnce(MagLeft2SwitchOnCmd);
-           XPLMCommandOnce(MagLeft3SwitchOnCmd);
-           XPLMCommandOnce(MagLeft4SwitchOnCmd);
-           XPLMCommandOnce(MagLeft5SwitchOnCmd);
-           XPLMCommandOnce(MagLeft6SwitchOnCmd);
-           XPLMCommandOnce(MagLeft7SwitchOnCmd);
-           XPLMCommandOnce(MagLeft8SwitchOnCmd);
+           if (MagLeftSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagLeftSwitchOnCmd);
+               XPLMCommandOnce(MagLeft2SwitchOnCmd);
+               XPLMCommandOnce(MagLeft3SwitchOnCmd);
+               XPLMCommandOnce(MagLeft4SwitchOnCmd);
+               XPLMCommandOnce(MagLeft5SwitchOnCmd);
+               XPLMCommandOnce(MagLeft6SwitchOnCmd);
+               XPLMCommandOnce(MagLeft7SwitchOnCmd);
+               XPLMCommandOnce(MagLeft8SwitchOnCmd);
+               MagLeftSwitchAllreadyOn = 1;
+               MagLeftSwitchAllreadyOff = 0;
+           }
+
        }
        if(!testbit(switchbuf,MAG_LEFT)) {
-           XPLMCommandOnce(MagLeftSwitchOffCmd);
-           XPLMCommandOnce(MagLeft2SwitchOffCmd);
-           XPLMCommandOnce(MagLeft3SwitchOffCmd);
-           XPLMCommandOnce(MagLeft4SwitchOffCmd);
-           XPLMCommandOnce(MagLeft5SwitchOffCmd);
-           XPLMCommandOnce(MagLeft6SwitchOffCmd);
-           XPLMCommandOnce(MagLeft7SwitchOffCmd);
-           XPLMCommandOnce(MagLeft8SwitchOffCmd);
+           if (MagLeftSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagLeftSwitchOffCmd);
+               XPLMCommandOnce(MagLeft2SwitchOffCmd);
+               XPLMCommandOnce(MagLeft3SwitchOffCmd);
+               XPLMCommandOnce(MagLeft4SwitchOffCmd);
+               XPLMCommandOnce(MagLeft5SwitchOffCmd);
+               XPLMCommandOnce(MagLeft6SwitchOffCmd);
+               XPLMCommandOnce(MagLeft7SwitchOffCmd);
+               XPLMCommandOnce(MagLeft8SwitchOffCmd);
+               MagLeftSwitchAllreadyOff = 1;
+               MagLeftSwitchAllreadyOn = 0;
+           }
+
        }
        return;
    }
@@ -532,24 +621,32 @@ void process_engines_both_mag_switch()
 
    if(magbothswitchenable == 2) {
        if(testbit(switchbuf,MAG_BOTH)) {
-           XPLMCommandOnce(MagBothSwitchOnCmd);
-           XPLMCommandOnce(MagBoth2SwitchOnCmd);
-           XPLMCommandOnce(MagBoth3SwitchOnCmd);
-           XPLMCommandOnce(MagBoth4SwitchOnCmd);
-           XPLMCommandOnce(MagBoth5SwitchOnCmd);
-           XPLMCommandOnce(MagBoth6SwitchOnCmd);
-           XPLMCommandOnce(MagBoth7SwitchOnCmd);
-           XPLMCommandOnce(MagBoth8SwitchOnCmd);
+           if (MagBothSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagBothSwitchOnCmd);
+               XPLMCommandOnce(MagBoth2SwitchOnCmd);
+               XPLMCommandOnce(MagBoth3SwitchOnCmd);
+               XPLMCommandOnce(MagBoth4SwitchOnCmd);
+               XPLMCommandOnce(MagBoth5SwitchOnCmd);
+               XPLMCommandOnce(MagBoth6SwitchOnCmd);
+               XPLMCommandOnce(MagBoth7SwitchOnCmd);
+               XPLMCommandOnce(MagBoth8SwitchOnCmd);
+               MagBothSwitchAllreadyOn = 1;
+               MagBothSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,MAG_BOTH)) {
-           XPLMCommandOnce(MagBothSwitchOffCmd);
-           XPLMCommandOnce(MagBoth2SwitchOffCmd);
-           XPLMCommandOnce(MagBoth3SwitchOffCmd);
-           XPLMCommandOnce(MagBoth4SwitchOffCmd);
-           XPLMCommandOnce(MagBoth5SwitchOffCmd);
-           XPLMCommandOnce(MagBoth6SwitchOffCmd);
-           XPLMCommandOnce(MagBoth7SwitchOffCmd);
-           XPLMCommandOnce(MagBoth8SwitchOffCmd);
+           if (MagBothSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagBothSwitchOffCmd);
+               XPLMCommandOnce(MagBoth2SwitchOffCmd);
+               XPLMCommandOnce(MagBoth3SwitchOffCmd);
+               XPLMCommandOnce(MagBoth4SwitchOffCmd);
+               XPLMCommandOnce(MagBoth5SwitchOffCmd);
+               XPLMCommandOnce(MagBoth6SwitchOffCmd);
+               XPLMCommandOnce(MagBoth7SwitchOffCmd);
+               XPLMCommandOnce(MagBoth8SwitchOffCmd);
+               MagBothSwitchAllreadyOff = 1;
+               MagBothSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
@@ -684,24 +781,32 @@ void process_engines_start_switch()
 
    if(magstartswitchenable == 2) {
        if(testbit(switchbuf,ENG_START)) {
-           XPLMCommandOnce(MagStartSwitchOnCmd);
-           XPLMCommandOnce(MagStart2SwitchOnCmd);
-           XPLMCommandOnce(MagStart3SwitchOnCmd);
-           XPLMCommandOnce(MagStart4SwitchOnCmd);
-           XPLMCommandOnce(MagStart5SwitchOnCmd);
-           XPLMCommandOnce(MagStart6SwitchOnCmd);
-           XPLMCommandOnce(MagStart7SwitchOnCmd);
-           XPLMCommandOnce(MagStart8SwitchOnCmd);
+           if (MagStartSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagStartSwitchOnCmd);
+               XPLMCommandOnce(MagStart2SwitchOnCmd);
+               XPLMCommandOnce(MagStart3SwitchOnCmd);
+               XPLMCommandOnce(MagStart4SwitchOnCmd);
+               XPLMCommandOnce(MagStart5SwitchOnCmd);
+               XPLMCommandOnce(MagStart6SwitchOnCmd);
+               XPLMCommandOnce(MagStart7SwitchOnCmd);
+               XPLMCommandOnce(MagStart8SwitchOnCmd);
+               MagStartSwitchAllreadyOn = 1;
+               MagStartSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,ENG_START)) {
-           XPLMCommandOnce(MagStartSwitchOffCmd);
-           XPLMCommandOnce(MagStart2SwitchOffCmd);
-           XPLMCommandOnce(MagStart3SwitchOffCmd);
-           XPLMCommandOnce(MagStart4SwitchOffCmd);
-           XPLMCommandOnce(MagStart5SwitchOffCmd);
-           XPLMCommandOnce(MagStart6SwitchOffCmd);
-           XPLMCommandOnce(MagStart7SwitchOffCmd);
-           XPLMCommandOnce(MagStart8SwitchOffCmd);
+           if (MagStartSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagStartSwitchOffCmd);
+               XPLMCommandOnce(MagStart2SwitchOffCmd);
+               XPLMCommandOnce(MagStart3SwitchOffCmd);
+               XPLMCommandOnce(MagStart4SwitchOffCmd);
+               XPLMCommandOnce(MagStart5SwitchOffCmd);
+               XPLMCommandOnce(MagStart6SwitchOffCmd);
+               XPLMCommandOnce(MagStart7SwitchOffCmd);
+               XPLMCommandOnce(MagStart8SwitchOffCmd);
+               MagStartSwitchAllreadyOff = 1;
+               MagStartSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
@@ -921,25 +1026,33 @@ void process_master_battery_switch()
    if(batmasterswitchenable == 2) {
 
         if(testbit(switchbuf,MASTER_BATTERY)) {
-          XPLMCommandOnce(BatMasterSwitchOnCmd);
-          XPLMCommandOnce(BatMaster2SwitchOnCmd);
-          XPLMCommandOnce(BatMaster3SwitchOnCmd);
-          XPLMCommandOnce(BatMaster4SwitchOnCmd);
-          XPLMCommandOnce(BatMaster5SwitchOnCmd);
-          XPLMCommandOnce(BatMaster6SwitchOnCmd);
-          XPLMCommandOnce(BatMaster7SwitchOnCmd);
-          XPLMCommandOnce(BatMaster8SwitchOnCmd);
+            if (BatMasterSwitchAllreadyOn < 1) {
+                XPLMCommandOnce(BatMasterSwitchOnCmd);
+                XPLMCommandOnce(BatMaster2SwitchOnCmd);
+                XPLMCommandOnce(BatMaster3SwitchOnCmd);
+                XPLMCommandOnce(BatMaster4SwitchOnCmd);
+                XPLMCommandOnce(BatMaster5SwitchOnCmd);
+                XPLMCommandOnce(BatMaster6SwitchOnCmd);
+                XPLMCommandOnce(BatMaster7SwitchOnCmd);
+                XPLMCommandOnce(BatMaster8SwitchOnCmd);
+                BatMasterSwitchAllreadyOn = 1;
+                BatMasterSwitchAllreadyOff = 0;
+            }
          }
 
         if(!testbit(switchbuf,MASTER_BATTERY)) {
-          XPLMCommandOnce(BatMasterSwitchOffCmd);
-          XPLMCommandOnce(BatMaster2SwitchOffCmd);
-          XPLMCommandOnce(BatMaster3SwitchOffCmd);
-          XPLMCommandOnce(BatMaster4SwitchOffCmd);
-          XPLMCommandOnce(BatMaster5SwitchOffCmd);
-          XPLMCommandOnce(BatMaster6SwitchOffCmd);
-          XPLMCommandOnce(BatMaster7SwitchOffCmd);
-          XPLMCommandOnce(BatMaster8SwitchOffCmd);
+            if (BatMasterSwitchAllreadyOff < 1) {
+                XPLMCommandOnce(BatMasterSwitchOffCmd);
+                XPLMCommandOnce(BatMaster2SwitchOffCmd);
+                XPLMCommandOnce(BatMaster3SwitchOffCmd);
+                XPLMCommandOnce(BatMaster4SwitchOffCmd);
+                XPLMCommandOnce(BatMaster5SwitchOffCmd);
+                XPLMCommandOnce(BatMaster6SwitchOffCmd);
+                XPLMCommandOnce(BatMaster7SwitchOffCmd);
+                XPLMCommandOnce(BatMaster8SwitchOffCmd);
+                BatMasterSwitchAllreadyOff = 1;
+                BatMasterSwitchAllreadyOn = 0;
+            }
         }
 
         return;
@@ -1183,25 +1296,33 @@ void process_master_altenator_switch()
    if(altmasterswitchenable == 2) {
 
         if(testbit(switchbuf,MASTER_ALTENATOR)) {
-          XPLMCommandOnce(AltMasterSwitchOnCmd);
-          XPLMCommandOnce(AltMaster2SwitchOnCmd);
-          XPLMCommandOnce(AltMaster3SwitchOnCmd);
-          XPLMCommandOnce(AltMaster4SwitchOnCmd);
-          XPLMCommandOnce(AltMaster5SwitchOnCmd);
-          XPLMCommandOnce(AltMaster6SwitchOnCmd);
-          XPLMCommandOnce(AltMaster7SwitchOnCmd);
-          XPLMCommandOnce(AltMaster8SwitchOnCmd);
+            if (AltMasterSwitchAllreadyOn < 1) {
+                XPLMCommandOnce(AltMasterSwitchOnCmd);
+                XPLMCommandOnce(AltMaster2SwitchOnCmd);
+                XPLMCommandOnce(AltMaster3SwitchOnCmd);
+                XPLMCommandOnce(AltMaster4SwitchOnCmd);
+                XPLMCommandOnce(AltMaster5SwitchOnCmd);
+                XPLMCommandOnce(AltMaster6SwitchOnCmd);
+                XPLMCommandOnce(AltMaster7SwitchOnCmd);
+                XPLMCommandOnce(AltMaster8SwitchOnCmd);
+                AltMasterSwitchAllreadyOn = 1;
+                AltMasterSwitchAllreadyOff = 0;
+            }
          }
 
         if(!testbit(switchbuf,MASTER_ALTENATOR)) {
-          XPLMCommandOnce(AltMasterSwitchOffCmd);
-          XPLMCommandOnce(AltMaster2SwitchOffCmd);
-          XPLMCommandOnce(AltMaster3SwitchOffCmd);
-          XPLMCommandOnce(AltMaster4SwitchOffCmd);
-          XPLMCommandOnce(AltMaster5SwitchOffCmd);
-          XPLMCommandOnce(AltMaster6SwitchOffCmd);
-          XPLMCommandOnce(AltMaster7SwitchOffCmd);
-          XPLMCommandOnce(AltMaster8SwitchOffCmd);
+            if (AltMasterSwitchAllreadyOff < 1) {
+                XPLMCommandOnce(AltMasterSwitchOffCmd);
+                XPLMCommandOnce(AltMaster2SwitchOffCmd);
+                XPLMCommandOnce(AltMaster3SwitchOffCmd);
+                XPLMCommandOnce(AltMaster4SwitchOffCmd);
+                XPLMCommandOnce(AltMaster5SwitchOffCmd);
+                XPLMCommandOnce(AltMaster6SwitchOffCmd);
+                XPLMCommandOnce(AltMaster7SwitchOffCmd);
+                XPLMCommandOnce(AltMaster8SwitchOffCmd);
+                AltMasterSwitchAllreadyOff = 1;
+                AltMasterSwitchAllreadyOn = 0;
+            }
         }
 
         return;
@@ -1397,25 +1518,37 @@ void process_avionics_power_switch()
     if(avionicsmasterswitchenable == 2) {
 
         if(testbit(switchbuf,AVIONICS_POWER)) {
-            XPLMCommandOnce(AvMasterSwitchOnCmd);
-            XPLMCommandOnce(AvMaster2SwitchOnCmd);
-            XPLMCommandOnce(AvMaster3SwitchOnCmd);
-            XPLMCommandOnce(AvMaster4SwitchOnCmd);
-            XPLMCommandOnce(AvMaster5SwitchOnCmd);
-            XPLMCommandOnce(AvMaster6SwitchOnCmd);
-            XPLMCommandOnce(AvMaster7SwitchOnCmd);
-            XPLMCommandOnce(AvMaster8SwitchOnCmd);
+            if (AvMasterSwitchAllreadyOn < 1) {
+                XPLMCommandOnce(AvMasterSwitchOnCmd);
+                XPLMCommandOnce(AvMaster2SwitchOnCmd);
+                XPLMCommandOnce(AvMaster3SwitchOnCmd);
+                XPLMCommandOnce(AvMaster4SwitchOnCmd);
+                XPLMCommandOnce(AvMaster5SwitchOnCmd);
+                XPLMCommandOnce(AvMaster6SwitchOnCmd);
+                XPLMCommandOnce(AvMaster7SwitchOnCmd);
+                XPLMCommandOnce(AvMaster8SwitchOnCmd);
+                AvMasterSwitchAllreadyOn = 1;
+                AvMasterSwitchAllreadyOff = 0;
+
+            }
+
         }
 
         if(!testbit(switchbuf,AVIONICS_POWER)) {
-          XPLMCommandOnce(AvMasterSwitchOffCmd);
-          XPLMCommandOnce(AvMaster2SwitchOffCmd);
-          XPLMCommandOnce(AvMaster3SwitchOffCmd);
-          XPLMCommandOnce(AvMaster4SwitchOffCmd);
-          XPLMCommandOnce(AvMaster5SwitchOffCmd);
-          XPLMCommandOnce(AvMaster6SwitchOffCmd);
-          XPLMCommandOnce(AvMaster7SwitchOffCmd);
-          XPLMCommandOnce(AvMaster8SwitchOffCmd);
+            if (AvMasterSwitchAllreadyOff < 1) {
+                XPLMCommandOnce(AvMasterSwitchOffCmd);
+                XPLMCommandOnce(AvMaster2SwitchOffCmd);
+                XPLMCommandOnce(AvMaster3SwitchOffCmd);
+                XPLMCommandOnce(AvMaster4SwitchOffCmd);
+                XPLMCommandOnce(AvMaster5SwitchOffCmd);
+                XPLMCommandOnce(AvMaster6SwitchOffCmd);
+                XPLMCommandOnce(AvMaster7SwitchOffCmd);
+                XPLMCommandOnce(AvMaster8SwitchOffCmd);
+                AvMasterSwitchAllreadyOff = 1;
+                AvMasterSwitchAllreadyOn = 0;
+
+            }
+
         }
 
         return;
@@ -1625,25 +1758,33 @@ void process_fuel_pump_switch()
    if(fuelpumpswitchenable == 2) {
 
         if(testbit(switchbuf,FUEL_PUMP)) {
-          XPLMCommandOnce(FuelPumpOnCmd);
-          XPLMCommandOnce(FuelPump2OnCmd);
-          XPLMCommandOnce(FuelPump3OnCmd);
-          XPLMCommandOnce(FuelPump4OnCmd);
-          XPLMCommandOnce(FuelPump5OnCmd);
-          XPLMCommandOnce(FuelPump6OnCmd);
-          XPLMCommandOnce(FuelPump7OnCmd);
-          XPLMCommandOnce(FuelPump8OnCmd);
+            if (FuelPumpAllreadyOn < 1) {
+                XPLMCommandOnce(FuelPumpOnCmd);
+                XPLMCommandOnce(FuelPump2OnCmd);
+                XPLMCommandOnce(FuelPump3OnCmd);
+                XPLMCommandOnce(FuelPump4OnCmd);
+                XPLMCommandOnce(FuelPump5OnCmd);
+                XPLMCommandOnce(FuelPump6OnCmd);
+                XPLMCommandOnce(FuelPump7OnCmd);
+                XPLMCommandOnce(FuelPump8OnCmd);
+                FuelPumpAllreadyOn = 1;
+                FuelPumpAllreadyOff = 0;
+            }
          }
 
         if(!testbit(switchbuf,FUEL_PUMP)) {
-          XPLMCommandOnce(FuelPumpOffCmd);
-          XPLMCommandOnce(FuelPump2OffCmd);
-          XPLMCommandOnce(FuelPump3OffCmd);
-          XPLMCommandOnce(FuelPump4OffCmd);
-          XPLMCommandOnce(FuelPump5OffCmd);
-          XPLMCommandOnce(FuelPump6OffCmd);
-          XPLMCommandOnce(FuelPump7OffCmd);
-          XPLMCommandOnce(FuelPump8OffCmd);
+            if (FuelPumpAllreadyOff < 1) {
+                XPLMCommandOnce(FuelPumpOffCmd);
+                XPLMCommandOnce(FuelPump2OffCmd);
+                XPLMCommandOnce(FuelPump3OffCmd);
+                XPLMCommandOnce(FuelPump4OffCmd);
+                XPLMCommandOnce(FuelPump5OffCmd);
+                XPLMCommandOnce(FuelPump6OffCmd);
+                XPLMCommandOnce(FuelPump7OffCmd);
+                XPLMCommandOnce(FuelPump8OffCmd);
+                FuelPumpAllreadyOff = 1;
+                FuelPumpAllreadyOn = 0;
+            }
         }
 
         return;
@@ -1829,25 +1970,33 @@ void process_de_ice_switch()
 
     if(deiceswitchenable == 2) {
         if(testbit(switchbuf,DE_ICE)) {
-          XPLMCommandOnce(DeiceOnCmd);
-          XPLMCommandOnce(DeiceOnCmd2);
-          XPLMCommandOnce(DeiceOnCmd3);
-          XPLMCommandOnce(DeiceOnCmd4);
-          XPLMCommandOnce(DeiceOnCmd5);
-          XPLMCommandOnce(DeiceOnCmd6);
-          XPLMCommandOnce(DeiceOnCmd7);
-          XPLMCommandOnce(DeiceOnCmd8);
+            if (DeiceAllreadyOn < 1) {
+                XPLMCommandOnce(DeiceOnCmd);
+                XPLMCommandOnce(DeiceOnCmd2);
+                XPLMCommandOnce(DeiceOnCmd3);
+                XPLMCommandOnce(DeiceOnCmd4);
+                XPLMCommandOnce(DeiceOnCmd5);
+                XPLMCommandOnce(DeiceOnCmd6);
+                XPLMCommandOnce(DeiceOnCmd7);
+                XPLMCommandOnce(DeiceOnCmd8);
+                DeiceAllreadyOn = 1;
+                DeiceAllreadyOff = 0;
+            }
          }
 
         if(!testbit(switchbuf,DE_ICE)) {
-          XPLMCommandOnce(DeiceOffCmd);
-          XPLMCommandOnce(DeiceOffCmd2);
-          XPLMCommandOnce(DeiceOffCmd3);
-          XPLMCommandOnce(DeiceOffCmd4);
-          XPLMCommandOnce(DeiceOffCmd5);
-          XPLMCommandOnce(DeiceOffCmd6);
-          XPLMCommandOnce(DeiceOffCmd7);
-          XPLMCommandOnce(DeiceOffCmd8);
+            if (DeiceAllreadyOff < 1) {
+                XPLMCommandOnce(DeiceOffCmd);
+                XPLMCommandOnce(DeiceOffCmd2);
+                XPLMCommandOnce(DeiceOffCmd3);
+                XPLMCommandOnce(DeiceOffCmd4);
+                XPLMCommandOnce(DeiceOffCmd5);
+                XPLMCommandOnce(DeiceOffCmd6);
+                XPLMCommandOnce(DeiceOffCmd7);
+                XPLMCommandOnce(DeiceOffCmd8);
+                DeiceAllreadyOff = 1;
+                DeiceAllreadyOn = 0;
+            }
         }
 
         return;
@@ -1998,24 +2147,32 @@ void process_pitot_heat_switch()
 
     if(pitotheatswitchenable == 2) {
         if(testbit(switchbuf,PITOT_HEAT)) {
-            XPLMCommandOnce(PitotHeatOnCmd);
-            XPLMCommandOnce(PitotHeat2OnCmd);
-            XPLMCommandOnce(PitotHeat3OnCmd);
-            XPLMCommandOnce(PitotHeat4OnCmd);
-            XPLMCommandOnce(PitotHeat5OnCmd);
-            XPLMCommandOnce(PitotHeat6OnCmd);
-            XPLMCommandOnce(PitotHeat7OnCmd);
-            XPLMCommandOnce(PitotHeat8OnCmd);
+            if (PitotHeatAllreadyOn < 1) {
+                XPLMCommandOnce(PitotHeatOnCmd);
+                XPLMCommandOnce(PitotHeat2OnCmd);
+                XPLMCommandOnce(PitotHeat3OnCmd);
+                XPLMCommandOnce(PitotHeat4OnCmd);
+                XPLMCommandOnce(PitotHeat5OnCmd);
+                XPLMCommandOnce(PitotHeat6OnCmd);
+                XPLMCommandOnce(PitotHeat7OnCmd);
+                XPLMCommandOnce(PitotHeat8OnCmd);
+                PitotHeatAllreadyOn = 1;
+                PitotHeatAllreadyOff = 0;
+            }
         }
         if(!testbit(switchbuf,PITOT_HEAT)) {
-            XPLMCommandOnce(PitotHeatOffCmd);
-            XPLMCommandOnce(PitotHeat2OffCmd);
-            XPLMCommandOnce(PitotHeat3OffCmd);
-            XPLMCommandOnce(PitotHeat4OffCmd);
-            XPLMCommandOnce(PitotHeat5OffCmd);
-            XPLMCommandOnce(PitotHeat6OffCmd);
-            XPLMCommandOnce(PitotHeat7OffCmd);
-            XPLMCommandOnce(PitotHeat8OffCmd);
+            if (PitotHeatAllreadyOff < 1) {
+                XPLMCommandOnce(PitotHeatOffCmd);
+                XPLMCommandOnce(PitotHeat2OffCmd);
+                XPLMCommandOnce(PitotHeat3OffCmd);
+                XPLMCommandOnce(PitotHeat4OffCmd);
+                XPLMCommandOnce(PitotHeat5OffCmd);
+                XPLMCommandOnce(PitotHeat6OffCmd);
+                XPLMCommandOnce(PitotHeat7OffCmd);
+                XPLMCommandOnce(PitotHeat8OffCmd);
+                PitotHeatAllreadyOff = 1;
+                PitotHeatAllreadyOn = 0;
+            }
         }
         return;
     }
@@ -2192,25 +2349,33 @@ void process_cowl_flaps_switch()
 
     if(cowlflapsenable == 2) {
         if(testbit(switchbuf,COWL_FLAPS)) {
-            XPLMCommandOnce(CowlFlapsOpenCmd);
-            XPLMCommandOnce(CowlFlaps2OpenCmd);
-            XPLMCommandOnce(CowlFlaps3OpenCmd);
-            XPLMCommandOnce(CowlFlaps4OpenCmd);
-            XPLMCommandOnce(CowlFlaps5OpenCmd);
-            XPLMCommandOnce(CowlFlaps6OpenCmd);
-            XPLMCommandOnce(CowlFlaps7OpenCmd);
-            XPLMCommandOnce(CowlFlaps8OpenCmd);
+            if (CowlFlapsAllreadyOpen < 1) {
+                XPLMCommandOnce(CowlFlapsOpenCmd);
+                XPLMCommandOnce(CowlFlaps2OpenCmd);
+                XPLMCommandOnce(CowlFlaps3OpenCmd);
+                XPLMCommandOnce(CowlFlaps4OpenCmd);
+                XPLMCommandOnce(CowlFlaps5OpenCmd);
+                XPLMCommandOnce(CowlFlaps6OpenCmd);
+                XPLMCommandOnce(CowlFlaps7OpenCmd);
+                XPLMCommandOnce(CowlFlaps8OpenCmd);
+                CowlFlapsAllreadyOpen = 1;
+                CowlFlapsAllreadyClose = 0;
+            }
         }
 
         if(!testbit(switchbuf,COWL_FLAPS)) {
-            XPLMCommandOnce(CowlFlapsCloseCmd);
-            XPLMCommandOnce(CowlFlaps2CloseCmd);
-            XPLMCommandOnce(CowlFlaps3CloseCmd);
-            XPLMCommandOnce(CowlFlaps4CloseCmd);
-            XPLMCommandOnce(CowlFlaps5CloseCmd);
-            XPLMCommandOnce(CowlFlaps6CloseCmd);
-            XPLMCommandOnce(CowlFlaps7CloseCmd);
-            XPLMCommandOnce(CowlFlaps8CloseCmd);
+            if (CowlFlapsAllreadyClose < 1) {
+                XPLMCommandOnce(CowlFlapsCloseCmd);
+                XPLMCommandOnce(CowlFlaps2CloseCmd);
+                XPLMCommandOnce(CowlFlaps3CloseCmd);
+                XPLMCommandOnce(CowlFlaps4CloseCmd);
+                XPLMCommandOnce(CowlFlaps5CloseCmd);
+                XPLMCommandOnce(CowlFlaps6CloseCmd);
+                XPLMCommandOnce(CowlFlaps7CloseCmd);
+                XPLMCommandOnce(CowlFlaps8CloseCmd);
+                CowlFlapsAllreadyClose = 1;
+                CowlFlapsAllreadyOpen = 0;
+            }
         }
         return;
     }
@@ -2346,24 +2511,32 @@ void process_panel_lights_switch()
 
     if(panellightswitchenable == 2) {
         if(testbit(switchbuf, PANEL_LIGHTS)) {
-            XPLMCommandOnce(PanelLightsOnCmd);
-            XPLMCommandOnce(PanelLights2OnCmd);
-            XPLMCommandOnce(PanelLights3OnCmd);
-            XPLMCommandOnce(PanelLights4OnCmd);
-            XPLMCommandOnce(PanelLights5OnCmd);
-            XPLMCommandOnce(PanelLights6OnCmd);
-            XPLMCommandOnce(PanelLights7OnCmd);
-            XPLMCommandOnce(PanelLights8OnCmd);
+            if (PanelLightsAllreadyOn < 1) {
+                XPLMCommandOnce(PanelLightsOnCmd);
+                XPLMCommandOnce(PanelLights2OnCmd);
+                XPLMCommandOnce(PanelLights3OnCmd);
+                XPLMCommandOnce(PanelLights4OnCmd);
+                XPLMCommandOnce(PanelLights5OnCmd);
+                XPLMCommandOnce(PanelLights6OnCmd);
+                XPLMCommandOnce(PanelLights7OnCmd);
+                XPLMCommandOnce(PanelLights8OnCmd);
+                PanelLightsAllreadyOn = 1;
+                PanelLightsAllreadyOff = 0;
+            }
         }
         if(!testbit(switchbuf, PANEL_LIGHTS)) {
-            XPLMCommandOnce(PanelLightsOffCmd);
-            XPLMCommandOnce(PanelLights2OffCmd);
-            XPLMCommandOnce(PanelLights3OffCmd);
-            XPLMCommandOnce(PanelLights4OffCmd);
-            XPLMCommandOnce(PanelLights5OffCmd);
-            XPLMCommandOnce(PanelLights6OffCmd);
-            XPLMCommandOnce(PanelLights7OffCmd);
-            XPLMCommandOnce(PanelLights8OffCmd);
+            if (PanelLightsAllreadyOff < 1) {
+                XPLMCommandOnce(PanelLightsOffCmd);
+                XPLMCommandOnce(PanelLights2OffCmd);
+                XPLMCommandOnce(PanelLights3OffCmd);
+                XPLMCommandOnce(PanelLights4OffCmd);
+                XPLMCommandOnce(PanelLights5OffCmd);
+                XPLMCommandOnce(PanelLights6OffCmd);
+                XPLMCommandOnce(PanelLights7OffCmd);
+                XPLMCommandOnce(PanelLights8OffCmd);
+                PanelLightsAllreadyOff = 1;
+                PanelLightsAllreadyOn = 0;
+            }
         }
         return;
     }
@@ -2571,24 +2744,32 @@ void process_beacon_lights_switch()
 
     if(beaconlightswitchenable == 2) {
         if(testbit(switchbuf,BEACON_LIGHTS)) {
-            XPLMCommandOnce(BeaconLightsOnCmd);
-            XPLMCommandOnce(BeaconLights2OnCmd);
-            XPLMCommandOnce(BeaconLights3OnCmd);
-            XPLMCommandOnce(BeaconLights4OnCmd);
-            XPLMCommandOnce(BeaconLights5OnCmd);
-            XPLMCommandOnce(BeaconLights6OnCmd);
-            XPLMCommandOnce(BeaconLights7OnCmd);
-            XPLMCommandOnce(BeaconLights8OnCmd);
+            if (BeaconLightsAllreadyOn < 1) {
+                XPLMCommandOnce(BeaconLightsOnCmd);
+                XPLMCommandOnce(BeaconLights2OnCmd);
+                XPLMCommandOnce(BeaconLights3OnCmd);
+                XPLMCommandOnce(BeaconLights4OnCmd);
+                XPLMCommandOnce(BeaconLights5OnCmd);
+                XPLMCommandOnce(BeaconLights6OnCmd);
+                XPLMCommandOnce(BeaconLights7OnCmd);
+                XPLMCommandOnce(BeaconLights8OnCmd);
+                BeaconLightsAllreadyOn = 1;
+                BeaconLightsAllreadyOff = 0;
+            }
         }
         if(!testbit(switchbuf,BEACON_LIGHTS)) {
-            XPLMCommandOnce(BeaconLightsOffCmd);
-            XPLMCommandOnce(BeaconLights2OffCmd);
-            XPLMCommandOnce(BeaconLights3OffCmd);
-            XPLMCommandOnce(BeaconLights4OffCmd);
-            XPLMCommandOnce(BeaconLights5OffCmd);
-            XPLMCommandOnce(BeaconLights6OffCmd);
-            XPLMCommandOnce(BeaconLights7OffCmd);
-            XPLMCommandOnce(BeaconLights8OffCmd);
+            if (BeaconLightsAllreadyOff < 1) {
+                XPLMCommandOnce(BeaconLightsOffCmd);
+                XPLMCommandOnce(BeaconLights2OffCmd);
+                XPLMCommandOnce(BeaconLights3OffCmd);
+                XPLMCommandOnce(BeaconLights4OffCmd);
+                XPLMCommandOnce(BeaconLights5OffCmd);
+                XPLMCommandOnce(BeaconLights6OffCmd);
+                XPLMCommandOnce(BeaconLights7OffCmd);
+                XPLMCommandOnce(BeaconLights8OffCmd);
+                BeaconLightsAllreadyOff = 1;
+                BeaconLightsAllreadyOn = 0;
+            }
         }
         return;
     }
@@ -2676,24 +2857,32 @@ void process_nav_lights_switch()
 
     if(navlightswitchenable == 2) {
         if(testbit(switchbuf,NAV_LIGHTS)) {
-            XPLMCommandOnce(NavLightsOnCmd);
-            XPLMCommandOnce(NavLights2OnCmd);
-            XPLMCommandOnce(NavLights3OnCmd);
-            XPLMCommandOnce(NavLights4OnCmd);
-            XPLMCommandOnce(NavLights5OnCmd);
-            XPLMCommandOnce(NavLights6OnCmd);
-            XPLMCommandOnce(NavLights7OnCmd);
-            XPLMCommandOnce(NavLights8OnCmd);
+            if (NavLightsAllreadyOn < 1) {
+                XPLMCommandOnce(NavLightsOnCmd);
+                XPLMCommandOnce(NavLights2OnCmd);
+                XPLMCommandOnce(NavLights3OnCmd);
+                XPLMCommandOnce(NavLights4OnCmd);
+                XPLMCommandOnce(NavLights5OnCmd);
+                XPLMCommandOnce(NavLights6OnCmd);
+                XPLMCommandOnce(NavLights7OnCmd);
+                XPLMCommandOnce(NavLights8OnCmd);
+                NavLightsAllreadyOn = 1;
+                NavLightsAllreadyOff = 0;
+            }
         }
         if(!testbit(switchbuf,NAV_LIGHTS)) {
-            XPLMCommandOnce(NavLightsOffCmd);
-            XPLMCommandOnce(NavLights2OffCmd);
-            XPLMCommandOnce(NavLights3OffCmd);
-            XPLMCommandOnce(NavLights4OffCmd);
-            XPLMCommandOnce(NavLights5OffCmd);
-            XPLMCommandOnce(NavLights6OffCmd);
-            XPLMCommandOnce(NavLights7OffCmd);
-            XPLMCommandOnce(NavLights8OffCmd);
+            if (NavLightsAllreadyOff < 1) {
+                XPLMCommandOnce(NavLightsOffCmd);
+                XPLMCommandOnce(NavLights2OffCmd);
+                XPLMCommandOnce(NavLights3OffCmd);
+                XPLMCommandOnce(NavLights4OffCmd);
+                XPLMCommandOnce(NavLights5OffCmd);
+                XPLMCommandOnce(NavLights6OffCmd);
+                XPLMCommandOnce(NavLights7OffCmd);
+                XPLMCommandOnce(NavLights8OffCmd);
+                NavLightsAllreadyOff = 1;
+                NavLightsAllreadyOn= 0;
+            }
         }
         return;
     }
@@ -2778,24 +2967,32 @@ void process_strobe_lights_switch()
 
     if(strobelightswitchenable == 2) {
         if(testbit(switchbuf,STROBE_LIGHTS)) {
-            XPLMCommandOnce(StrobeLightsOnCmd);
-            XPLMCommandOnce(StrobeLights2OnCmd);
-            XPLMCommandOnce(StrobeLights3OnCmd);
-            XPLMCommandOnce(StrobeLights4OnCmd);
-            XPLMCommandOnce(StrobeLights5OnCmd);
-            XPLMCommandOnce(StrobeLights6OnCmd);
-            XPLMCommandOnce(StrobeLights7OnCmd);
-            XPLMCommandOnce(StrobeLights8OnCmd);
+            if (StrobeLightsAllreadyOn < 1) {
+                XPLMCommandOnce(StrobeLightsOnCmd);
+                XPLMCommandOnce(StrobeLights2OnCmd);
+                XPLMCommandOnce(StrobeLights3OnCmd);
+                XPLMCommandOnce(StrobeLights4OnCmd);
+                XPLMCommandOnce(StrobeLights5OnCmd);
+                XPLMCommandOnce(StrobeLights6OnCmd);
+                XPLMCommandOnce(StrobeLights7OnCmd);
+                XPLMCommandOnce(StrobeLights8OnCmd);
+                StrobeLightsAllreadyOn = 1;
+                StrobeLightsAllreadyOff = 0;
+            }
         }
         if(!testbit(switchbuf,STROBE_LIGHTS)) {
-            XPLMCommandOnce(StrobeLightsOffCmd);
-            XPLMCommandOnce(StrobeLights2OffCmd);
-            XPLMCommandOnce(StrobeLights3OffCmd);
-            XPLMCommandOnce(StrobeLights4OffCmd);
-            XPLMCommandOnce(StrobeLights5OffCmd);
-            XPLMCommandOnce(StrobeLights6OffCmd);
-            XPLMCommandOnce(StrobeLights7OffCmd);
-            XPLMCommandOnce(StrobeLights8OffCmd);
+            if (StrobeLightsAllreadyOff < 1) {
+                XPLMCommandOnce(StrobeLightsOffCmd);
+                XPLMCommandOnce(StrobeLights2OffCmd);
+                XPLMCommandOnce(StrobeLights3OffCmd);
+                XPLMCommandOnce(StrobeLights4OffCmd);
+                XPLMCommandOnce(StrobeLights5OffCmd);
+                XPLMCommandOnce(StrobeLights6OffCmd);
+                XPLMCommandOnce(StrobeLights7OffCmd);
+                XPLMCommandOnce(StrobeLights8OffCmd);
+                StrobeLightsAllreadyOff = 1;
+                StrobeLightsAllreadyOn = 0;
+            }
         }
         return;
     }
@@ -2879,25 +3076,35 @@ void process_taxi_lights_switch()
 
     if(taxilightswitchenable == 2) {
         if(testbit(switchbuf,TAXI_LIGHTS)) {
-            XPLMCommandOnce(TaxiLightsOnCmd);
-            XPLMCommandOnce(TaxiLights2OnCmd);
-            XPLMCommandOnce(TaxiLights3OnCmd);
-            XPLMCommandOnce(TaxiLights4OnCmd);
-            XPLMCommandOnce(TaxiLights5OnCmd);
-            XPLMCommandOnce(TaxiLights6OnCmd);
-            XPLMCommandOnce(TaxiLights7OnCmd);
-            XPLMCommandOnce(TaxiLights8OnCmd);
+            if (TaxiLightsAllreadyOn < 1) {
+                XPLMCommandOnce(TaxiLightsOnCmd);
+                XPLMCommandOnce(TaxiLights2OnCmd);
+                XPLMCommandOnce(TaxiLights3OnCmd);
+                XPLMCommandOnce(TaxiLights4OnCmd);
+                XPLMCommandOnce(TaxiLights5OnCmd);
+                XPLMCommandOnce(TaxiLights6OnCmd);
+                XPLMCommandOnce(TaxiLights7OnCmd);
+                XPLMCommandOnce(TaxiLights8OnCmd);
+                TaxiLightsAllreadyOn = 0;
+                TaxiLightsAllreadyOff = 1;
+            }
+
 
         }
         if(!testbit(switchbuf,TAXI_LIGHTS)) {
-            XPLMCommandOnce(TaxiLightsOffCmd);
-            XPLMCommandOnce(TaxiLights2OffCmd);
-            XPLMCommandOnce(TaxiLights3OffCmd);
-            XPLMCommandOnce(TaxiLights4OffCmd);
-            XPLMCommandOnce(TaxiLights5OffCmd);
-            XPLMCommandOnce(TaxiLights6OffCmd);
-            XPLMCommandOnce(TaxiLights7OffCmd);
-            XPLMCommandOnce(TaxiLights8OffCmd);
+            if (TaxiLightsAllreadyOff < 1) {
+                XPLMCommandOnce(TaxiLightsOffCmd);
+                XPLMCommandOnce(TaxiLights2OffCmd);
+                XPLMCommandOnce(TaxiLights3OffCmd);
+                XPLMCommandOnce(TaxiLights4OffCmd);
+                XPLMCommandOnce(TaxiLights5OffCmd);
+                XPLMCommandOnce(TaxiLights6OffCmd);
+                XPLMCommandOnce(TaxiLights7OffCmd);
+                XPLMCommandOnce(TaxiLights8OffCmd);
+                TaxiLightsAllreadyOff = 1;
+                TaxiLightsAllreadyOn = 0;
+            }
+
         }
         return;
     }
@@ -2984,17 +3191,32 @@ void process_landing_lights_switch()
 
     if(landinglightswitchenable == 2) {
         if(testbit(switchbuf,LANDING_LIGHTS)) {
-            XPLMCommandOnce(LandingLightsOnCmd);
-            XPLMCommandOnce(LandingLights2OnCmd);
-            XPLMCommandOnce(LandingLights3OnCmd);
-            XPLMCommandOnce(LandingLights4OnCmd);
-            XPLMCommandOnce(LandingLights5OnCmd);
-            XPLMCommandOnce(LandingLights6OnCmd);
-            XPLMCommandOnce(LandingLights7OnCmd);
-            XPLMCommandOnce(LandingLights8OnCmd);
+            if (LandingLightsAllreadyOn < 1) {
+                XPLMCommandOnce(LandingLightsOnCmd);
+                XPLMCommandOnce(LandingLights2OnCmd);
+                XPLMCommandOnce(LandingLights3OnCmd);
+                XPLMCommandOnce(LandingLights4OnCmd);
+                XPLMCommandOnce(LandingLights5OnCmd);
+                XPLMCommandOnce(LandingLights6OnCmd);
+                XPLMCommandOnce(LandingLights7OnCmd);
+                XPLMCommandOnce(LandingLights8OnCmd);
+                LandingLightsAllreadyOn = 1;
+                LandingLightsAllreadyOff = 0;
+            }
         }
         if(!testbit(switchbuf,LANDING_LIGHTS)) {
-            XPLMCommandOnce(LandingLightsOffCmd);
+            if (LandingLightsAllreadyOff < 1) {
+                XPLMCommandOnce(LandingLightsOffCmd);
+                XPLMCommandOnce(LandingLights2OffCmd);
+                XPLMCommandOnce(LandingLights3OffCmd);
+                XPLMCommandOnce(LandingLights4OffCmd);
+                XPLMCommandOnce(LandingLights5OffCmd);
+                XPLMCommandOnce(LandingLights6OffCmd);
+                XPLMCommandOnce(LandingLights7OffCmd);
+                XPLMCommandOnce(LandingLights8OffCmd);
+                LandingLightsAllreadyOff = 1;
+                LandingLightsAllreadyOn = 0;
+            }
         }
         return;
     }
@@ -3086,25 +3308,64 @@ void process_gear_switch_switch()
     if(landinggearknobupenable == 2) {
 
         if(testbit(switchbuf,GEAR_SWITCH_UP)) {
-          XPLMCommandOnce(GearUpOnCmd);
-          XPLMCommandOnce(GearUp2OnCmd);
-          XPLMCommandOnce(GearUp3OnCmd);
-          XPLMCommandOnce(GearUp4OnCmd);
-          XPLMCommandOnce(GearUp5OnCmd);
-          XPLMCommandOnce(GearUp6OnCmd);
-          XPLMCommandOnce(GearUp7OnCmd);
-          XPLMCommandOnce(GearUp8OnCmd);
+            if (GearUpAllreadyOn < 1) {
+                XPLMCommandOnce(GearUpOnCmd);
+                XPLMCommandOnce(GearUp2OnCmd);
+                XPLMCommandOnce(GearUp3OnCmd);
+                XPLMCommandOnce(GearUp4OnCmd);
+                XPLMCommandOnce(GearUp5OnCmd);
+                XPLMCommandOnce(GearUp6OnCmd);
+                XPLMCommandOnce(GearUp7OnCmd);
+                XPLMCommandOnce(GearUp8OnCmd);
+                GearUpAllreadyOn = 1;
+                GearDnAllreadyOn = 0;
+            }
          }
 
+        if(!testbit(switchbuf,GEAR_SWITCH_UP)) {
+            if (GearUpAllreadyOff < 1) {
+                XPLMCommandOnce(GearUpOffCmd);
+                XPLMCommandOnce(GearUp2OffCmd);
+                XPLMCommandOnce(GearUp3OffCmd);
+                XPLMCommandOnce(GearUp4OffCmd);
+                XPLMCommandOnce(GearUp5OffCmd);
+                XPLMCommandOnce(GearUp6OffCmd);
+                XPLMCommandOnce(GearUp7OffCmd);
+                XPLMCommandOnce(GearUp8OffCmd);
+                GearUpAllreadyOff = 1;
+                GearDnAllreadyOff = 0;
+            }
+         }
+
+
         if(testbit(switchbuf,GEAR_SWITCH_DN)) {
-          XPLMCommandOnce(GearDnOnCmd);
-          XPLMCommandOnce(GearDn2OnCmd);
-          XPLMCommandOnce(GearDn3OnCmd);
-          XPLMCommandOnce(GearDn4OnCmd);
-          XPLMCommandOnce(GearDn5OnCmd);
-          XPLMCommandOnce(GearDn6OnCmd);
-          XPLMCommandOnce(GearDn7OnCmd);
-          XPLMCommandOnce(GearDn8OnCmd);
+            if (GearDnAllreadyOn < 1) {
+                XPLMCommandOnce(GearDnOnCmd);
+                XPLMCommandOnce(GearDn2OnCmd);
+                XPLMCommandOnce(GearDn3OnCmd);
+                XPLMCommandOnce(GearDn4OnCmd);
+                XPLMCommandOnce(GearDn5OnCmd);
+                XPLMCommandOnce(GearDn6OnCmd);
+                XPLMCommandOnce(GearDn7OnCmd);
+                XPLMCommandOnce(GearDn8OnCmd);
+                GearDnAllreadyOn = 1;
+                GearUpAllreadyOn = 0;
+            }
+        }
+
+        if(!testbit(switchbuf,GEAR_SWITCH_DN)) {
+            if (GearDnAllreadyOff < 1) {
+                XPLMCommandOnce(GearDnOffCmd);
+                XPLMCommandOnce(GearDn2OffCmd);
+                XPLMCommandOnce(GearDn3OnCmd);
+                XPLMCommandOnce(GearDn4OffCmd);
+                XPLMCommandOnce(GearDn5OffCmd);
+                XPLMCommandOnce(GearDn6OffCmd);
+                XPLMCommandOnce(GearDn7OffCmd);
+                XPLMCommandOnce(GearDn8OffCmd);
+                GearDnAllreadyOff = 1;
+                GearUpAllreadyOff = 0;
+            }
         }
 
         return;

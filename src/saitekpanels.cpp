@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Feb 18 2017   **************
+// ****** Mar 27 2017   **************
 
-#define PLUGIN_VERSION "2.59 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 259
+#define PLUGIN_VERSION "2.60 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 260
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -698,14 +698,14 @@ XPLMCommandRef PitotHeat6OnCmd = NULL, PitotHeat6OffCmd = NULL;
 XPLMCommandRef PitotHeat7OnCmd = NULL, PitotHeat7OffCmd = NULL;
 XPLMCommandRef PitotHeat8OnCmd = NULL, PitotHeat8OffCmd = NULL;
 
-XPLMCommandRef GearUpOnCmd = NULL, GearOnOffCmd = NULL;
-XPLMCommandRef GearUp2OnCmd = NULL, GearOn2OffCmd = NULL;
-XPLMCommandRef GearUp3OnCmd = NULL, GearOn3OffCmd = NULL;
-XPLMCommandRef GearUp4OnCmd = NULL, GearOn4OffCmd = NULL;
-XPLMCommandRef GearUp5OnCmd = NULL, GearOnO5ffCmd = NULL;
-XPLMCommandRef GearUp6OnCmd = NULL, GearOn6OffCmd = NULL;
-XPLMCommandRef GearUp7OnCmd = NULL, GearOn7OffCmd = NULL;
-XPLMCommandRef GearUp8OnCmd = NULL, GearOn8OffCmd = NULL;
+XPLMCommandRef GearUpOnCmd = NULL, GearUpOffCmd = NULL;
+XPLMCommandRef GearUp2OnCmd = NULL, GearUp2OffCmd = NULL;
+XPLMCommandRef GearUp3OnCmd = NULL, GearUp3OffCmd = NULL;
+XPLMCommandRef GearUp4OnCmd = NULL, GearUp4OffCmd = NULL;
+XPLMCommandRef GearUp5OnCmd = NULL, GearUp5OffCmd = NULL;
+XPLMCommandRef GearUp6OnCmd = NULL, GearUp6OffCmd = NULL;
+XPLMCommandRef GearUp7OnCmd = NULL, GearUp7OffCmd = NULL;
+XPLMCommandRef GearUp8OnCmd = NULL, GearUp8OffCmd = NULL;
 
 XPLMCommandRef GearDnOnCmd = NULL, GearDnOffCmd = NULL;
 XPLMCommandRef GearDn2OnCmd = NULL, GearDn2OffCmd = NULL;

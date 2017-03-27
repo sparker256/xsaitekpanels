@@ -1556,42 +1556,42 @@ void process_read_ini_file()
          gear_switch_up_on = getOptionToString("gear_up_switch_on_cmd");
          gear_switch_up_off = getOptionToString("gear_up_switch_off_cmd");
          GearUpOnCmd = XPLMFindCommand(gear_switch_up_on.c_str());
-         GearUpOnCmd = XPLMFindCommand(gear_switch_up_off.c_str());
+         GearUpOffCmd = XPLMFindCommand(gear_switch_up_off.c_str());
 
          gear2_switch_up_on = getOptionToString("gear2_up_switch_on_cmd");
          gear2_switch_up_off = getOptionToString("gear2_up_switch_off_cmd");
          GearUp2OnCmd = XPLMFindCommand(gear2_switch_up_on.c_str());
-         GearUp2OnCmd = XPLMFindCommand(gear2_switch_up_off.c_str());
+         GearUp2OffCmd = XPLMFindCommand(gear2_switch_up_off.c_str());
 
          gear3_switch_up_on = getOptionToString("gear3_up_switch_on_cmd");
          gear3_switch_up_off = getOptionToString("gear3_up_switch_off_cmd");
          GearUp3OnCmd = XPLMFindCommand(gear3_switch_up_on.c_str());
-         GearUp3OnCmd = XPLMFindCommand(gear3_switch_up_off.c_str());
+         GearUp3OffCmd = XPLMFindCommand(gear3_switch_up_off.c_str());
 
          gear4_switch_up_on = getOptionToString("gear4_up_switch_on_cmd");
          gear4_switch_up_off = getOptionToString("gear4_up_switch_off_cmd");
          GearUp4OnCmd = XPLMFindCommand(gear4_switch_up_on.c_str());
-         GearUp4OnCmd = XPLMFindCommand(gear4_switch_up_off.c_str());
+         GearUp4OffCmd = XPLMFindCommand(gear4_switch_up_off.c_str());
 
          gear5_switch_up_on = getOptionToString("gear5_up_switch_on_cmd");
          gear5_switch_up_off = getOptionToString("gear5_up_switch_off_cmd");
          GearUp5OnCmd = XPLMFindCommand(gear5_switch_up_on.c_str());
-         GearUp5OnCmd = XPLMFindCommand(gear5_switch_up_off.c_str());
+         GearUp5OffCmd = XPLMFindCommand(gear5_switch_up_off.c_str());
 
          gear6_switch_up_on = getOptionToString("gear6_up_switch_on_cmd");
          gear6_switch_up_off = getOptionToString("gear6_up_switch_off_cmd");
          GearUp6OnCmd = XPLMFindCommand(gear6_switch_up_on.c_str());
-         GearUp6OnCmd = XPLMFindCommand(gear6_switch_up_off.c_str());
+         GearUp6OffCmd = XPLMFindCommand(gear6_switch_up_off.c_str());
 
          gear7_switch_up_on = getOptionToString("gear7_up_switch_on_cmd");
          gear7_switch_up_off = getOptionToString("gear7_up_switch_off_cmd");
          GearUp7OnCmd = XPLMFindCommand(gear7_switch_up_on.c_str());
-         GearUp7OnCmd = XPLMFindCommand(gear7_switch_up_off.c_str());
+         GearUp7OffCmd = XPLMFindCommand(gear7_switch_up_off.c_str());
 
          gear8_switch_up_on = getOptionToString("gear8_up_switch_on_cmd");
          gear8_switch_up_off = getOptionToString("gear8_up_switch_off_cmd");
          GearUp8OnCmd = XPLMFindCommand(gear8_switch_up_on.c_str());
-         GearUp8OnCmd = XPLMFindCommand(gear8_switch_up_off.c_str());
+         GearUp8OffCmd = XPLMFindCommand(gear8_switch_up_off.c_str());
      }
 
      if ((landinggearknobupenable == 3) || (landinggearknobupenable == 4)) {
