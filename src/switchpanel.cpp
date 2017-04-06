@@ -3142,8 +3142,8 @@ void process_taxi_lights_switch()
                 XPLMCommandOnce(TaxiLights6OnCmd);
                 XPLMCommandOnce(TaxiLights7OnCmd);
                 XPLMCommandOnce(TaxiLights8OnCmd);
-                TaxiLightsAllreadyOn = 0;
-                TaxiLightsAllreadyOff = 1;
+                TaxiLightsAllreadyOn = 1;
+                TaxiLightsAllreadyOff = 0;
             }
 
 
@@ -3226,8 +3226,8 @@ void process_taxi_lights_switch()
 	if(testbit(switchbuf,TAXI_LIGHTS)) {
         if (TaxiLightsAllreadyOn < 1) {
             XPLMCommandOnce(TxLtOn);
-            TaxiLightsAllreadyOn = 0;
-            TaxiLightsAllreadyOff = 1;
+            TaxiLightsAllreadyOn = 1;
+            TaxiLightsAllreadyOff = 0;
         }
  	}
 	if(!testbit(switchbuf,TAXI_LIGHTS)) {
