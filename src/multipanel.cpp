@@ -61,6 +61,8 @@ static int ADJUSTMENT_UP = 2, ADJUSTMENT_DN = 1;
 
 static int Last_Adjustment_Up, Last_Adjustment_Dn;
 
+static const float MultiKnobSpeedThreshold = 0.025f;  // Steve Bootes: speed thresholds for knob acceleration (25ms)
+
 static unsigned char multibuf[4];
 static unsigned char multiwbuf[13];
 
@@ -320,10 +322,10 @@ void process_alt_switch()
         upapalt = (int)(upapaltf);
         if((Last_Adjustment_Up == 1) && (testbit(multibuf,ADJUSTMENT_UP) == 0)) {
             altdbncinc++;
-            if (altdbncinc > multispeed) {
+			if (altdbncinc > multispeed) {
                 n = multimul;
-                if(xpanelsfnbutton == 1) {
-                    if(altswitchremap == 1) {
+                if((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
+					if(altswitchremap == 1) {
                         while (n>0) {
                            XPLMCommandOnce(AltSwitchUpRemapableCmd);
                            --n;
@@ -338,6 +340,7 @@ void process_alt_switch()
                     }
 
                 }
+
                 if (xpanelsfnbutton == 0) {
                     if(altswitchremap == 1) {
                        XPLMCommandOnce(AltSwitchUpRemapableCmd);
@@ -350,15 +353,16 @@ void process_alt_switch()
 
                 }
             }
-        }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
+		}
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
 
         if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             altdbncdec++;
-            if (altdbncdec > multispeed) {
+			if (altdbncdec > multispeed) {
                 n = multimul;
-                if(xpanelsfnbutton == 1) {
-                    if(altswitchremap == 1) {
+                if((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
+					if(altswitchremap == 1) {
                         while (n>0) {
                            XPLMCommandOnce(AltSwitchDnRemapableCmd);
                            --n;
@@ -393,7 +397,8 @@ void process_alt_switch()
                 }
 
             }
-        }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
+		}
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
 
         upapaltf = upapalt;
@@ -440,7 +445,9 @@ void process_vs_switch()
             vsdbncinc++;
             if (vsdbncinc > multispeed) {
                 n = multimul;
-                if (xpanelsfnbutton == 1) {
+				// Steve Bootes : add test for MultiKnob rotation time - DISABLE this test for V/S as it makes it too sensitive and isn't really needed
+				// if((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+				if (xpanelsfnbutton == 1) {
                     if (vsswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(VsSwitchUpRemapableCmd);
@@ -467,14 +474,17 @@ void process_vs_switch()
                     vsdbncinc = 0;
                 }
              }
-        }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved.  Not needed here UNLESS acceleration for V/S is re-enabled.
+		}
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
 
         if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             vsdbncdec++;
             if (vsdbncdec > multispeed) {
                 n = multimul;
-                if(xpanelsfnbutton == 1) {
+				// Steve Bootes : add test for MultiKnob rotation time - DISABLE this test for V/S as it makes it too sensitive and isn't really needed
+				// if((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+				if (xpanelsfnbutton == 1) {
                     if (vsswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(VsSwitchDnRemapableCmd);
@@ -499,6 +509,7 @@ void process_vs_switch()
                     vsdbncdec = 0;
                 }
             }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
         }
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
 
@@ -565,7 +576,7 @@ void process_ias_switch()
             iasdbncinc++;
             if (iasdbncinc > multispeed) {
                 n = multimul;
-                if (xpanelsfnbutton == 1) {
+                if ((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (iasswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(IasSwitchUpRemapableCmd);
@@ -610,6 +621,7 @@ void process_ias_switch()
                     iasdbncinc = 0;
                 }
             }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
         }
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
 
@@ -617,7 +629,7 @@ void process_ias_switch()
             iasdbncdec++;
             if (iasdbncdec > multispeed) {
                 n = multimul;
-                if (xpanelsfnbutton == 1) {
+                if ((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (iasswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(IasSwitchDnRemapableCmd);
@@ -663,6 +675,7 @@ void process_ias_switch()
                     iasdbncdec = 0;
                 }
             }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
         }
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
         if (iasismachremap == 1) {
@@ -721,7 +734,7 @@ void process_hdg_switch()
             hdgdbncinc++;
             if (hdgdbncinc > multispeed) {
                 n = multimul;
-                if(xpanelsfnbutton == 1) {
+                if((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (hdgswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(HdgSwitchUpRemapableCmd);
@@ -742,6 +755,7 @@ void process_hdg_switch()
                     hdgdbncinc = 0;
                 }
             }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
         }
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
 
@@ -749,7 +763,7 @@ void process_hdg_switch()
             hdgdbncdec++;
             if (hdgdbncdec > multispeed) {
                 n = multimul;
-                if(xpanelsfnbutton == 1) {
+                if((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (hdgswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(HdgSwitchDnRemapableCmd);
@@ -769,6 +783,7 @@ void process_hdg_switch()
                     hdgdbncdec = 0;
                 }
             }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
         }
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
         if(upaphdg > 360) {
@@ -821,7 +836,7 @@ void process_crs_switch()
             crsdbncinc++;
             if (crsdbncinc > multispeed) {
                 n = multimul;
-                if (xpanelsfnbutton == 1) {
+                if ((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (crsswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(CrsSwitchUpRemapableCmd);
@@ -841,6 +856,7 @@ void process_crs_switch()
                 }
                 crsdbncinc = 0;
             }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
         }
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
 
@@ -848,7 +864,7 @@ void process_crs_switch()
             crsdbncdec++;
             if (crsdbncdec > multispeed) {
                 n = multimul;
-                if (xpanelsfnbutton == 1) {
+                if ((xpanelsfnbutton == 1) || (MultiKnobTimeSinceChange < MultiKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (crsswitchremap == 1) {
                         while (n>0) {
                             XPLMCommandOnce(CrsSwitchDnRemapableCmd);
@@ -870,6 +886,7 @@ void process_crs_switch()
 
                 crsdbncdec = 0;
             }
+			MultiKnobTimeSinceChange = 0; // Steve Bootes: reset timer since knob has moved
         }
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
 

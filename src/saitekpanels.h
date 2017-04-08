@@ -2704,5 +2704,8 @@ extern int dre_enable;
 
 extern int icao_enable;
 
+// Steve Bootes
+extern float MultiKnobTimeSinceChange;
+
 
 #endif
