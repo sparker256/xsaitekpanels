@@ -2,8 +2,8 @@
 // ****  William R. Good   ***********
 // ****** Apr 06 2017   **************
 
-#define PLUGIN_VERSION "2.62 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 262
+#define PLUGIN_VERSION "2.62.1 Steve Bootes test build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 2621
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -3143,6 +3143,8 @@ int icao_enable = 0;
 
 
 int readiniloop = 0;
+
+float MultiKnobTimeSinceChange = 0;// Steve Bootes - Global to track time between knob adjustments
 
 
 void process_radio_panel();
@@ -9112,7 +9114,8 @@ float	MyPanelsFlightLoopCallback(
                                    void *               inRefcon)
 
 {
-    (void) inElapsedSinceLastCall; // To get rid of warnings on unused variables
+	MultiKnobTimeSinceChange += inElapsedSinceLastCall; // Steve Bootes: keep track of time between flight loop calls
+
     (void) inElapsedTimeSinceLastFlightLoop; // To get rid of warnings on unused variables
     (void) inCounter; // To get rid of warnings on unused variables
     (void) inRefcon; // To get rid of warnings on unused variables
