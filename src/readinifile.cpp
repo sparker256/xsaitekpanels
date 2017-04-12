@@ -95,7 +95,7 @@ void process_read_ini_file()
     starterswitchenable = 0;
 
     // radio panel defaults
-    radspeed                 = 3;
+    radspeed                 = 1;
     numadf                   = 1;
     metricpressenable        = 0;
     channelspacing833enable  = 0;
