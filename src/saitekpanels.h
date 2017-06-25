@@ -2706,6 +2706,10 @@ extern int icao_enable;
 
 // Steve Bootes
 extern float MultiKnobTimeSinceChange;
+extern char	buf[256];
+extern float wrgCurrentTime;
+extern float MultiKnobLastCurrentTime;
+extern float MultiKnobLastCurrentTimeDiff;
 
 
 #endif

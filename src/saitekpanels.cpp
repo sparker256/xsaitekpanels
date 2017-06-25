@@ -3144,7 +3144,11 @@ int icao_enable = 0;
 
 int readiniloop = 0;
 
-float MultiKnobTimeSinceChange = 0;// Steve Bootes - Global to track time between knob adjustments
+float wrgCurrentTime = 0;
+float MultiKnobLastCurrentTime = 0;
+float MultiKnobLastCurrentTimeDiff = 0; // Steve Bootes Bill Good - Global to track time between knob adjustments
+
+char	buf[256];
 
 
 void process_radio_panel();
@@ -3288,7 +3292,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   bip_devs = hid_enumerate(0x6a3, 0xb4e);
   bip_cur_dev = bip_devs;
-  char	buf[256];
+  // char	buf[256];
   int bip_result01, bip_result10;
   int bip_result02, bip_result20;
   int bip_result12, bip_result21;
@@ -9114,11 +9118,14 @@ float	MyPanelsFlightLoopCallback(
                                    void *               inRefcon)
 
 {
-	MultiKnobTimeSinceChange += inElapsedSinceLastCall; // Steve Bootes: keep track of time between flight loop calls
+//    MultiKnobTimeSinceChange += inElapsedSinceLastCall; // Steve Bootes: keep track of time between flight loop calls
 
+    (void) inElapsedSinceLastCall; // To get rid of warnings on unused variables
     (void) inElapsedTimeSinceLastFlightLoop; // To get rid of warnings on unused variables
     (void) inCounter; // To get rid of warnings on unused variables
     (void) inRefcon; // To get rid of warnings on unused variables
+
+    wrgCurrentTime = XPLMGetElapsedTime();
 
   if(radcnt > 0){
     process_radio_panel();
