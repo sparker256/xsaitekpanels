@@ -2229,10 +2229,10 @@ void process_read_ini_file()
               LandingLights7OnCmd = XPLMFindCommand(landing_lights_switch7_on.c_str());
               LandingLights7OffCmd = XPLMFindCommand(landing_lights_switch7_off.c_str());
 
-              landing_lights_switch_on = getOptionToString("landing_lights_switch8_on_cmd");
-              landing_lights_switch_off = getOptionToString("landing_lights_switch8_off_cmd");
-              LandingLightsOnCmd = XPLMFindCommand(landing_lights_switch8_on.c_str());
-              LandingLightsOffCmd = XPLMFindCommand(landing_lights_switch8_off.c_str());
+              landing_lights_switch8_on = getOptionToString("landing_lights_switch8_on_cmd");
+              landing_lights_switch8_off = getOptionToString("landing_lights_switch8_off_cmd");
+              LandingLights8OnCmd = XPLMFindCommand(landing_lights_switch8_on.c_str());
+              LandingLights8OffCmd = XPLMFindCommand(landing_lights_switch8_off.c_str());
           }
 
           if ((landinglightswitchenable == 3) || (landinglightswitchenable == 4)) {

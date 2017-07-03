@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Apr 11 2017   **************
+// ****** Jul 03 2017   **************
 
-#define PLUGIN_VERSION "2.63 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 263
+#define PLUGIN_VERSION "2.64 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 264
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -3141,14 +3141,15 @@ int dre_enable = 0;
 
 int icao_enable = 0;
 
-
 int readiniloop = 0;
+
+int log_enable = 0;
 
 float wrgCurrentTime = 0;
 float MultiKnobLastCurrentTime = 0;
 float MultiKnobLastCurrentTimeDiff = 0; // Steve Bootes Bill Good - Global to track time between knob adjustments
 
-char	buf[256];
+char	buf[512];
 
 
 void process_radio_panel();
