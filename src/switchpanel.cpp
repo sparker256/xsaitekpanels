@@ -3380,6 +3380,30 @@ void process_gear_switch_switch()
         return;
     }
 
+
+    if(landinggearknobupenable == 1) {
+        if(testbit(switchbuf,GEAR_SWITCH_UP)) {
+            if (GearUpAllreadyOn < 1) {
+                XPLMCommandOnce(GearUp);
+                if(XPLMGetDatai(OnGround) > 0) {
+                    gearled = 0x38;
+                }
+                GearUpAllreadyOn = 1;
+                GearDnAllreadyOn = 0;
+            }
+        }
+
+        if(testbit(switchbuf,GEAR_SWITCH_DN)) {
+            if (GearDnAllreadyOn < 1) {
+                XPLMCommandOnce(GearDn);
+                GearDnAllreadyOn = 1;
+                GearUpAllreadyOn = 0;
+            }
+        }
+
+    }
+
+
     if(landinggearknobupenable == 2) {
 
         if(testbit(switchbuf,GEAR_SWITCH_UP)) {
@@ -3443,7 +3467,7 @@ void process_gear_switch_switch()
             }
         }
 
-        return;
+        //return;
     }
 
     if(landinggearknobupenable == 3) {
@@ -3460,7 +3484,7 @@ void process_gear_switch_switch()
         if(!testbit(switchbuf,GEAR_SWITCH_DN)) {
            XPLMSetDatai(GearDnData, gear_switch_down_data_off_value);
         }
-        return;
+        //return;
     }
 
     if(landinggearknobupenable == 4) {
@@ -3485,7 +3509,7 @@ void process_gear_switch_switch()
             gear_switch_down_dataf_off_value = gear_switch_down_dataf_off_value / 100.0f;
             XPLMSetDataf(GearDnData, gear_switch_down_dataf_off_value);
         }
-        return;
+        //return;
     }
 
     if(XPLMGetDatai(GearRetract) > 0) {
@@ -3663,27 +3687,6 @@ void process_gear_switch_switch()
                  gearled &= ~(1<<2);   // * clear bit 0 in gearled to 0 *
              }
         }
-
-
-        if(testbit(switchbuf,GEAR_SWITCH_UP)) {
-            if (GearUpAllreadyOn < 1) {
-                XPLMCommandOnce(GearUp);
-                if(XPLMGetDatai(OnGround) > 0) {
-                    gearled = 0x38;
-                }
-                GearUpAllreadyOn = 1;
-                GearDnAllreadyOn = 0;
-            }
-        }
-
-        if(testbit(switchbuf,GEAR_SWITCH_DN)) {
-            if (GearDnAllreadyOn < 1) {
-                XPLMCommandOnce(GearDn);
-                GearDnAllreadyOn = 1;
-                GearUpAllreadyOn = 0;
-            }
-        }
-
 	}
 	if(XPLMGetDatai(GearRetract) == 0){
 	  gearled = 0x00;
