@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jul 03 2017   **************
+// ****** Jul 05 2017   **************
 
-#define PLUGIN_VERSION "2.64 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 264
+#define PLUGIN_VERSION "2.65 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 265
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -3146,8 +3146,11 @@ int readiniloop = 0;
 int log_enable = 0;
 
 float wrgCurrentTime = 0;
-float MultiKnobLastCurrentTime = 0;
-float MultiKnobLastCurrentTimeDiff = 0; // Steve Bootes Bill Good - Global to track time between knob adjustments
+
+float MultiKnobLastCurrentUpTime = 0;
+float MultiKnobLastCurrentDnTime = 0;
+float MultiKnobLastCurrentUpTimeDiff = 0; // Steve Bootes Bill Good - Global to track time between knob adjustments
+float MultiKnobLastCurrentDnTimeDiff = 0; // Steve Bootes Bill Good - Global to track time between knob adjustments
 
 char	buf[512];
 

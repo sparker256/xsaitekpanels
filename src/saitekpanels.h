@@ -2710,8 +2710,12 @@ extern int log_enable;
 extern float MultiKnobTimeSinceChange;
 extern char	buf[256];
 extern float wrgCurrentTime;
-extern float MultiKnobLastCurrentTime;
-extern float MultiKnobLastCurrentTimeDiff;
+
+extern float MultiKnobLastCurrentUpTime;
+extern float MultiKnobLastCurrentDnTime;
+extern float MultiKnobLastCurrentUpTimeDiff;
+extern float MultiKnobLastCurrentDnTimeDiff;
+
 
 
 #endif
