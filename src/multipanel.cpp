@@ -39,6 +39,10 @@ static int altdbncinc = 0, altdbncdec = 0, vsdbncinc = 0, vsdbncdec = 0;
 static int iasdbncinc = 0, iasdbncdec = 0, hdgdbncinc = 0, hdgdbncdec = 0;
 static int crsdbncinc = 0, crsdbncdec = 0; 
 
+static int altbiginc = 0, altbigdec = 0, vsbiginc = 0, vsbigdec = 0;
+static int iasbiginc = 0, iasbigdec = 0, hdgbiginc = 0, hdgbigdec = 0;
+static int crsbiginc = 0, crsbigdec = 0;
+
 static float upapaltf, upapvsf, upapasf, upaphdgf, upapcrsf, upapcrsf2, rhdgf;
 static float apasf, apmasf;
 
@@ -334,7 +338,7 @@ void process_alt_switch()
                 if (log_enable == 1) {
                     sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentUpTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentUpTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentUpTime = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiAltKnobSpeedThreshold);
+                    sprintf(buf, "Xsaitekpanels:MultiKnobLastCurrentUpTimeDiff = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiAltKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiAltKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
@@ -357,8 +361,9 @@ void process_alt_switch()
                         upapalt = (upapalt / 1000);
                         upapalt = (upapalt * 1000);
                         altdbncinc = 0;
+                        altbiginc = 1;
                         if (log_enable == 1) {
-                            sprintf(buf, "upapalt + 1000 = %d\n", upapalt);
+                            sprintf(buf, "upapalt + 1000 = %d\n\n", upapalt);
                             XPLMDebugString(buf);
                         }
                     }
@@ -372,19 +377,22 @@ void process_alt_switch()
                             sprintf(buf, "Xsaitekpanels: upapalt = %d ", upapalt);
                             XPLMDebugString(buf);
                         }
-                        upapalt = upapalt + 100;
-                        upapalt = (upapalt / 100);
-                        upapalt = (upapalt * 100);
-                        altdbncinc = 0;
-                        if (log_enable == 1) {
-                            sprintf(buf, "upapalt + 100 = %d\n", upapalt);
-                            XPLMDebugString(buf);
+                        if (altbiginc == 0) {
+                            upapalt = upapalt + 100;
+                            upapalt = (upapalt / 100);
+                            upapalt = (upapalt * 100);
+                            altdbncinc = 0;
+                            if (log_enable == 1) {
+                                sprintf(buf, "upapalt + 100 = %d\n\n", upapalt);
+                                XPLMDebugString(buf);
+                            }
                         }
                     }
                 }
             }
 		}
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+        altbiginc = 0;
 
         if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             altdbncdec++;
@@ -414,26 +422,18 @@ void process_alt_switch()
                                 XPLMDebugString(buf);
                             }
                             upapalt = upapalt - 1000;
+                            altbigdec = 1;
                             if (log_enable == 1) {
-                                sprintf(buf, "upapalt - 1000 = %d\n", upapalt);
+                                sprintf(buf, "upapalt - 1000 = %d\n\n", upapalt);
                                 XPLMDebugString(buf);
                             }
                         }
                         if(upapalt > 100) {
-                            if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: upapalt = %d ", upapalt);
-                                XPLMDebugString(buf);
-                            }
                             upapalt = (upapalt / 100);
                             upapalt = (upapalt * 100);
-                            if (log_enable == 1) {
-                                sprintf(buf, "upapalt = %d\n", upapalt);
-                                XPLMDebugString(buf);
-                            }
                         }
                         altdbncdec = 0;
                     }
-
                 }
                 MultiKnobLastCurrentDnTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
                 if (xpanelsfnbutton == 0) {
@@ -441,14 +441,16 @@ void process_alt_switch()
                         XPLMCommandOnce(AltSwitchDnRemapableCmd);
                      } else {
                          if (upapalt >= 100) {
-                             if (log_enable == 1) {
-                                 sprintf(buf, "Xsaitekpanels: upapalt = %d ", upapalt);
-                                 XPLMDebugString(buf);
-                             }
-                             upapalt = upapalt - 100;
-                             if (log_enable == 1) {
-                                 sprintf(buf, "upapalt - 100 = %d\n", upapalt);
-                                 XPLMDebugString(buf);
+                             if (altbigdec == 0) {
+                                 if (log_enable == 1) {
+                                     sprintf(buf, "Xsaitekpanels: upapalt = %d ", upapalt);
+                                     XPLMDebugString(buf);
+                                 }
+                                 upapalt = upapalt - 100;
+                                 if (log_enable == 1) {
+                                     sprintf(buf, "upapalt - 100 = %d\n\n", upapalt);
+                                     XPLMDebugString(buf);
+                                 }
                              }
                          }
                          if(upapalt > 100) {
@@ -457,14 +459,12 @@ void process_alt_switch()
                          }
                          altdbncdec = 0;
                      }
-
                 }
-
             }
 		}
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
-
         upapaltf = upapalt;
+        altbigdec = 0;
 
         if (altswitchremap == 2) {
             XPLMSetDataf(AltSwitchRemapableData, upapaltf);
@@ -533,8 +533,9 @@ void process_vs_switch()
                             XPLMDebugString(buf);
                         }
                         upapvs = upapvs + 200;
+                        vsbiginc = 1;
                         if (log_enable == 1) {
-                            sprintf(buf, "upapvs + 200 = %d\n", upapvs);
+                            sprintf(buf, "upapvs + 200 = %d\n\n", upapvs);
                             XPLMDebugString(buf);
                         }
                     }
@@ -546,23 +547,25 @@ void process_vs_switch()
                     if (vsswitchremap == 1) {
                         XPLMCommandOnce(VsSwitchUpRemapableCmd);
                     } else {
-                        if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: upapvs = %d ", upapvs);
-                            XPLMDebugString(buf);
+                        if (vsbiginc == 0) {
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: upapvs = %d ", upapvs);
+                                XPLMDebugString(buf);
+                            }
+                            //XPLMCommandOnce(ApVsUp);
+                            upapvs = upapvs + 100;
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: upapvs + 100 = %d\n\n", upapvs);
+                                XPLMDebugString(buf);
+                            }
                         }
-                        //XPLMCommandOnce(ApVsUp);
-                        upapvs = upapvs + 100;
-                        if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: upapvs + 100 = %d ", upapvs);
-                            XPLMDebugString(buf);
-                        }
-
                     }
                     vsdbncinc = 0;
                 }
              }
 		}
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+        vsbiginc = 0;
 
         if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             vsdbncdec++;
@@ -591,8 +594,9 @@ void process_vs_switch()
                             XPLMDebugString(buf);
                         }
                         upapvs = upapvs - 200;
+                        vsbigdec = 1;
                         if (log_enable == 1) {
-                            sprintf(buf, "upapvs - 200 = %d\n", upapvs);
+                            sprintf(buf, "upapvs - 200 = %d\n\n", upapvs);
                             XPLMDebugString(buf);
                         }
                     }
@@ -604,14 +608,16 @@ void process_vs_switch()
                         XPLMCommandOnce(VsSwitchDnRemapableCmd);
                     } else {
                         //XPLMCommandOnce(ApVsUp);
-                        if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: upapvs = %d ", upapvs);
-                            XPLMDebugString(buf);
-                        }
-                        upapvs = upapvs - 100;
-                        if (log_enable == 1) {
-                            sprintf(buf, "upapvs - 100 = %d\n", upapvs);
-                            XPLMDebugString(buf);
+                        if (vsbigdec == 0) {
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: upapvs = %d ", upapvs);
+                                XPLMDebugString(buf);
+                            }
+                            upapvs = upapvs - 100;
+                            if (log_enable == 1) {
+                                sprintf(buf, "upapvs - 100 = %d\n\n", upapvs);
+                                XPLMDebugString(buf);
+                            }
                         }
                     }
                     vsdbncdec = 0;
@@ -619,6 +625,7 @@ void process_vs_switch()
             }
         }
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
+        vsbigdec = 0;
 
         upapvsf = upapvs;
         if (vsswitchremap == 2) {
@@ -716,7 +723,7 @@ void process_ias_switch()
                             }
                             apmasf = apmasf + .10;
                             if (log_enable == 1) {
-                                sprintf(buf, "apmasf + .10 = %f\n", apmasf);
+                                sprintf(buf, "apmasf + .10 = %f\n\n", apmasf);
                                 XPLMDebugString(buf);
                             }
                         } else {
@@ -725,8 +732,9 @@ void process_ias_switch()
                                 XPLMDebugString(buf);
                             }
                             apas = apas + 10;
+                            iasbiginc = 1;
                             if (log_enable == 1) {
-                                sprintf(buf, "apas + 10 = %d\n", apas);
+                                sprintf(buf, "apas + 10 = %d\n\n", apas);
                                 XPLMDebugString(buf);
                             }
                         }
@@ -753,18 +761,20 @@ void process_ias_switch()
                             }
                             apmasf = apmasf + .01;
                             if (log_enable == 1) {
-                                sprintf(buf, "apmasf + .01 = %f\n", apmasf);
+                                sprintf(buf, "apmasf + .01 = %f\n\n", apmasf);
                                 XPLMDebugString(buf);
                             }
                         } else {
-                            if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: apas = %d ", apas);
-                                XPLMDebugString(buf);
-                            }
-                            apas = apas + 1;
-                            if (log_enable == 1) {
-                                sprintf(buf, "apas - 1 = %d\n", apas);
-                                XPLMDebugString(buf);
+                            if (iasbiginc == 0) {
+                                if (log_enable == 1) {
+                                    sprintf(buf, "Xsaitekpanels: apas = %d ", apas);
+                                    XPLMDebugString(buf);
+                                }
+                                apas = apas + 1;
+                                if (log_enable == 1) {
+                                    sprintf(buf, "apas + 1 = %d\n\n", apas);
+                                    XPLMDebugString(buf);
+                                }
                             }
                         }
                     }
@@ -773,6 +783,7 @@ void process_ias_switch()
             }
         }
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+        iasbiginc = 0;
 
 
         if ((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
@@ -810,7 +821,7 @@ void process_ias_switch()
                            }
                            apmasf = apmasf - .01;
                            if (log_enable == 1) {
-                               sprintf(buf, "apmasf - .01 = %f\n", apmasf);
+                               sprintf(buf, "apmasf - .01 = %f\n\n", apmasf);
                                XPLMDebugString(buf);
                            }
                        } else {
@@ -819,8 +830,9 @@ void process_ias_switch()
                                XPLMDebugString(buf);
                            }
                            apas = apas - 10;
+                           iasbigdec = 1;
                            if (log_enable == 1) {
-                               sprintf(buf, "apas - 10 = %d\n", apas);
+                               sprintf(buf, "apas - 10 = %d\n\n", apas);
                                XPLMDebugString(buf);
                            }
                        }
@@ -848,18 +860,20 @@ void process_ias_switch()
                             }
                             apmasf = apmasf - .01;
                             if (log_enable == 1) {
-                                sprintf(buf, "apmasf - .01 = %f\n", apmasf);
+                                sprintf(buf, "apmasf - .01 = %f\n\n", apmasf);
                                 XPLMDebugString(buf);
                             }
                         } else {
-                            if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: apas = %d ", apas);
-                                XPLMDebugString(buf);
-                            }
-                            apas = apas - 1;
-                            if (log_enable == 1) {
-                                sprintf(buf, "apas - 1 = %d\n", apas);
-                                XPLMDebugString(buf);
+                            if (iasbigdec == 0) {
+                                if (log_enable == 1) {
+                                    sprintf(buf, "Xsaitekpanels: apas = %d ", apas);
+                                    XPLMDebugString(buf);
+                                }
+                                apas = apas - 1;
+                                if (log_enable == 1) {
+                                    sprintf(buf, "apas - 1 = %d\n\n", apas);
+                                    XPLMDebugString(buf);
+                                }
                             }
                         }
                     }
@@ -868,6 +882,7 @@ void process_ias_switch()
             }
         }
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
+        iasbigdec = 0;
 
         if (iasismachremap == 1) {
             if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
@@ -950,8 +965,9 @@ void process_hdg_switch()
                             XPLMDebugString(buf);
                         }
                         upaphdg = upaphdg + 10;
+                        hdgbiginc = 1;
                         if (log_enable == 1) {
-                            sprintf(buf, "upaphdg + 10 = %d\n", upaphdg);
+                            sprintf(buf, "upaphdg + 10 = %d\n\n", upaphdg);
                             XPLMDebugString(buf);
                         }
                     }
@@ -963,14 +979,16 @@ void process_hdg_switch()
                     if (hdgswitchremap == 1) {
                         XPLMCommandOnce(HdgSwitchUpRemapableCmd);
                     } else {
-                        if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: upaphdg = %d ", upaphdg);
-                            XPLMDebugString(buf);
-                        }
-                        upaphdg = upaphdg + 1;
-                        if (log_enable == 1) {
-                            sprintf(buf, "upaphdg + 1 = %d\n", upaphdg);
-                            XPLMDebugString(buf);
+                        if (hdgbiginc == 0) {
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: upaphdg = %d ", upaphdg);
+                                XPLMDebugString(buf);
+                            }
+                            upaphdg = upaphdg + 1;
+                            if (log_enable == 1) {
+                                sprintf(buf, "upaphdg + 1 = %d\n\n", upaphdg);
+                                XPLMDebugString(buf);
+                            }
                         }
                     }
                     hdgdbncinc = 0;
@@ -978,6 +996,7 @@ void process_hdg_switch()
             }
         }
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+        hdgbiginc = 0;
 
         if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             hdgdbncdec++;
@@ -1006,8 +1025,9 @@ void process_hdg_switch()
                             XPLMDebugString(buf);
                         }
                         upaphdg = upaphdg - 10;
+                        hdgbigdec = 1;
                         if (log_enable == 1) {
-                            sprintf(buf, "upaphdg - 10 = %d\n", upaphdg);
+                            sprintf(buf, "upaphdg - 10 = %d\n\n", upaphdg);
                             XPLMDebugString(buf);
                         }
                     }
@@ -1018,14 +1038,16 @@ void process_hdg_switch()
                     if (hdgswitchremap == 1) {
                         XPLMCommandOnce(HdgSwitchDnRemapableCmd);
                     } else {
-                        if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: upaphdg = %d ", upaphdg);
-                            XPLMDebugString(buf);
-                        }
-                        upaphdg = upaphdg - 1;
-                        if (log_enable == 1) {
-                            sprintf(buf, "upaphdg - 1 = %d\n", upaphdg);
-                            XPLMDebugString(buf);
+                        if (hdgbigdec == 0) {
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: upaphdg = %d ", upaphdg);
+                                XPLMDebugString(buf);
+                            }
+                            upaphdg = upaphdg - 1;
+                            if (log_enable == 1) {
+                                sprintf(buf, "upaphdg - 1 = %d\n\n", upaphdg);
+                                XPLMDebugString(buf);
+                            }
                         }
                     }
                     hdgdbncdec = 0;
@@ -1033,6 +1055,8 @@ void process_hdg_switch()
             }
         }
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
+        hdgbigdec = 0;
+
         if(upaphdg > 360) {
             upaphdg = 1;
         }
@@ -1108,8 +1132,9 @@ void process_crs_switch()
                             XPLMDebugString(buf);
                         }
                         cur_apcrs = cur_apcrs + 10;
+                        crsbiginc = 1;
                         if (log_enable == 1) {
-                            sprintf(buf, "cur_apcrs + 10 = %d\n", cur_apcrs);
+                            sprintf(buf, "cur_apcrs + 10 = %d\n\n", cur_apcrs);
                             XPLMDebugString(buf);
                         }
                     }
@@ -1119,22 +1144,24 @@ void process_crs_switch()
                     if (crsswitchremap == 1) {
                         XPLMCommandOnce(CrsSwitchUpRemapableCmd);
                     } else {
-                        if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: cur_apcrs = %d ", cur_apcrs);
-                            XPLMDebugString(buf);
-                        }
-                        cur_apcrs = cur_apcrs + 1;
-                        if (log_enable == 1) {
-                            sprintf(buf, "cur_apcrs + 1 = %d\n ", cur_apcrs);
-                            XPLMDebugString(buf);
+                        if (crsbiginc == 0) {
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: cur_apcrs = %d ", cur_apcrs);
+                                XPLMDebugString(buf);
+                            }
+                            cur_apcrs = cur_apcrs + 1;
+                            if (log_enable == 1) {
+                                sprintf(buf, "cur_apcrs + 1 = %d\n\n", cur_apcrs);
+                                XPLMDebugString(buf);
+                            }
                         }
                     }
-
                 }
                 crsdbncinc = 0;
             }
         }
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
+        crsbiginc = 0;
 
         if((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             crsdbncdec++;
@@ -1164,8 +1191,9 @@ void process_crs_switch()
                             XPLMDebugString(buf);
                         }
                         cur_apcrs = cur_apcrs - 10;
+                        crsbigdec = 1;
                         if (log_enable == 1) {
-                            sprintf(buf, "cur_apcrs - 10 = %d\n", cur_apcrs);
+                            sprintf(buf, "cur_apcrs - 10 = %d\n\n", cur_apcrs);
                             XPLMDebugString(buf);
                         }
                     }
@@ -1176,23 +1204,25 @@ void process_crs_switch()
                     if (crsswitchremap == 1) {
                         XPLMCommandOnce(CrsSwitchDnRemapableCmd);
                     } else {
-                        if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: cur_apcrs = %d ", cur_apcrs);
-                            XPLMDebugString(buf);
-                        }
-                        cur_apcrs = cur_apcrs - 1;
-                        if (log_enable == 1) {
-                            sprintf(buf, "cur_apcrs - 1 = %d\n", cur_apcrs);
-                            XPLMDebugString(buf);
+                        if (crsbigdec == 0) {
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: cur_apcrs = %d ", cur_apcrs);
+                                XPLMDebugString(buf);
+                            }
+                            cur_apcrs = cur_apcrs - 1;
+                            if (log_enable == 1) {
+                                sprintf(buf, "cur_apcrs - 1 = %d\n\n", cur_apcrs);
+                                XPLMDebugString(buf);
+                            }
                         }
                     }
-
                 }
 
                 crsdbncdec = 0;
             }
         }
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
+        crsbigdec = 0;
 
         if(cur_apcrs > 360) {
             cur_apcrs = 1;
