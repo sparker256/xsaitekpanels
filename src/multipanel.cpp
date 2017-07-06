@@ -373,11 +373,11 @@ void process_alt_switch()
                     if(altswitchremap == 1) {
                        XPLMCommandOnce(AltSwitchUpRemapableCmd);
                     } else {
-                        if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: upapalt = %d ", upapalt);
-                            XPLMDebugString(buf);
-                        }
                         if (altbiginc == 0) {
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: upapalt = %d ", upapalt);
+                                XPLMDebugString(buf);
+                            }
                             upapalt = upapalt + 100;
                             upapalt = (upapalt / 100);
                             upapalt = (upapalt * 100);
