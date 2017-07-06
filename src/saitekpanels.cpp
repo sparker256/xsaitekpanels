@@ -2144,6 +2144,8 @@ int loaded737 = 0;
 
 int trimspeed, multispeed, autothrottleswitchenable, autothrottleswitcharmedvalue;
 
+int multiaccelthreshold;
+
 int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
 int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
 int lightdatareferencetype;

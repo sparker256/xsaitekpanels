@@ -1519,6 +1519,8 @@ extern int numadf;
 extern int loaded737;
 extern int trimspeed, multispeed, autothrottleswitchenable, autothrottleswitcharmedvalue;
 
+extern int  multiaccelthreshold;
+
 extern int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
 extern int altbuttonremap, vsbuttonremap, aprbuttonremap, revbuttonremap;
 extern int lightdatareferencetype;

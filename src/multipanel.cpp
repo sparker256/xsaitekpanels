@@ -62,11 +62,11 @@ static int ADJUSTMENT_UP = 2, ADJUSTMENT_DN = 1;
 static int Last_Adjustment_Up, Last_Adjustment_Dn;
 
 
-static const float MultiAltKnobSpeedThreshold = 0.40f;  // Steve Bootes  Bill Good: speed thresholds for alt knob acceleration
-static const float MultiVsKnobSpeedThreshold = 0.40f;  // Steve Bootes Bill Good: speed thresholds for vs knob acceleration
-static const float MultiIasKnobSpeedThreshold = 0.40f;  // Steve Bootes Bill Good: speed thresholds for ias knob acceleration
-static const float MultiHdgKnobSpeedThreshold = 0.40f;  // Steve Bootes Bill Good: speed thresholds for hdg knob acceleration
-static const float MultiCrsKnobSpeedThreshold = 0.40f;  // Steve Bootes Bill Good: speed thresholds for crs knob acceleration
+float MultiAltKnobSpeedThreshold = 0.40f;  // Steve Bootes  Bill Good: speed thresholds for alt knob acceleration
+float MultiVsKnobSpeedThreshold =  0.40f;  // Steve Bootes Bill Good: speed thresholds for vs knob acceleration
+float MultiIasKnobSpeedThreshold =  0.40f;  // Steve Bootes Bill Good: speed thresholds for ias knob acceleration
+float MultiHdgKnobSpeedThreshold =  0.40f;  // Steve Bootes Bill Good: speed thresholds for hdg knob acceleration
+float MultiCrsKnobSpeedThreshold =  0.40f;  // Steve Bootes Bill Good: speed thresholds for crs knob acceleration
 
 
 static unsigned char multibuf[4];
@@ -311,6 +311,7 @@ void process_multi_panel_datareference_values()
 void process_alt_switch()
 {
     if(testbit(multibuf,ALT_SWITCH)) {
+        MultiAltKnobSpeedThreshold = (float)(multiaccelthreshold * .01);
 
         if (!AvPwrIsOn()) {
             multiseldis = 5;
@@ -331,9 +332,9 @@ void process_alt_switch()
                 n = multimul;
                 MultiKnobLastCurrentUpTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentUpTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentUpTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentUpTimeDiff,  wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentUpTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentUpTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentUpTime = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTime, MultiAltKnobSpeedThreshold);
+                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentUpTime = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiAltKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiAltKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
@@ -391,9 +392,9 @@ void process_alt_switch()
                 n = multimul;
                 MultiKnobLastCurrentDnTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentDnTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentDnTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentDnTimeDiff,  wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentDnTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentDnTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentDnTime = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTime, MultiAltKnobSpeedThreshold);
+                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentDnTimeDiff = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiAltKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiAltKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
@@ -491,6 +492,7 @@ void process_alt_switch()
 void process_vs_switch()
 {
     if(testbit(multibuf,VS_SWITCH)) {
+        MultiVsKnobSpeedThreshold = (float)(multiaccelthreshold * .01);
         if (!AvPwrIsOn() || !BatPwrIsOn()) {
             multiseldis = 5;
         } else {
@@ -509,9 +511,9 @@ void process_vs_switch()
                 n = multimul;
                 MultiKnobLastCurrentUpTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentUpTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentUpTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentUpTimeDiff,  wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentUpTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentUpTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentUpTime = %f MultiVsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTime, MultiVsKnobSpeedThreshold);
+                    sprintf(buf, "MultiKnobLastCurrentUpTimeDiff = %f MultiVsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiVsKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiVsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
@@ -522,10 +524,8 @@ void process_vs_switch()
                 //if (xpanelsfnbutton == 1) {
 
                     if (vsswitchremap == 1) {
-                        while (n>0) {
-                            XPLMCommandOnce(VsSwitchUpRemapableCmd);
-                            --n;
-                        }
+                        XPLMCommandOnce(VsSwitchUpRemapableCmd);
+                        XPLMCommandOnce(VsSwitchUpRemapableCmd);
                     } else {
                         //XPLMCommandOnce(ApVsUp);
                         if (log_enable == 1) {
@@ -570,9 +570,9 @@ void process_vs_switch()
                 n = multimul;
                 MultiKnobLastCurrentDnTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentDnTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentDnTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentDnTimeDiff,  wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentDnTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentDnTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentDnTime = %f MultiVsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTime, MultiVsKnobSpeedThreshold);
+                    sprintf(buf, "MultiKnobLastCurrentDnTimeDiff = %f MultiVsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiVsKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiVsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
@@ -582,10 +582,8 @@ void process_vs_switch()
                     }
                 //if (xpanelsfnbutton == 1) {
                     if (vsswitchremap == 1) {
-                        while (n>0) {
-                            XPLMCommandOnce(VsSwitchDnRemapableCmd);
-                            --n;
-                        }
+                        XPLMCommandOnce(VsSwitchDnRemapableCmd);
+                        XPLMCommandOnce(VsSwitchDnRemapableCmd);
                     } else {
                         //XPLMCommandOnce(ApVsUp);
                         if (log_enable == 1) {
@@ -659,6 +657,7 @@ void process_vs_switch()
 void process_ias_switch()
 {
     if (testbit(multibuf,IAS_SWITCH)) {
+        MultiIasKnobSpeedThreshold = (float)(multiaccelthreshold * .01);
         //multiseldis = 2;
         if (!AvPwrIsOn() || !BatPwrIsOn()) {
             multiseldis = 5;
@@ -687,9 +686,9 @@ void process_ias_switch()
                 n = multimul;
                 MultiKnobLastCurrentUpTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentUpTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentUpTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentUpTimeDiff, wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentUpTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentUpTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentUpTime = %f MultiIasKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTime, MultiIasKnobSpeedThreshold);
+                    sprintf(buf, "MultiKnobLastCurrentUpTimeDiff = %f MultiIasKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiIasKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
 
@@ -782,9 +781,9 @@ void process_ias_switch()
                 n = multimul;
                 MultiKnobLastCurrentDnTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentDnTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentDnTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentDnTimeDiff, wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentDnTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentDnTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentDnTime = %f MultiIasKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTime, MultiIasKnobSpeedThreshold);
+                    sprintf(buf, "MultiKnobLastCurrentDnTimeDiff = %f MultiIasKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiIasKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
                 if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiIasKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
@@ -908,6 +907,7 @@ void process_hdg_switch()
 {
 
     if(testbit(multibuf,HDG_SWITCH)) {
+        MultiHdgKnobSpeedThreshold = (float)(multiaccelthreshold * .01);
         //multiseldis = 3;
         if (!AvPwrIsOn() || !BatPwrIsOn()) {
             multiseldis = 5;
@@ -928,9 +928,9 @@ void process_hdg_switch()
                 n = multimul;
                 MultiKnobLastCurrentUpTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentUpTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentUpTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentUpTimeDiff,  wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentUpTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentUpTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentUpTime = %f MultiHdgKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTime, MultiHdgKnobSpeedThreshold);
+                    sprintf(buf, "MultiKnobLastCurrentUpTimeDiff = %f MultiHdgKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiHdgKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
 
@@ -985,9 +985,9 @@ void process_hdg_switch()
                 n = multimul;
                 MultiKnobLastCurrentDnTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentDnTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentDnTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentDnTimeDiff,  wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentDnTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentDnTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentDnTime = %f MultiHdgKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTime, MultiHdgKnobSpeedThreshold);
+                    sprintf(buf, "MultiKnobLastCurrentDnTimeDiff = %f MultiHdgKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiHdgKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiHdgKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
@@ -1062,6 +1062,7 @@ void process_crs_switch()
     XPLMDataRef crs_dataref =  !xpanelscrstoggle ? ApCrs : ApCrs2;
 
 	if(testbit(multibuf,CRS_SWITCH)) {
+         MultiCrsKnobSpeedThreshold = (float)(multiaccelthreshold * .01);
         //multiseldis = 4;
         if (!AvPwrIsOn() || !BatPwrIsOn()) {
             multiseldis = 5;
@@ -1085,9 +1086,9 @@ void process_crs_switch()
                 n = multimul;
                 MultiKnobLastCurrentUpTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentUpTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentUpTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentUpTimeDiff,  wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentUpTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentUpTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentUpTime = %f MultiCrsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTime, MultiCrsKnobSpeedThreshold);
+                    sprintf(buf, "MultiKnobLastCurrentUpTimeDiff = %f MultiCrsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiCrsKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
 
@@ -1141,9 +1142,9 @@ void process_crs_switch()
                 n = multimul;
                 MultiKnobLastCurrentDnTimeDiff = wrgCurrentTime -  MultiKnobLastCurrentDnTime;
                 if (log_enable == 1) {
-                    sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentDnTimeDiff = %f wrgCurrentTime = %f ",MultiKnobLastCurrentDnTimeDiff,  wrgCurrentTime);
+                    sprintf(buf, "Xsaitekpanels: wrgCurrentTime = %f MultiKnobLastCurrentDnTime = %f\n",wrgCurrentTime, MultiKnobLastCurrentDnTime);
                     XPLMDebugString(buf);
-                    sprintf(buf, "MultiKnobLastCurrentDnTime = %f MultiCrsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTime, MultiCrsKnobSpeedThreshold);
+                    sprintf(buf, "MultiKnobLastCurrentDnTimeDiff = %f MultiCrsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiCrsKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
 

@@ -147,9 +147,13 @@ void process_read_ini_file()
          XPSetWidgetProperty(RadioSpeed1CheckWidget[0], xpProperty_ButtonState, 1);
     }
 
+
+    log_enable = 0;
+
     // multi panel defaults
     trimspeed                = 1;
     multispeed               = 3;
+    multiaccelthreshold      = 40;
     iasismachremap           = 0;
     iasismachvalue           = 1;
 
@@ -252,6 +256,11 @@ void process_read_ini_file()
 
     // Do we want to display the plane icao on screen?
     readOptionAsInt("Display Plane ICAO On Screen Enable", &icao_enable);
+
+    // Do we want debug loging enabled
+    readOptionAsInt("Add Debug Entries To Log.txt Enable", &log_enable);
+
+
 
     // bat alt normal alt bat cessna
     readOptionAsInt("Bat Alt inverse", &bataltinverse);
@@ -3856,6 +3865,8 @@ void process_read_ini_file()
 
 
 //  ***********************   Multi Panel Commands **************************
+
+    readOptionAsInt("Multi Freq Knob Aceleration Threshold", &multiaccelthreshold);
 
     readOptionAsInt("Multi Freq Knob Pulse per Command", &multispeed);
     XPSetWidgetProperty(MultiSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
