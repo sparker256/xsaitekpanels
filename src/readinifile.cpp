@@ -163,8 +163,8 @@ void process_read_ini_file()
     hdgswitchremap          = 0;
     crsswitchremap          = 0;
 
-    autothrottleswitchenable = 1;
-    autothrottleswitcharmedvalue = 1;
+    autothrottleswitchenable = 0;
+    autothrottleswitcharmedvalue = 0;
 
     trimupremap             = 0;
     trimdnremap             = 0;
