@@ -180,7 +180,6 @@ void process_switch_register_xsaitekpanels_datareference()
                              SwitchLandingPositionSetDataiCallback,
                              NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                              NULL, NULL, NULL, NULL, NULL);
-
 return;
 }
 

@@ -27,10 +27,10 @@ static int n = 5;
 static int appushed = 0;
 static int lastappos = 0, lastappos2 = 0;
 static int aploop = 0;
-static int multitestloop = 0;
+//static int multitestloop = 0;
 
 
-static int upapalt, upapvs, upapas, upaphdg, upapcrs, upapcrs2, neg;
+static int upapalt, upapvs, upaphdg, upapcrs, upapcrs2, neg;
 static int apas, apasout, apmas;
 
 static int flashcnt = 0, flashon = 0;
@@ -43,7 +43,7 @@ static int altbiginc = 0, altbigdec = 0, vsbiginc = 0, vsbigdec = 0;
 static int iasbiginc = 0, iasbigdec = 0, hdgbiginc = 0, hdgbigdec = 0;
 static int crsbiginc = 0, crsbigdec = 0;
 
-static float upapaltf, upapvsf, upapasf, upaphdgf, upapcrsf, upapcrsf2, rhdgf;
+static float upapaltf, upapvsf, upaphdgf, upapcrsf, upapcrsf2, rhdgf;
 static float apasf, apmasf;
 
 static int multiaactv, multiadig1, multiarem1, multiadig2, multiarem2;

@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jul 05 2017   **************
+// ****** Jul 13 2017   **************
 
-#define PLUGIN_VERSION "2.65 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 265
+#define PLUGIN_VERSION "2.66 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 266
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -907,6 +907,9 @@ XPLMDataRef Pitot7HeatSwitchData = NULL, Pitot8HeatSwitchData = NULL;
 XPLMDataRef GearUpData = NULL;
 XPLMDataRef GearDnData = NULL;
 
+XPLMDataRef LandingGearNoseLedData = NULL, LandingGearLeftLedData = NULL, LandingGearRightLedData = NULL;
+
+
 XPLMDataRef CowlFlapsData = NULL, Cowl2FlapsData = NULL;
 XPLMDataRef Cowl3FlapsData = NULL, Cowl4FlapsData = NULL;
 XPLMDataRef Cowl5FlapsData = NULL, Cowl6FlapsData = NULL;
@@ -945,6 +948,7 @@ XPLMDataRef	SwitchCowlOwnedDataRef = NULL, SwitchPanelOwnedDataRef = NULL;
 XPLMDataRef	SwitchBeaconOwnedDataRef = NULL, SwitchNavOwnedDataRef = NULL;
 XPLMDataRef	SwitchStrobeOwnedDataRef = NULL, SwitchTaxiOwnedDataRef = NULL;
 XPLMDataRef	SwitchLandingOwnedDataRef = NULL;
+
 
 XPLMMenuID      SwitchMenu;
 XPLMMenuID      SwitchMenuId;
@@ -2339,6 +2343,8 @@ int strobelightswitchenable, taxilightswitchenable;
 int landinglightswitchenable, bataltinverse;
 int panellightsenable, starterswitchenable;
 
+int gearledenable;
+
 int mag_off_switch_data_on_value, mag_off_switch_data_off_value;
 int mag_off2_switch_data_on_value, mag_off2_switch_data_off_value;
 int mag_off3_switch_data_on_value, mag_off3_switch_data_off_value;
@@ -2476,6 +2482,9 @@ int pitot8_heat_switch_data_on_value, pitot8_heat_switch_data_off_value;
 int gear_switch_up_data_on_value, gear_switch_up_data_off_value;
 int gear_switch_down_data_on_value, gear_switch_down_data_off_value;
 
+int landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value;
+
+
 int cowl_flaps_data_on_value, cowl_flaps_data_off_value;
 int cowl2_flaps_data_on_value, cowl2_flaps_data_off_value;
 int cowl3_flaps_data_on_value, cowl3_flaps_data_off_value;
@@ -2595,7 +2604,6 @@ static int SwitchStrobeOwnedData = 0, SwitchTaxiOwnedData = 0;
 static int SwitchLandingOwnedData = 0;
 
 
-
 int	SwitchPanelCountGetDataiCallback(void * inRefcon);
 void	SwitchPanelCountSetDataiCallback(void * inRefcon, int SwitchPanelCount);
 
@@ -2658,7 +2666,6 @@ void	SwitchTaxiPositionSetDataiCallback(void * inRefcon, int SwitchTaxiPosition)
 
 int	SwitchLandingPositionGetDataiCallback(void * inRefcon);
 void	SwitchLandingPositionSetDataiCallback(void * inRefcon, int SwitchLandingPosition);
-
 
 
 float mag_off_switch_dataf_on_value, mag_off_switch_dataf_off_value;
@@ -2991,6 +2998,8 @@ string gear5_switch_down_on, gear5_switch_down_off, gear5_switch_down_data;
 string gear6_switch_down_on, gear6_switch_down_off, gear6_switch_down_data;
 string gear7_switch_down_on, gear7_switch_down_off, gear7_switch_down_data;
 string gear8_switch_down_on, gear8_switch_down_off, gear8_switch_down_data;
+
+string landing_gear_nose_led_data, landing_gear_left_led_data, landing_gear_right_led_data;
 
 string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data ;
 string cowl2_flaps_open, cowl2_flaps_close, cowl2_flaps_data;
@@ -4358,7 +4367,9 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
                                       int		inMessage,
                                       void *		inParam)
 {
+
     (void) inFromWho; // To get rid of warnings on unused variables
+    (void) inParam; // To get rid of warnings on unused variables
     std::string          PlaneICAO = "[]";
     char            ICAOString[40];
 
@@ -4366,33 +4377,48 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
 
     PlaneICAO.insert(1,ICAOString);
 
-
-
-    if ((inMessage == XPLM_MSG_PLANE_LOADED) & ((intptr_t) inParam == 0)) {
-        XPLMRegisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, -1, NULL);
+    if (inFromWho == XPLM_PLUGIN_XPLANE) {
+            // size_t inparam = reinterpret_cast<size_t>(inParam);
+            switch (inMessage) {
+            case XPLM_MSG_PLANE_LOADED:
+                XPLMRegisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, -1, NULL);
+                if(bipcnt > 0){
+                    process_bip_panel();
+                    ReadConfigFile(PlaneICAO);
+                    if(bipcnt > 1){
+                       process_bip_panel();
+                       ReadConfigFile(PlaneICAO);
+                    }
+                }
+                break;
+            case XPLM_MSG_AIRPORT_LOADED:
+                ReadConfigFile(PlaneICAO);
+                if(bipcnt > 1){
+                   process_bip_panel();
+                   ReadConfigFile(PlaneICAO);
+                }
+                // LPRINTF("CommViewer Plugin: XPluginReceiveMessage XPLM_MSG_AIRPORT_LOADED\n");
+                break;
+            case XPLM_MSG_SCENERY_LOADED:
+                // LPRINTF("CommViewer Plugin: XPluginReceiveMessage XPLM_MSG_SCENERY_LOADED\n");
+                break;
+            case XPLM_MSG_AIRPLANE_COUNT_CHANGED:
+                // LPRINTF("CommViewer Plugin: XPluginReceiveMessage XPLM_MSG_AIRPLANE_COUNT_CHANGED\n");
+                break;
+            case XPLM_MSG_PLANE_CRASHED:
+                // XXX: system state and procedure, what's difference between
+                // an unloaded and crashed plane?
+                // LPRINTF("CommViewer Plugin: XPluginReceiveMessage XPLM_MSG_PLANE_CRASHED\n");
+                break;
+            case XPLM_MSG_PLANE_UNLOADED:
+                // gPlaneLoaded = false;
+                // LPRINTF("CommViewer Plugin: XPluginReceiveMessage XPLM_MSG_PLANE_UNLOADED\n");
+                break;
+            default:
+                // unknown, anything to do?
+                break;
+            } // switch (inMessage)
     }
-
-    if(bipcnt > 0){
-
-        if ((inMessage == XPLM_MSG_PLANE_LOADED) & ((intptr_t) inParam == 0)) {
-          process_bip_panel();
-          ReadConfigFile(PlaneICAO);
-          if(bipcnt > 1){
-             process_bip_panel();
-             ReadConfigFile(PlaneICAO);
-          }
-        }
-        if (inMessage == XPLM_MSG_AIRPORT_LOADED) {
-          ReadConfigFile(PlaneICAO);
-          if(bipcnt > 1){
-             process_bip_panel();
-             ReadConfigFile(PlaneICAO);
-          }
-
-        }
-
-    }
-
 }
 
 // Saitek panels data references call backs
@@ -9105,12 +9131,8 @@ float MyPanelsDeferredInitNewAircraftFLCB(float MyPanelselapsedMe, float MyPanel
     (void) MyPanelscounter; // To get rid of warnings on unused variables
     (void) MyPanelsrefcon; // To get rid of warnings on unused variables
 
-    static int MyPanelsFLCBStartUpFlag = 0;
-    if ( MyPanelsFLCBStartUpFlag == 0 )
-    {
-        MyPanelsFLCBStartUpFlag = 1; // Flag tells init has already been completed
-        process_read_ini_file();
-    }
+    process_read_ini_file();
+
     return 0; // Returning 0 stops DeferredInitFLCB from being looped again.
 }
 

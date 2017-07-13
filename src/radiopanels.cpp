@@ -44,7 +44,7 @@ static int upxpdrcode[4], loxpdrcode[4];
 static int upxpdrmode[4], loxpdrmode[4];
 static int upbaroset[4], lobaroset[4];
 
-static int upstbyadf1dir[4], upstbyadf2dir[4];
+static int upstbyadf1dir[4];
 static int lostbyadf1dir[4], lostbyadf2dir[4];
 
 static int updmemode[4], lodmemode[4];
@@ -112,10 +112,12 @@ static float upbarosetf[4], lobarosetf[4];
 static float UpNav1ObsDegm[4], UpNav2ObsDegm[4];
 static float LoNav1ObsDegm[4], LoNav2ObsDegm[4];
 
-static float UpAdf1CardDirDegm[4], UpAdf2CardDirDegm[4];
+//static float UpAdf1CardDirDegm[4], UpAdf2CardDirDegm[4];
+static float UpAdf1CardDirDegm[4];
 static float LoAdf1CardDirDegm[4], LoAdf2CardDirDegm[4];
 
-static int upstbyadf1dirf[4], upstbyadf2dirf[4];
+//static int upstbyadf1dirf[4], upstbyadf2dirf[4];
+static int upstbyadf1dirf[4];
 static int lostbyadf1dirf[4], lostbyadf2dirf[4];
 
 static int radioaactv, radioadig1, radioarem1, radioadig2, radioarem2, radioadig3, radioarem3;

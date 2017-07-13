@@ -1981,6 +1981,8 @@ extern XPLMDataRef Pitot7HeatSwitchData, Pitot8HeatSwitchData;
 extern XPLMDataRef GearUpData;
 extern XPLMDataRef GearDnData;
 
+extern XPLMDataRef LandingGearNoseLedData, LandingGearLeftLedData, LandingGearRightLedData;
+
 extern XPLMDataRef CowlFlapsData, Cowl2FlapsData;
 extern XPLMDataRef Cowl3FlapsData, Cowl4FlapsData;
 extern XPLMDataRef Cowl5FlapsData, Cowl6FlapsData;
@@ -2079,7 +2081,6 @@ extern int	SwitchLandingPositionGetDataiCallback(void * inRefcon);
 extern void	SwitchLandingPositionSetDataiCallback(void * inRefcon, int SwitchLandingPosition);
 
 
-
 extern XPLMMenuID      SwitchMenu;
 extern XPLMMenuID      SwitchMenuId;
 extern XPWidgetID      SwitchEnableCheckWidget[50];
@@ -2105,6 +2106,8 @@ extern int beaconlightswitchenable, navlightswitchenable;
 extern int strobelightswitchenable, taxilightswitchenable;
 extern int landinglightswitchenable, bataltinverse;
 extern int starterswitchenable;
+
+extern int gearledenable;
 
 extern int mag_off_switch_data_on_value, mag_off_switch_data_off_value;
 extern int mag_off2_switch_data_on_value, mag_off2_switch_data_off_value;
@@ -2239,6 +2242,8 @@ extern int pitot8_heat_switch_data_on_value, pitot8_heat_switch_data_off_value;
 
 extern int gear_switch_up_data_on_value, gear_switch_up_data_off_value;
 extern int gear_switch_down_data_on_value, gear_switch_down_data_off_value;
+
+extern int landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value;
 
 extern int cowl_flaps_data_on_value, cowl_flaps_data_off_value;
 extern int cowl2_flaps_data_on_value, cowl2_flaps_data_off_value;
@@ -2612,6 +2617,8 @@ extern string gear5_switch_down_on, gear5_switch_down_off, gear5_switch_down_dat
 extern string gear6_switch_down_on, gear6_switch_down_off, gear6_switch_down_data;
 extern string gear7_switch_down_on, gear7_switch_down_off, gear7_switch_down_data;
 extern string gear8_switch_down_on, gear8_switch_down_off, gear8_switch_down_data;
+
+extern string landing_gear_nose_led_data, landing_gear_left_led_data, landing_gear_right_led_data;
 
 extern string cowl_flaps_open, cowl_flaps_close, cowl_flaps_data ;
 extern string cowl2_flaps_open, cowl2_flaps_close, cowl2_flaps_data;

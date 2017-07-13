@@ -91,6 +91,11 @@ void process_read_ini_file()
     taxilightswitchenable        = 1;
     landinglightswitchenable     = 1;
 
+    gearledenable                = 1;
+
+    sprintf(buf, "Xsaitekpanels: default gearledenable = %d\n",gearledenable);
+    XPLMDebugString(buf);
+
     bataltinverse = 0;
     starterswitchenable = 0;
 
@@ -1672,6 +1677,18 @@ void process_read_ini_file()
       }
 
 
+    // landing gear led disable - enable - remap
+     readOptionAsInt("Landing Gear Led enable", &gearledenable);
+     if (gearledenable == 2) {
+         landing_gear_nose_led_data = getOptionToString("landing_gear_nose_led_data");
+         LandingGearNoseLedData = XPLMFindDataRef(landing_gear_nose_led_data.c_str());
+
+         landing_gear_left_led_data = getOptionToString("landing_gear_left_led_data");
+         LandingGearLeftLedData = XPLMFindDataRef(landing_gear_left_led_data.c_str());
+
+         landing_gear_right_led_data = getOptionToString("landing_gear_right_led_data");
+         LandingGearRightLedData = XPLMFindDataRef(landing_gear_right_led_data.c_str());
+     }
 
    // cowl flaps switch disable - enable - remap
     readOptionAsInt("Cowl Flaps enable", &cowlflapsenable);
@@ -4213,6 +4230,9 @@ void process_read_ini_file()
          AvPwrOnCustomDataref = XPLMFindDataRef(getOptionToString(
             "avionics_power_on_remapable_data").c_str());
     }
+
+    sprintf(buf, "Xsaitekpanels: xsaitekpanels.ini gearledenable = %d\n",gearledenable);
+    XPLMDebugString(buf);
 
   return;
 }
