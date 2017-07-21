@@ -90,11 +90,7 @@ void process_read_ini_file()
     strobelightswitchenable      = 1;
     taxilightswitchenable        = 1;
     landinglightswitchenable     = 1;
-
     gearledenable                = 1;
-
-    sprintf(buf, "Xsaitekpanels: default gearledenable = %d\n",gearledenable);
-    XPLMDebugString(buf);
 
     bataltinverse = 0;
     starterswitchenable = 0;
@@ -4230,9 +4226,6 @@ void process_read_ini_file()
          AvPwrOnCustomDataref = XPLMFindDataRef(getOptionToString(
             "avionics_power_on_remapable_data").c_str());
     }
-
-    sprintf(buf, "Xsaitekpanels: xsaitekpanels.ini gearledenable = %d\n",gearledenable);
-    XPLMDebugString(buf);
 
   return;
 }
