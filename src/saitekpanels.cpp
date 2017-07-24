@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jul 13 2017   **************
+// ****** Jul 24 2017   **************
 
-#define PLUGIN_VERSION "2.66 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 266
+#define PLUGIN_VERSION "2.67 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 267
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -2344,6 +2344,7 @@ int landinglightswitchenable, bataltinverse;
 int panellightsenable, starterswitchenable;
 
 int gearledenable;
+int gearled_write_loop = 0;
 
 int mag_off_switch_data_on_value, mag_off_switch_data_off_value;
 int mag_off2_switch_data_on_value, mag_off2_switch_data_off_value;
@@ -3974,6 +3975,7 @@ PLUGIN_API int XPluginStart(char *		outName,
       process_switch_register_xsaitekpanels_datareference();
       process_switch_find_xplane_commands();
       process_switch_find_xplane_datareference();
+      gearled_write_loop = 0;
   }
 
   // If you find a radio panel then create
@@ -9132,6 +9134,7 @@ float MyPanelsDeferredInitNewAircraftFLCB(float MyPanelselapsedMe, float MyPanel
     (void) MyPanelsrefcon; // To get rid of warnings on unused variables
 
     process_read_ini_file();
+    gearled_write_loop = 0;
 
     return 0; // Returning 0 stops DeferredInitFLCB from being looped again.
 }

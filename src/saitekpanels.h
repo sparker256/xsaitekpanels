@@ -2108,6 +2108,8 @@ extern int landinglightswitchenable, bataltinverse;
 extern int starterswitchenable;
 
 extern int gearledenable;
+extern int gearled_write_loop;
+
 
 extern int mag_off_switch_data_on_value, mag_off_switch_data_off_value;
 extern int mag_off2_switch_data_on_value, mag_off2_switch_data_off_value;
