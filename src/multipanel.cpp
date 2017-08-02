@@ -533,6 +533,8 @@ void process_vs_switch()
                             XPLMDebugString(buf);
                         }
                         upapvs = upapvs + 200;
+                        upapvs = (upapvs / 100);
+                        upapvs = (upapvs * 100);
                         vsbiginc = 1;
                         if (log_enable == 1) {
                             sprintf(buf, "upapvs + 200 = %d\n\n", upapvs);
@@ -554,6 +556,8 @@ void process_vs_switch()
                             }
                             //XPLMCommandOnce(ApVsUp);
                             upapvs = upapvs + 100;
+                            upapvs = (upapvs / 100);
+                            upapvs = (upapvs * 100);
                             if (log_enable == 1) {
                                 sprintf(buf, "Xsaitekpanels: upapvs + 100 = %d\n\n", upapvs);
                                 XPLMDebugString(buf);
@@ -594,6 +598,14 @@ void process_vs_switch()
                             XPLMDebugString(buf);
                         }
                         upapvs = upapvs - 200;
+                        if (upapvs > 100) {
+                            upapvs = (upapvs / 100);
+                            upapvs = (upapvs * 100);
+                        }
+                        if (upapvs < (-100)) {
+                            upapvs = (upapvs / 100);
+                            upapvs = (upapvs * 100);
+                        }
                         vsbigdec = 1;
                         if (log_enable == 1) {
                             sprintf(buf, "upapvs - 200 = %d\n\n", upapvs);
@@ -614,6 +626,14 @@ void process_vs_switch()
                                 XPLMDebugString(buf);
                             }
                             upapvs = upapvs - 100;
+                            if (upapvs > 100) {
+                                upapvs = (upapvs / 100);
+                                upapvs = (upapvs * 100);
+                            }
+                            if (upapvs < (-100)) {
+                                upapvs = (upapvs / 100);
+                                upapvs = (upapvs * 100);
+                            }
                             if (log_enable == 1) {
                                 sprintf(buf, "upapvs - 100 = %d\n\n", upapvs);
                                 XPLMDebugString(buf);
@@ -3263,6 +3283,8 @@ void process_vs_button()
         if (multires > 0) {
             if(testbit(multibuf,VS_BUTTON)) {
                 XPLMCommandOnce(ApVsBtn);
+                upapvsf = 0;
+                XPLMSetDataf(ApVs, upapvsf);
                 lastappos = 1;
              }
         }
