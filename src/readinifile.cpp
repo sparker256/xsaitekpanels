@@ -904,42 +904,42 @@ void process_read_ini_file()
     if (batmasterswitchenable == 2) {
             XPSetWidgetProperty(SwitchRemapCheckWidget[5], xpProperty_ButtonState, 1);
             bat_master_switch_on = getOptionToString("bat_master_switch_on_cmd");
-            bat_master_switch_off = getOptionToString("bat_master_switch_cmd");
+            bat_master_switch_off = getOptionToString("bat_master_switch_off_cmd");
             BatMasterSwitchOnCmd = XPLMFindCommand(bat_master_switch_on.c_str());
             BatMasterSwitchOffCmd = XPLMFindCommand(bat_master_switch_off.c_str());
 
             bat2_master_switch_on = getOptionToString("bat2_master_switch_on_cmd");
-            bat2_master_switch_off = getOptionToString("bat2_master_switch_cmd");
+            bat2_master_switch_off = getOptionToString("bat2_master_switch_off_cmd");
             BatMaster2SwitchOnCmd = XPLMFindCommand(bat2_master_switch_on.c_str());
             BatMaster2SwitchOffCmd = XPLMFindCommand(bat2_master_switch_off.c_str());
 
             bat3_master_switch_on = getOptionToString("bat3_master_switch_on_cmd");
-            bat3_master_switch_off = getOptionToString("bat3_master_switch_cmd");
+            bat3_master_switch_off = getOptionToString("bat3_master_switch_off_cmd");
             BatMaster3SwitchOnCmd = XPLMFindCommand(bat3_master_switch_on.c_str());
             BatMaster3SwitchOffCmd = XPLMFindCommand(bat3_master_switch_off.c_str());
 
             bat4_master_switch_on = getOptionToString("bat4_master_switch_on_cmd");
-            bat4_master_switch_off = getOptionToString("bat4_master_switch_cmd");
+            bat4_master_switch_off = getOptionToString("bat4_master_switch_off_cmd");
             BatMaster4SwitchOnCmd = XPLMFindCommand(bat4_master_switch_on.c_str());
             BatMaster4SwitchOffCmd = XPLMFindCommand(bat4_master_switch_off.c_str());
 
             bat5_master_switch_on = getOptionToString("bat5_master_switch_on_cmd");
-            bat5_master_switch_off = getOptionToString("bat5_master_switch_cmd");
+            bat5_master_switch_off = getOptionToString("bat5_master_switch_off_cmd");
             BatMaster5SwitchOnCmd = XPLMFindCommand(bat5_master_switch_on.c_str());
             BatMaster5SwitchOffCmd = XPLMFindCommand(bat5_master_switch_off.c_str());
 
             bat6_master_switch_on = getOptionToString("bat6_master_switch_on_cmd");
-            bat6_master_switch_off = getOptionToString("bat6_master_switch_cmd");
+            bat6_master_switch_off = getOptionToString("bat6_master_switch_off_cmd");
             BatMaster6SwitchOnCmd = XPLMFindCommand(bat6_master_switch_on.c_str());
             BatMaster6SwitchOffCmd = XPLMFindCommand(bat6_master_switch_off.c_str());
 
             bat7_master_switch_on = getOptionToString("bat7_master_switch_on_cmd");
-            bat7_master_switch_off = getOptionToString("bat7_master_switch_cmd");
+            bat7_master_switch_off = getOptionToString("bat7_master_switch_off_cmd");
             BatMaster7SwitchOnCmd = XPLMFindCommand(bat7_master_switch_on.c_str());
             BatMaster7SwitchOffCmd = XPLMFindCommand(bat7_master_switch_off.c_str());
 
             bat8_master_switch_on = getOptionToString("bat8_master_switch_on_cmd");
-            bat8_master_switch_off = getOptionToString("bat8_master_switch_cmd");
+            bat8_master_switch_off = getOptionToString("bat8_master_switch_off_cmd");
             BatMaster8SwitchOnCmd = XPLMFindCommand(bat8_master_switch_on.c_str());
             BatMaster8SwitchOffCmd = XPLMFindCommand(bat8_master_switch_off.c_str());
 
