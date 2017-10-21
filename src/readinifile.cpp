@@ -241,7 +241,7 @@ void process_read_ini_file()
         parseIniFile(&parse_ini_path_name[0]);
         found_file = 1;
 
-    } else if (ifile == 0 ) {
+    } else if (!ifile) {
         std::vector<char> parse_ini_path_name1(xpsini_path_name1.size() + 1);
         std::copy(xpsini_path_name1.begin(), xpsini_path_name1.end(), parse_ini_path_name1.begin());
 
