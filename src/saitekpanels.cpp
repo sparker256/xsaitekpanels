@@ -4382,13 +4382,16 @@ PLUGIN_API void XPluginReceiveMessage(XPLMPluginID	inFromWho,
             // size_t inparam = reinterpret_cast<size_t>(inParam);
             switch (inMessage) {
             case XPLM_MSG_PLANE_LOADED:
-                XPLMRegisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, -1, NULL);
-                if(bipcnt > 0){
-                    process_bip_panel();
-                    ReadConfigFile(PlaneICAO);
-                    if(bipcnt > 1){
-                       process_bip_panel();
-                       ReadConfigFile(PlaneICAO);
+                //XPLMRegisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, -1, NULL);
+                if ((intptr_t)inParam == XPLM_PLUGIN_XPLANE) {
+                    XPLMRegisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, -1, NULL);
+                    if(bipcnt > 0){
+                        process_bip_panel();
+                        ReadConfigFile(PlaneICAO);
+                        if(bipcnt > 1){
+                           process_bip_panel();
+                           ReadConfigFile(PlaneICAO);
+                        }
                     }
                 }
                 break;
@@ -7784,7 +7787,7 @@ void CreateSwitchWidget(int x, int y, int w, int h)
 // Register our widget handler
         XPAddWidgetCallback(SwitchWidgetID, SwitchHandler);
 
-        process_read_ini_file();
+        //process_read_ini_file();
 }
 
 // This is our widget handler.  In this example we are only interested when the close box is pressed.
@@ -8358,7 +8361,7 @@ void CreateRadioWidget(int x, int y, int w, int h)
 
 // Register our widget handler
         XPAddWidgetCallback(RadioWidgetID, RadioHandler);
-        process_read_ini_file();
+        //process_read_ini_file();
 
 
 }
@@ -8688,7 +8691,7 @@ void CreateMultiWidget(int x, int y, int w, int h)
 
 // Register our widget handler
              XPAddWidgetCallback(MultiWidgetID, MultiHandler);
-             process_read_ini_file();
+             //process_read_ini_file();
 
 
 }
