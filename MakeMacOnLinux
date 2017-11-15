@@ -40,7 +40,7 @@ TARGETDIR=release/Xsaitekpanels
 
 # build hybrid OSX version
 make -f Makefile_mac clean
-OS=MACOSX CC=/home/bill/X-Plane_OsxCrossBuild/osxcross/target/bin/o64-clang SDK=$OSXSDK TARGET=$TARGETDIR/mac.xpl make -f Makefile_mac
+OS=MACOSX CC=o64-clang SDK=$OSXSDK TARGET=$TARGETDIR/mac.xpl make -f Makefile_mac
 
 # clean up
 make -f Makefile_mac clean
