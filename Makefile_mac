@@ -28,11 +28,11 @@ OBJS = hid.o saitekpanels.o bippanel.o inireader.o multidata.o multipanel.o radi
 	radio2data.o radio3data.o  radiopanels.o readinifile.o switchdata.o switchpanel.o 
 
 Xsaitekpanels.xpl: $(OBJS)
-	$(CC) $(LDFLAGS) $(LDDYNFLAGS) $(OBJS) -o Xsaitekpanels.xpl $(LIBS)
+	 $(CC) $(LDFLAGS) $(LDDYNFLAGS) $(OBJS) -o Xsaitekpanels.xpl $(LIBS)
 	cp Xsaitekpanels.xpl $(TARGET)
 
 hid.o: hidapi/mac/hid.c
-	 $(CC) -c -pipe $(CFLAGS) $(SDK) $(INC) -DXPLM200 -DAPL=1 -DIBM=0 -DLIN=0 hidapi/mac/hid.c
+	 o64-clang -c -pipe $(CFLAGS) $(SDK) $(INC) -DXPLM200 -DAPL=1 -DIBM=0 -DLIN=0 hidapi/mac/hid.c
 
 saitekpanels.o: src/saitekpanels.cpp
 	 $(CC) -c -pipe $(CFLAGS) $(SDK) $(INC) -DXPLM200 -DAPL=1 -DIBM=0 -DLIN=0 src/saitekpanels.cpp
@@ -69,9 +69,6 @@ switchdata.o: src/switchdata.cpp
 
 switchpanel.o: src/switchpanel.cpp
 	 $(CC) -c -pipe $(CFLAGS) $(SDK) $(INC) -DXPLM200 -DAPL=1 -DIBM=0 -DLIN=0 src/switchpanel.cpp
-
-
-
 
 # %.o: %.c TeensyControls.h Makefile
 #	$(CC) $(CFLAGS) -c $<

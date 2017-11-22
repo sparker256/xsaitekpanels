@@ -3684,9 +3684,9 @@ void process_rev_button()
             if (XPLMGetDataf(RevLightRemapableData) > .50) {
                 revlightdata = 1;
             } else if (XPLMGetDataf(RevLightRemapableData) < .50) {
-                revlightflashdata = 0;
+                revlightdata = 0;
             }
-            switch(revlightflashdata) {
+            switch(revlightdata) {
             case 1:
                 btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
                 break;
@@ -3767,9 +3767,9 @@ void process_rev_button()
             if (XPLMGetDataf(RevLightRemapableData) > .50) {
                 revlightdata = 1;
             } else if (XPLMGetDataf(RevLightRemapableData) < .50) {
-                revlightflashdata = 0;
+                revlightdata = 0;
             }
-            switch(revlightflashdata) {
+            switch(revlightdata) {
             case 1:
                 btnleds |= (1<<7);   // * set bit 7 in btnleds to 1 *
                 break;

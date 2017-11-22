@@ -5,6 +5,7 @@ rm -rf lipo_temp
 rm -rf release
 mkdir -p lipo_temp &&
 mkdir -p release/Xsaitekpanels/64 &&
+mkdir -p target/Xsaitekpanels/64 &&
 make distclean >/dev/null
 qmake -spec /Volumes/YosemiteHome/bill/Qt5.1.1/5.1.1/clang_64/mkspecs/macx-clang-32 && make &&
 cp plugin/libmac.xpl.dylib lipo_temp/mac32.xpl
