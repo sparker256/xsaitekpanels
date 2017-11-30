@@ -288,9 +288,10 @@ void process_read_ini_file()
     readOptionAsInt("Display Plane ICAO On Screen Enable", &icao_enable);
 
     // Do we want debug loging enabled
-    readOptionAsInt("Add Debug Entries To Log.txt Enable", &log_enable);
+    readOptionAsInt("Add Debug Entries To Log Enable", &log_enable);
 
-
+    sprintf(buf, "Xsaitekpanels: dre_enable = %d  icao_enable = %d  log_enable = %d\n",dre_enable, icao_enable, log_enable);
+    XPLMDebugString(buf);
 
     // bat alt normal alt bat cessna
     readOptionAsInt("Bat Alt inverse", &bataltinverse);
@@ -3908,7 +3909,7 @@ void process_read_ini_file()
 
 //  ***********************   Multi Panel Commands **************************
 
-    readOptionAsInt("Multi Freq Knob Aceleration Threshold", &multiaccelthreshold);
+    readOptionAsInt("Multi Freq Knob Acceleration Threshold", &multiaccelthreshold);
 
     readOptionAsInt("Multi Freq Knob Pulse per Command", &multispeed);
     XPSetWidgetProperty(MultiSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
@@ -3945,6 +3946,14 @@ void process_read_ini_file()
     if (trimspeed == 3) {
          XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0], xpProperty_ButtonState, 1);
     }
+
+    sprintf(buf, "Xsaitekpanels: multispeed = %d  multiaccelthreshold = %d  trimspeed = %d  ",multispeed, multiaccelthreshold, trimspeed);
+    XPLMDebugString(buf);
+
+    float FPS = XPLMGetDataf(Frp);
+
+    sprintf(buf, "  FPS = %f \n\n",1/FPS);
+    XPLMDebugString(buf);
 
     // auto throttle switch - remapable
     readOptionAsInt("Auto Throttle Switch enable", &autothrottleswitchenable);

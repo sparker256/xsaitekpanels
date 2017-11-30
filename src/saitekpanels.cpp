@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Nov 22 2017   **************
+// ****** Nov 29 2017   **************
 
-#define PLUGIN_VERSION "2.71 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 271
+#define PLUGIN_VERSION "2.72 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 272
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -3248,6 +3248,7 @@ PLUGIN_API int XPluginStart(char *		outName,
   XpanelsFnButtonCommand = XPLMCreateCommand("bgood/xsaitekpanels/x_panels_fn_button","Xpanels Fn Button");
   XpanelsLeftStartFnButtonCommand = XPLMCreateCommand("bgood/xsaitekpanels/left_start_fn_button","Xpanels Left Start Fn Button");
 
+  Frp = XPLMFindDataRef("sim/operation/misc/frame_rate_period");
 
 
 // ************* Open any Radio that is connected *****************
@@ -3968,6 +3969,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
   AvPwrOn = XPLMFindDataRef("sim/cockpit2/switches/avionics_power_on");
   BatPwrOn = XPLMFindDataRef("sim/cockpit/electrical/battery_on");
+
   // If you find a switch panel then create
   // datareferences for all of the switch panel switch positions
   if(switchcnt > 0)  {

@@ -3858,7 +3858,7 @@ void process_switch_panel()
       else {
       }
 
-      if (log_enable == 1) {
+      if (log_enable == 9) {
           sprintf(buf, "Xsaitekpanels: if ((gearledenable == 0) || (gearledenable == 2)) gearledenable = %d gearled = %d\n", gearledenable, gearled);
           XPLMDebugString(buf);
           sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = %d landing_gear_left_led_data_value = %d ", landing_gear_nose_led_data_value, landing_gear_left_led_data_value);

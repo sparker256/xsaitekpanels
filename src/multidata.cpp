@@ -294,7 +294,6 @@ void process_multi_find_xplane_datareference()
       ApAprStat = XPLMFindDataRef("sim/cockpit2/autopilot/approach_status");
       ApRevStat = XPLMFindDataRef("sim/cockpit2/autopilot/backcourse_status");
 
-      Frp = XPLMFindDataRef("sim/operation/misc/frame_rate_period");
 
       MHdg = XPLMFindDataRef("sim/flightmodel/position/magpsi");
 
