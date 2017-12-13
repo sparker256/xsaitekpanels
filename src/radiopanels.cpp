@@ -156,6 +156,10 @@ static int Last_Lower_Fine_Up[4], Last_Lower_Fine_Dn[4];
 static int Last_Upper_Coarse_Up[4], Last_Upper_Coarse_Dn[4];
 static int Last_Lower_Coarse_Up[4], Last_Lower_Coarse_Dn[4];
 
+static int Last_Upper_Act_Stby[4];
+static int Last_Lower_Act_Stby[4];
+
+
 static int Last_Upper_Fine_Up_Raw[4], Last_Upper_Fine_Dn_Raw[4];
 static int Last_Lower_Fine_Up_Raw[4], Last_Lower_Fine_Dn_Raw[4];
 static int Last_Upper_Coarse_Up_Raw[4], Last_Upper_Coarse_Dn_Raw[4];
@@ -2520,7 +2524,8 @@ void proecss_upper_adf_switch()
            }
            Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
 
-           if (testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+           if ((Last_Upper_Act_Stby[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_ACT_STBY) == 0)) {
+
                if ((rad1upradfactstbybtnremap == 1) && (radnum == 0)) {
                    XPLMCommandOnce(Rad1UprAdfActStbyRemapableCmd);
                } else if ((rad2upradfactstbybtnremap == 1) && (radnum == 1)) {
@@ -2530,8 +2535,11 @@ void proecss_upper_adf_switch()
                } else {
                    XPLMCommandOnce(Adf1ActStby);
                }
-            }
+           }
+           Last_Upper_Act_Stby[radnum] = testbit(radiobuf[radnum],UPPER_ACT_STBY);
+
         }
+
 
         upactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
         upstbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
@@ -5161,7 +5169,7 @@ void process_lower_adf_switch()
                 }
                 Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
 
-                if (testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
+                if ((Last_Lower_Act_Stby[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_ACT_STBY) == 0)) {
                     if ((rad1lwradfactstbybtnremap == 1) && (radnum == 0)) {
                         XPLMCommandOnce(Rad1LowrAdfActStbyRemapableCmd);
                     } else if ((rad2lwradfactstbybtnremap == 1) && (radnum == 1)) {
@@ -5171,7 +5179,9 @@ void process_lower_adf_switch()
                     } else {
                         XPLMCommandOnce(Adf1ActStby);
                     }
-                 }
+                }
+                Last_Lower_Act_Stby[radnum] = testbit(radiobuf[radnum],LOWER_ACT_STBY);
+
             }
 
             loactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
@@ -5389,7 +5399,8 @@ void process_lower_adf_switch()
                 }
                 Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
 
-                if (testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
+
+                if ((Last_Lower_Act_Stby[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_ACT_STBY) == 0)) {
                     if ((rad1lwradfactstbybtnremap == 1) && (radnum == 0)) {
                         XPLMCommandOnce(Rad1LowrAdfActStbyRemapableCmd);
                     } else if ((rad2lwradfactstbybtnremap == 1) && (radnum == 1)) {
@@ -5400,7 +5411,10 @@ void process_lower_adf_switch()
                         XPLMCommandOnce(Adf2ActStby);
                     }
                 }
+                Last_Lower_Act_Stby[radnum] = testbit(radiobuf[radnum],LOWER_ACT_STBY);
             }
+
+
             loactadffreq[radnum] = XPLMGetDatai(Adf2ActFreq);
             lostbyadffreq[radnum] = XPLMGetDatai(Adf2StbyFreq);
         }
