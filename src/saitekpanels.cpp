@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Dec 19 2017   **************
+// ****** Feb 18 2018   **************
 
-#define PLUGIN_VERSION "2.74 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 274
+#define PLUGIN_VERSION "2.75 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 275
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -8821,11 +8821,11 @@ int    XpanelsFnButtonCommandHandler(XPLMCommandRef       inCommand,
     (void) inCommand;
     (void) inRefcon;
 //  If inPhase == 1 the command is executed continuously.
-     if (inPhase == 1)
+     if (inPhase == xplm_CommandContinue)
    {
           xpanelsfnbutton = 1;
     }
-     if (inPhase == 2)
+     if (inPhase == xplm_CommandEnd)
    {
           xpanelsfnbutton = 0;
     }
@@ -8840,11 +8840,11 @@ int    XpanelsLeftStartFnButtonCommandHandler(XPLMCommandRef       inCommand,
     (void) inCommand;
     (void) inRefcon;
 //  If inPhase == 1 the command is executed continuously.
-     if (inPhase == 1)
+     if (inPhase == xplm_CommandContinue)
    {
           xpanelsleftstartfnbutton = 1;
     }
-     if (inPhase == 2)
+     if (inPhase == xplm_CommandEnd)
    {
           xpanelsleftstartfnbutton = 0;
     }

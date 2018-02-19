@@ -3680,7 +3680,7 @@ void process_upper_xpdr_switch()
                 Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
 
                 if (testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
-                    XPLMCommandOnce(Rad1UpperXpdrBaroStdRemapableData);
+                    XPLMCommandOnce(BaroStd);
                 }
 
             }
