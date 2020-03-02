@@ -3,7 +3,7 @@
 cd X-Plane_Github_Plugins/xsaitekpanels &&
 ./build4linux
 ./MakeMacOnLinux
-ssh -v Bills-Mac-Pro-Yos.local ". ~/.bash_profile && cd X-Plane_Github_Plugins/xsaitekpanels && git pull && ./build4mac"
+# ssh -v Bills-Mac-Pro-Yos.local ". ~/.bash_profile && cd X-Plane_Github_Plugins/xsaitekpanels && git pull && ./build4mac"
 exec $SHELL
 #
 

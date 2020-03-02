@@ -36,12 +36,12 @@ OSXSDK=~/X-Plane_OsxCrossBuild/osxcross/target/SDK/MacOSX10.11.sdk
 set -x
 
 # set name and location of output directory
-TARGETDIR=target/Xsaitekpanels
+TARGETDIR=release/Xsaitekpanels
 
 # create output directory structure
-rm -rf $TARGETDIR
-mkdir -p $TARGETDIR
-mkdir $TARGETDIR/64
+# rm -rf $TARGETDIR
+# mkdir -p $TARGETDIR
+# mkdir $TARGETDIR/64
 
 # build hybrid OSX version
 make -f Makefile_mac clean

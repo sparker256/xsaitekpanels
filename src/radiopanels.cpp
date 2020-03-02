@@ -3299,7 +3299,7 @@ void process_upper_xpdr_switch()
                        upseldis[radnum] = 9;
                     }
                     //upseldis[radnum] = 9;
-                    XPLMSetDatai(Rad2UpperXpdrRemapableData, rad3uprxpdrdigitremap);
+                    XPLMSetDatai(Rad3UpperXpdrRemapableData, rad3uprxpdrdigitremap);
                     rad3uprxpdrlastdigitcnt = rad3uprxpdrlastdigitcnt + 1;
                 }
 
@@ -4011,15 +4011,8 @@ void process_lower_datareferences()
         if(Last_Lower_Coarse_Dn[radnum] !=0 && rad3_lower_corse_adjustment_dn == 0) {
             XPLMSetDatai(Rad3LowerCorseDecTicksOwnedDataRef, XPLMGetDatai(Rad3LowerCorseDecTicksOwnedDataRef) + 1);
         }
-
     }
-
-
-
-
 }
-
-
 
 
 // ***************** Lower COM1 Switch Position *******************
@@ -6028,7 +6021,6 @@ void process_lower_xpdr_switch()
                        }
                    }
                }
-
                // if loxpdrloop is to low mode switch will not stop in position
                // if loxpdrloop is to high mode switch sometimes will not move
                // ToDo Need to find a better way
@@ -6108,6 +6100,222 @@ void process_lower_xpdr_switch()
                XPLMSetDatai(MetricPress, 1);
            }
            lobaroset[radnum] = (int)lobarosetf[radnum];
+
+
+        } else if ((rad3lwrxpdrswitchremap == 777)  && (radnum == 2)) {
+
+            if(xpanelsfnbutton == 0) {
+                if (!AvPwrIsOn() || !BatPwrIsOn()) {
+                    upseldis[radnum] = 10;
+                } else {
+                   upseldis[radnum] = 9;
+                }
+                //upseldis[radnum] = 9;
+                rad3lwrxpdrlastdigitremap = 0;
+                if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
+                    loxpdrdbncfninc[radnum]++;
+                    if (loxpdrdbncfninc[radnum] > radspeed) {
+                        rad3lwrxpdrdigitremap++;
+                        loxpdrdbncfninc[radnum] = 0;
+                        if (rad3lwrxpdrdigitremap > 7) {
+                            rad3lwrxpdrdigitremap = 0;
+                        }
+                        rad3lwrxpdrlastdigitremap = 1;
+                    }
+                    rad3lwrxpdrlastdigitcnt = 0;
+                }
+                Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
+
+
+                if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
+                    loxpdrdbncfninc[radnum]++;
+                    if (loxpdrdbncfninc[radnum] > radspeed) {
+                        rad3lwrxpdrdigitremap--;
+                        loxpdrdbncfninc[radnum] = 0;
+                        if (rad3lwrxpdrdigitremap < 0) {
+                            rad3lwrxpdrdigitremap = 7;
+                        }
+                        rad3lwrxpdrlastdigitremap = 1;
+                    }
+                    rad3lwrxpdrlastdigitcnt = 0;
+                }
+                Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
+
+
+                if (rad3lwrxpdrlastdigitremap == 0) {
+                    if (rad3lwrxpdrlastdigitcnt < 25) {
+                        rad3lwrxpdrlastdigitcnt++;
+                    }
+                }
+
+                if (rad3lwrxpdrlastdigitcnt < 25) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
+                        loseldis[radnum] = 10;
+                    } else {
+                       loseldis[radnum] = 11;
+                    }
+                    //upseldis[radnum] = 11;
+                }
+
+                if (rad3lwrxpdrlastdigitcnt == 25) {
+                    if (!AvPwrIsOn() || !BatPwrIsOn()) {
+                        loseldis[radnum] = 10;
+                    } else {
+                       loseldis[radnum] = 9;
+                    }
+                    //upseldis[radnum] = 9;
+                    XPLMSetDatai(Rad3LowerXpdrRemapableData, rad3lwrxpdrdigitremap);
+                    rad3lwrxpdrlastdigitcnt = rad3lwrxpdrlastdigitcnt + 1;
+                }
+
+
+                // Use the ACT/STBY button to select XPDR mode
+
+                if (loxpdrpushed == 0) {
+                    if (XPLMGetDatai(Rad3LowerXpdrRemapableMode) == 0) {
+                        if (testbit(radiobuf[radnum], LOWER_ACT_STBY)) {
+                            XPLMSetDatai(Rad3LowerXpdrRemapableMode, 1);
+                            loxpdrpushed = 1;
+                            lolastxpdrpos = 0;
+                        }
+                    }
+                }
+
+                if (loxpdrpushed == 0) {
+                    if (XPLMGetDatai(Rad3LowerXpdrRemapableMode) == 1) {
+                        if (testbit(radiobuf[radnum], LOWER_ACT_STBY)) {
+                            if (lolastxpdrpos == 0) {
+                                XPLMSetDatai(Rad3LowerXpdrRemapableMode, 2);
+                                loxpdrpushed = 1;
+                                lolastxpdrpos = 1;
+                            }
+                            if (lolastxpdrpos == 2) {
+                                XPLMSetDatai(Rad3LowerXpdrRemapableMode, 0);
+                                loxpdrpushed = 1;
+                            }
+                        }
+                      }
+                    }
+                if (loxpdrpushed == 0) {
+                    if (XPLMGetDatai(Rad3LowerXpdrRemapableMode) == 2) {
+                        if (testbit(radiobuf[radnum], LOWER_ACT_STBY)) {
+                            if (lolastxpdrpos == 1) {
+                                XPLMSetDatai(Rad3LowerXpdrRemapableMode, 3);
+                                loxpdrpushed = 1;
+                                lolastxpdrpos = 2;
+                            }
+                            if (lolastxpdrpos == 3) {
+                                XPLMSetDatai(Rad3LowerXpdrRemapableMode, 1);
+                                loxpdrpushed = 1;
+                                lolastxpdrpos = 2;
+                            }
+                        }
+                    }
+                }
+                if (loxpdrpushed == 0) {
+                    if (XPLMGetDatai(Rad3LowerXpdrRemapableMode) == 3) {
+                        if (testbit(radiobuf[radnum], LOWER_ACT_STBY)) {
+                            if (lolastxpdrpos == 2) {
+                                XPLMSetDatai(Rad3LowerXpdrRemapableMode, 4);
+                                loxpdrpushed = 1;
+                                lolastxpdrpos = 3;
+                            }
+                            if (lolastxpdrpos == 4) {
+                                XPLMSetDatai(Rad3LowerXpdrRemapableMode, 2);
+                                loxpdrpushed = 1;
+                                lolastxpdrpos = 3;
+                            }
+                        }
+                    }
+                }
+
+                if (loxpdrpushed == 0) {
+                    if (XPLMGetDatai(Rad3LowerXpdrRemapableMode) == 4) {
+                        if (testbit(radiobuf[radnum], LOWER_ACT_STBY)) {
+                            XPLMSetDatai(Rad3LowerXpdrRemapableMode, 3);
+                            loxpdrpushed = 1;
+                            lolastxpdrpos = 4;
+                        }
+                    }
+                }
+                // if upxpdrloop is to low mode switch will not stop in position
+                // if upxpdrloop is to high mode switch sometimes will not move
+                // ToDo Need to find a better way
+                if (loxpdrpushed == 1) {
+                    loxpdrloop++;
+                    if (loxpdrloop == 25) {
+                        loxpdrpushed = 0;
+                        loxpdrloop = 0;
+                    }
+                }
+            }
+
+            if (xpanelsfnbutton == 1) {
+                if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
+                    loqnhdbncfninc[radnum]++;
+                    if (loqnhdbncfninc[radnum] > radspeed) {
+                        XPLMCommandOnce(Rad3LowrXpdrBaroUpRemapableCmd);
+                        loqnhdbncfninc[radnum] = 0;
+                    }
+                }
+                Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
+
+
+                if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
+                    loqnhdbncfndec[radnum]++;
+                    if (loqnhdbncfndec[radnum] > radspeed) {
+                        XPLMCommandOnce(Rad3LowrXpdrBaroDnRemapableCmd);
+                        loqnhdbncfndec[radnum] = 0;
+                    }
+                }
+                Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
+
+
+                if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
+                    loqnhdbnccorinc[radnum]++;
+                    if (loqnhdbnccorinc[radnum] > radspeed) {
+                        radn = 10;
+                        while (radn>0) {
+                            XPLMCommandOnce(Rad3LowrXpdrBaroUpRemapableCmd);
+                            --radn;
+                        }
+                        loqnhdbnccorinc[radnum] = 0;
+                    }
+                }
+                Last_Lower_Coarse_Up[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_UP);
+
+
+                if ((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
+                    loqnhdbnccordec[radnum]++;
+                    if (loqnhdbnccordec[radnum] > radspeed) {
+                        radn = 10;
+                        while (radn>0) {
+                            XPLMCommandOnce(Rad3LowrXpdrBaroDnRemapableCmd);
+                            --radn;
+                        }
+                        loqnhdbnccordec[radnum] = 0;
+                    }
+                }
+
+                if (testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
+                    XPLMSetDatai(Rad3LowerXpdrBaroStdRemapableData, 1);
+                }
+            }
+
+            loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
+            loxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
+            lobarosetf[radnum] = XPLMGetDataf(BaroSetting);
+            if (metricpressenable == 0) {
+                lobarosetf[radnum] = lobarosetf[radnum] * 100.0;
+                XPLMSetDatai(MetricPress, 0);
+            }
+            if (metricpressenable == 1) {
+                lobarosetf[radnum] = lobarosetf[radnum] * 33.8639;
+                XPLMSetDatai(MetricPress, 1);
+            }
+            lobaroset[radnum] = (int)lobarosetf[radnum];
+
+
 
        } else {
             if (!AvPwrIsOn() || !BatPwrIsOn()) {
