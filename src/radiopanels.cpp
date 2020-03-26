@@ -281,7 +281,24 @@ void process_radio_upper_display()
       radiobdig5 = radiobrem4;
     }
 
-    if (upadfsel[radnum] > 3) {
+    if (upadfsel[radnum] == 4) {
+      radioaactv = upactadffreq[radnum];
+      radioadig1 = radioaactv/10000, radioarem1 = radioaactv%10000;
+      radioadig2 = radioarem1/1000, radioarem2 =radioaactv%1000;
+      radioadig3 = radioarem2/100, radioarem3 =radioarem2%100;
+      radioadig4 = radioarem3/10, radioarem4 = radioarem3%10;
+      radioadig5 = radioarem4;
+
+      radiobstby = upstbyadffreq[radnum];
+      radiobdig1 = radiobstby/10000, radiobrem1 = radiobstby%10000;
+      radiobdig2 = radiobrem1/1000, radiobrem2 = radiobstby%1000;
+      radiobdig3 = radiobrem2/100, radiobrem3 = radiobrem2%100;
+      radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
+      radiobdig5 = radiobrem4;
+    }
+
+
+    if (upadfsel[radnum] > 4) {
       radioaactv = upactadffreq[radnum];
       radioadig1 = 15;
       radioadig2 = radioaactv/1000, radioarem2 =radioaactv%1000;
@@ -702,7 +719,25 @@ void process_radio_lower_display()
       radioddig5 = radiodrem4;
     }
 
-    if (loadfsel[radnum] > 3) {
+    if (loadfsel[radnum] == 4) {
+      radiocactv = loactadffreq[radnum];
+      radiocdig1 = radiocactv/10000, radiocrem1 = radiocactv%10000;
+      radiocdig2 = radiocrem1/1000, radiocrem2 =radiocactv%1000;
+      radiocdig3 = radiocrem2/100, radiocrem3 =radiocrem2%100;
+      radiocdig4 = radiocrem3/10, radiocrem4 = radiocrem3%10;
+      radiocdig5 = radiocrem4;
+
+      radiodstby = lostbyadffreq[radnum];
+      radioddig1 = radiodstby/10000, radiodrem1 = radiodstby%10000;
+      radioddig2 = radiodrem1/1000, radiodrem2 = radiodstby%1000;
+      radioddig3 = radiodrem2/100, radiodrem3 = radiodrem2%100;
+      radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
+      radioddig5 = radiodrem4;
+    }
+
+
+
+    if (loadfsel[radnum] > 4) {
       radiocactv = loactadffreq[radnum];
       radiocdig1 = 15;
       radiocdig2 = radiocactv/1000, radiocrem2 =radiocactv%1000;
@@ -2540,9 +2575,23 @@ void proecss_upper_adf_switch()
 
         }
 
+        if ((rad1upradfswitchremap == 1) && (radnum == 0)) {
+            upactadffreq[radnum] = XPLMGetDatai(Rad1UpperAdfActRemapableData);
+            upstbyadffreq[radnum] = XPLMGetDatai(Rad1UpperAdfStbyRemapableData);
+            upadfsel[radnum] = 4;
+        } else if ((rad2upradfswitchremap == 1) && (radnum == 1)) {
+            upactadffreq[radnum] = XPLMGetDatai(Rad2UpperAdfActRemapableData);
+            upstbyadffreq[radnum] = XPLMGetDatai(Rad2UpperAdfStbyRemapableData);
+            upadfsel[radnum] = 4;
+        } else if ((rad3upradfswitchremap == 1) && (radnum == 2)) {
+            upactadffreq[radnum] = XPLMGetDatai(Rad3UpperAdfActRemapableData);
+            upstbyadffreq[radnum] = XPLMGetDatai(Rad3UpperAdfStbyRemapableData);
+            upadfsel[radnum] = 4;
+        } else {
+            upactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
+            upstbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
+        }
 
-        upactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
-        upstbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
     }
 }
 
@@ -5007,7 +5056,7 @@ void process_lower_adf_switch()
 
 
             if (xpanelsfnbutton == 0) {
-                if (loadfsel[radnum] == 1) {
+                if ((loadfsel[radnum] == 1) || (loadfsel[radnum] == 4)) {
                     if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loadfdbncfninc[radnum]++;
                         if (loadfdbncfninc[radnum] > radspeed) {
@@ -5177,9 +5226,22 @@ void process_lower_adf_switch()
 
             }
 
-            loactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
-            lostbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
-
+            if ((rad1lwradfswitchremap == 1) && (radnum == 0)) {
+                loactadffreq[radnum] = XPLMGetDatai(Rad1LowerAdfActRemapableData);
+                lostbyadffreq[radnum] = XPLMGetDatai(Rad1LowerAdfStbyRemapableData);
+                loadfsel[radnum] = 4;
+            } else if ((rad2lwradfswitchremap == 1) && (radnum == 1)) {
+                loactadffreq[radnum] = XPLMGetDatai(Rad2LowerAdfActRemapableData);
+                lostbyadffreq[radnum] = XPLMGetDatai(Rad2LowerAdfStbyRemapableData);
+                loadfsel[radnum] = 4;
+            } else if ((rad3lwradfswitchremap == 1) && (radnum == 2)) {
+                loactadffreq[radnum] = XPLMGetDatai(Rad3LowerAdfActRemapableData);
+                lostbyadffreq[radnum] = XPLMGetDatai(Rad3LowerAdfStbyRemapableData);
+                loadfsel[radnum] = 4;
+            } else {
+                loactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
+                lostbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
+            }
         }
 
         // Second ADF on the lower position
