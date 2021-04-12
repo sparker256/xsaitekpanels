@@ -3841,7 +3841,7 @@ void process_read_ini_file()
    }
 
   // Radio3 Lower Adf switch - remapable
-  readOptionAsInt("Radio2 Lower Adf Switch remapable", &rad3lwradfswitchremap);
+  readOptionAsInt("Radio3 Lower Adf Switch remapable", &rad3lwradfswitchremap);
   if (rad3lwradfswitchremap == 1) {
 
       rad3_lower_adf_corse_up_remapable = getOptionToString("rad3_lower_adf_corse_up_cmd");

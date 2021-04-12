@@ -583,15 +583,15 @@ void process_radio_find_xplane_commands()
       Nav2StbyCorseDn = XPLMFindCommand("sim/radios/stby_nav2_coarse_down");
       Nav2StbyCorseUp = XPLMFindCommand("sim/radios/stby_nav2_coarse_up");
 
-      Afd1StbyHunUp = XPLMFindCommand("sim/radios/stby_adf1_hundreds_up");
-      Afd1StbyHunDn = XPLMFindCommand("sim/radios/stby_adf1_hundreds_down");
+      Afd1StbyHunUp = XPLMFindCommand("sim/radios/stby_adf1_hundreds_thous_up");
+      Afd1StbyHunDn = XPLMFindCommand("sim/radios/stby_adf1_hundreds_thous_down");
       Afd1StbyTensUp = XPLMFindCommand("sim/radios/stby_adf1_tens_up");
       Afd1StbyTensDn = XPLMFindCommand("sim/radios/stby_adf1_tens_down");
       Afd1StbyOnesUp = XPLMFindCommand("sim/radios/stby_adf1_ones_up");
       Afd1StbyOnesDn = XPLMFindCommand("sim/radios/stby_adf1_ones_down");
 
-      Afd2StbyHunUp = XPLMFindCommand("sim/radios/stby_adf2_hundreds_up");
-      Afd2StbyHunDn = XPLMFindCommand("sim/radios/stby_adf2_hundreds_down");
+      Afd2StbyHunUp = XPLMFindCommand("sim/radios/stby_adf2_hundreds_thous_up");
+      Afd2StbyHunDn = XPLMFindCommand("sim/radios/stby_adf2_hundreds_thous_down");
       Afd2StbyTensUp = XPLMFindCommand("sim/radios/stby_adf2_tens_up");
       Afd2StbyTensDn = XPLMFindCommand("sim/radios/stby_adf2_tens_down");
       Afd2StbyOnesUp = XPLMFindCommand("sim/radios/stby_adf2_ones_up");

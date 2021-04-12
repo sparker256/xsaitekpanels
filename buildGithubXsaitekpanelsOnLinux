@@ -5,6 +5,14 @@
 cd xp11_xsaitekpanels_plugin_builder/xsaitekpanels &&
 ./build4linux
 ./MakeMacOnLinux
+
+cp release/Xsaitekpanels/lin.xpl Xsaitekpanels/lin.xpl
+cp release/Xsaitekpanels/win.xpl Xsaitekpanels/win.xpl
+cp release/Xsaitekpanels/mac.xpl Xsaitekpanels/mac.xpl
+cp release/Xsaitekpanels/64/lin.xpl Xsaitekpanels/64/lin.xpl
+cp release/Xsaitekpanels/64/win.xpl Xsaitekpanels/64/win.xpl
+
+
 # ssh -v Bills-Mac-Pro-Yos.local ". ~/.bash_profile && cd X-Plane_Github_Plugins/xsaitekpanels && git pull && ./build4mac"
 exec $SHELL
 #
