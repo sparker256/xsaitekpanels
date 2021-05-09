@@ -13,6 +13,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <tgmath.h>
+#include <math.h>
 
 #define testbit(x, y)  ( ( ((const char*)&(x))[(y)>>3] & 0x80 >> ((y)&0x07)) >> (7-((y)&0x07) ) )
 
@@ -4037,8 +4039,8 @@ double lerp(double a, double b, double t)
 
 void process_trim_wheel(float dt)
 {
-    static float timeFromLastUpTrimInput = 0.0f;
-    static float timeFromLastDownTrimInput = 0.0f;
+    static double timeFromLastUpTrimInput = 0.0f;
+    static double timeFromLastDownTrimInput = 0.0f;
 
     timeFromLastUpTrimInput += dt;
     timeFromLastDownTrimInput += dt;
@@ -4049,7 +4051,7 @@ void process_trim_wheel(float dt)
             int commandMult = trimspeed;
             if (dynamicTrimWheel == 1) {
                 if (timeFromLastUpTrimInput < dynamicTrimAccelerationPoint) {
-                    double lerpFactor = (min(dynamicTrimAccelerationPoint, timeFromLastUpTrimInput)) / (dynamicTrimAccelerationPoint);
+                    double lerpFactor = (fmin(dynamicTrimAccelerationPoint, timeFromLastUpTrimInput)) / (dynamicTrimAccelerationPoint);
                     commandMult = (int) floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
                 }
             }
@@ -4068,13 +4070,10 @@ void process_trim_wheel(float dt)
             int commandMult = trimspeed;
             if (dynamicTrimWheel == 1) {
                 if (timeFromLastDownTrimInput < dynamicTrimAccelerationPoint) {
-                    double lerpFactor = (min(dynamicTrimAccelerationPoint, timeFromLastDownTrimInput)) / (dynamicTrimAccelerationPoint);
+                    double lerpFactor = (fmin(dynamicTrimAccelerationPoint, timeFromLastDownTrimInput)) / (dynamicTrimAccelerationPoint);
                     commandMult = (int)floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
                 }
             }
-            char buf[500];
-            sprintf(buf, "timeFromLastDownTrimInput: %f, speedMult: %d\n", timeFromLastDownTrimInput, commandMult);
-            XPLMDebugString(buf);
 
             timeFromLastDownTrimInput = 0.0f;
 
