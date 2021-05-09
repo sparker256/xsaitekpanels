@@ -95,6 +95,15 @@ void readOptionAsInt(std::string key, int * value)
     }
 }
 
+void readOptionAsDouble(std::string key, double* value)
+{
+    try {
+        *value = atof(configMap.at(key).c_str());
+    }
+    catch (const std::out_of_range& oor) {
+    }
+}
+
 std::string parseOptionName(std::string value)
 {
         size_t found;
