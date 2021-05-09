@@ -4053,9 +4053,6 @@ void process_trim_wheel(float dt)
                     commandMult = (int) floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
                 }
             }
-            char buf[500];
-            sprintf(buf, "timeFromLastUpTrimInput: %f, speedMult: %d\n", timeFromLastUpTrimInput, commandMult);
-            XPLMDebugString(buf);
 
             timeFromLastUpTrimInput = 0.0f;
 
