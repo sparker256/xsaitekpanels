@@ -4048,13 +4048,16 @@ void process_trim_wheel(float dt)
     int i;
     if (multires > 0) {
         if(testbit(multibuf,TRIM_WHEEL_UP)) {
-            int commandMult = trimspeed;
+            int commandMult = 1;
             if (dynamicTrimWheel == 1) {
                 if (timeFromLastUpTrimInput < dynamicTrimAccelerationPoint) {
                     double lerpFactor = (fmin(dynamicTrimAccelerationPoint, timeFromLastUpTrimInput)) / (dynamicTrimAccelerationPoint);
                     commandMult = (int) floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
                 }
             }
+			else {
+				commandMult = trimspeed;
+			}
 
             timeFromLastUpTrimInput = 0.0f;
 
@@ -4067,13 +4070,16 @@ void process_trim_wheel(float dt)
             }
         }
         if(testbit(multibuf,TRIM_WHEEL_DN)) {
-            int commandMult = trimspeed;
+            int commandMult = 1;
             if (dynamicTrimWheel == 1) {
                 if (timeFromLastDownTrimInput < dynamicTrimAccelerationPoint) {
                     double lerpFactor = (fmin(dynamicTrimAccelerationPoint, timeFromLastDownTrimInput)) / (dynamicTrimAccelerationPoint);
                     commandMult = (int)floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
                 }
             }
+			else {
+				commandMult = trimspeed;
+			}
 
             timeFromLastDownTrimInput = 0.0f;
 
