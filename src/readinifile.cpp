@@ -167,6 +167,11 @@ void process_read_ini_file()
     autothrottleswitchenable = 0;
     autothrottleswitcharmedvalue = 0;
 
+    dynamicTrimWheel        = 1;
+    dynamicTrimAccelerationPoint = 0.3;
+    dynamicTrimMinVal       = 1;
+    dynamicTrimMaxVal       = 6;
+
     trimupremap             = 0;
     trimdnremap             = 0;
 
@@ -3933,6 +3938,18 @@ void process_read_ini_file()
          XPSetWidgetProperty(MultiSpeed5CheckWidget[0], xpProperty_ButtonState, 1);
     }
 
+    // Dynamic Trim Wheel
+    readOptionAsInt("Dynamic Trim Wheel", &dynamicTrimWheel);
+
+    // Dynamic Trim Max Val
+    readOptionAsInt("Dynamic Trim Max Val", &dynamicTrimMaxVal);
+
+    // "Dynamic Trim Min Val
+    readOptionAsInt("Dynamic Trim Min Val", &dynamicTrimMinVal);
+
+    // "Dynamic Trim Acceleration Point
+    readOptionAsDouble("Dynamic Trim Acceleration Point", &dynamicTrimAccelerationPoint);
+
     readOptionAsInt("Multi Trim Speed", &trimspeed);
     XPSetWidgetProperty(MultiTrimSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
     XPSetWidgetProperty(MultiTrimSpeed2CheckWidget[0], xpProperty_ButtonState, 0);
@@ -4222,7 +4239,6 @@ void process_read_ini_file()
         rev_light_flash_remapable = getOptionToString("rev_light_flash_remapable_data");
         RevLightFlashRemapableData = XPLMFindDataRef(rev_light_flash_remapable.c_str());
     }
-
 
     // trim up - remapable
     readOptionAsInt("Trim Up remapable", &trimupremap);

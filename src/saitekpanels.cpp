@@ -2147,6 +2147,9 @@ int loaded737 = 0;
 
 int trimspeed, multispeed, autothrottleswitchenable, autothrottleswitcharmedvalue;
 
+int dynamicTrimWheel, dynamicTrimMinVal, dynamicTrimMaxVal;
+double dynamicTrimAccelerationPoint;
+
 int multiaccelthreshold;
 
 int apbuttonremap, hdgbuttonremap, navbuttonremap, iasbuttonremap;
@@ -3176,7 +3179,7 @@ void process_radio3_unregister_xsaitekpanels_datareference();
 void process_radio_find_xplane_commands();
 void process_radio_find_xplane_datareference();
 
-void process_multi_panel();
+void process_multi_panel(float dt);
 void process_multi_register_xsaitekpanels_datareference();
 void process_multi_unregister_xsaitekpanels_datareference();
 void process_multi_find_xplane_commands();
@@ -9167,7 +9170,7 @@ float	MyPanelsFlightLoopCallback(
   }
 
   if (multicnt > 0) {
-        process_multi_panel();
+        process_multi_panel(inElapsedSinceLastCall);
   }
 
 

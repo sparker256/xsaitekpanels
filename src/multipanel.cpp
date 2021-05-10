@@ -13,6 +13,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <tgmath.h>
+#include <math.h>
 
 #define testbit(x, y)  ( ( ((const char*)&(x))[(y)>>3] & 0x80 >> ((y)&0x07)) >> (7-((y)&0x07) ) )
 
@@ -4028,13 +4030,38 @@ void process_flaps_switch()
     }
  }
 
-// *************** Trim Wheel *********************
-void process_trim_wheel()
+// *************** Setupapi.libSetupapi.lib Wheel *********************
+
+double lerp(double a, double b, double t)
 {
+    return a + (b - a) * t;
+}
+
+void process_trim_wheel(float dt)
+{
+    static double timeFromLastUpTrimInput = 0.0f;
+    static double timeFromLastDownTrimInput = 0.0f;
+
+    timeFromLastUpTrimInput += dt;
+    timeFromLastDownTrimInput += dt;
+
     int i;
     if (multires > 0) {
         if(testbit(multibuf,TRIM_WHEEL_UP)) {
-            for(i = 0; i < trimspeed; ++i) {
+            int commandMult = 1;
+            if (dynamicTrimWheel == 1) {
+                if (timeFromLastUpTrimInput < dynamicTrimAccelerationPoint) {
+                    double lerpFactor = (fmin(dynamicTrimAccelerationPoint, timeFromLastUpTrimInput)) / (dynamicTrimAccelerationPoint);
+                    commandMult = (int) floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
+                }
+            }
+			else {
+				commandMult = trimspeed;
+			}
+
+            timeFromLastUpTrimInput = 0.0f;
+
+            for(i = 0; i < commandMult; ++i) {
                 if (trimupremap == 1) {
                     XPLMCommandOnce(TrimUpRemapableCmd);
                 } else {
@@ -4043,7 +4070,20 @@ void process_trim_wheel()
             }
         }
         if(testbit(multibuf,TRIM_WHEEL_DN)) {
-            for(i = 0; i < trimspeed; ++i) {
+            int commandMult = 1;
+            if (dynamicTrimWheel == 1) {
+                if (timeFromLastDownTrimInput < dynamicTrimAccelerationPoint) {
+                    double lerpFactor = (fmin(dynamicTrimAccelerationPoint, timeFromLastDownTrimInput)) / (dynamicTrimAccelerationPoint);
+                    commandMult = (int)floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
+                }
+            }
+			else {
+				commandMult = trimspeed;
+			}
+
+            timeFromLastDownTrimInput = 0.0f;
+
+            for(i = 0; i < commandMult; ++i) {
                 if (trimdnremap == 1) {
                     XPLMCommandOnce(TrimDnRemapableCmd);
                 } else {
@@ -4095,7 +4135,7 @@ void process_multi_blank_display()
 
 
 // ***** Multi Panel Process ******
-void process_multi_panel()
+void process_multi_panel(float dt)
 
 {
 
@@ -4123,7 +4163,7 @@ void process_multi_panel()
         process_apr_button();
         process_rev_button();
         process_flaps_switch();
-        process_trim_wheel();
+        process_trim_wheel(dt);
         if(multires > 0) {
             process_multi_flash();
             process_multi_blank_display();

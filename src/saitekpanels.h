@@ -1518,6 +1518,8 @@ extern int multifd;
 extern int numadf;
 extern int loaded737;
 extern int trimspeed, multispeed, autothrottleswitchenable, autothrottleswitcharmedvalue;
+extern int dynamicTrimWheel, dynamicTrimMinVal, dynamicTrimMaxVal;
+extern double dynamicTrimAccelerationPoint;
 
 extern int  multiaccelthreshold;
 
