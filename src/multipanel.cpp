@@ -13,8 +13,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
-#include <tgmath.h>
-#include <math.h>
+#include <cmath>
+#include <algorithm>
 
 #define testbit(x, y)  ( ( ((const char*)&(x))[(y)>>3] & 0x80 >> ((y)&0x07)) >> (7-((y)&0x07) ) )
 
