@@ -580,7 +580,9 @@ XPWidgetID	MultiSpeedTextWidget[50] = {NULL};
 XPWidgetID	MultiTrimSpeed1CheckWidget[50] = {NULL};
 XPWidgetID	MultiTrimSpeed2CheckWidget[50] = {NULL};
 XPWidgetID	MultiTrimSpeed3CheckWidget[50] = {NULL};
+XPWidgetID	MultiEnableDynamicTrimSpeedCheckWidget[50] = {NULL};
 XPWidgetID	MultiTrimSpeedTextWidget[50] = {NULL};
+
 
 XPWidgetID	MultiAt0CheckWidget[50] = {NULL};
 XPWidgetID	MultiAt1CheckWidget[50] = {NULL};
@@ -2324,6 +2326,7 @@ char MultiTrimSpeedText[50][200] = {
 "TRIM X1",
 "TRIM X2",
 "TRIM X3",
+"ENABLE DYNAMIC TRIM SPEED",
 "end"
 };
 
@@ -8487,6 +8490,7 @@ void CreateMultiWidget(int x, int y, int w, int h)
         int y2 = y - h;
         int Index;
         int yOffset;
+        int LineNumber = 0;
 
         DataRefID.clear();
         memset(MultiSpeed1CheckWidget, 0, sizeof(MultiSpeed1CheckWidget));
@@ -8512,7 +8516,8 @@ void CreateMultiWidget(int x, int y, int w, int h)
 
 
 
-        yOffset = (05+28+(0*20));
+        yOffset = (05+28+(LineNumber *20));
+        LineNumber++;
         MultiSpeed1CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                            1,	// Visible
                            "",       // desc
@@ -8524,7 +8529,8 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiSpeed1CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
 
-        yOffset = (05+28+(1*20));
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiSpeed2CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                            1,	// Visible
                            "",       // desc
@@ -8537,7 +8543,8 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiSpeed2CheckWidget[0], xpProperty_ButtonState, 0);
 
 
-        yOffset = (05+28+(2*20));
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiSpeed3CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                            1,	// Visible
                            "",       // desc
@@ -8549,7 +8556,8 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiSpeed3CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiSpeed3CheckWidget[0], xpProperty_ButtonState, 0);
 
-        yOffset = (05+28+(3*20));
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiSpeed4CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                            1,	// Visible
                            "",       // desc
@@ -8561,7 +8569,8 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiSpeed4CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiSpeed4CheckWidget[0], xpProperty_ButtonState, 0);
 
-        yOffset = (05+28+(4*20));
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiSpeed5CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                            1,	// Visible
                            "",       // desc
@@ -8590,9 +8599,13 @@ void CreateMultiWidget(int x, int y, int w, int h)
                  XPSetWidgetProperty(MultiSpeedTextWidget[Index], xpProperty_CaptionLit, 1);
         }
 
+        //Empty line;
+        LineNumber++;
+
 //  // Checkbox for trim speed
 
-        yOffset = (05+28+(6*20));
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiTrimSpeed1CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                            1,	// Visible
                            "",       // desc
@@ -8605,7 +8618,8 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiTrimSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
 
 
-        yOffset = (05+28+(7*20));
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiTrimSpeed2CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                            1,	// Visible
                            "",       // desc
@@ -8617,7 +8631,8 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiTrimSpeed2CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiTrimSpeed2CheckWidget[0], xpProperty_ButtonState, 0);
 
-        yOffset = (05+28+(8*20));
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiTrimSpeed3CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                            1,	// Visible
                            "",       // desc
@@ -8628,6 +8643,19 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0], xpProperty_ButtonType, xpRadioButton);
         XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0], xpProperty_ButtonState, 0);
+
+        yOffset = (05 + 28 + (LineNumber * 20));
+        LineNumber++;
+        MultiEnableDynamicTrimSpeedCheckWidget[0] = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
+            1,	// Visible
+            "",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_Button);
+
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonType, xpRadioButton);
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonState, dynamicTrimWheel);
 
 
  // Create a text widget
@@ -8646,9 +8674,23 @@ void CreateMultiWidget(int x, int y, int w, int h)
                  XPSetWidgetProperty(MultiTrimSpeedTextWidget[Index], xpProperty_CaptionLit, 1);
         }
 
+        //Empty line
+        LineNumber++;
+
 // Auto Throttle Widget
 
-        yOffset = (05+28+(10*20));
+        yOffset = (05 + 28 + (LineNumber * 20));
+        MultiAt0TextWidget[0] = XPCreateWidget(x + 50, y - yOffset, x + 50 + 22, y - yOffset - 20,
+            1,	// Visible
+            "DISABLE_AUTO_THROTTLE SWITCH",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_Caption);
+
+        XPSetWidgetProperty(MultiAt0TextWidget[0], xpProperty_CaptionLit, 1);
+
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiAt0CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                          1,	// Visible
                          "",       // desc
@@ -8660,8 +8702,18 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiAt0CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiAt0CheckWidget[0], xpProperty_ButtonState, 0);
 
+        yOffset = (05 + 28 + (LineNumber * 20));
+        MultiAt1TextWidget[0] = XPCreateWidget(x + 50, y - yOffset, x + 50 + 22, y - yOffset - 20,
+            1,	// Visible
+            "ENABLE_AUTO_THROTTLE SWITCH",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_Caption);
 
-        yOffset = (05+28+(11*20));
+        XPSetWidgetProperty(MultiAt1TextWidget[0], xpProperty_CaptionLit, 1);
+
+        yOffset = (05+28+(LineNumber*20));
+        LineNumber++;
         MultiAt1CheckWidget[0] = XPCreateWidget(x+05, y-yOffset, x+05+22, y-yOffset-20,
                          1,	// Visible
                          "",       // desc
@@ -8672,26 +8724,6 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonType, xpRadioButton);
         XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 0);
-
-        yOffset = (05+28+(10*20));
-        MultiAt0TextWidget[0] = XPCreateWidget(x+50, y-yOffset, x+50+22, y-yOffset-20,
-                        1,	// Visible
-                        "DISABLE_AUTO_THROTTLE SWITCH",       // desc
-                         0,	// root
-                         MultiWidgetID,
-                         xpWidgetClass_Caption);
-
-        XPSetWidgetProperty(MultiAt0TextWidget[0], xpProperty_CaptionLit, 1);
-
-        yOffset = (05+28+(11*20));
-        MultiAt1TextWidget[0] = XPCreateWidget(x+50, y-yOffset, x+50+22, y-yOffset-20,
-                        1,	// Visible
-                        "ENABLE_AUTO_THROTTLE SWITCH",       // desc
-                         0,	// root
-                         MultiWidgetID,
-                         xpWidgetClass_Caption);
-
-        XPSetWidgetProperty(MultiAt1TextWidget[0], xpProperty_CaptionLit, 1);
 
 
 // Register our widget handler
@@ -8787,6 +8819,16 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
             }
 
          }
+
+            if (inParam1 == (intptr_t)MultiEnableDynamicTrimSpeedCheckWidget[0]) {
+                State = XPGetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonState, 0);
+                if (State){
+                    dynamicTrimWheel = 1;
+                }
+                else{
+                    dynamicTrimWheel = 0;
+                }
+            }
 
             if(inParam1 == (intptr_t)MultiAt0CheckWidget[0] ||
                inParam1 == (intptr_t)MultiAt1CheckWidget[0] ) {

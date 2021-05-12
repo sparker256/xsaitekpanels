@@ -1510,6 +1510,7 @@ extern XPWidgetID	MultiSpeed5CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed1CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed2CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed3CheckWidget[50];
+extern XPWidgetID	MultiEnableDynamicTrimSpeedCheckWidget[50];
 extern XPWidgetID	MultiAt0CheckWidget[50];
 extern XPWidgetID	MultiAt1CheckWidget[50];
 

@@ -3940,6 +3940,16 @@ void process_read_ini_file()
 
     // Dynamic Trim Wheel
     readOptionAsInt("Dynamic Trim Wheel", &dynamicTrimWheel);
+    if (dynamicTrimWheel > 0)
+    {
+        dynamicTrimWheel = 1;
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    else
+    {
+        dynamicTrimWheel = 0;
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonState, 0);
+    }
 
     // Dynamic Trim Max Val
     readOptionAsInt("Dynamic Trim Max Val", &dynamicTrimMaxVal);
