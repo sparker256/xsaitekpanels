@@ -566,6 +566,7 @@ extern float rad3_lwr_nav2_actstby_btn_dataf_on_value, rad3_lwr_nav2_actstby_btn
 extern float rad3_lwr_adf_actstby_btn_dataf_on_value, rad3_lwr_adf_actstby_btn_dataf_off_value;
 extern float rad3_lwr_dme_actstby_btn_dataf_on_value, rad3_lwr_dme_actstby_btn_dataf_off_value;
 
+void UpdateUI(); 
 
 extern int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprCom1StatusSetDataiCallback(void * inRefcon, int Rad1UprCom1Status);

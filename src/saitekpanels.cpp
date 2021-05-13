@@ -41,6 +41,8 @@ double MAX_ACCELERATION_POINT = 0.4 - MIN_ACCELERATION_POINT;
 double MIN_SPEED = 1;
 double MAX_SPEED = 15 - MIN_SPEED;
 
+void UpdateUI();
+
 // ************* Radio Panel Command Ref ****************
 XPLMCommandRef  Com1StbyFineDn = NULL, Com1StbyFineUp = NULL, Com1StbyCorseDn = NULL, Com1StbyCorseUp = NULL;
 XPLMCommandRef  Com1StbyFineDn_833 = NULL, Com1StbyFineUp_833 = NULL;
@@ -7804,6 +7806,7 @@ void CreateSwitchWidget(int x, int y, int w, int h)
         XPAddWidgetCallback(SwitchWidgetID, SwitchHandler);
 
         //process_read_ini_file();
+        UpdateUI();
 }
 
 // This is our widget handler.  In this example we are only interested when the close box is pressed.
@@ -8379,7 +8382,7 @@ void CreateRadioWidget(int x, int y, int w, int h)
         XPAddWidgetCallback(RadioWidgetID, RadioHandler);
         //process_read_ini_file();
 
-
+        UpdateUI();
 }
 
 // This is our widget handler.  In this example we are only interested when the close box is pressed.
@@ -8809,7 +8812,7 @@ void CreateMultiWidget(int x, int y, int w, int h)
              XPAddWidgetCallback(MultiWidgetID, MultiHandler);
              //process_read_ini_file();
 
-
+             UpdateUI();
 }
 
 
@@ -8836,7 +8839,7 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
 
                 if (inParam1 == (intptr_t)MultiTrimAccelerationPointScroll )
                 {
-                    double val = XPGetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarSliderPosition, NULL);
+                    double val = (double) XPGetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarSliderPosition, NULL);
                     val = MIN_ACCELERATION_POINT + (val * MAX_ACCELERATION_POINT) / 100.0;
 
                     dynamicTrimAccelerationPoint = val;
@@ -8847,8 +8850,8 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
                 }
                 else if (inParam1 == (intptr_t)MultiTrimMaxSpeedScroll)
                 {
-                    double val = XPGetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarSliderPosition, NULL);
-                    dynamicTrimMaxVal = (int)MIN_SPEED + (val * MAX_SPEED) / 100.0;
+                    double val = (double) XPGetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarSliderPosition, NULL);
+                    dynamicTrimMaxVal = (int) (MIN_SPEED + (val * MAX_SPEED) / 100.0);
 
                     char buf[32];
                     snprintf(buf, sizeof(buf), "%d", dynamicTrimMaxVal);
@@ -9404,4 +9407,402 @@ bool BatPwrIsOn()
   } else {
     return XPLMGetDatai(BatPwrOn) == 1;
   }
+}
+
+void UpdateUI()
+{
+    if (numadf == 1) {
+        XPSetWidgetProperty(RadioSpeed1CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    if (bataltinverse == 0) {
+        XPSetWidgetProperty(SwitchBatAltCheckWidget[0], xpProperty_ButtonState, 1);
+        XPSetWidgetProperty(SwitchAltBatCheckWidget[0], xpProperty_ButtonState, 0);
+
+    }
+
+    if (bataltinverse == 1) {
+        XPSetWidgetProperty(SwitchBatAltCheckWidget[0], xpProperty_ButtonState, 0);
+        XPSetWidgetProperty(SwitchAltBatCheckWidget[0], xpProperty_ButtonState, 1);
+
+    }
+
+    if (starterswitchenable == 0) {
+        XPSetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonState, 1);
+        XPSetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonState, 0);
+    }
+
+    if (starterswitchenable == 1) {
+        XPSetWidgetProperty(SwitchStartSwitchOldCheckWidget[0], xpProperty_ButtonState, 0);
+        XPSetWidgetProperty(SwitchStartSwitchNewCheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    int Index2;
+    for (Index2 = 0; Index2 < 19; Index2++) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[Index2], xpProperty_ButtonState, 0);
+        XPSetWidgetProperty(SwitchEnableCheckWidget[Index2], xpProperty_ButtonState, 0);
+        XPSetWidgetProperty(SwitchRemapCheckWidget[Index2], xpProperty_ButtonState, 0);
+    }
+
+    if (magoffswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    if (magoffswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    if (magoffswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    if (magrightswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[1], xpProperty_ButtonState, 1);
+    }
+
+    if (magrightswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[1], xpProperty_ButtonState, 1);
+    }
+
+    if (magrightswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[1], xpProperty_ButtonState, 1);
+    }
+
+    if (magleftswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[2], xpProperty_ButtonState, 1);
+    }
+
+    if (magleftswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[2], xpProperty_ButtonState, 1);
+    }
+
+    if (magleftswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[2], xpProperty_ButtonState, 1);
+    }
+
+    if (magbothswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[3], xpProperty_ButtonState, 1);
+    }
+
+    if (magbothswitchenable == 1) {
+
+        XPSetWidgetProperty(SwitchEnableCheckWidget[3], xpProperty_ButtonState, 1);
+    }
+
+    if (magbothswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[3], xpProperty_ButtonState, 1);
+    }
+
+    if (magstartswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[4], xpProperty_ButtonState, 1);
+    }
+
+    if (magstartswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[4], xpProperty_ButtonState, 1);
+    }
+
+    if (magstartswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[4], xpProperty_ButtonState, 1);
+    }
+
+    if (batmasterswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[5], xpProperty_ButtonState, 1);
+    }
+
+    if (batmasterswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[5], xpProperty_ButtonState, 1);
+    }
+
+    if (batmasterswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[5], xpProperty_ButtonState, 1);
+    }
+
+    if (altmasterswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[6], xpProperty_ButtonState, 1);
+
+    }
+
+    if (altmasterswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[6], xpProperty_ButtonState, 1);
+    }
+
+    if (altmasterswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[6], xpProperty_ButtonState, 1);
+    }
+
+    if (avionicsmasterswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[7], xpProperty_ButtonState, 1);
+    }
+
+    if (avionicsmasterswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[7], xpProperty_ButtonState, 1);
+    }
+
+    if (avionicsmasterswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[7], xpProperty_ButtonState, 1);
+    }
+
+    if (fuelpumpswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[8], xpProperty_ButtonState, 1);
+    }
+
+    if (fuelpumpswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[8], xpProperty_ButtonState, 1);
+    }
+
+    if (fuelpumpswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[8], xpProperty_ButtonState, 1);
+    }
+
+    if (deiceswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[9], xpProperty_ButtonState, 1);
+    }
+
+    if (deiceswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[9], xpProperty_ButtonState, 1);
+    }
+
+    if (deiceswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[9], xpProperty_ButtonState, 1);
+    }
+
+    if (pitotheatswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[10], xpProperty_ButtonState, 1);
+    }
+
+    if (pitotheatswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[10], xpProperty_ButtonState, 1);
+    }
+
+    if (pitotheatswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[10], xpProperty_ButtonState, 1);
+    }
+
+    if (landinggearknobupenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[11], xpProperty_ButtonState, 1);
+    }
+
+    if (landinggearknobupenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[11], xpProperty_ButtonState, 1);
+    }
+
+    if (landinggearknobupenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[11], xpProperty_ButtonState, 1);
+    }
+
+    if (landinggearknobdnenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[12], xpProperty_ButtonState, 1);
+    }
+
+    if (landinggearknobdnenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[12], xpProperty_ButtonState, 1);
+    }
+
+    if (landinggearknobdnenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[12], xpProperty_ButtonState, 1);
+    }
+
+    if (cowlflapsenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[13], xpProperty_ButtonState, 1);
+    }
+
+    if (cowlflapsenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[13], xpProperty_ButtonState, 1);
+    }
+
+
+    if (cowlflapsenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[13], xpProperty_ButtonState, 1);
+    }
+
+    if (panellightswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[14], xpProperty_ButtonState, 1);
+    }
+
+    if (panellightswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[14], xpProperty_ButtonState, 1);
+    }
+
+    if (panellightswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[14], xpProperty_ButtonState, 1);
+    }
+
+    if (beaconlightswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[15], xpProperty_ButtonState, 1);
+    }
+
+    if (beaconlightswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[15], xpProperty_ButtonState, 1);
+    }
+
+    if (beaconlightswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[15], xpProperty_ButtonState, 1);
+    }
+
+    if (navlightswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[16], xpProperty_ButtonState, 1);
+    }
+
+    if (navlightswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[16], xpProperty_ButtonState, 1);
+    }
+
+    if (navlightswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[16], xpProperty_ButtonState, 1);
+    }
+
+    if (strobelightswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[17], xpProperty_ButtonState, 1);
+    }
+
+    if (strobelightswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[17], xpProperty_ButtonState, 1);
+    }
+    if (strobelightswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[17], xpProperty_ButtonState, 1);
+    }
+
+    if (taxilightswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[18], xpProperty_ButtonState, 1);
+    }
+
+    if (taxilightswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[18], xpProperty_ButtonState, 1);
+    }
+
+    if (taxilightswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[18], xpProperty_ButtonState, 1);
+    }
+
+    if (landinglightswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[19], xpProperty_ButtonState, 1);
+    }
+
+    if (landinglightswitchenable == 1) {
+        XPSetWidgetProperty(SwitchEnableCheckWidget[19], xpProperty_ButtonState, 1);
+        //XPSetWidgetProperty(SwitchRemapCheckWidget[19], xpProperty_ButtonState, 0);
+    }
+
+    if (landinglightswitchenable == 2) {
+        XPSetWidgetProperty(SwitchRemapCheckWidget[19], xpProperty_ButtonState, 1);
+    }
+
+    if (landinglightswitchenable == 0) {
+        XPSetWidgetProperty(SwitchDisableCheckWidget[19], xpProperty_ButtonState, 1);
+    }
+
+    // *******************  Radio Panel   **********************************
+
+    XPSetWidgetProperty(RadioSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(RadioSpeed2CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(RadioSpeed3CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(RadioSpeed4CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(RadioSpeed5CheckWidget[0], xpProperty_ButtonState, 0);
+
+
+    if (radspeed == 1) {
+        XPSetWidgetProperty(RadioSpeed1CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (radspeed == 2) {
+        XPSetWidgetProperty(RadioSpeed2CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (radspeed == 3) {
+        XPSetWidgetProperty(RadioSpeed3CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (radspeed == 4) {
+        XPSetWidgetProperty(RadioSpeed4CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (radspeed == 5) {
+        XPSetWidgetProperty(RadioSpeed5CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    XPSetWidgetProperty(RadioAdf1CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(RadioAdf2CheckWidget[0], xpProperty_ButtonState, 0);
+    if (numadf == 1) {
+        XPSetWidgetProperty(RadioAdf1CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (numadf == 2) {
+        XPSetWidgetProperty(RadioAdf2CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    XPSetWidgetProperty(RadioQnh0CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(RadioQnh1CheckWidget[0], xpProperty_ButtonState, 0);
+    if (metricpressenable == 0) {
+        XPSetWidgetProperty(RadioQnh0CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (metricpressenable == 1) {
+        XPSetWidgetProperty(RadioQnh1CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    //  ***********************   Multi Panel **************************
+
+    XPSetWidgetProperty(MultiSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(MultiSpeed2CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(MultiSpeed3CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(MultiSpeed4CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(MultiSpeed5CheckWidget[0], xpProperty_ButtonState, 0);
+    if (multispeed == 1) {
+        XPSetWidgetProperty(MultiSpeed1CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (multispeed == 2) {
+        XPSetWidgetProperty(MultiSpeed2CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (multispeed == 3) {
+        XPSetWidgetProperty(MultiSpeed3CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (multispeed == 4) {
+        XPSetWidgetProperty(MultiSpeed4CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (multispeed == 5) {
+        XPSetWidgetProperty(MultiSpeed5CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    if (dynamicTrimWheel > 0)
+    {
+        dynamicTrimWheel = 1;
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonState, 1);
+    }
+    else
+    {
+        dynamicTrimWheel = 0;
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonState, 0);
+    }
+
+    if (dynamicTrimMaxVal > MAX_SPEED)
+        MAX_SPEED = dynamicTrimMaxVal;
+    int speedVal = (int) ((dynamicTrimMaxVal / MAX_SPEED) * 100.0 - MIN_SPEED);
+    XPSetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarSliderPosition, speedVal);
+    char buf[32];
+    snprintf(buf, sizeof(buf), "%d", dynamicTrimMaxVal);
+    XPSetWidgetDescriptor(MultiTrimMaxSpeedScrollText, buf);
+
+    if (dynamicTrimAccelerationPoint > MAX_ACCELERATION_POINT)
+        MAX_ACCELERATION_POINT = dynamicTrimAccelerationPoint;
+    int accelerationVal = (int) ((dynamicTrimAccelerationPoint / MAX_ACCELERATION_POINT) * 100.0 - MIN_ACCELERATION_POINT);
+    XPSetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarSliderPosition, accelerationVal);
+    snprintf(buf, sizeof(buf), "%0.3f", dynamicTrimAccelerationPoint);
+    XPSetWidgetDescriptor(MultiTrimAccelerationPointScrollText, buf);
+
+    XPSetWidgetProperty(MultiTrimSpeed1CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(MultiTrimSpeed2CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0], xpProperty_ButtonState, 0);
+    if (trimspeed == 1) {
+        XPSetWidgetProperty(MultiTrimSpeed1CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (trimspeed == 2) {
+        XPSetWidgetProperty(MultiTrimSpeed2CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (trimspeed == 3) {
+        XPSetWidgetProperty(MultiTrimSpeed3CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
+    XPSetWidgetProperty(MultiAt0CheckWidget[0], xpProperty_ButtonState, 0);
+    XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 0);
+    if (autothrottleswitchenable == 0) {
+        XPSetWidgetProperty(MultiAt0CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+    if (autothrottleswitchenable == 1) {
+        XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 1);
+    }
+
 }
