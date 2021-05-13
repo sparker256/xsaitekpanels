@@ -4045,6 +4045,9 @@ void process_trim_wheel(float dt)
     timeFromLastUpTrimInput += dt;
     timeFromLastDownTrimInput += dt;
 
+    float TrimWheelDeflectionTime = XPLMGetDataf(XPLMFindDataRef("sim/aircraft/controls/acf_elev_trim_time"));
+    double MaxWithDeflection = dynamicTrimMaxVal * ((double)TrimWheelDeflectionTime / 8.0);
+
     int i;
     if (multires > 0) {
         if(testbit(multibuf,TRIM_WHEEL_UP)) {
@@ -4052,12 +4055,18 @@ void process_trim_wheel(float dt)
             if (dynamicTrimWheel == 1) {
                 if (timeFromLastUpTrimInput < dynamicTrimAccelerationPoint) {
                     double lerpFactor = (fmin(dynamicTrimAccelerationPoint, timeFromLastUpTrimInput)) / (dynamicTrimAccelerationPoint);
-                    commandMult = (int) floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
+                    commandMult = (int) floor(lerp(MaxWithDeflection, dynamicTrimMinVal, lerpFactor) + 0.5f);
                 }
             }
 			else {
 				commandMult = trimspeed;
 			}
+
+#ifdef TRIM_DEBUG_LOG
+            char buf[500];
+            sprintf(buf, "timeFromLastUpTrimInput: %f, speedMult: %d, MaxWithDeflection %f, TrimWheelDeflectionTime %f\n", timeFromLastUpTrimInput, commandMult, MaxWithDeflection, TrimWheelDeflectionTime);
+            XPLMDebugString(buf);
+#endif //TRIM_DEBUG_LOG
 
             timeFromLastUpTrimInput = 0.0f;
 
@@ -4074,7 +4083,7 @@ void process_trim_wheel(float dt)
             if (dynamicTrimWheel == 1) {
                 if (timeFromLastDownTrimInput < dynamicTrimAccelerationPoint) {
                     double lerpFactor = (fmin(dynamicTrimAccelerationPoint, timeFromLastDownTrimInput)) / (dynamicTrimAccelerationPoint);
-                    commandMult = (int)floor(lerp(dynamicTrimMaxVal, dynamicTrimMinVal, lerpFactor) + 0.5f);
+                    commandMult = (int)floor(lerp(MaxWithDeflection, dynamicTrimMinVal, lerpFactor) + 0.5f);
                 }
             }
 			else {

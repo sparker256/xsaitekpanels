@@ -566,6 +566,7 @@ extern float rad3_lwr_nav2_actstby_btn_dataf_on_value, rad3_lwr_nav2_actstby_btn
 extern float rad3_lwr_adf_actstby_btn_dataf_on_value, rad3_lwr_adf_actstby_btn_dataf_off_value;
 extern float rad3_lwr_dme_actstby_btn_dataf_on_value, rad3_lwr_dme_actstby_btn_dataf_off_value;
 
+void UpdateUI(); 
 
 extern int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprCom1StatusSetDataiCallback(void * inRefcon, int Rad1UprCom1Status);
@@ -1510,8 +1511,13 @@ extern XPWidgetID	MultiSpeed5CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed1CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed2CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed3CheckWidget[50];
+extern XPWidgetID	MultiEnableDynamicTrimSpeedCheckWidget;
 extern XPWidgetID	MultiAt0CheckWidget[50];
 extern XPWidgetID	MultiAt1CheckWidget[50];
+extern XPWidgetID   MultiTrimAccelerationPointScroll;
+extern XPWidgetID   MultiTrimAccelerationPointScrollText;
+extern XPWidgetID   MultiTrimMaxSpeedScroll;
+extern XPWidgetID   MultiTrimMaxSpeedScrollText;
 
 // **************** Multi Panel variables *******************
 extern int multifd;
@@ -2691,6 +2697,14 @@ extern int switchloop;
 
 extern float LandingGearDeployRatio[10];
 extern hid_device *switchhandle;
+
+
+// ************** Multipanel trim wheel ******************
+
+extern double MIN_ACCELERATION_POINT;
+extern double MAX_ACCELERATION_POINT;
+extern double MIN_SPEED;
+extern double MAX_SPEED;
 
 // ************** Bip Panel Data Ref ******************
 extern XPLMDataRef gTimeSimIsRunningXDataRef;
