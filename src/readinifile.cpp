@@ -3943,22 +3943,35 @@ void process_read_ini_file()
     if (dynamicTrimWheel > 0)
     {
         dynamicTrimWheel = 1;
-        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonState, 1);
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonState, 1);
     }
     else
     {
         dynamicTrimWheel = 0;
-        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonState, 0);
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonState, 0);
     }
 
     // Dynamic Trim Max Val
     readOptionAsInt("Dynamic Trim Max Val", &dynamicTrimMaxVal);
+    if (dynamicTrimMaxVal > MAX_SPEED)
+        MAX_SPEED = dynamicTrimMaxVal;
+    int speedVal = (dynamicTrimMaxVal / MAX_SPEED) * 100.0 - MIN_SPEED;
+    XPSetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarSliderPosition, speedVal);
+    char buf[32];
+    snprintf(buf, sizeof(buf), "%d", dynamicTrimMaxVal);
+    XPSetWidgetDescriptor(MultiTrimMaxSpeedScrollText, buf);
 
     // "Dynamic Trim Min Val
     readOptionAsInt("Dynamic Trim Min Val", &dynamicTrimMinVal);
 
     // "Dynamic Trim Acceleration Point
     readOptionAsDouble("Dynamic Trim Acceleration Point", &dynamicTrimAccelerationPoint);
+    if (dynamicTrimAccelerationPoint > MAX_ACCELERATION_POINT)
+        MAX_ACCELERATION_POINT = dynamicTrimAccelerationPoint;
+    int accelerationVal = (dynamicTrimAccelerationPoint / MAX_ACCELERATION_POINT) * 100.0 - MIN_ACCELERATION_POINT;
+    XPSetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarSliderPosition, accelerationVal);
+    snprintf(buf, sizeof(buf), "%0.3f", dynamicTrimAccelerationPoint);
+    XPSetWidgetDescriptor(MultiTrimAccelerationPointScrollText, buf);
 
     readOptionAsInt("Multi Trim Speed", &trimspeed);
     XPSetWidgetProperty(MultiTrimSpeed1CheckWidget[0], xpProperty_ButtonState, 0);

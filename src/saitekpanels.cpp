@@ -36,6 +36,11 @@
 
 using namespace std;
 
+double MIN_ACCELERATION_POINT = 0.01;
+double MAX_ACCELERATION_POINT = 0.4 - MIN_ACCELERATION_POINT;
+double MIN_SPEED = 1;
+double MAX_SPEED = 15 - MIN_SPEED;
+
 // ************* Radio Panel Command Ref ****************
 XPLMCommandRef  Com1StbyFineDn = NULL, Com1StbyFineUp = NULL, Com1StbyCorseDn = NULL, Com1StbyCorseUp = NULL;
 XPLMCommandRef  Com1StbyFineDn_833 = NULL, Com1StbyFineUp_833 = NULL;
@@ -580,9 +585,12 @@ XPWidgetID	MultiSpeedTextWidget[50] = {NULL};
 XPWidgetID	MultiTrimSpeed1CheckWidget[50] = {NULL};
 XPWidgetID	MultiTrimSpeed2CheckWidget[50] = {NULL};
 XPWidgetID	MultiTrimSpeed3CheckWidget[50] = {NULL};
-XPWidgetID	MultiEnableDynamicTrimSpeedCheckWidget[50] = {NULL};
+XPWidgetID	MultiEnableDynamicTrimSpeedCheckWidget = NULL;
 XPWidgetID	MultiTrimSpeedTextWidget[50] = {NULL};
-
+XPWidgetID  MultiTrimAccelerationPointScroll = NULL;
+XPWidgetID  MultiTrimAccelerationPointScrollText = NULL;
+XPWidgetID  MultiTrimMaxSpeedScroll = NULL;
+XPWidgetID  MultiTrimMaxSpeedScrollText = NULL;
 
 XPWidgetID	MultiAt0CheckWidget[50] = {NULL};
 XPWidgetID	MultiAt1CheckWidget[50] = {NULL};
@@ -7532,7 +7540,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 5){
        if (strcmp((char *) inItemRef, "MULTI_WIDGET") == 0) {
-             CreateMultiWidget(05, 700, 300, 330);	//left, top, right, bottom.
+             CreateMultiWidget(05, 700, 300, 360);	//left, top, right, bottom.
              multiMenuItem = 1;
        }
 
@@ -8646,16 +8654,16 @@ void CreateMultiWidget(int x, int y, int w, int h)
 
         yOffset = (05 + 28 + (LineNumber * 20));
         LineNumber++;
-        MultiEnableDynamicTrimSpeedCheckWidget[0] = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
+        MultiEnableDynamicTrimSpeedCheckWidget = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
             1,	// Visible
             "",       // desc
             0,	// root
             MultiWidgetID,
             xpWidgetClass_Button);
 
-        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonType, xpRadioButton);
-        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
-        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonState, dynamicTrimWheel);
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonType, xpRadioButton);
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
+        XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonState, dynamicTrimWheel);
 
 
  // Create a text widget
@@ -8674,7 +8682,78 @@ void CreateMultiWidget(int x, int y, int w, int h)
                  XPSetWidgetProperty(MultiTrimSpeedTextWidget[Index], xpProperty_CaptionLit, 1);
         }
 
-        //Empty line
+
+//Create MultiTrimAccelerationPoint scroll bar
+        yOffset = (05 + 28 + (LineNumber * 20));
+        //yOffset = (05 + 28 + (LineNumber * 20) - 3);
+
+        XPWidgetID labelWidget = XPCreateWidget(x + 5, y - yOffset, x + 140, y - yOffset - 20,
+            1,	// Visible
+            "TRIM ACCELERATION",// desc
+            0,		// root
+            MultiWidgetID,
+            xpWidgetClass_Caption);
+        XPSetWidgetProperty(labelWidget, xpProperty_CaptionLit, 1);
+
+        MultiTrimAccelerationPointScroll = XPCreateWidget(x + 145, y - yOffset, x + 230, y - yOffset - 20,
+            1,	// Visible
+            "0",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_ScrollBar);
+
+        XPSetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarType, xpScrollBarTypeSlider);
+        XPSetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_Enabled, 1);
+        XPSetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarMin, 0);
+        XPSetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarMax, 100);
+        XPSetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarPageAmount, 10);
+
+        MultiTrimAccelerationPointScrollText = XPCreateWidget(x + 235, y - yOffset, x + 240, y - yOffset - 20,
+            1,	// Visible
+            "0",// desc
+            0,		// root
+            MultiWidgetID,
+            xpWidgetClass_Caption);
+        XPSetWidgetProperty(MultiTrimAccelerationPointScrollText, xpProperty_CaptionLit, 1);
+
+        LineNumber++;
+
+//Create MultiTrimMaxSpeedScroll  scroll bar
+        yOffset = (05 + 28 + (LineNumber * 20));
+
+        labelWidget = XPCreateWidget(x + 5, y - yOffset, x + 140, y - yOffset - 20,
+            1,	// Visible
+            "MAX TRIM SPEED",// desc
+            0,		// root
+            MultiWidgetID,
+            xpWidgetClass_Caption);
+        XPSetWidgetProperty(labelWidget, xpProperty_CaptionLit, 1);
+
+        MultiTrimMaxSpeedScroll = XPCreateWidget(x + 145, y - yOffset, x + 230, y - yOffset - 20,
+            1,	// Visible
+            "0",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_ScrollBar);
+
+        XPSetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarType, xpScrollBarTypeSlider);
+        XPSetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_Enabled, 1);
+        XPSetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarMin, 0);
+        XPSetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarMax, 100);
+        XPSetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarPageAmount, 10);
+
+        //yOffset = (05 + 28 + (LineNumber * 20) - 3);
+        MultiTrimMaxSpeedScrollText = XPCreateWidget(x + 235, y - yOffset, x + 240, y - yOffset - 20,
+            1,	// Visible
+            "0",// desc
+            0,		// root
+            MultiWidgetID,
+            xpWidgetClass_Caption);
+        XPSetWidgetProperty(MultiTrimMaxSpeedScrollText, xpProperty_CaptionLit, 1);
+
+        LineNumber++;
+
+//Empty line
         LineNumber++;
 
 // Auto Throttle Widget
@@ -8748,11 +8827,38 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
                 return 1;
         }
 
+        if (MultiinMessage == xpMsg_ScrollBarSliderPositionChanged)
+        {
+            if (inParam1 == (intptr_t)MultiTrimAccelerationPointScroll || inParam1 == (intptr_t)MultiTrimMaxSpeedScroll)
+            {
+                dynamicTrimWheel = 1;
+                XPSetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonState, 1);
+
+                if (inParam1 == (intptr_t)MultiTrimAccelerationPointScroll )
+                {
+                    double val = XPGetWidgetProperty(MultiTrimAccelerationPointScroll, xpProperty_ScrollBarSliderPosition, NULL);
+                    val = MIN_ACCELERATION_POINT + (val * MAX_ACCELERATION_POINT) / 100.0;
+
+                    dynamicTrimAccelerationPoint = val;
+
+                    char buf[32];
+                    snprintf(buf, sizeof(buf), "%0.3f", val);
+                    XPSetWidgetDescriptor(MultiTrimAccelerationPointScrollText, buf);
+                }
+                else if (inParam1 == (intptr_t)MultiTrimMaxSpeedScroll)
+                {
+                    double val = XPGetWidgetProperty(MultiTrimMaxSpeedScroll, xpProperty_ScrollBarSliderPosition, NULL);
+                    dynamicTrimMaxVal = (int)MIN_SPEED + (val * MAX_SPEED) / 100.0;
+
+                    char buf[32];
+                    snprintf(buf, sizeof(buf), "%d", dynamicTrimMaxVal);
+                    XPSetWidgetDescriptor(MultiTrimMaxSpeedScrollText, buf);
+                }
+            }
+        }
+
         if(MultiinMessage == xpMsg_ButtonStateChanged)
         {
-
-
-
             if(inParam1 == (intptr_t)MultiSpeed1CheckWidget[0] ||
                inParam1 == (intptr_t)MultiSpeed2CheckWidget[0] ||
                inParam1 == (intptr_t)MultiSpeed3CheckWidget[0] ||
@@ -8820,8 +8926,8 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
 
          }
 
-            if (inParam1 == (intptr_t)MultiEnableDynamicTrimSpeedCheckWidget[0]) {
-                State = XPGetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget[0], xpProperty_ButtonState, 0);
+            if (inParam1 == (intptr_t)MultiEnableDynamicTrimSpeedCheckWidget) {
+                State = XPGetWidgetProperty(MultiEnableDynamicTrimSpeedCheckWidget, xpProperty_ButtonState, 0);
                 if (State){
                     dynamicTrimWheel = 1;
                 }

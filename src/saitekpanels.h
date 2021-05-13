@@ -1510,9 +1510,13 @@ extern XPWidgetID	MultiSpeed5CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed1CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed2CheckWidget[50];
 extern XPWidgetID	MultiTrimSpeed3CheckWidget[50];
-extern XPWidgetID	MultiEnableDynamicTrimSpeedCheckWidget[50];
+extern XPWidgetID	MultiEnableDynamicTrimSpeedCheckWidget;
 extern XPWidgetID	MultiAt0CheckWidget[50];
 extern XPWidgetID	MultiAt1CheckWidget[50];
+extern XPWidgetID   MultiTrimAccelerationPointScroll;
+extern XPWidgetID   MultiTrimAccelerationPointScrollText;
+extern XPWidgetID   MultiTrimMaxSpeedScroll;
+extern XPWidgetID   MultiTrimMaxSpeedScrollText;
 
 // **************** Multi Panel variables *******************
 extern int multifd;
@@ -2692,6 +2696,14 @@ extern int switchloop;
 
 extern float LandingGearDeployRatio[10];
 extern hid_device *switchhandle;
+
+
+// ************** Multipanel trim wheel ******************
+
+extern double MIN_ACCELERATION_POINT;
+extern double MAX_ACCELERATION_POINT;
+extern double MIN_SPEED;
+extern double MAX_SPEED;
 
 // ************** Bip Panel Data Ref ******************
 extern XPLMDataRef gTimeSimIsRunningXDataRef;
