@@ -197,6 +197,7 @@ void process_read_ini_file()
     //XPLMDebugString("\n");
 
     if (strlen(xpsacfpath) == 0) {
+        XPLMDebugString("\nXsaitekpanels: Error strlen(xpsacfpath) == 0 \n");
         return;
     }
 
@@ -270,6 +271,7 @@ void process_read_ini_file()
             }
         }
         else {
+            XPLMDebugString("\nXsaitekpanels: Error ifile2 == false \n");
             return;
         }
 
