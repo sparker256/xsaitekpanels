@@ -2182,8 +2182,6 @@ int hdgswitchremap, crsswitchremap;
 int trimupremap, trimdnremap;
 int flapsupremap, flapsdnremap;
 
-int attrswitchremap;
-
 int iasismachremap, iasismachvalue;
 
 

@@ -1542,8 +1542,6 @@ extern int iaslightflashdata,altlightflashdata, vslightflashdata, aprlightflashd
 extern int altswitchremap, vsswitchremap, iasswitchremap;
 extern int hdgswitchremap, crsswitchremap;
 
-extern int attrswitchremap;
-
 extern int iasismachremap, iasismachvalue;
 
 extern int trimupremap, trimdnremap;

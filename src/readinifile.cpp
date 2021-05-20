@@ -3800,9 +3800,8 @@ void process_read_ini_file()
         iasismachvalue = getOptionToInt("ias_ismach_remapable_value");
     }
 
-    // auto throttle switch - remapable
-    readOptionAsInt("Auto Throttle Switch enable", &attrswitchremap);
-    if (attrswitchremap == 2) {
+    // auto throttle switch - remapable (autothrottleswitchenable == 2)
+    if (autothrottleswitchenable == 2) {
         attr_switch_remapable = getOptionToString("auto_throttle_switch_remapable_data");
         AttrSwitchRemapableData = XPLMFindDataRef(attr_switch_remapable.c_str());
     }
