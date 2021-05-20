@@ -42,6 +42,9 @@ double MIN_SPEED = 1;
 double MAX_SPEED = 15 - MIN_SPEED;
 
 void UpdateUI();
+void saveIniFile(char* fileName);
+
+extern std::vector<char> ini_save_path_name;
 
 // ************* Radio Panel Command Ref ****************
 XPLMCommandRef  Com1StbyFineDn = NULL, Com1StbyFineUp = NULL, Com1StbyCorseDn = NULL, Com1StbyCorseUp = NULL;
@@ -7820,6 +7823,7 @@ int	SwitchHandler(XPWidgetMessage  SwitchinMessage, XPWidgetID  SwitchWidgetID, 
                 if (switchMenuItem == 1)
                 {
                         XPHideWidget(SwitchWidgetID);
+                        saveIniFile(&ini_save_path_name[0]);
                 }
                 return 1;
         }
@@ -8395,6 +8399,7 @@ int	RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, int
                 if (radioMenuItem == 1)
                 {
                         XPHideWidget(RadioWidgetID);
+                        saveIniFile(&ini_save_path_name[0]);
                 }
                 return 1;
         }
@@ -8826,6 +8831,7 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
                 if (multiMenuItem == 1)
                 {
                         XPHideWidget(MultiWidgetID);
+                        saveIniFile(&ini_save_path_name[0]);
                 }
                 return 1;
         }

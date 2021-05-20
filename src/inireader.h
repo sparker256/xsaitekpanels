@@ -50,7 +50,7 @@ int getOptionToInt(std::string key);
  * @param	key The option key
  * @return	none
  */
-void readOptionAsInt(std::string key, int * value);
+void readOptionAsInt(std::string key, int * value, bool UI_Configurable=false);
 
 /**
  * Write the value of the requested key to the variable provided by pointer.
@@ -58,7 +58,7 @@ void readOptionAsInt(std::string key, int * value);
  * @param	key The option key
  * @return	none
  */
-void readOptionAsDouble(std::string key, double* value);
+void readOptionAsDouble(std::string key, double* value, bool UI_Configurable = false);
 
 /**
  * Return the value of the requested key in with the char type
