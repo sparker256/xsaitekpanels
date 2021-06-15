@@ -15,30 +15,35 @@
 
 using namespace std;
 
-enum INILineType {
-    EMPTY,
-    KEY,
-    COMMENT
-};
+namespace INILineType {
+    enum Val {
+        EMPTY,
+        KEY,
+        COMMENT
+    };
+}
+
 
 struct INILine
 {
-    INILine(INILineType type, const std::string& value) : Type(type), Value(value) {}
+    INILine(INILineType::Val type, const std::string& value) : Type(type), Value(value) {}
 
-    INILineType Type;
+    INILineType::Val Type;
     std::string Value;
 };
 
-enum VariableType {
-    INT,
-    DOUBLE,
-    STRING
-};
+namespace VariableType {
+    enum Val {
+        INT,
+        DOUBLE,
+        STRING
+    };
+}
 
 struct INIVariable
 {
     INIVariable() {}
-    INIVariable(VariableType type, void* pointer) : Type(type), Pointer(pointer) {}
+    INIVariable(VariableType::Val type, void* pointer) : Type(type), Pointer(pointer) {}
 
     std::string Get() const {
         char buff[100];
@@ -57,7 +62,7 @@ struct INIVariable
     }
 
     void* Pointer;
-    VariableType Type;
+    VariableType::Val Type;
 };
 
 std::map<std::string, INIVariable> VariablesPointersMap;
@@ -117,8 +122,10 @@ void saveIniFile(char* fileName)
     std::ofstream outfile;
     outfile.open(fileName, std::ios::trunc);
 
-    for (const auto& line : INIFileStruct)
+    for (int i = 0; i < INIFileStruct.size(); ++i)
     {
+        const INILine& line = INIFileStruct[i];
+
         if (line.Type == INILineType::KEY)
         {
             std::string val = (VariablesPointersMap.find(line.Value) != VariablesPointersMap.end()) ? VariablesPointersMap[line.Value].Get() : configMap[line.Value];
@@ -130,8 +137,9 @@ void saveIniFile(char* fileName)
         }
     }
 
-    for (const auto& uiKey : KeysFromUIPanel)
+    for (int i=0; i<KeysFromUIPanel.size(); ++i)
     {
+        std::string& uiKey = KeysFromUIPanel[i];
         //UI modified variables that wasn't previously in INI file
         if (configMap.find(uiKey) == configMap.end())
         {
@@ -157,7 +165,7 @@ std::string getOptionToString(std::string key)
     try {
         return configMap.at(key);
     }
-    catch (const std::out_of_range& oor) {
+    catch (const std::out_of_range&) {
         return "";
     }
 }
@@ -167,7 +175,7 @@ const char *getOptionToChar(std::string key)
     try {
         return configMap.at(key).c_str();
     }
-    catch (const std::out_of_range& oor) {
+    catch (const std::out_of_range&) {
         return "";
     }
 }
@@ -177,7 +185,7 @@ int getOptionToInt(std::string key)
     try {
         return atoi(configMap.at(key).c_str());
     }
-    catch (const std::out_of_range& oor) {
+    catch (const std::out_of_range&) {
         return 0;
     }
 }
@@ -195,7 +203,7 @@ void readOptionAsInt(std::string key, int * value, bool UI_Configurable)
     try {
         *value = atoi(configMap.at(key).c_str());
     }
-    catch (const std::out_of_range& oor) {
+    catch (const std::out_of_range&) {
     }
 }
 
@@ -212,7 +220,7 @@ void readOptionAsDouble(std::string key, double* value, bool UI_Configurable)
     try {
         *value = atof(configMap.at(key).c_str());
     }
-    catch (const std::out_of_range& oor) {
+    catch (const std::out_of_range&) {
     }
 }
 
