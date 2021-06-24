@@ -220,8 +220,7 @@ bool ReadConfigFile(string PlaneICAO)
       XPLMDebugString("\nXsaitekpanels: mac_converted_bip_path is\n");
       XPLMDebugString(mac_converted_bip_path.c_str());
       XPLMDebugString("\n");
-      xpsbipd2b_path_name = mac_converted_bi 
-          p_path;
+      xpsbipd2b_path_name = mac_converted_bip_path;
   #endif
 
   xpsbipd2b_path_name2 = xpsbipd2b_path_name;
