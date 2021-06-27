@@ -1432,7 +1432,7 @@ void process_autothrottle_switch()
         return;
     }
     if(testbit(multibuf,AUTO_THROTTLE_SWITCH)) {
-        if (attrswitchremap == 2) {
+        if (autothrottleswitchenable == 2) {
             if(autothrottleswitcharmedvalue == 1) {
                XPLMSetDatai(AttrSwitchRemapableData, 1);
             } else {
@@ -1443,7 +1443,7 @@ void process_autothrottle_switch()
             XPLMSetDatai(ApAutThr, 1);
         }
     } else {
-        if (attrswitchremap == 2) {
+        if (autothrottleswitchenable == 2) {
             if(autothrottleswitcharmedvalue == 1) {
                 XPLMSetDatai(AttrSwitchRemapableData, 0);
             } else {

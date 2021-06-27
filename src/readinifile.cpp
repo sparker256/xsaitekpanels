@@ -53,6 +53,8 @@ string convert_Mac_Path(string in_path) {
 }
 
 // ***** Configuration File Process ******
+std::vector<char> ini_save_path_name;
+
 void process_read_ini_file()
 
 {
@@ -237,6 +239,8 @@ void process_read_ini_file()
         XPLMDebugString(&parse_ini_path_name[0]);
         XPLMDebugString("\n");
 
+        ini_save_path_name = parse_ini_path_name;
+
         parseIniFile(&parse_ini_path_name[0]);
         found_file = 1;
 
@@ -250,6 +254,8 @@ void process_read_ini_file()
             XPLMDebugString("\nXsaitekpanels: Found xsaitekpanels.ini in the current aircraft path and it is\n");
             XPLMDebugString(&parse_ini_path_name1[0]);
             XPLMDebugString("\n");
+
+            ini_save_path_name = parse_ini_path_name1;
 
             parseIniFile(&parse_ini_path_name1[0]);
             found_file = 1;
@@ -266,6 +272,8 @@ void process_read_ini_file()
                 XPLMDebugString("\nXsaitekpanels: Found xsaitekpanels.ini in the Xsaitekpanels plugin path and it is\n");
                 XPLMDebugString(iniDefaultPluginPath);
                 XPLMDebugString("\n");
+
+                ini_save_path_name = parse_ini_path_name;
 
                 parseIniFile(iniDefaultPluginPath);
             }
@@ -296,13 +304,13 @@ void process_read_ini_file()
     XPLMDebugString(buf);
 
     // bat alt normal alt bat cessna
-    readOptionAsInt("Bat Alt inverse", &bataltinverse);
+    readOptionAsInt("Bat Alt inverse", &bataltinverse, true);
 
     // Starter Switch Old/New Style
-    readOptionAsInt("Starter Old New", &starterswitchenable);
+    readOptionAsInt("Starter Old New", &starterswitchenable, true);
 
     // mag off switch disable - enable - remap
-    readOptionAsInt("Mag Off Switch enable", &magoffswitchenable);
+    readOptionAsInt("Mag Off Switch enable", &magoffswitchenable, true);
 
     if (magoffswitchenable == 2) {
         mag_off_switch_on = getOptionToString("mag_off_switch_on_cmd");
@@ -402,7 +410,7 @@ void process_read_ini_file()
 
 
     // mag right switch disable - enable - remap
-    readOptionAsInt("Mag Right Switch enable", &magrightswitchenable);
+    readOptionAsInt("Mag Right Switch enable", &magrightswitchenable, true);
 
     if (magrightswitchenable == 2) {
         mag_right_switch_on = getOptionToString("mag_right_switch_on_cmd");
@@ -501,7 +509,7 @@ void process_read_ini_file()
     }
 
     // mag left switch disable - enable - remap
-    readOptionAsInt("Mag Left Switch enable", &magleftswitchenable);
+    readOptionAsInt("Mag Left Switch enable", &magleftswitchenable, true);
 
     if (magleftswitchenable == 2) {
         mag_left_switch_on = getOptionToString("mag_left_switch_on_cmd");
@@ -602,7 +610,7 @@ void process_read_ini_file()
 
 
     // mag both switch disable - enable - remap
-    readOptionAsInt("Mag Both Switch enable", &magbothswitchenable);
+    readOptionAsInt("Mag Both Switch enable", &magbothswitchenable, true);
 
     if (magbothswitchenable == 2) {
         mag_both_switch_on = getOptionToString("mag_both_switch_on_cmd");
@@ -702,7 +710,7 @@ void process_read_ini_file()
 
 
     // mag start switch disable - enable - remap
-    readOptionAsInt("Mag Start Switch enable", &magstartswitchenable);
+    readOptionAsInt("Mag Start Switch enable", &magstartswitchenable, true);
 
     if (magstartswitchenable == 2) {
         mag_start_switch_on = getOptionToString("mag_start_switch_on_cmd");
@@ -851,7 +859,7 @@ void process_read_ini_file()
     }
 
     // bat master switch disable - enable - remap
-    readOptionAsInt("Bat Master Switch enable", &batmasterswitchenable);
+    readOptionAsInt("Bat Master Switch enable", &batmasterswitchenable, true);
 
     if (batmasterswitchenable == 2) {
         bat_master_switch_on = getOptionToString("bat_master_switch_on_cmd");
@@ -941,7 +949,7 @@ void process_read_ini_file()
 
 
     // alt master switch disable - enable - remap
-    readOptionAsInt("Alt Master Switch enable", &altmasterswitchenable);
+    readOptionAsInt("Alt Master Switch enable", &altmasterswitchenable, true);
 
     if (altmasterswitchenable == 2) {
         alt_master_switch_on = getOptionToString("alt_master_switch_on_cmd");
@@ -1029,7 +1037,7 @@ void process_read_ini_file()
     }
 
     // avionics master switch disable - enable - remap
-    readOptionAsInt("Avionics master Switch enable", &avionicsmasterswitchenable);
+    readOptionAsInt("Avionics master Switch enable", &avionicsmasterswitchenable, true);
 
     if (avionicsmasterswitchenable == 2) {
         av_master_switch_on = getOptionToString("av_master_switch_on_cmd");
@@ -1193,7 +1201,7 @@ void process_read_ini_file()
 
 
     // fuel pump switch disable - enable - remap
-    readOptionAsInt("Fuel Pump Switch enable", &fuelpumpswitchenable);
+    readOptionAsInt("Fuel Pump Switch enable", &fuelpumpswitchenable, true);
 
     if (fuelpumpswitchenable == 2) {
         fuel_pump_switch_on = getOptionToString("fuel_pump_switch_on_cmd");
@@ -1283,7 +1291,7 @@ void process_read_ini_file()
 
 
     // deice switch disable - enable - remap
-    readOptionAsInt("Deice Switch enable", &deiceswitchenable);
+    readOptionAsInt("Deice Switch enable", &deiceswitchenable, true);
 
     if (deiceswitchenable == 2) {
         deice_switch_on = getOptionToString("deice_switch_on_cmd");
@@ -1373,7 +1381,7 @@ void process_read_ini_file()
 
 
     // pitot heat switch disable - enable - remap
-    readOptionAsInt("Pitot Heat Switch enable", &pitotheatswitchenable);
+    readOptionAsInt("Pitot Heat Switch enable", &pitotheatswitchenable, true);
 
     if (pitotheatswitchenable == 2) {
         pitot_heat_switch_on = getOptionToString("pitot_heat_switch_on_cmd");
@@ -1461,7 +1469,7 @@ void process_read_ini_file()
     }
 
     // landing gear up knob disable - enable - remap
-    readOptionAsInt("Landing Gear Knob Up enable", &landinggearknobupenable);
+    readOptionAsInt("Landing Gear Knob Up enable", &landinggearknobupenable, true);
 
     if (landinggearknobupenable == 2) {
         gear_switch_up_on = getOptionToString("gear_up_switch_on_cmd");
@@ -1514,7 +1522,7 @@ void process_read_ini_file()
     }
 
     // landing gear dn knob disable - enable - remap
-    readOptionAsInt("Landing Gear Knob Up enable", &landinggearknobdnenable);
+    readOptionAsInt("Landing Gear Knob Up enable", &landinggearknobdnenable, true);
 
     if (landinggearknobdnenable == 2) {
         gear_switch_down_on = getOptionToString("gear_dn_switch_on_cmd");
@@ -1776,7 +1784,7 @@ void process_read_ini_file()
     }
 
     // beacon lights switch disable - enable - remap
-    readOptionAsInt("Beacon Lights Switch enable", &beaconlightswitchenable);
+    readOptionAsInt("Beacon Lights Switch enable", &beaconlightswitchenable, true);
 
     if (beaconlightswitchenable == 2) {
         beacon_lights_switch_on = getOptionToString("beacon_lights_switch_on_cmd");
@@ -1845,7 +1853,7 @@ void process_read_ini_file()
 
 
     // nav lights switch disable - enable - remap
-    readOptionAsInt("Nav Lights Switch enable", &navlightswitchenable);
+    readOptionAsInt("Nav Lights Switch enable", &navlightswitchenable, true);
 
     if (navlightswitchenable == 2) {
         nav_lights_switch_on = getOptionToString("nav_lights_switch_on_cmd");
@@ -1913,7 +1921,7 @@ void process_read_ini_file()
     }
 
     // strobe lights switch disable - enable - remap
-    readOptionAsInt("Strobe Lights Switch enable", &strobelightswitchenable);
+    readOptionAsInt("Strobe Lights Switch enable", &strobelightswitchenable, true);
 
     if (strobelightswitchenable == 2) {
         strobe_lights_switch_on = getOptionToString("strobe_lights_switch_on_cmd");
@@ -1981,7 +1989,7 @@ void process_read_ini_file()
     }
 
     // taxi lights switch disable - enable - remap
-    readOptionAsInt("Taxi Lights Switch enable", &taxilightswitchenable);
+    readOptionAsInt("Taxi Lights Switch enable", &taxilightswitchenable, true);
 
     if (taxilightswitchenable == 2) {
         taxi_lights_switch_on = getOptionToString("taxi_lights_switch_on_cmd");
@@ -2049,7 +2057,7 @@ void process_read_ini_file()
     }
 
     // landing lights switch disable - enable - remap
-    readOptionAsInt("Landing Lights Switch enable", &landinglightswitchenable);
+    readOptionAsInt("Landing Lights Switch enable", &landinglightswitchenable, true);
 
     if (landinglightswitchenable == 2) {
         landing_lights_switch_on = getOptionToString("landing_lights_switch_on_cmd");
@@ -2118,14 +2126,14 @@ void process_read_ini_file()
 
 
     // landing lights switch disable - enable - remap
-    readOptionAsInt("Landing Lights Switch enable", &landinglightswitchenable);
+    readOptionAsInt("Landing Lights Switch enable", &landinglightswitchenable, true);
 
 
     // *******************  Radio Panel Commands   **********************************
 
-    readOptionAsInt("Radio Freq Knob Pulse per Command", &radspeed);
-    readOptionAsInt("Radio Number of ADF's", &numadf);
-    readOptionAsInt("Metric Press enable", &metricpressenable);
+    readOptionAsInt("Radio Freq Knob Pulse per Command", &radspeed, true);
+    readOptionAsInt("Radio Number of ADF's", &numadf, true);
+    readOptionAsInt("Metric Press enable", &metricpressenable, true);
     readOptionAsInt("Channel Spacing 883 enable", &channelspacing833enable);
 
     sprintf(radtestbuf1, "Xsaitekpanels: channelspacing833enable ==  %d \n", channelspacing833enable);
@@ -3673,21 +3681,21 @@ void process_read_ini_file()
     //  ***********************   Multi Panel Commands **************************
 
     readOptionAsInt("Multi Freq Knob Acceleration Threshold", &multiaccelthreshold);
-    readOptionAsInt("Multi Freq Knob Pulse per Command", &multispeed);
+    readOptionAsInt("Multi Freq Knob Pulse per Command", &multispeed, true);
 
     // Dynamic Trim Wheel
-    readOptionAsInt("Dynamic Trim Wheel", &dynamicTrimWheel);
+    readOptionAsInt("Dynamic Trim Wheel", &dynamicTrimWheel, true);
 
     // Dynamic Trim Max Val
-    readOptionAsInt("Dynamic Trim Max Val", &dynamicTrimMaxVal);
+    readOptionAsInt("Dynamic Trim Max Val", &dynamicTrimMaxVal, true);
 
     // "Dynamic Trim Min Val
-    readOptionAsInt("Dynamic Trim Min Val", &dynamicTrimMinVal);
+    readOptionAsInt("Dynamic Trim Min Val", &dynamicTrimMinVal, true);
 
     // "Dynamic Trim Acceleration Point
-    readOptionAsDouble("Dynamic Trim Acceleration Point", &dynamicTrimAccelerationPoint);
+    readOptionAsDouble("Dynamic Trim Acceleration Point", &dynamicTrimAccelerationPoint, true);
 
-    readOptionAsInt("Multi Trim Speed", &trimspeed);
+    readOptionAsInt("Multi Trim Speed", &trimspeed, true);
 
     sprintf(buf, "Xsaitekpanels: multispeed = %d  multiaccelthreshold = %d  trimspeed = %d  ", multispeed, multiaccelthreshold, trimspeed);
     XPLMDebugString(buf);
@@ -3698,7 +3706,7 @@ void process_read_ini_file()
     XPLMDebugString(buf);
 
     // auto throttle switch - remapable
-    readOptionAsInt("Auto Throttle Switch enable", &autothrottleswitchenable);
+    readOptionAsInt("Auto Throttle Switch enable", &autothrottleswitchenable, true);
 
     // auto throttle switch armed value
     readOptionAsInt("Auto Throttle Switch Armed value", &autothrottleswitcharmedvalue);
@@ -3792,9 +3800,8 @@ void process_read_ini_file()
         iasismachvalue = getOptionToInt("ias_ismach_remapable_value");
     }
 
-    // auto throttle switch - remapable
-    readOptionAsInt("Auto Throttle Switch enable", &attrswitchremap);
-    if (attrswitchremap == 2) {
+    // auto throttle switch - remapable (autothrottleswitchenable == 2)
+    if (autothrottleswitchenable == 2) {
         attr_switch_remapable = getOptionToString("auto_throttle_switch_remapable_data");
         AttrSwitchRemapableData = XPLMFindDataRef(attr_switch_remapable.c_str());
     }

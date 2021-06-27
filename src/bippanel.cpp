@@ -97,13 +97,10 @@ void WriteCSVTableToDisk(void);
 
 void LetWidgetSay(string BipTextToDisplay)
 {
-
     XPSetWidgetDescriptor(BipWidgetID, BipTextToDisplay.c_str());
-    int x = XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_width")) - (int) XPLMMeasureString(xplmFont_Proportional, BipTextToDisplay.c_str(), BipTextToDisplay.length()) - 10;
+    int x = XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_width")) - (int) XPLMMeasureString(xplmFont_Proportional, BipTextToDisplay.c_str(), (int) BipTextToDisplay.length()) - 10;
     int y = XPLMGetDatai(XPLMFindDataRef("sim/graphics/view/window_height")) - 35;
     XPSetWidgetGeometry(BipWidgetID, x, y, x+5, y-5);
-
-
 }
 
 void logMsg ( std::string message )
