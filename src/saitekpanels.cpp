@@ -3123,6 +3123,9 @@ char SwitchText[50][200] = {
 
 hid_device *switchhandle;
 
+// ****************** General data refs variables ***********************
+bool IsVR_Enabled = false;
+
 // ****************** BIP Panel variables *******************************
 int bipcnt = 0, biptmpcnt = 0, bipres, biploop[4], stopbipcnt;
 int bipnum = 0;
@@ -3172,6 +3175,10 @@ int icao_enable = 0;
 int readiniloop = 0;
 
 int log_enable = 0;
+
+int dissableSwitchPanelInVR = 0;
+int dissableRadioPanelInVR = 0;
+int dissableMultiPanelInVR = 0;
 
 float wrgCurrentTime = 0;
 
@@ -9296,6 +9303,7 @@ float MyPanelsDeferredInitNewAircraftFLCB(float MyPanelselapsedMe, float MyPanel
     (void) MyPanelsrefcon; // To get rid of warnings on unused variables
 
     process_read_ini_file();
+    IsVR_Enabled = XPLMGetDatai(XPLMFindDataRef("sim/graphics/VR/enabled")) != 0;
     gearled_write_loop = 0;
 
     return 0; // Returning 0 stops DeferredInitFLCB from being looped again.
@@ -9320,16 +9328,24 @@ float	MyPanelsFlightLoopCallback(
 
     wrgCurrentTime = XPLMGetElapsedTime();
 
-  if(radcnt > 0){
+    static bool updateRadioPanel = true;
+    static bool updateSwitchPanel = true;
+    static bool updateMultiPanel = true;
+
+    updateRadioPanel = (radcnt > 0) && (!IsVR_Enabled || dissableRadioPanelInVR == 0);
+    updateMultiPanel = (multicnt > 0) && (!IsVR_Enabled || dissableMultiPanelInVR == 0);
+    updateSwitchPanel = (switchcnt > 0) && (!IsVR_Enabled || dissableSwitchPanelInVR == 0);
+    
+
+  if(updateRadioPanel){
     process_radio_panel();
   }
 
-  if (multicnt > 0) {
+  if (updateMultiPanel) {
         process_multi_panel(inElapsedSinceLastCall);
   }
 
-
-  if(switchcnt > 0){
+  if(updateSwitchPanel){
     process_switch_panel();
   }
 
@@ -9342,6 +9358,8 @@ float	MyPanelsFlightLoopCallback(
       readiniloop++;
   } else if (readiniloop == 50) {
       process_read_ini_file();
+      IsVR_Enabled = XPLMGetDatai(XPLMFindDataRef("sim/graphics/VR/enabled")) != 0;
+
       readiniloop = 51;
       if (dre_enable == 1) {
           XPLMRegisterFlightLoopCallback(XsaitekpanelsCustomDatarefLoopCB, 1, NULL);

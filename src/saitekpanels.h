@@ -12,6 +12,8 @@
 
 using namespace std;
 
+extern bool IsVR_Enabled;
+
 // ****************  Start Radio Panel Section  ***************************
 
 // ************** Radio Panel SDK Command Ref **********************
@@ -2730,6 +2732,10 @@ extern int dre_enable;
 extern int icao_enable;
 
 extern int log_enable;
+
+extern int dissableSwitchPanelInVR;
+extern int dissableRadioPanelInVR;
+extern int dissableMultiPanelInVR;
 
 // Steve Bootes
 extern float MultiKnobTimeSinceChange;

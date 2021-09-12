@@ -146,6 +146,10 @@ void process_read_ini_file()
 
     log_enable = 0;
 
+    dissableSwitchPanelInVR = 1;
+    dissableRadioPanelInVR = 1;
+    dissableMultiPanelInVR = 1;
+
     // multi panel defaults
     trimspeed = 1;
     multispeed = 3;
@@ -300,7 +304,16 @@ void process_read_ini_file()
     // Do we want debug loging enabled
     readOptionAsInt("Add Debug Entries To Log Enable", &log_enable);
 
-    sprintf(buf, "Xsaitekpanels: dre_enable = %d  icao_enable = %d  log_enable = %d\n", dre_enable, icao_enable, log_enable);
+    // Do we want disable switch panel in virtual reality
+    readOptionAsInt("Dissable Switch Panel In VR", &dissableSwitchPanelInVR);
+
+    // Do we want disable switch panel in virtual reality
+    readOptionAsInt("Dissable Radio Panel In VR", &dissableRadioPanelInVR);
+
+    // Do we want disable switch panel in virtual reality
+    readOptionAsInt("Dissable Multi Panel In VR", &dissableMultiPanelInVR);
+
+    sprintf(buf, "Xsaitekpanels: dre_enable = %d  icao_enable = %d  log_enable = %d dissableSwitchPanelInVR = %d dissableRadioPanelInVR = %d dissableMultiPanelInVR = %d\n", dre_enable, icao_enable, log_enable, dissableSwitchPanelInVR, dissableRadioPanelInVR, dissableMultiPanelInVR);
     XPLMDebugString(buf);
 
     // bat alt normal alt bat cessna
