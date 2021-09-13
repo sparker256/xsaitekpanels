@@ -1,6 +1,6 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** September 12 2021   **************
+// ****** September 12  2021   **************
 
 #define PLUGIN_VERSION "2.80 stable build " __DATE__ " " __TIME__
 #define PLUGIN_VERSION_NUMBER 280
@@ -481,7 +481,8 @@ XPWidgetID	RadioQnh1CheckWidget[50] = {NULL};
 XPWidgetID	RadioQnh0TextWidget[50] = {NULL};
 XPWidgetID	RadioQnh1TextWidget[50] = {NULL};
 
-
+XPWidgetID  RadioDisableInVRCheckWidget = NULL;
+XPWidgetID  RadioDisableInVRText = NULL;
 
 // ****************** Multi Panel Command Ref **********************
 XPLMCommandRef ApAltDn = NULL, ApAltUp = NULL, ApVsDn = NULL, ApVsUp = NULL;
@@ -596,6 +597,8 @@ XPWidgetID  MultiTrimAccelerationPointScroll = NULL;
 XPWidgetID  MultiTrimAccelerationPointScrollText = NULL;
 XPWidgetID  MultiTrimMaxSpeedScroll = NULL;
 XPWidgetID  MultiTrimMaxSpeedScrollText = NULL;
+XPWidgetID  MultiDisableInVRCheckWidget = NULL;
+XPWidgetID  MultiDisableInVRText = NULL;
 
 XPWidgetID	MultiAt0CheckWidget[50] = {NULL};
 XPWidgetID	MultiAt1CheckWidget[50] = {NULL};
@@ -984,6 +987,9 @@ XPWidgetID	SwitchStartSwitchNewTextWidget[50] = {NULL};
 
 XPWidgetID	SwitchLabelTextWidget[50] = {NULL};
 XPWidgetID	SwitchTextWidget[50] = {NULL};
+
+XPWidgetID  SwitchDisableInVRCheckWidget = NULL;
+XPWidgetID	SwitchDisableInVRText = NULL;
 
 typedef	std::vector<XPLMDataRef> aXPLMDataRefID;
 
@@ -7550,7 +7556,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 5){
        if (strcmp((char *) inItemRef, "MULTI_WIDGET") == 0) {
-             CreateMultiWidget(05, 700, 300, 360);	//left, top, right, bottom.
+             CreateMultiWidget(05, 700, 300, 390);	//left, top, right, bottom.
              multiMenuItem = 1;
        }
 
@@ -7559,7 +7565,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
     if((intptr_t)inMenuRef == 6){
 
          if (strcmp((char *) inItemRef, "RADIO_WIDGET") == 0) {
-             CreateRadioWidget(15, 700, 300, 300);	//left, top, right, bottom.
+             CreateRadioWidget(15, 700, 300, 320);	//left, top, right, bottom.
              radioMenuItem = 1;
          }
 
@@ -7567,7 +7573,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 7){
          if (strcmp((char *) inItemRef, "SWITCH_WIDGET") == 0) {
-             CreateSwitchWidget(05, 700, 300, 510);	//left, top, right, bottom.
+             CreateSwitchWidget(05, 700, 300, 530);	//left, top, right, bottom.
              switchMenuItem = 1;
 
          }
@@ -7808,7 +7814,28 @@ void CreateSwitchWidget(int x, int y, int w, int h)
 
         }
 
+       //Dissable in VR
+       yOffset = (65 + 28 + ((19+2) * 20));
 
+       SwitchDisableInVRText = XPCreateWidget(x + 50, y - yOffset, x + 50 + 22, y - yOffset - 20,
+           1,	// Visible
+           "Disable Switch Panel in Virtual Reality",       // desc
+           0,	// root
+           SwitchWidgetID,
+           xpWidgetClass_Caption);
+
+       XPSetWidgetProperty(SwitchDisableInVRText, xpProperty_CaptionLit, 1);
+
+       SwitchDisableInVRCheckWidget = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
+           1,	// Visible
+           "",       // desc
+           0,	// root
+           SwitchWidgetID,
+           xpWidgetClass_Button);
+
+       XPSetWidgetProperty(SwitchDisableInVRCheckWidget, xpProperty_ButtonType, xpRadioButton);
+       XPSetWidgetProperty(SwitchDisableInVRCheckWidget, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
+       XPSetWidgetProperty(SwitchDisableInVRCheckWidget, xpProperty_ButtonState, dissableSwitchPanelInVR);
 
 // Register our widget handler
         XPAddWidgetCallback(SwitchWidgetID, SwitchHandler);
@@ -7844,6 +7871,16 @@ int	SwitchHandler(XPWidgetMessage  SwitchinMessage, XPWidgetID  SwitchWidgetID, 
                      XPSetWidgetProperty(SwitchAltBatCheckWidget[0], xpProperty_ButtonState, 0);
 
                      XPSetWidgetProperty((XPWidgetID)inParam1, xpProperty_ButtonState, 1);
+            }
+
+            if (inParam1 == (intptr_t)SwitchDisableInVRCheckWidget) {
+                State = XPGetWidgetProperty(SwitchDisableInVRCheckWidget, xpProperty_ButtonState, 0);
+                if (State) {
+                    dissableSwitchPanelInVR = 1;
+                }
+                else {
+                    dissableSwitchPanelInVR = 0;
+                }
             }
 
             if(inParam1 == (intptr_t)SwitchStartSwitchOldCheckWidget[0] ||
@@ -8386,6 +8423,28 @@ void CreateRadioWidget(int x, int y, int w, int h)
 
          XPSetWidgetProperty(RadioQnh1TextWidget[0], xpProperty_CaptionLit, 1);
 
+         //Dissable in VR
+         yOffset = (05 + 28 + (12 * 20));
+
+         RadioDisableInVRText = XPCreateWidget(x + 50, y - yOffset, x + 50 + 22, y - yOffset - 20,
+             1,	// Visible
+             "Disable Radio Panel in Virtual Reality",       // desc
+             0,	// root
+             RadioWidgetID,
+             xpWidgetClass_Caption);
+
+         XPSetWidgetProperty(RadioDisableInVRText, xpProperty_CaptionLit, 1);
+
+         RadioDisableInVRCheckWidget = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
+             1,	// Visible
+             "",       // desc
+             0,	// root
+             RadioWidgetID,
+             xpWidgetClass_Button);
+
+         XPSetWidgetProperty(RadioDisableInVRCheckWidget, xpProperty_ButtonType, xpRadioButton);
+         XPSetWidgetProperty(RadioDisableInVRCheckWidget, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
+         XPSetWidgetProperty(RadioDisableInVRCheckWidget, xpProperty_ButtonState, dissableRadioPanelInVR);
 
 // Register our widget handler
         XPAddWidgetCallback(RadioWidgetID, RadioHandler);
@@ -8452,6 +8511,16 @@ int	RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, int
             State = XPGetWidgetProperty(RadioSpeed5CheckWidget[0], xpProperty_ButtonState, 0);
             if (State){
                 radspeed = 5;
+            }
+
+            if (inParam1 == (intptr_t)RadioDisableInVRCheckWidget) {
+                State = XPGetWidgetProperty(RadioDisableInVRCheckWidget, xpProperty_ButtonState, 0);
+                if (State) {
+                    dissableRadioPanelInVR = 1;
+                }
+                else {
+                    dissableRadioPanelInVR = 0;
+                }
             }
 
 
@@ -8817,6 +8886,33 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 0);
 
+        //Empty line
+        LineNumber++;
+
+        //Dissable in VR
+        yOffset = (05 + 28 + (LineNumber * 20));
+        LineNumber++;
+
+        MultiDisableInVRText = XPCreateWidget(x + 50, y - yOffset, x + 50 + 22, y - yOffset - 20,
+            1,	// Visible
+            "Disable Multi Panel in Virtual Reality",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_Caption);
+
+        XPSetWidgetProperty(MultiDisableInVRText, xpProperty_CaptionLit, 1);
+
+        MultiDisableInVRCheckWidget = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
+            1,	// Visible
+            "",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_Button);
+
+        XPSetWidgetProperty(MultiDisableInVRCheckWidget, xpProperty_ButtonType, xpRadioButton);
+        XPSetWidgetProperty(MultiDisableInVRCheckWidget, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
+        XPSetWidgetProperty(MultiDisableInVRCheckWidget, xpProperty_ButtonState, dissableMultiPanelInVR);
+
 
 // Register our widget handler
              XPAddWidgetCallback(MultiWidgetID, MultiHandler);
@@ -8947,6 +9043,16 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
                 }
                 else{
                     dynamicTrimWheel = 0;
+                }
+            }
+
+            if (inParam1 == (intptr_t)MultiDisableInVRCheckWidget) {
+                State = XPGetWidgetProperty(MultiDisableInVRCheckWidget, xpProperty_ButtonState, 0);
+                if (State) {
+                    dissableMultiPanelInVR = 1;
+                }
+                else {
+                    dissableMultiPanelInVR = 0;
                 }
             }
 

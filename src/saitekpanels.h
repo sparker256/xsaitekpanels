@@ -1520,6 +1520,8 @@ extern XPWidgetID   MultiTrimAccelerationPointScroll;
 extern XPWidgetID   MultiTrimAccelerationPointScrollText;
 extern XPWidgetID   MultiTrimMaxSpeedScroll;
 extern XPWidgetID   MultiTrimMaxSpeedScrollText;
+extern XPWidgetID   MultiDisableInVRCheckWidget;
+extern XPWidgetID   MultiDisableInVRText;
 
 // **************** Multi Panel variables *******************
 extern int multifd;
@@ -2098,6 +2100,8 @@ extern XPWidgetID      SwitchBatAltCheckWidget[50];
 extern XPWidgetID      SwitchAltBatCheckWidget[50];
 extern XPWidgetID	   SwitchStartSwitchOldCheckWidget[50];
 extern XPWidgetID	   SwitchStartSwitchNewCheckWidget[50];
+extern XPWidgetID	   SwitchDisableInVRCheckWidget;
+extern XPWidgetID	   SwitchDisableInVRText;
 
 // ***************** Switch Panel variables ********************
 extern int switchfd;
