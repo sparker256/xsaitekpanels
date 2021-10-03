@@ -1420,6 +1420,23 @@ extern hid_device *radiohandle[4];
 // ****************  Start Multi Panel Section  ***************************
 
 // ********** Multi Panel Command Ref ***************
+extern XPLMCommandRef AttrSwitch_1_OnCmd, AttrSwitch_1_OffCmd;
+extern XPLMCommandRef AttrSwitch_2_OnCmd, AttrSwitch_2_OffCmd;
+extern XPLMCommandRef AttrSwitch_3_OnCmd, AttrSwitch_3_OffCmd;
+extern XPLMCommandRef AttrSwitch_4_OnCmd, AttrSwitch_4_OffCmd;
+extern XPLMCommandRef AttrSwitch_5_OnCmd, AttrSwitch_5_OffCmd;
+extern XPLMCommandRef AttrSwitch_6_OnCmd, AttrSwitch_6_OffCmd;
+extern XPLMCommandRef AttrSwitch_7_OnCmd, AttrSwitch_7_OffCmd;
+extern XPLMCommandRef AttrSwitch_8_OnCmd, AttrSwitch_8_OffCmd;
+extern XPLMCommandRef AttrSwitch_9_OnCmd, AttrSwitch_9_OffCmd;
+extern XPLMCommandRef AttrSwitch_10_OnCmd, AttrSwitch_10_OffCmd;
+extern XPLMCommandRef AttrSwitch_11_OnCmd, AttrSwitch_11_OffCmd;
+extern XPLMCommandRef AttrSwitch_12_OnCmd, AttrSwitch_12_OffCmd;
+extern XPLMCommandRef AttrSwitch_13_OnCmd, AttrSwitch_13_OffCmd;
+extern XPLMCommandRef AttrSwitch_14_OnCmd, AttrSwitch_14_OffCmd;
+extern XPLMCommandRef AttrSwitch_15_OnCmd, AttrSwitch_15_OffCmd;
+extern XPLMCommandRef AttrSwitch_16_OnCmd, AttrSwitch_16_OffCmd;
+
 extern XPLMCommandRef ApAltDn, ApAltUp, ApVsDn, ApVsUp;
 extern XPLMCommandRef ApAsDn, ApAsUp, ApHdgDn, ApHdgUp;
 extern XPLMCommandRef ApCrsDn, ApCrsUp, ApCrsDn2, ApCrsUp2;
@@ -1469,7 +1486,14 @@ extern XPLMDataRef IasSwitchRemapableData;
 extern XPLMDataRef HdgSwitchRemapableData;
 extern XPLMDataRef CrsSwitchRemapableData;
 
-extern XPLMDataRef AttrSwitchRemapableData;
+extern XPLMDataRef AttrSwitchRemapableData, Attr2SwitchRemapableData;
+extern XPLMDataRef Attr3SwitchRemapableData, Attr4SwitchRemapableData;
+extern XPLMDataRef Attr5SwitchRemapableData, Attr6SwitchRemapableData;
+extern XPLMDataRef Attr7SwitchRemapableData, Attr8SwitchRemapableData;
+extern XPLMDataRef Attr9SwitchRemapableData, Attr10SwitchRemapableData;
+extern XPLMDataRef Attr11SwitchRemapableData, Attr12SwitchRemapableData;
+extern XPLMDataRef Attr13SwitchRemapableData, Attr14SwitchRemapableData;
+extern XPLMDataRef Attr15SwitchRemapableData, Attr16SwitchRemapableData;
 
 extern XPLMDataRef IasIsmachRemapableData;
 
@@ -1524,6 +1548,24 @@ extern XPWidgetID   MultiDisableInVRCheckWidget;
 extern XPWidgetID   MultiDisableInVRText;
 
 // **************** Multi Panel variables *******************
+
+extern int AttrSwitch_1_DataOnValue, AttrSwitch_1_DataOffValue;
+extern int AttrSwitch_2_DataOnValue, AttrSwitch_2_DataOffValue;
+extern int AttrSwitch_3_DataOnValue, AttrSwitch_3_DataOffValue;
+extern int AttrSwitch_4_DataOnValue, AttrSwitch_4_DataOffValue;
+extern int AttrSwitch_5_DataOnValue, AttrSwitch_5_DataOffValue;
+extern int AttrSwitch_6_DataOnValue, AttrSwitch_6_DataOffValue;
+extern int AttrSwitch_7_DataOnValue, AttrSwitch_7_DataOffValue;
+extern int AttrSwitch_8_DataOnValue, AttrSwitch_8_DataOffValue;
+extern int AttrSwitch_9_DataOnValue, AttrSwitch_9_DataOffValue;
+extern int AttrSwitch_10_DataOnValue, AttrSwitch_10_DataOffValue;
+extern int AttrSwitch_11_DataOnValue, AttrSwitch_11_DataOffValue;
+extern int AttrSwitch_12_DataOnValue, AttrSwitch_12_DataOffValue;
+extern int AttrSwitch_13_DataOnValue, AttrSwitch_13_DataOffValue;
+extern int AttrSwitch_14_DataOnValue, AttrSwitch_14_DataOffValue;
+extern int AttrSwitch_15_DataOnValue, AttrSwitch_15_DataOffValue;
+extern int AttrSwitch_16_DataOnValue, AttrSwitch_16_DataOffValue;
+
 extern int multifd;
 extern int numadf;
 extern int loaded737;
@@ -1645,9 +1687,6 @@ extern string vs_switch_up_remapable, vs_switch_dn_remapable;
 extern string ias_switch_up_remapable, ias_switch_dn_remapable;
 extern string hdg_switch_up_remapable, hdg_switch_dn_remapable;
 extern string crs_switch_up_remapable, crs_switch_dn_remapable;
-
-extern string attr_switch_remapable;
-
 
 extern string ias_ismach_remapable;
 

@@ -485,6 +485,23 @@ XPWidgetID  RadioDisableInVRCheckWidget = NULL;
 XPWidgetID  RadioDisableInVRText = NULL;
 
 // ****************** Multi Panel Command Ref **********************
+XPLMCommandRef AttrSwitch_1_OnCmd = NULL, AttrSwitch_1_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_2_OnCmd = NULL, AttrSwitch_2_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_3_OnCmd = NULL, AttrSwitch_3_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_4_OnCmd = NULL, AttrSwitch_4_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_5_OnCmd = NULL, AttrSwitch_5_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_6_OnCmd = NULL, AttrSwitch_6_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_7_OnCmd = NULL, AttrSwitch_7_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_8_OnCmd = NULL, AttrSwitch_8_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_9_OnCmd = NULL, AttrSwitch_9_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_10_OnCmd = NULL, AttrSwitch_10_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_11_OnCmd = NULL, AttrSwitch_11_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_12_OnCmd = NULL, AttrSwitch_12_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_13_OnCmd = NULL, AttrSwitch_13_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_14_OnCmd = NULL, AttrSwitch_14_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_15_OnCmd = NULL, AttrSwitch_15_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_16_OnCmd = NULL, AttrSwitch_16_OffCmd = NULL;
+
 XPLMCommandRef ApAltDn = NULL, ApAltUp = NULL, ApVsDn = NULL, ApVsUp = NULL;
 XPLMCommandRef ApAsDn = NULL, ApAsUp = NULL, ApHdgDn = NULL, ApHdgUp = NULL;
 XPLMCommandRef ApCrsDn = NULL, ApCrsUp = NULL, ApCrsDn2 = NULL, ApCrsUp2 = NULL;
@@ -540,7 +557,14 @@ XPLMDataRef IasSwitchRemapableData = NULL;
 XPLMDataRef HdgSwitchRemapableData = NULL;
 XPLMDataRef CrsSwitchRemapableData = NULL;
 
-XPLMDataRef AttrSwitchRemapableData = NULL;
+XPLMDataRef AttrSwitchRemapableData = NULL, Attr2SwitchRemapableData = NULL;
+XPLMDataRef Attr3SwitchRemapableData = NULL, Attr4SwitchRemapableData = NULL;
+XPLMDataRef Attr5SwitchRemapableData = NULL, Attr6SwitchRemapableData = NULL;
+XPLMDataRef Attr7SwitchRemapableData = NULL, Attr8SwitchRemapableData = NULL;
+XPLMDataRef Attr9SwitchRemapableData = NULL, Attr10SwitchRemapableData = NULL;
+XPLMDataRef Attr11SwitchRemapableData = NULL, Attr12SwitchRemapableData = NULL;
+XPLMDataRef Attr13SwitchRemapableData = NULL, Attr14SwitchRemapableData = NULL;
+XPLMDataRef Attr15SwitchRemapableData = NULL, Attr16SwitchRemapableData = NULL;
 
 XPLMDataRef IasIsmachRemapableData = NULL;
 
@@ -2312,8 +2336,6 @@ string vs_switch_up_remapable, vs_switch_dn_remapable;
 string ias_switch_up_remapable, ias_switch_dn_remapable;
 string hdg_switch_up_remapable, hdg_switch_dn_remapable;
 string crs_switch_up_remapable, crs_switch_dn_remapable;
-
-string attr_switch_remapable;
 
 string ias_ismach_remapable;
 

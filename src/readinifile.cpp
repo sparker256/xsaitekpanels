@@ -3813,10 +3813,93 @@ void process_read_ini_file()
         iasismachvalue = getOptionToInt("ias_ismach_remapable_value");
     }
 
-    // auto throttle switch - remapable (autothrottleswitchenable == 2)
-    if (autothrottleswitchenable == 2) {
-        attr_switch_remapable = getOptionToString("auto_throttle_switch_remapable_data");
-        AttrSwitchRemapableData = XPLMFindDataRef(attr_switch_remapable.c_str());
+    // auto throttle switch - remapable (autothrottleswitchenable == 2 or 4)
+    if (autothrottleswitchenable == 2 || autothrottleswitchenable == 4) {
+        AttrSwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle_switch_remapable_data").c_str());
+        Attr2SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle2_switch_remapable_data").c_str());
+        Attr3SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle3_switch_remapable_data").c_str());
+        Attr4SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle4_switch_remapable_data").c_str());
+        Attr5SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle5_switch_remapable_data").c_str());
+        Attr6SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle6_switch_remapable_data").c_str());
+        Attr7SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle7_switch_remapable_data").c_str());
+        Attr8SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle8_switch_remapable_data").c_str());
+        Attr9SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle9_switch_remapable_data").c_str());
+        Attr10SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle10_switch_remapable_data").c_str());
+        Attr11SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle11_switch_remapable_data").c_str());
+        Attr12SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle12_switch_remapable_data").c_str());
+        Attr13SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle13_switch_remapable_data").c_str());
+        Attr14SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle14_switch_remapable_data").c_str());
+        Attr15SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle15_switch_remapable_data").c_str());
+        Attr16SwitchRemapableData = XPLMFindDataRef(getOptionToString("auto_throttle16_switch_remapable_data").c_str());
+
+        AttrSwitch_1_DataOnValue = getOptionToInt("auto_throttle_switch_remapable_data_on_value");
+        AttrSwitch_1_DataOffValue = getOptionToInt("auto_throttle_switch_remapable_data_off_value");
+        AttrSwitch_2_DataOnValue  = getOptionToInt("auto_throttle2_switch_remapable_data_on_value");
+        AttrSwitch_2_DataOffValue = getOptionToInt("auto_throttle2_switch_remapable_data_off_value");
+        AttrSwitch_3_DataOnValue = getOptionToInt("auto_throttle3_switch_remapable_data_on_value");
+        AttrSwitch_3_DataOffValue = getOptionToInt("auto_throttle3_switch_remapable_data_off_value");
+        AttrSwitch_4_DataOnValue = getOptionToInt("auto_throttle4_switch_remapable_data_on_value");
+        AttrSwitch_4_DataOffValue = getOptionToInt("auto_throttle4_switch_remapable_data_off_value");
+        AttrSwitch_5_DataOnValue = getOptionToInt("auto_throttle5_switch_remapable_data_on_value");
+        AttrSwitch_5_DataOffValue = getOptionToInt("auto_throttle5_switch_remapable_data_off_value");
+        AttrSwitch_6_DataOnValue = getOptionToInt("auto_throttle6_switch_remapable_data_on_value");
+        AttrSwitch_6_DataOffValue = getOptionToInt("auto_throttle6_switch_remapable_data_off_value");
+        AttrSwitch_7_DataOnValue = getOptionToInt("auto_throttle7_switch_remapable_data_on_value");
+        AttrSwitch_7_DataOffValue = getOptionToInt("auto_throttle7_switch_remapable_data_off_value");
+        AttrSwitch_8_DataOnValue = getOptionToInt("auto_throttle8_switch_remapable_data_on_value");
+        AttrSwitch_8_DataOffValue = getOptionToInt("auto_throttle8_switch_remapable_data_off_value");
+        AttrSwitch_9_DataOnValue = getOptionToInt("auto_throttle9_switch_remapable_data_on_value");
+        AttrSwitch_9_DataOffValue = getOptionToInt("auto_throttle9_switch_remapable_data_off_value");
+        AttrSwitch_10_DataOnValue = getOptionToInt("auto_throttle10_switch_remapable_data_on_value");
+        AttrSwitch_10_DataOffValue = getOptionToInt("auto_throttle10_switch_remapable_data_off_value");
+        AttrSwitch_11_DataOnValue = getOptionToInt("auto_throttle11_switch_remapable_data_on_value");
+        AttrSwitch_11_DataOffValue = getOptionToInt("auto_throttle11_switch_remapable_data_off_value");
+        AttrSwitch_12_DataOnValue = getOptionToInt("auto_throttle12_switch_remapable_data_on_value");
+        AttrSwitch_12_DataOffValue = getOptionToInt("auto_throttle12_switch_remapable_data_off_value");
+        AttrSwitch_13_DataOnValue = getOptionToInt("auto_throttle13_switch_remapable_data_on_value");
+        AttrSwitch_13_DataOffValue = getOptionToInt("auto_throttle13_switch_remapable_data_off_value");
+        AttrSwitch_14_DataOnValue = getOptionToInt("auto_throttle14_switch_remapable_data_on_value");
+        AttrSwitch_14_DataOffValue = getOptionToInt("auto_throttle14_switch_remapable_data_off_value");
+        AttrSwitch_15_DataOnValue = getOptionToInt("auto_throttle15_switch_remapable_data_on_value");
+        AttrSwitch_15_DataOffValue = getOptionToInt("auto_throttle15_switch_remapable_data_off_value");
+        AttrSwitch_16_DataOnValue = getOptionToInt("auto_throttle16_switch_remapable_data_on_value");
+        AttrSwitch_16_DataOffValue = getOptionToInt("auto_throttle16_switch_remapable_data_off_value");
+    }
+
+    // auto throttle switch - remapable (autothrottleswitchenable == 3)
+    if (autothrottleswitchenable == 3) {
+        AttrSwitch_1_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle_switch_on_cmd").c_str());
+        AttrSwitch_1_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle_switch_off_cmd").c_str());
+        AttrSwitch_2_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle2_switch_on_cmd").c_str());
+        AttrSwitch_2_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle2_switch_off_cmd").c_str());
+        AttrSwitch_3_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle3_switch_on_cmd").c_str());
+        AttrSwitch_3_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle3_switch_off_cmd").c_str());
+        AttrSwitch_4_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle4_switch_on_cmd").c_str());
+        AttrSwitch_4_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle4_switch_off_cmd").c_str());
+        AttrSwitch_5_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle5_switch_on_cmd").c_str());
+        AttrSwitch_5_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle5_switch_off_cmd").c_str());
+        AttrSwitch_6_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle6_switch_on_cmd").c_str());
+        AttrSwitch_6_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle6_switch_off_cmd").c_str());
+        AttrSwitch_7_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle7_switch_on_cmd").c_str());
+        AttrSwitch_7_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle7_switch_off_cmd").c_str());
+        AttrSwitch_8_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle8_switch_on_cmd").c_str());
+        AttrSwitch_8_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle8_switch_off_cmd").c_str());
+        AttrSwitch_9_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle9_switch_on_cmd").c_str());
+        AttrSwitch_9_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle9_switch_off_cmd").c_str());
+        AttrSwitch_10_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle10_switch_on_cmd").c_str());
+        AttrSwitch_10_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle10_switch_off_cmd").c_str());
+        AttrSwitch_11_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle11_switch_on_cmd").c_str());
+        AttrSwitch_11_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle11_switch_off_cmd").c_str());
+        AttrSwitch_12_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle12_switch_on_cmd").c_str());
+        AttrSwitch_12_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle12_switch_off_cmd").c_str());
+        AttrSwitch_13_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle13_switch_on_cmd").c_str());
+        AttrSwitch_13_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle13_switch_off_cmd").c_str());
+        AttrSwitch_14_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle14_switch_on_cmd").c_str());
+        AttrSwitch_14_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle14_switch_off_cmd").c_str());
+        AttrSwitch_15_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle15_switch_on_cmd").c_str());
+        AttrSwitch_15_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle15_switch_off_cmd").c_str());
+        AttrSwitch_16_OnCmd = XPLMFindCommand(getOptionToString("auto_throttle16_switch_on_cmd").c_str());
+        AttrSwitch_16_OffCmd = XPLMFindCommand(getOptionToString("auto_throttle16_switch_off_cmd").c_str());
     }
 
 
