@@ -19,6 +19,24 @@
 #define testbit(x, y)  ( ( ((const char*)&(x))[(y)>>3] & 0x80 >> ((y)&0x07)) >> (7-((y)&0x07) ) )
 
 // ********************** Multi Panel variables ***********************
+
+int AttrSwitch_1_DataOnValue, AttrSwitch_1_DataOffValue;
+int AttrSwitch_2_DataOnValue, AttrSwitch_2_DataOffValue;
+int AttrSwitch_3_DataOnValue, AttrSwitch_3_DataOffValue;
+int AttrSwitch_4_DataOnValue, AttrSwitch_4_DataOffValue;
+int AttrSwitch_5_DataOnValue, AttrSwitch_5_DataOffValue;
+int AttrSwitch_6_DataOnValue, AttrSwitch_6_DataOffValue;
+int AttrSwitch_7_DataOnValue, AttrSwitch_7_DataOffValue;
+int AttrSwitch_8_DataOnValue, AttrSwitch_8_DataOffValue;
+int AttrSwitch_9_DataOnValue, AttrSwitch_9_DataOffValue;
+int AttrSwitch_10_DataOnValue, AttrSwitch_10_DataOffValue;
+int AttrSwitch_11_DataOnValue, AttrSwitch_11_DataOffValue;
+int AttrSwitch_12_DataOnValue, AttrSwitch_12_DataOffValue;
+int AttrSwitch_13_DataOnValue, AttrSwitch_13_DataOffValue;
+int AttrSwitch_14_DataOnValue, AttrSwitch_14_DataOffValue;
+int AttrSwitch_15_DataOnValue, AttrSwitch_15_DataOffValue;
+int AttrSwitch_16_DataOnValue, AttrSwitch_16_DataOffValue;
+
 static int multinowrite = 0, lastmultiseldis = 0;
 static int mulres, multires;
 
@@ -1431,27 +1449,176 @@ void process_autothrottle_switch()
     if(autothrottleswitchenable == 0) {
         return;
     }
-    if(testbit(multibuf,AUTO_THROTTLE_SWITCH)) {
-        if (autothrottleswitchenable == 2) {
-            if(autothrottleswitcharmedvalue == 1) {
-               XPLMSetDatai(AttrSwitchRemapableData, 1);
-            } else {
-               XPLMSetDatai(AttrSwitchRemapableData, 0);
-            }
 
-        } else {
+    bool IsAutoThottleEnabled = testbit(multibuf, AUTO_THROTTLE_SWITCH);
+
+    if (autothrottleswitcharmedvalue == 0)
+        IsAutoThottleEnabled = !IsAutoThottleEnabled;
+
+    static bool AutoThrottleAllreadyOn = IsAutoThottleEnabled;
+    static bool AutoThrottleAllreadyOff = !IsAutoThottleEnabled;
+
+    if (IsAutoThottleEnabled && AutoThrottleAllreadyOn)
+        return;
+    if (!IsAutoThottleEnabled && AutoThrottleAllreadyOff)
+        return;
+
+    if (autothrottleswitchenable == 1)
+    {
+        if (IsAutoThottleEnabled)
+        {
             XPLMSetDatai(ApAutThr, 1);
-        }
-    } else {
-        if (autothrottleswitchenable == 2) {
-            if(autothrottleswitcharmedvalue == 1) {
-                XPLMSetDatai(AttrSwitchRemapableData, 0);
-            } else {
-               XPLMSetDatai(AttrSwitchRemapableData, 1);
-            }
 
-        } else {
+            AutoThrottleAllreadyOn = true;
+            AutoThrottleAllreadyOff = false;
+        }
+        else
+        {
             XPLMSetDatai(ApAutThr, 0);
+
+            AutoThrottleAllreadyOn = true;
+            AutoThrottleAllreadyOff = false;
+        }
+    }
+    else if (autothrottleswitchenable == 2)
+    {
+        if (IsAutoThottleEnabled)
+        {
+            XPLMSetDatai(AttrSwitchRemapableData, AttrSwitch_1_DataOnValue);
+            XPLMSetDatai(Attr2SwitchRemapableData, AttrSwitch_2_DataOnValue);
+            XPLMSetDatai(Attr3SwitchRemapableData, AttrSwitch_3_DataOnValue);
+            XPLMSetDatai(Attr4SwitchRemapableData, AttrSwitch_4_DataOnValue);
+            XPLMSetDatai(Attr5SwitchRemapableData, AttrSwitch_5_DataOnValue);
+            XPLMSetDatai(Attr6SwitchRemapableData, AttrSwitch_6_DataOnValue);
+            XPLMSetDatai(Attr7SwitchRemapableData, AttrSwitch_7_DataOnValue);
+            XPLMSetDatai(Attr8SwitchRemapableData, AttrSwitch_8_DataOnValue);
+            XPLMSetDatai(Attr9SwitchRemapableData, AttrSwitch_9_DataOnValue);
+            XPLMSetDatai(Attr10SwitchRemapableData, AttrSwitch_10_DataOnValue);
+            XPLMSetDatai(Attr11SwitchRemapableData, AttrSwitch_11_DataOnValue);
+            XPLMSetDatai(Attr12SwitchRemapableData, AttrSwitch_12_DataOnValue);
+            XPLMSetDatai(Attr13SwitchRemapableData, AttrSwitch_13_DataOnValue);
+            XPLMSetDatai(Attr14SwitchRemapableData, AttrSwitch_14_DataOnValue);
+            XPLMSetDatai(Attr15SwitchRemapableData, AttrSwitch_15_DataOnValue);
+            XPLMSetDatai(Attr16SwitchRemapableData, AttrSwitch_16_DataOnValue);
+
+            AutoThrottleAllreadyOn = true;
+            AutoThrottleAllreadyOff = false;
+        }
+        else
+        {
+            XPLMSetDatai(AttrSwitchRemapableData, AttrSwitch_1_DataOffValue);
+            XPLMSetDatai(Attr2SwitchRemapableData, AttrSwitch_2_DataOffValue);
+            XPLMSetDatai(Attr3SwitchRemapableData, AttrSwitch_3_DataOffValue);
+            XPLMSetDatai(Attr4SwitchRemapableData, AttrSwitch_4_DataOffValue);
+            XPLMSetDatai(Attr5SwitchRemapableData, AttrSwitch_5_DataOffValue);
+            XPLMSetDatai(Attr6SwitchRemapableData, AttrSwitch_6_DataOffValue);
+            XPLMSetDatai(Attr7SwitchRemapableData, AttrSwitch_7_DataOffValue);
+            XPLMSetDatai(Attr8SwitchRemapableData, AttrSwitch_8_DataOffValue);
+            XPLMSetDatai(Attr9SwitchRemapableData, AttrSwitch_9_DataOffValue);
+            XPLMSetDatai(Attr10SwitchRemapableData, AttrSwitch_10_DataOffValue);
+            XPLMSetDatai(Attr11SwitchRemapableData, AttrSwitch_11_DataOffValue);
+            XPLMSetDatai(Attr12SwitchRemapableData, AttrSwitch_12_DataOffValue);
+            XPLMSetDatai(Attr13SwitchRemapableData, AttrSwitch_13_DataOffValue);
+            XPLMSetDatai(Attr14SwitchRemapableData, AttrSwitch_14_DataOffValue);
+            XPLMSetDatai(Attr15SwitchRemapableData, AttrSwitch_15_DataOffValue);
+            XPLMSetDatai(Attr16SwitchRemapableData, AttrSwitch_16_DataOffValue);
+
+            AutoThrottleAllreadyOn = false;
+            AutoThrottleAllreadyOff = true;
+        }
+    }
+    else if (autothrottleswitchenable == 3)
+    {
+        if (IsAutoThottleEnabled)
+        {
+            XPLMCommandOnce(AttrSwitch_1_OnCmd);
+            XPLMCommandOnce(AttrSwitch_2_OnCmd);
+            XPLMCommandOnce(AttrSwitch_3_OnCmd);
+            XPLMCommandOnce(AttrSwitch_4_OnCmd);
+            XPLMCommandOnce(AttrSwitch_5_OnCmd);
+            XPLMCommandOnce(AttrSwitch_6_OnCmd);
+            XPLMCommandOnce(AttrSwitch_7_OnCmd);
+            XPLMCommandOnce(AttrSwitch_8_OnCmd);
+            XPLMCommandOnce(AttrSwitch_9_OnCmd);
+            XPLMCommandOnce(AttrSwitch_10_OnCmd);
+            XPLMCommandOnce(AttrSwitch_11_OnCmd);
+            XPLMCommandOnce(AttrSwitch_12_OnCmd);
+            XPLMCommandOnce(AttrSwitch_13_OnCmd);
+            XPLMCommandOnce(AttrSwitch_14_OnCmd);
+            XPLMCommandOnce(AttrSwitch_15_OnCmd);
+            XPLMCommandOnce(AttrSwitch_16_OnCmd);
+
+            AutoThrottleAllreadyOn = true;
+            AutoThrottleAllreadyOff = false;
+        }
+        else
+        {
+            XPLMCommandOnce(AttrSwitch_2_OffCmd);
+            XPLMCommandOnce(AttrSwitch_1_OffCmd);
+            XPLMCommandOnce(AttrSwitch_3_OffCmd);
+            XPLMCommandOnce(AttrSwitch_4_OffCmd);
+            XPLMCommandOnce(AttrSwitch_5_OffCmd);
+            XPLMCommandOnce(AttrSwitch_6_OffCmd);
+            XPLMCommandOnce(AttrSwitch_7_OffCmd);
+            XPLMCommandOnce(AttrSwitch_8_OffCmd);
+            XPLMCommandOnce(AttrSwitch_9_OffCmd);
+            XPLMCommandOnce(AttrSwitch_10_OffCmd);
+            XPLMCommandOnce(AttrSwitch_11_OffCmd);
+            XPLMCommandOnce(AttrSwitch_12_OffCmd);
+            XPLMCommandOnce(AttrSwitch_13_OffCmd);
+            XPLMCommandOnce(AttrSwitch_14_OffCmd);
+            XPLMCommandOnce(AttrSwitch_15_OffCmd);
+            XPLMCommandOnce(AttrSwitch_16_OffCmd);
+
+            AutoThrottleAllreadyOn = false;
+            AutoThrottleAllreadyOff = true;
+        }
+    }
+    else if (autothrottleswitchenable == 4)
+    {
+        if (IsAutoThottleEnabled)
+        {
+            XPLMSetDataf(AttrSwitchRemapableData, ((float)AttrSwitch_1_DataOnValue / 100.0f));
+            XPLMSetDataf(Attr2SwitchRemapableData, AttrSwitch_2_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr3SwitchRemapableData, AttrSwitch_3_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr4SwitchRemapableData, AttrSwitch_4_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr5SwitchRemapableData, AttrSwitch_5_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr6SwitchRemapableData, AttrSwitch_6_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr7SwitchRemapableData, AttrSwitch_7_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr8SwitchRemapableData, AttrSwitch_8_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr9SwitchRemapableData, AttrSwitch_9_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr10SwitchRemapableData, AttrSwitch_10_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr11SwitchRemapableData, AttrSwitch_11_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr12SwitchRemapableData, AttrSwitch_12_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr13SwitchRemapableData, AttrSwitch_13_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr14SwitchRemapableData, AttrSwitch_14_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr15SwitchRemapableData, AttrSwitch_15_DataOnValue / 100.0f);
+            XPLMSetDataf(Attr16SwitchRemapableData, AttrSwitch_16_DataOnValue / 100.0f);
+
+            AutoThrottleAllreadyOn = true;
+            AutoThrottleAllreadyOff = false;
+        }
+        else
+        {
+            XPLMSetDataf(AttrSwitchRemapableData, AttrSwitch_1_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr2SwitchRemapableData, AttrSwitch_2_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr3SwitchRemapableData, AttrSwitch_3_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr4SwitchRemapableData, AttrSwitch_4_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr5SwitchRemapableData, AttrSwitch_5_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr6SwitchRemapableData, AttrSwitch_6_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr7SwitchRemapableData, AttrSwitch_7_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr8SwitchRemapableData, AttrSwitch_8_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr9SwitchRemapableData, AttrSwitch_9_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr10SwitchRemapableData, AttrSwitch_10_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr11SwitchRemapableData, AttrSwitch_11_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr12SwitchRemapableData, AttrSwitch_12_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr13SwitchRemapableData, AttrSwitch_13_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr14SwitchRemapableData, AttrSwitch_14_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr15SwitchRemapableData, AttrSwitch_15_DataOffValue / 100.0f);
+            XPLMSetDataf(Attr16SwitchRemapableData, AttrSwitch_16_DataOffValue / 100.0f);
+
+            AutoThrottleAllreadyOn = false;
+            AutoThrottleAllreadyOff = true;
         }
     }
 }

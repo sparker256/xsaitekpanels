@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** June 27 2021   **************
+// ****** September 12  2021   **************
 
-#define PLUGIN_VERSION "2.79 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 279
+#define PLUGIN_VERSION "2.80 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 280
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -481,9 +481,27 @@ XPWidgetID	RadioQnh1CheckWidget[50] = {NULL};
 XPWidgetID	RadioQnh0TextWidget[50] = {NULL};
 XPWidgetID	RadioQnh1TextWidget[50] = {NULL};
 
-
+XPWidgetID  RadioDisableInVRCheckWidget = NULL;
+XPWidgetID  RadioDisableInVRText = NULL;
 
 // ****************** Multi Panel Command Ref **********************
+XPLMCommandRef AttrSwitch_1_OnCmd = NULL, AttrSwitch_1_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_2_OnCmd = NULL, AttrSwitch_2_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_3_OnCmd = NULL, AttrSwitch_3_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_4_OnCmd = NULL, AttrSwitch_4_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_5_OnCmd = NULL, AttrSwitch_5_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_6_OnCmd = NULL, AttrSwitch_6_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_7_OnCmd = NULL, AttrSwitch_7_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_8_OnCmd = NULL, AttrSwitch_8_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_9_OnCmd = NULL, AttrSwitch_9_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_10_OnCmd = NULL, AttrSwitch_10_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_11_OnCmd = NULL, AttrSwitch_11_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_12_OnCmd = NULL, AttrSwitch_12_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_13_OnCmd = NULL, AttrSwitch_13_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_14_OnCmd = NULL, AttrSwitch_14_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_15_OnCmd = NULL, AttrSwitch_15_OffCmd = NULL;
+XPLMCommandRef AttrSwitch_16_OnCmd = NULL, AttrSwitch_16_OffCmd = NULL;
+
 XPLMCommandRef ApAltDn = NULL, ApAltUp = NULL, ApVsDn = NULL, ApVsUp = NULL;
 XPLMCommandRef ApAsDn = NULL, ApAsUp = NULL, ApHdgDn = NULL, ApHdgUp = NULL;
 XPLMCommandRef ApCrsDn = NULL, ApCrsUp = NULL, ApCrsDn2 = NULL, ApCrsUp2 = NULL;
@@ -539,7 +557,14 @@ XPLMDataRef IasSwitchRemapableData = NULL;
 XPLMDataRef HdgSwitchRemapableData = NULL;
 XPLMDataRef CrsSwitchRemapableData = NULL;
 
-XPLMDataRef AttrSwitchRemapableData = NULL;
+XPLMDataRef AttrSwitchRemapableData = NULL, Attr2SwitchRemapableData = NULL;
+XPLMDataRef Attr3SwitchRemapableData = NULL, Attr4SwitchRemapableData = NULL;
+XPLMDataRef Attr5SwitchRemapableData = NULL, Attr6SwitchRemapableData = NULL;
+XPLMDataRef Attr7SwitchRemapableData = NULL, Attr8SwitchRemapableData = NULL;
+XPLMDataRef Attr9SwitchRemapableData = NULL, Attr10SwitchRemapableData = NULL;
+XPLMDataRef Attr11SwitchRemapableData = NULL, Attr12SwitchRemapableData = NULL;
+XPLMDataRef Attr13SwitchRemapableData = NULL, Attr14SwitchRemapableData = NULL;
+XPLMDataRef Attr15SwitchRemapableData = NULL, Attr16SwitchRemapableData = NULL;
 
 XPLMDataRef IasIsmachRemapableData = NULL;
 
@@ -596,6 +621,8 @@ XPWidgetID  MultiTrimAccelerationPointScroll = NULL;
 XPWidgetID  MultiTrimAccelerationPointScrollText = NULL;
 XPWidgetID  MultiTrimMaxSpeedScroll = NULL;
 XPWidgetID  MultiTrimMaxSpeedScrollText = NULL;
+XPWidgetID  MultiDisableInVRCheckWidget = NULL;
+XPWidgetID  MultiDisableInVRText = NULL;
 
 XPWidgetID	MultiAt0CheckWidget[50] = {NULL};
 XPWidgetID	MultiAt1CheckWidget[50] = {NULL};
@@ -984,6 +1011,9 @@ XPWidgetID	SwitchStartSwitchNewTextWidget[50] = {NULL};
 
 XPWidgetID	SwitchLabelTextWidget[50] = {NULL};
 XPWidgetID	SwitchTextWidget[50] = {NULL};
+
+XPWidgetID  SwitchDisableInVRCheckWidget = NULL;
+XPWidgetID	SwitchDisableInVRText = NULL;
 
 typedef	std::vector<XPLMDataRef> aXPLMDataRefID;
 
@@ -2307,8 +2337,6 @@ string ias_switch_up_remapable, ias_switch_dn_remapable;
 string hdg_switch_up_remapable, hdg_switch_dn_remapable;
 string crs_switch_up_remapable, crs_switch_dn_remapable;
 
-string attr_switch_remapable;
-
 string ias_ismach_remapable;
 
 string alt_switch_data_remapable;
@@ -3123,6 +3151,9 @@ char SwitchText[50][200] = {
 
 hid_device *switchhandle;
 
+// ****************** General data refs variables ***********************
+bool IsVR_Enabled = false;
+
 // ****************** BIP Panel variables *******************************
 int bipcnt = 0, biptmpcnt = 0, bipres, biploop[4], stopbipcnt;
 int bipnum = 0;
@@ -3172,6 +3203,10 @@ int icao_enable = 0;
 int readiniloop = 0;
 
 int log_enable = 0;
+
+int dissableSwitchPanelInVR = 0;
+int dissableRadioPanelInVR = 0;
+int dissableMultiPanelInVR = 0;
 
 float wrgCurrentTime = 0;
 
@@ -7543,7 +7578,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 5){
        if (strcmp((char *) inItemRef, "MULTI_WIDGET") == 0) {
-             CreateMultiWidget(05, 700, 300, 360);	//left, top, right, bottom.
+             CreateMultiWidget(05, 700, 300, 390);	//left, top, right, bottom.
              multiMenuItem = 1;
        }
 
@@ -7552,7 +7587,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
     if((intptr_t)inMenuRef == 6){
 
          if (strcmp((char *) inItemRef, "RADIO_WIDGET") == 0) {
-             CreateRadioWidget(15, 700, 300, 300);	//left, top, right, bottom.
+             CreateRadioWidget(15, 700, 300, 320);	//left, top, right, bottom.
              radioMenuItem = 1;
          }
 
@@ -7560,7 +7595,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 7){
          if (strcmp((char *) inItemRef, "SWITCH_WIDGET") == 0) {
-             CreateSwitchWidget(05, 700, 300, 510);	//left, top, right, bottom.
+             CreateSwitchWidget(05, 700, 300, 530);	//left, top, right, bottom.
              switchMenuItem = 1;
 
          }
@@ -7801,7 +7836,28 @@ void CreateSwitchWidget(int x, int y, int w, int h)
 
         }
 
+       //Dissable in VR
+       yOffset = (65 + 28 + ((19+2) * 20));
 
+       SwitchDisableInVRText = XPCreateWidget(x + 50, y - yOffset, x + 50 + 22, y - yOffset - 20,
+           1,	// Visible
+           "Disable Switch Panel in Virtual Reality",       // desc
+           0,	// root
+           SwitchWidgetID,
+           xpWidgetClass_Caption);
+
+       XPSetWidgetProperty(SwitchDisableInVRText, xpProperty_CaptionLit, 1);
+
+       SwitchDisableInVRCheckWidget = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
+           1,	// Visible
+           "",       // desc
+           0,	// root
+           SwitchWidgetID,
+           xpWidgetClass_Button);
+
+       XPSetWidgetProperty(SwitchDisableInVRCheckWidget, xpProperty_ButtonType, xpRadioButton);
+       XPSetWidgetProperty(SwitchDisableInVRCheckWidget, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
+       XPSetWidgetProperty(SwitchDisableInVRCheckWidget, xpProperty_ButtonState, dissableSwitchPanelInVR);
 
 // Register our widget handler
         XPAddWidgetCallback(SwitchWidgetID, SwitchHandler);
@@ -7837,6 +7893,16 @@ int	SwitchHandler(XPWidgetMessage  SwitchinMessage, XPWidgetID  SwitchWidgetID, 
                      XPSetWidgetProperty(SwitchAltBatCheckWidget[0], xpProperty_ButtonState, 0);
 
                      XPSetWidgetProperty((XPWidgetID)inParam1, xpProperty_ButtonState, 1);
+            }
+
+            if (inParam1 == (intptr_t)SwitchDisableInVRCheckWidget) {
+                State = XPGetWidgetProperty(SwitchDisableInVRCheckWidget, xpProperty_ButtonState, 0);
+                if (State) {
+                    dissableSwitchPanelInVR = 1;
+                }
+                else {
+                    dissableSwitchPanelInVR = 0;
+                }
             }
 
             if(inParam1 == (intptr_t)SwitchStartSwitchOldCheckWidget[0] ||
@@ -8379,6 +8445,28 @@ void CreateRadioWidget(int x, int y, int w, int h)
 
          XPSetWidgetProperty(RadioQnh1TextWidget[0], xpProperty_CaptionLit, 1);
 
+         //Dissable in VR
+         yOffset = (05 + 28 + (12 * 20));
+
+         RadioDisableInVRText = XPCreateWidget(x + 50, y - yOffset, x + 50 + 22, y - yOffset - 20,
+             1,	// Visible
+             "Disable Radio Panel in Virtual Reality",       // desc
+             0,	// root
+             RadioWidgetID,
+             xpWidgetClass_Caption);
+
+         XPSetWidgetProperty(RadioDisableInVRText, xpProperty_CaptionLit, 1);
+
+         RadioDisableInVRCheckWidget = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
+             1,	// Visible
+             "",       // desc
+             0,	// root
+             RadioWidgetID,
+             xpWidgetClass_Button);
+
+         XPSetWidgetProperty(RadioDisableInVRCheckWidget, xpProperty_ButtonType, xpRadioButton);
+         XPSetWidgetProperty(RadioDisableInVRCheckWidget, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
+         XPSetWidgetProperty(RadioDisableInVRCheckWidget, xpProperty_ButtonState, dissableRadioPanelInVR);
 
 // Register our widget handler
         XPAddWidgetCallback(RadioWidgetID, RadioHandler);
@@ -8445,6 +8533,16 @@ int	RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, int
             State = XPGetWidgetProperty(RadioSpeed5CheckWidget[0], xpProperty_ButtonState, 0);
             if (State){
                 radspeed = 5;
+            }
+
+            if (inParam1 == (intptr_t)RadioDisableInVRCheckWidget) {
+                State = XPGetWidgetProperty(RadioDisableInVRCheckWidget, xpProperty_ButtonState, 0);
+                if (State) {
+                    dissableRadioPanelInVR = 1;
+                }
+                else {
+                    dissableRadioPanelInVR = 0;
+                }
             }
 
 
@@ -8810,6 +8908,33 @@ void CreateMultiWidget(int x, int y, int w, int h)
         XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonBehavior, xpButtonBehaviorRadioButton);
         XPSetWidgetProperty(MultiAt1CheckWidget[0], xpProperty_ButtonState, 0);
 
+        //Empty line
+        LineNumber++;
+
+        //Dissable in VR
+        yOffset = (05 + 28 + (LineNumber * 20));
+        LineNumber++;
+
+        MultiDisableInVRText = XPCreateWidget(x + 50, y - yOffset, x + 50 + 22, y - yOffset - 20,
+            1,	// Visible
+            "Disable Multi Panel in Virtual Reality",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_Caption);
+
+        XPSetWidgetProperty(MultiDisableInVRText, xpProperty_CaptionLit, 1);
+
+        MultiDisableInVRCheckWidget = XPCreateWidget(x + 05, y - yOffset, x + 05 + 22, y - yOffset - 20,
+            1,	// Visible
+            "",       // desc
+            0,	// root
+            MultiWidgetID,
+            xpWidgetClass_Button);
+
+        XPSetWidgetProperty(MultiDisableInVRCheckWidget, xpProperty_ButtonType, xpRadioButton);
+        XPSetWidgetProperty(MultiDisableInVRCheckWidget, xpProperty_ButtonBehavior, xpButtonBehaviorCheckBox);
+        XPSetWidgetProperty(MultiDisableInVRCheckWidget, xpProperty_ButtonState, dissableMultiPanelInVR);
+
 
 // Register our widget handler
              XPAddWidgetCallback(MultiWidgetID, MultiHandler);
@@ -8940,6 +9065,16 @@ int	MultiHandler(XPWidgetMessage  MultiinMessage, XPWidgetID  MultiWidgetID, int
                 }
                 else{
                     dynamicTrimWheel = 0;
+                }
+            }
+
+            if (inParam1 == (intptr_t)MultiDisableInVRCheckWidget) {
+                State = XPGetWidgetProperty(MultiDisableInVRCheckWidget, xpProperty_ButtonState, 0);
+                if (State) {
+                    dissableMultiPanelInVR = 1;
+                }
+                else {
+                    dissableMultiPanelInVR = 0;
                 }
             }
 
@@ -9296,6 +9431,7 @@ float MyPanelsDeferredInitNewAircraftFLCB(float MyPanelselapsedMe, float MyPanel
     (void) MyPanelsrefcon; // To get rid of warnings on unused variables
 
     process_read_ini_file();
+    IsVR_Enabled = XPLMGetDatai(XPLMFindDataRef("sim/graphics/VR/enabled")) != 0;
     gearled_write_loop = 0;
 
     return 0; // Returning 0 stops DeferredInitFLCB from being looped again.
@@ -9320,16 +9456,24 @@ float	MyPanelsFlightLoopCallback(
 
     wrgCurrentTime = XPLMGetElapsedTime();
 
-  if(radcnt > 0){
+    static bool updateRadioPanel = true;
+    static bool updateSwitchPanel = true;
+    static bool updateMultiPanel = true;
+
+    updateRadioPanel = (radcnt > 0) && (!IsVR_Enabled || dissableRadioPanelInVR == 0);
+    updateMultiPanel = (multicnt > 0) && (!IsVR_Enabled || dissableMultiPanelInVR == 0);
+    updateSwitchPanel = (switchcnt > 0) && (!IsVR_Enabled || dissableSwitchPanelInVR == 0);
+    
+
+  if(updateRadioPanel){
     process_radio_panel();
   }
 
-  if (multicnt > 0) {
+  if (updateMultiPanel) {
         process_multi_panel(inElapsedSinceLastCall);
   }
 
-
-  if(switchcnt > 0){
+  if(updateSwitchPanel){
     process_switch_panel();
   }
 
@@ -9342,6 +9486,8 @@ float	MyPanelsFlightLoopCallback(
       readiniloop++;
   } else if (readiniloop == 50) {
       process_read_ini_file();
+      IsVR_Enabled = XPLMGetDatai(XPLMFindDataRef("sim/graphics/VR/enabled")) != 0;
+
       readiniloop = 51;
       if (dre_enable == 1) {
           XPLMRegisterFlightLoopCallback(XsaitekpanelsCustomDatarefLoopCB, 1, NULL);
