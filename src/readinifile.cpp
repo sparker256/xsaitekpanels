@@ -146,9 +146,9 @@ void process_read_ini_file()
 
     log_enable = 0;
 
-    dissableSwitchPanelInVR = 1;
-    dissableRadioPanelInVR = 1;
-    dissableMultiPanelInVR = 1;
+    dissableSwitchPanelInVR = 0;
+    dissableRadioPanelInVR = 0;
+    dissableMultiPanelInVR = 0;
 
     // multi panel defaults
     trimspeed = 1;
