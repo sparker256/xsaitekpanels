@@ -15,7 +15,7 @@ Bill
 
 
 
-[![CMake](https://github.com/sparker256/xbtn2cmd/actions/workflows/cmake.yml/badge.svg)](https://github.com/sparker256/xbtn2cmd/actions/workflows/cmake.yml)
+[![CMake](https://github.com/sparker256/xsaitekpanels/actions/workflows/cmake.yml/badge.svg)](https://github.com/sparker256/xsaitekpanels/actions/workflows/cmake.yml)
 
 
 
@@ -60,7 +60,7 @@ Bill
 
    ```
    git clone https://github.com/sparker256/xsaitekpanels.git
-   cd xbtn2cmd
+   cd xsaitekpanels
    cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
    ```
 
@@ -79,7 +79,7 @@ Bill
 
    ```
    git clone https://github.com/sparker256/xsaitekpanels.git
-   cd xbtn2cmd
+   cd xsaitekpanels
    cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
    ```
 
