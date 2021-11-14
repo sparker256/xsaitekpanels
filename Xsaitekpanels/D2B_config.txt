@@ -1,0 +1,65 @@
+Fill this file with your indicator assignments!
+
+This is for Xsaitekpanels 2.80
+
+If there is no # sign starting the line it is a comment.
+There are two kinds of data reference that can be used.
+
+The first is DATAREF and is one of a kind.
+
+The second is ARRAY and has multiples. An example would be engines which could 
+be up to eight. Remember that ARRAY starts with 0 so engine number one is 0.
+ 
+The first eight lines starting with a # match a default 172 annunciator panel
+I will describe in detail each line to help in creating your own configurations
+
+This will turn on the top row first indicator red if the first generator is off
+#SET BIP A 0 R FROM  ARRAY sim/cockpit2/annunciators/generator_off 0 RANGE 1 TO 1
+
+This will turn on the top row second indicator red if the voltage is low
+#SET BIP A 1 R FROM  DATAREF sim/cockpit/warnings/annunciators/low_voltage RANGE 1 TO 1
+
+This will turn on the top row third indicator red if fuel is low
+#SET BIP A 2 R FROM  DATAREF sim/cockpit2/annunciators/fuel_quantity RANGE 1 TO 1
+
+This will turn on the top row fourth indicator red if the parking brake is on
+#SET BIP A 3 R FROM  DATAREF sim/cockpit2/controls/parking_brake_ratio RANGE 1 TO 1
+
+This will turn on the middle row first indicator if oil pressure is low
+#SET BIP B 0 R FROM  ARRAY sim/cockpit2/annunciators/oil_pressure_low 0 RANGE 1 TO 1
+
+This will turn on the middle row second indicator if oil temperature in high
+#SET BIP B 1 R FROM  ARRAY sim/cockpit2/annunciators/oil_temperature_high 0 RANGE 1 TO 1
+
+This will turn on the middle row third indicator if the vacuum is low
+#SET BIP B 2 R FROM  DATAREF sim/cockpit2/annunciators/low_vacuum RANGE 1 TO 1
+
+This will turn on the middle row fourth indicator if the auto pilot is turned off
+#SET BIP B 3 R FROM  DATAREF sim/cockpit2/annunciators/autopilot_disconnect RANGE 1 TO 1
+
+This tests all the indicators when you press the annunciator test button
+[BIP_TEST]
+#SET BIP A 0 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP A 1 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP A 2 A FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP A 3 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP A 4 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP A 5 A FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP A 6 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP A 7 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP B 0 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP B 1 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP B 2 A FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP B 3 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP B 4 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP B 5 A FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP B 6 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP B 7 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP C 0 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP C 1 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP C 2 A FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP C 3 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP C 4 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP C 5 A FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP C 6 G FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
+#SET BIP C 7 R FROM  DATAREF sim/cockpit/warnings/annunciator_test_pressed RANGE 1 TO 1
