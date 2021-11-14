@@ -1,101 +1,169 @@
-cmake_minimum_required(VERSION 2.8.3)
-project(plugin CXX)
+# Xsaitekpanels build script.
+#
+# Useful command line flags:
+#   * -DCMAKE_BUILD_TYPE=XXX, where XXX is one of Debug, Release,
+#     RelWithDebInfo and MinSizeRel. Default is Release.
+#   * -DCREATECOMPLETEEDITION=XXX, where XXX is true or false. Default is true.
 
-SET(SRC bippanel.cpp inireader.cpp multidata.cpp multipanel.cpp radio1data.cpp radio2data.cpp radio3data.cpp radiopanels.cpp readinifile.cpp saitekpanels.cpp switchdata.cpp switchpanel.cpp)
-SET(HDR inireader.h saitekpanels.h)
+cmake_minimum_required(VERSION 3.9)
+project(Xsaitekpanels VERSION 2.8.0 DESCRIPTION "Xsaitekpanels X-Plane plugin")
 
-if(APPLE)
-	SET(HIDAPI_SRC ../hidapi-0.8.0-rc1_Patched/mac/hid.c)
-elseif(UNIX)
-	SET(HIDAPI_SRC ../hidapi-0.8.0-rc1_Patched/linux/hid.c)
-elseif(WIN32)
-	SET(HIDAPI_SRC ../hidapi-0.8.0-rc1_Patched/windows/hid.c)
-endif()
+# By default, use optimized release configuration.
+if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")
+    set(CMAKE_BUILD_TYPE "Release" CACHE STRING "" FORCE)
+endif ()
 
-SET(ALL_SRC ${SRC} ${HIDAPI_SRC} ${HDR})
-LIST(SORT ALL_SRC)
+set(CMAKE_CXX_STANDARD 14)
 
-if(APPLE)
-	add_executable(plugin ${ALL_SRC})
-elseif(UNIX)
-	add_library(plugin SHARED ${ALL_SRC})
-elseif(WIN32)
-	add_library(plugin MODULE ${ALL_SRC})
-	SET(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MD")
-	SET(CMAKE_CXX_FLAGS_RELWITHDEBINFO "${CMAKE_CXX_FLAGS_RELEASE} /MD")
-	SET(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
-endif()
-
-#compiler flags
-if(WIN32)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCHECK_RESULT_USED=_Check_return_")
-else()
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra --std=c++11")
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DCHECK_RESULT_USED=\"__attribute__ ((warn_unused_result))\"")
-endif()
-
-#libraries
-if(UNIX)
-	include_directories(plugin PUBLIC "../SDK/CHeaders/XPLM/" "../SDK/CHeaders/Widgets/" "../SDK/CHeaders/Wrappers/" "../hidapi-0.8.0-rc1_Patched/hidapi")
-endif(UNIX)
-if(APPLE)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -arch x86_64")
-	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -arch x86_64")
-	target_include_directories(plugin PUBLIC "../hidapi-0.8.0-rc1_Patched/hidapi")
-	find_library(IOKIT_FRAMEWORK IOKit)
-	find_library(COREFOUNDATION_FRAMEWORK CoreFoundation)
-	target_link_libraries(${PROJECT_NAME} ${COREFOUNDATION_FRAMEWORK} ${IOKIT_FRAMEWORK})
-endif(APPLE)
-if(WIN32)
-	target_include_directories(plugin PUBLIC "..\\SDK\\CHeaders\\XPLM" "..\\SDK\\CHeaders\\Widgets" "..\\SDK\\CHeaders\\Wrappers" "../hidapi-0.8.0-rc1_Patched/hidapi")
-	target_include_directories(plugin_custom_dataref PUBLIC "..\\SDK\\CHeaders\\XPLM" "..\\SDK\\CHeaders\\Widgets" "..\\SDK\\CHeaders\\Wrappers")
-endif(WIN32)
-
-# X-Plane stuff
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DXPLM200=1 -DXPLM210=1")
-if(APPLE)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DAPL=1 -DIBM=0 -DLIN=0")
-elseif(UNIX)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DAPL=0 -DIBM=0 -DLIN=1")
-elseif(WIN32)
-	set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DAPL=0 -DIBM=1 -DLIN=0 -D_CRT_SECURE_NO_WARNINGS /bigobj")
-endif()
-
-#linking
-link_libraries(m)
-if(APPLE)
-	set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} ../SDK/Libraries/Mac/)
-	FIND_LIBRARY(XPLM_LIBRARY XPLM ../SDK/Libraries/Mac/)
-	FIND_LIBRARY(XPWIDGETS_LIBRARY XPWidgets ../SDK/Libraries/Mac/)
-	target_link_libraries(plugin ${XPLM_LIBRARY} ${XPWIDGETS_LIBRARY})
-elseif(UNIX)
-	INCLUDE(FindPkgConfig)
-	pkg_check_modules(UDEV REQUIRED libudev)
-	include_directories(${UDEV_INCLUDE_DIRS})
-	link_directories(${UDEV_LIBRARY_DIRS})
-	target_link_libraries(plugin ${UDEV_LIBRARIES})	
-elseif(WIN32)
-	set(CMAKE_LIBRARY_PATH ${CMAKE_LIBRARY_PATH} "..\\SDK\\Libraries\\Win\\")
-	FIND_LIBRARY(XPLM_LIBRARY XPLM_64 "..\\SDK\\Libraries\\Win\\")
-	FIND_LIBRARY(XPWIDGETS_LIBRARY XPWidgets_64 "..\\SDK\\Libraries\\Win\\")
-	target_link_libraries(plugin ${XPLM_LIBRARY} ${XPWIDGETS_LIBRARY})
-	target_link_libraries(plugin_custom_dataref ${XPLM_LIBRARY} ${XPWIDGETS_LIBRARY})
-endif()
-
-#output
-SET_TARGET_PROPERTIES(plugin PROPERTIES PREFIX "")
-SET_TARGET_PROPERTIES(plugin PROPERTIES SUFFIX "")
-if(APPLE)
-	set(PLUGIN_OUTPUT_FILENAME "mac.xpl")
-	SET_TARGET_PROPERTIES(plugin PROPERTIES LINK_FLAGS "${CMAKE_SHARED_LINKER_FLAGS}  -fPIC -fvisibility=hidden -bundle -framework OpenGL -framework Cocoa")
-elseif(UNIX)
-	set(PLUGIN_OUTPUT_FILENAME "lin.xpl")
-	SET_TARGET_PROPERTIES(plugin PROPERTIES LINK_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -rdynamic -nodefaultlibs -undefined_warning -fPIC -fvisibility=hidden")
-elseif(WIN32)
-	set(PLUGIN_OUTPUT_FILENAME "win.xpl")
-endif()
+# Set include directories used by our code and dependencies.
+include_directories("${CMAKE_SOURCE_DIR}/SDK/CHeaders/Widgets")
+include_directories("${CMAKE_SOURCE_DIR}/SDK/CHeaders/Wrappers")
+include_directories("${CMAKE_SOURCE_DIR}/SDK/CHeaders/XPLM")
+include_directories("${CMAKE_SOURCE_DIR}/hidapi")
 
 
-set_target_properties(plugin PROPERTIES RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/Xsaitekpanels" )
-set_target_properties(plugin PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin/Xsaitekpanels" )
-set_target_properties(plugin PROPERTIES OUTPUT_NAME "${PLUGIN_OUTPUT_FILENAME}")
+# Specify library search locations.
+if (WIN32)
+    list(APPEND CMAKE_LIBRARY_PATH "${CMAKE_SOURCE_DIR}/SDK/Libraries/Win")
+elseif (APPLE)
+    list(APPEND CMAKE_FRAMEWORK_PATH "${CMAKE_SOURCE_DIR}/SDK/Libraries/Mac")
+elseif (UNIX)
+
+endif ()
+
+# message (STATUS "CMAKE_LIBRARY_PATH" = ${CMAKE_LIBRARY_PATH})
+
+# Enable all X-Plane SDK APIs up to the newest version.
+add_definitions(-DXPLM200=1 -DXPLM210=1 -DXPLM300=1 -DXPLM301=1 -DXPLM303=1)
+# Define platform macros.
+add_definitions(-DAPL=$<BOOL:${APPLE}> -DIBM=$<BOOL:${WIN32}> -DLIN=$<AND:$<BOOL:${UNIX}>,$<NOT:$<BOOL:${APPLE}>>>)
+
+
+
+# Force-enable exception support. This is most likely redundant, although for C
+# code the default is the opposite. Since we are mixing C++ and C libraries,
+# safer to set it on?
+add_compile_options(-fexceptions)
+# On UNIX systems this makes symbols non-exported by default. On Windows this
+# option is simply ignored, since symbol visibility works differently there.
+add_compile_options(-fvisibility=hidden)
+
+# Enable stricter warnings and then disable some we are not interested in.
+add_compile_options(-Wall -Wpedantic -Wshadow -Wfloat-equal -Wextra)
+add_compile_options(-Wno-unused)
+
+# Always use position-independent code and highest optimization level (FPS!).
+add_compile_options(-O3 -fPIC)
+
+# Turn on Debug mode
+# add_compile_options(-g)
+
+# X-Plane plugin
+# FIXME: Split this into individual targets.
+list(APPEND XSAITEKPANELS_SRCS bippanel.cpp inireader.cpp multidata.cpp multipanel.cpp radio1data.cpp radio2data.cpp radio3data.cpp radiopanels.cpp)
+list(APPEND XSAITEKPANELS_SRCS readinifile.cpp saitekpanels.cpp switchdata.cpp switchpanel.cpp inireader.h saitekpanels.h)
+
+if (WIN32)
+    list(APPEND XSAITEKPANELS_SRCS hidapi/windows/hid.c)
+elseif (APPLE)
+    list(APPEND XSAITEKPANELS_SRCS hidapi/mac/hid.c)
+elseif (UNIX)
+    list(APPEND XSAITEKPANELS_SRCS hidapi/linux/hid.c)
+endif ()
+
+add_library(Xsaitekpanels SHARED ${XSAITEKPANELS_SRCS})
+
+
+target_compile_features(Xsaitekpanels PUBLIC cxx_std_11)
+
+
+
+if (APPLE)
+    # X-Plane 12 supports OS X 11.3+, so this should ensure FlyWithLua can run on
+    # all supported versions.
+    target_compile_options(Xsaitekpanels PUBLIC -mmacosx-version-min=11.3)
+    target_link_libraries(Xsaitekpanels -mmacosx-version-min=11.3)
+endif ()
+
+# Link OpenGL and OpenAL related libraries.
+find_package(OpenGL REQUIRED)  # apt install freeglut3-dev
+find_library(OPENAL_LIBRARY NAMES openal OpenAL OpenAL32)  # apt install libopenal-dev
+find_library(GLUT_LIBRARY NAMES glut GLUT glut64)  # apt install freeglut3-dev
+# target_link_libraries(xbtn2cmd ${OPENGL_LIBRARIES} ${OPENAL_LIBRARY} ${GLUT_LIBRARY})
+
+
+# Link X-Plane plugin system libraries. They are only provided for OS X and Windows.
+if (WIN32 OR APPLE)
+# if (WIN32)
+    find_library(XPLM_LIBRARY NAMES XPLM XPLM_64.lib)
+	find_library(XPWIDGETS_LIBRARY NAMES XPWidgets XPWidgets_64.lib)
+    target_link_libraries(Xsaitekpanels ${XPLM_LIBRARY} ${XPWIDGETS_LIBRARY})
+endif ()
+
+# Link OS-specific libraries HidApi depends on. Only supported for Windows and Linux.
+if ((WIN32 OR UNIX) AND NOT APPLE)
+    # HINTS is required to force CMake to search among the toolchain-provided libraries.
+    # This is important to make sure that the correct library is picked up on a system with
+    # several toolchains installed.
+    find_library(HIDAPIDEPS_LIBRARY NAMES setupapi udev HINTS ${CMAKE_C_IMPLICIT_LINK_DIRECTORIES})
+    target_link_libraries(Xsaitekpanels ${HIDAPIDEPS_LIBRARY})
+endif ()
+
+
+# Link library for dynamic loading of shared objects on UNIX systems.
+if (UNIX)
+    find_library(DL_LIBRARY dl)
+    target_link_libraries(Xsaitekpanels ${DL_LIBRARY})
+endif ()
+
+# Link OS X core system libraries.
+if (APPLE)
+    find_library(IOKIT_LIBRARY IOKit)
+    find_library(CORE_FOUNDATION_LIBRARY CoreFoundation)
+    find_library(GLUT_LIBRARY GLUT)
+    find_library(OpenGL_LIBRARY OpenGL)
+    find_library(Cocoa_LIBRARY Cocoa)
+
+    target_link_libraries(Xsaitekpanels ${IOKIT_LIBRARY} ${CORE_FOUNDATION_LIBRARY} ${GLUT_LIBRARY})
+    target_link_libraries(Xsaitekpanels ${OpenGL_LIBRARY} ${Cocoa_LIBRARY})
+endif ()
+
+if (WIN32)
+    # Unlike OS X and Linux we build standard libraries statically since X-Plane does not provide them.
+    target_link_libraries(Xsaitekpanels -static-libgcc -static-libstdc++ opengl32)
+    # MSYS2 for some reason always links against winpthread, so we have to work around it by statically linking the
+    # entire plugin. This allows building the plugin nativaly on Windows.
+    target_link_libraries(Xsaitekpanels -static)
+elseif (APPLE)
+    # Restrict set of symbols exported from the plugin. This reduces changes of
+    # conflict with other plugins, in particular ones with Lua interpreter
+    # embedded.
+    target_link_libraries(Xsaitekpanels "-exported_symbols_list ${CMAKE_SOURCE_DIR}/xsaitekpanels.sym_mac")
+	target_link_libraries(Xsaitekpanels "-framework XPLM -framework XPWidgets -ldl")
+elseif (UNIX)
+    # Specify additional runtime search laths for dynamically-linked libraries.
+    # Restrict set of symbols exported from the plugin. This reduces changes of
+    # conflict with other plugins, in particular ones with Lua interpreter
+    # embedded.
+    target_link_libraries(Xsaitekpanels -Wl,--version-script -Wl,${CMAKE_SOURCE_DIR}/xsaitekpanels.sym)
+endif ()
+
+
+set_target_properties(Xsaitekpanels PROPERTIES PREFIX "")
+if (WIN32)
+    set_target_properties(Xsaitekpanels PROPERTIES OUTPUT_NAME "win")
+elseif (APPLE)
+    set_target_properties(Xsaitekpanels PROPERTIES OUTPUT_NAME "mac")
+elseif (UNIX)
+    set_target_properties(Xsaitekpanels PROPERTIES OUTPUT_NAME "lin")
+endif ()
+set_target_properties(Xsaitekpanels PROPERTIES SUFFIX ".xpl")
+
+
+# set_target_properties(Xsaitekpanels PROPERTIES PREFIX "")
+# set_target_properties(Xsaitekpanels PROPERTIES OUTPUT_NAME "Xbtn2cmd")
+# set_target_properties(Xsaitekpanels PROPERTIES SUFFIX ".xpl")
+
+
+
+
