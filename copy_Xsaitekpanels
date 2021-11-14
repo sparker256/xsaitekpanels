@@ -1,9 +1,0 @@
-#!/bin/bash
-#
-
-scp release/Xsaitekpanels/mac.xpl bill@billsim-64-1604.local:X-Plane_Github_Plugins/xsaitekpanels/release/Xsaitekpanels/mac.xpl
-
-scp bill@billsim-64-1604.local:X-Plane_Github_Plugins/xsaitekpanels/target/Xsaitekpanels/mac.xpl target/Xsaitekpanels/mac.xpl
-
-#
-
