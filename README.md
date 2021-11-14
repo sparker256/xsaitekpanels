@@ -35,8 +35,8 @@ Bill
 2.  Checkout and configure the project:
 
     ```
-    git clone https://github.com/sparker256/xbtn2cmd.git
-    cd xbtn2cmd
+    git clone https://github.com/sparker256/xsaitekpanels.git
+    cd xsaitekpanels
     cmake -G "MinGW Makefiles" -S .\src -B .\build -DCMAKE_BUILD_TYPE=RelWithDebInfo
     ```
 
@@ -44,7 +44,7 @@ Bill
 
     ```
     cmake --build .\build
-    cp .\build\win.xpl .\Xbtn2cmd\64\
+    cp .\build\win.xpl .\Xsaitekpanels\64\
     ```
 
 ### On Ubuntu:
@@ -59,7 +59,7 @@ Bill
 2. Checkout and configure the project:
 
    ```
-   git clone https://github.com/sparker256/xbtn2cmd.git
+   git clone https://github.com/sparker256/xsaitekpanels.git
    cd xbtn2cmd
    cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
    ```
@@ -68,7 +68,7 @@ Bill
 
    ```
    cmake --build ./build
-   cp ./build/lin.xpl ./Xbtn2cmd/64
+   cp ./build/lin.xpl ./Xsaitekpanels/64
    ```
 
 ### On OS X:
@@ -78,7 +78,7 @@ Bill
 2. Checkout and configure the project:
 
    ```
-   git clone https://github.com/sparker256/xbtn2cmd.git
+   git clone https://github.com/sparker256/xsaitekpanels.git
    cd xbtn2cmd
    cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
    ```
@@ -87,4 +87,4 @@ Bill
 
    ```
    cmake --build ./build
-   cp ./build/mac.xpl ./Xbtn2cmd/64
+   cp ./build/mac.xpl ./Xsaitekpanels/64
