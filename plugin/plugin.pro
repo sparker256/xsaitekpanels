@@ -10,6 +10,7 @@ VERSION = 1.0.0
 INCLUDEPATH += ../src/SDK/CHeaders/XPLM
 INCLUDEPATH += ../src/SDK/CHeaders/Wrappers
 INCLUDEPATH += ../src/SDK/CHeaders/Widgets
+INCLUDEPATH += ../src/hidapi
 
 
 # Defined to use X-Plane SDK 2.0 capabilities - no backward compatibility before 9.0

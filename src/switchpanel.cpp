@@ -23,20 +23,20 @@ static int switchres, switchwres;
 static int gearled_haschanged = 0;
 static int gearled_haschanged_loop = 0;
 
-//static int MagOffSwitchAllreadyOn = 0;
-//static int MagOffSwitchAllreadyOff = 0;
+static int MagOffSwitchAllreadyOn = 0;
+static int MagOffSwitchAllreadyOff = 0;
 
 static int MagRightSwitchAllreadyOn = 0;
-//static int MagRightSwitchAllreadyOff = 0;
+static int MagRightSwitchAllreadyOff = 0;
 
-//static int MagLeftSwitchAllreadyOn = 0;
-//static int MagLeftSwitchAllreadyOff = 0;
+static int MagLeftSwitchAllreadyOn = 0;
+static int MagLeftSwitchAllreadyOff = 0;
 
-//static int MagBothSwitchAllreadyOn = 0;
-//static int MagBothSwitchAllreadyOff = 0;
+static int MagBothSwitchAllreadyOn = 0;
+static int MagBothSwitchAllreadyOff = 0;
 
-//static int MagStartSwitchAllreadyOn = 0;
-//static int MagStartSwitchAllreadyOff = 0;
+static int MagStartSwitchAllreadyOn = 0;
+static int MagStartSwitchAllreadyOff = 0;
 
 static int BatMasterSwitchAllreadyOn = 0;
 static int BatMasterSwitchAllreadyOff = 0;
@@ -157,26 +157,32 @@ void process_engines_mag_off_switch()
 
    if(magoffswitchenable == 2) {
        if(testbit(switchbuf,MAG_OFF)) {
-           XPLMCommandOnce(MagOffSwitchOnCmd);
-           XPLMCommandOnce(MagOff2SwitchOnCmd);
-           XPLMCommandOnce(MagOff3SwitchOnCmd);
-           XPLMCommandOnce(MagOff4SwitchOnCmd);
-           XPLMCommandOnce(MagOff5SwitchOnCmd);
-           XPLMCommandOnce(MagOff6SwitchOnCmd);
-           XPLMCommandOnce(MagOff7SwitchOnCmd);
-           XPLMCommandOnce(MagOff8SwitchOnCmd);
-
+           if (MagOffSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagOffSwitchOnCmd);
+               XPLMCommandOnce(MagOff2SwitchOnCmd);
+               XPLMCommandOnce(MagOff3SwitchOnCmd);
+               XPLMCommandOnce(MagOff4SwitchOnCmd);
+               XPLMCommandOnce(MagOff5SwitchOnCmd);
+               XPLMCommandOnce(MagOff6SwitchOnCmd);
+               XPLMCommandOnce(MagOff7SwitchOnCmd);
+               XPLMCommandOnce(MagOff8SwitchOnCmd);
+               MagOffSwitchAllreadyOn = 1;
+               MagOffSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,MAG_OFF)) {
-           XPLMCommandOnce(MagOffSwitchOffCmd);
-           XPLMCommandOnce(MagOff2SwitchOffCmd);
-           XPLMCommandOnce(MagOff3SwitchOffCmd);
-           XPLMCommandOnce(MagOff4SwitchOffCmd);
-           XPLMCommandOnce(MagOff5SwitchOffCmd);
-           XPLMCommandOnce(MagOff6SwitchOffCmd);
-           XPLMCommandOnce(MagOff7SwitchOffCmd);
-           XPLMCommandOnce(MagOff8SwitchOffCmd);
-
+           if (MagOffSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagOffSwitchOffCmd);
+               XPLMCommandOnce(MagOff2SwitchOffCmd);
+               XPLMCommandOnce(MagOff3SwitchOffCmd);
+               XPLMCommandOnce(MagOff4SwitchOffCmd);
+               XPLMCommandOnce(MagOff5SwitchOffCmd);
+               XPLMCommandOnce(MagOff6SwitchOffCmd);
+               XPLMCommandOnce(MagOff7SwitchOffCmd);
+               XPLMCommandOnce(MagOff8SwitchOffCmd);
+               MagOffSwitchAllreadyOff = 1;
+               MagOffSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
@@ -313,26 +319,32 @@ void process_engines_right_mag_switch()
 
    if(magrightswitchenable == 2) {
        if(testbit(switchbuf,MAG_RIGHT)) {
-           XPLMCommandOnce(MagRightSwitchOnCmd);
-           XPLMCommandOnce(MagRight2SwitchOnCmd);
-           XPLMCommandOnce(MagRight3SwitchOnCmd);
-           XPLMCommandOnce(MagRight4SwitchOnCmd);
-           XPLMCommandOnce(MagRight5SwitchOnCmd);
-           XPLMCommandOnce(MagRight6SwitchOnCmd);
-           XPLMCommandOnce(MagRight7SwitchOnCmd);
-           XPLMCommandOnce(MagRight8SwitchOnCmd);
-
+           if (MagRightSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagRightSwitchOnCmd);
+               XPLMCommandOnce(MagRight2SwitchOnCmd);
+               XPLMCommandOnce(MagRight3SwitchOnCmd);
+               XPLMCommandOnce(MagRight4SwitchOnCmd);
+               XPLMCommandOnce(MagRight5SwitchOnCmd);
+               XPLMCommandOnce(MagRight6SwitchOnCmd);
+               XPLMCommandOnce(MagRight7SwitchOnCmd);
+               XPLMCommandOnce(MagRight8SwitchOnCmd);
+               MagRightSwitchAllreadyOn = 1;
+               MagRightSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,MAG_RIGHT)) {
-           XPLMCommandOnce(MagRightSwitchOffCmd);
-           XPLMCommandOnce(MagRight2SwitchOffCmd);
-           XPLMCommandOnce(MagRight3SwitchOffCmd);
-           XPLMCommandOnce(MagRight4SwitchOffCmd);
-           XPLMCommandOnce(MagRight5SwitchOffCmd);
-           XPLMCommandOnce(MagRight6SwitchOffCmd);
-           XPLMCommandOnce(MagRight7SwitchOffCmd);
-           XPLMCommandOnce(MagRight8SwitchOffCmd);
-
+           if (MagRightSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagRightSwitchOffCmd);
+               XPLMCommandOnce(MagRight2SwitchOffCmd);
+               XPLMCommandOnce(MagRight3SwitchOffCmd);
+               XPLMCommandOnce(MagRight4SwitchOffCmd);
+               XPLMCommandOnce(MagRight5SwitchOffCmd);
+               XPLMCommandOnce(MagRight6SwitchOffCmd);
+               XPLMCommandOnce(MagRight7SwitchOffCmd);
+               XPLMCommandOnce(MagRight8SwitchOffCmd);
+               MagRightSwitchAllreadyOff = 1;
+               MagRightSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
@@ -458,24 +470,32 @@ void process_engines_left_mag_switch()
 
    if(magleftswitchenable == 2) {
        if(testbit(switchbuf,MAG_LEFT)) {
-           XPLMCommandOnce(MagLeftSwitchOnCmd);
-           XPLMCommandOnce(MagLeft2SwitchOnCmd);
-           XPLMCommandOnce(MagLeft3SwitchOnCmd);
-           XPLMCommandOnce(MagLeft4SwitchOnCmd);
-           XPLMCommandOnce(MagLeft5SwitchOnCmd);
-           XPLMCommandOnce(MagLeft6SwitchOnCmd);
-           XPLMCommandOnce(MagLeft7SwitchOnCmd);
-           XPLMCommandOnce(MagLeft8SwitchOnCmd);
+           if (MagLeftSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagLeftSwitchOnCmd);
+               XPLMCommandOnce(MagLeft2SwitchOnCmd);
+               XPLMCommandOnce(MagLeft3SwitchOnCmd);
+               XPLMCommandOnce(MagLeft4SwitchOnCmd);
+               XPLMCommandOnce(MagLeft5SwitchOnCmd);
+               XPLMCommandOnce(MagLeft6SwitchOnCmd);
+               XPLMCommandOnce(MagLeft7SwitchOnCmd);
+               XPLMCommandOnce(MagLeft8SwitchOnCmd);
+               MagLeftSwitchAllreadyOn = 1;
+               MagLeftSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,MAG_LEFT)) {
-           XPLMCommandOnce(MagLeftSwitchOffCmd);
-           XPLMCommandOnce(MagLeft2SwitchOffCmd);
-           XPLMCommandOnce(MagLeft3SwitchOffCmd);
-           XPLMCommandOnce(MagLeft4SwitchOffCmd);
-           XPLMCommandOnce(MagLeft5SwitchOffCmd);
-           XPLMCommandOnce(MagLeft6SwitchOffCmd);
-           XPLMCommandOnce(MagLeft7SwitchOffCmd);
-           XPLMCommandOnce(MagLeft8SwitchOffCmd);
+           if (MagLeftSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagLeftSwitchOffCmd);
+               XPLMCommandOnce(MagLeft2SwitchOffCmd);
+               XPLMCommandOnce(MagLeft3SwitchOffCmd);
+               XPLMCommandOnce(MagLeft4SwitchOffCmd);
+               XPLMCommandOnce(MagLeft5SwitchOffCmd);
+               XPLMCommandOnce(MagLeft6SwitchOffCmd);
+               XPLMCommandOnce(MagLeft7SwitchOffCmd);
+               XPLMCommandOnce(MagLeft8SwitchOffCmd);
+               MagLeftSwitchAllreadyOff = 1;
+               MagLeftSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
@@ -604,24 +624,32 @@ void process_engines_both_mag_switch()
 
    if(magbothswitchenable == 2) {
        if(testbit(switchbuf,MAG_BOTH)) {
-           XPLMCommandOnce(MagBothSwitchOnCmd);
-           XPLMCommandOnce(MagBoth2SwitchOnCmd);
-           XPLMCommandOnce(MagBoth3SwitchOnCmd);
-           XPLMCommandOnce(MagBoth4SwitchOnCmd);
-           XPLMCommandOnce(MagBoth5SwitchOnCmd);
-           XPLMCommandOnce(MagBoth6SwitchOnCmd);
-           XPLMCommandOnce(MagBoth7SwitchOnCmd);
-           XPLMCommandOnce(MagBoth8SwitchOnCmd);
+           if (MagBothSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagBothSwitchOnCmd);
+               XPLMCommandOnce(MagBoth2SwitchOnCmd);
+               XPLMCommandOnce(MagBoth3SwitchOnCmd);
+               XPLMCommandOnce(MagBoth4SwitchOnCmd);
+               XPLMCommandOnce(MagBoth5SwitchOnCmd);
+               XPLMCommandOnce(MagBoth6SwitchOnCmd);
+               XPLMCommandOnce(MagBoth7SwitchOnCmd);
+               XPLMCommandOnce(MagBoth8SwitchOnCmd);
+               MagBothSwitchAllreadyOn = 1;
+               MagBothSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,MAG_BOTH)) {
-           XPLMCommandOnce(MagBothSwitchOffCmd);
-           XPLMCommandOnce(MagBoth2SwitchOffCmd);
-           XPLMCommandOnce(MagBoth3SwitchOffCmd);
-           XPLMCommandOnce(MagBoth4SwitchOffCmd);
-           XPLMCommandOnce(MagBoth5SwitchOffCmd);
-           XPLMCommandOnce(MagBoth6SwitchOffCmd);
-           XPLMCommandOnce(MagBoth7SwitchOffCmd);
-           XPLMCommandOnce(MagBoth8SwitchOffCmd);
+           if (MagBothSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagBothSwitchOffCmd);
+               XPLMCommandOnce(MagBoth2SwitchOffCmd);
+               XPLMCommandOnce(MagBoth3SwitchOffCmd);
+               XPLMCommandOnce(MagBoth4SwitchOffCmd);
+               XPLMCommandOnce(MagBoth5SwitchOffCmd);
+               XPLMCommandOnce(MagBoth6SwitchOffCmd);
+               XPLMCommandOnce(MagBoth7SwitchOffCmd);
+               XPLMCommandOnce(MagBoth8SwitchOffCmd);
+               MagBothSwitchAllreadyOff = 1;
+               MagBothSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
@@ -755,25 +783,32 @@ void process_engines_start_switch()
 
    if(magstartswitchenable == 2) {
        if(testbit(switchbuf,ENG_START)) {
-           XPLMCommandOnce(MagStartSwitchOnCmd);
-           XPLMCommandOnce(MagStart2SwitchOnCmd);
-           XPLMCommandOnce(MagStart3SwitchOnCmd);
-           XPLMCommandOnce(MagStart4SwitchOnCmd);
-           XPLMCommandOnce(MagStart5SwitchOnCmd);
-           XPLMCommandOnce(MagStart6SwitchOnCmd);
-           XPLMCommandOnce(MagStart7SwitchOnCmd);
-           XPLMCommandOnce(MagStart8SwitchOnCmd);
-
+           if (MagStartSwitchAllreadyOn < 1) {
+               XPLMCommandOnce(MagStartSwitchOnCmd);
+               XPLMCommandOnce(MagStart2SwitchOnCmd);
+               XPLMCommandOnce(MagStart3SwitchOnCmd);
+               XPLMCommandOnce(MagStart4SwitchOnCmd);
+               XPLMCommandOnce(MagStart5SwitchOnCmd);
+               XPLMCommandOnce(MagStart6SwitchOnCmd);
+               XPLMCommandOnce(MagStart7SwitchOnCmd);
+               XPLMCommandOnce(MagStart8SwitchOnCmd);
+               MagStartSwitchAllreadyOn = 1;
+               MagStartSwitchAllreadyOff = 0;
+           }
        }
        if(!testbit(switchbuf,ENG_START)) {
-           XPLMCommandOnce(MagStartSwitchOffCmd);
-           XPLMCommandOnce(MagStart2SwitchOffCmd);
-           XPLMCommandOnce(MagStart3SwitchOffCmd);
-           XPLMCommandOnce(MagStart4SwitchOffCmd);
-           XPLMCommandOnce(MagStart5SwitchOffCmd);
-           XPLMCommandOnce(MagStart6SwitchOffCmd);
-           XPLMCommandOnce(MagStart7SwitchOffCmd);
-           XPLMCommandOnce(MagStart8SwitchOffCmd);
+           if (MagStartSwitchAllreadyOff < 1) {
+               XPLMCommandOnce(MagStartSwitchOffCmd);
+               XPLMCommandOnce(MagStart2SwitchOffCmd);
+               XPLMCommandOnce(MagStart3SwitchOffCmd);
+               XPLMCommandOnce(MagStart4SwitchOffCmd);
+               XPLMCommandOnce(MagStart5SwitchOffCmd);
+               XPLMCommandOnce(MagStart6SwitchOffCmd);
+               XPLMCommandOnce(MagStart7SwitchOffCmd);
+               XPLMCommandOnce(MagStart8SwitchOffCmd);
+               MagStartSwitchAllreadyOff = 1;
+               MagStartSwitchAllreadyOn = 0;
+           }
        }
        return;
    }
