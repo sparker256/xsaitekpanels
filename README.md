@@ -68,7 +68,8 @@ Bill
 
    ```
    cmake --build ./build
-   cp ./build/lin.xpl ./Xsaitekpanels/64
+   mkdir ./Xsaitekpanels/64
+   cp ./build/lin.xpl ./Xsaitekpanels/64/
    ```
 
 ### On OS X:
@@ -87,4 +88,6 @@ Bill
 
    ```
    cmake --build ./build
-   cp ./build/mac.xpl ./Xsaitekpanels/64
+   mkdir ./Xsaitekpanels/64
+   cp ./build/mac.xpl ./Xsaitekpanels/64/
+   ```
