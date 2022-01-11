@@ -93,14 +93,22 @@ static int acf_en_type[8];
 static float opencowl[8], closecowl[8];
 static float engn_mixt[8];
 
-static float panel_lights_switch_dataf_array[8];
-static float panel_lights_switch2_dataf_array[8];
-static float panel_lights_switch3_dataf_array[8];
-static float panel_lights_switch4_dataf_array[8];
-static float panel_lights_switch5_dataf_array[8];
-static float panel_lights_switch6_dataf_array[8];
-static float panel_lights_switch7_dataf_array[8];
-static float panel_lights_switch8_dataf_array[8];
+// WARNING by Mr Hyde:
+// I changed the following because the arry used in my test is a 32 elements float array
+// and previous definitions used just 8 elements arrays.
+// But probably with my changes these are useless (need to check to br really sure)
+static const unsigned char PANEL_LIGHT_SWITCH_MAX_SIZE = 32;
+
+typedef float PanelLightSwitchArray_t[PANEL_LIGHT_SWITCH_MAX_SIZE];
+
+static PanelLightSwitchArray_t panel_lights_switch_dataf_array;
+static PanelLightSwitchArray_t panel_lights_switch2_dataf_array;
+static PanelLightSwitchArray_t panel_lights_switch3_dataf_array;
+static PanelLightSwitchArray_t panel_lights_switch4_dataf_array;
+static PanelLightSwitchArray_t panel_lights_switch5_dataf_array;
+static PanelLightSwitchArray_t panel_lights_switch6_dataf_array;
+static PanelLightSwitchArray_t panel_lights_switch7_dataf_array;
+static PanelLightSwitchArray_t panel_lights_switch8_dataf_array;
 
 //float ThrottleList[8];
 
@@ -2560,6 +2568,61 @@ void process_cowl_flaps_switch()
 
 // ***************** Panel Lights *******************
 
+//!
+//! \brief Updates (if needed) float data reference array element
+//! 
+//! This method simply reads an element value from a data reference float array
+//! at a specific location/index, conputes the new raw value to write in data ref
+//! (according to specified new value "multiplied by 100") and then writes the array
+//! (only if computed new raw value does not correspond to current value).
+//!
+//! \param[in,out] dataRef        data reference handle to update (must point to a FLOAT array data reference)
+//! \param[in]     newValueBy100  value to be written in data reference but expressed with "magnitudo 100" (so real value to be written but multiplied by 100)
+//! \param[in]     index          index/float to read/write the specific element of specified data reference
+//! 
+//! \returns
+//! - true if the new value has been written in data reference at specified position (or if the value doen not need to be updated)
+//! - false otherwise (invalid parameter, invalid data reference...)
+//!
+bool updateFloatDFArrayElement(XPLMDataRef& dataRef, int newValueBy100, int index)
+{
+	if (dataRef == nullptr) {
+		// invalid data reference
+		return false;
+	}
+
+	if (index < 0) {
+		// negative/invalid index value, consider to log error
+		return false;
+	}
+
+	// As regards the check on upper limit/size of the data reference: at the beginning I thought to implement it
+	// but later I read in X-Plane SDK documentation that the check is already executed by  XPLMGetDatavf/XPLMSetDatavf
+	// so at the end I preferred to avoid another check
+	
+	// read current element value
+	float currentRawValue = 0.0f;
+	int res = XPLMGetDatavf(dataRef, &currentRawValue, index, 1);
+
+	if (res != 1) {
+		// failed to read element at pos offset, consider to log error
+		return false;
+	}
+
+	float newRawValue = (0.01f * newValueBy100);
+
+	if (newRawValue == currentRawValue) {
+		// value already set, nothing to do
+		return true; // do not consider this as an error
+	}
+
+	XPLMSetDatavf(dataRef, &newRawValue, index, 1);
+	// XPLMSetDatavf is a void function so does not return error validation code.
+	// At this point we can only return true
+	
+	return true;
+}
+
 void process_panel_lights_switch()
 {
     if(testbit(switchbuf,PANEL_LIGHTS)) {
@@ -2713,89 +2776,29 @@ void process_panel_lights_switch()
 
 
     if(panellightswitchenable == 5) {
+	// tryed to change the code to alter just the data reference array element pointed by offset and NOT the whole arrray
         if(testbit(switchbuf, PANEL_LIGHTS)) {
-            panel_lights_switch_dataf_on_value = panel_lights_switch_data_on_value;
-            panel_lights_switch_dataf_on_value = panel_lights_switch_dataf_on_value / 100.0f;
-            panel_lights_switch_dataf_array[panel_lights_switch_data_array_offset] = panel_lights_switch_dataf_on_value;
-            XPLMSetDatavf(PanelLightsData, panel_lights_switch_dataf_array, 0, panel_lights_switch_data_array_size);
-
-            panel_lights_switch2_dataf_on_value = panel_lights_switch2_data_on_value;
-            panel_lights_switch2_dataf_on_value = panel_lights_switch2_dataf_on_value / 100.0f;
-            panel_lights_switch2_dataf_array[panel_lights_switch2_data_array_offset] = panel_lights_switch2_dataf_on_value;
-            XPLMSetDatavf(PanelLights2Data, panel_lights_switch2_dataf_array, 0, panel_lights_switch2_data_array_size);
-
-            panel_lights_switch3_dataf_on_value = panel_lights_switch3_data_on_value;
-            panel_lights_switch3_dataf_on_value = panel_lights_switch3_dataf_on_value / 100.0f;
-            panel_lights_switch3_dataf_array[panel_lights_switch3_data_array_offset] = panel_lights_switch3_dataf_on_value;
-            XPLMSetDatavf(PanelLights3Data, panel_lights_switch3_dataf_array, 0, panel_lights_switch3_data_array_size);
-
-            panel_lights_switch4_dataf_on_value = panel_lights_switch4_data_on_value;
-            panel_lights_switch4_dataf_on_value = panel_lights_switch4_dataf_on_value / 100.0f;
-            panel_lights_switch4_dataf_array[panel_lights_switch4_data_array_offset] = panel_lights_switch4_dataf_on_value;
-            XPLMSetDatavf(PanelLights4Data, panel_lights_switch4_dataf_array, 0, panel_lights_switch4_data_array_size);
-
-            panel_lights_switch5_dataf_on_value = panel_lights_switch5_data_on_value;
-            panel_lights_switch5_dataf_on_value = panel_lights_switch5_dataf_on_value / 100.0f;
-            panel_lights_switch5_dataf_array[panel_lights_switch5_data_array_offset] = panel_lights_switch5_dataf_on_value;
-            XPLMSetDatavf(PanelLights5Data, panel_lights_switch5_dataf_array, 0, panel_lights_switch5_data_array_size);
-
-            panel_lights_switch6_dataf_on_value = panel_lights_switch6_data_on_value;
-            panel_lights_switch6_dataf_on_value = panel_lights_switch6_dataf_on_value / 100.0f;
-            panel_lights_switch6_dataf_array[panel_lights_switch6_data_array_offset] = panel_lights_switch6_dataf_on_value;
-            XPLMSetDatavf(PanelLights6Data, panel_lights_switch6_dataf_array, 0, panel_lights_switch6_data_array_size);
-
-            panel_lights_switch7_dataf_on_value = panel_lights_switch7_data_on_value;
-            panel_lights_switch7_dataf_on_value = panel_lights_switch7_dataf_on_value / 100.0f;
-            panel_lights_switch7_dataf_array[panel_lights_switch7_data_array_offset] = panel_lights_switch7_dataf_on_value;
-            XPLMSetDatavf(PanelLights7Data, panel_lights_switch7_dataf_array, 0, panel_lights_switch7_data_array_size);
-
-            panel_lights_switch8_dataf_on_value = panel_lights_switch8_data_on_value;
-            panel_lights_switch8_dataf_on_value = panel_lights_switch8_dataf_on_value / 100.0f;
-            panel_lights_switch8_dataf_array[panel_lights_switch8_data_array_offset] = panel_lights_switch8_dataf_on_value;
-            XPLMSetDatavf(PanelLights8Data, panel_lights_switch8_dataf_array, 0, panel_lights_switch8_data_array_size);
-
+		updateFloatDFArrayElement(PanelLightsData, panel_lights_switch_data_on_value, panel_lights_switch_data_array_offset);
+		updateFloatDFArrayElement(PanelLights2Data, panel_lights_switch2_data_on_value, panel_lights_switch2_data_array_offset);
+		updateFloatDFArrayElement(PanelLights3Data, panel_lights_switch3_data_on_value, panel_lights_switch3_data_array_offset);
+		updateFloatDFArrayElement(PanelLights4Data, panel_lights_switch4_data_on_value, panel_lights_switch4_data_array_offset);
+		updateFloatDFArrayElement(PanelLights5Data, panel_lights_switch5_data_on_value, panel_lights_switch5_data_array_offset);
+		updateFloatDFArrayElement(PanelLights6Data, panel_lights_switch6_data_on_value, panel_lights_switch6_data_array_offset);
+		updateFloatDFArrayElement(PanelLights7Data, panel_lights_switch7_data_on_value, panel_lights_switch7_data_array_offset);
+		updateFloatDFArrayElement(PanelLights8Data, panel_lights_switch8_data_on_value, panel_lights_switch8_data_array_offset);
         }
+
+	// not sure: can be the following be replaced with just "else" to previous if?
         if(!testbit(switchbuf, PANEL_LIGHTS)) {
-            panel_lights_switch_dataf_off_value = panel_lights_switch_data_off_value;
-            panel_lights_switch_dataf_off_value = panel_lights_switch_dataf_off_value / 100.0f;
-            panel_lights_switch_dataf_array[panel_lights_switch_data_array_offset] = panel_lights_switch_dataf_off_value;
-            XPLMSetDatavf(PanelLightsData, panel_lights_switch_dataf_array, 0, panel_lights_switch_data_array_size);
-
-            panel_lights_switch2_dataf_off_value = panel_lights_switch2_data_off_value;
-            panel_lights_switch2_dataf_off_value = panel_lights_switch2_dataf_off_value / 100.0f;
-            panel_lights_switch2_dataf_array[panel_lights_switch2_data_array_offset] = panel_lights_switch2_dataf_off_value;
-            XPLMSetDatavf(PanelLights2Data, panel_lights_switch2_dataf_array, 0, panel_lights_switch2_data_array_size);
-
-            panel_lights_switch3_dataf_off_value = panel_lights_switch3_data_off_value;
-            panel_lights_switch3_dataf_off_value = panel_lights_switch3_dataf_off_value / 100.0f;
-            panel_lights_switch3_dataf_array[panel_lights_switch3_data_array_offset] = panel_lights_switch3_dataf_off_value;
-            XPLMSetDatavf(PanelLights3Data, panel_lights_switch3_dataf_array, 0, panel_lights_switch3_data_array_size);
-
-            panel_lights_switch4_dataf_off_value = panel_lights_switch4_data_off_value;
-            panel_lights_switch4_dataf_off_value = panel_lights_switch4_dataf_off_value / 100.0f;
-            panel_lights_switch4_dataf_array[panel_lights_switch4_data_array_offset] = panel_lights_switch4_dataf_off_value;
-            XPLMSetDatavf(PanelLights4Data, panel_lights_switch4_dataf_array, 0, panel_lights_switch4_data_array_size);
-
-            panel_lights_switch5_dataf_off_value = panel_lights_switch5_data_off_value;
-            panel_lights_switch5_dataf_off_value = panel_lights_switch5_dataf_off_value / 100.0f;
-            panel_lights_switch5_dataf_array[panel_lights_switch5_data_array_offset] = panel_lights_switch5_dataf_off_value;
-            XPLMSetDatavf(PanelLights5Data, panel_lights_switch5_dataf_array, 0, panel_lights_switch5_data_array_size);
-
-            panel_lights_switch6_dataf_off_value = panel_lights_switch6_data_off_value;
-            panel_lights_switch6_dataf_off_value = panel_lights_switch6_dataf_off_value / 100.0f;
-            panel_lights_switch6_dataf_array[panel_lights_switch6_data_array_offset] = panel_lights_switch6_dataf_off_value;
-            XPLMSetDatavf(PanelLights6Data, panel_lights_switch6_dataf_array, 0, panel_lights_switch6_data_array_size);
-
-            panel_lights_switch7_dataf_off_value = panel_lights_switch7_data_off_value;
-            panel_lights_switch7_dataf_off_value = panel_lights_switch7_dataf_off_value / 100.0f;
-            panel_lights_switch7_dataf_array[panel_lights_switch7_data_array_offset] = panel_lights_switch7_dataf_off_value;
-            XPLMSetDatavf(PanelLights7Data, panel_lights_switch7_dataf_array, 0, panel_lights_switch7_data_array_size);
-
-            panel_lights_switch8_dataf_off_value = panel_lights_switch8_data_off_value;
-            panel_lights_switch8_dataf_off_value = panel_lights_switch8_dataf_off_value / 100.0f;
-            panel_lights_switch8_dataf_array[panel_lights_switch8_data_array_offset] = panel_lights_switch8_dataf_off_value;
-            XPLMSetDatavf(PanelLights8Data, panel_lights_switch8_dataf_array, 0, panel_lights_switch8_data_array_size);
-        }
+		updateFloatDFArrayElement(PanelLightsData, panel_lights_switch_data_off_value, panel_lights_switch_data_array_offset);
+		updateFloatDFArrayElement(PanelLights2Data, panel_lights_switch2_data_off_value, panel_lights_switch2_data_array_offset);
+		updateFloatDFArrayElement(PanelLights3Data, panel_lights_switch3_data_off_value, panel_lights_switch3_data_array_offset);
+		updateFloatDFArrayElement(PanelLights4Data, panel_lights_switch4_data_off_value, panel_lights_switch4_data_array_offset);
+		updateFloatDFArrayElement(PanelLights5Data, panel_lights_switch5_data_off_value, panel_lights_switch5_data_array_offset);
+		updateFloatDFArrayElement(PanelLights6Data, panel_lights_switch6_data_off_value, panel_lights_switch6_data_array_offset);
+		updateFloatDFArrayElement(PanelLights7Data, panel_lights_switch7_data_off_value, panel_lights_switch7_data_array_offset);
+		updateFloatDFArrayElement(PanelLights8Data, panel_lights_switch8_data_off_value, panel_lights_switch8_data_array_offset);
+    	}
         return;
     }
 
