@@ -2217,6 +2217,7 @@ void process_nav_button()
             if(testbit(multibuf,NAV_BUTTON)) {
                 switch (XPLMGetDatai(HsiSelector)) {
                 case 0:
+                    XPLMCommandOnce(NavButtonVorlocRemapableCmd);
                 case 1:
                     XPLMCommandOnce(NavButtonVorlocRemapableCmd);
                     break;
@@ -2229,6 +2230,76 @@ void process_nav_button()
         }
         switch (XPLMGetDatai(HsiSelector)) {
         case 0:
+            // Use LED to match power state
+            if (lightdatareferencetype == 1) {
+                if (XPLMGetDataf(NavLightVorlocRemapableData) > .50) {
+                    navlightvorlocdata = 1;
+                } else if (XPLMGetDataf(NavLightVorlocRemapableData) < .50) {
+                    navlightvorlocdata = 0;
+                }
+                switch(navlightvorlocdata) {
+                case 1:
+                    btnleds |= (1<<2);
+                    break;
+                case 0:
+                    if (XPLMGetDataf(NavLightVorlocFlashRemapableData) > .50) {
+                        navlightflashvorlocdata = 1;
+                    } else if (XPLMGetDataf(NavLightVorlocFlashRemapableData) < .50) {
+                        navlightflashvorlocdata = 0;
+                    }
+                    if (navlightflashvorlocdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<2);
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                    } else {
+                        btnleds &= ~(1<<2);
+                    }
+                    break;
+                }
+
+            } else if (lightdatareferencetype == 2) {
+
+                    switch(XPLMGetDatai(NavLightVorlocRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<2);
+                        break;
+                    case 0:
+                        navlightflashvorlocdata = XPLMGetDatai(NavLightVorlocFlashRemapableData);
+
+                        if (navlightflashvorlocdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<2);
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                        break;
+                    }
+
+            } else if (lightdatareferencetype == 3) {
+                navlightvorlocdata = XPLMGetDatai(NavLightVorlocRemapableData);
+                switch(navlightvorlocdata) {
+                case 2:
+                    btnleds |= (1<<2);   // * set bit 2 in btnleds to 1 *
+                    break;
+                case 1:
+                    if (flashon == 1) {
+                          btnleds |= (1<<2);   // * set bit 1 in btnleds to 1 *
+                    }else{
+                          btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                    }
+                    break;
+                case 0:
+                    btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                    break;
+                }
+            }
+
+            break;
         case 1:
             // Use LED to match power state
             if (lightdatareferencetype == 1) {
@@ -2380,6 +2451,7 @@ void process_nav_button()
             if(testbit(multibuf,NAV_BUTTON)) {
                 switch (XPLMGetDatai(HsiSelector)) {
                 case 0:
+                    XPLMSetDatai(NavButtonVorlocRemapableData, 1);
                 case 1:
                     XPLMSetDatai(NavButtonVorlocRemapableData, 1);
                     break;
@@ -2392,6 +2464,7 @@ void process_nav_button()
         } else if(!testbit(multibuf,NAV_BUTTON)) {
                 switch (XPLMGetDatai(HsiSelector)) {
                 case 0:
+                    XPLMSetDatai(NavButtonVorlocRemapableData, 0);
                 case 1:
                     XPLMSetDatai(NavButtonVorlocRemapableData, 0);
                     break;
@@ -2404,6 +2477,75 @@ void process_nav_button()
 
         switch (XPLMGetDatai(HsiSelector)) {
         case 0:
+            if (lightdatareferencetype == 1) {
+                if (XPLMGetDataf(NavLightVorlocRemapableData) > .50) {
+                    navlightvorlocdata = 1;
+                } else if (XPLMGetDataf(NavLightVorlocRemapableData) < .50) {
+                    navlightvorlocdata = 0;
+                }
+                switch(navlightvorlocdata) {
+                case 1:
+                    btnleds |= (1<<2);
+                    break;
+                case 0:
+                    if (XPLMGetDataf(NavLightVorlocFlashRemapableData) > .50) {
+                        navlightflashvorlocdata = 1;
+                    } else if (XPLMGetDataf(NavLightVorlocFlashRemapableData) < .50) {
+                        navlightflashvorlocdata = 0;
+                    }
+                    if (navlightflashvorlocdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<2);
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                    } else {
+                        btnleds &= ~(1<<2);
+                    }
+                    break;
+                }
+
+            } else if (lightdatareferencetype == 2) {
+
+                    switch(XPLMGetDatai(NavLightVorlocRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<2);
+                        break;
+                    case 0:
+                        navlightflashvorlocdata = XPLMGetDatai(NavLightVorlocFlashRemapableData);
+
+                        if (navlightflashvorlocdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<2);
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                        break;
+                    }
+
+            } else if (lightdatareferencetype == 3) {
+                navlightvorlocdata = XPLMGetDatai(NavLightVorlocRemapableData);
+                switch(navlightvorlocdata) {
+                  case 2:
+                        btnleds |= (1<<2);   // * set bit 2 in btnleds to 1 *
+                        break;
+                      case 1:
+                    if (flashon == 1) {
+                          btnleds |= (1<<2);   // * set bit 1 in btnleds to 1 *
+                    }else{
+                          btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                    }
+                    break;
+                  case 0:
+                        btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                    break;
+                }
+            }
+
+            break;
         case 1:
             if (lightdatareferencetype == 1) {
                 if (XPLMGetDataf(NavLightVorlocRemapableData) > .50) {
@@ -2553,6 +2695,12 @@ void process_nav_button()
                 lastappos2 = XPLMGetDatai(NavButtonLnavRemapableData);
                 switch (XPLMGetDatai(HsiSelector)) {
                 case 0:
+                    if (lastappos == 1) {
+                        XPLMSetDatai(NavButtonVorlocRemapableData, 0);
+                    } else {
+                        XPLMSetDatai(NavButtonVorlocRemapableData, 1);
+                    }
+                    break;
                 case 1:
                     if (lastappos == 1) {
                         XPLMSetDatai(NavButtonVorlocRemapableData, 0);
@@ -2575,6 +2723,75 @@ void process_nav_button()
 
         switch (XPLMGetDatai(HsiSelector)) {
         case 0:
+            if (lightdatareferencetype == 1) {
+                if (XPLMGetDataf(NavLightVorlocRemapableData) > .50) {
+                    navlightvorlocdata = 1;
+                } else if (XPLMGetDataf(NavLightVorlocRemapableData) < .50) {
+                    navlightvorlocdata = 0;
+                }
+                switch(navlightvorlocdata) {
+                case 1:
+                    btnleds |= (1<<2);
+                    break;
+                case 0:
+                    if (XPLMGetDataf(NavLightVorlocFlashRemapableData) > .50) {
+                        navlightflashvorlocdata = 1;
+                    } else if (XPLMGetDataf(NavLightVorlocFlashRemapableData) < .50) {
+                        navlightflashvorlocdata = 0;
+                    }
+                    if (navlightflashvorlocdata) {
+                        if (flashon == 1) {
+                            btnleds |= (1<<2);
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                    } else {
+                        btnleds &= ~(1<<2);
+                    }
+                    break;
+                }
+
+            } else if (lightdatareferencetype == 2) {
+
+                    switch(XPLMGetDatai(NavLightVorlocRemapableData)) {
+                    case 1:
+                        btnleds |= (1<<2);
+                        break;
+                    case 0:
+                        navlightflashvorlocdata = XPLMGetDatai(NavLightVorlocFlashRemapableData);
+
+                        if (navlightflashvorlocdata) {
+                            if (flashon == 1) {
+                                btnleds |= (1<<2);
+                            } else {
+                                btnleds &= ~(1<<2);
+                            }
+                        } else {
+                            btnleds &= ~(1<<2);
+                        }
+                        break;
+                    }
+
+            } else if (lightdatareferencetype == 3) {
+                navlightvorlocdata = XPLMGetDatai(NavLightVorlocRemapableData);
+                switch(XPLMGetDatai(NavLightVorlocRemapableData)) {
+                  case 2:
+                    btnleds |= (1<<2);   // * set bit 2 in btnleds to 1 *
+                    break;
+                  case 1:
+                    if (flashon == 1) {
+                    btnleds |= (1<<2);   // * set bit 1 in btnleds to 1 *
+                    } else {
+                        btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                    }
+                    break;
+                  case 0:
+                        btnleds &= ~(1<<2);   // * clear bit 2 in btnleds to 0 *
+                    break;
+                }
+            }
+
+            break;
         case 1:
             if (lightdatareferencetype == 1) {
                 if (XPLMGetDataf(NavLightVorlocRemapableData) > .50) {
