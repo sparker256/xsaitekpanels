@@ -6,7 +6,7 @@
 #   * -DCREATECOMPLETEEDITION=XXX, where XXX is true or false. Default is true.
 
 cmake_minimum_required(VERSION 3.9)
-project(Xsaitekpanels VERSION 2.8.0 DESCRIPTION "Xsaitekpanels X-Plane plugin")
+project(Xsaitekpanels VERSION 2.8.2 DESCRIPTION "Xsaitekpanels X-Plane plugin")
 
 # X-Plane supports OS X 10.10+, so this should ensure FlyWithLua can run on
 # all supported versions.

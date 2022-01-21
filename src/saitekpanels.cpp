@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** November 14  2021   **************
+// ****** Jan 21  2022   **************
 
 #define PLUGIN_VERSION "2.82 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 281
+#define PLUGIN_VERSION_NUMBER 282
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
