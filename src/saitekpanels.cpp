@@ -2,7 +2,7 @@
 // ****  William R. Good   ***********
 // ****** November 14  2021   **************
 
-#define PLUGIN_VERSION "2.81 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION "2.82 stable build " __DATE__ " " __TIME__
 #define PLUGIN_VERSION_NUMBER 281
 
 #include "XPLMDisplay.h"
