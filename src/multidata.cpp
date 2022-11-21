@@ -295,7 +295,7 @@ void process_multi_find_xplane_datareference()
       ApRevStat = XPLMFindDataRef("sim/cockpit2/autopilot/backcourse_status");
 
 
-      MHdg = XPLMFindDataRef("sim/flightmodel/position/magpsi");
+      MHdg = XPLMFindDataRef("sim/flightmodel/position/mag_psi");
 
       AirspeedIsMach = XPLMFindDataRef("sim/cockpit/autopilot/airspeed_is_mach");
       Airspeed = XPLMFindDataRef("sim/cockpit/autopilot/airspeed");

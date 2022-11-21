@@ -344,7 +344,11 @@ void process_switch_find_xplane_datareference()
 
 {
     // **************** Find Switch Panel Data Ref *******************
-    AntiIce           = XPLMFindDataRef("sim/cockpit/switches/anti_ice_on");
+    AntiIceInletHeat    = XPLMFindDataRef("sim/cockpit/switches/anti_ice_inlet_heat");
+    AntiIcePropHeat     = XPLMFindDataRef("sim/cockpit/switches/anti_ice_prop_heat");
+    AntiIceWindowHeat   = XPLMFindDataRef("sim/cockpit/switches/anti_ice_window_heat");
+    AntiIceAoaHeat      = XPLMFindDataRef("sim/cockpit/switches/anti_ice_AOA_heat");
+
     CockpitLights     = XPLMFindDataRef("sim/cockpit/electrical/cockpit_lights");
     CowlFlaps         = XPLMFindDataRef("sim/flightmodel/engine/ENGN_cowl");
     GearRetract       = XPLMFindDataRef("sim/aircraft/gear/acf_gear_retract");

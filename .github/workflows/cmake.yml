@@ -1,16 +1,11 @@
 name: CMake
 
-on:
-  push:
-    branches: [ "*" ]
-  pull_request:
-    branches: [ "*" ]
-  release:
-    type: [created, edited]
+on: [push]
 
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: RelWithDebInfo
+  XSP_VERSION: 3.0.0
 
 jobs:
   build:
@@ -20,13 +15,13 @@ jobs:
         os:
           - ubuntu-latest
           - windows-latest
-          - macos-11          
-#          - macos-latest          
+          - macos-latest          
+         
 
     runs-on: ${{matrix.os}}
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
 
     - name: "Windows: Configure environment"
       if: runner.os == 'Windows'
@@ -53,7 +48,7 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
       
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v3
       with:
         name: binaries
         path: ${{github.workspace}}/build/*.xpl
@@ -64,29 +59,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: binaries
           path: Xsaitekpanels/64
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
-          name: Xsaitekpanels_plugin
+          name: Xsaitekpanels_v${{env.XSP_VERSION}}
           path: |
             ${{github.workspace}}/Xsaitekpanels*
           if-no-files-found: error
-
-      - name: Create plugin archive
-        if: github.event_name == 'release'
-        run: zip -r Xsaitekpanels.zip Xsaitekpanels/
-
-      - name: Upload binaries to release
-        if: github.event_name == 'release'
-        uses: svenstaro/upload-release-action@v2
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: Xsaitekpanels.zip
-          tag: ${{ github.ref }}
-          overwrite: true

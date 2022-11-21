@@ -1,0 +1,248 @@
+bgood/xsaitekpanels/version	int	y
+bgood/xsaitekpanels/fnbutton/status	int	y
+bgood/xsaitekpanels/leftstartfnbutton/status	int	y	
+bgood/xsaitekpanels/switchpanel/count	int	y
+bgood/xsaitekpanels/radiopanel/count	int	y
+bgood/xsaitekpanels/multipanel/count	int	y
+bgood/xsaitekpanels/tpmpanel/count	int	y
+bgood/xsaitekpanels/sharedata/integer1	int	y
+bgood/xsaitekpanels/sharedata/integer2	int	y
+bgood/xsaitekpanels/sharedata/integer3	int	y
+bgood/xsaitekpanels/sharedata/integer4	int	y
+bgood/xsaitekpanels/sharedata/integer5	int	y
+bgood/xsaitekpanels/sharedata/integer6	int	y
+bgood/xsaitekpanels/sharedata/integer7	int	y
+bgood/xsaitekpanels/sharedata/integer8	int	y
+bgood/xsaitekpanels/sharedata/integer9	int	y
+bgood/xsaitekpanels/sharedata/integer10	int	y
+bgood/xsaitekpanels/sharedata/integer11	int	y
+bgood/xsaitekpanels/sharedata/integer12	int	y
+bgood/xsaitekpanels/sharedata/integer13	int	y
+bgood/xsaitekpanels/sharedata/integer14	int	y
+bgood/xsaitekpanels/sharedata/integer15	int	y
+bgood/xsaitekpanels/sharedata/integer16	int	y
+bgood/xsaitekpanels/sharedata/integer17	int	y
+bgood/xsaitekpanels/sharedata/integer18	int	y
+bgood/xsaitekpanels/sharedata/integer19	int	y
+bgood/xsaitekpanels/sharedata/integer20	int	y
+bgood/xsaitekpanels/sharedata/float1	float	y
+bgood/xsaitekpanels/sharedata/float2	float	y
+bgood/xsaitekpanels/sharedata/float3	float	y
+bgood/xsaitekpanels/sharedata/float4	float	y
+bgood/xsaitekpanels/sharedata/float5	float	y
+bgood/xsaitekpanels/sharedata/float6	float	y
+bgood/xsaitekpanels/sharedata/float7	float	y
+bgood/xsaitekpanels/sharedata/float8	float	y
+bgood/xsaitekpanels/sharedata/float9	float	y
+bgood/xsaitekpanels/sharedata/float10	float	y
+bgood/xsaitekpanels/sharedata/float11	float	y
+bgood/xsaitekpanels/sharedata/float12	float	y
+bgood/xsaitekpanels/sharedata/float13	float	y
+bgood/xsaitekpanels/sharedata/float14	float	y
+bgood/xsaitekpanels/sharedata/float15	float	y
+bgood/xsaitekpanels/sharedata/float16	float	y
+bgood/xsaitekpanels/sharedata/float17	float	y
+bgood/xsaitekpanels/sharedata/float18	float	y
+bgood/xsaitekpanels/sharedata/float19	float	y
+bgood/xsaitekpanels/sharedata/float20	float	y
+bgood/xsaitekpanels/switchpanel/startoff/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/startright/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/startleft/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/startboth/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/startstart/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/bat/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/alt/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/av/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/fuel/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/dice/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/pitot/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/gearup/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/geardn/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/cowl/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/panel/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/beacon/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/nav/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/strobe/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/taxi/status	int	y	bool
+bgood/xsaitekpanels/switchpanel/landing/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprcom1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprcom2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprnav1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprnav2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1upradf/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdme/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprxpdr/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprcorseinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprcorsedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprfineinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprfinedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprcorseincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprcorsedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprfineincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprfinedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1upractstby/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit1/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit2/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit3/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit4/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit5/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit6/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit7/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit8/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit9/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1uprdigit10/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1writenow	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrcom1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrcom2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrnav1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrnav2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwradf/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdme/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrxpdr/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrcorseinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrcorsedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrfineinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrfinedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrcorseincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrcorsedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrfineincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrfinedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwractstby/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit1/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit2/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit3/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit4/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit5/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit6/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit7/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit8/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit9/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad1lwrdigit10/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprcom1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprcom2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprnav1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprnav2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2upradf/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdme/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprxpdr/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprcorseinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprcorsedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprfineinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprfinedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprcorseincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprcorsedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprfineincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprfinedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2upractstby/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit1/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit2/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit3/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit4/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit5/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit6/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit7/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit8/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit9/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2uprdigit10/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2writenow	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrcom1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrcom2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrnav1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrnav2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwradf/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdme/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrxpdr/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrcorseinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrcorsedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrfineinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrfinedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrcorseincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrcorsedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrfineincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrfinedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwractstby/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit1/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit2/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit3/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit4/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit5/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit6/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit7/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit8/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit9/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad2lwrdigit10/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprcom1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprcom2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprnav1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprnav2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3upradf/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdme/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprxpdr/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprcorseinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprcorsedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprfineinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprfinedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprcorseincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprcorsedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprfineincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprfinedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3upractstby/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit1/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit2/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit3/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit4/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit5/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit6/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit7/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit8/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit9/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3uprdigit10/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3writenow	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrcom1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrcom2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrnav1/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrnav2/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwradf/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdme/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrxpdr/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrcorseinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrcorsedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrfineinc/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrfinedec/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrcorseincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrcorsedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrfineincticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrfinedecticks/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwractstby/status	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit1/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit2/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit3/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit4/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit5/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit6/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit7/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit8/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit9/value	int	y	bool
+bgood/xsaitekpanels/radiopanel/rad3lwrdigit10/value	int	y	bool
+bgood/xsaitekpanels/multipanel/altswitch/status	int	y	bool
+bgood/xsaitekpanels/multipanel/vsswitch/status	int	y	bool
+bgood/xsaitekpanels/multipanel/iasswitch/status	int	y	bool
+bgood/xsaitekpanels/multipanel/hdgswitch/status	int	y	bool
+bgood/xsaitekpanels/multipanel/crsswitch/status	int	y	bool
+bgood/xsaitekpanels/multipanel/knobinc/status	int	y	bool
+bgood/xsaitekpanels/multipanel/knobdec/status	int	y	bool
+bgood/xsaitekpanels/multipanel/knobincticks/status	int	y	bool
+bgood/xsaitekpanels/multipanel/knobdecticks/status	int	y	bool
+bgood/xsaitekpanels/multipanel/at/status	int	y	bool
+bgood/xsaitekpanels/multipanel/trimup/status	int	y	bool
+bgood/xsaitekpanels/multipanel/trimdn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/flapsup/status	int	y	bool
+bgood/xsaitekpanels/multipanel/flapsdn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/apbtn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/hdgbtn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/navbtn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/iasbtn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/altbtn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/vsbtn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/aprbtn/status	int	y	bool
+bgood/xsaitekpanels/multipanel/revbtn/status	int	y	bool

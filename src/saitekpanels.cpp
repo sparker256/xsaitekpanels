@@ -2,8 +2,8 @@
 // ****  William R. Good   ***********
 // ****** Jan 21  2022   **************
 
-#define PLUGIN_VERSION "2.82 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 282
+#define PLUGIN_VERSION "3.00 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 300
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -855,7 +855,11 @@ XPLMDataRef BatArrayOnDR = NULL, IgnSwitchArray = NULL;
 XPLMDataRef EngnMixt = NULL, IgniterOn = NULL;
 XPLMDataRef AcfEnType = NULL;
 
-XPLMDataRef CowlFlaps = NULL, CockpitLights = NULL, AntiIce = NULL;
+XPLMDataRef CowlFlaps = NULL, CockpitLights = NULL;
+
+XPLMDataRef AntiIceInletHeat = NULL; XPLMDataRef AntiIcePropHeat = NULL;
+XPLMDataRef AntiIceWindowHeat = NULL; XPLMDataRef AntiIceAoaHeat = NULL;
+
 XPLMDataRef GearRetract = NULL, OnGround = NULL, LandingGearStatus = {NULL};
 XPLMDataRef Gear1Fail = NULL, Gear2Fail = NULL, Gear3Fail = NULL;
 

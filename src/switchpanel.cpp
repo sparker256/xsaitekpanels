@@ -2029,10 +2029,17 @@ void process_de_ice_switch()
 
     if(deiceswitchenable == 1) {
         if(testbit(switchbuf,DE_ICE)) {
-           XPLMSetDatai(AntiIce, 1);
+           XPLMSetDatai(AntiIceInletHeat, 1);
+           XPLMSetDatai(AntiIcePropHeat, 1);
+           XPLMSetDatai(AntiIceWindowHeat, 1);
+           XPLMSetDatai(AntiIceAoaHeat, 1);
+
         }
         if(!testbit(switchbuf,DE_ICE)) {
-           XPLMSetDatai(AntiIce, 0);
+           XPLMSetDatai(AntiIceInletHeat, 0);
+           XPLMSetDatai(AntiIcePropHeat, 0);
+           XPLMSetDatai(AntiIceWindowHeat, 0);
+           XPLMSetDatai(AntiIceAoaHeat, 0);
         }
 
         return;

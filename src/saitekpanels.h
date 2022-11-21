@@ -1934,7 +1934,11 @@ extern XPLMDataRef BatArrayOnDR, IgnSwitchArray;
 extern XPLMDataRef EngnMixt, IgniterOn;
 extern XPLMDataRef AcfEnType;
 
-extern XPLMDataRef CowlFlaps, CockpitLights, AntiIce;
+extern XPLMDataRef CowlFlaps, CockpitLights;
+
+extern XPLMDataRef AntiIceInletHeat, AntiIcePropHeat;
+extern XPLMDataRef AntiIceWindowHeat, AntiIceAoaHeat;
+
 extern XPLMDataRef GearRetract, OnGround, LandingGearStatus;
 extern XPLMDataRef Gear1Fail, Gear2Fail, Gear3Fail;
 

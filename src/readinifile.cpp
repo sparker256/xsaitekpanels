@@ -283,7 +283,7 @@ void process_read_ini_file()
             }
         }
         else {
-            XPLMDebugString("\nXsaitekpanels: Error ifile2 == false \n");
+            XPLMDebugString("\nXsaitekpanels: Error xsaitekpanels.ini not found in plugin path\n");
             return;
         }
 

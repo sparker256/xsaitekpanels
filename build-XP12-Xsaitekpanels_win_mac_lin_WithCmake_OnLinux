@@ -1,0 +1,42 @@
+#!/bin/bash
+#
+# How to run
+# cd Xsaitekpanels repo
+# ./build-XP12-Xsaitekpanels_win_mac_lin_WithCmake_OnLinux
+
+rm -r Xsaitekpanels/64/*
+
+
+# Windows build
+
+ rm -r build/*
+ cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=../src/Toolchain-mingw-w64-x86-64.cmake
+ cmake --build ./build -v
+ cp ./build/win.xpl ./Xsaitekpanels/64/
+
+
+# Linux build
+
+rm -r build/*
+cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake --build ./build -v
+cp ./build/lin.xpl ./Xsaitekpanels/64/
+
+
+# Mac build
+
+rm -r build/*
+cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=../src/Toolchain-ubuntu-osxcross-11.3.cmake
+cmake --build ./build -v
+cp ./build/mac.xpl ./Xsaitekpanels/64/
+
+
+cp docs/XsaitekpanelsUsersManual.pdf Xsaitekpanels/Documentation/
+cp docs/ChangeLog.txt Xsaitekpanels/Documentation/
+cp docs/Xsaitekpanelsdatarefs.txt Xsaitekpanels/Documentation/
+cp docs/Linux_Users_Please_Read.txt Xsaitekpanels/Documentation/
+cp docs/51-Xsaitekpanels.rules Xsaitekpanels/Documentation/
+
+exec $SHELL
+#
+

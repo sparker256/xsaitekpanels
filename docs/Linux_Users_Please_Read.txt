@@ -1,0 +1,92 @@
+if on Linux you find that the Switch, Radio and Multi interfere with the mouse﻿ then you could try this configuration files.
+
+This has been tested on Ubuntu 20.04 LTS and not sure on other versions.
+
+
+
+************ Please Read    Important    Important     Important     Please Read      **************
+
+* If you apply this configuration without having previously installed the device (connect it at least once) remember that it will not start X11 (graphical environment)
+
+Because of this first install my provided 51-Xsaitekpanels.rules into /lib/udev/rules.d and reboot computer. Start X-Plane and make sure the panels are working even though there might be some mouse interference. After you have done that then you can install the conf files listed below and you should have a interference free experence with the panels and the mouse.
+
+************ Please Read    Important    Important     Important     Please Read      **************
+
+
+
+SWITCH PANEL:
+
+
+This is what I used for my switch panel but it is quite old
+
+#/usr/share/X11/xorg.conf.d/50-saitekswitchpanel.conf
+
+Section "InputClass"
+        Identifier "Saitek Switch Panel"
+        MatchProduct "HOLTEK Saitek Pro Flight Switch Panel"
+        Option "Ignore" "true"
+EndSection
+
+
+Another user needed to use this for it to work corectly
+
+#/usr/share/X11/xorg.conf.d/50-saitekswitchpanel.conf
+
+Section "InputClass"
+        Identifier "Saitek Switch Panel"
+        MatchProduct "Intretech Saitek Pro Flight Switch Panel"
+        Option "Ignore" "true"
+EndSection
+
+
+
+RADIO PANEL:
+
+This is what I used for my radio panel but it is quite old
+
+#/usr/share/X11/xorg.conf.d/50-saitekradiopanel.conf
+
+Section "InputClass"
+        Identifier "Saitek Radio Panel"
+        MatchProduct "Saitek Pro Flight Radio Panel"
+        Option "Ignore" "true"
+EndSection
+
+
+Another user needed to use this for it to work corectly
+
+#/usr/share/X11/xorg.conf.d/50-saitekradiopanel.conf
+
+Section "InputClass"
+        Identifier "Saitek Radio Panel"
+        MatchProduct "Logitech Logitech Flight Radio Panel"
+        Option "Ignore" "true"
+EndSection
+
+
+
+MULTI PANEL:
+
+This is what I used for my multi panel but it is quite old
+
+#/usr/share/X11/xorg.conf.d/50-saitekmultipanel.conf
+
+Section "InputClass"
+        Identifier "Saitek Multi Panel"
+        MatchProduct "Saitek Pro Flight Multi Panel"
+        Option "Ignore" "true"
+EndSection
+
+
+Another user needed to use this for it to work corectly
+
+#/usr/share/X11/xorg.conf.d/50-saitekmultipanel.conf
+
+Section "InputClass"
+        Identifier "Saitek Multi Panel"
+        MatchProduct "Logitech Logitech Flight Multi Panel"
+        Option "Ignore" "true"
+EndSection
+
+
+What is important here is to match the name Linux is finding so the Option "Ignore" "true" will work and prevent the panels interfering with the mouse.

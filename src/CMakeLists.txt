@@ -8,12 +8,11 @@
 cmake_minimum_required(VERSION 3.9)
 project(Xsaitekpanels VERSION 2.8.2 DESCRIPTION "Xsaitekpanels X-Plane plugin")
 
-# X-Plane supports OS X 10.10+, so this should ensure FlyWithLua can run on
+# X-Plane 12 supports OS X 11.0+, so this should ensure Xsaitekpanels can run on
 # all supported versions.
-set(CMAKE_OSX_DEPLOYMENT_TARGET "10.10" CACHE STRING "Minimum macOS version" FORCE)
-# We will enable this when we have a SDK supporting arm
-# set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for mac OS X" FORCE)
-set(CMAKE_OSX_ARCHITECTURES "x86_64" CACHE STRING "Build architectures for mac OS X" FORCE)
+set(CMAKE_OSX_DEPLOYMENT_TARGET "11.0" CACHE STRING "Minimum macOS version" FORCE)
+set(CMAKE_OSX_ARCHITECTURES "x86_64;arm64" CACHE STRING "Build architectures for mac OS X" FORCE)
+
 
 # By default, use optimized release configuration.
 if (NOT CMAKE_BUILD_TYPE OR CMAKE_BUILD_TYPE STREQUAL "")

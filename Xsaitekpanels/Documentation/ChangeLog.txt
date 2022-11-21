@@ -1,0 +1,231 @@
+Ver 1.16 First version to support Linux and Windows.
+
+Ver 1.17 Fixed bug that would crash X-Plane if Multi panel and Switch panel were not plugged in.
+
+Ver 1.18 Updated the AP for the Multi panel. Added Mac support. Unresolved issue with the IAS button.
+
+Ver 1.19 Fixed the IAS button issue. I tried to mimic the P180 Avanti but still may have issues with heavy metal.
+
+Ver 1.20 Added support for the BIP panel. Fixed some bugs with the gear leds on the Switch Panel.
+
+Ver 1.21 Fixed some bugs with the DME on the Radio Panel.
+
+Ver 1.22 Added adjustable trim speeds on the Multi Panel.
+
+Ver 1.23 Added option of two ADF's. Added Active/Standby for ADF's. Improved selection of frequency of ADF's.
+
+Ver 1.24 Added checkmarks to selected menu items. Improved selection of codes for transponder.
+
+Ver 1.25 Added menu option to invert bat alt on switch panel. Completely blank the multi panel when avionics or battery off.
+
+Ver 1.26 Added menu option for multiple speeds on multi panel knob. Fixed bug with the cowl flaps on the switch panel.
+
+Ver 1.27 Added preference file to allow user adjustable defaults. Changed master switch to completely turn off all panels like in a real plane.
+
+Ver 1.28 Found a bug introduced in the last update with the ACT/STBY on the radio panels. Thanks Pasquale Faraco.
+
+Ver 1.29 Added high speed multiplier for the multi panel silver knob. The multiplier is selected from the xsaitekpanels > multi menu selection. The high speed command can be mapped under Joystick,keys&equipment.
+
+Ver 1.30 Corrected the ADF and XPDR digit selection to work in both directions. Before it only worked in the increase direction.
+
+Ver 1.31 Lots of changes this version. On the radio panel corrected the ADF and XPDR digit selection so clockwise is right and counter is left. On the multi panel improved the CRS and HDG adjustments using data reference so should be more responsive. Removed the adjustable multiplier menu selection and made it 10X so when you use the high speed multiplier button it is 10 times faster. On the ALT switch changes so it is 100 feet normal and with the high speed button it is 1000 feet so you should be able to get the ALT dialed in very fast. With Michal's help the silver knobs and displays on the radio and multi panels are much more responsive without any lag or overtravel from slow FPS to fast FPS.
+
+Ver 1.32 Changed the name of the multiplier button to Xpanels Fn Button to better reflect its new use. I have added a sync function to the HDG and CRS button. If you hold down the new Fn Button and also press the HDG button is will set the AP heading to the magnetic heading. The same is for the CRS button. Added a QNH function to the XPDR switch position to adjust the altimeter using the xpanelsfnbutton and the fine and course knobs. Added a set the altimeter to 2992 by pressing the xpanelsfnbutton and the ACT/STBY buttons as the same time. Pressing the ACT/STBY alone will cycle through the XPDR modes.
+
+Ver 1.33 Changed the auto throttle from using commands to using a data reference. This versions will have the beginnings of a user manual that I hope will explain some of the features that might not be so obvious. 
+
+Ver 1.34 Added selection of N1 or N2 when DME is selected. Added OBS1 or OBS2 for the CRS position of the multi panel. PDF user manual to help in explaining what is possible with this plugin.
+
+Ver 1.35 Improved switch panel logic. Added support for two Bip's
+
+Ver 1.36 Thanks to Chris Strosser we have added support for x737. Fixed a bug that would crash X-Plane if DataRefEditor plugin was closed.
+
+Ver 1.37 Improved cleaner configuration using inireader also allowing the remapping of some switches on the switch panel. They are deice, cowl flaps, panel lights and gear switch.
+
+Ver 1.38 xsaitekpanels.ini can now reside in a aircraft folder and Xsaitekpanels will look in the current aircraft folder for xsaitekpanels.ini then look in Xsaitekpanels plugin folder. This will allow for different configurations for different aircraft. Also added a xsaitekpanels.ini reload button to the menu.
+
+Ver 1.39 Added configuration to the QNH display to allow selecting between inHg and hPa. For all platforms you can now put the xsaitekpanels.ini file and the D2B_config2.txt file for the BIP in the aircraft folder because I have started using PPL. I look first in the current aircraft folder and if not found revert back to the plugin folder. The xsaitekpanels.ini now has sections for a little better organization. 
+
+Ver 1.40 This is a re release of 1.39 but without loosing any of the my Windows users. I could not get PPL to work for all my users so went back to 1.38 and created my own pathing and used inireader like I did in 1.38. I am hoping for a much smoother release in this as I have had Vista and Mac testers making sure there are no issues (Thanks EK_Fly and Couchpilot).
+
+Ver 1.41 We now have a fully re-mappable switch panel using a widget to do enable disable remap selection and a expanded xsaitekpansls.ini to support new features. This will allow a quick test of enable - disable before changing the xsaitkepanels.ini. This can all be done live when X-Plane is running as the xsaitekpanels.ini will be re-loaded if a aircraft is changed or you press the reload button.
+
+Ver 1.42 Have added widgets to the radio and multi panels for a cleaner user interface. Fixed a bug that if the battery master was off the flaps should not move. Also fixed a bug that if the battery master was off the electric gyros should not be running if the avionics switch was on.
+
+Ver 1.43 Added support for SimAvio by allowing some remapping of the multi panel using the xsaitekpanels.ini file. Added using the decimal points to see the XPDR mode on the display while temporarily blanking the digit selection. Made the digit selection speed for ADF and XPDR  use the pulses per command selection. Fixed a bug where the BIP panel would not blank with the battery master on X-Plane 10.05r1.
+
+Ver 1.44 Fixed bug with the DME selection that would lock up mode selection and NAV selection on radio panel. Added debug info to see which BIP number is matched to which BIP serial number. Fixed a bug with 2 BIP not automaticly updating the second one. Thanks to André and Al for testing.
+
+Ver 1.45 Fixed bug for the switch panel for mapping the starter switch. When running two BIP's made D2B_config.txt and D2B_config2.txt follow there serial numbers. Improved the menu system especially for the BIP or BIP's and very happy with how it is now very consistent.
+
+Ver 1.46 Fixed bug for the multi panel that would not allow a increase or decrease of 100 feet per minute for the autopilot vertical speed. Also for the multi panel fixed a bug that would not alow a increase or decrease of 1 for the indicated air speed.
+
+Ver 2.00 First try at support for X-Plane 10.20 with support for 32/64 bit. This is my ver 1.46 changed so it would build both a 32 and 64 bit plugin. 
+
+Ver 2.01 Fixed a bug where I did not link the 64bit version the same as the 32bit version for Windows.This meant that some of my Windows users and as it turns out running a non U.S. version the 64 bit part did not work. This is the only change and want to thank Hermann, letibo and fren for testing my 2.01rc1 to be sure I have this working for all users now.
+
+Ver 2.02 A very big rework of the starter switch on the switch panel to fix a bug where you could not stop the engines of some aircraft. Also for turbines and jets added mixture, bleed air and ingniters.For all the default turbine and jet aircraft I checked it will either just start or you will have to start the APU first and then start the aircraft. 
+
+Ver 2.03 Added being able to change and show the Obs 1 & 2 using the Nav 1 & 2 standby position and silver knob and the function key.
+
+Ver 2.04 Added being able to change and show the Adf 1 & 2 using the Adf 1 & 2 standby position and silver knob and the function key. Also allowing for using the original starter switch or the new as described in ver 2.02. There is a updated xsaitekpanels.ini to reflects the starter change.
+
+Ver 2.05 Fixed bug in the multi panel autopilot changing from knots to mach and back and is now working correctly.
+
+Ver 2.06 On radio panel added remapabilty for upper and lower com and nav 1 & 2 for radio 1 & 2 fine & coarse knobs. Also on radio panel added remapability for upper and lower com and nav 1 & 2 for radio 1 & 2 ACT/STBY buttons. On multi panel added remapability for elevator trim up and down. Updated all builds using SDK 2.1.2 rc2.
+
+Ver 2.07 Fixed some bugs from Ver 2.06 for radio panel added remapabilty. Added displaying in the Log.txt which and how many panels Xsaitekpanels has found. Added remapability for the AP buttons and lights on the multi panel. This means using the new xsaitekpanels.ini included in the archive to work correctly. I have changed the leading name for the fn button. The path is now bgood/xsaitekpanels/x_panels_fn_button as this reflects a unique name that I have regestered and should not change again. 
+
+Ver 2.08 This version will be a bug fix and adding some more debugging so that from your Log.txt I will be able to get more info. Fixed bug that the xsaitekpanels.ini file would not work in the aircraft folder on a Mac (thanks Chuck).
+
+Ver 2.09 This version adds full remapability to the multi panel. I have both command reference and data reference for the selector switch. This also means that there is a new xsaitekpanels.ini so please use the new one as there are added features. I have also added a version munber to the xsaitekpanels.ini so from a Log.txt I can tell if the plugin and ini versions match.Found a bug in the new engine start that I was forcing a value into the bleed air mode and that was very wrong.
+
+Ver 2.10 Fixed some bugs created in version 2.09. Added the ability to have a data reference flash the button lights on the multi panel. I have removed the internal x737 code and using the xsaitekpanels.ini to give back the same functionalty. To do this copy the xsaitekpanels.ini in the Add_On_Aircraft_ini/x737 folder and put in in the x737 aircraft folder.
+
+Ver 2.11 Fixed small bug in HDG display on multi panel if remaping. Added comments before the remaping commands to help better explain what is needed in the xsaitekpanels.ini. 
+
+Ver 2.12 Fixed small bug that only affected the default KingAir C90B and the Baron B58 ALT hold for the autopilot on the multi panel. Also made sure all the defaults are set correctly in the xsaitekpanels.ini and also in the plugin.
+
+Ver 2.13 Fixed a bug with the button leds on the multi panel by adding 3 types of data references for them.
+
+Ver 2.14 Added datareference remaping to switch panel. With this version and the updated xsaitekpanels.ini in the Add_On_Aircraft_ini/R&P_777 folder there should no longer be a need for xjoymap for the R&P_777.
+
+Ver 2.15 Added float datareference to panel light switch for R&P 777 on switch panel. Added remapable commands for com 1 & 2 and nav 1 & 2 on radio panel. Updated the R&P_777 xsaitekpanels.ini to reflect changes including setting com 1 & 2 and transponder & barometer setting.
+
+Ver 2.16 Added 4 float datareferences to each of the light switches on switch panel to allow them to work on the Challenger300. Added more datareferences that can be mapped for each of the starter switch positions for a total of 10 in each position. Have new xsaitekpanels.ini for the Challenger300 located in the Add_On_Aircraft_ini/Challenger300_XP10 folder. Reworked multi panel buttons to allow datareference toggles for the Challenger300. Added more commands and datareferences to the cowl flaps switch for a total of 4 commands and 8 datareferences.
+
+Ver 2.17 Xsaitekpanels has meet FlyWithLua by me creating a datareference for every switch position on the switch panel much like the new planes are now. There is a new file called saitekpanelsdatarefs.txt that lists the datareferences and there use. There is a example in the FlyWithLua folder in the archive for how I fly the Challenger300. I will be doing the same for the radio and multi panel in upcomming releases. There is also a new xsaitekpanels.ini for the C-17 Globemaster in the Add_On_Aircraft_ini/C-17 Globemaster III folder.
+
+Ver 2.18 Bug fix for 32bit Linux that was broken. Finished adding datareference for every switch position on 2 radio panels and multi panel. Now using FlyWith Lua have a hardware test for switch, 2 radio panels and the multi panel that reside in the FlyWithLua/Scripts folder. There is also a new xsaitekpanels.lua residing in FlyWithLua/Modules that is needed for all the new datareferences I have created. I also have a comlete Xsaitekpanelsdatarefs.txt that lists all the datareferences that can be created. 
+
+Ver 2.19 Fixed a bug in the datareference for the beacon lights switch. Added information in the manual on how to create custom xsaitekpanels.ini for your add on aircraft. Added a folder for the Bae Jetstream 32_v10 in the Add_On_Aircraft_ini folder to support this plane. With this custom xsaitekpanels.ini you can start the right engine using GPU and no mouse clicks. Added some more datareferences to the avionics switch for the Jetstream 32.
+
+Ver 2.20 Alot of changes but what my goal for this release was to support the CRJ200 and I have done that and much more. The support for it is with a updated xsaitekpanels.ini and also a custom crj200_engine_start.lua file that with my hardware allows a complete start of the engines with out using a mouse. Fixed a bug in the datareference for the avioncs master remaping. Added second Fn key called "left start" to allow you to start the left engine of a two engine aircraft using the same starter switch. Added a option to have my datareferences visible or not in Data Reference Editor with a new enable in the xsaitekpanels.ini file.
+
+Ver 2.21 Fixed a bug introduced in ver 2.20 that looked for the avionics switch position on the switch panel even if you did not have a switch panel making the radio and multi panels permanently dark.
+
+Ver 2.22 Fixed a bug introduced in ver 2.21 that I was looking for the batteries data references in the radio and multi panel. This meant that if you only had a switch panel your avionics master was not responding.
+
+Ver 2.23 Fixed a bug for datareference remaping for the panel switch on the switch panel. Thanks to Massimo for finding it and glad my users are using the remapping ability as I had hoped they would.
+
+Ver 2.24 Fixed a bug where the switch panel was not found on the Mac. Thanks xdave.
+
+Ver 2.25 Added the ability to have a remapable float array datareference for the panel lights switch on the switch panel. This is a test to see if my method is workable for my users. Added datareferences for version and number of switch, radio, and multi panels found.
+
+Ver 2.26 Fixed bug with the remaping of Ias button light for multi panel.
+
+Ver 2.26 rev1 Added two sections to the manual for how to use the Add_On_Aircraft_ini folder and also how to use FlyWithLua. I also added support for the Red Eyes An-2 and the Com1 and Nav 1 & 2 radios on the default 747.
+
+Ver 2.27 Fixed remapable ACT/STBY issue that got broke in Ver 2.26 and meant that the original configuration for the R&P B777 was not working corectly. Created a new R&P B777 configuration so they work with the default radios when the "Plugin Radio" is checked. Also added to the B777 where you can start the left and then the right engines so it is simular to how the B757 works with my plugin. Added infinitely adjustable flaps for the Remos GX.
+
+Ver 2.28 Thanks to a hardware donation by Pasquale Faraco there is now support for three BIP's. Added remapable command to the flaps switch on the multi panel. Added support for the JARDesign A320. Added 5 shared integer datareference. Added 5 shared float datareference.
+
+Ver 2.29 Fixed a bug with the Alt button light on the multi panel.
+
+Ver 2.30 Added support for a third radio panel. Fixed issue with X-Plane crashing if TrackIR software was running.
+
+Ver 2.31 Improved processing of the silver knob on the multi panel.
+
+Ver 2.32 Improved processing of the silver knob on the radio panel.
+
+Ver 2.33 Added 833 KHz Chanel spacing enable for Com 1 & 2 on the radio panel. Added float datareferences for all switches on the switch panel.
+
+Ver 2.34 For the radio panel added the option to change the position for the DME display so that distance in on the left side and speed is on the right like in a real aircraft.
+
+Ver 2.35 For the radio panel added the option to remap obs commands the display. Also added when plugin is starting to display on the radio panel its number.
+
+Ver 2.36 Added support for data reference tool still keeping support for data reference editor.
+
+Ver 2.36A Fixed a bug on Linux where Xsaitekpanels would not start because of missing Lib.
+
+Ver 2.37 Fixed a bug with the array's for the BIP.
+
+Ver 2.38 Fixed a bug in upper radio display for barometer in XPDR switch position. Added datarefs for Fn Buttons.
+
+Ver 2.39 Fixed a bug in published datarefs.
+
+Ver 2.40 Fixed a couple of bugs for the switch panel float remaping.
+
+Ver 2.41 Added deferred initialization until after aircraft is loaded and its datarefs are available which should reduce the need to reload xsaitekpanels.ini after opening a second aircraft.
+
+Ver 2.42 Fixed a bug for the remapable float dataref for the Landing Gear on for the switch panel.
+
+Ver 2.43 Added remapable commands for the ADF on the radio panel.
+
+Ver 2.44 Fixed some bugs with the multipanel remappable buttons. Compiled Linux Xsaitekpanels against an older version of the libstdc++ library to make it compatable with Steam and Ubuntu 12.04 LTS.
+
+Ver 2.45 Changed the mapping of the multi panel ALT button from arm to hold.
+
+Ver 2.46 Fixed a bug in the multi panel flaps up and down remaping.
+
+Ver 2.47 Added the ability to display raw data for DME and XPDR on all three radio panels.
+
+Ver 2.48 Added the ability to display raw data for all switch positions on all three radio panels. Improved the script for the AirFoilLabs C172SP to make the transponder easier to adjust using some of the raw data features.
+
+Ver 2.49 Found the bug with the help of org user xpRobby that was causing X-Plane to crash on Windows if hidapi-0.8.0-rc1 was used and you started X-Plane after the Trackir software. This bug has been with me for a while (Ver 2.30) and acutaly thought I had fixed it but did not make the connection to hidapi until today. I can now go back to building Windows & Linux on my Linux machine using mingw-w64 which will save time building new versions. Also added two new datarefs for the silver knob on the multi panel to improve performance while using FlyWithLua. 
+
+Ver 2.50 Added new datarefs for the silver knobs on the radio panels to improve performance while using FlyWithLua. Because of this I was able to improve the setting of the XPDR on the AirFoilLabs C172SP where I am finaly happy with it.
+
+Ver 2.51 Fixed bug in Radio two lower XPDR raw function. Updated the AirFoilLabs C172SP_Xsaitekpanels.lua script to make the DME display on the panel better match the virtual cockpit. Updated the An-2REyes_Xsaitekpanels.lua to make it better work with the transponder.
+
+Ver 2.52 Fixed bugs in Multipanel with remapable switch positions data. Added 10 more Shared integer and floats for a total of 20 each.
+
+Ver 2.53 Added checking if the Saitek TPM is connected. Updated the FlyWithLua scripts so they automaticly look at which panels are connected. This allows automaticly only enabling parts of the scripts that are related to the panels you have.
+
+Ver 2.54 Added configurable avionics and battery status checks by Saso Kiselkov.
+
+Ver 2.55 Fixed a bug where X-Plane crashed on exit on the Mac.
+
+Ver 2.56 Using updated hidapi. Make sure after finding TPM it is closed to prevent a conflict.
+
+Ver 2.57 Fixed a menu issue when running X-Plane 11.00pb2.
+
+Ver 2.58 Changed default behaviour to not display ICAO on screen and allowed user to enable it.
+
+Ver 2.59 Thanks to Ilya we now have replaced iniItem array with std::map, and added support for partial xsaitekpanels.ini files. Added up to eight commands for the switch panels switches.
+
+Ver 2.60 Changed Remapable switch panel commands so they only run once when a switch moves. This fixes the issue I had using some commands in the X-Plane 11 default Cesna 172.
+
+Ver 2.61 Changed the default switch panel commands so that they only run once when a switch moves. This fixes the issue I had using some commands in the X-Plane 11 default Cesna 172.
+
+Ver 2.62 Fixed bug in switch panel taxi light switch commands.
+
+Ver 2.63 Thanks to Jakub I have fixed bug where there was a difference between X-Plane 10 & 11 regarding the OBS functionality. Thanks to Steve Bootes we have added acceleration of multi-panel knob.
+
+Ver 2.64 Fixed bug for the remapable command for the landing light switch on the switch panel.
+
+Ver 2.65 Fixed issue with multi panel knob acceleration overtravel when changing knob direction. Fixed issue with gear leds if using remapable commands. Added acceleration threshold and debug logging to xsaitekpanels.ini. Made the default for the multi panel auto throttle off.
+
+Ver 2.66 Improved function and added remaping of gear leds on the switch panel.
+
+Ver 2.67 Fixed bugs in remaping and default gear leds on the switch panel.
+
+Ver 2.68 Fixed a bug with the VS switch position and VS button on multi panel.
+
+Ver 2.69 Fixed bug with switch panel BAT master switch remapable command.
+
+Ver 2.70 Added being able to prefix xsaitekpanels.ini with aircraft name. Example Cessna_172SP_xsaitekpanels.ini
+
+Ver 2.71 Fixed issue with clang build on mac. Cleanup some extra unneeded Log.txt entries. Fixed bug that Steve found with the multipanel REV light remapping. First use of osxcross to build the Mac version on Linux.
+
+Ver 2.72 Fixed typo for Multipanel knob accelerationin in xsaitekpanels.ini and plugin. Added more logging to help in resolving any remaining Multipanel knob acceleration issues. Fixed typo bug where more verbose logging for Multipanel knob accelerationin was not getting turned on from xsaitekpanels.ini.
+
+Ver 2.73 Fixed issue with ACT STBY on ADF switch position. Fixed typo in xsaitekpanels_radio3.lua.
+
+Ver 2.74 Fixed issue with re-mapable commands for all switch positions of the multi panel for the silver knob.
+
+Ver 2.75 Fixed issue with upper radio XPDR switch position pressing the ACT/STBY button and the fn button setting standard pressure.
+
+Ver 2.76 Fixed missing code for radio panel 3 lower XPDR switch position. Fixed re-mapable date for adf.
+
+Ver 2.77 Fixed remapping code for adf.
+
+Ver 2.78 Added dynamic trim wheel to multi panel by Janusz
+
+Ver 2.79 Added Saving properties changed by gui Panel by Janusz
+
+Ver 2.80 Added option to disable panels in VR. Make Auto-Throttle switch mappable by Janusz
+
+Ver 2.81 Fixed bug with switch panel panel light remappable dataref array by Mr Hyde. Fixed missing a bug with the multi panel remapable nav button.
+
+Ver 3.00 First version for X-Plane 12 and adding support for arm64 on the Mac.
