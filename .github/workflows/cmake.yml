@@ -64,8 +64,19 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: binaries
-          path: Xsaitekpanels/64
-
+          path: Xsaitekpanels/lin_x64
+      - name: Test artifact download     
+        run: ls -R -l
+      - name: Rename lin.xpl to Xsaitekpanels.xpl
+        run: mv Xsaitekpanels/lin_x64/lin.xpl Xsaitekpanels/lin_x64/Xsaitekpanels.xpl
+      - name: List folder     
+        run: ls -R -l  
+      - name: Rename win.xpl to Xsaitekpanels/win_x64/Xsaitekpanels.xpl
+        run: mv Xsaitekpanels/lin_x64/win.xpl Xsaitekpanels/win_x64/Xsaitekpanels.xpl
+      - name: Rename mac.xpl to Xsaitekpanels/mac_x64/Xsaitekpanels.xpl
+        run: mv Xsaitekpanels/lin_x64/mac.xpl Xsaitekpanels/mac_x64/Xsaitekpanels.xpl
+      - name: List Final Folder     
+        run: ls -R -l   
       - uses: actions/upload-artifact@v3
         with:
           name: Xsaitekpanels_v${{env.XSP_VERSION}}

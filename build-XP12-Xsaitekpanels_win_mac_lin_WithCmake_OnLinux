@@ -4,7 +4,9 @@
 # cd Xsaitekpanels repo
 # ./build-XP12-Xsaitekpanels_win_mac_lin_WithCmake_OnLinux
 
-rm -r Xsaitekpanels/64/*
+rm -r Xsaitekpanels/win_x64/*
+rm -r Xsaitekpanels/lin_x64/*
+rm -r Xsaitekpanels/mac_x64/*
 
 
 # Windows build
@@ -12,7 +14,7 @@ rm -r Xsaitekpanels/64/*
  rm -r build/*
  cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=../src/Toolchain-mingw-w64-x86-64.cmake
  cmake --build ./build -v
- cp ./build/win.xpl ./Xsaitekpanels/64/
+ cp ./build/win.xpl ./Xsaitekpanels/win_x64/Xsaitekpanels.xpl
 
 
 # Linux build
@@ -20,7 +22,7 @@ rm -r Xsaitekpanels/64/*
 rm -r build/*
 cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
 cmake --build ./build -v
-cp ./build/lin.xpl ./Xsaitekpanels/64/
+cp ./build/lin.xpl ./Xsaitekpanels/lin_x64/Xsaitekpanels.xpl
 
 
 # Mac build
@@ -28,7 +30,7 @@ cp ./build/lin.xpl ./Xsaitekpanels/64/
 rm -r build/*
 cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_TOOLCHAIN_FILE=../src/Toolchain-ubuntu-osxcross-11.3.cmake
 cmake --build ./build -v
-cp ./build/mac.xpl ./Xsaitekpanels/64/
+cp ./build/mac.xpl ./Xsaitekpanels/mac_x64/Xsaitekpanels.xpl
 
 
 cp docs/XsaitekpanelsUsersManual.pdf Xsaitekpanels/Documentation/

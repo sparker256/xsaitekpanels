@@ -229,3 +229,5 @@ Ver 2.80 Added option to disable panels in VR. Make Auto-Throttle switch mappabl
 Ver 2.81 Fixed bug with switch panel panel light remappable dataref array by Mr Hyde. Fixed missing a bug with the multi panel remapable nav button.
 
 Ver 3.00 First version for X-Plane 12 and adding support for arm64 on the Mac.
+
+Ver 3.01 Added File Indentification Tag for Geoff Lohr.

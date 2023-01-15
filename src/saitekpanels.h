@@ -2774,6 +2774,8 @@ extern int wrgXPlaneVersion;
 extern int wrgXPLMVersion;
 extern int wrgHostID;
 
+extern int file_id_tag;
+
 extern int dre_enable;
 
 extern int icao_enable;

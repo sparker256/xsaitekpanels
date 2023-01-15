@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jan 21  2022   **************
+// ****** Jan 15  2023   **************
 
-#define PLUGIN_VERSION "3.00 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 300
+#define PLUGIN_VERSION "3.01 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 301
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -1048,6 +1048,7 @@ XPLMDataRef TpmPanelCountDataRef = NULL;
 
 // ********************* Saitek Panels Data Ref  ************************
 static XPLMDataRef XsaitekpanelsVersionDataRef = NULL;
+static XPLMDataRef XsaitekpanelsFileIdTagDataRef = NULL;
 static XPLMDataRef XsaitekpanelsFnButtonDataRef = NULL;
 static XPLMDataRef XsaitekpanelsLeftStartFnButtonDataRef = NULL;
 
@@ -2580,11 +2581,15 @@ int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 // This is the storage for the data we own.
 
 static int XsaitekpanelsVersionData = 0;
+static int XsaitekpanelsFileIdTagData = 0;
 static int XsaitekpanelsFnButtonData = 0;
 static int XsaitekpanelsLeftStartFnButtonData = 0;
 
 int	XsaitekpanelsVersionGetDataiCallback(void * inRefcon);
 void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVersion);
+
+int	XsaitekpanelsFileIdTagGetDataiCallback(void * inRefcon);
+void	XsaitekpanelsFileIdTagSetDataiCallback(void * inRefcon, int XsaitekpanelsFileIdTag);
 
 int	XsaitekpanelsFnButtonGetDataiCallback(void * inRefcon);
 void	XsaitekpanelsFnButtonSetDataiCallback(void * inRefcon, int XsaitekpanelsFnButton);
@@ -3200,6 +3205,8 @@ int wrgXPlaneVersion = 0;
 int wrgXPLMVersion = 0;
 int wrgHostID = 0;
 
+int file_id_tag = 0;
+
 int dre_enable = 0;
 
 int icao_enable = 0;
@@ -3660,6 +3667,14 @@ PLUGIN_API int XPluginStart(char *		outName,
                            1,
                            XsaitekpanelsVersionGetDataiCallback,
                            XsaitekpanelsVersionSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  XsaitekpanelsFileIdTagDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/idtag",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsFileIdTagGetDataiCallback,
+                           XsaitekpanelsFileIdTagSetDataiCallback,
                            NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                            NULL, NULL, NULL, NULL, NULL);
 
@@ -4496,6 +4511,20 @@ void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVers
     (void) inRefcon;
     XsaitekpanelsVersionData = XsaitekpanelsVersionData2;
 }
+
+
+int	XsaitekpanelsFileIdTagGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsFileIdTagData;
+}
+
+void	XsaitekpanelsFileIdTagSetDataiCallback(void * inRefcon, int XsaitekpanelsFileIdTagData2)
+{
+    (void) inRefcon;
+    XsaitekpanelsFileIdTagData = XsaitekpanelsFileIdTagData2;
+}
+
 
 
 int	XsaitekpanelsFnButtonGetDataiCallback(void * inRefcon)
@@ -9502,6 +9531,8 @@ float	MyPanelsFlightLoopCallback(
   }
 
   XPLMSetDatai(XsaitekpanelsVersionDataRef, XsaitekpanelsVersion);
+
+  XPLMSetDatai(XsaitekpanelsFileIdTagDataRef, file_id_tag);
 
   XsaitekpanelsFnButton = xpanelsfnbutton;
   XPLMSetDatai(XsaitekpanelsFnButtonDataRef, XsaitekpanelsFnButton);

@@ -295,6 +295,11 @@ void process_read_ini_file()
     XPLMDebugString(version.c_str());
     XPLMDebugString("\n");
 
+    // get file identification tag
+    readOptionAsInt("IDTag", &file_id_tag);
+    sprintf(buf, "\nXsaitekpanels: file identification tag   %d\n", file_id_tag);
+    XPLMDebugString(buf);
+
     // Do we want to enable data reference editor?
     readOptionAsInt("Data Reference Editor enable", &dre_enable);
 
