@@ -7540,6 +7540,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 1){
          if (strcmp((char *) inItemRef, "TRUE") == 0) {
+             file_id_tag = 0;
              process_read_ini_file();
          }
 
@@ -9463,6 +9464,7 @@ float MyPanelsDeferredInitNewAircraftFLCB(float MyPanelselapsedMe, float MyPanel
     (void) MyPanelscounter; // To get rid of warnings on unused variables
     (void) MyPanelsrefcon; // To get rid of warnings on unused variables
 
+    file_id_tag = 0;
     process_read_ini_file();
     IsVR_Enabled = XPLMGetDatai(XPLMFindDataRef("sim/graphics/VR/enabled")) != 0;
     gearled_write_loop = 0;
@@ -9518,6 +9520,7 @@ float	MyPanelsFlightLoopCallback(
   if (readiniloop < 50) {
       readiniloop++;
   } else if (readiniloop == 50) {
+      file_id_tag = 0;
       process_read_ini_file();
       IsVR_Enabled = XPLMGetDatai(XPLMFindDataRef("sim/graphics/VR/enabled")) != 0;
 
