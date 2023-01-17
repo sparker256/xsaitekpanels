@@ -2,12 +2,12 @@
 #
 # How to run
 # cd Xsaitekpanels repo
-# ./build-XP12-Xsaitekpanels_win_mac_lin_WithCmake_OnLinux
+# ./build-XP12-Xsaitekpanels_lin_WithDocker_win_mac_WithCmake_OnLinux
 
 rm -r Xsaitekpanels/win_x64/*
 rm -r Xsaitekpanels/lin_x64/*
 rm -r Xsaitekpanels/mac_x64/*
-
+rm -r src/build-lin/*
 
 # Windows build
 
@@ -19,10 +19,16 @@ rm -r Xsaitekpanels/mac_x64/*
 
 # Linux build
 
-rm -r build/*
-cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
-cmake --build ./build -v
-cp ./build/lin.xpl ./Xsaitekpanels/lin_x64/Xsaitekpanels.xpl
+# building a version for Ubuntu 20.04
+# It does not have the debugging info the other build has
+
+(cd docker; make)
+cp src/build-lin/lin.xpl Xsaitekpanels/lin_x64/Xsaitekpanels.xpl
+
+# rm -r build/*
+# cmake -S ./src -B ./build -DCMAKE_BUILD_TYPE=RelWithDebInfo
+# cmake --build ./build -v
+# cp ./build/lin.xpl ./Xsaitekpanels/lin_x64/Xsaitekpanels.xpl
 
 
 # Mac build
