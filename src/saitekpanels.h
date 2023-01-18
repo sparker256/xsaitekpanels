@@ -5,6 +5,8 @@
 #include "XPLMMenus.h"
 #include "XPWidgets.h"
 #include "XPStandardWidgets.h"
+#include "XPLMDataAccess.h"
+
 
 #include "hidapi.h"
 
@@ -228,7 +230,8 @@ extern XPLMDataRef Rad1UpperNav2ActRemapableData, Rad1UpperNav2StbyRemapableData
 extern XPLMDataRef Rad1UpperObs1RemapableDataf, Rad1UpperObs2RemapableDataf;
 extern XPLMDataRef Rad1UpperAdfActRemapableData, Rad1UpperAdfStbyRemapableData, Rad1UprAdfActStbyRemapableData, Rad1UprAdfActStbyRemapableDataf;
 extern XPLMDataRef Rad1UpperDmeActRemapableData, Rad1UpperDmeStbyRemapableData;
-extern XPLMDataRef Rad1UpperXpdrRemapableData, Rad1UpperXpdrRemapableMode, Rad1UpperXpdrBaroStdRemapableData;
+extern XPLMDataRef Rad1UpperXpdrRemapableData, Rad1UpperXpdrRemapableMode;
+extern XPLMDataRef Rad1UpperXpdrBaroStdRemapableData, Rad1UpperXpdrBaroRemapableData;
 
 extern XPLMDataRef Rad1LowerCom1ActRemapableData, Rad1LowerCom1StbyRemapableData, Rad1LowrCom1ActStbyRemapableData, Rad1LowrCom1ActStbyRemapableDataf;
 extern XPLMDataRef Rad1LowerCom2ActRemapableData, Rad1LowerCom2StbyRemapableData, Rad1LowrCom2ActStbyRemapableData, Rad1LowrCom2ActStbyRemapableDataf;
@@ -237,7 +240,8 @@ extern XPLMDataRef Rad1LowerNav2ActRemapableData, Rad1LowerNav2StbyRemapableData
 extern XPLMDataRef Rad1LowerObs1RemapableDataf, Rad1LowerObs2RemapableDataf;
 extern XPLMDataRef Rad1LowerAdfActRemapableData, Rad1LowerAdfStbyRemapableData, Rad1LowrAdfActStbyRemapableData, Rad1LowrAdfActStbyRemapableDataf;
 extern XPLMDataRef Rad1LowerDmeActRemapableData, Rad1LowerDmeStbyRemapableData;
-extern XPLMDataRef Rad1LowerXpdrRemapableData, Rad1LowerXpdrRemapableMode, Rad1LowerXpdrBaroStdRemapableData;
+extern XPLMDataRef Rad1LowerXpdrRemapableData, Rad1LowerXpdrRemapableMode;
+extern XPLMDataRef Rad1LowerXpdrBaroStdRemapableData, Rad1LowerXpdrBaroRemapableData;
 
 
 extern XPLMDataRef Rad2UpperCom1ActRemapableData, Rad2UpperCom1StbyRemapableData, Rad2UprCom1ActStbyRemapableData, Rad2UprCom1ActStbyRemapableDataf;
@@ -248,7 +252,8 @@ extern XPLMDataRef Rad2UpperObs1RemapableDataf, Rad2UpperObs2RemapableDataf;
 extern XPLMDataRef Rad2UpperAdfActRemapableData, Rad2UpperAdfStbyRemapableData;
 extern XPLMDataRef Rad2UprAdfActStbyRemapableData, Rad2UprAdfActStbyRemapableDataf;
 extern XPLMDataRef Rad2UpperDmeActRemapableData, Rad2UpperDmeStbyRemapableData;
-extern XPLMDataRef Rad2UpperXpdrRemapableData, Rad2UpperXpdrRemapableMode, Rad2UpperXpdrBaroStdRemapableData;
+extern XPLMDataRef Rad2UpperXpdrRemapableData, Rad2UpperXpdrRemapableMode;
+extern XPLMDataRef Rad2UpperXpdrBaroStdRemapableData, Rad2UpperXpdrBaroRemapableData;
 
 extern XPLMDataRef Rad2LowerCom1ActRemapableData, Rad2LowerCom1StbyRemapableData, Rad2LowrCom1ActStbyRemapableData, Rad2LowrCom1ActStbyRemapableDataf;
 extern XPLMDataRef Rad2LowerCom2ActRemapableData, Rad2LowerCom2StbyRemapableData, Rad2LowrCom2ActStbyRemapableData, Rad2LowrCom2ActStbyRemapableDataf;
@@ -257,7 +262,8 @@ extern XPLMDataRef Rad2LowerNav2ActRemapableData, Rad2LowerNav2StbyRemapableData
 extern XPLMDataRef Rad2LowerObs1RemapableDataf, Rad2LowerObs2RemapableDataf;
 extern XPLMDataRef Rad2LowerAdfActRemapableData, Rad2LowerAdfStbyRemapableData, Rad2LowrAdfActStbyRemapableData, Rad2LowrAdfActStbyRemapableDataf;
 extern XPLMDataRef Rad2LowerDmeActRemapableData, Rad2LowerDmeStbyRemapableData;
-extern XPLMDataRef Rad2LowerXpdrRemapableData, Rad2LowerXpdrRemapableMode, Rad2LowerXpdrBaroStdRemapableData;
+extern XPLMDataRef Rad2LowerXpdrRemapableData, Rad2LowerXpdrRemapableMode;
+extern XPLMDataRef Rad2LowerXpdrBaroStdRemapableData, Rad2LowerXpdrBaroRemapableData;
 
 
 extern XPLMDataRef Rad3UpperCom1ActRemapableData, Rad3UpperCom1StbyRemapableData, Rad3UprCom1ActStbyRemapableData, Rad3UprCom1ActStbyRemapableDataf;
@@ -267,7 +273,8 @@ extern XPLMDataRef Rad3UpperNav2ActRemapableData, Rad3UpperNav2StbyRemapableData
 extern XPLMDataRef Rad3UpperObs1RemapableDataf, Rad3UpperObs2RemapableDataf;
 extern XPLMDataRef Rad3UpperAdfActRemapableData, Rad3UpperAdfStbyRemapableData, Rad3UprAdfActStbyRemapableData, Rad3UprAdfActStbyRemapableDataf;
 extern XPLMDataRef Rad3UpperDmeActRemapableData, Rad3UpperDmeStbyRemapableData;
-extern XPLMDataRef Rad3UpperXpdrRemapableData, Rad3UpperXpdrRemapableMode, Rad3UpperXpdrBaroStdRemapableData;
+extern XPLMDataRef Rad3UpperXpdrRemapableData, Rad3UpperXpdrRemapableMode;
+extern XPLMDataRef Rad3UpperXpdrBaroStdRemapableData, Rad3UpperXpdrBaroRemapableData;
 
 extern XPLMDataRef Rad3LowerCom1ActRemapableData, Rad3LowerCom1StbyRemapableData, Rad3LowrCom1ActStbyRemapableData, Rad3LowrCom1ActStbyRemapableDataf;
 extern XPLMDataRef Rad3LowerCom2ActRemapableData, Rad3LowerCom2StbyRemapableData, Rad3LowrCom2ActStbyRemapableData, Rad3LowrCom2ActStbyRemapableDataf;
@@ -276,7 +283,8 @@ extern XPLMDataRef Rad3LowerNav2ActRemapableData, Rad3LowerNav2StbyRemapableData
 extern XPLMDataRef Rad3LowerObs1RemapableDataf, Rad3LowerObs2RemapableDataf, Rad3LowrAdfActStbyRemapableData, Rad3LowrAdfActStbyRemapableDataf;
 extern XPLMDataRef Rad3LowerAdfActRemapableData, Rad3LowerAdfStbyRemapableData;
 extern XPLMDataRef Rad3LowerDmeActRemapableData, Rad3LowerDmeStbyRemapableData;
-extern XPLMDataRef Rad3LowerXpdrRemapableData, Rad3LowerXpdrRemapableMode, Rad3LowerXpdrBaroStdRemapableData;
+extern XPLMDataRef Rad3LowerXpdrRemapableData, Rad3LowerXpdrRemapableMode;
+extern XPLMDataRef Rad3LowerXpdrBaroStdRemapableData, Rad3LowerXpdrBaroRemapableData;
 
 
 extern XPLMDataRef Rad1UpperCom1OwnedDataRef, Rad1UpperCom2OwnedDataRef;
@@ -1193,7 +1201,8 @@ extern string rad1_upper_dme_act_data_remapable, rad1_upper_dme_stby_data_remapa
 extern string rad1_upper_dme_actstby_btn_remapable_cmd, rad1_upper_dme_actstby_btn_remapable_data;
 extern string rad1_upper_dme_actstby_btn_remapable_dataf;
 
-extern string rad1_upper_xpdr_data_remapable, rad1_upper_xpdr_mode_remapable, rad1_upper_xpdr_baro_std_data_remapable;
+extern string rad1_upper_xpdr_data_remapable, rad1_upper_xpdr_mode_remapable;
+extern string rad1_upper_xpdr_baro_std_data_remapable, rad1_upper_xpdr_baro_data_remapable;
 extern string rad1_upper_xpdr_baro_up_remapable_cmd, rad1_upper_xpdr_baro_dn_remapable_cmd;
 
 
@@ -1236,7 +1245,7 @@ extern string rad1_lower_dme_actstby_btn_remapable_cmd, rad1_lower_dme_actstby_b
 extern string rad1_lower_dme_actstby_btn_remapable_dataf;
 
 extern string rad1_lower_xpdr_data_remapable, rad1_lower_xpdr_mode_remapable;
-extern string rad1_lower_xpdr_baro_std_data_remapable;
+extern string rad1_lower_xpdr_baro_std_data_remapable, rad1_lower_xpdr_baro_data_remapable;
 extern string rad1_lower_xpdr_baro_up_remapable_cmd, rad1_lower_xpdr_baro_dn_remapable_cmd;
 
 
@@ -1278,7 +1287,8 @@ extern string rad2_upper_dme_act_data_remapable, rad2_upper_dme_stby_data_remapa
 extern string rad2_upper_dme_actstby_btn_remapable_cmd, rad2_upper_dme_actstby_btn_remapable_data;
 extern string rad2_upper_dme_actstby_btn_remapable_dataf;
 
-extern string rad2_upper_xpdr_data_remapable, rad2_upper_xpdr_mode_remapable, rad2_upper_xpdr_baro_std_data_remapable;
+extern string rad2_upper_xpdr_data_remapable, rad2_upper_xpdr_mode_remapable;
+extern string rad2_upper_xpdr_baro_std_data_remapable, rad2_upper_xpdr_baro_data_remapable;
 extern string rad2_upper_xpdr_baro_up_remapable_cmd, rad2_upper_xpdr_baro_dn_remapable_cmd;
 
 
@@ -1320,7 +1330,8 @@ extern string rad2_lower_dme_act_data_remapable, rad2_lower_dme_stby_data_remapa
 extern string rad2_lower_dme_actstby_btn_remapable_cmd, rad2_lower_dme_actstby_btn_remapable_data;
 extern string rad2_lower_dme_actstby_btn_remapable_dataf;
 
-extern string rad2_lower_xpdr_data_remapable, rad2_lower_xpdr_mode_remapable, rad2_lower_xpdr_baro_std_data_remapable;
+extern string rad2_lower_xpdr_data_remapable, rad2_lower_xpdr_mode_remapable;
+extern string rad2_lower_xpdr_baro_std_data_remapable, rad2_lower_xpdr_baro_data_remapable;
 extern string rad2_lower_xpdr_baro_up_remapable_cmd, rad2_lower_xpdr_baro_dn_remapable_cmd;
 
 
@@ -1362,7 +1373,8 @@ extern string rad3_upper_dme_act_data_remapable, rad3_upper_dme_stby_data_remapa
 extern string rad3_upper_dme_actstby_btn_remapable_cmd, rad3_upper_dme_actstby_btn_remapable_data;
 extern string rad3_upper_dme_actstby_btn_remapable_dataf;
 
-extern string rad3_upper_xpdr_data_remapable, rad3_upper_xpdr_mode_remapable, rad3_upper_xpdr_baro_std_data_remapable;
+extern string rad3_upper_xpdr_data_remapable, rad3_upper_xpdr_mode_remapable;
+extern string rad3_upper_xpdr_baro_std_data_remapable, rad3_upper_xpdr_baro_data_remapable;
 extern string rad3_upper_xpdr_baro_up_remapable_cmd, rad3_upper_xpdr_baro_dn_remapable_cmd;
 
 
@@ -1404,7 +1416,8 @@ extern string rad3_lower_dme_act_data_remapable, rad3_lower_dme_stby_data_remapa
 extern string rad3_lower_dme_actstby_btn_remapable_cmd, rad3_lower_dme_actstby_btn_remapable_data;
 extern string rad3_lower_dme_actstby_btn_remapable_dataf;
 
-extern string rad3_lower_xpdr_data_remapable, rad3_lower_xpdr_mode_remapable, rad3_lower_xpdr_baro_std_data_remapable;
+extern string rad3_lower_xpdr_data_remapable, rad3_lower_xpdr_mode_remapable;
+extern string rad3_lower_xpdr_baro_std_data_remapable, rad3_lower_xpdr_baro_data_remapable;
 extern string rad3_lower_xpdr_baro_up_remapable_cmd, rad3_lower_xpdr_baro_dn_remapable_cmd;
 
 
