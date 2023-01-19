@@ -3277,8 +3277,6 @@ void process_upper_xpdr_switch()
             upbaroset[radnum] = (int)upbarosetf[radnum];
 
 
-
-
         } else if ((rad3uprxpdrswitchremap == 777)  && (radnum == 2)) {
 
             if(xpanelsfnbutton == 0) {
@@ -3490,13 +3488,6 @@ void process_upper_xpdr_switch()
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
-
-
-
-
-
-
-
 
 
 
@@ -3741,20 +3732,6 @@ void process_upper_xpdr_switch()
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
          } else if ((rad2uprxpdrswitchremap == 1)  && (radnum == 1)) {
