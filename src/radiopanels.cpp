@@ -7168,7 +7168,7 @@ void process_lower_xpdr_switch()
                     Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
 
                 } else if (loxpdrsel[radnum] == 4) {
-                    if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
+                    if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loxpdrdbncfninc[radnum]++;
                         if (loxpdrdbncfninc[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrThUp);
@@ -7408,7 +7408,7 @@ void process_lower_xpdr_switch()
                     Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
 
                 } else if (loxpdrsel[radnum] == 4) {
-                    if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
+                    if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loxpdrdbncfninc[radnum]++;
                         if (loxpdrdbncfninc[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrThUp);
@@ -7646,7 +7646,7 @@ void process_lower_xpdr_switch()
                     Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_DN);
 
                 } else if (loxpdrsel[radnum] == 4) {
-                    if ((Last_Upper_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
+                    if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                         loxpdrdbncfninc[radnum]++;
                         if (loxpdrdbncfninc[radnum] > radspeed) {
                             XPLMCommandOnce(XpdrThUp);
