@@ -233,3 +233,5 @@ Ver 3.00 First version for X-Plane 12 and adding support for arm64 on the Mac.
 Ver 3.01 Added File Indentification Tag for Geoff Lohr.
 
 Ver 3.02 On radio panel added remapable baro commands with default transpomder for Geoff Lohr.
+
+Ver 3.03  Refactored multi panel switch positions. Added more logging to help resolve any remaining issues.
