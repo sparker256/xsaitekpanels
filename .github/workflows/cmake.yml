@@ -5,7 +5,7 @@ on: [push]
 env:
   # Customize the CMake build type here (Release, Debug, RelWithDebInfo, etc.)
   BUILD_TYPE: RelWithDebInfo
-  XSP_VERSION: 3.0.2
+  XSP_VERSION: 3.0.3
 
 jobs:
   build:

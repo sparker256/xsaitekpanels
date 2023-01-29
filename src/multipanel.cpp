@@ -364,26 +364,24 @@ void process_alt_switch()
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiAltKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
 					if(altswitchremap == 1) {
-                         XPLMCommandOnce(AltSwitchUpRemapableCmd);
-                         XPLMCommandOnce(AltSwitchUpRemapableCmd);
-                         XPLMCommandOnce(AltSwitchUpRemapableCmd);
-                         XPLMCommandOnce(AltSwitchUpRemapableCmd);
-                         XPLMCommandOnce(AltSwitchUpRemapableCmd);
-                         if (log_enable == 1) {
-                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
-                             XPLMDebugString(buf);
-                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
-                             XPLMDebugString(buf);
-                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
-                             XPLMDebugString(buf);
-                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
-                             XPLMDebugString(buf);
-                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n\n");
-                             XPLMDebugString(buf);
-                         }
-
-                         altdbncinc = 0;
-                         altbiginc = 1;
+                        float tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                        if (log_enable == 1) {
+                            tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                            sprintf(buf, "Xsaitekpanels: tmp_alt_remap_dataref = %f\n", tmp_alt_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
+                        XPLMCommandOnce(AltSwitchUpRemapableCmd);
+                        tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                        tmp_alt_remap_dataref = tmp_alt_remap_dataref + 1000;
+                        XPLMSetDataf(AltSwitchRemapableData, tmp_alt_remap_dataref);
+                        if (log_enable == 1) {
+                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
+                            XPLMDebugString(buf);
+                            sprintf(buf, "Xsaitekpanels: tmp_alt_remap_dataref = %f\n\n", tmp_alt_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
+                        altdbncinc = 0;
+                        altbiginc = 1;
 
                     } else {
                         if (log_enable == 1) {
@@ -405,12 +403,21 @@ void process_alt_switch()
                 if (xpanelsfnbutton == 0) {
                     if(altswitchremap == 1) {
                         if (altbiginc == 0) {
-                            XPLMCommandOnce(AltSwitchUpRemapableCmd);
-                            altdbncinc = 0;
+                            float tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
                             if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n\n");
+                                tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                                sprintf(buf, "Xsaitekpanels: tmp_alt_remap_dataref = %f\n", tmp_alt_remap_dataref);
                                 XPLMDebugString(buf);
                             }
+                            XPLMCommandOnce(AltSwitchUpRemapableCmd);
+                            tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_alt_remap_dataref = %f\n\n", tmp_alt_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            altdbncinc = 0;
                         }
 
                     } else {
@@ -446,26 +453,24 @@ void process_alt_switch()
                     sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentDnTimeDiff = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiAltKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
-                if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiAltKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
-					if(altswitchremap == 1) {
-                        XPLMCommandOnce(AltSwitchDnRemapableCmd);
-                        XPLMCommandOnce(AltSwitchDnRemapableCmd);
-                        XPLMCommandOnce(AltSwitchDnRemapableCmd);
-                        XPLMCommandOnce(AltSwitchDnRemapableCmd);
-                        XPLMCommandOnce(AltSwitchDnRemapableCmd);
+                if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiAltKnobSpeedThreshold)) { // Steve Bootes : add test for MultiKnob rotation time
+                    if(altswitchremap == 1) {
+                        float tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
                         if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchDnRemapableCmd);\n\n");
+                            tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                            sprintf(buf, "Xsaitekpanels: tmp_alt_remap_dataref = %f\n", tmp_alt_remap_dataref);
                             XPLMDebugString(buf);
                         }
-
+                        XPLMCommandOnce(AltSwitchDnRemapableCmd);
+                        tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                        tmp_alt_remap_dataref = tmp_alt_remap_dataref - 1000;
+                        XPLMSetDataf(AltSwitchRemapableData, tmp_alt_remap_dataref);
+                        if (log_enable == 1) {
+                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
+                            XPLMDebugString(buf);
+                            sprintf(buf, "Xsaitekpanels: tmp_alt_remap_dataref = %f\n\n", tmp_alt_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
                         altdbncdec = 0;
                         altbigdec = 1;
 
@@ -493,12 +498,22 @@ void process_alt_switch()
                 if (xpanelsfnbutton == 0) {
                      if(altswitchremap == 1) {
                         if (altbigdec == 0) {
-                            XPLMCommandOnce(AltSwitchDnRemapableCmd);
-                            altdbncdec = 0;
+                            float tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
                             if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchDnRemapableCmd);\n\n");
+                                tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                                sprintf(buf, "Xsaitekpanels: tmp_alt_remap_dataref = %f\n", tmp_alt_remap_dataref);
                                 XPLMDebugString(buf);
                             }
+                            XPLMCommandOnce(AltSwitchDnRemapableCmd);
+                            tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_alt_remap_dataref = %f\n\n", tmp_alt_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            altdbncdec = 0;
+
                         }
 
                      } else {
@@ -528,13 +543,17 @@ void process_alt_switch()
         upapaltf = upapalt;
         altbigdec = 0;
 
-        if (altswitchremap == 2) {
+        if (altswitchremap == 1) {
+            upapaltf = XPLMGetDataf(AltSwitchRemapableData);
+        } else if (altswitchremap == 2) {
             XPLMSetDataf(AltSwitchRemapableData, upapaltf);
         } else {
             XPLMSetDataf(ApAlt, upapaltf);
         }
 
-        if (vsswitchremap == 2) {
+        if (vsswitchremap == 1) {
+            upapvsf = XPLMGetDataf(VsSwitchRemapableData);
+        } else if (vsswitchremap == 2) {
             upapvsf = XPLMGetDataf(VsSwitchRemapableData);
         } else {
             upapvsf = XPLMGetDataf(ApVs);
@@ -582,12 +601,19 @@ void process_vs_switch()
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiVsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (vsswitchremap == 1) {
-                        XPLMCommandOnce(VsSwitchUpRemapableCmd);
-                        XPLMCommandOnce(VsSwitchUpRemapableCmd);
+                        float tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
                         if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n");
+                            sprintf(buf, "Xsaitekpanels: tmp_vs_remap_dataref = %f\n", tmp_vs_remap_dataref);
                             XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n\n");
+                        }
+                        XPLMCommandOnce(VsSwitchUpRemapableCmd);
+                        tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
+                        tmp_vs_remap_dataref = tmp_vs_remap_dataref + 200;
+                        XPLMSetDataf(VsSwitchRemapableData, tmp_vs_remap_dataref);
+                        if (log_enable == 1) {
+                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchUpRemapableCmd);\n");
+                            XPLMDebugString(buf);
+                            sprintf(buf, "Xsaitekpanels: tmp_vs_remap_dataref = %f\n\n", tmp_vs_remap_dataref);
                             XPLMDebugString(buf);
                         }
                         vsdbncinc = 0;
@@ -614,12 +640,20 @@ void process_vs_switch()
                 if (xpanelsfnbutton == 0) {
                     if (vsswitchremap == 1) {
                         if (vsbiginc == 0) {
-                            XPLMCommandOnce(VsSwitchUpRemapableCmd);
-                            vsdbncinc = 0;
+                            float tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
                             if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(AltSwitchUpRemapableCmd);\n\n");
+                                sprintf(buf, "Xsaitekpanels: tmp_vs_remap_dataref = %f\n", tmp_vs_remap_dataref);
                                 XPLMDebugString(buf);
                             }
+                            XPLMCommandOnce(VsSwitchUpRemapableCmd);
+                            tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchUpRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_vs_remap_dataref = %f\n\n", tmp_vs_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            vsdbncinc = 0;
                         }
                      } else {
                         if (vsbiginc == 0) {
@@ -656,14 +690,22 @@ void process_vs_switch()
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiVsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (vsswitchremap == 1) {
+                        float tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
+                        if (log_enable == 1) {
+                            sprintf(buf, "Xsaitekpanels: tmp_vs_remap_dataref = %f\n", tmp_vs_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
                         XPLMCommandOnce(VsSwitchDnRemapableCmd);
-                        XPLMCommandOnce(VsSwitchDnRemapableCmd);
+                        tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
+                        tmp_vs_remap_dataref = tmp_vs_remap_dataref - 200;
+                        XPLMSetDataf(VsSwitchRemapableData, tmp_vs_remap_dataref);
                         if (log_enable == 1) {
                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n");
                             XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n\n");
+                            sprintf(buf, "Xsaitekpanels: tmp_vs_remap_dataref = %f\n\n", tmp_vs_remap_dataref);
                             XPLMDebugString(buf);
                         }
+
                         vsdbncdec = 0;
                         vsbigdec = 1;
                     } else {
@@ -692,13 +734,20 @@ void process_vs_switch()
                 if(xpanelsfnbutton == 0) {
                     if (vsswitchremap == 1) {
                         if (vsbigdec == 0) {
-                            XPLMCommandOnce(VsSwitchDnRemapableCmd);
-                            vsdbncdec = 0;
+                            float tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
                             if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n\n");
+                                sprintf(buf, "Xsaitekpanels: tmp_vs_remap_dataref = %f\n", tmp_vs_remap_dataref);
                                 XPLMDebugString(buf);
                             }
-
+                            XPLMCommandOnce(VsSwitchDnRemapableCmd);
+                            tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_vs_remap_dataref = %f\n\n", tmp_vs_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            vsdbncdec = 0;
                         }
                     } else {
                         if (vsbigdec == 0) {
@@ -738,13 +787,17 @@ void process_vs_switch()
             XPLMSetDataf(ApVs, upapvsf);
         }
 
-        if (altswitchremap == 2) {
+        if (altswitchremap == 1) {
+            upapaltf = XPLMGetDataf(AltSwitchRemapableData);
+        } else if (altswitchremap == 2) {
             upapaltf = XPLMGetDataf(AltSwitchRemapableData);
         } else {
             upapaltf = XPLMGetDataf(ApAlt);
         }
 
-        if (vsswitchremap == 2) {
+        if (vsswitchremap == 1) {
+            upapvsf = XPLMGetDataf(VsSwitchRemapableData);
+        } else if (vsswitchremap == 2) {
             upapvsf = XPLMGetDataf(VsSwitchRemapableData);
         } else {
             upapvsf = XPLMGetDataf(ApVs);
@@ -790,6 +843,7 @@ void process_ias_switch()
             apasf = XPLMGetDataf(ApAs);
             apas = (int)(apasf);
         }
+
         if ((Last_Adjustment_Up == 1) && (testbit(multibuf,ADJUSTMENT_UP) == 0)) {
             iasdbncinc++;
             if (iasdbncinc > multispeed) {
@@ -804,12 +858,26 @@ void process_ias_switch()
 
                 if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiIasKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (iasswitchremap == 1) {
+                        float tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                        if (log_enable == 1) {
+                            tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                            sprintf(buf, "Xsaitekpanels: tmp_ias_remap_dataref = %f\n", tmp_ias_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
                         XPLMCommandOnce(IasSwitchUpRemapableCmd);
-                        XPLMCommandOnce(IasSwitchUpRemapableCmd);
+                        tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                        if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                            tmp_ias_remap_dataref = tmp_ias_remap_dataref + .09;
+                        } else {
+                            tmp_ias_remap_dataref = tmp_ias_remap_dataref + 9;
+                        }
+
+                        XPLMSetDataf(IasSwitchRemapableData, tmp_ias_remap_dataref);
                         if (log_enable == 1) {
                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(IasSwitchUpRemapableCmd);\n");
                             XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(IasSwitchUpRemapableCmd);\n\n");
+                            tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                            sprintf(buf, "Xsaitekpanels: tmp_ias_remap_dataref = %f\n\n", tmp_ias_remap_dataref);
                             XPLMDebugString(buf);
                         }
                         iasdbncinc = 0;
@@ -851,10 +919,18 @@ void process_ias_switch()
                 if (xpanelsfnbutton == 0) {
                     if (iasswitchremap == 1) {
                         if (iasbiginc == 0) {
+                            if (log_enable == 1) {
+                                float log_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                                sprintf(buf, "Xsaitekpanels: log_ias_remap_dataref = %f\n", log_ias_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
                             XPLMCommandOnce(IasSwitchUpRemapableCmd);
                             iasdbncinc = 0;
                             if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(IasSwitchUpRemapableCmd);\n\n");
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(IasSwitchUpRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                float log_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                                sprintf(buf, "Xsaitekpanels: log_ias_remap_dataref = %f\n\n", log_ias_remap_dataref);
                                 XPLMDebugString(buf);
                             }
                         }
@@ -898,7 +974,6 @@ void process_ias_switch()
         Last_Adjustment_Up = testbit(multibuf,ADJUSTMENT_UP);
         iasbiginc = 0;
 
-
         if ((Last_Adjustment_Dn == 1) && (testbit(multibuf,ADJUSTMENT_DN) == 0)) {
             iasdbncdec++;
             if (iasdbncdec > multispeed) {
@@ -912,12 +987,24 @@ void process_ias_switch()
                 }
                 if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiIasKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (iasswitchremap == 1) {
+                        float tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                        if (log_enable == 1) {
+                            sprintf(buf, "Xsaitekpanels: log_ias_remap_dataref = %f\n", tmp_ias_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
                         XPLMCommandOnce(IasSwitchDnRemapableCmd);
-                        XPLMCommandOnce(IasSwitchDnRemapableCmd);
+                        tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                        if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                            tmp_ias_remap_dataref = tmp_ias_remap_dataref - .09;
+                        } else {
+                            tmp_ias_remap_dataref = tmp_ias_remap_dataref - 9;
+                        }
+                        XPLMSetDataf(IasSwitchRemapableData, tmp_ias_remap_dataref);
                         if (log_enable == 1) {
                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(IasSwitchDnRemapableCmd);\n");
                             XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(IasSwitchDnRemapableCmd);\n\n");
+                            tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                            sprintf(buf, "Xsaitekpanels: tmp_ias_remap_dataref = %f\n\n", tmp_ias_remap_dataref);
                             XPLMDebugString(buf);
                         }
                         iasdbncdec = 0;
@@ -959,10 +1046,18 @@ void process_ias_switch()
                 if (xpanelsfnbutton == 0) {
                     if (iasswitchremap == 1) {
                         if (iasbigdec == 0) {
+                            if (log_enable == 1) {
+                                float log_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                                sprintf(buf, "Xsaitekpanels: log_ias_remap_dataref = %f\n", log_ias_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
                             XPLMCommandOnce(IasSwitchDnRemapableCmd);
                             iasdbncdec = 0;
                             if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(IasSwitchDnRemapableCmd);\n\n");
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(IasSwitchDnRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                float log_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
+                                sprintf(buf, "Xsaitekpanels: log_ias_remap_dataref = %f\n\n", log_ias_remap_dataref);
                                 XPLMDebugString(buf);
                             }
                         }
@@ -1006,33 +1101,40 @@ void process_ias_switch()
         Last_Adjustment_Dn = testbit(multibuf,ADJUSTMENT_DN);
         iasbigdec = 0;
 
-        if (iasismachremap == 1) {
-            if (XPLMGetDatai(IasIsmachRemapableData) == iasismachvalue) {
-                if (iasswitchremap == 1) {
-                   apmasf = XPLMGetDataf(IasSwitchRemapableData);
-                }
+
+        if (iasswitchremap == 1) {
+            if (XPLMGetDatai(AirspeedIsMach) == 1) {
+                apmasf = XPLMGetDataf(IasSwitchRemapableData);
                 apmas = (int)(apmasf * 100);
                 apasout = apmas;
-                //XPLMSetDataf(IasSwitchRemapableData, apmasf);
             } else {
-                if (iasswitchremap == 1) {
-                   apasf = XPLMGetDataf(IasSwitchRemapableData);
-                   apas = (int)(apasf);
-                }
+                apasf = XPLMGetDataf(IasSwitchRemapableData);
+                apas = (int)(apasf);
+                apasout = apas;
+            }
+
+
+        } else if (iasswitchremap == 2) {
+            if (XPLMGetDatai(AirspeedIsMach) == 1) {
+
+                apmas = (int)(apmasf * 100);
+                apasout = apmas;
+                XPLMSetDataf(ApAs, apmasf);
+            } else {
                 apasout = apas;
                 apasf = apas;
-                //XPLMSetDataf(IasSwitchRemapableData, apasf);
-            }
-        } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
-            apmas = (int)(apmasf * 100);
-            apasout = apmas;
-            XPLMSetDataf(ApAs, apmasf);
-        } else {
-            apasout = apas;
-            apasf = apas;
-            if ((iasswitchremap == 1) | (iasswitchremap == 2)) {
                 XPLMSetDataf(IasSwitchRemapableData, apasf);
+            }
+
+        } else {
+            if (XPLMGetDatai(AirspeedIsMach) == 1) {
+
+                apmas = (int)(apmasf * 100);
+                apasout = apmas;
+                XPLMSetDataf(ApAs, apmasf);
             } else {
+                apasout = apas;
+                apasf = apas;
                 XPLMSetDataf(ApAs, apasf);
             }
         }
@@ -1075,23 +1177,22 @@ void process_hdg_switch()
 
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiHdgKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (hdgswitchremap == 1) {
-                        XPLMCommandOnce(HdgSwitchUpRemapableCmd);
-                        XPLMCommandOnce(HdgSwitchUpRemapableCmd);
-                        XPLMCommandOnce(HdgSwitchUpRemapableCmd);
-                        XPLMCommandOnce(HdgSwitchUpRemapableCmd);
-                        XPLMCommandOnce(HdgSwitchUpRemapableCmd);
+                        float tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
                         if (log_enable == 1) {
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n\n");
+                            sprintf(buf, "Xsaitekpanels: tmp_hdg_remap_dataref = %f\n", tmp_hdg_remap_dataref);
                             XPLMDebugString(buf);
                         }
+                        XPLMCommandOnce(HdgSwitchUpRemapableCmd);
+                        tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
+                        tmp_hdg_remap_dataref = tmp_hdg_remap_dataref + 10;
+                        XPLMSetDataf(HdgSwitchRemapableData, tmp_hdg_remap_dataref);
+                        if (log_enable == 1) {
+                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchUpRemapableCmd);\n");
+                            XPLMDebugString(buf);
+                            sprintf(buf, "Xsaitekpanels: tmp_hdg_remap_dataref = %f\n\n", tmp_hdg_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
+
                         hdgbiginc = 1;
 
                     } else {
@@ -1113,12 +1214,20 @@ void process_hdg_switch()
                 if(xpanelsfnbutton == 0) {
                     if (hdgswitchremap == 1) {
                         if (hdgbiginc == 0) {
-                            XPLMCommandOnce(HdgSwitchUpRemapableCmd);
-                            hdgdbncinc = 0;
+                            float tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
                             if (log_enable == 1) {
-                                 sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(VsSwitchDnRemapableCmd);\n\n");
-                                 XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_hdg_remap_dataref = %f\n", tmp_hdg_remap_dataref);
+                                XPLMDebugString(buf);
                             }
+                            XPLMCommandOnce(HdgSwitchUpRemapableCmd);
+                            tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchUpRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_hdg_remap_dataref = %f\n\n", tmp_hdg_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            hdgdbncinc = 0;
                         }
 
                     } else {
@@ -1154,23 +1263,23 @@ void process_hdg_switch()
                 }
                 if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiHdgKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (hdgswitchremap == 1) {
+                        float tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
+                        if (log_enable == 1) {
+                            tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
+                            sprintf(buf, "Xsaitekpanels: tmp_hdg_remap_dataref = %f\n", tmp_hdg_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
                         XPLMCommandOnce(HdgSwitchDnRemapableCmd);
-                        XPLMCommandOnce(HdgSwitchDnRemapableCmd);
-                        XPLMCommandOnce(HdgSwitchDnRemapableCmd);
-                        XPLMCommandOnce(HdgSwitchDnRemapableCmd);
-                        XPLMCommandOnce(HdgSwitchDnRemapableCmd);
+                        tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
+                        tmp_hdg_remap_dataref = tmp_hdg_remap_dataref + 10;
+                        XPLMSetDataf(HdgSwitchRemapableData, tmp_hdg_remap_dataref);
                         if (log_enable == 1) {
                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchDnRemapableCmd);\n");
                             XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchDnRemapableCmd);\n");
-                            XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchDnRemapableCmd);\n\n");
+                            sprintf(buf, "Xsaitekpanels: tmp_hdg_remap_dataref = %f\n\n", tmp_hdg_remap_dataref);
                             XPLMDebugString(buf);
                         }
+
                         hdgbigdec = 1;
 
                     } else {
@@ -1191,12 +1300,22 @@ void process_hdg_switch()
                 if(xpanelsfnbutton == 0) {
                     if (hdgswitchremap == 1) {
                         if (hdgbigdec == 0) {
-                            XPLMCommandOnce(HdgSwitchDnRemapableCmd);
-                            hdgdbncdec = 0;
+                            float tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
                             if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchDnRemapableCmd);\n\n");
+                                tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
+                                sprintf(buf, "Xsaitekpanels: tmp_hdg_remap_dataref = %f\n", tmp_hdg_remap_dataref);
                                 XPLMDebugString(buf);
                             }
+                            XPLMCommandOnce(HdgSwitchDnRemapableCmd);
+                            tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(HdgSwitchDnRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_hdg_remap_dataref = %f\n\n", tmp_hdg_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            hdgdbncdec = 0;
+
                         }
 
                     } else {
@@ -1282,14 +1401,22 @@ void process_crs_switch()
 
                 if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiCrsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (crsswitchremap == 1) {
+                        float tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
+                        if (log_enable == 1) {
+                            sprintf(buf, "Xsaitekpanels: tmp_crs_remap_dataref = %f\n", tmp_crs_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
                         XPLMCommandOnce(CrsSwitchUpRemapableCmd);
-                        XPLMCommandOnce(CrsSwitchUpRemapableCmd);
+                        tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
+                        tmp_crs_remap_dataref = tmp_crs_remap_dataref + 10;
+                        XPLMSetDataf(CrsSwitchRemapableData, tmp_crs_remap_dataref);
                         if (log_enable == 1) {
                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(CrsSwitchUpRemapableCmd);\n");
                             XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(CrsSwitchUpRemapableCmd);\n\n");
+                            sprintf(buf, "Xsaitekpanels: tmp_crs_remap_dataref = %f\n\n", tmp_crs_remap_dataref);
                             XPLMDebugString(buf);
                         }
+
                         crsdbncinc = 0;
                         crsbiginc = 1;
 
@@ -1310,12 +1437,21 @@ void process_crs_switch()
                 if(xpanelsfnbutton == 0) {
                     if (crsswitchremap == 1) {
                         if (crsbiginc == 0) {
-                            XPLMCommandOnce(CrsSwitchUpRemapableCmd);
-                            crsdbncinc = 0;
+                            float tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
                             if (log_enable == 1) {
-                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(CrsSwitchUpRemapableCmd);\n\n");
+                                sprintf(buf, "Xsaitekpanels: tmp_crs_remap_dataref = %f\n", tmp_crs_remap_dataref);
                                 XPLMDebugString(buf);
                             }
+                            XPLMCommandOnce(CrsSwitchUpRemapableCmd);
+                            tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(CrsSwitchUpRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_crs_remap_dataref = %f\n\n", tmp_crs_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            crsdbncinc = 0;
+
                         }
                     } else {
                         if (crsbiginc == 0) {
@@ -1351,14 +1487,22 @@ void process_crs_switch()
 
                 if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiCrsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (crsswitchremap == 1) {
+                        float tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
+                        if (log_enable == 1) {
+                            sprintf(buf, "Xsaitekpanels: tmp_crs_remap_dataref = %f\n", tmp_crs_remap_dataref);
+                            XPLMDebugString(buf);
+                        }
                         XPLMCommandOnce(CrsSwitchDnRemapableCmd);
-                        XPLMCommandOnce(CrsSwitchDnRemapableCmd);
+                        tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
+                        tmp_crs_remap_dataref = tmp_crs_remap_dataref - 10;
+                        XPLMSetDataf(CrsSwitchRemapableData, tmp_crs_remap_dataref);
                         if (log_enable == 1) {
                             sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(CrsSwitchDnRemapableCmd);\n");
                             XPLMDebugString(buf);
-                            sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(CrsSwitchDnRemapableCmd);\n\n");
+                            sprintf(buf, "Xsaitekpanels: tmp_crs_remap_dataref = %f\n\n", tmp_crs_remap_dataref);
                             XPLMDebugString(buf);
                         }
+
                         crsbigdec = 1;
                         crsdbncdec = 0;
 
@@ -1379,12 +1523,20 @@ void process_crs_switch()
                 if(xpanelsfnbutton == 0) {
                     if (crsswitchremap == 1) {
                         if (crsbigdec == 0) {
-                           XPLMCommandOnce(CrsSwitchDnRemapableCmd);
-                           crsdbncdec = 0;
-                           if (log_enable == 1) {
-                               sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(CrsSwitchDnRemapableCmd);\n\n");
-                               XPLMDebugString(buf);
-                           }
+                            float tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: tmp_crs_remap_dataref = %f\n", tmp_crs_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            XPLMCommandOnce(CrsSwitchDnRemapableCmd);
+                            tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
+                            if (log_enable == 1) {
+                                sprintf(buf, "Xsaitekpanels: XPLMCommandOnce(CrsSwitchDnRemapableCmd);\n");
+                                XPLMDebugString(buf);
+                                sprintf(buf, "Xsaitekpanels: tmp_crs_remap_dataref = %f\n\n", tmp_crs_remap_dataref);
+                                XPLMDebugString(buf);
+                            }
+                            crsdbncdec = 0;
                         }
                     } else {
                         if (crsbigdec == 0) {
@@ -1425,6 +1577,7 @@ void process_crs_switch()
         }
 
         if (crsswitchremap == 1) {
+
 
         } else {
             //  set the appropriate global based on whether the crs toggle is on
