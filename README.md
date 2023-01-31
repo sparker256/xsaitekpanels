@@ -44,7 +44,8 @@ Bill
 
     ```
     cmake --build .\build
-    cp .\build\win.xpl .\Xsaitekpanels\64\
+    mkdir .\Xsaitekpanels\win_x64
+    copy .\build\win.xpl .\Xsaitekpanels\win_x64\Xsaitekpanels.xpl
     ```
 
 ### On Ubuntu:
@@ -68,8 +69,8 @@ Bill
 
    ```
    cmake --build ./build
-   mkdir ./Xsaitekpanels/64
-   cp ./build/lin.xpl ./Xsaitekpanels/64/
+   mkdir ./Xsaitekpanels/lin_x64
+   cp ./build/lin.xpl ./Xsaitekpanels/lin_x64/Xsaitekpanels.xpl
    ```
 
 ### On OS X:
@@ -88,6 +89,6 @@ Bill
 
    ```
    cmake --build ./build
-   mkdir ./Xsaitekpanels/64
-   cp ./build/mac.xpl ./Xsaitekpanels/64/
+   mkdir ./Xsaitekpanels/mac_x64
+   cp ./build/mac.xpl ./Xsaitekpanels/mac_x64/Xsaitekpanels.xpl
    ```
