@@ -345,7 +345,7 @@ void process_alt_switch()
            multiseldis = 1;
         }
 
-        if ((altswitchremap == 2) | (altswitchremap == 1)) {
+        if ((altswitchremap == 2) | (altswitchremap == 1) | (altswitchremap == 3)) {
             upapaltf = XPLMGetDataf(AltSwitchRemapableData);
         } else {
             upapaltf = XPLMGetDataf(ApAlt);
@@ -362,8 +362,8 @@ void process_alt_switch()
                     sprintf(buf, "Xsaitekpanels:MultiKnobLastCurrentUpTimeDiff = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiAltKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
-                if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiAltKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
-					if(altswitchremap == 1) {
+                if (((xpanelsfnbutton == 1) && (altswitchremap != 3)) || (MultiKnobLastCurrentUpTimeDiff < MultiAltKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time
+					if (altswitchremap == 1) {
                         float tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
                         if (log_enable == 1) {
                             tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
@@ -400,8 +400,8 @@ void process_alt_switch()
                     }
                 }
                 MultiKnobLastCurrentUpTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if (xpanelsfnbutton == 0) {
-                    if(altswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (altswitchremap == 3)) {
+                    if ((altswitchremap == 1) || (altswitchremap == 3)) {
                         if (altbiginc == 0) {
                             float tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
                             if (log_enable == 1) {
@@ -453,7 +453,7 @@ void process_alt_switch()
                     sprintf(buf, "Xsaitekpanels: MultiKnobLastCurrentDnTimeDiff = %f MultiAltKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiAltKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
-                if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiAltKnobSpeedThreshold)) { // Steve Bootes : add test for MultiKnob rotation time
+                if (((xpanelsfnbutton == 1) && (altswitchremap != 3)) || (MultiKnobLastCurrentDnTimeDiff < MultiAltKnobSpeedThreshold)) { // Steve Bootes : add test for MultiKnob rotation time
                     if(altswitchremap == 1) {
                         float tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
                         if (log_enable == 1) {
@@ -495,8 +495,8 @@ void process_alt_switch()
                     }
                 }
                 MultiKnobLastCurrentDnTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if (xpanelsfnbutton == 0) {
-                     if(altswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (altswitchremap == 3)) {
+                     if ((altswitchremap == 1) || (altswitchremap == 3)) {
                         if (altbigdec == 0) {
                             float tmp_alt_remap_dataref = XPLMGetDataf(AltSwitchRemapableData);
                             if (log_enable == 1) {
@@ -543,7 +543,7 @@ void process_alt_switch()
         upapaltf = upapalt;
         altbigdec = 0;
 
-        if (altswitchremap == 1) {
+        if ((altswitchremap == 1) || (altswitchremap == 3)) {
             upapaltf = XPLMGetDataf(AltSwitchRemapableData);
         } else if (altswitchremap == 2) {
             XPLMSetDataf(AltSwitchRemapableData, upapaltf);
@@ -551,7 +551,7 @@ void process_alt_switch()
             XPLMSetDataf(ApAlt, upapaltf);
         }
 
-        if (vsswitchremap == 1) {
+        if ((vsswitchremap == 1) || (vsswitchremap == 3)) {
             upapvsf = XPLMGetDataf(VsSwitchRemapableData);
         } else if (vsswitchremap == 2) {
             upapvsf = XPLMGetDataf(VsSwitchRemapableData);
@@ -599,7 +599,7 @@ void process_vs_switch()
                     sprintf(buf, "MultiKnobLastCurrentUpTimeDiff = %f MultiVsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentUpTimeDiff, MultiVsKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
-                if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiVsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+                if (((xpanelsfnbutton == 1) && (vsswitchremap != 3)) || (MultiKnobLastCurrentUpTimeDiff < MultiVsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (vsswitchremap == 1) {
                         float tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
                         if (log_enable == 1) {
@@ -637,8 +637,8 @@ void process_vs_switch()
 
                 }
                 MultiKnobLastCurrentUpTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if (xpanelsfnbutton == 0) {
-                    if (vsswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (vsswitchremap == 3)) {
+                    if ((vsswitchremap == 1) || (vsswitchremap == 3)) {
                         if (vsbiginc == 0) {
                             float tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
                             if (log_enable == 1) {
@@ -688,7 +688,7 @@ void process_vs_switch()
                     sprintf(buf, "MultiKnobLastCurrentDnTimeDiff = %f MultiVsKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiVsKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
-                if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiVsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+                if (((xpanelsfnbutton == 1) && (vsswitchremap != 3)) || (MultiKnobLastCurrentDnTimeDiff < MultiVsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (vsswitchremap == 1) {
                         float tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
                         if (log_enable == 1) {
@@ -731,8 +731,8 @@ void process_vs_switch()
                 }
                 vsdbncdec = 0;
                 MultiKnobLastCurrentDnTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if(xpanelsfnbutton == 0) {
-                    if (vsswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (vsswitchremap == 3)) {
+                    if ((vsswitchremap == 1) || (vsswitchremap == 3)) {
                         if (vsbigdec == 0) {
                             float tmp_vs_remap_dataref = XPLMGetDataf(VsSwitchRemapableData);
                             if (log_enable == 1) {
@@ -780,14 +780,14 @@ void process_vs_switch()
         upapvsf = upapvs;
         if (vsswitchremap == 2) {
             XPLMSetDataf(VsSwitchRemapableData, upapvsf);
-        } else if (vsswitchremap == 1) {
+        } else if ((vsswitchremap == 1) || (vsswitchremap == 3)) {
             upapvsf = XPLMGetDataf(VsSwitchRemapableData);
             upapvs = (int)(upapvsf);
         } else {
             XPLMSetDataf(ApVs, upapvsf);
         }
 
-        if (altswitchremap == 1) {
+        if ((altswitchremap == 1) || (altswitchremap == 3)) {
             upapaltf = XPLMGetDataf(AltSwitchRemapableData);
         } else if (altswitchremap == 2) {
             upapaltf = XPLMGetDataf(AltSwitchRemapableData);
@@ -795,7 +795,7 @@ void process_vs_switch()
             upapaltf = XPLMGetDataf(ApAlt);
         }
 
-        if (vsswitchremap == 1) {
+        if ((vsswitchremap == 1) || (vsswitchremap == 3)) {
             upapvsf = XPLMGetDataf(VsSwitchRemapableData);
         } else if (vsswitchremap == 2) {
             upapvsf = XPLMGetDataf(VsSwitchRemapableData);
@@ -836,7 +836,7 @@ void process_ias_switch()
             }
         } else if (XPLMGetDatai(AirspeedIsMach) == 1) {
             apmasf = XPLMGetDataf(ApAs);
-        } else if ((iasswitchremap == 1) | (iasswitchremap == 2)) {
+        } else if ((iasswitchremap == 1) | (iasswitchremap == 2) | (iasswitchremap == 3)) {
             apasf = XPLMGetDataf(IasSwitchRemapableData);
             apas = (int)(apasf);
         } else {
@@ -856,7 +856,7 @@ void process_ias_switch()
                     XPLMDebugString(buf);
                 }
 
-                if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiIasKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+                if (((xpanelsfnbutton == 1) && (iasswitchremap != 3)) || (MultiKnobLastCurrentUpTimeDiff < MultiIasKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (iasswitchremap == 1) {
                         float tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
                         if (log_enable == 1) {
@@ -916,8 +916,8 @@ void process_ias_switch()
                     iasdbncinc = 0;
                 }
                 MultiKnobLastCurrentUpTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if (xpanelsfnbutton == 0) {
-                    if (iasswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (iasswitchremap == 3)) {
+                    if ((iasswitchremap == 1) || (iasswitchremap == 3)) {
                         if (iasbiginc == 0) {
                             if (log_enable == 1) {
                                 float log_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
@@ -985,7 +985,7 @@ void process_ias_switch()
                     sprintf(buf, "MultiKnobLastCurrentDnTimeDiff = %f MultiIasKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiIasKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
-                if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiIasKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+                if (((xpanelsfnbutton == 1) && (iasswitchremap != 3)) || (MultiKnobLastCurrentDnTimeDiff < MultiIasKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (iasswitchremap == 1) {
                         float tmp_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
                         if (log_enable == 1) {
@@ -1042,9 +1042,8 @@ void process_ias_switch()
                     iasdbncdec = 0;
                 }
                 MultiKnobLastCurrentDnTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-
-                if (xpanelsfnbutton == 0) {
-                    if (iasswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (iasswitchremap == 3)) {
+                    if ((iasswitchremap == 1) || (iasswitchremap == 3)) {
                         if (iasbigdec == 0) {
                             if (log_enable == 1) {
                                 float log_ias_remap_dataref = XPLMGetDataf(IasSwitchRemapableData);
@@ -1102,7 +1101,7 @@ void process_ias_switch()
         iasbigdec = 0;
 
 
-        if (iasswitchremap == 1) {
+        if ((iasswitchremap == 1) || (iasswitchremap == 3)) {
             if (XPLMGetDatai(AirspeedIsMach) == 1) {
                 apmasf = XPLMGetDataf(IasSwitchRemapableData);
                 apmas = (int)(apmasf * 100);
@@ -1175,7 +1174,7 @@ void process_hdg_switch()
                     XPLMDebugString(buf);
                 }
 
-                if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiHdgKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+                if (((xpanelsfnbutton == 1) && (hdgswitchremap != 3)) || (MultiKnobLastCurrentUpTimeDiff < MultiHdgKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (hdgswitchremap == 1) {
                         float tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
                         if (log_enable == 1) {
@@ -1211,8 +1210,8 @@ void process_hdg_switch()
 
                 }
                 MultiKnobLastCurrentUpTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if(xpanelsfnbutton == 0) {
-                    if (hdgswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (hdgswitchremap == 3)) {
+                    if ((hdgswitchremap == 1) || (hdgswitchremap == 3)) {
                         if (hdgbiginc == 0) {
                             float tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
                             if (log_enable == 1) {
@@ -1261,7 +1260,7 @@ void process_hdg_switch()
                     sprintf(buf, "MultiKnobLastCurrentDnTimeDiff = %f MultiHdgKnobSpeedThreshold = %f\n",MultiKnobLastCurrentDnTimeDiff, MultiHdgKnobSpeedThreshold);
                     XPLMDebugString(buf);
                 }
-                if((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiHdgKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+                if (((xpanelsfnbutton == 1) && (hdgswitchremap != 3)) || (MultiKnobLastCurrentDnTimeDiff < MultiHdgKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (hdgswitchremap == 1) {
                         float tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
                         if (log_enable == 1) {
@@ -1297,8 +1296,8 @@ void process_hdg_switch()
                     hdgdbncdec = 0;
                 }
                 MultiKnobLastCurrentDnTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if(xpanelsfnbutton == 0) {
-                    if (hdgswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (hdgswitchremap == 3)) {
+                    if ((hdgswitchremap == 1) || (hdgswitchremap == 3)) {
                         if (hdgbigdec == 0) {
                             float tmp_hdg_remap_dataref = XPLMGetDataf(HdgSwitchRemapableData);
                             if (log_enable == 1) {
@@ -1347,7 +1346,7 @@ void process_hdg_switch()
         upaphdgf = upaphdg;
         if (hdgswitchremap == 2) {
             XPLMSetDataf(HdgSwitchRemapableData, upaphdgf);
-        } else if (hdgswitchremap == 1) {
+        } else if ((hdgswitchremap == 1) || (hdgswitchremap == 3)) {
             upaphdgf = XPLMGetDataf(HdgSwitchRemapableData);
             upaphdg = (int)(upaphdgf);
         } else {
@@ -1380,7 +1379,7 @@ void process_crs_switch()
         upapcrsf = XPLMGetDataf(ApCrs);
         upapcrs = (int)(upapcrsf);
 
-        if ((crsswitchremap == 1) || (crsswitchremap == 2)) {
+        if ((crsswitchremap == 1) || (crsswitchremap == 2) || (crsswitchremap == 3)) {
             cur_apcrsf = XPLMGetDataf(CrsSwitchRemapableData);
         } else {
             //  get the appropriate course setting depending on if the toggle is down
@@ -1399,7 +1398,7 @@ void process_crs_switch()
                     XPLMDebugString(buf);
                 }
 
-                if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentUpTimeDiff < MultiCrsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+                if (((xpanelsfnbutton == 1) && (crsswitchremap != 3)) || (MultiKnobLastCurrentUpTimeDiff < MultiCrsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (crsswitchremap == 1) {
                         float tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
                         if (log_enable == 1) {
@@ -1434,8 +1433,8 @@ void process_crs_switch()
                     }
                 }
                 MultiKnobLastCurrentUpTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if(xpanelsfnbutton == 0) {
-                    if (crsswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (crsswitchremap == 3)) {
+                    if ((crsswitchremap == 1) || (crsswitchremap == 3)) {
                         if (crsbiginc == 0) {
                             float tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
                             if (log_enable == 1) {
@@ -1485,7 +1484,7 @@ void process_crs_switch()
                     XPLMDebugString(buf);
                 }
 
-                if ((xpanelsfnbutton == 1) || (MultiKnobLastCurrentDnTimeDiff < MultiCrsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
+                if (((xpanelsfnbutton == 1) && (crsswitchremap != 3)) || (MultiKnobLastCurrentDnTimeDiff < MultiCrsKnobSpeedThreshold)) {  // Steve Bootes : add test for MultiKnob rotation time)
                     if (crsswitchremap == 1) {
                         float tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
                         if (log_enable == 1) {
@@ -1520,8 +1519,8 @@ void process_crs_switch()
                     }
                 }
                 MultiKnobLastCurrentDnTime = wrgCurrentTime; // Steve Bootes  Bill Good: set last current time to current time
-                if(xpanelsfnbutton == 0) {
-                    if (crsswitchremap == 1) {
+                if ((xpanelsfnbutton == 0) || (crsswitchremap == 3)) {
+                    if ((crsswitchremap == 1) || (crsswitchremap == 3)) {
                         if (crsbigdec == 0) {
                             float tmp_crs_remap_dataref = XPLMGetDataf(CrsSwitchRemapableData);
                             if (log_enable == 1) {
@@ -1567,7 +1566,7 @@ void process_crs_switch()
         }
 
         cur_apcrsf = cur_apcrs;
-        if (crsswitchremap == 1) {
+        if ((crsswitchremap == 1) || (crsswitchremap == 3)) {
             upapcrsf = XPLMGetDataf(CrsSwitchRemapableData);
             upapcrs = (int)(upapcrsf);
         } else if (crsswitchremap == 2) {
@@ -1576,7 +1575,7 @@ void process_crs_switch()
             XPLMSetDataf(crs_dataref, cur_apcrsf);
         }
 
-        if (crsswitchremap == 1) {
+        if ((crsswitchremap == 1) || (crsswitchremap == 3)) {
 
 
         } else {

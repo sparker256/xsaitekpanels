@@ -3826,7 +3826,7 @@ void process_read_ini_file()
 
     // alt switch - remapable
     readOptionAsInt("Alt Switch remapable", &altswitchremap);
-    if (altswitchremap == 1) {
+    if ((altswitchremap == 1) || (altswitchremap == 3)) {
         alt_switch_up_remapable = getOptionToString("alt_switch_up_remapable_cmd");
         AltSwitchUpRemapableCmd = XPLMFindCommand(alt_switch_up_remapable.c_str());
         alt_switch_dn_remapable = getOptionToString("alt_switch_dn_remapable_cmd");
@@ -3843,7 +3843,7 @@ void process_read_ini_file()
 
     // vs switch - remapable
     readOptionAsInt("Vs Switch remapable", &vsswitchremap);
-    if (vsswitchremap == 1) {
+    if ((vsswitchremap == 1) || (vsswitchremap == 3)) {
         vs_switch_up_remapable = getOptionToString("vs_switch_up_remapable_cmd");
         VsSwitchUpRemapableCmd = XPLMFindCommand(vs_switch_up_remapable.c_str());
         vs_switch_dn_remapable = getOptionToString("vs_switch_dn_remapable_cmd");
@@ -3859,7 +3859,7 @@ void process_read_ini_file()
 
     // ias switch - remapable
     readOptionAsInt("Ias Switch remapable", &iasswitchremap);
-    if (iasswitchremap == 1) {
+    if ((iasswitchremap == 1) || (iasswitchremap == 3)) {
         ias_switch_up_remapable = getOptionToString("ias_switch_up_remapable_cmd");
         IasSwitchUpRemapableCmd = XPLMFindCommand(ias_switch_up_remapable.c_str());
         ias_switch_dn_remapable = getOptionToString("ias_switch_dn_remapable_cmd");
@@ -3875,7 +3875,7 @@ void process_read_ini_file()
 
     // hdg switch - remapable
     readOptionAsInt("Hdg Switch remapable", &hdgswitchremap);
-    if (hdgswitchremap == 1) {
+    if ((hdgswitchremap == 1) || (hdgswitchremap == 3)) {
         hdg_switch_up_remapable = getOptionToString("hdg_switch_up_remapable_cmd");
         HdgSwitchUpRemapableCmd = XPLMFindCommand(hdg_switch_up_remapable.c_str());
         hdg_switch_dn_remapable = getOptionToString("hdg_switch_dn_remapable_cmd");
@@ -3891,7 +3891,7 @@ void process_read_ini_file()
 
     // crs switch - remapable
     readOptionAsInt("Crs Switch remapable", &crsswitchremap);
-    if (crsswitchremap == 1) {
+    if ((crsswitchremap == 1) || (crsswitchremap == 3)) {
         crs_switch_up_remapable = getOptionToString("crs_switch_up_remapable_cmd");
         CrsSwitchUpRemapableCmd = XPLMFindCommand(crs_switch_up_remapable.c_str());
         crs_switch_dn_remapable = getOptionToString("crs_switch_dn_remapable_cmd");
