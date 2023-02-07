@@ -1788,7 +1788,7 @@ void process_ap_master_switch()
         }
         if (appushed == 1) {
             aploop++;
-            if (aploop == 50) {
+            if (aploop == 10) {
                appushed = 0;
                aploop = 0;
             }
@@ -1871,7 +1871,7 @@ void process_ap_master_switch()
 
             if (appushed == 1) {
                 aploop++;
-                if (aploop == 50) {
+                if (aploop == 10) {
                    appushed = 0;
                    aploop = 0;
                 }
@@ -1960,7 +1960,7 @@ void process_ap_master_switch()
 
         if (appushed == 1) {
             aploop++;
-            if (aploop == 50) {
+            if (aploop == 10) {
                appushed = 0;
                aploop = 0;
             }
@@ -2065,7 +2065,7 @@ void process_ap_master_switch()
 
         if (appushed == 1) {
             aploop++;
-            if (aploop == 50) {
+            if (aploop == 10) {
                 appushed = 0;
                 aploop = 0;
             }
@@ -4724,7 +4724,7 @@ void process_multi_panel(float dt)
     process_multi_display();
 
     // ******* Write on changes or timeout ********
-    if ((lastmultiseldis != multiseldis) || (lastbtnleds != btnleds) || (multinowrite > 50)) {
+    if ((lastmultiseldis != multiseldis) || (lastbtnleds != btnleds) || (multinowrite > 10)) {
         mulres = hid_send_feature_report(multihandle, multiwbuf, sizeof(multiwbuf));
         multinowrite = 1;
         lastmultiseldis = multiseldis;

@@ -34,7 +34,7 @@ extern XPLMCommandRef Afd2StbyOnesUp, Afd2StbyOnesDn;
 
 extern XPLMCommandRef XpdrThUp, XpdrThDn, XpdrHunUp, XpdrHunDn;
 extern XPLMCommandRef XpdrTensUp, XpdrTensDn, XpdrOnesUp, XpdrOnesDn;
-extern XPLMCommandRef BaroUp, BaroDn, BaroStd;
+extern XPLMCommandRef BaroUp, BaroDn, BaroUp2, BaroDn2, BaroStd;
 
 extern XPLMCommandRef Com1ActStby, Com2ActStby, Nav1ActStby, Nav2ActStby;
 extern XPLMCommandRef Adf1ActStby, Adf2ActStby;
@@ -202,8 +202,9 @@ extern XPLMDataRef Com1StbyFreq_833, Com2StbyFreq_833;
 extern XPLMDataRef Adf1StbyFreq, Adf2StbyFreq;
 extern XPLMDataRef Adf1ActFreq, Adf2ActFreq;
 
-extern XPLMDataRef XpdrCode, XpdrMode, BaroSetting;
+extern XPLMDataRef XpdrCode, XpdrMode, BaroSetting, BaroSetting2;
 extern XPLMDataRef MetricPress;
+extern XPLMDataRef MetricPressEnabledDataRef;
 extern XPLMDataRef DmeMode, DmeSlvSource;
 extern XPLMDataRef Nav1DmeNmDist, Nav1DmeSpeed;
 extern XPLMDataRef Nav2DmeNmDist, Nav2DmeSpeed;
@@ -577,6 +578,9 @@ extern float rad3_lwr_adf_actstby_btn_dataf_on_value, rad3_lwr_adf_actstby_btn_d
 extern float rad3_lwr_dme_actstby_btn_dataf_on_value, rad3_lwr_dme_actstby_btn_dataf_off_value;
 
 void UpdateUI(); 
+
+extern int	MetricPressEnabledStatusGetDataiCallback(void * inRefcon);
+extern void	MetricPressEnabledStatusSetDataiCallback(void * inRefcon, int MetricPressEnabledStatus);
 
 extern int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon);
 extern void	Rad1UprCom1StatusSetDataiCallback(void * inRefcon, int Rad1UprCom1Status);

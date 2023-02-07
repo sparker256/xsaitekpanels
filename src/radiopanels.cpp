@@ -13,6 +13,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <cmath>
 
 #define testbit(x, y)  ( ( ((const char*)&(x))[(y)>>3] & 0x80 >> ((y)&0x07)) >> (7-((y)&0x07) ) )
 
@@ -3053,11 +3054,11 @@ void process_upper_xpdr_switch()
             upxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             upbarosetf[radnum] = XPLMGetDataf(BaroSetting);
             if (metricpressenable == 0) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 100.0;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8639;
+                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -3267,11 +3268,11 @@ void process_upper_xpdr_switch()
             upxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             upbarosetf[radnum] = XPLMGetDataf(BaroSetting);
             if (metricpressenable == 0) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 100.0;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8639;
+                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -3480,11 +3481,11 @@ void process_upper_xpdr_switch()
             upxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             upbarosetf[radnum] = XPLMGetDataf(BaroSetting);
             if (metricpressenable == 0) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 100.0;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8639;
+                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -3724,11 +3725,11 @@ void process_upper_xpdr_switch()
             upxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             upbarosetf[radnum] = XPLMGetDataf(Rad1UpperXpdrBaroRemapableData);
             if (metricpressenable == 0) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 100.0;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8639;
+                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -3968,11 +3969,11 @@ void process_upper_xpdr_switch()
             upxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             upbarosetf[radnum] = XPLMGetDataf(Rad2UpperXpdrBaroRemapableData);
             if (metricpressenable == 0) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 100.0;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8639;
+                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -4210,11 +4211,11 @@ void process_upper_xpdr_switch()
            upxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
            upbarosetf[radnum] = XPLMGetDataf(Rad3UpperXpdrBaroRemapableData);
            if (metricpressenable == 0) {
-               upbarosetf[radnum] = upbarosetf[radnum] * 100.0;
+               upbarosetf[radnum] = round(upbarosetf[radnum] * 100.0);
                XPLMSetDatai(MetricPress, 0);
            }
            if (metricpressenable == 1) {
-               upbarosetf[radnum] = upbarosetf[radnum] * 33.8639;
+               upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
                XPLMSetDatai(MetricPress, 1);
            }
            upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -4461,12 +4462,12 @@ void process_upper_xpdr_switch()
             upxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             upbarosetf[radnum] = XPLMGetDataf(BaroSetting);
             if (metricpressenable == 0) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 100.0;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
 
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8639;
+                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -6656,13 +6657,13 @@ void process_lower_xpdr_switch()
 
            loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
            loxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
-           lobarosetf[radnum] = XPLMGetDataf(BaroSetting);
+           lobarosetf[radnum] = XPLMGetDataf(BaroSetting2);
            if (metricpressenable == 0) {
-               lobarosetf[radnum] = lobarosetf[radnum] * 100.0;
+               lobarosetf[radnum] = round(lobarosetf[radnum] * 100.0);
                XPLMSetDatai(MetricPress, 0);
            }
            if (metricpressenable == 1) {
-               lobarosetf[radnum] = lobarosetf[radnum] * 33.8639;
+               lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
                XPLMSetDatai(MetricPress, 1);
            }
            lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -6875,13 +6876,13 @@ void process_lower_xpdr_switch()
 
            loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
            loxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
-           lobarosetf[radnum] = XPLMGetDataf(BaroSetting);
+           lobarosetf[radnum] = XPLMGetDataf(BaroSetting2);
            if (metricpressenable == 0) {
-               lobarosetf[radnum] = lobarosetf[radnum] * 100.0;
+               lobarosetf[radnum] = round(lobarosetf[radnum] * 100.0);
                XPLMSetDatai(MetricPress, 0);
            }
            if (metricpressenable == 1) {
-               lobarosetf[radnum] = lobarosetf[radnum] * 33.8639;
+               lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
                XPLMSetDatai(MetricPress, 1);
            }
            lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -7089,13 +7090,13 @@ void process_lower_xpdr_switch()
 
             loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
             loxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
-            lobarosetf[radnum] = XPLMGetDataf(BaroSetting);
+            lobarosetf[radnum] = XPLMGetDataf(BaroSetting2);
             if (metricpressenable == 0) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 100.0;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8639;
+                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -7331,11 +7332,11 @@ void process_lower_xpdr_switch()
             loxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             lobarosetf[radnum] = XPLMGetDataf(Rad1LowerXpdrBaroRemapableData);
             if (metricpressenable == 0) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 100.0;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8639;
+                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -7570,11 +7571,11 @@ void process_lower_xpdr_switch()
             loxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             lobarosetf[radnum] = XPLMGetDataf(Rad2LowerXpdrBaroRemapableData);
             if (metricpressenable == 0) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 100.0;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8639;
+                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -7808,11 +7809,11 @@ void process_lower_xpdr_switch()
             loxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
             lobarosetf[radnum] = XPLMGetDataf(Rad3LowerXpdrBaroRemapableData);
             if (metricpressenable == 0) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 100.0;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8639;
+                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -8011,7 +8012,7 @@ void process_lower_xpdr_switch()
                 if ((Last_Lower_Fine_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_UP) == 0)) {
                     loqnhdbncfninc[radnum]++;
                     if (loqnhdbncfninc[radnum] > radspeed) {
-                        XPLMCommandOnce(BaroUp);
+                        XPLMCommandOnce(BaroUp2);
                         loqnhdbncfninc[radnum] = 0;
                     }
                 }
@@ -8020,7 +8021,7 @@ void process_lower_xpdr_switch()
                 if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                     loqnhdbncfndec[radnum]++;
                     if (loqnhdbncfndec[radnum] > radspeed) {
-                        XPLMCommandOnce(BaroDn);
+                        XPLMCommandOnce(BaroDn2);
                         loqnhdbncfndec[radnum] = 0;
                     }
                 }
@@ -8032,7 +8033,7 @@ void process_lower_xpdr_switch()
                     if (loqnhdbnccorinc[radnum] > radspeed) {
                         radn = 10;
                         while (radn>0) {
-                            XPLMCommandOnce(BaroUp);
+                            XPLMCommandOnce(BaroUp2);
                             --radn;
                         }
                         loqnhdbnccorinc[radnum] = 0;
@@ -8046,7 +8047,7 @@ void process_lower_xpdr_switch()
                     if (loqnhdbnccordec[radnum] > radspeed) {
                         radn = 10;
                         while (radn>0) {
-                            XPLMCommandOnce(BaroDn);
+                            XPLMCommandOnce(BaroDn2);
                             --radn;
                         }
                         loqnhdbnccordec[radnum] = 0;
@@ -8061,14 +8062,14 @@ void process_lower_xpdr_switch()
 
             loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
             loxpdrmode[radnum] = XPLMGetDatai(XpdrMode);
-            lobarosetf[radnum] = XPLMGetDataf(BaroSetting);
+            lobarosetf[radnum] = XPLMGetDataf(BaroSetting2);
             if (metricpressenable == 0) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 100.0;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 100.0);
                 XPLMSetDatai(MetricPress, 0);
             }
 
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8639;
+                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -8222,11 +8223,26 @@ void process_upper_nav_freq()
           //UpNav2ObsDegm[radnum] = XPLMGetDataf(Nav2ObsDegm);
           radiobstby = (int)(UpNav2ObsDegm[radnum]);
       }
-      radiobdig1 = 15, radiobdig2 = 15;
+      radiobdig1 = 15;
       //radiobstby = radiobstby + 10;
-      radiobdig3 = radiobstby/100, radiobrem3 = radiobstby%100;
-      radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
-      radiobdig3 = radiobdig3, radiobdig5 = radiobrem4;
+      if (radiobstby > 999) {
+      	radiobdig2 = radiobstby/1000, radiobrem2 = radiobstby%1000;
+        radiobdig3 = radiobrem2/100, radiobrem3 = radiobrem2%100;
+        radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
+        radiobdig3 = radiobdig3, radiobdig5 = radiobrem4;
+				float BaroValue1 = XPLMGetDataf(BaroSetting);
+				float BaroValue2 = XPLMGetDataf(BaroSetting2);
+        int BaroValue1i = round(BaroValue1 * 100.0);
+        int BaroValue2i = round(BaroValue2 * 100.0);
+          if (metricpressenable == 0 && (BaroValue1i == radiodstby || BaroValue2i == radiodstby)) {
+              radiobdig3 = radiobdig3+208;
+          }
+   		} else if (radiobstby < 1000) {
+        radiobdig2 = 15;
+        radiobdig3 = radiobstby/100, radiobrem3 = radiobstby%100;
+        radiobdig4 = radiobrem3/10, radiobrem4 = radiobrem3%10;
+        radiobdig3 = radiobdig3, radiobdig5 = radiobrem4;
+      }
   }
 
 
@@ -8312,12 +8328,27 @@ void process_lower_nav_freq()
           radiodstby = (int)(LoNav2ObsDegm[radnum]);
       }
 
-      radioddig1 = 15, radioddig2 = 15;
+      radioddig1 = 15;
       //radiodstby = radiodstby + 10;
 
-      radioddig3 = radiodstby/100, radiodrem3 = radiodstby%100;
-      radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
-      radioddig3 = radioddig3, radioddig5 = radiodrem4;
+      if (radiodstby > 999) {
+      	radioddig2 = radiodstby/1000, radiodrem2 = radiodstby%1000;
+        radioddig3 = radiodrem2/100, radiodrem3 = radiodrem2%100;
+        radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
+        radioddig3 = radioddig3, radioddig5 = radiodrem4;
+				float BaroValue1 = XPLMGetDataf(BaroSetting);
+				float BaroValue2 = XPLMGetDataf(BaroSetting2);
+        int BaroValue1i = round(BaroValue1 * 100.0);
+        int BaroValue2i = round(BaroValue2 * 100.0);
+          if (metricpressenable == 0 && (BaroValue1i == radiodstby || BaroValue2i == radiodstby)) {
+              radioddig3 = radioddig3+208;
+          }
+   		} else if (radiodstby < 1000) {
+        radioddig2 = 15;
+        radioddig3 = radiodstby/100, radiodrem3 = radiodstby%100;
+        radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
+        radioddig3 = radioddig3, radioddig5 = radiodrem4;
+      }
   }
 
   return;
@@ -8476,6 +8507,7 @@ void process_radio_panel()
         radionowrite[radnum] = 1;
         lastupseldis[radnum] = upseldis[radnum];
         lastloseldis[radnum] = loseldis[radnum];
+        metricpressenable = XPLMGetDatai(MetricPressEnabledDataRef);
     }else{
         radionowrite[radnum]++;
     }

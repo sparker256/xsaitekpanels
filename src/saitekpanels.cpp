@@ -62,7 +62,7 @@ XPLMCommandRef	Afd2StbyOnesUp = NULL, Afd2StbyOnesDn = NULL;
 
 XPLMCommandRef	XpdrThUp = NULL, XpdrThDn = NULL, XpdrHunUp = NULL, XpdrHunDn = NULL;
 XPLMCommandRef	XpdrTensUp = NULL, XpdrTensDn = NULL, XpdrOnesUp = NULL, XpdrOnesDn = NULL;
-XPLMCommandRef	BaroUp = NULL, BaroDn = NULL, BaroStd = NULL;
+XPLMCommandRef	BaroUp = NULL, BaroDn = NULL, BaroUp2 = NULL, BaroDn2 = NULL, BaroStd = NULL;
 
 
 XPLMCommandRef Com1ActStby = NULL, Com2ActStby = NULL, Nav1ActStby = NULL, Nav2ActStby = NULL;
@@ -230,8 +230,9 @@ XPLMDataRef Com1StbyFreq_833 = NULL, Com2StbyFreq_833 = NULL;
 XPLMDataRef Adf1StbyFreq = NULL, Adf2StbyFreq = NULL;
 XPLMDataRef Adf1ActFreq = NULL, Adf2ActFreq = NULL;
 
-XPLMDataRef XpdrCode = NULL, XpdrMode = NULL, BaroSetting = NULL;
+XPLMDataRef XpdrCode = NULL, XpdrMode = NULL, BaroSetting = NULL, BaroSetting2 = NULL;
 XPLMDataRef MetricPress = NULL;
+XPLMDataRef MetricPressEnabledDataRef = NULL;
 
 XPLMDataRef DmeMode = NULL, DmeSlvSource = NULL;
 XPLMDataRef Nav1DmeNmDist = NULL, Nav1DmeSpeed = NULL;
@@ -1255,6 +1256,7 @@ int radioMenuItem;
 
 
 static int RadioPanelCountData = 0;
+static int MetricPressEnabledData = 0;
 static int Rad1UprCom1OwnedData = 0, Rad1UprCom2OwnedData = 0;
 static int Rad1UprNav1OwnedData = 0, Rad1UprNav2OwnedData = 0;
 static int Rad1UprAdfOwnedData = 0, Rad1UprDmeOwnedData = 0;
@@ -1373,6 +1375,8 @@ int Rad3LwrDigit9OwnedData = 0, Rad3LwrDigit10OwnedData = 0;
 int	RadioPanelCountGetDataiCallback(void * inRefcon);
 void	RadioPanelCountSetDataiCallback(void * inRefcon, int RadioPanelCount);
 
+int	MetricPressEnabledStatusGetDataiCallback(void * inRefcon);
+void	MetricPressEnabledStatusSetDataiCallback(void * inRefcon, int MetricPressEnabledStatus);
 
 int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon);
 void	Rad1UprCom1StatusSetDataiCallback(void * inRefcon, int Rad1UprCom1Status);
@@ -5065,6 +5069,17 @@ void	RadioPanelCountSetDataiCallback(void * inRefcon, int RadioPanelCountData2)
     RadioPanelCountData = RadioPanelCountData2;
 }
 
+int	MetricPressEnabledStatusGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return MetricPressEnabledData;
+}
+
+void	MetricPressEnabledStatusSetDataiCallback(void * inRefcon, int MetricPressEnabledStatus2)
+{
+    (void) inRefcon;
+    MetricPressEnabledData = MetricPressEnabledStatus2;
+}
 
 int	Rad1UprCom1StatusGetDataiCallback(void * inRefcon)
 {
@@ -8623,11 +8638,13 @@ int	RadioHandler(XPWidgetMessage  RadioinMessage, XPWidgetID  RadioWidgetID, int
             State = XPGetWidgetProperty(RadioQnh0CheckWidget[0], xpProperty_ButtonState, 0);
             if (State){
                 metricpressenable = 0;
+                XPLMSetDatai(MetricPressEnabledDataRef, 0);
             }
 
             State = XPGetWidgetProperty(RadioQnh1CheckWidget[0], xpProperty_ButtonState, 0);
             if (State){
                 metricpressenable = 1;
+                XPLMSetDatai(MetricPressEnabledDataRef, 1);
             }
          }
 
@@ -9276,6 +9293,7 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
 
 
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/count");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/metricpress/status");
 
     if (radcnt > 0) {
         XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/radiopanel/rad1uprcom1/status");

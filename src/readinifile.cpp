@@ -2154,6 +2154,11 @@ void process_read_ini_file()
     readOptionAsInt("Metric Press enable", &metricpressenable, true);
     readOptionAsInt("Channel Spacing 883 enable", &channelspacing833enable);
 
+    if (metricpressenable == 0) {
+    XPLMSetDatai(MetricPressEnabledDataRef, 0);
+    } else if (metricpressenable == 1) {
+    XPLMSetDatai(MetricPressEnabledDataRef, 1);
+    }
     sprintf(radtestbuf1, "Xsaitekpanels: channelspacing833enable ==  %d \n", channelspacing833enable);
     XPLMDebugString(radtestbuf1);
 
