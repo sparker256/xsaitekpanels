@@ -2177,7 +2177,8 @@ extern int cowlflapsenable, panellightswitchenable;
 extern int beaconlightswitchenable, navlightswitchenable;
 extern int strobelightswitchenable, taxilightswitchenable;
 extern int landinglightswitchenable, bataltinverse;
-extern int starterswitchenable;
+extern int upradioswitchpos, loradioswitchpos;
+extern int multiswitchpos, starterswitchenable;
 
 extern int gearledenable;
 extern int gearled_write_loop;

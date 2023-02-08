@@ -70,7 +70,7 @@ static int multiaactv, multiadig1, multiarem1, multiadig2, multiarem2;
 static int multiadig3, multiarem3, multiadig4, multiarem4, multiadig5;
 static int multibstby, multibdig1, multibdig2, multibrem2;
 static int multibdig3, multibrem3, multibdig4, multibrem4, multibdig5;  
-static int btnleds = 0, lastbtnleds = 0, multiseldis = 5;
+static int btnleds = 0, lastbtnleds = 0, multiseldis = 1;
 
 static int ALT_SWITCH = 7, VS_SWITCH = 6;
 static int IAS_SWITCH = 5, HDG_SWITCH = 4;
@@ -4693,6 +4693,25 @@ void process_multi_panel(float dt)
     do {
         multires = hid_read(multihandle, multibuf, sizeof(multibuf));
         process_multi_panel_datareference_values();
+        if (multibuf[0] == 0) {
+           multiseldis = multiswitchpos;
+           lastmultiseldis = multiseldis;
+           if (multiswitchpos == 1) {
+              upapaltf = XPLMGetDataf(ApAlt);
+              upapalt = (int)(upapaltf);
+              upapvsf = XPLMGetDataf(ApVs);
+              upapvs = (int)(upapvsf);
+           } else if (multiswitchpos == 2) {
+              apasf = XPLMGetDataf(ApAs);
+              apasout = (int)(apasf);
+           } else if (multiswitchpos == 3) {
+              upaphdgf = XPLMGetDataf(ApHdg);
+              upaphdg = (int)(upaphdgf);
+           } else if (multiswitchpos == 4) {
+              upapcrsf = XPLMGetDataf(ApCrs);
+              upapcrs = (int)(upapcrsf);
+           }
+        }
         process_alt_switch();
         process_vs_switch();
         process_ias_switch();

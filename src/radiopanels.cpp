@@ -2302,7 +2302,7 @@ void process_upper_nav2_switch()
     }
 }
 
-// ***************** Upper AFD Switch Position *******************
+// ***************** Upper ADF Switch Position *******************
 
 void proecss_upper_adf_switch()
 {
@@ -8447,6 +8447,88 @@ void process_radio_panel()
     radiores = hid_read(radiohandle[radnum], radiobuf[radnum], sizeof(radiobuf[radnum]));
 
     process_upper_datareferences();
+    if (radiobuf[radnum][0] == 0) {
+       upseldis[radnum] = upradioswitchpos;
+       loseldis[radnum] = loradioswitchpos;
+       lastupseldis[radnum] = upseldis[radnum];
+       lastloseldis[radnum] = loseldis[radnum];
+       if (upseldis[radnum] == 1) {
+          if (channelspacing833enable == 0) {
+             upactcomfreq[radnum] = XPLMGetDatai(Com1ActFreq);
+             upactcomfreq[radnum] = upactcomfreq[radnum] * 10;
+             upstbycomfreq[radnum] = XPLMGetDatai(Com1StbyFreq);
+             upstbycomfreq[radnum] = upstbycomfreq[radnum] * 10;
+          } else if (channelspacing833enable == 1) {
+             upactcomfreq[radnum] = XPLMGetDatai(Com1ActFreq_833);
+             upstbycomfreq[radnum] = XPLMGetDatai(Com1StbyFreq_833);
+          }
+       } else if (upseldis[radnum] == 2) {
+          if (channelspacing833enable == 0) {
+             upactcomfreq[radnum] = XPLMGetDatai(Com2ActFreq);
+             upactcomfreq[radnum] = upactcomfreq[radnum] * 10;
+             upstbycomfreq[radnum] = XPLMGetDatai(Com2StbyFreq);
+             upstbycomfreq[radnum] = upstbycomfreq[radnum] * 10;
+          } else if (channelspacing833enable == 1) {
+             upactcomfreq[radnum] = XPLMGetDatai(Com2ActFreq_833);
+             upstbycomfreq[radnum] = XPLMGetDatai(Com2StbyFreq_833);
+          }
+       } else if (upseldis[radnum] == 3) {
+             upactnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
+             upstbynavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
+       } else if (upseldis[radnum] == 4) {
+             upactnavfreq[radnum] = XPLMGetDatai(Nav2ActFreq);
+             upstbynavfreq[radnum] = XPLMGetDatai(Nav2StbyFreq);
+       } else if (upseldis[radnum] == 5) {
+             upactadffreq[radnum] = XPLMGetDatai(Adf1ActFreq);
+             upstbyadffreq[radnum] = XPLMGetDatai(Adf1StbyFreq);
+       } else if (upseldis[radnum] == 8) {
+             updmenavspeed[radnum] = (int)(updmenav1speedf[radnum]);
+             updmetime[radnum] = XPLMGetDataf(DmeTime);
+       } else if (upseldis[radnum] == 9) {
+             float BaroValue1 = XPLMGetDataf(BaroSetting);
+             int BaroValue1i = round(BaroValue1 * 100.0);
+             upbaroset[radnum] = BaroValue1i;
+             upxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
+       }
+       if (loseldis[radnum] == 1) {
+          if (channelspacing833enable == 0) {
+             loactcomfreq[radnum] = XPLMGetDatai(Com1ActFreq);
+             loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
+             lostbycomfreq[radnum] = XPLMGetDatai(Com1StbyFreq);
+             lostbycomfreq[radnum] = lostbycomfreq[radnum] * 10;
+          } else if (channelspacing833enable == 1) {
+             loactcomfreq[radnum] = XPLMGetDatai(Com1ActFreq_833);
+             lostbycomfreq[radnum] = XPLMGetDatai(Com1StbyFreq_833);
+          }
+       } else if (loseldis[radnum] == 2) {
+          if (channelspacing833enable == 0) {
+             loactcomfreq[radnum] = XPLMGetDatai(Com2ActFreq);
+             loactcomfreq[radnum] = loactcomfreq[radnum] * 10;
+             lostbycomfreq[radnum] = XPLMGetDatai(Com2StbyFreq);
+             lostbycomfreq[radnum] = lostbycomfreq[radnum] * 10;
+          } else if (channelspacing833enable == 1) {
+             loactcomfreq[radnum] = XPLMGetDatai(Com2ActFreq_833);
+             lostbycomfreq[radnum] = XPLMGetDatai(Com2StbyFreq_833);
+          }
+       } else if (loseldis[radnum] == 3) {
+             loactnavfreq[radnum] = XPLMGetDatai(Nav1ActFreq);
+             lostbynavfreq[radnum] = XPLMGetDatai(Nav1StbyFreq);
+       } else if (loseldis[radnum] == 4) {
+             loactnavfreq[radnum] = XPLMGetDatai(Nav2ActFreq);
+             lostbynavfreq[radnum] = XPLMGetDatai(Nav2StbyFreq);
+       } else if (loseldis[radnum] == 5) {
+             loactadffreq[radnum] = XPLMGetDatai(Adf2ActFreq);
+             lostbyadffreq[radnum] = XPLMGetDatai(Adf2StbyFreq);
+       } else if (loseldis[radnum] == 8) {
+             lodmenavspeed[radnum] = (int)(lodmenav1speedf[radnum]);
+             lodmetime[radnum] = XPLMGetDataf(DmeTime);
+       } else if (loseldis[radnum] == 9) {
+             float BaroValue2 = XPLMGetDataf(BaroSetting2);
+             int BaroValue2i = round(BaroValue2 * 100.0);
+             lobaroset[radnum] = BaroValue2i;
+             loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
+       }
+    }
     process_upper_com1_switch();
     process_upper_com2_switch();
     process_upper_nav1_switch();

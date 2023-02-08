@@ -2406,6 +2406,8 @@ int beaconlightswitchenable, navlightswitchenable;
 int strobelightswitchenable, taxilightswitchenable;
 int landinglightswitchenable, bataltinverse;
 int panellightsenable, starterswitchenable;
+int upradioswitchpos, loradioswitchpos;
+int multiswitchpos;
 
 int gearledenable;
 int gearled_write_loop = 0;

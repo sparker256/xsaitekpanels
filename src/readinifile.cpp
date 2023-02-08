@@ -93,6 +93,9 @@ void process_read_ini_file()
     landinglightswitchenable = 1;
     gearledenable = 1;
 
+    upradioswitchpos = 1;
+    loradioswitchpos = 2;
+    multiswitchpos = 1;
     bataltinverse = 0;
     starterswitchenable = 0;
 
@@ -320,6 +323,15 @@ void process_read_ini_file()
 
     sprintf(buf, "Xsaitekpanels: dre_enable = %d  icao_enable = %d  log_enable = %d dissableSwitchPanelInVR = %d dissableRadioPanelInVR = %d dissableMultiPanelInVR = %d\n", dre_enable, icao_enable, log_enable, dissableSwitchPanelInVR, dissableRadioPanelInVR, dissableMultiPanelInVR);
     XPLMDebugString(buf);
+
+    // Default upper radio panel switch position
+    readOptionAsInt("Upper Radio Switch", &upradioswitchpos, true);
+
+    // Default lower radio panel switch position
+    readOptionAsInt("Lower Radio Switch", &loradioswitchpos, true);
+
+    // Default multi panel switch position
+    readOptionAsInt("Multi Switch", &multiswitchpos, true);
 
     // bat alt normal alt bat cessna
     readOptionAsInt("Bat Alt inverse", &bataltinverse, true);
