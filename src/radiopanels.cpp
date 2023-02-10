@@ -8584,7 +8584,7 @@ void process_radio_panel()
 
 // ******* Write on changes or timeout *******
 
-    if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (radionowrite[radnum] > 10) || (xpanelsfnbutton == 1)) {
+    if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (radionowrite[radnum] > 50) || (xpanelsfnbutton == 1)) {
         radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
         radionowrite[radnum] = 1;
         lastupseldis[radnum] = upseldis[radnum];
