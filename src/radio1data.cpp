@@ -20,6 +20,14 @@ void process_radio1_upper_datareference()
 {
 
 
+        MetricPressEnabledDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/metricpress/status",
+                                 xplmType_Int,
+                                 1,
+                                 MetricPressEnabledStatusGetDataiCallback,
+                                 MetricPressEnabledStatusSetDataiCallback,
+                                 NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                                 NULL, NULL, NULL, NULL, NULL);
+
         Rad1UpperCom1OwnedDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/radiopanel/rad1uprcom1/status",
                                  xplmType_Int,
                                  1,
@@ -492,6 +500,7 @@ void process_radio1_lower_datareference()
 
 void process_radio1_unregister_xsaitekpanels_datareference()
 {
+    XPLMUnregisterDataAccessor(MetricPressEnabledDataRef);
     XPLMUnregisterDataAccessor(Rad1UpperCom1OwnedDataRef);
     XPLMUnregisterDataAccessor(Rad1UpperCom2OwnedDataRef);
     XPLMUnregisterDataAccessor(Rad1UpperNav1OwnedDataRef);
@@ -608,6 +617,8 @@ void process_radio_find_xplane_commands()
 
       BaroUp = XPLMFindCommand("sim/instruments/barometer_up");
       BaroDn = XPLMFindCommand("sim/instruments/barometer_down");
+      BaroUp2 = XPLMFindCommand("sim/instruments/barometer_copilot_up");
+      BaroDn2 = XPLMFindCommand("sim/instruments/barometer_copilot_down");
       BaroStd = XPLMFindCommand("sim/instruments/barometer_2992");
 
       Com1ActStby = XPLMFindCommand("sim/radios/com1_standy_flip");
@@ -653,6 +664,7 @@ void process_radio_find_xplane_datareference()
       XpdrCode = XPLMFindDataRef("sim/cockpit/radios/transponder_code");
       XpdrMode = XPLMFindDataRef("sim/cockpit/radios/transponder_mode");
       BaroSetting = XPLMFindDataRef("sim/cockpit/misc/barometer_setting");
+      BaroSetting2 = XPLMFindDataRef("sim/cockpit/misc/barometer_setting2");
       MetricPress = XPLMFindDataRef("sim/physics/metric_press");
 
       DmeMode = XPLMFindDataRef("sim/cockpit2/radios/actuators/DME_mode");
