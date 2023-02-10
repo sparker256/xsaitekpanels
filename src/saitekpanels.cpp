@@ -2,8 +2,8 @@
 // ****  William R. Good   ***********
 // ****** Jan 29  2023   **************
 
-#define PLUGIN_VERSION "3.03 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 303
+#define PLUGIN_VERSION "3.04 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 304
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -1113,6 +1113,8 @@ static unsigned char blankradiowbuf[4][23];
 static unsigned char radiobuf[4][4], radiowbuf[4][23];
 
 unsigned char radbuf[4], radwbuf[21];
+
+static int PluginVersion, radiovdig3, radiovrem3, radiovdig4, radiovrem4, radiovdig5;
 
 int radspeed, numadf, metricpressenable, channelspacing833enable;
 int dmedistspeedenable;
@@ -3333,6 +3335,11 @@ PLUGIN_API int XPluginStart(char *		outName,
 
 // ************* Open any Radio that is connected *****************
 
+  PluginVersion = XsaitekpanelsVersion;
+  radiovdig3 = PluginVersion/100, radiovrem3 = PluginVersion%100;
+  radiovdig4 = radiovrem3/10, radiovrem4 = radiovrem3%10;
+  radiovdig5 = radiovrem4;
+
   struct hid_device_info *rad_devs, *rad_cur_dev;
 
   rad_devs = hid_enumerate(0x6a3, 0x0d05);
@@ -3342,7 +3349,25 @@ PLUGIN_API int XPluginStart(char *		outName,
         hid_set_nonblocking(radiohandle[radcnt], 1);
         radiores = hid_read(radiohandle[radcnt], radiobuf[radcnt], sizeof(radiobuf[radcnt]));
         radiowbuf[0][1] = 1, radiowbuf[1][1] = 2, radiowbuf[2][1] = 3;
+        radiowbuf[0][2] = 15+224, radiowbuf[1][2] = 15+224, radiowbuf[2][2] = 15+224;
+        radiowbuf[0][3] = 1, radiowbuf[1][3] = 1, radiowbuf[2][3] = 1;
+        radiowbuf[0][4] = 15, radiowbuf[1][4] = 15, radiowbuf[2][4] = 15;
+        radiowbuf[0][5] = 15, radiowbuf[1][5] = 15, radiowbuf[2][5] = 15;
+        radiowbuf[0][6] = 15, radiowbuf[1][6] = 15, radiowbuf[2][6] = 15;
+        radiowbuf[0][7] = 15, radiowbuf[1][7] = 15, radiowbuf[2][7] = 15;
+        radiowbuf[0][8] = radiovdig3+208, radiowbuf[1][8] = radiovdig3+208, radiowbuf[2][8] = radiovdig3+208;
+        radiowbuf[0][9] = radiovdig4, radiowbuf[1][9] = radiovdig4, radiowbuf[2][9] = radiovdig4;
+        radiowbuf[0][10] = radiovdig5, radiowbuf[1][10] = radiovdig5, radiowbuf[2][10] = radiovdig5;
         radiowbuf[0][11] = 1, radiowbuf[1][11] = 2, radiowbuf[2][11] = 3;
+        radiowbuf[0][12] = 15+224, radiowbuf[1][12] = 15+224, radiowbuf[2][12] = 15+224;
+        radiowbuf[0][13] = 2, radiowbuf[1][13] = 2, radiowbuf[2][13] = 2;
+        radiowbuf[0][14] = 15, radiowbuf[1][14] = 15, radiowbuf[2][14] = 15;
+        radiowbuf[0][15] = 15, radiowbuf[1][15] = 15, radiowbuf[2][15] = 15;
+        radiowbuf[0][16] = 15, radiowbuf[1][16] = 15, radiowbuf[2][16] = 15;
+        radiowbuf[0][17] = 15, radiowbuf[1][17] = 15, radiowbuf[2][17] = 15;
+        radiowbuf[0][18] = radiovdig3+208, radiowbuf[1][18] = radiovdig3+208, radiowbuf[2][18] = radiovdig3+208;
+        radiowbuf[0][19] = radiovdig4, radiowbuf[1][19] = radiovdig4, radiowbuf[2][19] = radiovdig4;
+        radiowbuf[0][20] = radiovdig5, radiowbuf[1][20] = radiovdig5, radiowbuf[2][20] = radiovdig5;
         hid_send_feature_report(radiohandle[radcnt], radiowbuf[radcnt], 23);
         radcnt++;
         rad_cur_dev = rad_cur_dev->next;
@@ -3359,6 +3384,10 @@ PLUGIN_API int XPluginStart(char *		outName,
         multihandle = hid_open_path(multi_cur_dev->path);
         hid_set_nonblocking(multihandle, 1);
         multires = hid_read(multihandle, multibuf, sizeof(multibuf));
+        multiwbuf[0] = 0, multiwbuf[1] = 15, multiwbuf[2] = 15;
+        multiwbuf[3] = 0, multiwbuf[4] = 0, multiwbuf[5] = 0;
+        multiwbuf[6] = 15, multiwbuf[7] = 15, multiwbuf[8] = 15;
+        multiwbuf[9] = 0, multiwbuf[10] = 0, multiwbuf[11] = 0;
         hid_send_feature_report(multihandle, multiwbuf, 13);
         multicnt++;
         multi_cur_dev = multi_cur_dev->next;
