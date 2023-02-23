@@ -204,10 +204,8 @@ void process_switch_unregister_xsaitekpanels_datareference()
     XPLMUnregisterDataAccessor(SwitchBeaconOwnedDataRef);
     XPLMUnregisterDataAccessor(SwitchNavOwnedDataRef);
     XPLMUnregisterDataAccessor(SwitchStrobeOwnedDataRef);
-
-
     XPLMUnregisterDataAccessor(SwitchTaxiOwnedDataRef);
-    XPLMUnregisterDataAccessor(SwitchStrobeOwnedDataRef);
+    XPLMUnregisterDataAccessor(SwitchLandingOwnedDataRef);
 
 
     return;

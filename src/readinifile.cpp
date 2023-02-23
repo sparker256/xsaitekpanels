@@ -93,8 +93,12 @@ void process_read_ini_file()
     landinglightswitchenable = 1;
     gearledenable = 1;
 
-    upradioswitchpos = 1;
-    loradioswitchpos = 2;
+    rad1upradioswitchpos = 1;
+    rad1loradioswitchpos = 2;
+    rad2upradioswitchpos = 3;
+    rad2loradioswitchpos = 4;
+    rad3upradioswitchpos = 5;
+    rad3loradioswitchpos = 9;
     multiswitchpos = 1;
     bataltinverse = 0;
     starterswitchenable = 0;
@@ -148,6 +152,7 @@ void process_read_ini_file()
     rad3lwrdmeswitchremap = 0, rad3lwrdmeactstbybtnremap = 0;
 
     log_enable = 0;
+    file_id_tag = 0;
 
     dissableSwitchPanelInVR = 0;
     dissableRadioPanelInVR = 0;
@@ -300,6 +305,7 @@ void process_read_ini_file()
 
     // get file identification tag
     readOptionAsInt("IDTag", &file_id_tag);
+    XPLMSetDatai(XsaitekpanelsFileIdTagDataRef, file_id_tag);
     sprintf(buf, "\nXsaitekpanels: file identification tag   %d\n", file_id_tag);
     XPLMDebugString(buf);
 
@@ -311,6 +317,7 @@ void process_read_ini_file()
 
     // Do we want debug loging enabled
     readOptionAsInt("Add Debug Entries To Log Enable", &log_enable);
+    XPLMSetDatai(XsaitekpanelsDebugLogDataRef, log_enable);
 
     // Do we want disable switch panel in virtual reality
     readOptionAsInt("Dissable Switch Panel In VR", &dissableSwitchPanelInVR);
@@ -324,11 +331,23 @@ void process_read_ini_file()
     sprintf(buf, "Xsaitekpanels: dre_enable = %d  icao_enable = %d  log_enable = %d dissableSwitchPanelInVR = %d dissableRadioPanelInVR = %d dissableMultiPanelInVR = %d\n", dre_enable, icao_enable, log_enable, dissableSwitchPanelInVR, dissableRadioPanelInVR, dissableMultiPanelInVR);
     XPLMDebugString(buf);
 
-    // Default upper radio panel switch position
-    readOptionAsInt("Upper Radio Switch", &upradioswitchpos, true);
+    // Default Radio1 upper radio panel switch position
+    readOptionAsInt("Radio1 Upper Radio Switch", &rad1upradioswitchpos, true);
 
-    // Default lower radio panel switch position
-    readOptionAsInt("Lower Radio Switch", &loradioswitchpos, true);
+    // Default Radio1 lower radio panel switch position
+    readOptionAsInt("Radio1 Lower Radio Switch", &rad1loradioswitchpos, true);
+
+    // Default Radio2 upper radio panel switch position
+    readOptionAsInt("Radio2 Upper Radio Switch", &rad2upradioswitchpos, true);
+
+    // Default Radio2 lower radio panel switch position
+    readOptionAsInt("Radio2 Lower Radio Switch", &rad2loradioswitchpos, true);
+
+    // Default Radio3 upper radio panel switch position
+    readOptionAsInt("Radio3 Upper Radio Switch", &rad3upradioswitchpos, true);
+
+    // Default Radio3 lower radio panel switch position
+    readOptionAsInt("Radio3 Lower Radio Switch", &rad3loradioswitchpos, true);
 
     // Default multi panel switch position
     readOptionAsInt("Multi Switch", &multiswitchpos, true);
@@ -2164,13 +2183,9 @@ void process_read_ini_file()
     readOptionAsInt("Radio Freq Knob Pulse per Command", &radspeed, true);
     readOptionAsInt("Radio Number of ADF's", &numadf, true);
     readOptionAsInt("Metric Press enable", &metricpressenable, true);
+    XPLMSetDatai(MetricPressEnabledDataRef, metricpressenable);
     readOptionAsInt("Channel Spacing 883 enable", &channelspacing833enable);
 
-    if (metricpressenable == 0) {
-    XPLMSetDatai(MetricPressEnabledDataRef, 0);
-    } else if (metricpressenable == 1) {
-    XPLMSetDatai(MetricPressEnabledDataRef, 1);
-    }
     sprintf(radtestbuf1, "Xsaitekpanels: channelspacing833enable ==  %d \n", channelspacing833enable);
     XPLMDebugString(radtestbuf1);
 

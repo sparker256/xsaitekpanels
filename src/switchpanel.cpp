@@ -17,7 +17,6 @@
 #define testbit(x, y)  ( ( ((const char*)&(x))[(y)>>3] & 0x80 >> ((y)&0x07)) >> (7-((y)&0x07) ) )
 
 // ****************** Switch Panel variables *******************************
-static int switchnowrite = 0;
 static int switchres, switchwres;
 
 static int gearled_haschanged = 0;
@@ -3859,7 +3858,8 @@ void process_switch_panel()
         --switch_safety_cntr;
       }while((switchres > 0) && (switch_safety_cntr > 0));
 
-      switchnowrite = 1;
+      process_debug_mode();
+      process_reopen_panels();
 
       if(XPLMGetDatai(GearRetract) > 0) {
           if (!BatPwrIsOn()) {

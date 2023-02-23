@@ -18,8 +18,8 @@
 #define testbit(x, y)  ( ( ((const char*)&(x))[(y)>>3] & 0x80 >> ((y)&0x07)) >> (7-((y)&0x07) ) )
 
 // ********************** Radio Panel variables ***********************
-static int radnum = 0, radionowrite[4] = {0, 0, 0, 0};
-static int radiores = 0, radn;
+static int radnum = 0, radn;
+static int radiores = 0;
 
 static int updmepushed = 0, lodmepushed = 0;
 static int updmeloop = 0, lodmeloop = 0;
@@ -28,6 +28,7 @@ static int uplastdmepos = 0, lolastdmepos = 0;
 static int upxpdrpushed = 0, loxpdrpushed = 0;
 static int upxpdrloop = 0, loxpdrloop = 0;
 static int uplastxpdrpos = 0, lolastxpdrpos = 0;
+static int upmodeturnoff = 180, lomodeturnoff = 180;
 
 static int upactcomfreq[4], upstbycomfreq[4], loactcomfreq[4], lostbycomfreq[4];
 static int upactnavfreq[4], upstbynavfreq[4], loactnavfreq[4], lostbynavfreq[4];
@@ -129,6 +130,7 @@ static int radiocactv, radiocdig1, radiocrem1, radiocdig2, radiocrem2, radiocdig
 static int radiocdig4, radiocrem4, radiocdig5, radiocrem5, radiocdig6;
 static int radiodstby, radioddig1, radiodrem1, radioddig2, radiodrem2, radioddig3, radiodrem3;
 static int radioddig4, radiodrem4, radioddig5, radiodrem5, radioddig6;
+static int lastradioaactv, lastradiocactv, lastradiobstby, lastradiodstby;
 
 static int upxpdrsel[4] = {1, 1, 1, 1}, loxpdrsel[4] = {1, 1, 1, 1};
 //static int upqnhsel[4] = {1, 1, 1, 1}, loqnhsel[4] = {1, 1, 1, 1};
@@ -168,8 +170,6 @@ static int Last_Lower_Coarse_Up_Raw[4], Last_Lower_Coarse_Dn_Raw[4];
 
 static int Upper_Raw1, Upper_Raw2, Upper_Raw3;
 static int Lower_Raw1, Lower_Raw2, Lower_Raw3;
-
-static int upmodeturnoff, lomodeturnoff;
 
 static unsigned char radiobuf[4][4];
 static unsigned char radiowbuf[4][23];
@@ -504,6 +504,9 @@ void process_radio_upper_display()
           }
           else {
             upmodeturnoff++;
+            if (upmodeturnoff == 200) {
+            updatedisprad = 3;             // update panel display three more times to get transponder mode period time out positions
+            }
 
           }
 
@@ -945,6 +948,9 @@ void process_radio_lower_display()
       }
       else {
         lomodeturnoff++;
+        if (lomodeturnoff == 200) {
+           updatedisprad = 3;
+        }
 
       }
 
@@ -963,7 +969,7 @@ void process_radio_lower_display()
           radiocdig4 = radiocrem3/10, radiocrem4 = radiocrem3%10;
           radiocdig5 = radiocrem4;
 
-          radiodstby = upxpdrcode[radnum];
+          radiodstby = loxpdrcode[radnum];
           radioddig1 = 15, radioddig2 = radiodstby/1000, radiodrem2 = radiodstby%1000;
           radioddig3 = radiodrem2/100, radiodrem3 = radiodrem2%100;
           radioddig4 = radiodrem3/10, radiodrem4 = radiodrem3%10;
@@ -3058,7 +3064,7 @@ void process_upper_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -3272,7 +3278,7 @@ void process_upper_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -3485,7 +3491,7 @@ void process_upper_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -3729,7 +3735,7 @@ void process_upper_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -3973,7 +3979,7 @@ void process_upper_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -4215,7 +4221,7 @@ void process_upper_xpdr_switch()
                XPLMSetDatai(MetricPress, 0);
            }
            if (metricpressenable == 1) {
-               upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
+               upbarosetf[radnum] = round(upbarosetf[radnum] * 33.8637526);
                XPLMSetDatai(MetricPress, 1);
            }
            upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -4467,7 +4473,7 @@ void process_upper_xpdr_switch()
             }
 
             if (metricpressenable == 1) {
-                upbarosetf[radnum] = upbarosetf[radnum] * 33.8637526;
+                upbarosetf[radnum] = round(upbarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             upbaroset[radnum] = (int)upbarosetf[radnum];
@@ -6663,7 +6669,7 @@ void process_lower_xpdr_switch()
                XPLMSetDatai(MetricPress, 0);
            }
            if (metricpressenable == 1) {
-               lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
+               lobarosetf[radnum] = round(lobarosetf[radnum] * 33.8637526);
                XPLMSetDatai(MetricPress, 1);
            }
            lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -6882,7 +6888,7 @@ void process_lower_xpdr_switch()
                XPLMSetDatai(MetricPress, 0);
            }
            if (metricpressenable == 1) {
-               lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
+               lobarosetf[radnum] = round(lobarosetf[radnum] * 33.8637526);
                XPLMSetDatai(MetricPress, 1);
            }
            lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -7096,7 +7102,7 @@ void process_lower_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -7336,7 +7342,7 @@ void process_lower_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -7575,7 +7581,7 @@ void process_lower_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -7813,7 +7819,7 @@ void process_lower_xpdr_switch()
                 XPLMSetDatai(MetricPress, 0);
             }
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -8069,7 +8075,7 @@ void process_lower_xpdr_switch()
             }
 
             if (metricpressenable == 1) {
-                lobarosetf[radnum] = lobarosetf[radnum] * 33.8637526;
+                lobarosetf[radnum] = round(lobarosetf[radnum] * 33.8637526);
                 XPLMSetDatai(MetricPress, 1);
             }
             lobaroset[radnum] = (int)lobarosetf[radnum];
@@ -8448,8 +8454,16 @@ void process_radio_panel()
 
     process_upper_datareferences();
     if (radiobuf[radnum][0] == 0) {
-       upseldis[radnum] = upradioswitchpos;
-       loseldis[radnum] = loradioswitchpos;
+       if (radnum == 0) {
+          upseldis[radnum] = rad1upradioswitchpos;
+          loseldis[radnum] = rad1loradioswitchpos;
+       } else if (radnum == 1) {
+          upseldis[radnum] = rad2upradioswitchpos;
+          loseldis[radnum] = rad2loradioswitchpos;
+       } else if (radnum == 2) {
+          upseldis[radnum] = rad3upradioswitchpos;
+          loseldis[radnum] = rad3loradioswitchpos;
+       }
        lastupseldis[radnum] = upseldis[radnum];
        lastloseldis[radnum] = loseldis[radnum];
        if (upseldis[radnum] == 1) {
@@ -8544,11 +8558,13 @@ void process_radio_panel()
     process_lower_adf_switch();
     process_lower_dme_switch();
     process_lower_xpdr_switch();
+    metricpressenable = XPLMGetDatai(MetricPressEnabledDataRef);
     if(radiores > 0){
         process_radio_blank_display();
         process_radio_upper_display();
         process_radio_lower_display();
         process_radio_make_message();
+        updatedisprad = radcnt * 2;     // more panel display updates so the other display is not one update behind or more than one radio panel
         hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
     }
     --radio_safety_cntr;
@@ -8558,6 +8574,9 @@ void process_radio_panel()
   process_radio_upper_display();
   process_radio_lower_display();
   process_radio_make_message();
+  process_debug_mode();
+  process_reopen_panels();
+
 
 // ******* Write on WriteNowOwnedData true ********
 
@@ -8582,19 +8601,25 @@ void process_radio_panel()
          }
      }
 
-// ******* Write on changes or timeout *******
+// ******* Write on changes or display update count *******
 
-    if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (radionowrite[radnum] > 50) || (xpanelsfnbutton == 1)) {
+    if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (lastradioaactv != radioaactv) || (lastradiobstby != radiobstby) || (lastradiocactv != radiocactv) || (lastradiodstby != radiodstby) || (xpanelsfnbutton == 1) || (updatedisprad > 0)) {
         radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
-        radionowrite[radnum] = 1;
         lastupseldis[radnum] = upseldis[radnum];
         lastloseldis[radnum] = loseldis[radnum];
-        metricpressenable = XPLMGetDatai(MetricPressEnabledDataRef);
-    }else{
-        radionowrite[radnum]++;
+        lastradioaactv = radioaactv;
+        lastradiobstby = radiobstby;
+        lastradiocactv = radiocactv;
+        lastradiodstby = radiodstby;
+        if (updatedisprad > 0) {
+           --updatedisprad;
+        }
+        if (xpanelsfnbutton == 1) {
+           updatedisprad = 1;          // update panel display one more time after FN button released to restore periods for transponder
+        }
     }
 
-  // *********** loop untill all radios serviced *************
+  // *********** loop until all radios serviced *************
   // **************   then start again    *******************
 
     //printf("radnum = %d\n", radnum);
