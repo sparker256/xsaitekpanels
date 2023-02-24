@@ -1,6 +1,6 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Jan 29  2023   **************
+// ****** Feb 24  2023   **************
 
 #define PLUGIN_VERSION "3.05 stable build " __DATE__ " " __TIME__
 #define PLUGIN_VERSION_NUMBER 305
@@ -35,12 +35,15 @@
 #include <sstream>
 #include <vector>
 #include <wchar.h>
-#include <thread>
+
+#ifdef _WINDOWS
+#include <windows.h>
+#else
+#include <unistd.h>
+#define Sleep(x) usleep((x)*1000)
+#endif
 
 using namespace std;
-using namespace std::this_thread;           // sleep_for(1ms), sleep_until(system_clock::now() + 1ms)
-//using namespace std::chrono_literals;     //ns, us, ms, s, h, etc. #include <chrono>
-//using std::chrono::system_clock;    
 
 double MIN_ACCELERATION_POINT = 0.01;
 double MAX_ACCELERATION_POINT = 0.4 - MIN_ACCELERATION_POINT;
@@ -9824,13 +9827,13 @@ bool process_reopen_panels()
            hid_send_feature_report(radiohandle[radcnt], blankradiowbuf[radcnt], 23);
            int bufferoffset = 1;
            do {
-              sleep_for(25ms);
+              Sleep(25);
               blankradiowbuf[radcnt][bufferoffset] = 0;
               blankradiowbuf[radcnt][bufferoffset+5] = 0;
               blankradiowbuf[radcnt][bufferoffset+10] = 0;
               blankradiowbuf[radcnt][bufferoffset+15] = 0;
               hid_send_feature_report(radiohandle[radcnt], blankradiowbuf[radcnt], 23);
-              sleep_for(25ms);
+              Sleep(25);
               blankradiowbuf[radcnt][bufferoffset] = 15;
               blankradiowbuf[radcnt][bufferoffset+5] = 15;
               blankradiowbuf[radcnt][bufferoffset+10] = 15;
@@ -9902,7 +9905,7 @@ bool process_reopen_panels()
               blankmultiwbuf[4] = multicharnumb, blankmultiwbuf[5] = multicharnumb;
               multires = hid_send_feature_report(multihandle, blankmultiwbuf, 13);
               blankmultiwbuf[11] = lednumb;
-              sleep_for(40ms);
+              Sleep(40);
               lednumb = lednumb * 2;
               multicharnumb++;
               if (multicharnumb == 8) {
@@ -9961,16 +9964,16 @@ bool process_reopen_panels()
            blankswitchwbuf[0] = 0;
            blankswitchwbuf[1] = 0x33;
            switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
-           sleep_for(100ms);
+           Sleep(100);
            blankswitchwbuf[1] = 0x1d;
            switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
-           sleep_for(100ms);
+           Sleep(100);
            blankswitchwbuf[1] = 0x2e;
            switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
-           sleep_for(100ms);
+           Sleep(100);
            blankswitchwbuf[1] = 0x33;
            switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
-           sleep_for(100ms);
+           Sleep(100);
            if (XPLMGetDatai(GearRetract) == 0) {
               blankswitchwbuf[1] = 0;
               switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
@@ -10111,6 +10114,38 @@ bool process_debug_mode()
     return 0;
 }
 
+string convertMacPath(string in_path) {
+
+    //char seperator_number_buffer[255] = {0};
+
+    std::size_t len = in_path.length();
+    std::size_t pos = in_path.find(":");
+
+    in_path.erase(in_path.begin() + 0, in_path.end() - (len - pos));
+
+    int count = 0;
+    for (int i = 0; i < in_path.size(); i++)
+        if (in_path[i] == ':') count++;
+    // sprintf(seperator_number_buffer, "Xsaitekpanels: How many path seperators are in the path = %d\n", count);
+    // XPLMDebugString(seperator_number_buffer);
+
+    size_t found;
+    int n = count;
+
+    while (n > 0) {
+        found = in_path.find(":");
+        in_path.replace(found, 1, "/");
+        --n;
+    }
+
+    std::size_t pos2 = in_path.find("/Aircraft");
+    std::string tmp_in_path = in_path.substr(pos2);
+    tmp_in_path.insert(0, ".");
+    in_path = tmp_in_path;
+
+    return in_path;
+}
+
 void process_get_ini_file()
 {
     char* iniDefaultPluginPath;
@@ -10132,7 +10167,7 @@ void process_get_ini_file()
     std::size_t pos1 = xpsini_aircraft_name.find(".acf");
     xpsini_aircraft_name = xpsini_aircraft_name.substr(0, pos1);
 #if APL && __MACH__
-    std::string mac_converted_path = convert_Mac_Path(xpsini_path_name);
+    std::string mac_converted_path = convertMacPath(xpsini_path_name);
     XPLMDebugString("\nMac_converted_path is \n");
     XPLMDebugString(mac_converted_path.c_str());
     XPLMDebugString("\n");
