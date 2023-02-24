@@ -2,8 +2,8 @@
 // ****  William R. Good   ***********
 // ****** Jan 29  2023   **************
 
-#define PLUGIN_VERSION "3.04 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 304
+#define PLUGIN_VERSION "3.05 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 305
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -15,8 +15,10 @@
 #include "XPLMMenus.h"
 #include "XPWidgets.h"
 #include "XPStandardWidgets.h"
+#include "inireader.h"
 
 #define MSG_ADD_DATAREF 0x01000000
+#define LOGITECH_PLUGIN_SIGNATURE "XPlane Plugin.1.2.6.0"
 
 #include "hidapi.h"
 
@@ -33,8 +35,12 @@
 #include <sstream>
 #include <vector>
 #include <wchar.h>
+#include <thread>
 
 using namespace std;
+using namespace std::this_thread;           // sleep_for(1ms), sleep_until(system_clock::now() + 1ms)
+//using namespace std::chrono_literals;     //ns, us, ms, s, h, etc. #include <chrono>
+//using std::chrono::system_clock;    
 
 double MIN_ACCELERATION_POINT = 0.01;
 double MAX_ACCELERATION_POINT = 0.4 - MIN_ACCELERATION_POINT;
@@ -1038,10 +1044,12 @@ XPLMDataRef gTimeSimIsRunningXDataRef = NULL;
 XPLMDataRef BipPanelCountData = NULL;
 
 XPLMMenuID      XsaitekpanelsMenu;
-XPLMMenuID      BipMenu;
+XPLMMenuID      BipMenu, Bip2Menu, Bip3Menu, Bip4Menu;
 XPLMMenuID      BipMenuId, Bip2MenuId, Bip3MenuId, Bip4MenuId;
+XPLMMenuID      ConfigMenu;
 XPLMMenuID      ConfigMenuId;
-
+XPLMMenuID      ReopenMenu;
+XPLMMenuID      ReopenMenuId;
 XPWidgetID      XsaitekpanelsWidgetID = NULL;
 XPWidgetID      BipWidgetID = NULL;
 XPWidgetID      Bip2WidgetID = NULL;
@@ -1054,8 +1062,10 @@ XPWidgetID      Bip4WidgetID = NULL;
 XPLMDataRef TpmPanelCountDataRef = NULL;
 
 // ********************* Saitek Panels Data Ref  ************************
+XPLMDataRef XsaitekpanelsFileIdTagDataRef = NULL;
+XPLMDataRef XsaitekpanelsReopenPanelsDataRef = NULL;
+XPLMDataRef XsaitekpanelsDebugLogDataRef = NULL;
 static XPLMDataRef XsaitekpanelsVersionDataRef = NULL;
-static XPLMDataRef XsaitekpanelsFileIdTagDataRef = NULL;
 static XPLMDataRef XsaitekpanelsFnButtonDataRef = NULL;
 static XPLMDataRef XsaitekpanelsLeftStartFnButtonDataRef = NULL;
 
@@ -2408,7 +2418,9 @@ int beaconlightswitchenable, navlightswitchenable;
 int strobelightswitchenable, taxilightswitchenable;
 int landinglightswitchenable, bataltinverse;
 int panellightsenable, starterswitchenable;
-int upradioswitchpos, loradioswitchpos;
+int rad1upradioswitchpos, rad1loradioswitchpos;
+int rad2upradioswitchpos, rad2loradioswitchpos;
+int rad3upradioswitchpos, rad3loradioswitchpos;
 int multiswitchpos;
 
 int gearledenable;
@@ -2600,12 +2612,17 @@ int landing_lights_switch4_data_on_value, landing_lights_switch4_data_off_value;
 // This is the storage for the data we own.
 
 static int XsaitekpanelsVersionData = 0;
+static int XsaitekpanelsReopenPanelsData = 0;
 static int XsaitekpanelsFileIdTagData = 0;
+static int XsaitekpanelsDebugLogData = 0;
 static int XsaitekpanelsFnButtonData = 0;
 static int XsaitekpanelsLeftStartFnButtonData = 0;
 
 int	XsaitekpanelsVersionGetDataiCallback(void * inRefcon);
 void	XsaitekpanelsVersionSetDataiCallback(void * inRefcon, int XsaitekpanelsVersion);
+
+int	XsaitekpanelsReopenPanelsGetDataiCallback(void * inRefcon);
+void	XsaitekpanelsReopenPanelsSetDataiCallback(void * inRefcon, int XsaitekpanelsReopenPanels);
 
 int	XsaitekpanelsFileIdTagGetDataiCallback(void * inRefcon);
 void	XsaitekpanelsFileIdTagSetDataiCallback(void * inRefcon, int XsaitekpanelsFileIdTag);
@@ -2615,6 +2632,9 @@ void	XsaitekpanelsFnButtonSetDataiCallback(void * inRefcon, int XsaitekpanelsFnB
 
 int	XsaitekpanelsLeftStartFnButtonGetDataiCallback(void * inRefcon);
 void	XsaitekpanelsLeftStartFnButtonSetDataiCallback(void * inRefcon, int XsaitekpanelsLeftStartFnButton);
+
+int	XsaitekpanelsDebugLogGetDataiCallback(void * inRefcon);
+void	XsaitekpanelsDebugLogSetDataiCallback(void * inRefcon, int XsaitekpanelsDebugLog);
 
 /* This callback is called whenever our shared data is changed. */
 
@@ -3225,13 +3245,11 @@ int wrgXPLMVersion = 0;
 int wrgHostID = 0;
 
 int file_id_tag = 0;
-
+int reopen_panels = 0;
+int reopenvalue = 0;
 int dre_enable = 0;
-
 int icao_enable = 0;
-
 int readiniloop = 0;
-
 int log_enable = 0;
 
 int dissableSwitchPanelInVR = 0;
@@ -3271,6 +3289,7 @@ void process_switch_find_xplane_datareference();
 void process_bip_panel();
 void process_pref_file();
 void process_read_ini_file();
+void process_get_ini_file();
 
 
 // ********************* MyPanelsFlightLoopCallback **************************
@@ -3311,6 +3330,7 @@ PLUGIN_API int XPluginStart(char *		outName,
   int BipSubMenuItem, Bip2SubMenuItem, Bip3SubMenuItem;
   int MultiSubMenuItem, RadioSubMenuItem;
   int SwitchSubMenuItem;
+  int ReopenSubMenuItem;
   int XsaitekpanelsSharedRetVal;
 
   XPLMGetVersions(&wrgXPlaneVersion, &wrgXPLMVersion, &wrgHostID);
@@ -3724,6 +3744,13 @@ PLUGIN_API int XPluginStart(char *		outName,
                            NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                            NULL, NULL, NULL, NULL, NULL);
 
+  XsaitekpanelsReopenPanelsDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/reopenpanels",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsReopenPanelsGetDataiCallback,
+                           XsaitekpanelsReopenPanelsSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
 
   XsaitekpanelsFnButtonDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/fnbutton/status",
                            xplmType_Int,
@@ -3738,6 +3765,14 @@ PLUGIN_API int XPluginStart(char *		outName,
                            1,
                            XsaitekpanelsLeftStartFnButtonGetDataiCallback,
                            XsaitekpanelsLeftStartFnButtonSetDataiCallback,
+                           NULL, NULL, NULL, NULL, NULL, NULL, NULL,
+                           NULL, NULL, NULL, NULL, NULL);
+
+  XsaitekpanelsDebugLogDataRef = XPLMRegisterDataAccessor("bgood/xsaitekpanels/debuglog/status",
+                           xplmType_Int,
+                           1,
+                           XsaitekpanelsDebugLogGetDataiCallback,
+                           XsaitekpanelsDebugLogSetDataiCallback,
                            NULL, NULL, NULL, NULL, NULL, NULL, NULL,
                            NULL, NULL, NULL, NULL, NULL);
 
@@ -4153,6 +4188,33 @@ PLUGIN_API int XPluginStart(char *		outName,
     XPLMClearAllMenuItems(ConfigMenuId);
     XPLMAppendMenuItem(ConfigMenuId, "Reload xsaitekpanels.ini", (void *) "TRUE", 1);
 
+    ReopenSubMenuItem = XPLMAppendMenuItem(
+            XsaitekpanelsMenu,
+            "Reopen Panels",
+            NULL,
+            8);
+
+    ReopenMenuId = XPLMCreateMenu(
+            "Reopen Panels",
+            XsaitekpanelsMenu,
+            ReopenSubMenuItem,
+            XsaitekpanelsMenuHandler,
+            (void *)8);
+
+    XPLMClearAllMenuItems(ReopenMenuId);
+
+    if ((radcnt > 0) || (multicnt > 0) || (switchcnt > 0)) {
+       XPLMAppendMenuItem(ReopenMenuId, "Reopen All Panels", (void *) "REOPEN_ALL", 1);
+    }
+    if (radcnt > 0) {
+       XPLMAppendMenuItem(ReopenMenuId, "Reopen Radio Panel", (void *) "REOPEN_RADIO", 1);
+    }
+    if (multicnt > 0) {
+       XPLMAppendMenuItem(ReopenMenuId, "Reopen Multi Panel", (void *) "REOPEN_MULTI", 1);
+    }
+    if (switchcnt > 0) {
+       XPLMAppendMenuItem(ReopenMenuId, "Reopen Switch Panel", (void *) "REOPEN_SWITCH", 1);
+    }
 
    if (bipcnt > 0) {
 
@@ -4449,7 +4511,7 @@ PLUGIN_API void	XPluginStop(void)
   }
 
 
-  // ********** Unregitser the callback on quit. *************
+  // ********** Unregister the callback on quit. *************
   XPLMUnregisterFlightLoopCallback(MyPanelsFlightLoopCallback, NULL);
   XPLMUnregisterFlightLoopCallback(MyPanelsDeferredInitNewAircraftFLCB, NULL);
   XPLMUnregisterFlightLoopCallback(XsaitekpanelsCustomDatarefLoopCB, NULL);
@@ -4464,9 +4526,12 @@ PLUGIN_API void	XPluginStop(void)
   XPLMDestroyMenu(BipMenuId);
   XPLMDestroyMenu(Bip2MenuId);
   XPLMDestroyMenu(Bip3MenuId);
+  XPLMDestroyMenu(Bip4MenuId);
+  XPLMDestroyMenu(ConfigMenuId);
   XPLMDestroyMenu(MultiMenuId);
   XPLMDestroyMenu(RadioMenuId);
   XPLMDestroyMenu(SwitchMenuId);
+  XPLMDestroyMenu(ReopenMenuId);
 
   XPLMDestroyMenu(SwitchWidgetID);
   XPLMDestroyMenu(RadioWidgetID);
@@ -4571,7 +4636,17 @@ void	XsaitekpanelsFileIdTagSetDataiCallback(void * inRefcon, int XsaitekpanelsFi
     XsaitekpanelsFileIdTagData = XsaitekpanelsFileIdTagData2;
 }
 
+int	XsaitekpanelsReopenPanelsGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsReopenPanelsData;
+}
 
+void	XsaitekpanelsReopenPanelsSetDataiCallback(void * inRefcon, int XsaitekpanelsReopenPanelsData2)
+{
+    (void) inRefcon;
+    XsaitekpanelsReopenPanelsData = XsaitekpanelsReopenPanelsData2;
+}
 
 int	XsaitekpanelsFnButtonGetDataiCallback(void * inRefcon)
 {
@@ -4598,11 +4673,22 @@ void	XsaitekpanelsLeftStartFnButtonSetDataiCallback(void * inRefcon, int Xsaitek
     XsaitekpanelsLeftStartFnButtonData = XsaitekpanelsLeftStartFnButtonData2;
 }
 
+int	XsaitekpanelsDebugLogGetDataiCallback(void * inRefcon)
+{
+    (void) inRefcon;
+    return XsaitekpanelsDebugLogData;
+}
+
+void	XsaitekpanelsDebugLogSetDataiCallback(void * inRefcon, int XsaitekpanelsDebugLogData2)
+{
+    (void) inRefcon;
+    XsaitekpanelsDebugLogData = XsaitekpanelsDebugLogData2;
+}
 
 
 /*
  * This is the callback for our shared data.  Right now we do not react
- * to our shared data being chagned.
+ * to our shared data being changed.
  *
  */
 void	XsaitekpanelsInteger1DataChangedCallback(void * inRefcon)
@@ -7597,7 +7683,6 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 1){
          if (strcmp((char *) inItemRef, "TRUE") == 0) {
-             file_id_tag = 0;
              process_read_ini_file();
          }
 
@@ -7669,7 +7754,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 5){
        if (strcmp((char *) inItemRef, "MULTI_WIDGET") == 0) {
-             CreateMultiWidget(05, 700, 300, 390);	//left, top, right, bottom.
+             CreateMultiWidget(15, 700, 305, 385);	//left, top, right, bottom.
              multiMenuItem = 1;
        }
 
@@ -7678,7 +7763,7 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
     if((intptr_t)inMenuRef == 6){
 
          if (strcmp((char *) inItemRef, "RADIO_WIDGET") == 0) {
-             CreateRadioWidget(15, 700, 300, 320);	//left, top, right, bottom.
+             CreateRadioWidget(15, 685, 305, 305);	//left, top, right, bottom.
              radioMenuItem = 1;
          }
 
@@ -7686,15 +7771,28 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
 
     if((intptr_t)inMenuRef == 7){
          if (strcmp((char *) inItemRef, "SWITCH_WIDGET") == 0) {
-             CreateSwitchWidget(05, 700, 300, 530);	//left, top, right, bottom.
+             CreateSwitchWidget(15, 670, 305, 545);	//left, top, right, bottom.
              switchMenuItem = 1;
 
          }
 
     }
 
-
-
+    if((intptr_t)inMenuRef == 8){
+       if (strcmp((char *) inItemRef, "REOPEN_ALL") == 0) {
+             XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 5);
+             bool process_reopen_panels();
+       } else if (strcmp((char *) inItemRef, "REOPEN_RADIO") == 0) {
+             XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 1);
+             bool process_reopen_panels();
+       } else if (strcmp((char *) inItemRef, "REOPEN_MULTI") == 0) {
+             XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 2);
+             bool process_reopen_panels();
+       } else if (strcmp((char *) inItemRef, "REOPEN_SWITCH") == 0) {
+             XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 3);
+             bool process_reopen_panels();
+       }
+    }
     return;
 }
 
@@ -7839,7 +7937,7 @@ void CreateSwitchWidget(int x, int y, int w, int h)
         yOffset = (25+28+(1*15));
         SwitchLabelTextWidget[Index] = XPCreateWidget(x+05, y-yOffset, x+05+170, y-yOffset-20,
               1,	// Visible
-              "Disable        Enable        Remapable",// desc
+              "Disable     Enable     Remapable",// desc
               0,		// root
               SwitchWidgetID,
               xpWidgetClass_Caption);
@@ -9251,6 +9349,9 @@ float XsaitekpanelsCustomDatarefLoopCB(float elapsedMe, float elapsedSim, int co
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/version");
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/fnbutton/status");
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/leftstartfnbutton/status");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/idtag");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/reopenpanels");
+    XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/debuglog/status");
 
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer1");
     XPLMSendMessageToPlugin(XPLM_NO_PLUGIN_ID, 0x01000000, (void*)"bgood/xsaitekpanels/sharedata/integer2");
@@ -9524,7 +9625,6 @@ float MyPanelsDeferredInitNewAircraftFLCB(float MyPanelselapsedMe, float MyPanel
     (void) MyPanelscounter; // To get rid of warnings on unused variables
     (void) MyPanelsrefcon; // To get rid of warnings on unused variables
 
-    file_id_tag = 0;
     process_read_ini_file();
     IsVR_Enabled = XPLMGetDatai(XPLMFindDataRef("sim/graphics/VR/enabled")) != 0;
     gearled_write_loop = 0;
@@ -9580,7 +9680,6 @@ float	MyPanelsFlightLoopCallback(
   if (readiniloop < 50) {
       readiniloop++;
   } else if (readiniloop == 50) {
-      file_id_tag = 0;
       process_read_ini_file();
       IsVR_Enabled = XPLMGetDatai(XPLMFindDataRef("sim/graphics/VR/enabled")) != 0;
 
@@ -9594,8 +9693,6 @@ float	MyPanelsFlightLoopCallback(
   }
 
   XPLMSetDatai(XsaitekpanelsVersionDataRef, XsaitekpanelsVersion);
-
-  XPLMSetDatai(XsaitekpanelsFileIdTagDataRef, file_id_tag);
 
   XsaitekpanelsFnButton = xpanelsfnbutton;
   XPLMSetDatai(XsaitekpanelsFnButtonDataRef, XsaitekpanelsFnButton);
@@ -9655,6 +9752,459 @@ bool BatPwrIsOn()
   } else {
     return XPLMGetDatai(BatPwrOn) == 1;
   }
+}
+
+XPLMDataRef ReloadScriptsCMD = NULL;
+XPLMDataRef DataRefTest = NULL;
+int updatedisprad = 0;
+int updatedispmul = 0;
+int panelsopened = 0;
+int rad_discon = 0;
+int multi_discon = 0;
+int switch_discon = 0;
+
+bool process_reopen_panels()
+{
+  int RadioSubMenuItem;
+  int MultiSubMenuItem;
+  int SwitchSubMenuItem;
+  reopenvalue = XPLMGetDatai(XsaitekpanelsReopenPanelsDataRef);
+  if ((reopenvalue >= 1) && (reopenvalue <= 15)) {
+     XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 0);
+     if (reopenvalue == 14) {
+        return 0;
+     }
+     updatedisprad = radcnt * 2;
+     updatedispmul = 1;
+  } else {
+      return 0;
+  }
+  panelsopened = 0;
+  rad_discon = 0;
+  multi_discon = 0;
+  switch_discon = 0;
+  if ((reopenvalue == 5) || (reopenvalue == 15) || (reopenvalue == 1) || (reopenvalue == 11)) {
+     struct hid_device_info *rad_devs, *rad_cur_dev;
+     rad_devs = hid_enumerate(0x6a3, 0x0d05);
+     hid_free_enumeration(rad_devs);
+     if (rad_devs != 0) {
+        rad_discon = 1;
+        if (radcnt > 0) {
+           radcnt--;
+           if (radcnt == 3) {
+              hid_close(radiohandle[radcnt]);
+              radcnt--;
+           }
+           if (radcnt == 2) {
+              hid_close(radiohandle[radcnt]);
+              radcnt--;
+           }
+           if (radcnt == 1) {
+              hid_close(radiohandle[radcnt]);
+              radcnt--;
+           }
+           if (radcnt == 0) {
+              hid_close(radiohandle[radcnt]);
+           }
+        }
+        radcnt = 0;
+        rad_devs = hid_enumerate(0x6a3, 0x0d05);
+        rad_cur_dev = rad_devs;
+        while (rad_cur_dev) {
+           radiohandle[radcnt] = hid_open_path(rad_cur_dev->path);
+           hid_set_nonblocking(radiohandle[radcnt], 1);
+           radiores = hid_read(radiohandle[radcnt], radiobuf[radcnt], sizeof(radiobuf[radcnt]));
+           blankradiowbuf[radcnt][0] = 0, blankradiowbuf[radcnt][1] = 15, blankradiowbuf[radcnt][2] = 15;
+           blankradiowbuf[radcnt][3] = 15, blankradiowbuf[radcnt][4] = 15, blankradiowbuf[radcnt][5] = 15;
+           blankradiowbuf[radcnt][6] = 15, blankradiowbuf[radcnt][7] = 15, blankradiowbuf[radcnt][8] = 15;
+           blankradiowbuf[radcnt][9] = 15, blankradiowbuf[radcnt][10] = 15, blankradiowbuf[radcnt][11] = 15;
+           blankradiowbuf[radcnt][12] = 15, blankradiowbuf[radcnt][13] = 15, blankradiowbuf[radcnt][14] = 15;
+           blankradiowbuf[radcnt][15] = 15, blankradiowbuf[radcnt][16] = 15, blankradiowbuf[radcnt][17] = 15;
+           blankradiowbuf[radcnt][18] = 15, blankradiowbuf[radcnt][19] = 15, blankradiowbuf[radcnt][20] = 15;
+           hid_send_feature_report(radiohandle[radcnt], blankradiowbuf[radcnt], 23);
+           int bufferoffset = 1;
+           do {
+              sleep_for(25ms);
+              blankradiowbuf[radcnt][bufferoffset] = 0;
+              blankradiowbuf[radcnt][bufferoffset+5] = 0;
+              blankradiowbuf[radcnt][bufferoffset+10] = 0;
+              blankradiowbuf[radcnt][bufferoffset+15] = 0;
+              hid_send_feature_report(radiohandle[radcnt], blankradiowbuf[radcnt], 23);
+              sleep_for(25ms);
+              blankradiowbuf[radcnt][bufferoffset] = 15;
+              blankradiowbuf[radcnt][bufferoffset+5] = 15;
+              blankradiowbuf[radcnt][bufferoffset+10] = 15;
+              blankradiowbuf[radcnt][bufferoffset+15] = 15;
+              hid_send_feature_report(radiohandle[radcnt], blankradiowbuf[radcnt], 23);
+              bufferoffset++;
+              }
+           while (bufferoffset < 6);
+           radcnt++;
+           rad_cur_dev = rad_cur_dev->next;
+        }
+        hid_free_enumeration(rad_devs);
+        if (radcnt > 0) {
+           XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 16);
+        }
+        DataRefTest = XPLMFindDataRef("bgood/xsaitekpanels/radiopanel/rad1uprcom1/status");
+        if ((DataRefTest == NULL) && (radcnt > 0 )) {
+           process_radio1_register_xsaitekpanels_datareference();
+           process_radio_find_xplane_commands();
+           process_radio_find_xplane_datareference();
+           if(radcnt > 1) {
+              process_radio2_register_xsaitekpanels_datareference();
+           }
+           if(radcnt > 2) {
+           process_radio3_register_xsaitekpanels_datareference();
+           }
+           RadioSubMenuItem = XPLMAppendMenuItem(
+                   XsaitekpanelsMenu,
+                   "Radio",
+                   NULL,
+                   6);
+           RadioMenuId = XPLMCreateMenu(
+                   "Radio",
+                   XsaitekpanelsMenu,
+                   RadioSubMenuItem,
+                   XsaitekpanelsMenuHandler,
+                   (void *)6);
+           XPLMClearAllMenuItems(RadioMenuId);
+           XPLMAppendMenuItem(ReopenMenuId, "Reopen Radio Panel", (void *) "REOPEN_RADIO", 1);
+           XPLMAppendMenuItem(RadioMenuId, "Radio Panel Widget", (void *) "RADIO_WIDGET", 1);
+           panelsopened++;
+        }
+     }
+  }
+
+  if ((reopenvalue == 5) || (reopenvalue == 15) || (reopenvalue == 2) || (reopenvalue == 12)) {
+     struct hid_device_info *multi_devs, *multi_cur_dev;
+     multi_devs = hid_enumerate(0x6a3, 0x0d06);
+     hid_free_enumeration(multi_devs);
+     if (multi_devs != 0) {
+        multi_discon = 1;
+        if (multicnt > 0) {
+           hid_close(multihandle);
+        }
+        multicnt = 0;
+        multi_devs = hid_enumerate(0x6a3, 0x0d06);
+        multi_cur_dev = multi_devs;
+        while (multi_cur_dev) {
+           multihandle = hid_open_path(multi_cur_dev->path);
+           hid_set_nonblocking(multihandle, 1);
+           multires = hid_read(multihandle, multibuf, sizeof(multibuf));
+           blankmultiwbuf[0] = 0, blankmultiwbuf[6] = 15, blankmultiwbuf[7] = 15;
+           blankmultiwbuf[8] = 15, blankmultiwbuf[9] = 15, blankmultiwbuf[10] = 15;
+           blankmultiwbuf[11] = 255;
+           int lednumb = 1;
+           int multicharnumb = 1;
+           do {
+              blankmultiwbuf[1] = multicharnumb, blankmultiwbuf[2] = multicharnumb, blankmultiwbuf[3] = multicharnumb;
+              blankmultiwbuf[4] = multicharnumb, blankmultiwbuf[5] = multicharnumb;
+              multires = hid_send_feature_report(multihandle, blankmultiwbuf, 13);
+              blankmultiwbuf[11] = lednumb;
+              sleep_for(40ms);
+              lednumb = lednumb * 2;
+              multicharnumb++;
+              if (multicharnumb == 8) {
+                 multicharnumb = 15;
+                 blankmultiwbuf[11] = 0;
+              }
+           }
+           while (multicharnumb < 16);
+           multicnt++;
+           multi_cur_dev = multi_cur_dev->next;
+        }
+        hid_free_enumeration(multi_devs);
+        if (multicnt > 0) {
+           XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 17);
+        }
+        DataRefTest = XPLMFindDataRef("bgood/xsaitekpanels/multipanel/apbtn/status");
+        if ((DataRefTest == NULL) && (multicnt > 0 )) {
+           process_multi_register_xsaitekpanels_datareference();
+           process_multi_find_xplane_commands();
+           process_multi_find_xplane_datareference();
+           MultiSubMenuItem = XPLMAppendMenuItem(
+                   XsaitekpanelsMenu,
+                   "Multi",
+                   NULL,
+                   5);
+           MultiMenuId = XPLMCreateMenu(
+                   "Multi",
+                   XsaitekpanelsMenu,
+                   MultiSubMenuItem,
+                   XsaitekpanelsMenuHandler,
+                   (void *)5);
+           XPLMClearAllMenuItems(MultiMenuId);
+           XPLMAppendMenuItem(ReopenMenuId, "Reopen Multi Panel", (void *) "REOPEN_MULTI", 1);
+           XPLMAppendMenuItem(MultiMenuId, "Multi Panel Widget", (void *) "MULTI_WIDGET", 1);
+           panelsopened = panelsopened + 2;
+        }
+     }
+  }
+
+  if ((reopenvalue == 5) || (reopenvalue == 15) || (reopenvalue == 3) || (reopenvalue == 13)) {
+     struct hid_device_info *switch_devs, *switch_cur_dev;
+     switch_devs = hid_enumerate(0x6a3, 0x0d67);
+     hid_free_enumeration(switch_devs);
+     if (switch_devs != 0) {
+        switch_discon = 1;
+        if (switchcnt > 0) {
+           hid_close(switchhandle);
+        }
+        switchcnt = 0;
+        switch_devs = hid_enumerate(0x6a3, 0x0d67);
+        switch_cur_dev = switch_devs;
+        while (switch_cur_dev) {
+           switchhandle = hid_open_path(switch_cur_dev->path);
+           hid_set_nonblocking(switchhandle, 1);
+           switchres = hid_read(switchhandle, switchbuf, sizeof(switchbuf));
+           blankswitchwbuf[0] = 0;
+           blankswitchwbuf[1] = 0x33;
+           switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
+           sleep_for(100ms);
+           blankswitchwbuf[1] = 0x1d;
+           switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
+           sleep_for(100ms);
+           blankswitchwbuf[1] = 0x2e;
+           switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
+           sleep_for(100ms);
+           blankswitchwbuf[1] = 0x33;
+           switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
+           sleep_for(100ms);
+           if (XPLMGetDatai(GearRetract) == 0) {
+              blankswitchwbuf[1] = 0;
+              switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
+           }
+           switchcnt++;
+           switch_cur_dev = switch_cur_dev->next;
+        }
+        hid_free_enumeration(switch_devs);
+        if (switchcnt > 0) {
+           XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 18);
+        }
+        DataRefTest = XPLMFindDataRef("bgood/xsaitekpanels/switchpanel/bat/status");
+        if ((DataRefTest == NULL) && (switchcnt > 0 )) {
+           process_switch_register_xsaitekpanels_datareference();
+           process_switch_find_xplane_commands();
+           process_switch_find_xplane_datareference();
+           gearled_write_loop = 0;
+           SwitchSubMenuItem = XPLMAppendMenuItem(
+                   XsaitekpanelsMenu,
+                   "Switch",
+                   NULL,
+                   7);
+           SwitchMenuId = XPLMCreateMenu(
+                   "Switch",
+                   XsaitekpanelsMenu,
+                   SwitchSubMenuItem,
+                   XsaitekpanelsMenuHandler,
+                   (void *)7);
+           XPLMClearAllMenuItems(SwitchMenuId);
+           XPLMAppendMenuItem(ReopenMenuId, "Reopen Switch Panel", (void *) "REOPEN_SWITCH", 1);
+           XPLMAppendMenuItem(SwitchMenuId, "Switch Panel Widget", (void *) "SWITCH_WIDGET", 4);
+           panelsopened = panelsopened + 4;
+        }
+     }
+  }
+
+  if (reopenvalue == 6) {
+     if (radioMenuItem == 1) {
+        XPHideWidget(RadioWidgetID);
+        radioMenuItem = 0;
+        return 0;
+     }
+     CreateRadioWidget(15, 600, 305, 305);
+     radioMenuItem = 1;
+     return 0;
+  }
+  if (reopenvalue == 7) {
+     if (multiMenuItem == 1) {
+        XPHideWidget(MultiWidgetID);
+        multiMenuItem = 0;
+        return 0;
+     }
+     CreateMultiWidget(330, 600, 305, 385);
+     multiMenuItem = 1;
+     return 0;
+  }
+  if (reopenvalue == 8) {
+     if (switchMenuItem == 1) {
+        XPHideWidget(SwitchWidgetID);
+        switchMenuItem = 0;
+        return 0;
+     }
+     CreateSwitchWidget(645, 600, 305, 545);
+     switchMenuItem = 1;
+     return 0;
+  }
+  if (reopenvalue == 9) {
+     process_read_ini_file();
+     return 0;
+  }
+  if (((reopenvalue == 5) || (reopenvalue == 15)) && ((rad_discon != 0) || (multi_discon != 0) || (switch_discon != 0))) {
+     XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 19);
+  }
+  if (((reopenvalue == 5) || (reopenvalue == 15)) && ((rad_discon == 0) && (multi_discon == 0) && (switch_discon == 0))) {
+     panelsopened = 8;
+  }
+  if (((reopenvalue == 1) || (reopenvalue == 11)) && ((rad_discon == 0))) {
+     panelsopened = 9;
+  }
+  if (((reopenvalue == 2) || (reopenvalue == 12)) && ((multi_discon == 0))) {
+     panelsopened = 10;
+  }
+  if (((reopenvalue == 3) || (reopenvalue == 13)) && ((switch_discon == 0))) {
+     panelsopened = 11;
+  }
+  if (panelsopened != 0) {
+     panelsopened = panelsopened + 19;
+     XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, panelsopened);
+  }
+  if ((reopenvalue >= 10) && (reopenvalue <= 15)) {
+     ReloadScriptsCMD = XPLMFindCommand("FlyWithLua/debugging/reload_scripts");
+     XPLMCommandOnce(ReloadScriptsCMD);
+  }
+  return 0;
+}
+
+char* PlaneICAOString[40];
+
+bool process_debug_mode()
+{
+    log_enable = XPLMGetDatai(XsaitekpanelsDebugLogDataRef);
+    if (log_enable == 2) {
+       XPLMSetDatai(XsaitekpanelsDebugLogDataRef, 0);
+       XPLMGetDatab(XPLMFindDataRef("sim/aircraft/view/acf_ICAO"), PlaneICAOString, 0, 40);
+       XPLMDebugString("\n\n\n********** Xsaitekpanels: Debug Information **********\n\n");
+       sprintf(buf, "X-Plane Version = %d, XPLM Version = %d, HostID = %d, Plane ICAO = %s, ", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID, PlaneICAOString);
+       XPLMDebugString(buf);
+       XPLMPluginID PluginID = XPLMFindPluginBySignature(LOGITECH_PLUGIN_SIGNATURE);
+       if (PluginID == -1) {
+          XPLMDebugString("Logitech Pro Flight plugin installed = No\n");
+          } else {
+          sprintf(buf, "Logitech Pro Flight plugin installed = Yes :: Signature = %d\n", PluginID);
+          XPLMDebugString(buf);
+       }
+       XPLMDebugString("Plugin Version is :  " PLUGIN_VERSION "\n\n");
+       sprintf(buf, "The plugin found these Panels :\n\n%d  Switch panel\n%d  Radio panel\n%d  Multi panel \n%d  BIP panel\n%d  TPM Panels\n", switchcnt, radcnt, multicnt, bipcnt, tpmcnt);
+       XPLMDebugString(buf);
+       process_get_ini_file();
+       XPLMDebugString("OTHER XSAITEKPANELS.INI SETTINGS :\n");
+       sprintf(buf, "GLOBAL OPTIONS :\nData reference editor enable = %d\nDisplay plane ICAO on screen = %d\nDebug entries to log enable = %d\n\n", dre_enable, icao_enable, log_enable);
+       XPLMDebugString(buf);
+       XPLMDebugString("DISPLAY VALUES FOR THESE SWITCH POSITIONS ON LOAD :   (RP = Radio Panel number)\n");
+       sprintf(buf, "Upper radio switch RP1 = %d, RP2 = %d, RP3 = %d   (1=COM1, 2=COM2, 3=NAV1, 4=NAV2, 5=ADF1, 8 DME, 9=XPDR/Baro1, 10=Blank display)\n", rad1upradioswitchpos, rad2upradioswitchpos, rad3upradioswitchpos);
+       XPLMDebugString(buf);
+       sprintf(buf, "Lower radio switch RP1 = %d, RP2 = %d, RP3 = %d   (1=COM1, 2=COM2, 3=NAV1, 4=NAV2, 5=ADF2, 8 DME, 9=XPDR/Baro2, 10=Blank display)\n", rad1loradioswitchpos, rad2loradioswitchpos, rad3loradioswitchpos);
+       XPLMDebugString(buf);
+       sprintf(buf, "Multi Switch position = %d   (1=ALT, 1=VS, 2=IAS, 3=HDG, 4=CRS, 5 blank display)\n\n", multiswitchpos);
+       XPLMDebugString(buf);
+       sprintf(buf, "RADIO PANEL OPTIONS :\nRadio knob speed = %d\nNumber of ADF's in aircraft = %d\nMetric pressure enable = %d\n8.33 Khz channel spacing enable = %d\nDME display distance speed enable = %d\n\n", radspeed, numadf, metricpressenable, channelspacing833enable, dmedistspeedenable);
+       XPLMDebugString(buf);
+       sprintf(buf, "MULTI PANEL OPTIONS :\nMulti speed = %d\nMulti acceleration threshold = %d\nTrimspeed = %d\n\n", multispeed, multiaccelthreshold, trimspeed);
+       XPLMDebugString(buf);
+       sprintf(buf, "VIRTUAL REALITY OPTIONS :\nDisable Switch Panel in VR = %d\nDisable Radio Panel in VR = %d\nDisable Multi Panel in VR = %d\n\n", dissableSwitchPanelInVR, dissableRadioPanelInVR, dissableMultiPanelInVR);
+       XPLMDebugString(buf);
+       XPLMDebugString("The above information is obtained by writing '2' to the DataRef 'bgood/xsaitekpanels/debuglog/status', or write '1' to\n");
+       XPLMDebugString("this DataRef to enable plugin debug log information', and write '0' to disable debug logging.\n\n");
+    }
+    return 0;
+}
+
+void process_get_ini_file()
+{
+    char* iniDefaultPluginPath;
+    iniDefaultPluginPath = "./Resources/plugins/Xsaitekpanels/xsaitekpanels.ini";
+    string version;
+    cleanupIniReader();
+    char xpsacfname[512];
+    char xpsacfpath[512];
+    XPLMGetNthAircraftModel(0, xpsacfname, xpsacfpath);
+    char	radtestbuf1[256];
+    if (strlen(xpsacfpath) == 0) {
+        XPLMDebugString("\nXsaitekpanels: Error strlen(xpsacfpath) == 0 \n");
+        return;
+    }
+    std::string xpsini_path_name = xpsacfpath;
+    std::size_t pos = xpsini_path_name.find(xpsacfname);
+    xpsini_path_name = xpsini_path_name.substr(0, pos);
+    std::string xpsini_aircraft_name = xpsacfname;
+    std::size_t pos1 = xpsini_aircraft_name.find(".acf");
+    xpsini_aircraft_name = xpsini_aircraft_name.substr(0, pos1);
+#if APL && __MACH__
+    std::string mac_converted_path = convert_Mac_Path(xpsini_path_name);
+    XPLMDebugString("\nMac_converted_path is \n");
+    XPLMDebugString(mac_converted_path.c_str());
+    XPLMDebugString("\n");
+    xpsini_path_name = mac_converted_path;
+#endif
+    std::string xpsini_path_name1 = xpsini_path_name;
+    std::string xpsini_path_name2 = xpsini_path_name;          // get path only
+    xpsini_path_name1.append("xsaitekpanels.ini");
+    xpsini_path_name.append(xpsini_aircraft_name);
+    xpsini_path_name.append("_xsaitekpanels.ini");
+    int found_file = 0;
+    std::vector<char> parse_ini_path_name(xpsini_path_name.size() + 1);
+    std::copy(xpsini_path_name.begin(), xpsini_path_name.end(), parse_ini_path_name.begin());
+    std::ifstream ifile(&parse_ini_path_name[0]);
+    if (ifile) {
+        XPLMDebugString("\nFound '");
+        XPLMDebugString(&xpsini_aircraft_name[0]);
+        XPLMDebugString("_xsaitekpanels.ini' in this aircrafts path. Note this name format takes priority over the default name 'xsaitekpanels.ini' if present.\n");
+        XPLMDebugString("Aircraft path : ");
+        XPLMDebugString(&parse_ini_path_name[0]);
+        XPLMDebugString("\n");
+        ini_save_path_name = parse_ini_path_name;
+        parseIniFile(&parse_ini_path_name[0]);
+        found_file = 1;
+    }
+    else if (!ifile) {
+        std::vector<char> parse_ini_path_name1(xpsini_path_name1.size() + 1);
+        std::copy(xpsini_path_name1.begin(), xpsini_path_name1.end(), parse_ini_path_name1.begin());
+        std::ifstream ifile1(&parse_ini_path_name1[0]);
+        if (ifile1) {
+            XPLMDebugString("\nThe plugin found the default file 'xsaitekpanels.ini' in the root folder of the current aircraft.\n");
+            XPLMDebugString("Aircraft path : ");
+            XPLMDebugString(&parse_ini_path_name1[0]);
+            XPLMDebugString("\n");
+            ini_save_path_name = parse_ini_path_name1;
+            parseIniFile(&parse_ini_path_name1[0]);
+            found_file = 1;
+        }
+        if (found_file == 0) {
+            XPLMDebugString("\nThe plugin did not find 'xsaitekpanels.ini' or '");
+            XPLMDebugString(&xpsini_aircraft_name[0]);
+            XPLMDebugString("_xsaitekpanels.ini' for this aircraft. The prefix '");
+            XPLMDebugString(&xpsini_aircraft_name[0]);
+            XPLMDebugString("' is the aircrafts file name.\nAircraft root folder : ");
+            XPLMDebugString(&xpsini_path_name2[0]);
+            XPLMDebugString("\n");
+        }
+        std::ifstream ifile2(iniDefaultPluginPath);
+        if (ifile2) {
+            if (found_file == 0) {
+                XPLMDebugString("\nUsing the plugins default 'xsaitekpanels.ini' file in the Xsaitekpanels plugin path since neither file name format was found in the aircrafts root folder.\n");
+                XPLMDebugString("Plugin path : ");
+                XPLMDebugString(iniDefaultPluginPath);
+                XPLMDebugString("\n");
+                ini_save_path_name = parse_ini_path_name;
+                parseIniFile(iniDefaultPluginPath);
+            }
+        }
+        else {
+            XPLMDebugString("\nError: The plugin did not find the default 'xsaitekpanels.ini' file in the Xsaitekpanels plugin path.\n");
+            return;
+        }
+    }
+    version = getOptionToString("Version");
+    XPLMDebugString("\nThe 'xsaitekpanels.ini' file version is :  ");
+    XPLMDebugString(version.c_str());
+    readOptionAsInt("IDTag", &file_id_tag);
+    sprintf(buf, "\nThe 'xsaitekpanels.ini' file identification tag is :  %d\n\n", file_id_tag);
+    XPLMDebugString(buf);
+    XPLMDebugString("Lua programmers can use this value to test if they have the intended 'xsaitekpanels.ini' file. The 'xsaitekpanels.ini' file id tag is saved in the\n");
+    XPLMDebugString("DataRef 'bgood/xsaitekpanels/idtag' so the programmer can check for the number specified. You need to wait .5 second before reading it.\n\n");
+    return;
 }
 
 void UpdateUI()

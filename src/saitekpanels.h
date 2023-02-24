@@ -216,6 +216,8 @@ extern XPLMDataRef AvPwrOnCustomDataref, BatPwrOnCustomDataref;
 
 extern bool AvPwrIsOn();
 extern bool BatPwrIsOn();
+extern bool process_debug_mode();
+extern bool process_reopen_panels();
 
 extern XPLMDataRef Nav1PwrOn, Nav2PwrOn, Com1PwrOn, Com2PwrOn;
 extern XPLMDataRef Afd1PwrOn, DmePwrOn;
@@ -2090,6 +2092,19 @@ extern XPLMDataRef	SwitchBeaconOwnedDataRef, SwitchNavOwnedDataRef;
 extern XPLMDataRef	SwitchStrobeOwnedDataRef, SwitchTaxiOwnedDataRef;
 extern XPLMDataRef	SwitchLandingOwnedDataRef;
 
+extern XPLMDataRef XsaitekpanelsFileIdTagDataRef;
+extern XPLMDataRef XsaitekpanelsReopenPanelsDataRef;
+extern XPLMDataRef XsaitekpanelsDebugLogDataRef;
+
+extern int	XsaitekpanelsFileIdTagGetDataiCallback(void * inRefcon);
+extern void	XsaitekpanelsFileIdTagSetDataiCallback(void * inRefcon, int XsaitekpanelsFileIdTag);
+
+extern int	XsaitekpanelsReopenPanelsGetDataiCallback(void * inRefcon);
+extern void	XsaitekpanelsReopenPanelsSetDataiCallback(void * inRefcon, int XsaitekpanelsReopenPanels);
+
+extern int	XsaitekpanelsDebugLogGetDataiCallback(void * inRefcon);
+extern void	XsaitekpanelsDebugLogSetDataiCallback(void * inRefcon, int XsaitekpanelsDebugLog);
+
 extern int	SwitchStartOffPositionGetDataiCallback(void * inRefcon);
 extern void	SwitchStartOffPositionSetDataiCallback(void * inRefcon, int SwitchStartOffPosition);
 
@@ -2177,7 +2192,9 @@ extern int cowlflapsenable, panellightswitchenable;
 extern int beaconlightswitchenable, navlightswitchenable;
 extern int strobelightswitchenable, taxilightswitchenable;
 extern int landinglightswitchenable, bataltinverse;
-extern int upradioswitchpos, loradioswitchpos;
+extern int rad1upradioswitchpos, rad1loradioswitchpos;
+extern int rad2upradioswitchpos, rad2loradioswitchpos;
+extern int rad3upradioswitchpos, rad3loradioswitchpos;
 extern int multiswitchpos, starterswitchenable;
 
 extern int gearledenable;
@@ -2774,9 +2791,18 @@ extern double MAX_SPEED;
 // ************** Bip Panel Data Ref ******************
 extern XPLMDataRef gTimeSimIsRunningXDataRef;
 
-extern XPLMMenuID      BipMenu;
+extern XPLMMenuID      BipMenu, Bip2Menu, Bip3Menu, Bip4Menu;
 extern XPLMMenuID      BipMenuId, Bip2MenuId, Bip3MenuId, Bip4MenuId;
 extern XPWidgetID      BipWidgetID, Bip2WidgetID, Bip3WidgetID, Bip4WidgetID;
+
+// ************** All Panel Data Ref ******************
+
+extern XPLMDataRef ReloadScriptsCMD;
+
+extern XPLMMenuID      ConfigMenu;
+extern XPLMMenuID      ConfigMenuId;
+extern XPLMMenuID      ReopenMenu;
+extern XPLMMenuID      ReopenMenuId;
 
 // ***************** Bip Panel variables ********************
 extern hid_device *biphandle[4];
@@ -2792,12 +2818,12 @@ extern int wrgXPlaneVersion;
 extern int wrgXPLMVersion;
 extern int wrgHostID;
 
+extern int updatedisprad;
+extern int updatedispmul;
 extern int file_id_tag;
-
+extern int reopen_panels;
 extern int dre_enable;
-
 extern int icao_enable;
-
 extern int log_enable;
 
 extern int dissableSwitchPanelInVR;

@@ -44,9 +44,7 @@ static int multimul = 10;
 
 static int n = 5;
 
-static int appushed = 0;
 static int lastappos = 0, lastappos2 = 0;
-static int aploop = 0;
 //static int multitestloop = 0;
 
 
@@ -71,6 +69,7 @@ static int multiadig3, multiarem3, multiadig4, multiarem4, multiadig5;
 static int multibstby, multibdig1, multibdig2, multibrem2;
 static int multibdig3, multibrem3, multibdig4, multibrem4, multibdig5;  
 static int btnleds = 0, lastbtnleds = 0, multiseldis = 1;
+static int lastmultiaactv, lastmultibstby;
 
 static int ALT_SWITCH = 7, VS_SWITCH = 6;
 static int IAS_SWITCH = 5, HDG_SWITCH = 4;
@@ -1779,18 +1778,10 @@ void process_autothrottle_switch()
 void process_ap_master_switch()
 {
     if (apbuttonremap == 1) {
-        if (appushed == 0) {
+        if (multires > 0) {
             if (testbit(multibuf, AP_MASTER_BUTTON)) {
                 XPLMCommandOnce(ApButtonRemapableCmd);
-                appushed = 1;
                 lastappos = 1;
-            }
-        }
-        if (appushed == 1) {
-            aploop++;
-            if (aploop == 10) {
-               appushed = 0;
-               aploop = 0;
             }
         }
         if (lightdatareferencetype == 1) {
@@ -1859,23 +1850,15 @@ void process_ap_master_switch()
         }
 
     } else if (apbuttonremap == 2) {
-            if (appushed == 0) {
+            if (multires > 0) {
                 if (testbit(multibuf, AP_MASTER_BUTTON)) {
                     XPLMSetDatai(ApButtonRemapableData, 1);
-                    appushed = 1;
                     lastappos = 1;
                 } else if (!testbit(multibuf, AP_MASTER_BUTTON)) {
                     XPLMSetDatai(ApButtonRemapableData, 0);
                 }
             }
 
-            if (appushed == 1) {
-                aploop++;
-                if (aploop == 10) {
-                   appushed = 0;
-                   aploop = 0;
-                }
-            }
             if (lightdatareferencetype == 1) {
                 if (XPLMGetDataf(ApLightRemapableData) > .50) {
                     aplightdata = 1;
@@ -1944,10 +1927,9 @@ void process_ap_master_switch()
             }
 
     } else if (apbuttonremap == 3) {
-        if (appushed == 0) {
+        if (multires > 0) {
             if (testbit(multibuf, AP_MASTER_BUTTON)) {
                 lastappos = XPLMGetDatai(ApButtonRemapableData);
-                appushed = 1;
                 if (lastappos == 1) {
                     XPLMSetDatai(ApButtonRemapableData, 0);
                 } else {
@@ -1958,13 +1940,6 @@ void process_ap_master_switch()
             }
         }
 
-        if (appushed == 1) {
-            aploop++;
-            if (aploop == 10) {
-               appushed = 0;
-               aploop = 0;
-            }
-        }
         if (lightdatareferencetype == 1) {
             if (XPLMGetDataf(ApLightRemapableData) > .50) {
                 aplightdata = 1;
@@ -2032,12 +2007,11 @@ void process_ap_master_switch()
             }
         }
     } else {
-        if (appushed == 0) {
+        if (multires > 0) {
           switch(XPLMGetDatai(ApMstrStat)){
           case 0:
               if(testbit(multibuf, AP_MASTER_BUTTON)) {
                   XPLMSetDatai(ApMstrStat, 1);
-                  appushed = 1;
                   lastappos = 1;
               }
               break;
@@ -2045,32 +2019,22 @@ void process_ap_master_switch()
               if(testbit(multibuf, AP_MASTER_BUTTON)) {
                   if (lastappos == 1) {
                       XPLMSetDatai(ApMstrStat, 2);
-                      appushed = 1;
                   }
                   if (lastappos == 2) {
                       XPLMSetDatai(ApMstrStat, 0);
-                      appushed = 1;
                   }
               }
               break;
           case 2:
               if(testbit(multibuf, AP_MASTER_BUTTON)) {
                   XPLMSetDatai(ApMstrStat, 1);
-                  appushed = 1;
                   lastappos = 2;
               }
               break;
           }
         }
 
-        if (appushed == 1) {
-            aploop++;
-            if (aploop == 10) {
-                appushed = 0;
-                aploop = 0;
-            }
 
-        }
         
         switch(XPLMGetDatai(ApMstrStat)) {
         case 0:
@@ -4741,15 +4705,20 @@ void process_multi_panel(float dt)
     process_multi_flash();
     process_multi_blank_display();
     process_multi_display();
+    process_debug_mode();
+    process_reopen_panels();
 
-    // ******* Write on changes or timeout ********
-    if ((lastmultiseldis != multiseldis) || (lastbtnleds != btnleds) || (multinowrite > 10)) {
+
+    // ******* Write on changes ********
+    if ((lastmultiseldis != multiseldis) || (lastbtnleds != btnleds) || (lastmultiaactv != multiaactv) || (lastmultibstby != multibstby) || (updatedispmul > 0)) {
         mulres = hid_send_feature_report(multihandle, multiwbuf, sizeof(multiwbuf));
-        multinowrite = 1;
+        lastmultiaactv = multiaactv;
+        lastmultibstby = multibstby;
         lastmultiseldis = multiseldis;
         lastbtnleds = btnleds;
-    } else {
-        multinowrite++;
+        if (updatedispmul > 0) {
+           --updatedispmul;
+        }
     }
 
     /*
