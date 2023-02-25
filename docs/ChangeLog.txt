@@ -239,3 +239,5 @@ Ver 3.03 Refactored multi panel switch positions. Added more logging to help res
 Ver 3.04 Geoff Lohr updated many items to make Xsaitekpanels a better plugin. Thanks.
 
 Ver 3.05 Geoff Lohr updates 1 second delay removed from display update, reopen or open panels after x-plane has loaded, reload scripts, widgets and ini file from dataref write, upper radio panel does pilot and lower does copilot, autopilot button delay removed
+
+Ver 3.06 Geoff Lohr  changed menu from reopen to open or reopen, can load all panels after x-plane start, changed rewrite gear led delay loop that does nothing.
