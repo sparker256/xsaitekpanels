@@ -3858,13 +3858,10 @@ void process_switch_panel()
         --switch_safety_cntr;
       }while((switchres > 0) && (switch_safety_cntr > 0));
 
-      process_debug_mode();
-      process_reopen_panels();
-
       if(XPLMGetDatai(GearRetract) > 0) {
           if (!BatPwrIsOn()) {
               switchwbuf[0] = 0, switchwbuf[1] = 0;
-              if (gearled_write_loop == 15) {
+              if (gearled_write_loop == 200) {
                   switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
                   gearled_write_loop = 0;
               }
@@ -3882,7 +3879,7 @@ void process_switch_panel()
               gearled_write_loop = gearled_write_loop + 1;
           }
           if (BatPwrIsOn()) {
-              if (gearled_write_loop == 15) {
+              if (gearled_write_loop == 200) {
                   switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
                   gearled_write_loop = 0;
               }
@@ -3914,7 +3911,7 @@ void process_switch_panel()
       if ((gearledenable == 0) || (gearledenable == 2)) {
           if (!BatPwrIsOn()) {
                 switchwbuf[0] = 0, switchwbuf[1] = 0;
-                if (gearled_write_loop == 15) {
+                if (gearled_write_loop == 200) {
                     switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
                     gearled_write_loop = 0;
                 }
@@ -3932,7 +3929,7 @@ void process_switch_panel()
                 gearled_write_loop = gearled_write_loop + 1;
           }
           if (BatPwrIsOn()) {
-              if (gearled_write_loop == 15) {
+              if (gearled_write_loop == 200) {
                   switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
                   gearled_write_loop = 0;
               }

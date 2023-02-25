@@ -8574,8 +8574,6 @@ void process_radio_panel()
   process_radio_upper_display();
   process_radio_lower_display();
   process_radio_make_message();
-  process_debug_mode();
-  process_reopen_panels();
 
 
 // ******* Write on WriteNowOwnedData true ********

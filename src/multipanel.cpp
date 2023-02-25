@@ -4705,8 +4705,6 @@ void process_multi_panel(float dt)
     process_multi_flash();
     process_multi_blank_display();
     process_multi_display();
-    process_debug_mode();
-    process_reopen_panels();
 
 
     // ******* Write on changes ********
