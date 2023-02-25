@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** Feb 24  2023   **************
+// ****** Feb 25  2023   **************
 
-#define PLUGIN_VERSION "3.05 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 305
+#define PLUGIN_VERSION "3.06 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 306
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -3293,7 +3293,8 @@ void process_bip_panel();
 void process_pref_file();
 void process_read_ini_file();
 void process_get_ini_file();
-
+void process_reopen_panels();
+void process_debug_mode();
 
 // ********************* MyPanelsFlightLoopCallback **************************
 float	MyPanelsFlightLoopCallback(
@@ -4206,9 +4207,7 @@ PLUGIN_API int XPluginStart(char *		outName,
 
     XPLMClearAllMenuItems(ReopenMenuId);
 
-    if ((radcnt > 0) || (multicnt > 0) || (switchcnt > 0)) {
-       XPLMAppendMenuItem(ReopenMenuId, "Reopen All Panels", (void *) "REOPEN_ALL", 1);
-    }
+    XPLMAppendMenuItem(ReopenMenuId, "Open or Reopen Panels", (void *) "OPEN_PANELS", 1);
     if (radcnt > 0) {
        XPLMAppendMenuItem(ReopenMenuId, "Reopen Radio Panel", (void *) "REOPEN_RADIO", 1);
     }
@@ -7782,18 +7781,18 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
     }
 
     if((intptr_t)inMenuRef == 8){
-       if (strcmp((char *) inItemRef, "REOPEN_ALL") == 0) {
+       if (strcmp((char *) inItemRef, "OPEN_PANELS") == 0) {
              XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 5);
-             bool process_reopen_panels();
+             process_reopen_panels();
        } else if (strcmp((char *) inItemRef, "REOPEN_RADIO") == 0) {
              XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 1);
-             bool process_reopen_panels();
+             process_reopen_panels();
        } else if (strcmp((char *) inItemRef, "REOPEN_MULTI") == 0) {
              XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 2);
-             bool process_reopen_panels();
+             process_reopen_panels();
        } else if (strcmp((char *) inItemRef, "REOPEN_SWITCH") == 0) {
              XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 3);
-             bool process_reopen_panels();
+             process_reopen_panels();
        }
     }
     return;
@@ -9695,6 +9694,9 @@ float	MyPanelsFlightLoopCallback(
       }
   }
 
+  process_reopen_panels();
+  process_debug_mode();
+
   XPLMSetDatai(XsaitekpanelsVersionDataRef, XsaitekpanelsVersion);
 
   XsaitekpanelsFnButton = xpanelsfnbutton;
@@ -9766,7 +9768,7 @@ int rad_discon = 0;
 int multi_discon = 0;
 int switch_discon = 0;
 
-bool process_reopen_panels()
+void process_reopen_panels()
 {
   int RadioSubMenuItem;
   int MultiSubMenuItem;
@@ -9775,12 +9777,12 @@ bool process_reopen_panels()
   if ((reopenvalue >= 1) && (reopenvalue <= 15)) {
      XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 0);
      if (reopenvalue == 14) {
-        return 0;
+        return;
      }
      updatedisprad = radcnt * 2;
      updatedispmul = 1;
   } else {
-      return 0;
+      return;
   }
   panelsopened = 0;
   rad_discon = 0;
@@ -9977,6 +9979,9 @@ bool process_reopen_panels()
            if (XPLMGetDatai(GearRetract) == 0) {
               blankswitchwbuf[1] = 0;
               switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
+           } else {
+              blankswitchwbuf[1] = 7;
+              switchres = hid_send_feature_report(switchhandle, blankswitchwbuf, 2);
            }
            switchcnt++;
            switch_cur_dev = switch_cur_dev->next;
@@ -10010,39 +10015,39 @@ bool process_reopen_panels()
      }
   }
 
-  if (reopenvalue == 6) {
+  if ((reopenvalue == 6) && (radcnt > 0)) {
      if (radioMenuItem == 1) {
         XPHideWidget(RadioWidgetID);
         radioMenuItem = 0;
-        return 0;
+        return;
      }
      CreateRadioWidget(15, 600, 305, 305);
      radioMenuItem = 1;
-     return 0;
+     return;
   }
-  if (reopenvalue == 7) {
+  if ((reopenvalue == 7) && (multicnt > 0)) {
      if (multiMenuItem == 1) {
         XPHideWidget(MultiWidgetID);
         multiMenuItem = 0;
-        return 0;
+        return;
      }
      CreateMultiWidget(330, 600, 305, 385);
      multiMenuItem = 1;
-     return 0;
+     return;
   }
-  if (reopenvalue == 8) {
+  if ((reopenvalue == 8) && (switchcnt > 0)) {
      if (switchMenuItem == 1) {
         XPHideWidget(SwitchWidgetID);
         switchMenuItem = 0;
-        return 0;
+        return;
      }
      CreateSwitchWidget(645, 600, 305, 545);
      switchMenuItem = 1;
-     return 0;
+     return;
   }
   if (reopenvalue == 9) {
      process_read_ini_file();
-     return 0;
+     return;
   }
   if (((reopenvalue == 5) || (reopenvalue == 15)) && ((rad_discon != 0) || (multi_discon != 0) || (switch_discon != 0))) {
      XPLMSetDatai(XsaitekpanelsReopenPanelsDataRef, 19);
@@ -10067,12 +10072,11 @@ bool process_reopen_panels()
      ReloadScriptsCMD = XPLMFindCommand("FlyWithLua/debugging/reload_scripts");
      XPLMCommandOnce(ReloadScriptsCMD);
   }
-  return 0;
 }
 
 char* PlaneICAOString[40];
 
-bool process_debug_mode()
+void process_debug_mode()
 {
     log_enable = XPLMGetDatai(XsaitekpanelsDebugLogDataRef);
     if (log_enable == 2) {
@@ -10111,7 +10115,6 @@ bool process_debug_mode()
        XPLMDebugString("The above information is obtained by writing '2' to the DataRef 'bgood/xsaitekpanels/debuglog/status', or write '1' to\n");
        XPLMDebugString("this DataRef to enable plugin debug log information', and write '0' to disable debug logging.\n\n");
     }
-    return 0;
 }
 
 string convertMacPath(string in_path) {
