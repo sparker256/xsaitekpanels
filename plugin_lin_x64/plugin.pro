@@ -71,7 +71,8 @@ macx {
 }
 
 HEADERS += ../src/saitekpanels.h \
-      ../src/inireader.h
+      ../src/inireader.h \
+      ../src/hidapi/hidapi.h
 
 SOURCES += ../src/saitekpanels.cpp \
     ../src/radiopanels.cpp \
