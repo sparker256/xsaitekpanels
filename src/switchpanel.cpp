@@ -82,6 +82,8 @@ static int GearUpAllreadyOff = 0;
 static int GearDnAllreadyOn = 0;
 static int GearDnAllreadyOff = 0;
 
+static int BatStatus = 0;
+static int DelayedWrite = 0;
 
 //static int avf, avf2, avf3, avf4, avf5, avf6, avf7, avf8;
 //static int avf9, avf10, avf11, avf12, avf13, avf14, avf15, avf16;
@@ -95,7 +97,7 @@ static float engn_mixt[8];
 // WARNING by Mr Hyde:
 // I changed the following because the arry used in my test is a 32 elements float array
 // and previous definitions used just 8 elements arrays.
-// But probably with my changes these are useless (need to check to br really sure)
+// But probably with my changes these are useless (need to check to be really sure)
 static const unsigned char PANEL_LIGHT_SWITCH_MAX_SIZE = 32;
 
 typedef float PanelLightSwitchArray_t[PANEL_LIGHT_SWITCH_MAX_SIZE];
@@ -135,7 +137,15 @@ static unsigned char last_gearled;
 
 void process_switch_menu()
 {
-
+  if (!BatPwrIsOn()) {
+     if (switchwbuf[1] == 0) {
+        return;
+     }
+     switchwbuf[1] = 0;
+     BatStatus = 0;
+     gearled_haschanged = 1;
+     return;
+  }
   switchwbuf[0] = 0;
   switchwbuf[1] = gearled;
   if (bataltinverse == 0) {
@@ -3559,7 +3569,7 @@ void process_gear_switch_switch()
         //return;
     }
 
-    // Disable Gear Leds so turn then off
+    // Disable Gear Leds so turn them off
     if (gearledenable == 0) {
         gearled = 0x00;
     }
@@ -3775,6 +3785,13 @@ void process_gear_switch_switch()
             gearled &= ~(1<<0);   // * clear bit 0 in gearled to 0 *
         }
 
+        // Nose Gear Led
+        // Led is Amber
+        if (landing_gear_nose_led_data_value == 3) {
+            gearled |= (1<<0);   // * set bit 0 in gearled to 1 *
+            gearled |= (1<<3);   // * set bit 3 in gearled to 1 *
+        }
+
 
         // Left Gear Led
         // Led if Off
@@ -3797,6 +3814,13 @@ void process_gear_switch_switch()
             gearled &= ~(1<<1);   // * clear bit 1 in gearled to 0 *
         }
 
+        // Left Gear Led
+        // Led is Amber
+        if (landing_gear_left_led_data_value == 3) {
+            gearled |= (1<<1);   // * set bit 1 in gearled to 1 *
+            gearled |= (1<<4);   // * set bit 4 in gearled to 1 *
+        }
+
 
         // Right Gear Led
         // Led if Off
@@ -3817,6 +3841,12 @@ void process_gear_switch_switch()
         if (landing_gear_right_led_data_value == 2) {
             gearled |= (1<<5);   // * set bit 5 in gearled to 1 *
             gearled &= ~(1<<2);   // * clear bit 2 in gearled to 0 *
+        }
+        // Right Gear Led
+        // Led is Amber
+        if (landing_gear_right_led_data_value == 3) {
+            gearled |= (1<<2);   // * set bit 2 in gearled to 1 *
+            gearled |= (1<<5);   // * set bit 5 in gearled to 1 *
         }
     }
 }
@@ -3858,115 +3888,74 @@ void process_switch_panel()
         --switch_safety_cntr;
       }while((switchres > 0) && (switch_safety_cntr > 0));
 
-      if(XPLMGetDatai(GearRetract) > 0) {
-          if (!BatPwrIsOn()) {
-              switchwbuf[0] = 0, switchwbuf[1] = 0;
-              if (gearled_write_loop == 200) {
-                  switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                  gearled_write_loop = 0;
-              }
-              if (gearled != last_gearled) {
-                  gearled_haschanged = 1;
-              }
-              if (gearled_haschanged == 1){
-                  gearled_haschanged_loop = gearled_haschanged_loop + 1;
-              }
-              if (gearled_haschanged_loop == 5) {
-                  switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                  gearled_haschanged = 0;
-                  gearled_haschanged_loop = 0;
-              }
-              gearled_write_loop = gearled_write_loop + 1;
-          }
-          if (BatPwrIsOn()) {
-              if (gearled_write_loop == 200) {
-                  switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                  gearled_write_loop = 0;
-              }
-              if (gearled != last_gearled) {
-                  gearled_haschanged = 1;
-              }
-              if (gearled_haschanged == 1){
-                  gearled_haschanged_loop = gearled_haschanged_loop + 1;
-              }
-              if (gearled_haschanged_loop == 5) {
-                  switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                  gearled_haschanged = 0;
-                  gearled_haschanged_loop = 0;
-              }
-              gearled_write_loop = gearled_write_loop + 1;
-          }
-      }
-      else {
-      }
-
       if (log_enable == 9) {
-          sprintf(buf, "Xsaitekpanels: if ((gearledenable == 0) || (gearledenable == 2)) gearledenable = %d gearled = %d\n", gearledenable, gearled);
+          XPLMDebugString("Xsaitekpanels: BEFORE gear LED update\n");
+          sprintf(buf, "Xsaitekpanels: Gearledenable = '%d', gearled = '%d', Last_gearled = '%d', gearled_haschanged = '%d', Gearled_haschanged_loop = '%d', Battery Status = '%d'\n", gearledenable, gearled, last_gearled, gearled_haschanged, gearled_haschanged_loop, BatStatus);
           XPLMDebugString(buf);
-          sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = %d landing_gear_left_led_data_value = %d ", landing_gear_nose_led_data_value, landing_gear_left_led_data_value);
-          XPLMDebugString(buf);
-          sprintf(buf, "landing_gear_right_led_data_value = %d\n", landing_gear_right_led_data_value);
+          sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = '%d', landing_gear_left_led_data_value = '%d', landing_gear_right_led_data_value = '%d'\n\n", landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value);
           XPLMDebugString(buf);
       }
-      if ((gearledenable == 0) || (gearledenable == 2)) {
-          if (!BatPwrIsOn()) {
-                switchwbuf[0] = 0, switchwbuf[1] = 0;
-                if (gearled_write_loop == 200) {
-                    switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                    gearled_write_loop = 0;
-                }
-                if (gearled != last_gearled) {
-                    gearled_haschanged = 1;
-                }
-                if (gearled_haschanged == 1){
-                    gearled_haschanged_loop = gearled_haschanged_loop + 1;
-                }
-                if (gearled_haschanged_loop == 5) {
-                    switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                    gearled_haschanged = 0;
-                    gearled_haschanged_loop = 0;
-                }
-                gearled_write_loop = gearled_write_loop + 1;
-          }
-          if (BatPwrIsOn()) {
-              if (gearled_write_loop == 200) {
-                  switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                  gearled_write_loop = 0;
-              }
-              if (gearled != last_gearled) {
-                  gearled_haschanged = 1;
-              }
-              if (gearled_haschanged == 1){
-                  gearled_haschanged_loop = gearled_haschanged_loop + 1;
-              }
-              if (gearled_haschanged_loop == 5) {
-                  switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                  gearled_haschanged = 0;
-                  gearled_haschanged_loop = 0;
-              }
-              gearled_write_loop = gearled_write_loop + 1;
-          }
 
-
-      } else {
-          if(XPLMGetDatai(GearRetract) == 0) {
-            gearled = 0x00;
-            if (gearled != last_gearled) {
-                gearled_haschanged = 1;
-            }
-            if (gearled_haschanged == 1){
-                gearled_haschanged_loop = gearled_haschanged_loop + 1;
-            }
-            if (gearled_haschanged_loop == 5) {
-                switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-                gearled_haschanged = 0;
-                gearled_haschanged_loop = 0;
-            }
+      if(XPLMGetDatai(GearRetract) > 0) {
+          if ((BatPwrIsOn()) && (BatStatus == 0)) {
+              BatStatus = 1;
+              gearled_haschanged = 1;
+              return;
+          }
+          if (gearled_write_loop == 300) {
+              switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
+              gearled_write_loop = 0;
+              DelayedWrite = 0;             // turn off delayed write to catch missed buffer writes
+          }
+          if (gearled != last_gearled) {
+              gearled_haschanged = 1;
+          }
+          if (gearled_haschanged == 1){
+              gearled_haschanged_loop++;
+          }
+          if (gearled_haschanged_loop == 5) {
+              if ((log_enable == 9) || (log_enable == 10)) {
+                  XPLMDebugString("\nXsaitekpanels: WRITING gear LED (Updates when Gearled_haschanged_loop = '5'\n");
+                  sprintf(buf, "Xsaitekpanels: Gearledenable = '%d', gearled = '%d', Last_gearled = '%d', gearled_haschanged = '%d', Gearled_haschanged_loop = '%d', Battery Status = '%d'\n", gearledenable, gearled, last_gearled, gearled_haschanged, gearled_haschanged_loop, BatStatus);
+                  XPLMDebugString(buf);
+                  sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = '%d', landing_gear_left_led_data_value = '%d', landing_gear_right_led_data_value = '%d'\n\n\n", landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value);
+                  XPLMDebugString(buf);
+              }
+              switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
+              gearled_haschanged = 0;
+              gearled_haschanged_loop = 0;
+              gearled_write_loop = 0;
+              DelayedWrite = 1;             // turn on a delayed write to catch missed buffer writes
+          }
+          if (DelayedWrite == 1) {
+              gearled_write_loop++;
+          }
+      } else if(XPLMGetDatai(GearRetract) == 0) {
+          gearled = 0x00;
+          if (gearled != last_gearled) {
+              gearled_haschanged = 1;
+          }
+          if (gearled_haschanged == 1){
+              gearled_haschanged_loop++;
+          }
+          if (gearled_haschanged_loop == 5) {
+              switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
+              gearled_haschanged = 0;
+              gearled_haschanged_loop = 0;
+              gearled_write_loop = 0;
+              DelayedWrite = 1;
           }
       }
       last_gearled = gearled;
       batnum = XPLMGetDatai(BatNum), gennum = XPLMGetDatai(GenNum);
       engnum = XPLMGetDatai(EngNum);
 
-  return;
+      if (log_enable == 9) {
+          XPLMDebugString("Xsaitekpanels: AFTER gear LED update\n");
+          sprintf(buf, "Xsaitekpanels: Gearledenable = '%d', gearled = '%d', Last_gearled = '%d', gearled_haschanged = '%d', Gearled_haschanged_loop = '%d', Battery Status = '%d'\n", gearledenable, gearled, last_gearled, gearled_haschanged, gearled_haschanged_loop, BatStatus);
+          XPLMDebugString(buf);
+          sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = '%d', landing_gear_left_led_data_value = '%d', landing_gear_right_led_data_value = '%d'\n\n", landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value);
+          XPLMDebugString(buf);
+      }
+      return;
 }
