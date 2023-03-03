@@ -242,4 +242,4 @@ Ver 3.05 Geoff Lohr updates 1 second delay removed from display update, reopen o
 
 Ver 3.06 Geoff Lohr  changed menu from reopen to open or reopen, can load all panels after x-plane start, changed rewrite gear led delay loop that does nothing.
 
-Ver 3.07 Geoff Lohr amber gear lights option added to ini, added less agressive gear logging option and more detailed gear led logging, led gear writes only when needed now, fixed high CPU usage bug with bat switch off when no panel output had yet been given.
+Ver 3.07 Geoff Lohr amber gear lights option added to ini, added less agressive gear logging option and more detailed gear led logging, led gear writes only when needed now, fixed high CPU usage bug with bat switch off when no panel output had yet been given. Removed bug in lower adf tens, improved fps on radio panel and while holding fn button.
