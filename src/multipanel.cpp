@@ -4663,7 +4663,7 @@ void process_multi_panel(float dt)
                 lastmultiseldis = multiseldis;
            	    if (multionceonly == 0) {
                     multionceonly = 1;
-                    updatedispmul = 2;
+                    updatedispmul = 1;
                     if (multiswitchpos == 1) {
                         upapaltf = XPLMGetDataf(ApAlt);
                         upapalt = (int)(upapaltf);
@@ -4707,7 +4707,6 @@ void process_multi_panel(float dt)
             process_multi_flash();
             process_multi_blank_display();
             process_multi_display();
-            hid_send_feature_report(multihandle, multiwbuf, sizeof(multiwbuf));
 
         }
         --multi_safety_cntr;
@@ -4721,6 +4720,12 @@ void process_multi_panel(float dt)
     // ******* Write on changes ********
     if ((lastmultiseldis != multiseldis) || (lastbtnleds != btnleds) || (lastmultiaactv != multiaactv) || (lastmultibstby != multibstby) || (updatedispmul > 0)) {
         mulres = hid_send_feature_report(multihandle, multiwbuf, sizeof(multiwbuf));
+        if (log_enable == 1) {
+            sprintf(buf, "Xsaitekpanels: MULTI: lastmultiseldis = %d, multiseldis = %d,  |  lastbtnleds = %d, btnleds = %d  |  updatedispmul = %d\n",lastmultiseldis, multiseldis, lastbtnleds, btnleds, updatedispmul);
+            XPLMDebugString(buf);
+            sprintf(buf, "Xsaitekpanels: MULTI: lastmultiaactv = %d, multiaactv = %d  |  lastmultibstby = %d, multibstby = %d\n\n",lastmultiaactv, multiaactv, lastmultibstby, multibstby);
+            XPLMDebugString(buf);
+        }
         lastmultiaactv = multiaactv;
         lastmultibstby = multibstby;
         lastmultiseldis = multiseldis;

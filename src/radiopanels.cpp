@@ -482,9 +482,11 @@ void process_radio_upper_display()
           }
 
           if(testbit(radiobuf[radnum],UPPER_COARSE_UP)) {
+              updatedisprad = 1;                           // update period position for transponder digit edit
               upmodeturnoff = 0;
           }
           if(testbit(radiobuf[radnum],UPPER_COARSE_DN)) {
+              updatedisprad = 1;                           // update period position for transponder digit edit
               upmodeturnoff = 0;
           }
 
@@ -926,9 +928,11 @@ void process_radio_lower_display()
       }
 
       if(testbit(radiobuf[radnum],LOWER_COARSE_UP)) {
+          updatedisprad = 1;                           // update period position for transponder digit edit
           lomodeturnoff = 0;
       }
       if(testbit(radiobuf[radnum],LOWER_COARSE_DN)) {
+          updatedisprad = 1;                           // update period position for transponder digit edit
           lomodeturnoff = 0;
       }
 
@@ -2523,6 +2527,7 @@ void proecss_upper_adf_switch()
 
             // Use the Coarse knob to select digit in the up direction
            if ((Last_Upper_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_UP) == 0)) {
+               updatedisprad = 1;                                                                        // update period position for ADF digit edit
                upadfdbnccorinc[radnum] ++;
                if (upadfdbnccorinc[radnum] > radspeed) {
                    if ((rad1upradfswitchremap == 1) && (radnum == 0)) {
@@ -2545,6 +2550,7 @@ void proecss_upper_adf_switch()
 
            // Use the Coarse knob to select digit in the down direction
            if ((Last_Upper_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_DN) == 0)) {
+               updatedisprad = 1;                                                                        // update period position for ADF digit edit
                upadfdbnccordec[radnum] ++;
                if (upadfdbnccordec[radnum] > radspeed) {
                    if ((rad1upradfswitchremap == 1) && (radnum == 0)) {
@@ -5903,6 +5909,7 @@ void process_lower_adf_switch()
 
                 // Use the Adf Coarse knob to select digit in the up direction
                 if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
+                    updatedisprad = 1;                                                                        // update period position for ADF digit edit
                     loadfdbnccorinc[radnum] ++;
                     if(loadfdbnccorinc[radnum] > radspeed) {
                         if ((rad1lwradfswitchremap == 1) && (radnum == 0)) {
@@ -5924,6 +5931,7 @@ void process_lower_adf_switch()
 
                 // Use the Adf Coarse knob to select digit in the down direction
                 if ((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
+                    updatedisprad = 1;                                                                        // update period position for ADF digit edit
                     loadfdbnccordec[radnum] ++;
                     if (loadfdbnccordec[radnum] > radspeed) {
                         if ((rad1lwradfswitchremap == 1) && (radnum == 0)) {
@@ -6146,6 +6154,7 @@ void process_lower_adf_switch()
 
                 // Use the Adf Coarse knob to select digit in the up direction
                 if ((Last_Lower_Coarse_Up[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_UP) == 0)) {
+                    updatedisprad = 1;                                                                        // update period position for ADF digit edit
                     loadfdbnccorinc[radnum] ++;
                     if(loadfdbnccorinc[radnum] > radspeed) {
                         if ((rad1lwradfswitchremap == 1) && (radnum == 0)) {
@@ -6167,6 +6176,7 @@ void process_lower_adf_switch()
 
                 // Use the Adf Coarse knob to select digit in the down direction
                 if ((Last_Lower_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_COARSE_DN) == 0)) {
+                    updatedisprad = 1;                                                                        // update period position for ADF digit edit
                     loadfdbnccordec[radnum] ++;
                     if (loadfdbnccordec[radnum] > radspeed) {
                         if ((rad1lwradfswitchremap == 1) && (radnum == 0)) {
@@ -8577,17 +8587,6 @@ void process_radio_panel()
         process_radio_upper_display();
         process_radio_lower_display();
         process_radio_make_message();
-        updatedisprad = radcnt * 1;
-        if (upseldis[radnum] == loseldis[radnum]) {
-            updatedisprad = radcnt * 2;                      // extra panel display update so the other display is not one update behind or more than one radio panel if on same setting
-        }
-        if (log_enable == 1) {
-            sprintf(buf, "Xsaitekpanels: MAIN WRITE: lastupseldis[radnum] %d, upseldis[radnum]) %d,  lastloseldis[radnum] %d, loseldis[radnum] %d,  lastradioaactv %d, radioaactv %d\n",lastupseldis[radnum], upseldis[radnum], lastloseldis[radnum], loseldis[radnum], lastradioaactv, radioaactv);
-            XPLMDebugString(buf);
-            sprintf(buf, "lastradiobstby %d, radiobstby %d,  lastradiocactv %d, radiocactv %d,  lastradiodstby %d, radiodstby %d,  updatedisprad %d,\n\n", lastradiobstby, radiobstby, lastradiocactv, radiocactv, lastradiodstby, radiodstby, updatedisprad);
-            XPLMDebugString(buf);
-        }
-        hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
     }
     --radio_safety_cntr;
   }while((radiores > 0) && (radio_safety_cntr > 0));
@@ -8633,9 +8632,11 @@ void process_radio_panel()
     if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (lastradioaactv != radioaactv) || (lastradiobstby != radiobstby) || (lastradiocactv != radiocactv) || (lastradiodstby != radiodstby) || (updatedisprad > 0)) {
         radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
         if (log_enable == 1) {
-            sprintf(buf, "Xsaitekpanels: CATCHUP: lastupseldis[radnum] %d, upseldis[radnum]) %d,  lastloseldis[radnum] %d, loseldis[radnum] %d,  lastradioaactv %d, radioaactv %d\n",lastupseldis[radnum], upseldis[radnum], lastloseldis[radnum], loseldis[radnum], lastradioaactv, radioaactv);
+            sprintf(buf, "Xsaitekpanels: RADIO: lastupseldis[radnum] = %d, upseldis[radnum] = %d  |  lastloseldis[radnum] = %d, loseldis[radnum] = %d  |  updatedisprad %d\n",lastupseldis[radnum], upseldis[radnum], lastloseldis[radnum], loseldis[radnum], updatedisprad);
             XPLMDebugString(buf);
-            sprintf(buf, "lastradiobstby %d, radiobstby %d,  lastradiocactv %d, radiocactv %d,  lastradiodstby %d, radiodstby %d,  updatedisprad %d,\n\n", lastradiobstby, radiobstby, lastradiocactv, radiocactv, lastradiodstby, radiodstby, updatedisprad);
+            sprintf(buf, "Xsaitekpanels: RADIO: Upper: lastradioaactv = %d, radioaactv = %d  |  lastradiobstby = %d, radiobstby = %d\n", lastradioaactv, radioaactv, lastradiobstby, radiobstby);
+            XPLMDebugString(buf);
+            sprintf(buf, "Xsaitekpanels: RADIO: Lower lastradiocactv = %d, radiocactv = %d  |  lastradiodstby = %d, radiodstby = %d\n\n", lastradiocactv, radiocactv, lastradiodstby, radiodstby);
             XPLMDebugString(buf);
         }
         lastupseldis[radnum] = upseldis[radnum];
