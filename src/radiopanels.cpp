@@ -20,6 +20,7 @@
 // ********************** Radio Panel variables ***********************
 static int radnum = 0, radn;
 static int radiores = 0;
+static int fnpressed = 0;
 
 static int updmepushed = 0, lodmepushed = 0;
 static int updmeloop = 0, lodmeloop = 0;
@@ -6087,7 +6088,7 @@ void process_lower_adf_switch()
                             loadfdbncfninc[radnum] = 0;
                         }
                     }
-                    Last_Lower_Fine_Dn[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
+                    Last_Lower_Fine_Up[radnum] = testbit(radiobuf[radnum],LOWER_FINE_UP);
 
                     if ((Last_Lower_Fine_Dn[radnum] == 1) && (testbit(radiobuf[radnum],LOWER_FINE_DN) == 0)) {
                         loadfdbncfndec[radnum]++;
@@ -8576,7 +8577,16 @@ void process_radio_panel()
         process_radio_upper_display();
         process_radio_lower_display();
         process_radio_make_message();
-        updatedisprad = radcnt * 2;     // more panel display updates so the other display is not one update behind or more than one radio panel
+        updatedisprad = radcnt * 1;
+        if (upseldis[radnum] == loseldis[radnum]) {
+            updatedisprad = radcnt * 2;                      // extra panel display update so the other display is not one update behind or more than one radio panel if on same setting
+        }
+        if (log_enable == 1) {
+            sprintf(buf, "Xsaitekpanels: MAIN WRITE: lastupseldis[radnum] %d, upseldis[radnum]) %d,  lastloseldis[radnum] %d, loseldis[radnum] %d,  lastradioaactv %d, radioaactv %d\n",lastupseldis[radnum], upseldis[radnum], lastloseldis[radnum], loseldis[radnum], lastradioaactv, radioaactv);
+            XPLMDebugString(buf);
+            sprintf(buf, "lastradiobstby %d, radiobstby %d,  lastradiocactv %d, radiocactv %d,  lastradiodstby %d, radiodstby %d,  updatedisprad %d,\n\n", lastradiobstby, radiobstby, lastradiocactv, radiocactv, lastradiodstby, radiodstby, updatedisprad);
+            XPLMDebugString(buf);
+        }
         hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
     }
     --radio_safety_cntr;
@@ -8587,6 +8597,13 @@ void process_radio_panel()
   process_radio_lower_display();
   process_radio_make_message();
 
+  if ((xpanelsfnbutton == 1) && (fnpressed == 0)) {
+      fnpressed = 1;
+      updatedisprad = radcnt * 1;                           // remove periods for transponder and add for baro on FN pushed
+  } else if ((xpanelsfnbutton == 0) && (fnpressed == 1)) {
+      fnpressed = 0;
+      updatedisprad = radcnt * 1;                           // restore periods for transponder and remove for baro on FN pushed
+  }
 
 // ******* Write on WriteNowOwnedData true ********
 
@@ -8613,8 +8630,14 @@ void process_radio_panel()
 
 // ******* Write on changes or display update count *******
 
-    if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (lastradioaactv != radioaactv) || (lastradiobstby != radiobstby) || (lastradiocactv != radiocactv) || (lastradiodstby != radiodstby) || (xpanelsfnbutton == 1) || (updatedisprad > 0)) {
+    if ((lastupseldis[radnum] != upseldis[radnum]) || (lastloseldis[radnum] != loseldis[radnum]) || (lastradioaactv != radioaactv) || (lastradiobstby != radiobstby) || (lastradiocactv != radiocactv) || (lastradiodstby != radiodstby) || (updatedisprad > 0)) {
         radres = hid_send_feature_report(radiohandle[radnum], radiowbuf[radnum], sizeof(radiowbuf[radnum]));
+        if (log_enable == 1) {
+            sprintf(buf, "Xsaitekpanels: CATCHUP: lastupseldis[radnum] %d, upseldis[radnum]) %d,  lastloseldis[radnum] %d, loseldis[radnum] %d,  lastradioaactv %d, radioaactv %d\n",lastupseldis[radnum], upseldis[radnum], lastloseldis[radnum], loseldis[radnum], lastradioaactv, radioaactv);
+            XPLMDebugString(buf);
+            sprintf(buf, "lastradiobstby %d, radiobstby %d,  lastradiocactv %d, radiocactv %d,  lastradiodstby %d, radiodstby %d,  updatedisprad %d,\n\n", lastradiobstby, radiobstby, lastradiocactv, radiocactv, lastradiodstby, radiodstby, updatedisprad);
+            XPLMDebugString(buf);
+        }
         lastupseldis[radnum] = upseldis[radnum];
         lastloseldis[radnum] = loseldis[radnum];
         lastradioaactv = radioaactv;
@@ -8623,9 +8646,6 @@ void process_radio_panel()
         lastradiodstby = radiodstby;
         if (updatedisprad > 0) {
            --updatedisprad;
-        }
-        if (xpanelsfnbutton == 1) {
-           updatedisprad = 1;          // update panel display one more time after FN button released to restore periods for transponder
         }
     }
 
