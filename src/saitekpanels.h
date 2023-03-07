@@ -2798,11 +2798,14 @@ extern XPWidgetID      BipWidgetID, Bip2WidgetID, Bip3WidgetID, Bip4WidgetID;
 // ************** All Panel Data Ref ******************
 
 extern XPLMDataRef ReloadScriptsCMD;
+extern XPLMDataRef ShowDevConsoleCMD;
 
 extern XPLMMenuID      ConfigMenu;
 extern XPLMMenuID      ConfigMenuId;
 extern XPLMMenuID      ReopenMenu;
 extern XPLMMenuID      ReopenMenuId;
+extern XPLMMenuID      DebugMenu;
+extern XPLMMenuID      DebugMenuId;
 
 // ***************** Bip Panel variables ********************
 extern hid_device *biphandle[4];

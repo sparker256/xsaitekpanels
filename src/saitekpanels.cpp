@@ -1,9 +1,9 @@
 ﻿// ****** saitekpanels.cpp ***********
 // ****  William R. Good   ***********
-// ****** March 2  2023   **************
+// ****** March 7  2023   **************
 
-#define PLUGIN_VERSION "3.07 stable build " __DATE__ " " __TIME__
-#define PLUGIN_VERSION_NUMBER 307
+#define PLUGIN_VERSION "3.08 stable build " __DATE__ " " __TIME__
+#define PLUGIN_VERSION_NUMBER 308
 
 #include "XPLMDisplay.h"
 #include "XPLMGraphics.h"
@@ -1053,6 +1053,8 @@ XPLMMenuID      ConfigMenu;
 XPLMMenuID      ConfigMenuId;
 XPLMMenuID      ReopenMenu;
 XPLMMenuID      ReopenMenuId;
+XPLMMenuID      DebugMenu;
+XPLMMenuID      DebugMenuId;
 XPWidgetID      XsaitekpanelsWidgetID = NULL;
 XPWidgetID      BipWidgetID = NULL;
 XPWidgetID      Bip2WidgetID = NULL;
@@ -3243,6 +3245,10 @@ int             BipMenuItem;
 
 int Fps, multi_auto_mul;
 
+XPLMDataRef ShowDevConsoleCMD = NULL;
+XPLMDataRef ReloadScriptsCMD = NULL;
+XPLMDataRef DataRefTest = NULL;
+
 int wrgXPlaneVersion = 0;
 int wrgXPLMVersion = 0;
 int wrgHostID = 0;
@@ -3335,6 +3341,7 @@ PLUGIN_API int XPluginStart(char *		outName,
   int MultiSubMenuItem, RadioSubMenuItem;
   int SwitchSubMenuItem;
   int ReopenSubMenuItem;
+  int DebugSubMenuItem;
   int XsaitekpanelsSharedRetVal;
 
   XPLMGetVersions(&wrgXPlaneVersion, &wrgXPLMVersion, &wrgHostID);
@@ -4178,12 +4185,13 @@ PLUGIN_API int XPluginStart(char *		outName,
 
    ConfigSubMenuItem = XPLMAppendMenuItem(
            XsaitekpanelsMenu,
-           "xsaitekpanels.ini",
+           "Xsaitekpanels.ini",
            NULL,
            1);
+   XPLMAppendMenuSeparator(XsaitekpanelsMenu);
 
    ConfigMenuId = XPLMCreateMenu(
-           "xsaitekpanels.ini",
+           "Xsaitekpanels.ini",
            XsaitekpanelsMenu,
            ConfigSubMenuItem,
            XsaitekpanelsMenuHandler,
@@ -4208,6 +4216,7 @@ PLUGIN_API int XPluginStart(char *		outName,
     XPLMClearAllMenuItems(ReopenMenuId);
 
     XPLMAppendMenuItem(ReopenMenuId, "Open or Reopen Panels", (void *) "OPEN_PANELS", 1);
+    XPLMAppendMenuSeparator(ReopenMenuId);
     if (radcnt > 0) {
        XPLMAppendMenuItem(ReopenMenuId, "Reopen Radio Panel", (void *) "REOPEN_RADIO", 1);
     }
@@ -4218,6 +4227,21 @@ PLUGIN_API int XPluginStart(char *		outName,
        XPLMAppendMenuItem(ReopenMenuId, "Reopen Switch Panel", (void *) "REOPEN_SWITCH", 1);
     }
 
+    DebugSubMenuItem = XPLMAppendMenuItem(
+            XsaitekpanelsMenu,
+            "Debug modes",
+            NULL,
+            9);
+    XPLMAppendMenuSeparator(XsaitekpanelsMenu);
+
+    DebugMenuId = XPLMCreateMenu(
+            "Debug modes",
+            XsaitekpanelsMenu,
+            DebugSubMenuItem,
+            XsaitekpanelsMenuHandler,
+            (void *)9);
+
+    XPLMClearAllMenuItems(DebugMenuId);
    if (bipcnt > 0) {
 
      if(bipcnt > 0){
@@ -4534,6 +4558,7 @@ PLUGIN_API void	XPluginStop(void)
   XPLMDestroyMenu(RadioMenuId);
   XPLMDestroyMenu(SwitchMenuId);
   XPLMDestroyMenu(ReopenMenuId);
+  XPLMDestroyMenu(DebugMenuId);
 
   XPLMDestroyMenu(SwitchWidgetID);
   XPLMDestroyMenu(RadioWidgetID);
@@ -7795,6 +7820,28 @@ void XsaitekpanelsMenuHandler(void * inMenuRef, void * inItemRef)
              process_reopen_panels();
        }
     }
+
+    if((intptr_t)inMenuRef == 9){
+       if (strcmp((char *) inItemRef, "DEV_CONSOLE") == 0) {
+             ShowDevConsoleCMD = XPLMFindCommand("sim/operation/dev_console");
+             XPLMCommandOnce(ShowDevConsoleCMD);
+       } else if (strcmp((char *) inItemRef, "DEBUG_MODES_OFF") == 0) {
+             XPLMSetDatai(XsaitekpanelsDebugLogDataRef, 0);
+             process_debug_mode();
+       } else if (strcmp((char *) inItemRef, "DEBUG_MULACC") == 0) {
+             XPLMSetDatai(XsaitekpanelsDebugLogDataRef, 1);
+             process_debug_mode();
+       } else if (strcmp((char *) inItemRef, "DEBUG_INI") == 0) {
+             XPLMSetDatai(XsaitekpanelsDebugLogDataRef, 2);
+             process_debug_mode();
+       } else if (strcmp((char *) inItemRef, "DEBUG_PANELS") == 0) {
+             XPLMSetDatai(XsaitekpanelsDebugLogDataRef, 3);
+             process_debug_mode();
+       } else if (strcmp((char *) inItemRef, "DEBUG_GEAR_LED") == 0) {
+             XPLMSetDatai(XsaitekpanelsDebugLogDataRef, 9);
+             process_debug_mode();
+       }
+    }
     return;
 }
 
@@ -9759,14 +9806,13 @@ bool BatPwrIsOn()
   }
 }
 
-XPLMDataRef ReloadScriptsCMD = NULL;
-XPLMDataRef DataRefTest = NULL;
 int updatedisprad = 0;
 int updatedispmul = 0;
 int panelsopened = 0;
 int rad_discon = 0;
 int multi_discon = 0;
 int switch_discon = 0;
+int menuReopenRadio, menuReopenMulti, menuReopenSwitch;
 
 void process_reopen_panels()
 {
@@ -10076,44 +10122,140 @@ void process_reopen_panels()
 
 char* PlaneICAOString[40];
 
+int debugmenuadded = 0;
+int debugalloff = 0;
+int debugmulaccchecked = 0;
+int debugpanelstatchecked = 0;
+int debuggearchecked = 0;
+
+int menuDebugOff;
+int menuDebugMulAcc;
+int menuDebugINI;
+int menuDebugPanels;
+int menuDebugGearLED;
+
 void process_debug_mode()
 {
+    if (debugmenuadded == 0) {
+        XPLMAppendMenuItem(DebugMenuId, "Use developer console", (void *) "DEV_CONSOLE", 1);
+        XPLMAppendMenuSeparator(DebugMenuId);
+        menuDebugOff = XPLMAppendMenuItem(DebugMenuId, "Debug logging off  (0)", (void *) "DEBUG_MODES_OFF", 1);
+        menuDebugMulAcc = XPLMAppendMenuItem(DebugMenuId, "Multi acceleration  (1)", (void *) "DEBUG_MULACC", 1);
+        menuDebugINI = XPLMAppendMenuItem(DebugMenuId, "Xsaitekpanels.ini  (2)", (void *) "DEBUG_INI", 1);
+        menuDebugPanels = XPLMAppendMenuItem(DebugMenuId, "Show panel buffers  (3)", (void *) "DEBUG_PANELS", 1);
+        menuDebugGearLED = XPLMAppendMenuItem(DebugMenuId, "Landing gear led's  (9)", (void *) "DEBUG_GEAR_LED", 1);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugOff, xplm_Menu_Checked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugMulAcc, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugINI, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugPanels, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugGearLED, xplm_Menu_Unchecked);
+        debugmenuadded = 1;
+    }
+
     log_enable = XPLMGetDatai(XsaitekpanelsDebugLogDataRef);
-    if (log_enable == 2) {
-       XPLMSetDatai(XsaitekpanelsDebugLogDataRef, 0);
-       XPLMGetDatab(XPLMFindDataRef("sim/aircraft/view/acf_ICAO"), PlaneICAOString, 0, 40);
-       XPLMDebugString("\n\n\n********** Xsaitekpanels: Debug Information **********\n\n");
-       sprintf(buf, "X-Plane Version = %d, XPLM Version = %d, HostID = %d, Plane ICAO = %s, ", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID, PlaneICAOString);
-       XPLMDebugString(buf);
-       XPLMPluginID PluginID = XPLMFindPluginBySignature(LOGITECH_PLUGIN_SIGNATURE);
-       if (PluginID == -1) {
-          XPLMDebugString("Logitech Pro Flight plugin installed = No\n");
-          } else {
-          sprintf(buf, "Logitech Pro Flight plugin installed = Yes :: Signature = %d\n", PluginID);
-          XPLMDebugString(buf);
-       }
-       XPLMDebugString("Plugin Version is :  " PLUGIN_VERSION "\n\n");
-       sprintf(buf, "The plugin found these Panels :\n\n%d  Switch panel\n%d  Radio panel\n%d  Multi panel \n%d  BIP panel\n%d  TPM Panels\n", switchcnt, radcnt, multicnt, bipcnt, tpmcnt);
-       XPLMDebugString(buf);
-       process_get_ini_file();
-       XPLMDebugString("OTHER XSAITEKPANELS.INI SETTINGS :\n");
-       sprintf(buf, "GLOBAL OPTIONS :\nData reference editor enable = %d\nDisplay plane ICAO on screen = %d\nDebug entries to log enable = %d\n\n", dre_enable, icao_enable, log_enable);
-       XPLMDebugString(buf);
-       XPLMDebugString("DISPLAY VALUES FOR THESE SWITCH POSITIONS ON LOAD :   (RP = Radio Panel number)\n");
-       sprintf(buf, "Upper radio switch RP1 = %d, RP2 = %d, RP3 = %d   (1=COM1, 2=COM2, 3=NAV1, 4=NAV2, 5=ADF1, 8 DME, 9=XPDR/Baro1, 10=Blank display)\n", rad1upradioswitchpos, rad2upradioswitchpos, rad3upradioswitchpos);
-       XPLMDebugString(buf);
-       sprintf(buf, "Lower radio switch RP1 = %d, RP2 = %d, RP3 = %d   (1=COM1, 2=COM2, 3=NAV1, 4=NAV2, 5=ADF2, 8 DME, 9=XPDR/Baro2, 10=Blank display)\n", rad1loradioswitchpos, rad2loradioswitchpos, rad3loradioswitchpos);
-       XPLMDebugString(buf);
-       sprintf(buf, "Multi Switch position = %d   (1=ALT, 1=VS, 2=IAS, 3=HDG, 4=CRS, 5 blank display)\n\n", multiswitchpos);
-       XPLMDebugString(buf);
-       sprintf(buf, "RADIO PANEL OPTIONS :\nRadio knob speed = %d\nNumber of ADF's in aircraft = %d\nMetric pressure enable = %d\n8.33 Khz channel spacing enable = %d\nDME display distance speed enable = %d\n\n", radspeed, numadf, metricpressenable, channelspacing833enable, dmedistspeedenable);
-       XPLMDebugString(buf);
-       sprintf(buf, "MULTI PANEL OPTIONS :\nMulti speed = %d\nMulti acceleration threshold = %d\nTrimspeed = %d\n\n", multispeed, multiaccelthreshold, trimspeed);
-       XPLMDebugString(buf);
-       sprintf(buf, "VIRTUAL REALITY OPTIONS :\nDisable Switch Panel in VR = %d\nDisable Radio Panel in VR = %d\nDisable Multi Panel in VR = %d\n\n", dissableSwitchPanelInVR, dissableRadioPanelInVR, dissableMultiPanelInVR);
-       XPLMDebugString(buf);
-       XPLMDebugString("The above information is obtained by writing '2' to the DataRef 'bgood/xsaitekpanels/debuglog/status', or write '1' to\n");
-       XPLMDebugString("this DataRef to enable plugin debug log information', and write '0' to disable debug logging.\n\n");
+
+    if ((log_enable != 0) && (log_enable != 1) && (log_enable != 2) && (log_enable != 3) && (log_enable != 9)) {
+        XPLMCheckMenuItem(DebugMenuId, menuDebugOff, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugMulAcc, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugINI, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugPanels, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugGearLED, xplm_Menu_Unchecked);
+        debugalloff = 0;
+        debugmulaccchecked = 0;
+        debugpanelstatchecked = 0;
+        debuggearchecked = 0;
+        return;
+    }
+
+    if ((log_enable == 0) && (debugalloff == 0)) {
+        XPLMCheckMenuItem(DebugMenuId, menuDebugOff, xplm_Menu_Checked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugMulAcc, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugINI, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugPanels, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugGearLED, xplm_Menu_Unchecked);
+        debugalloff = 1;
+        debugmulaccchecked = 0;
+        debugpanelstatchecked = 0;
+        debuggearchecked = 0;
+        return;
+    } else if ((log_enable == 1) && (debugmulaccchecked == 0)) {
+        XPLMCheckMenuItem(DebugMenuId, menuDebugOff, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugMulAcc, xplm_Menu_Checked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugINI, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugPanels, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugGearLED, xplm_Menu_Unchecked);
+        debugalloff = 0;
+        debugmulaccchecked = 1;
+        debugpanelstatchecked = 0;
+        debuggearchecked = 0;
+        return;
+    } else if ((log_enable == 3) && (debugpanelstatchecked == 0)) {
+        XPLMCheckMenuItem(DebugMenuId, menuDebugOff, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugMulAcc, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugINI, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugPanels, xplm_Menu_Checked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugGearLED, xplm_Menu_Unchecked);
+        debugalloff = 0;
+        debugmulaccchecked = 0;
+        debugpanelstatchecked = 1;
+        debuggearchecked = 0;
+        return;
+    } else if ((log_enable == 9) && (debuggearchecked == 0)) {
+        XPLMCheckMenuItem(DebugMenuId, menuDebugOff, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugMulAcc, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugINI, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugPanels, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugGearLED, xplm_Menu_Checked);
+        debugalloff = 0;
+        debugmulaccchecked = 0;
+        debugpanelstatchecked = 0;
+        debuggearchecked = 1;
+        return;
+    } else if (log_enable == 2) {
+        XPLMCheckMenuItem(DebugMenuId, menuDebugOff, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugMulAcc, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugINI, xplm_Menu_Checked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugPanels, xplm_Menu_Unchecked);
+        XPLMCheckMenuItem(DebugMenuId, menuDebugGearLED, xplm_Menu_Unchecked);
+        debugalloff = 0;
+        debugmulaccchecked = 0;
+        debugpanelstatchecked = 0;
+        debuggearchecked = 0;
+
+        XPLMSetDatai(XsaitekpanelsDebugLogDataRef, 0);
+        XPLMGetDatab(XPLMFindDataRef("sim/aircraft/view/acf_ICAO"), PlaneICAOString, 0, 40);
+        XPLMDebugString("\n\n\n********** Xsaitekpanels: Debug Information **********\n\n");
+        sprintf(buf, "X-Plane Version = %d, XPLM Version = %d, HostID = %d, Plane ICAO = %s, ", wrgXPlaneVersion, wrgXPLMVersion, wrgHostID, PlaneICAOString);
+        XPLMDebugString(buf);
+        XPLMPluginID PluginID = XPLMFindPluginBySignature(LOGITECH_PLUGIN_SIGNATURE);
+        if (PluginID == -1) {
+            XPLMDebugString("Logitech Pro Flight plugin installed = No\n");
+            } else {
+            sprintf(buf, "Logitech Pro Flight plugin installed = Yes :: Signature = %d\n", PluginID);
+            XPLMDebugString(buf);
+        }
+        XPLMDebugString("Plugin Version is :  " PLUGIN_VERSION "\n\n");
+        sprintf(buf, "The plugin found these Panels :\n\n%d  Switch panel\n%d  Radio panel\n%d  Multi panel \n%d  BIP panel\n%d  TPM Panels\n", switchcnt, radcnt, multicnt, bipcnt, tpmcnt);
+        XPLMDebugString(buf);
+        process_get_ini_file();
+        XPLMDebugString("OTHER XSAITEKPANELS.INI SETTINGS :\n");
+        sprintf(buf, "GLOBAL OPTIONS :\nData reference editor enable = %d\nDisplay plane ICAO on screen = %d\nDebug entries to log enable = %d\n\n", dre_enable, icao_enable, log_enable);
+        XPLMDebugString(buf);
+        XPLMDebugString("DISPLAY VALUES FOR THESE SWITCH POSITIONS ON LOAD :   (RP = Radio Panel number)\n");
+        sprintf(buf, "Upper radio switch RP1 = %d, RP2 = %d, RP3 = %d   (1=COM1, 2=COM2, 3=NAV1, 4=NAV2, 5=ADF1, 8 DME, 9=XPDR/Baro1, 10=Blank display)\n", rad1upradioswitchpos, rad2upradioswitchpos, rad3upradioswitchpos);
+        XPLMDebugString(buf);
+        sprintf(buf, "Lower radio switch RP1 = %d, RP2 = %d, RP3 = %d   (1=COM1, 2=COM2, 3=NAV1, 4=NAV2, 5=ADF2, 8 DME, 9=XPDR/Baro2, 10=Blank display)\n", rad1loradioswitchpos, rad2loradioswitchpos, rad3loradioswitchpos);
+        XPLMDebugString(buf);
+        sprintf(buf, "Multi Switch position = %d   (1=ALT, 1=VS, 2=IAS, 3=HDG, 4=CRS, 5 blank display)\n\n", multiswitchpos);
+        XPLMDebugString(buf);
+        sprintf(buf, "RADIO PANEL OPTIONS :\nRadio knob speed = %d\nNumber of ADF's in aircraft = %d\nMetric pressure enable = %d\n8.33 Khz channel spacing enable = %d\nDME display distance speed enable = %d\n\n", radspeed, numadf, metricpressenable, channelspacing833enable, dmedistspeedenable);
+        XPLMDebugString(buf);
+        sprintf(buf, "MULTI PANEL OPTIONS :\nMulti speed = %d\nMulti acceleration threshold = %d\nTrimspeed = %d\n\n", multispeed, multiaccelthreshold, trimspeed);
+        XPLMDebugString(buf);
+        sprintf(buf, "VIRTUAL REALITY OPTIONS :\nDisable Switch Panel in VR = %d\nDisable Radio Panel in VR = %d\nDisable Multi Panel in VR = %d\n\n", dissableSwitchPanelInVR, dissableRadioPanelInVR, dissableMultiPanelInVR);
+        XPLMDebugString(buf);
+        XPLMDebugString("The above info is obtained by writing '2' to the DataRef 'bgood/xsaitekpanels/debuglog/status', '1' for multi panel acceleration logging,\n");
+        XPLMDebugString("'3' for all panel read and write buffers, '9' for gear led logging, and '0' to disable logging. See the plugins menu for these options.\n\n");
     }
 }
 

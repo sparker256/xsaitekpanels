@@ -19,7 +19,7 @@
 // ****************** Switch Panel variables *******************************
 static int switchres, switchwres;
 
-static int gearled_haschanged = 0;
+static int gearled_haschanged = 1;
 static int gearled_haschanged_loop = 0;
 
 static int MagOffSwitchAllreadyOn = 0;
@@ -82,8 +82,19 @@ static int GearUpAllreadyOff = 0;
 static int GearDnAllreadyOn = 0;
 static int GearDnAllreadyOff = 0;
 
-static int BatStatus = 0;
-static int DelayedWrite = 0;
+static int BatStatus = 1;
+static int DelayedWrite = 1;
+static int LogEntry = 0;
+
+static int lastGearRetract = 0;
+static int lastgearledenable = 0;
+static int lastgearled_haschanged = 0;
+static int lastgearled_haschanged_loop = 0;
+static int lastBatStatus = 0;
+static int lastLogEntry = 0;
+static int lastlanding_gear_nose_led_data_value = 0;
+static int lastlanding_gear_left_led_data_value = 0;
+static int lastlanding_gear_right_led_data_value = 0;
 
 //static int avf, avf2, avf3, avf4, avf5, avf6, avf7, avf8;
 //static int avf9, avf10, avf11, avf12, avf13, avf14, avf15, avf16;
@@ -134,18 +145,28 @@ static unsigned char switchbuf[4];
 static unsigned char switchwbuf[2], gearled;
 static unsigned char last_gearled;
 
+void process_gearled_log()
+{
+    if ((lastGearRetract != XPLMGetDatai(GearRetract)) || (lastgearledenable != gearledenable) || (lastgearled_haschanged != gearled_haschanged) || (lastgearled_haschanged_loop != gearled_haschanged_loop) || (lastBatStatus != BatStatus) || (lastlanding_gear_nose_led_data_value != landing_gear_nose_led_data_value) || (lastlanding_gear_left_led_data_value != landing_gear_left_led_data_value) || (lastlanding_gear_right_led_data_value != landing_gear_right_led_data_value)) {
+        XPLMDebugString(buf);
+        sprintf(buf, "Xsaitekpanels: GearRetract = %d, Gearledenable = %d, gearled = %d, Last_gearled = %d, gearled_haschanged = %d, Gearled_haschanged_loop = %d, BatStatus = %d\n",XPLMGetDatai(GearRetract), gearledenable, gearled, last_gearled, gearled_haschanged, gearled_haschanged_loop, BatStatus);
+        XPLMDebugString(buf);
+        sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = %d, landing_gear_left_led_data_value = %d, landing_gear_right_led_data_value = %d\n", landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value);
+        XPLMDebugString(buf);
+        LogEntry++;
+        lastGearRetract = XPLMGetDatai(GearRetract);
+        lastgearledenable = gearledenable;
+        lastgearled_haschanged = gearled_haschanged;
+        lastgearled_haschanged_loop = gearled_haschanged_loop;
+        lastBatStatus = BatStatus;
+        lastlanding_gear_nose_led_data_value = landing_gear_nose_led_data_value;
+        lastlanding_gear_left_led_data_value = landing_gear_left_led_data_value;
+        lastlanding_gear_right_led_data_value = landing_gear_right_led_data_value;
+    }
+}
 
 void process_switch_menu()
 {
-  if (!BatPwrIsOn()) {
-     if (switchwbuf[1] == 0) {
-        return;
-     }
-     switchwbuf[1] = 0;
-     BatStatus = 0;
-     gearled_haschanged = 1;
-     return;
-  }
   switchwbuf[0] = 0;
   switchwbuf[1] = gearled;
   if (bataltinverse == 0) {
@@ -3884,51 +3905,67 @@ void process_switch_panel()
         process_taxi_lights_switch();
         process_landing_lights_switch();
         process_gear_switch_switch();
-
+        if(switchres > 0) {
+            if (log_enable == 3) {
+                XPLMDebugString("Xsaitekpanels: SWITCH: Read buffer Byte3: Bits 7-4: Not used,  Bits 3-0: Gear Dn, Gear Up,  MAG Switch: START, BOTH\n");
+                XPLMDebugString("Xsaitekpanels: SWITCH: Read buffer Byte2: Bits 7-0: MAG Switch continued: L,  R, OFF,  Switches: Landing, Taxi, Strobe, NAV, Beacon\n");
+                XPLMDebugString("Xsaitekpanels: SWITCH: Read buffer Byte1: Bits 7-0: Switches continued: Panel, Cowl, Pitot, De-ice, Fuel, Avionics, ALT, Bat\n");
+                sprintf(buf, "Xsaitekpanels: SWITCH: Read buffer status = [%d, %d, %d]\n", switchbuf[0], switchbuf[1], switchbuf[2]);
+                XPLMDebugString(buf);
+                sprintf(buf, "Xsaitekpanels: SWITCH: Gear led buffer = [%d]       (Gear buffer Byte1: Bits 7-6: Not used,  Bits 5-0: Red R, Red L, Red N, Green R, Green L, Green N)\n\n", switchwbuf[1]);
+                XPLMDebugString(buf);
+            }
+        }
         --switch_safety_cntr;
       }while((switchres > 0) && (switch_safety_cntr > 0));
 
-      if (log_enable == 9) {
-          XPLMDebugString("Xsaitekpanels: BEFORE gear LED update\n");
-          sprintf(buf, "Xsaitekpanels: Gearledenable = '%d', gearled = '%d', Last_gearled = '%d', gearled_haschanged = '%d', Gearled_haschanged_loop = '%d', Battery Status = '%d'\n", gearledenable, gearled, last_gearled, gearled_haschanged, gearled_haschanged_loop, BatStatus);
-          XPLMDebugString(buf);
-          sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = '%d', landing_gear_left_led_data_value = '%d', landing_gear_right_led_data_value = '%d'\n\n", landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value);
-          XPLMDebugString(buf);
+      if (BatPwrIsOn()) {
+          switchwbuf[1] = gearled;
+          if (BatStatus == 0) {
+              BatStatus = 1;
+              gearled_write_loop = 0;
+          }
+      }
+      if (!BatPwrIsOn()) {
+          gearled = 0x00;
+          switchwbuf[1] = gearled;
+          if (BatStatus == 1) {
+              BatStatus = 0;
+              gearled_write_loop = 0;
+          }
       }
 
-      if(XPLMGetDatai(GearRetract) > 0) {
-          if ((BatPwrIsOn()) && (BatStatus == 0)) {
-              BatStatus = 1;
-              gearled_haschanged = 1;
-              return;
-          }
-          if (gearled_write_loop == 300) {
-              switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
-              gearled_write_loop = 0;
+      if (log_enable == 9) {
+          sprintf(buf, "Xsaitekpanels: BEFORE GEAR LED WRITE:  DelayedWrite = %d, LogEntry = %d\n", DelayedWrite, LogEntry);
+          process_gearled_log();
+      }
+
+      if (((XPLMGetDatai(GearRetract) > 0)) || ((gearledenable == 0) || (gearledenable == 2))) {
+          if (gearled_write_loop == 0) {
+              gearled_write_loop = 300;
               DelayedWrite = 0;             // turn off delayed write to catch missed buffer writes
+              gearled_haschanged = 1;
+              gearled_haschanged_loop = 4;
           }
           if (gearled != last_gearled) {
               gearled_haschanged = 1;
+              DelayedWrite = 1;             // enable a delayed write
           }
           if (gearled_haschanged == 1){
               gearled_haschanged_loop++;
           }
           if (gearled_haschanged_loop == 5) {
-              if ((log_enable == 9) || (log_enable == 10)) {
-                  XPLMDebugString("\nXsaitekpanels: WRITING gear LED (Updates when Gearled_haschanged_loop = '5'\n");
-                  sprintf(buf, "Xsaitekpanels: Gearledenable = '%d', gearled = '%d', Last_gearled = '%d', gearled_haschanged = '%d', Gearled_haschanged_loop = '%d', Battery Status = '%d'\n", gearledenable, gearled, last_gearled, gearled_haschanged, gearled_haschanged_loop, BatStatus);
-                  XPLMDebugString(buf);
-                  sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = '%d', landing_gear_left_led_data_value = '%d', landing_gear_right_led_data_value = '%d'\n\n\n", landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value);
-                  XPLMDebugString(buf);
+              if (log_enable == 9) {
+                  sprintf(buf, "Xsaitekpanels: WRITING THE GEAR LED:  DelayedWrite = %d, LogEntry = %d\n", DelayedWrite, LogEntry);
+                  process_gearled_log();
               }
               switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
               gearled_haschanged = 0;
               gearled_haschanged_loop = 0;
-              gearled_write_loop = 0;
-              DelayedWrite = 1;             // turn on a delayed write to catch missed buffer writes
+              gearled_write_loop = 300;
           }
           if (DelayedWrite == 1) {
-              gearled_write_loop++;
+              gearled_write_loop--;
           }
       } else if(XPLMGetDatai(GearRetract) == 0) {
           gearled = 0x00;
@@ -3942,8 +3979,6 @@ void process_switch_panel()
               switchwres = hid_send_feature_report(switchhandle, switchwbuf, 2);
               gearled_haschanged = 0;
               gearled_haschanged_loop = 0;
-              gearled_write_loop = 0;
-              DelayedWrite = 1;
           }
       }
       last_gearled = gearled;
@@ -3951,11 +3986,12 @@ void process_switch_panel()
       engnum = XPLMGetDatai(EngNum);
 
       if (log_enable == 9) {
-          XPLMDebugString("Xsaitekpanels: AFTER gear LED update\n");
-          sprintf(buf, "Xsaitekpanels: Gearledenable = '%d', gearled = '%d', Last_gearled = '%d', gearled_haschanged = '%d', Gearled_haschanged_loop = '%d', Battery Status = '%d'\n", gearledenable, gearled, last_gearled, gearled_haschanged, gearled_haschanged_loop, BatStatus);
-          XPLMDebugString(buf);
-          sprintf(buf, "Xsaitekpanels: landing_gear_nose_led_data_value = '%d', landing_gear_left_led_data_value = '%d', landing_gear_right_led_data_value = '%d'\n\n", landing_gear_nose_led_data_value, landing_gear_left_led_data_value, landing_gear_right_led_data_value);
-          XPLMDebugString(buf);
+          sprintf(buf, "Xsaitekpanels: AFTER GEAR LED WRITE:  DelayedWrite = %d, LogEntry = %d\n", DelayedWrite, LogEntry);
+          lastLogEntry = LogEntry;
+          process_gearled_log();
+          if (lastLogEntry != LogEntry) {
+              XPLMDebugString("\n");
+          }
       }
       return;
 }
