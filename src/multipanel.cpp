@@ -4658,33 +4658,21 @@ void process_multi_panel(float dt)
         multires = hid_read(multihandle, multibuf, sizeof(multibuf));
         process_multi_panel_datareference_values();
         if (multibuf[0] == 0) {
-            if ((BatPwrIsOn()) && (AvPwrIsOn())) {
-                multiseldis = multiswitchpos;
-                lastmultiseldis = multiseldis;
-           	    if (multionceonly == 0) {
-                    multionceonly = 1;
-                    updatedispmul = 1;
-                    if (multiswitchpos == 1) {
-                        upapaltf = XPLMGetDataf(ApAlt);
-                        upapalt = (int)(upapaltf);
-                        upapvsf = XPLMGetDataf(ApVs);
-                        upapvs = (int)(upapvsf);
-                    } else if (multiswitchpos == 2) {
-                        apasf = XPLMGetDataf(ApAs);
-                        apasout = (int)(apasf);
-                    } else if (multiswitchpos == 3) {
-                        upaphdgf = XPLMGetDataf(ApHdg);
-                        upaphdg = (int)(upaphdgf);
-                    } else if (multiswitchpos == 4) {
-                        upapcrsf = XPLMGetDataf(ApCrs);
-                        upapcrs = (int)(upapcrsf);
-                    }
-                }
-            }
-        }
-        if ((!BatPwrIsOn()) || (!AvPwrIsOn())) {
-            if (multionceonly == 1) {
-            multionceonly = 0;
+            multiseldis = multiswitchpos;
+            if (multiswitchpos == 1) {
+                upapaltf = XPLMGetDataf(ApAlt);
+                upapalt = (int)(upapaltf);
+                upapvsf = XPLMGetDataf(ApVs);
+                upapvs = (int)(upapvsf);
+            } else if (multiswitchpos == 2) {
+                apasf = XPLMGetDataf(ApAs);
+                apasout = (int)(apasf);
+            } else if (multiswitchpos == 3) {
+                upaphdgf = XPLMGetDataf(ApHdg);
+                upaphdg = (int)(upaphdgf);
+            } else if (multiswitchpos == 4) {
+                upapcrsf = XPLMGetDataf(ApCrs);
+                upapcrs = (int)(upapcrsf);
             }
         }
         process_alt_switch();
@@ -4708,6 +4696,19 @@ void process_multi_panel(float dt)
             process_multi_blank_display();
             process_multi_display();
 
+            if (log_enable == 3) {
+                XPLMDebugString("Xsaitekpanels: MULTI: Read buffer Byte3: Bits 7-4: Not used,  Bits 3-0: Pitch Up, Pitch Dn,  Flaps Dn, Flaps Up\n");
+                XPLMDebugString("Xsaitekpanels: MULTI: Read buffer Byte2: Bits 7-0: Switch: AT,  Buttons: REV, APR, VS, ALT, IAS, NAV, HDG\n");
+                XPLMDebugString("Xsaitekpanels: MULTI: Read buffer Byte1: Bits 7-0: Button: AP,  Knob: Dn, Up,  Switch: CRS, HDG, IAS, VS, ALT\n");
+                sprintf(buf, "Xsaitekpanels: MULTI: Read buffer status = [%d, %d, %d]\n", multibuf[0], multibuf[1], multibuf[2]);
+                XPLMDebugString(buf);
+                sprintf(buf, "Xsaitekpanels: MULTI: Upper display buffer = [%d, %d, %d, %d, %d]\n", multiwbuf[1], multiwbuf[2], multiwbuf[3], multiwbuf[4], multiwbuf[5]);
+                XPLMDebugString(buf);
+                sprintf(buf, "Xsaitekpanels: MULTI: Lower display buffer = [%d, %d, %d, %d, %d]          (15 = Blank character, 254 = minus sign)\n", multiwbuf[6], multiwbuf[7], multiwbuf[8], multiwbuf[9], multiwbuf[10]);
+                XPLMDebugString(buf);
+                sprintf(buf, "Xsaitekpanels: MULTI: LED button status = [%d]                         (Bits 7-0: REV, APR, VS, ALT, IAS, NAV, HDG, AP)\n\n",multiwbuf[11]);
+                XPLMDebugString(buf);
+            }
         }
         --multi_safety_cntr;
     } while((multires > 0) && (multi_safety_cntr > 0));
@@ -4720,7 +4721,7 @@ void process_multi_panel(float dt)
     // ******* Write on changes ********
     if ((lastmultiseldis != multiseldis) || (lastbtnleds != btnleds) || (lastmultiaactv != multiaactv) || (lastmultibstby != multibstby) || (updatedispmul > 0)) {
         mulres = hid_send_feature_report(multihandle, multiwbuf, sizeof(multiwbuf));
-        if (log_enable == 1) {
+        if (log_enable == 3) {
             sprintf(buf, "Xsaitekpanels: MULTI: lastmultiseldis = %d, multiseldis = %d,  |  lastbtnleds = %d, btnleds = %d  |  updatedispmul = %d\n",lastmultiseldis, multiseldis, lastbtnleds, btnleds, updatedispmul);
             XPLMDebugString(buf);
             sprintf(buf, "Xsaitekpanels: MULTI: lastmultiaactv = %d, multiaactv = %d  |  lastmultibstby = %d, multibstby = %d\n\n",lastmultiaactv, multiaactv, lastmultibstby, multibstby);
