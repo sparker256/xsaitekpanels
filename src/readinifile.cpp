@@ -2443,6 +2443,9 @@ void process_read_ini_file()
         rad1_upper_xpdr_mode_remapable = getOptionToString("rad1_upper_xpdr_mode");
         Rad1UpperXpdrRemapableMode = XPLMFindDataRef(rad1_upper_xpdr_mode_remapable.c_str());
 
+        rad1_upper_xpdr_baro_std_data_remapable = getOptionToString("rad1_upper_xpdr_baro_std_data");
+        Rad1UpperXpdrBaroStdRemapableData = XPLMFindDataRef(rad1_upper_xpdr_baro_std_data_remapable.c_str());
+
         rad1_upper_xpdr_baro_data_remapable = getOptionToString("rad1_upper_xpdr_baro_data");
         Rad1UpperXpdrBaroRemapableData = XPLMFindDataRef(rad1_upper_xpdr_baro_data_remapable.c_str());
 
@@ -2713,6 +2716,9 @@ void process_read_ini_file()
         rad1_lower_xpdr_mode_remapable = getOptionToString("rad1_lower_xpdr_mode");
         Rad1LowerXpdrRemapableMode = XPLMFindDataRef(rad1_lower_xpdr_mode_remapable.c_str());
 
+        rad1_lower_xpdr_baro_std_data_remapable = getOptionToString("rad1_lower_xpdr_baro_std_data");
+        Rad1LowerXpdrBaroStdRemapableData = XPLMFindDataRef(rad1_lower_xpdr_baro_std_data_remapable.c_str());
+
         rad1_lower_xpdr_baro_data_remapable = getOptionToString("rad1_lower_xpdr_baro_data");
         Rad1LowerXpdrBaroRemapableData = XPLMFindDataRef(rad1_lower_xpdr_baro_data_remapable.c_str());
 
@@ -2982,6 +2988,9 @@ void process_read_ini_file()
 
         rad2_upper_xpdr_mode_remapable = getOptionToString("rad2_upper_xpdr_mode");
         Rad2UpperXpdrRemapableMode = XPLMFindDataRef(rad2_upper_xpdr_mode_remapable.c_str());
+
+        rad2_upper_xpdr_baro_std_data_remapable = getOptionToString("rad2_upper_xpdr_baro_std_data");
+        Rad2UpperXpdrBaroStdRemapableData = XPLMFindDataRef(rad2_upper_xpdr_baro_std_data_remapable.c_str());
 
         rad2_upper_xpdr_baro_data_remapable = getOptionToString("rad2_upper_xpdr_baro_data");
         Rad2UpperXpdrBaroRemapableData = XPLMFindDataRef(rad2_upper_xpdr_baro_data_remapable.c_str());
@@ -3254,8 +3263,11 @@ void process_read_ini_file()
         rad2_lower_xpdr_mode_remapable = getOptionToString("rad2_lower_xpdr_mode");
         Rad2LowerXpdrRemapableMode = XPLMFindDataRef(rad2_lower_xpdr_mode_remapable.c_str());
 
+        rad2_lower_xpdr_baro_std_data_remapable = getOptionToString("rad2_lower_xpdr_baro_std_data");
+        Rad2LowerXpdrBaroStdRemapableData = XPLMFindDataRef(rad2_lower_xpdr_baro_std_data_remapable.c_str());
+
         rad2_lower_xpdr_baro_data_remapable = getOptionToString("rad2_lower_xpdr_baro_data");
-        Rad2LowerXpdrBaroStdRemapableData = XPLMFindDataRef(rad2_lower_xpdr_baro_data_remapable.c_str());
+        Rad2LowerXpdrBaroRemapableData = XPLMFindDataRef(rad2_lower_xpdr_baro_data_remapable.c_str());
 
         rad2_lower_xpdr_baro_up_remapable_cmd = getOptionToString("rad2_lower_xpdr_baro_up_cmd");
         Rad2LowrXpdrBaroUpRemapableCmd = XPLMFindCommand(rad2_lower_xpdr_baro_up_remapable_cmd.c_str());
@@ -3523,8 +3535,11 @@ void process_read_ini_file()
         rad3_upper_xpdr_mode_remapable = getOptionToString("rad3_upper_xpdr_mode");
         Rad3UpperXpdrRemapableMode = XPLMFindDataRef(rad3_upper_xpdr_mode_remapable.c_str());
 
+        rad3_upper_xpdr_baro_std_data_remapable = getOptionToString("rad3_upper_xpdr_baro_std_data");
+        Rad3UpperXpdrBaroStdRemapableData = XPLMFindDataRef(rad3_upper_xpdr_baro_std_data_remapable.c_str());
+
         rad3_upper_xpdr_baro_data_remapable = getOptionToString("rad3_upper_xpdr_baro_data");
-        Rad3UpperXpdrBaroStdRemapableData = XPLMFindDataRef(rad3_upper_xpdr_baro_data_remapable.c_str());
+        Rad3UpperXpdrBaroRemapableData = XPLMFindDataRef(rad3_upper_xpdr_baro_data_remapable.c_str());
 
         rad3_upper_xpdr_baro_up_remapable_cmd = getOptionToString("rad3_upper_xpdr_baro_up_cmd");
         Rad3UpperXpdrBaroUpRemapableCmd = XPLMFindCommand(rad3_upper_xpdr_baro_up_remapable_cmd.c_str());
@@ -3794,8 +3809,11 @@ void process_read_ini_file()
         rad3_lower_xpdr_mode_remapable = getOptionToString("rad3_lower_xpdr_mode");
         Rad3LowerXpdrRemapableMode = XPLMFindDataRef(rad3_lower_xpdr_mode_remapable.c_str());
 
+        rad3_lower_xpdr_baro_std_data_remapable = getOptionToString("rad3_lower_xpdr_baro_std_data");
+        Rad3LowerXpdrBaroStdRemapableData = XPLMFindDataRef(rad3_lower_xpdr_baro_std_data_remapable.c_str());
+
         rad3_lower_xpdr_baro_data_remapable = getOptionToString("rad3_lower_xpdr_baro_data");
-        Rad3LowerXpdrBaroStdRemapableData = XPLMFindDataRef(rad3_lower_xpdr_baro_data_remapable.c_str());
+        Rad3LowerXpdrBaroRemapableData = XPLMFindDataRef(rad3_lower_xpdr_baro_data_remapable.c_str());
 
         rad3_lower_xpdr_baro_up_remapable_cmd = getOptionToString("rad3_lower_xpdr_baro_up_cmd");
         Rad3LowrXpdrBaroUpRemapableCmd = XPLMFindCommand(rad3_lower_xpdr_baro_up_remapable_cmd.c_str());

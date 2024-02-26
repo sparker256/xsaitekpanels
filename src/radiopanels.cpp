@@ -3058,7 +3058,6 @@ void process_upper_xpdr_switch()
                 }
                 Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
 
-
                 if (testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
                     XPLMSetDatai(Rad1UpperXpdrBaroStdRemapableData, 1);
                 }
@@ -3733,6 +3732,10 @@ void process_upper_xpdr_switch()
                     }
                 }
                 Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
+
+                if (testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+                    XPLMSetDatai(Rad1UpperXpdrBaroStdRemapableData, 1);
+                }
             }
 
             upxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
@@ -3977,6 +3980,10 @@ void process_upper_xpdr_switch()
                     }
                 }
                 Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
+
+                if (testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+                    XPLMSetDatai(Rad2UpperXpdrBaroStdRemapableData, 1);
+                }
             }
 
             upxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
@@ -4206,7 +4213,6 @@ void process_upper_xpdr_switch()
                }
                Last_Upper_Coarse_Up[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_UP);
 
-
                if ((Last_Upper_Coarse_Dn[radnum] == 1) && (testbit(radiobuf[radnum],UPPER_COARSE_DN) == 0)) {
                    upqnhdbnccordec[radnum]++;
                    if (upqnhdbnccordec[radnum] > radspeed) {
@@ -4219,6 +4225,11 @@ void process_upper_xpdr_switch()
                    }
                }
 
+               Last_Upper_Coarse_Dn[radnum] = testbit(radiobuf[radnum],UPPER_COARSE_DN);
+
+               if (testbit(radiobuf[radnum],UPPER_ACT_STBY)) {
+                   XPLMSetDatai(Rad3UpperXpdrBaroStdRemapableData, 1);
+               }
            }
 
            upxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
@@ -7344,6 +7355,10 @@ void process_lower_xpdr_switch()
                     }
                 }
                 Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
+
+                if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
+                  XPLMSetDatai(Rad1LowerXpdrBaroStdRemapableData, 1);
+                }
             }
 
             loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
@@ -7583,6 +7598,10 @@ void process_lower_xpdr_switch()
                     }
                 }
                 Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
+
+                if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
+                  XPLMSetDatai(Rad2LowerXpdrBaroStdRemapableData, 1);
+                }
             }
 
             loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
@@ -7821,6 +7840,10 @@ void process_lower_xpdr_switch()
                     }
                 }
                 Last_Lower_Coarse_Dn[radnum] = testbit(radiobuf[radnum],LOWER_COARSE_DN);
+
+                if(testbit(radiobuf[radnum],LOWER_ACT_STBY)) {
+                  XPLMSetDatai(Rad3LowerXpdrBaroStdRemapableData, 1);
+                }
             }
 
             loxpdrcode[radnum] = XPLMGetDatai(XpdrCode);
