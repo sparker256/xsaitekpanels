@@ -48,7 +48,7 @@ jobs:
       working-directory: ${{github.workspace}}/build
       run: ctest -C ${{env.BUILD_TYPE}}
       
-    - uses: actions/upload-artifact@v3
+    - uses: actions/upload-artifact@v4
       with:
         name: binaries
         path: ${{github.workspace}}/build/*.xpl
@@ -60,8 +60,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      
+      - uses: actions/upload-artifact/merge@v4
+        with:
+          name: binaries
+          pattern: binaries-*
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         with:
           name: binaries
           path: Xsaitekpanels/lin_x64
@@ -77,7 +82,7 @@ jobs:
         run: mv Xsaitekpanels/lin_x64/mac.xpl Xsaitekpanels/mac_x64/Xsaitekpanels.xpl
       - name: List Final Folder     
         run: ls -R -l   
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: Xsaitekpanels_v${{env.XSP_VERSION}}
           path: |
