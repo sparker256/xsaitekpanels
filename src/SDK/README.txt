@@ -5,7 +5,7 @@
 This download contains the files necessary to build plugins for X-Plane.  The 
 X-Plane plugin website is:
 
-http://https://developer.x-plane.com/sdk/
+https://developer.x-plane.com/sdk/
 
 The website contains full documentation on the SDK including tech notes, sample
 plugins, sample code, contact information, and links to the latest versions of
@@ -32,11 +32,65 @@ SDK website explains this process in more detail.
 
 This section contains per-release notes for the history of the X-Plane SDK.
 
-X-PLane SDK Release 4.0.0 beta 1 9/18/2022
+X-Plane SDK Release 4.2.0 7/25/2025
+
+The 4.2.0 SDK includes new APi functionality:
+
+ - New weather APIs allow plugins to specify weather at multiple points for
+   custom weather that varies spatially.
+   
+ - The weather info structure is extended to support new data fields.
+ 
+ - Extended texture ID enumerations to access the radar return texture for
+   avionics drawing callbacks.
+
+ - Instances can be located using double precision coordinates, and can be
+   set to automatically move to match scenery coordinate shifts.
+
+ - Extended cursor enumerations for display and avionic cursor callbacks.
+
+This version of teh SDK requires X-Plane 12.3.0 or newer.
+
+X-Plane SDK Release 4.1.2 1/6/2025
+
+Internal changes to support 'safe mode' in the simulator.
+
+X-Plane SDK Release 4.1.1 10/10/2024
+
+This is a bug fix to the SDK itself; the dylib link paths on the included
+XPLM and XPWidgets frameworks now contain paths compatible with all versions
+of X-Plane and not just X-Plane 12.1.0 and newer. Fixes XPD-16057 and 
+includes doc clarification for sound callbacks.
+
+X-Plane SDK Release 4.1.0 4/10/2024
+
+The 4.1.0 SDK includes two new sets of APIs:
+
+ - XPLMAvionics has new APIs to create custom plugin-driven glass displays,
+   as well as extended callbacks for overriding the existing displays.
+
+ - XPLMNavigation has new APIs for interacting with the FMS and its flight-
+   plans.
+
+This version of the SDK requires X-Plane 12.1.0 or newer.
+
+X-Plane SDK Release 4.0.1 3/16/2023
+
+The 4.0.1 SDK fixes the XPLMSound.h header, which contained invalid C code
+(C++ struct definitons for FMOD_VECTOR and FMOD_ enums.)
+
+X-Plane SDK Release 4.0.0 3/8/2023
 
 The 4.0.0 SDK adds support for ARM64 Macs.  The 4.0 SDK is supported by X-Plane
-12.  The new SDK adds support for drawing hooks that draw directly to the G1000
-and other avionic cockpit devices.
+12.04 (but can be used with X-Plane 12.00 if not using the weather, sound or 
+dataref introspection APIs). New features:
+
+ - M1/ARM64 support for Mac
+ - Avionics display callbacks provide direct drawing to avionic "devices"
+ - New XPLMSound API
+ - New XPLMWeather API
+ - New dataref APIs to get the set of all datarefs programmatically and be 
+   notified of new datarefs ("introspection").  
 
 X-Plane SDK Release 3.0.2 4/29/2020
 

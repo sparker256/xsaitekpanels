@@ -26,7 +26,8 @@ Bill
 1.  Install required software using [Chocolatey](https://chocolatey.org/) using admin command prompt:
 
     ```
-    choco install git cmake
+    choco install git
+    choco install cmake --installargs '"ADD_CMAKE_TO_PATH=System"'
     choco install mingw --version 8.1.0
     ```
 
