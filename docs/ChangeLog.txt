@@ -247,3 +247,6 @@ Ver 3.07 Geoff Lohr amber gear lights option added to ini, added less agressive 
 Ver 3.08 Geoff Lohr Fix gear led bug using ledenable option 2, add debug menu and more debug options
 
 Ver 3.09 Fixed some bugs found in the XPDR switch position code.
+
+Ver 3.10 Updated 51-Xsaitekpanels.rules to fix a issue with the mouse on Linux. Thanks mattipt for the PR.
+

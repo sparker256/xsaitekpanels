@@ -1,6 +1,6 @@
 Fill this file with your indicator assignments!
 
-This is for Xsaitekpanels 3.09
+This is for Xsaitekpanels 3.10
 
 If there is no # sign starting the line it is a comment.
 There are two kinds of data reference that can be used.

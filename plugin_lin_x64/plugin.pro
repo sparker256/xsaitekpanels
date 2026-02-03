@@ -11,6 +11,7 @@ INCLUDEPATH += ../src/SDK/CHeaders/XPLM
 INCLUDEPATH += ../src/SDK/CHeaders/Wrappers
 INCLUDEPATH += ../src/SDK/CHeaders/Widgets
 INCLUDEPATH += ../src/hidapi
+INCLUDEPATH += ../src
 
 
 # Defined to use X-Plane SDK 2.0 capabilities - no backward compatibility before 9.0
@@ -70,9 +71,27 @@ macx {
     LIBS += -framework IOKit -framework CoreFoundation
 }
 
-HEADERS += ../src/saitekpanels.h \
-      ../src/inireader.h \
-      ../src/hidapi/hidapi.h
+
+HEADERS +=  ../src/SDK/CHeaders/XPLM/XPLMCamera.h \
+            ../src/SDK/CHeaders/XPLM/XPLMDataAccess.h \
+            ../src/SDK/CHeaders/XPLM/XPLMDefs.h \
+            ../src/SDK/CHeaders/XPLM/XPLMDisplay.h \
+            ../src/SDK/CHeaders/XPLM/XPLMGraphics.h \
+            ../src/SDK/CHeaders/XPLM/XPLMInstance.h \
+            ../src/SDK/CHeaders/XPLM/XPLMMap.h \
+            ../src/SDK/CHeaders/XPLM/XPLMMenus.h \
+            ../src/SDK/CHeaders/XPLM/XPLMNavigation.h \
+            ../src/SDK/CHeaders/XPLM/XPLMPlanes.h \
+            ../src/SDK/CHeaders/XPLM/XPLMPlugin.h \
+            ../src/SDK/CHeaders/XPLM/XPLMProcessing.h \
+            ../src/SDK/CHeaders/XPLM/XPLMScenery.h \
+            ../src/SDK/CHeaders/XPLM/XPLMSound.h \
+            ../src/SDK/CHeaders/XPLM/XPLMUtilities.h \
+            ../src/SDK/CHeaders/XPLM/XPLMWeather.h \
+            ../src/saitekpanels.h \
+            ../src/inireader.h \
+            ../src/hidapi/hidapi.h
+
 
 SOURCES += ../src/saitekpanels.cpp \
     ../src/radiopanels.cpp \
