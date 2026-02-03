@@ -1,3 +1,8 @@
+# we are building with GitHub Actions so these are not needed.
+Xsaitekpanels/lin_x64/Xsaitekpanels.xpl
+Xsaitekpanels/mac_x64/Xsaitekpanels.xpl
+Xsaitekpanels/win_x64/Xsaitekpanels.xpl
+
 #################
 ## Eclipse
 #################
